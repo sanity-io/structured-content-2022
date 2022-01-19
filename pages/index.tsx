@@ -3,8 +3,11 @@ import CheckMark from '../components/checkMark';
 import HeroIllustration from '../components/heroIllustration';
 import Logo from '../components/logo';
 
+// Meta
+const title = 'Structured Content 2022';
 const tagLine = `Where business, content, design, and engineering meet`;
 
+// Content
 const locations = [
 	'Online',
 	'San Francisco',
@@ -27,9 +30,21 @@ export default function Home() {
 	return (
 		<>
 			<Head>
-				<title>Structured Content 2022</title>
+				<title>{title}</title>
 				<meta name="description" content={tagLine} />
-				<link rel="icon" href="/favicon.ico" />
+
+				<meta property="og:title" content={title} />
+				<meta property="og:description" content={tagLine} />
+				<meta property="og:image" content={'/static/images/card-preview.png'} />
+
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:site" content="@sanity_io" />
+				<meta name="twitter:title" content={title} />
+				<meta name="twitter:description" content={tagLine} />
+				<meta
+					name="twitter:image"
+					content={'/static/images/card-preview.png'}
+				/>
 			</Head>
 
 			<main>
