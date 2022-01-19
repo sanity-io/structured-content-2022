@@ -64,24 +64,33 @@ export default function Home() {
 							<h2 className="mb-4 text-xl font-medium text-blue-900 sm:text-2xl">
 								Get early access
 							</h2>
-							<form>
-								<label htmlFor="email" className="hidden mb-2 sm:block">
+							<form
+								action="https://sanity.us3.list-manage.com/subscribe/post"
+								method="POST"
+							>
+								<input
+									type="hidden"
+									name="u"
+									value="3e99a07b5e03ed5b07a234a57"
+								/>
+								<input type="hidden" name="id" value="cca563332b" />
+								<label htmlFor="mce-EMAIL" className="hidden mb-2 sm:block">
 									Email address
 								</label>
 								<div className="flex flex-col space-x-0 space-y-3 sm:space-y-0 sm:space-x-2 sm:flex-row">
 									<input
-										name="email"
+										id="mce-EMAIL"
+										name="EMAIL"
 										type="email"
 										placeholder="Email address"
 										required
 										className="py-3 placeholder-blue-900 bg-blue-100 border-blue-900 sm:placeholder-opacity-0 sm:w-80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 "
 									/>
-									<button
+									<input
 										type="submit"
+										value="Sign up"
 										className="px-5 py-3 font-semibold text-white bg-blue-400 border border-blue-400 hover:border-blue-600 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
-									>
-										Sign up
-									</button>
+									/>
 								</div>
 							</form>
 						</div>
