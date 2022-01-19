@@ -33,9 +33,7 @@ export default function Home() {
 			</Head>
 
 			<main>
-				<section
-					className={`pt-10 pb-12 sm:py-20 bg-blue-50 ${defaultPaddingX}`}
-				>
+				<section className={`py-12 sm:py-28 bg-blue-50 ${defaultPaddingX}`}>
 					<div className="flex flex-col md:max-w-[52rem] mx-auto gap-y-8">
 						<div className="flex items-center justify-between">
 							<div className="md:max-w-md">
@@ -105,7 +103,7 @@ export default function Home() {
 							backgroundSize: '100% 100%',
 						}}
 					></div>
-					<div className="flex flex-col max-w-[52rem] mx-auto gap-y-12 sm:pt-12 pt-10 sm:pb-20 pb-12">
+					<div className="flex flex-col max-w-[52rem] mx-auto gap-y-12 sm:pt-16 pt-10 sm:pb-20 pb-12">
 						<div className="max-w-[28rem] mx-auto space-y-4 sm:text-lg text-red-900">
 							<p>
 								Sanity is not a typical web content management system.{' '}
@@ -121,7 +119,7 @@ export default function Home() {
 						</div>
 						<hr className="h-px bg-red-300 border-0" />
 						<div className="max-w-[28rem] mx-auto">
-							<h2 className="mb-8 text-2xl font-bold text-center text-red-900 sm:mb-12 sm:text-3xl font-larsseit">
+							<h2 className="mb-8 text-3xl font-bold text-center text-red-900 sm:mb-12 sm:text-4xl font-larsseit">
 								What to expect
 							</h2>
 							<div className="space-y-4 md:pr-6">
