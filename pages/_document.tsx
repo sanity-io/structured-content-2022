@@ -23,6 +23,7 @@ class MyDocument extends Document {
 		return (
 			<Html lang="en">
 				<Head>
+					<meta name="theme-color" content="#E8F1FE" />
 					<link
 						rel="preload"
 						href="/static/fonts/inter-var-latin.woff2"
@@ -43,7 +44,7 @@ class MyDocument extends Document {
 					/>
 					{/* TODO: Add favicons */}
 				</Head>
-				<body className="min-h-screen font-sans antialiased">
+				<body className="min-h-screen font-sans antialiased bg-blue-50">
 					<div id="cookieConsentContainer"></div>
 					<Main />
 					<NextScript />
