@@ -2,6 +2,7 @@ import Head from 'next/head';
 import CheckMark from '../components/checkMark';
 import HeroIllustration from '../components/heroIllustration';
 import Logo from '../components/logo';
+import CookieConsent from 'react-cookie-consent';
 
 // Meta
 const title = 'Structured Content 2022';
@@ -48,7 +49,7 @@ export default function Home() {
 			</Head>
 
 			<main>
-				<section className={`py-12 sm:py-28 bg-blue-50 ${defaultPaddingX}`}>
+				<section className={`py-12 sm:py-24 bg-blue-50 ${defaultPaddingX}`}>
 					<div className="flex flex-col md:max-w-[52rem] mx-auto gap-y-8">
 						<div className="flex items-center justify-between">
 							<div className="md:max-w-md">
@@ -182,6 +183,29 @@ export default function Home() {
 					</p>
 				</div>
 			</footer>
+			<div className="fixed bottom-0 w-full bg-black">
+				<CookieConsent
+					buttonText="OK"
+					declineButtonText="No, thanks"
+					enableDeclineButton
+					disableStyles
+					containerClasses="flex flex-col p-4 lg:px-0 text-gray-300 md:flex-row md:items-center md:justify-between max-w-[52rem] mx-auto"
+					contentClasses="max-w-lg"
+					buttonWrapperClasses="flex mt-6 space-x-4 md:space-x-6 md:mt-0"
+					buttonClasses="flex-1 px-4 md:px-6 py-2 text-red-900 bg-red-400 border border-red-400 hover:bg-red-300 md:flex-auto"
+					declineButtonClasses="flex-1 px-4 py-2 border border-gray-800 hover:bg-gray-950 md:flex-auto"
+				>
+					We use cookies to see how you use our website and to show you related
+					ads later.{' '}
+					<a
+						href="https://www.sanity.io/legal/privacy#2426b2eb5396"
+						className="text-red-400 hover:text-red-300"
+						target="_blank"
+					>
+						Learn more →
+					</a>
+				</CookieConsent>
+			</div>
 		</>
 	);
 }
