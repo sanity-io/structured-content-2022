@@ -26,6 +26,11 @@ const bulletPoints = [
 
 const defaultPaddingX = 'px-4 sm:px-6 md:px-8';
 
+const baseUrl =
+	process.env.NODE_ENV === 'development'
+		? 'http://localhost:3000'
+		: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+
 export default function Home() {
 	return (
 		<>
@@ -37,9 +42,7 @@ export default function Home() {
 				<meta property="og:description" content={tagLine} />
 				<meta
 					property="og:image"
-					content={`${
-						process.env.NEXT_PUBLIC_URL || ''
-					}/static/images/card-preview.png`}
+					content={`${baseUrl}/static/images/card-preview.png`}
 				/>
 
 				<meta name="twitter:card" content="summary_large_image" />
@@ -48,9 +51,7 @@ export default function Home() {
 				<meta name="twitter:description" content={tagLine} />
 				<meta
 					name="twitter:image"
-					content={`${
-						process.env.NEXT_PUBLIC_URL || ''
-					}/static/images/card-preview.png`}
+					content={`${baseUrl}/static/images/card-preview.png`}
 				/>
 			</Head>
 
@@ -67,7 +68,7 @@ export default function Home() {
 									<Logo className="w-16 text-red-500" />
 								</a>
 								<h1 className="py-4 text-5xl font-semibold text-blue-900 sm:py-6 sm:text-6xl font-larsseit">
-									Structured content <span className="text-blue-400">2022</span>
+									Structured Content <span className="text-blue-400">2022</span>
 								</h1>
 								<p className="text-xl font-semibold text-blue-900 sm:text-2xl">
 									{tagLine}
