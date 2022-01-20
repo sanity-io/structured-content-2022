@@ -38,7 +38,7 @@ export default function Home() {
 				<meta
 					property="og:image"
 					content={`${
-						process.env.NEXT_PUBLIC_VERCEL_URL || ''
+						process.env.NEXT_PUBLIC_URL || ''
 					}/static/images/card-preview.png`}
 				/>
 
@@ -49,7 +49,7 @@ export default function Home() {
 				<meta
 					name="twitter:image"
 					content={`${
-						process.env.NEXT_PUBLIC_VERCEL_URL || ''
+						process.env.NEXT_PUBLIC_URL || ''
 					}/static/images/card-preview.png`}
 				/>
 			</Head>
