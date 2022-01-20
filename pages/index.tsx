@@ -123,8 +123,8 @@ export default function Home() {
 						<div className="max-w-[28rem] mx-auto space-y-4 sm:text-lg text-red-900">
 							<p>
 								Sanity is not a typical web content management system.{' '}
-								<span className="text-red-500">Structured Content 2022</span>{' '}
-								will not be a typical developer conference.
+								<span className="font-bold">Structured Content 2022</span> will
+								not be a typical developer conference.
 							</p>
 							<p>
 								It will be a place to connect with people who are putting
