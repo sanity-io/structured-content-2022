@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
 
 	useEffect(() => {
 		const hasConsent = getCookieConsentValue();
-		if (hasConsent === 'true') {
+		if (hasConsent !== 'false') {
 			handleAcceptCookie();
 		}
 	}, []);
