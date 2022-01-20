@@ -2,7 +2,6 @@ import Head from 'next/head';
 import CheckMark from '../components/checkMark';
 import HeroIllustration from '../components/heroIllustration';
 import Logo from '../components/logo';
-import CookieConsent from 'react-cookie-consent';
 
 // Meta
 const title = 'Structured Content 2022';
@@ -36,7 +35,12 @@ export default function Home() {
 
 				<meta property="og:title" content={title} />
 				<meta property="og:description" content={tagLine} />
-				<meta property="og:image" content={'/static/images/card-preview.png'} />
+				<meta
+					property="og:image"
+					content={`${
+						process.env.NEXT_PUBLIC_VERCEL_URL || ''
+					}/static/images/card-preview.png`}
+				/>
 
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta name="twitter:site" content="@sanity_io" />
@@ -44,7 +48,9 @@ export default function Home() {
 				<meta name="twitter:description" content={tagLine} />
 				<meta
 					name="twitter:image"
-					content={'/static/images/card-preview.png'}
+					content={`${
+						process.env.NEXT_PUBLIC_VERCEL_URL || ''
+					}/static/images/card-preview.png`}
 				/>
 			</Head>
 
@@ -140,7 +146,7 @@ export default function Home() {
 							</h2>
 							<div className="space-y-4 md:pr-6">
 								{bulletPoints.map((point) => (
-									<div className="flex gap-x-2">
+									<div className="flex gap-x-2" key={point}>
 										<CheckMark className="flex-none w-4 h-4 mt-1.5" />
 										<p className="text-red-900 sm:text-lg">{point}</p>
 									</div>
@@ -156,9 +162,9 @@ export default function Home() {
 								business goals and user needs.
 							</p>
 							<p>
-								Together we will talk about the challenges we face, learn about how some
-								organizations are working to overcome them, and build a community
-								to support you in continuing to do the work.
+								Together we will talk about the challenges we face, learn about
+								how some organizations are working to overcome them, and build a
+								community to support you in continuing to do the work.
 							</p>
 							<p className="font-bold">
 								Expect to be inspired, connected, and a little smarter when you
@@ -183,29 +189,6 @@ export default function Home() {
 					</p>
 				</div>
 			</footer>
-			<div className="fixed bottom-0 w-full bg-black">
-				<CookieConsent
-					buttonText="OK"
-					declineButtonText="No, thanks"
-					enableDeclineButton
-					disableStyles
-					containerClasses="flex flex-col p-4 lg:px-0 text-gray-300 md:flex-row md:items-center md:justify-between max-w-[52rem] mx-auto"
-					contentClasses="max-w-lg"
-					buttonWrapperClasses="flex mt-6 space-x-4 md:space-x-6 md:mt-0"
-					buttonClasses="flex-1 px-4 md:px-6 py-2 text-red-900 bg-red-400 border border-red-400 hover:bg-red-300 md:flex-auto"
-					declineButtonClasses="flex-1 px-4 py-2 border border-gray-800 hover:bg-gray-950 md:flex-auto"
-				>
-					We use cookies to see how you use our website and to show you related
-					ads later.{' '}
-					<a
-						href="https://www.sanity.io/legal/privacy#2426b2eb5396"
-						className="text-red-400 hover:text-red-300"
-						target="_blank"
-					>
-						Learn more →
-					</a>
-				</CookieConsent>
-			</div>
 		</>
 	);
 }
