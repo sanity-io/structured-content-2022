@@ -106,11 +106,12 @@ export default function Home() {
 										required
 										className="py-3 placeholder-blue-900 bg-blue-100 border-blue-900 sm:placeholder-opacity-0 sm:w-80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 "
 									/>
-									<input
+									<button
 										type="submit"
-										value="Sign up"
-										className="px-5 py-3 font-semibold text-white bg-blue-400 border border-blue-400 hover:border-blue-600 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
-									/>
+										className="px-5 py-3 font-semibold text-white bg-blue-400 border border-blue-400 rounded-none hover:border-blue-600 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
+									>
+										Sign up
+									</button>
 								</div>
 							</form>
 						</div>
