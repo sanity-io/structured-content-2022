@@ -6,7 +6,6 @@ import Document, {
 	Main,
 	NextScript,
 } from 'next/document';
-import Script from 'next/script';
 
 class MyDocument extends Document {
 	public static async getInitialProps(
@@ -114,7 +113,6 @@ class MyDocument extends Document {
 					/>
 				</Head>
 				<body className="min-h-screen font-sans antialiased bg-blue-50">
-					<div id="cookieConsentContainer"></div>
 					<Main />
 					<NextScript />
 				</body>
