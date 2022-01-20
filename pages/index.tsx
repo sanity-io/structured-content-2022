@@ -122,9 +122,9 @@ export default function Home() {
 					<div className="flex flex-col max-w-[52rem] mx-auto gap-y-12 sm:pt-16 pt-10 sm:pb-20 pb-12">
 						<div className="max-w-[28rem] mx-auto space-y-4 sm:text-lg text-red-900">
 							<p>
-								Sanity is not a typical web content management system.{' '}
+								Sanity is not a typical content platform.{' '}
 								<span className="font-bold">Structured Content 2022</span> will
-								not be a typical developer conference.
+								not be a typical tech conference.
 							</p>
 							<p>
 								It will be a place to connect with people who are putting
@@ -156,8 +156,8 @@ export default function Home() {
 								business goals and user needs.
 							</p>
 							<p>
-								Together we will talk about the problem, learn about how some
-								organizations are working on solving it, and build a community
+								Together we will talk about the challenges we face, learn about how some
+								organizations are working to overcome them, and build a community
 								to support you in continuing to do the work.
 							</p>
 							<p className="font-bold">
