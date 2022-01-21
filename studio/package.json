@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "sanity start",
     "start": "sanity start",
-    "build": "sanity build"
+    "build": "sanity build && cp routes-manifest.json ./dist/routes-manifest.json"
   },
   "keywords": [
     "sanity"
