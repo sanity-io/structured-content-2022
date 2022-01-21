@@ -1,9 +1,11 @@
 {
+  "version": 3,
+  "basePath": "",
   "redirects": [
     {
-      "source": "/*",
-      "destination": "/index.html",
-      "statusCode": "301"
+      "destination": "/",
+      "statusCode": 301,
+      "regex": "^/*$"
     }
   ]
 }
