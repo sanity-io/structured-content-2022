@@ -1,11 +1,4 @@
 {
-  "version": 3,
-  "basePath": "",
-  "redirects": [
-    {
-      "destination": "/",
-      "statusCode": 301,
-      "regex": "^/*$"
-    }
-  ]
+  "version": 2,
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
