@@ -1,0 +1,39 @@
+{
+  "name": "structured-content-conf",
+  "private": true,
+  "devDependencies": {
+    "turbo": "^1.0.28"
+  },
+  "workspaces": [
+    "*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel"
+  },
+  "turbo": {
+    "baseBranch": "origin/main",
+    "pipeline": {
+      "build": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": [
+          ".next/**"
+        ]
+      },
+      "test": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": []
+      },
+      "lint": {
+        "outputs": []
+      },
+      "dev": {
+        "cache": false
+      }
+    }
+  }
+}

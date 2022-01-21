@@ -131,3 +131,9 @@ dist
 .DS_Store
 
 .vercel
+.turbo
+
+## Next.js
+build/**
+dist/**
+.next/**
