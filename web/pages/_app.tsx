@@ -38,6 +38,7 @@ function MyApp({ Component, pageProps }) {
 						href="https://www.sanity.io/legal/privacy#2426b2eb5396"
 						className="text-red-400 hover:text-red-300 whitespace-nowrap"
 						target="_blank"
+						rel="noopener noreferrer"
 					>
 						Learn more →
 					</a>
