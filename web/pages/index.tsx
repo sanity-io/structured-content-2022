@@ -127,7 +127,7 @@ export default function Home() {
 							backgroundSize: '100% 100%',
 						}}
 					></div>
-					<div className="flex flex-col max-w-[52rem] mx-auto gap-y-12 sm:pt-16 pt-10 sm:pb-20 pb-12">
+					<div className="relative flex flex-col max-w-[52rem] mx-auto gap-y-12 sm:pt-16 pt-10 sm:pb-20 pb-12">
 						<div className="max-w-[28rem] mx-auto space-y-4 sm:text-lg text-red-900">
 							<p>
 								Sanity is not a typical content platform.{' '}
