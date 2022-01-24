@@ -77,7 +77,7 @@ export default function Home() {
 							<HeroIllustration className="w-[22rem] hidden sm:block" />
 						</div>
 						<div className="flex flex-col text-xl gap-y-2 sm:text-2xl">
-							<p className="text-blue-400">May 24-25, 2002</p>
+							<p className="text-blue-400">May 24-25, 2022</p>
 							<p className="text-blue-900">{locations.join(' • ')}</p>
 						</div>
 						<hr className="h-px bg-blue-900 border-0" />
@@ -127,7 +127,7 @@ export default function Home() {
 							backgroundSize: '100% 100%',
 						}}
 					></div>
-					<div className="flex flex-col max-w-[52rem] mx-auto gap-y-12 sm:pt-16 pt-10 sm:pb-20 pb-12">
+					<div className="relative flex flex-col max-w-[52rem] mx-auto gap-y-12 sm:pt-16 pt-10 sm:pb-20 pb-12">
 						<div className="max-w-[28rem] mx-auto space-y-4 sm:text-lg text-red-900">
 							<p>
 								Sanity is not a typical content platform.{' '}
