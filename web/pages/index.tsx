@@ -77,7 +77,7 @@ export default function Home() {
 							<HeroIllustration className="w-[22rem] hidden sm:block" />
 						</div>
 						<div className="flex flex-col text-xl gap-y-2 sm:text-2xl">
-							<p className="text-blue-400">May 24-25, 2002</p>
+							<p className="text-blue-400">May 24-25, 2022</p>
 							<p className="text-blue-900">{locations.join(' • ')}</p>
 						</div>
 						<hr className="h-px bg-blue-900 border-0" />
