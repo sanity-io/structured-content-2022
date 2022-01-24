@@ -5,7 +5,8 @@
     "turbo": "^1.0.28"
   },
   "workspaces": [
-    "*"
+    "web/*",
+    "studio/*"
   ],
   "scripts": {
     "build": "turbo run build",
