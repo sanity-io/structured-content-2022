@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "basePath": "",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
