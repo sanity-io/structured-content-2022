@@ -11,7 +11,9 @@
     "@sanity/base",
     "@sanity/default-layout",
     "@sanity/default-login",
-    "@sanity/desk-tool"
+    "@sanity/desk-tool",
+    "asset-source-unsplash",
+    "leaflet-input"
   ],
   "env": {
     "development": {

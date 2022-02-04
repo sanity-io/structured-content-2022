@@ -1,6 +1,6 @@
 export default {
   name: "page",
-  title: "Page",
+  title: "Pages",
   type: "document",
   preview: {
     select: {
@@ -41,7 +41,6 @@ export default {
             },
           ],
         },
-        {},
       ],
     },
   ],
