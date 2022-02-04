@@ -15,6 +15,8 @@ import route from "./route";
 // Objects
 import seo from "./objects/seo";
 import figure from "./objects/figure";
+import simpleBlockContent from "./objects/simpleBlockContent";
+import blockContent from "./objects/blockContent";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -36,5 +38,7 @@ export default createSchema({
     ticket,
     seo,
     figure,
+    simpleBlockContent,
+    blockContent,
   ]),
 });
