@@ -1,6 +1,30 @@
 // deskStructure.js
 import S from "@sanity/desk-tool/structure-builder";
 import { HomeIcon } from "@sanity/icons";
+import Iframe from "sanity-plugin-iframe-pane";
+
+export const getDefaultDocumentNode = ({ schemaType }) => {
+  // Conditionally return a different configuration based on the schema type
+  switch (schemaType) {
+    case "person":
+      return S.document().views([
+        S.view.form(),
+        /* S.view
+          .component(Iframe)
+          .options({
+            url: (doc) => {
+              let handle = doc.social.twitter.startsWith("@")
+                ? doc.social.twitter
+                : `@${doc.social.twitter}`;
+              return `https://twitter.com/${handle}`;
+            },
+          })
+          .title("Twitter"), */
+      ]);
+    default:
+      return S.document().views([S.view.form()]);
+  }
+};
 
 const FilteredTypes = ({ id }) =>
   ["person", "venue", "event", "session", "route", "page"].includes(id);

@@ -5,6 +5,13 @@ export default {
   title: "People",
   type: "document",
   icon: UsersIcon,
+  preview: {
+    select: {
+      title: "name",
+      subtitle: "social.twitter",
+      media: "photo",
+    },
+  },
   fields: [
     {
       name: "name",
@@ -18,7 +25,7 @@ export default {
     },
     {
       name: "photo",
-      type: "image",
+      type: "figure",
     },
     {
       name: "social",
@@ -29,6 +36,15 @@ export default {
           name: "twitter",
           type: "string",
           title: "Twitter",
+          validation: (Rule) =>
+            Rule.regex(/^@[a-zA-Z0-9_]+$/).error('Include "@" symbol'),
+          description: "Only the handle is required. (e.g. @sanity_io)",
+        },
+        {
+          name: "linkedin",
+          type: "url",
+          title: "LinkedIn",
+          description: "Full URL",
         },
       ],
     },
