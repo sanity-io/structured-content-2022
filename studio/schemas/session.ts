@@ -29,6 +29,16 @@ export default {
       description: "Duration in minutes",
     },
     {
+      name: "shortDescription",
+      title: "Short description",
+      type: "simpleBlockContent",
+    },
+    {
+      name: "longDescription",
+      title: "Long description",
+      type: "blockContent",
+    },
+    {
       name: "speakers",
       title: "Speakers",
       type: "array",
