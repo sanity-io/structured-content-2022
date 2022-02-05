@@ -1,7 +1,10 @@
+import { PresentationIcon } from "@sanity/icons";
+
 export default {
   name: "sponsor",
   title: "Sponsors",
   type: "document",
+  icon: PresentationIcon,
   fields: [
     {
       name: "title",

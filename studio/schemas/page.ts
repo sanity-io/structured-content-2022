@@ -1,7 +1,9 @@
+import { DocumentIcon } from "@sanity/icons";
 export default {
   name: "page",
   title: "Pages",
   type: "document",
+  icon: DocumentIcon,
   preview: {
     select: {
       title: "internalTitle",

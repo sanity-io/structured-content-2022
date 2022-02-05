@@ -1,7 +1,10 @@
+import { BillIcon } from "@sanity/icons";
+
 export default {
   name: "ticket",
   title: "Tickets",
   type: "document",
+  icon: BillIcon,
   preview: {
     select: {
       title: "type",

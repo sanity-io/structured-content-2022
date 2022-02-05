@@ -1,7 +1,10 @@
+import { RestoreIcon } from "@sanity/icons";
+
 export default {
   name: "session",
   title: "Sessions",
   type: "document",
+  icon: RestoreIcon,
   fields: [
     {
       name: "title",

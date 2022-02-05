@@ -1,7 +1,10 @@
+import { DocumentsIcon } from "@sanity/icons";
+
 export default {
   name: "article",
   title: "Editorial Articles",
   type: "document",
+  icon: DocumentsIcon,
   fields: [
     {
       name: "title",

@@ -1,7 +1,10 @@
+import { LinkIcon } from '@sanity/icons'
+
 export default {
   name: 'route',
   type: 'document',
   title: 'Routes',
+  icon: LinkIcon,
   preview: {
     select: {
       title: 'seo.title',

@@ -1,7 +1,10 @@
+import { UsersIcon } from "@sanity/icons";
+
 export default {
   name: "person",
   title: "People",
   type: "document",
+  icon: UsersIcon,
   fields: [
     {
       name: "name",
@@ -10,7 +13,7 @@ export default {
     },
     {
       name: "title",
-      title: "Proffesional title",
+      title: "Profesional title",
       type: "string",
     },
     {

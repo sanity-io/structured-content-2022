@@ -98,5 +98,82 @@ export default {
       title: "End date",
       group: "practical",
     },
+    {
+      name: "microcopy",
+      type: "array",
+      title: "Microcopy",
+      description:
+        "A list of microcopy sentences that will be displayed on the event page",
+      group: "messaging",
+      of: [
+        {
+          type: "object",
+          preview: {
+            select: {
+              title: "text",
+              subtitle: "key",
+            },
+          },
+          fields: [
+            {
+              name: "key",
+              type: "string",
+              title: "Key",
+              validation: (Rule) => [
+                Rule.required(),
+                // Regex for no spaces, no special characters, no numbers
+                Rule.custom(
+                  (value) =>
+                    /^[a-zA-Z0-9]+$/.test(value) || "Key must be alphanumeric"
+                ),
+              ],
+              description: "Used to identify the microcopy in code",
+            },
+            {
+              name: "text",
+              type: "text",
+              title: "Text",
+              description: "The user-facing text",
+            },
+            {
+              name: "action",
+              type: "string",
+              title: "Action",
+              description:
+                "The action, if any, that will be taken when the user clicks the microcopy.",
+            },
+            {
+              name: "related",
+              type: "reference",
+              title: "Related",
+              to: [
+                { type: "route" },
+                { type: "sponsor" },
+                { type: "sponsorship" },
+                { type: "ticket" },
+                { type: "article" },
+                { type: "person" },
+                { type: "event" },
+                { type: "venue" },
+              ],
+            },
+            {
+              name: "type",
+              type: "string",
+              title: "Type",
+              description: "The type of microcopy.",
+              options: {
+                list: [
+                  { title: "Link", value: "link" },
+                  { title: "Info", value: "info" },
+                  { title: "Warning", value: "warning" },
+                  { title: "Error", value: "error" },
+                ],
+              },
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

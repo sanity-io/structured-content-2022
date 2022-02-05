@@ -1,5 +1,6 @@
 // deskStructure.js
 import S from "@sanity/desk-tool/structure-builder";
+import { HomeIcon } from "@sanity/icons";
 
 const FilteredTypes = ({ id }) =>
   ["person", "venue", "event", "session", "route", "page"].includes(id);
@@ -9,6 +10,7 @@ export default () =>
     .items([
       S.listItem()
         .title("Conference info")
+        .icon(HomeIcon)
         .child(
           S.document()
             .schemaType("event")
