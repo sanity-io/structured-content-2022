@@ -8477,6 +8477,11 @@ sanity-diff-patch@^1.0.9:
   dependencies:
     diff-match-patch "^1.0.5"
 
+sanity-plugin-asset-source-thispersondoesnotexist@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/sanity-plugin-asset-source-thispersondoesnotexist/-/sanity-plugin-asset-source-thispersondoesnotexist-0.0.1.tgz#dc998122d94618e85a91626462c60c590bcee270"
+  integrity sha512-Nnf4Lyz19MmAo61nmLrjvo7BvdRgQ1NElNIMdp9jItXckxxBBAFilXoROLIDHkH5/lPgu2ySTqwfiYx89wfOOg==
+
 sanity-plugin-asset-source-unsplash@^0.1.5:
   version "0.1.5"
   resolved "https://registry.npmjs.org/sanity-plugin-asset-source-unsplash/-/sanity-plugin-asset-source-unsplash-0.1.5.tgz#fbd10b23108ebd11af840b4ca5b416aeae05d15f"
