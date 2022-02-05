@@ -14,7 +14,8 @@
     "@sanity/desk-tool",
     "asset-source-unsplash",
     "leaflet-input",
-    "asset-source-thispersondoesnotexist"
+    "media",
+    "iframe-pane"
   ],
   "env": {
     "development": {

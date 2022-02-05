@@ -24,9 +24,10 @@
     "prop-types": "^15.7",
     "react": "^17.0",
     "react-dom": "^17.0",
-    "sanity-plugin-asset-source-thispersondoesnotexist": "^0.0.1",
     "sanity-plugin-asset-source-unsplash": "^0.1.5",
+    "sanity-plugin-iframe-pane": "^1.0.15",
     "sanity-plugin-leaflet-input": "^1.0.1",
+    "sanity-plugin-media": "^1.4.4",
     "styled-components": "^5.2.0"
   },
   "devDependencies": {
