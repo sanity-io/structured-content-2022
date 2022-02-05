@@ -15,7 +15,8 @@
     "asset-source-unsplash",
     "leaflet-input",
     "media",
-    "iframe-pane"
+    "iframe-pane",
+    "documents-pane"
   ],
   "env": {
     "development": {

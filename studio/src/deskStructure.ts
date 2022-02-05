@@ -2,14 +2,15 @@
 import S from "@sanity/desk-tool/structure-builder";
 import { HomeIcon } from "@sanity/icons";
 import Iframe from "sanity-plugin-iframe-pane";
+import DocumentsPane from "sanity-plugin-documents-pane";
 
 export const getDefaultDocumentNode = ({ schemaType }) => {
   // Conditionally return a different configuration based on the schema type
   switch (schemaType) {
-    case "person":
+    /*case "person":
       return S.document().views([
         S.view.form(),
-        /* S.view
+         S.view
           .component(Iframe)
           .options({
             url: (doc) => {
@@ -19,10 +20,21 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
               return `https://twitter.com/${handle}`;
             },
           })
-          .title("Twitter"), */
-      ]);
+          .title("Twitter"),
+      ]);*/
     default:
-      return S.document().views([S.view.form()]);
+      return S.document().views([
+        S.view.form(),
+        S.view
+          .component(DocumentsPane)
+          .options({
+            query: `*[!(_id in path("drafts.**")) && references($id)]`,
+            params: { id: `_id` },
+            useDraft: false,
+            debug: false,
+          })
+          .title("Incoming References"),
+      ]);
   }
 };
 

@@ -1,4 +1,5 @@
 import { InlineElementIcon } from "@sanity/icons";
+import { DocumentsIcon } from "@sanity/icons";
 
 export default {
   name: "blockContent",
@@ -23,7 +24,32 @@ export default {
         },
       ],
       marks: {
+        decorators: [
+          { title: "Strong", value: "strong" },
+          { title: "Emphasis", value: "em" },
+          { title: "Code", value: "code" },
+        ],
         annotations: [
+          {
+            name: "internalLink",
+            type: "object",
+            title: "Internal link",
+            icon: DocumentsIcon,
+            fields: [
+              {
+                name: "reference",
+                type: "reference",
+                title: "Reference",
+                to: [
+                  { type: "route" },
+                  { type: "person" },
+                  { type: "session" },
+                  { type: "article" },
+                  // other types you may want to link to
+                ],
+              },
+            ],
+          },
           {
             name: "link",
             type: "object",
@@ -39,25 +65,6 @@ export default {
                 name: "blank",
                 description: "Read https://css-tricks.com/use-target_blank/",
                 type: "boolean",
-              },
-            ],
-          },
-          {
-            name: "internalLink",
-            type: "object",
-            title: "Internal link",
-            fields: [
-              {
-                name: "reference",
-                type: "reference",
-                title: "Reference",
-                to: [
-                  { type: "route" },
-                  { type: "person" },
-                  { type: "session" },
-                  { type: "article" },
-                  // other types you may want to link to
-                ],
               },
             ],
           },

@@ -19,9 +19,20 @@ export default {
       type: "string",
     },
     {
+      name: "prononciation",
+      title: "Prononciation",
+      type: "string",
+      description: "Let's figure out how to use this field",
+    },
+    {
       name: "title",
       title: "Profesional title",
       type: "string",
+    },
+    {
+      name: "pronouns",
+      type: "string",
+      title: "Pronouns",
     },
     {
       name: "photo",
