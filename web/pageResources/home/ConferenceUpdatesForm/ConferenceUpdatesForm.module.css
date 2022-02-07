@@ -1,0 +1,15 @@
+.emailInput {
+  height: 3.5rem;
+  padding: 1rem;
+  margin-right: .5rem;
+}
+
+.submitButton {
+  background: #00a0d2;
+  color: white;
+  padding: 1rem;
+}
+
+.emailParagraph {
+  padding-top: 1rem;
+}

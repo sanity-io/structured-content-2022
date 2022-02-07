@@ -1,7 +1,7 @@
 import ProfilePicture from './ProfilePicture';
-import Paragraph from '../Paragraph';
-import blocksToText from '../../util/blocksToText';
-import { Speaker } from '../../../types/speaker';
+import Paragraph from '../../../components/Paragraph';
+import blocksToText from '../../../util/blocksToText';
+import { Speaker } from '../../../../types/speaker';
 import styles from './Speakers.module.css';
 
 interface SpeakersProps {

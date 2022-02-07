@@ -5,7 +5,9 @@ import { Speaker } from '../../types/speaker';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';
-import Speakers from '../components/Speakers';
+import Speakers from '../pageResources/home/Speakers';
+import styles from "../pageResources/home/home.module.css";
+import ConferenceUpdatesForm from "../pageResources/home/ConferenceUpdatesForm";
 
 const QUERY = `
   *[_type == "event"][0] {
@@ -37,20 +39,22 @@ interface HomeProps {
 const Home = ({
   data: { name, tagline, startDate, endDate, description, promotedSpeakers },
 }: HomeProps) => (
-  <>
-    <SectionBlock>
-      <header>
-        <Heading>{name}</Heading>
-        {tagline}
-        <Paragraph>
-          {formatDateWithTime(startDate)} - {formatDateWithTime(endDate)}
-        </Paragraph>
-      </header>
-    </SectionBlock>
+  <div className={styles.home}>
+    <header>
+      <SectionBlock className={styles.centerContent}>
+          <Heading>{name}</Heading>
+          {tagline}
+          <Paragraph>
+            {formatDateWithTime(startDate)} - {formatDateWithTime(endDate)}
+          </Paragraph>
+      </SectionBlock>
+    </header>
 
-    <main>
+    <main className={styles.centerContent}>
       <SectionBlock>
-        <Link href="#">{'Registration/Sign up/tickets ->'}</Link>
+        <Heading type="h2">
+          <Link href="#">{'Registration/Sign up/tickets ->'}</Link>
+        </Heading>
       </SectionBlock>
 
       <SectionBlock>
@@ -72,10 +76,19 @@ const Home = ({
 
       <SectionBlock>
         <Heading type="h2">Sponsors</Heading>
-        <Link href="#">{'Sponsors ->'}</Link>
+        <Paragraph>
+          <Heading type="h3">
+            <Link href="#">{'Become a Sponsor ->'}</Link>
+          </Heading>
+        </Paragraph>
+      </SectionBlock>
+
+      <SectionBlock>
+        <Heading type="h2">Get conference updates</Heading>
+        <ConferenceUpdatesForm />
       </SectionBlock>
     </main>
-  </>
+  </div>
 );
 
 export async function getStaticProps() {

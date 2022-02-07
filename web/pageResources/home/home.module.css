@@ -1,0 +1,9 @@
+.home {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.centerContent {
+  margin: 0 auto;
+}
