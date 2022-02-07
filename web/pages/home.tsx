@@ -1,18 +1,18 @@
-import Link from "next/link";
-import client from "../clients/mainClient";
-import {formatDateWithTime} from "../util/date";
-import SectionBlock from "../components/SectionBlock";
-import Heading from "../components/Heading";
+import Link from 'next/link';
+import client from '../clients/mainClient';
+import { formatDateWithTime } from '../util/date';
+import SectionBlock from '../components/SectionBlock';
+import Heading from '../components/Heading';
 
 const QUERY = `
-    *[_type == "event"][0] {
-      name,
-      description,
-      tagline,
-      startDate,
-      endDate,
-    }
-  `;
+  *[_type == "event"][0] {
+    name,
+    description,
+    tagline,
+    startDate,
+    endDate,
+  }
+`;
 
 interface HomeProps {
   data: {
@@ -24,13 +24,17 @@ interface HomeProps {
   };
 }
 
-const Home = ({ data: { name, tagline, startDate, endDate, description } }: HomeProps) => (
+const Home = ({
+  data: { name, tagline, startDate, endDate, description },
+}: HomeProps) => (
   <>
     <SectionBlock>
       <header>
         <Heading>{name}</Heading>
         {tagline}
-        <p>{formatDateWithTime(startDate)} - {formatDateWithTime(endDate)}</p>
+        <p>
+          {formatDateWithTime(startDate)} - {formatDateWithTime(endDate)}
+        </p>
       </header>
     </SectionBlock>
 
@@ -49,7 +53,7 @@ const Home = ({ data: { name, tagline, startDate, endDate, description } }: Home
 
 export async function getStaticProps() {
   const data = await client.fetch(QUERY);
-  console.log("DATA", data);
+  console.log('DATA', data);
   return {
     props: {
       data,

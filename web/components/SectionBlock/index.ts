@@ -1,1 +1,1 @@
-export { SectionBlock as default } from "./SectionBlock"
+export { SectionBlock as default } from './SectionBlock';
