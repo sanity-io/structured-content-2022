@@ -2,6 +2,7 @@ import Head from 'next/head';
 import React, { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import Logo from '../components/logo';
+import Link from 'next/link';
 
 const Confirmation = () => {
   // Event metadata
@@ -111,6 +112,7 @@ const Confirmation = () => {
                         } flex items-center w-full px-3 py-2 justify-center`}
                         href={generateGcalUrl()}
                         target="_blank"
+                        rel="noreferrer"
                       >
                         Google Calendar
                       </a>
@@ -129,6 +131,7 @@ const Confirmation = () => {
                         href={generateIcsBlob()}
                         download="structured-content-2022.ics"
                         target="_blank"
+                        rel="noreferrer"
                       >
                         Apple Calendar
                       </a>
@@ -147,6 +150,7 @@ const Confirmation = () => {
                         href={generateIcsBlob()}
                         download="structured-content-2022.ics"
                         target="_blank"
+                        rel="noreferrer"
                       >
                         Outlook
                       </a>
@@ -156,12 +160,11 @@ const Confirmation = () => {
               </Menu.Items>
             </Transition>
           </Menu>
-          <a
-            href="/"
-            className="font-medium text-gray-600 sm:mx-auto hover:text-blue-900"
-          >
-            ← Go back
-          </a>
+          <Link href="/">
+            <a className="font-medium text-gray-600 sm:mx-auto hover:text-blue-900">
+              ← Go back
+            </a>
+          </Link>
         </div>
       </div>
     </>
