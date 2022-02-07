@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import client from '../clients/mainClient';
 import { formatDateWithTime } from '../util/date';
+import { Speaker } from '../../types/speaker';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
+import Paragraph from '../components/Paragraph';
+import Speakers from '../components/Speakers';
 
 const QUERY = `
   *[_type == "event"][0] {
@@ -11,8 +14,14 @@ const QUERY = `
     tagline,
     startDate,
     endDate,
-  }
-`;
+    promotedSpeakers[]-> {
+      name,
+      title,
+      bio,
+      "photo": photo.asset->url,
+      "twitter": social.twitter,
+    }
+  }`;
 
 interface HomeProps {
   data: {
@@ -21,20 +30,21 @@ interface HomeProps {
     tagline: string;
     startDate: string;
     endDate: string;
+    promotedSpeakers: Speaker[];
   };
 }
 
 const Home = ({
-  data: { name, tagline, startDate, endDate, description },
+  data: { name, tagline, startDate, endDate, description, promotedSpeakers },
 }: HomeProps) => (
   <>
     <SectionBlock>
       <header>
         <Heading>{name}</Heading>
         {tagline}
-        <p>
+        <Paragraph>
           {formatDateWithTime(startDate)} - {formatDateWithTime(endDate)}
-        </p>
+        </Paragraph>
       </header>
     </SectionBlock>
 
@@ -47,16 +57,31 @@ const Home = ({
         <Heading type="h2">Why you should go/what this is</Heading>
         {description}
       </SectionBlock>
+
+      <SectionBlock>
+        <Heading type="h2">
+          <Link href="#">{'Speakers ->'}</Link>
+        </Heading>
+        <Speakers speakers={promotedSpeakers} />
+      </SectionBlock>
+
+      <SectionBlock>
+        <Heading type="h2">{'Program ->'}</Heading>
+        <Link href="#">{'Venues ->'}</Link>
+      </SectionBlock>
+
+      <SectionBlock>
+        <Heading type="h2">Sponsors</Heading>
+        <Link href="#">{'Sponsors ->'}</Link>
+      </SectionBlock>
     </main>
   </>
 );
 
 export async function getStaticProps() {
-  const data = await client.fetch(QUERY);
-  console.log('DATA', data);
   return {
     props: {
-      data,
+      data: await client.fetch(QUERY),
     },
   };
 }

@@ -19,8 +19,8 @@ export const Heading = ({ className, type = 'h1', ...props }: HeadingProps) => {
   const Heading = headingsMap[type];
   return (
     <Heading
-      className={clsx(className, styles.heading, styles[type])}
       {...props}
+      className={clsx(className, styles.heading, styles[type])}
     />
   );
 };
