@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import client from '../clients/mainClient';
 import { formatDateWithTime } from '../util/date';
+import blocksToText from '../util/blocksToText';
 import { Speaker } from '../../types/speaker';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';
 import Speakers from '../pageResources/home/Speakers';
-import styles from "../pageResources/home/home.module.css";
-import ConferenceUpdatesForm from "../pageResources/home/ConferenceUpdatesForm";
+import ConferenceUpdatesForm from '../pageResources/home/ConferenceUpdatesForm';
+import styles from '../pageResources/home/home.module.css';
 
 const QUERY = `
   *[_type == "event"][0] {
@@ -16,12 +17,17 @@ const QUERY = `
     tagline,
     startDate,
     endDate,
+    microcopy,
     promotedSpeakers[]-> {
       name,
       title,
       bio,
       "photo": photo.asset->url,
       "twitter": social.twitter,
+    },
+    valueProposition,
+    venues[]-> {
+      title
     }
   }`;
 
@@ -32,34 +38,72 @@ interface HomeProps {
     tagline: string;
     startDate: string;
     endDate: string;
+    microcopy: {
+      _key: string;
+      key: string;
+      action: string;
+      text: string;
+      type: 'link';
+    }[];
     promotedSpeakers: Speaker[];
+    valueProposition: {
+      _key: string;
+      _type: string;
+      children: {
+        _key: string;
+        _type: string;
+        marks: [];
+        text: string;
+      }[];
+      markDefs: [];
+      style: string;
+    }[];
+    venues: {
+      title: string;
+    }[];
   };
 }
 
 const Home = ({
-  data: { name, tagline, startDate, endDate, description, promotedSpeakers },
+  data: {
+    name,
+    tagline,
+    startDate,
+    endDate,
+    description,
+    microcopy,
+    promotedSpeakers,
+    valueProposition,
+    venues,
+  },
 }: HomeProps) => (
   <div className={styles.container}>
     <header>
       <SectionBlock>
-          <Heading>{name}</Heading>
-          {tagline}
-          <Paragraph>
-            {formatDateWithTime(startDate)} - {formatDateWithTime(endDate)}
-          </Paragraph>
+        <Heading>{name}</Heading>
+        {tagline}
+        <Paragraph>
+          {formatDateWithTime(startDate)} - {formatDateWithTime(endDate)}
+        </Paragraph>
+        {description}
       </SectionBlock>
     </header>
 
     <main>
       <SectionBlock>
-        <Heading type="h2">
-          <Link href="#">{'Registration/Sign up/tickets ->'}</Link>
-        </Heading>
+        <Heading type="h2">{'Registration/Sign up/tickets ->'}</Heading>
+        {microcopy.map(({ key, action, text }) => (
+          <Link key={key} href={action}>
+            {text}
+          </Link>
+        ))}
       </SectionBlock>
 
       <SectionBlock>
         <Heading type="h2">Why you should go/what this is</Heading>
-        {description}
+        {blocksToText(valueProposition).map((block, i) => (
+          <Paragraph key={i}>{block}</Paragraph>
+        ))}
       </SectionBlock>
 
       <SectionBlock>
@@ -71,7 +115,17 @@ const Home = ({
 
       <SectionBlock>
         <Heading type="h2">{'Program ->'}</Heading>
-        <Link href="#">{'Venues ->'}</Link>
+
+        <Heading type="h3">
+          <Link href="#">{'Venues ->'}</Link>
+        </Heading>
+        <ul>
+          {venues.map(({ title }) => (
+            <li key={title}>
+              <Link href="#">{title}</Link>
+            </li>
+          ))}
+        </ul>
       </SectionBlock>
 
       <SectionBlock>

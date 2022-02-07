@@ -1,1 +1,1 @@
-export { ConferenceUpdatesForm as default } from "./ConferenceUpdatesForm";
+export { ConferenceUpdatesForm as default } from './ConferenceUpdatesForm';

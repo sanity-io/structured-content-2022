@@ -18,7 +18,9 @@ export const Speakers = ({ speakers }: SpeakersProps) => (
         <div className={styles.details}>
           <strong>{name}</strong>
           <span className={styles.details__title}>{title}</span>
-          <Paragraph>{blocksToText(bio)}</Paragraph>
+          {blocksToText(bio).map((block, i) => (
+            <Paragraph key={i}>{block}</Paragraph>
+          ))}
         </div>
       </li>
     ))}
