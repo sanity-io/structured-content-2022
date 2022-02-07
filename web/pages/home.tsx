@@ -39,9 +39,9 @@ interface HomeProps {
 const Home = ({
   data: { name, tagline, startDate, endDate, description, promotedSpeakers },
 }: HomeProps) => (
-  <div className={styles.home}>
+  <div className={styles.container}>
     <header>
-      <SectionBlock className={styles.centerContent}>
+      <SectionBlock>
           <Heading>{name}</Heading>
           {tagline}
           <Paragraph>
@@ -50,7 +50,7 @@ const Home = ({
       </SectionBlock>
     </header>
 
-    <main className={styles.centerContent}>
+    <main>
       <SectionBlock>
         <Heading type="h2">
           <Link href="#">{'Registration/Sign up/tickets ->'}</Link>
