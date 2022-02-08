@@ -1,5 +1,5 @@
 import styles from './ConferenceUpdatesForm.module.css';
-import Paragraph from '../../../components/Paragraph';
+import Paragraph from '../Paragraph';
 
 export const ConferenceUpdatesForm = () => (
   <>

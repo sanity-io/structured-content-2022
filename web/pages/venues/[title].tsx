@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import client from '../../clients/mainClient';
-import { Venue } from '../../../types/venue';
+import { Venue } from '../../../types/Venue';
 import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Paragraph from '../../components/Paragraph';

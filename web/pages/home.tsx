@@ -2,12 +2,12 @@ import Link from 'next/link';
 import client from '../clients/mainClient';
 import { formatDateWithTime } from '../util/date';
 import blocksToText from '../util/blocksToText';
-import { Speaker } from '../../types/speaker';
+import { Speaker } from '../../types/Speaker';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';
 import Speakers from '../pageResources/home/Speakers';
-import ConferenceUpdatesForm from '../pageResources/home/ConferenceUpdatesForm';
+import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import styles from '../pageResources/shared/shared.module.css';
 
 const QUERY = `
