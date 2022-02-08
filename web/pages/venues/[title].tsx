@@ -17,9 +17,9 @@ interface VenueProps {
   data: Venue;
 }
 
-const MAPS_API_KEY = "AIzaSyAmi7CGrTHuDUz54Lxkz3-lLF9vYRL1SOw";
+const MAPS_API_KEY = 'AIzaSyAmi7CGrTHuDUz54Lxkz3-lLF9vYRL1SOw';
 
-const mapUrl = (geolocation: { lat: number, lng: number }) =>
+const mapUrl = (geolocation: { lat: number; lng: number }) =>
   `https://maps.google.com/maps?q=${geolocation.lat},${geolocation.lng}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
 const Venue = ({ data: { title, geolocation } }: VenueProps) => (
@@ -36,14 +36,16 @@ const Venue = ({ data: { title, geolocation } }: VenueProps) => (
           <div>
             <Heading type="h2">Location</Heading>
             <Paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit. This text is not fetched from
-              Sanity.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
+              ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+              dolor sit amet, consectetur adipiscing elit. This text is not
+              fetched from Sanity.
             </Paragraph>
           </div>
           <div className={styles.map}>
-            {geolocation?.lat && geolocation?.lng && <iframe src={mapUrl(geolocation)} />}
+            {geolocation?.lat && geolocation?.lng && (
+              <iframe src={mapUrl(geolocation)} />
+            )}
           </div>
         </div>
       </SectionBlock>
@@ -68,18 +70,17 @@ const Venue = ({ data: { title, geolocation } }: VenueProps) => (
         </Paragraph>
       </SectionBlock>
 
-      <SectionBlock style={{ background: "none" }}>
+      <SectionBlock style={{ background: 'none' }}>
         <Paragraph>
-          <Link href="#">See program for this venue -></Link>
+          <Link href="#">{'See program for this venue ->'}</Link>
         </Paragraph>
       </SectionBlock>
     </main>
   </div>
 );
 
-
 export async function getServerSideProps({ params: { title } }) {
-  const data = await client.fetch(QUERY, { title: title || "" });
+  const data = await client.fetch(QUERY, { title: title || '' });
   if (!data?.title) {
     return { notFound: true };
   }
