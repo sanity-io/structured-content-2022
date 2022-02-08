@@ -6,7 +6,6 @@ import { Speaker } from '../../types/speaker';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';
-import Speakers from '../pageResources/home/Speakers';
 import ConferenceUpdatesForm from '../pageResources/home/ConferenceUpdatesForm';
 import styles from '../pageResources/shared/shared.module.css';
 
@@ -17,21 +16,13 @@ const QUERY = `
     tagline,
     startDate,
     endDate,
-    microcopy,
-    promotedSpeakers[]-> {
-      name,
-      title,
-      bio,
-      "photo": photo.asset->url,
-      "twitter": social.twitter,
-    },
     valueProposition,
     venues[]-> {
       title
     }
   }`;
 
-interface HomeProps {
+interface AboutProps {
   data: {
     name: string;
     description: string;
@@ -64,39 +55,31 @@ interface HomeProps {
   };
 }
 
-const Home = ({
+const About = ({
   data: {
     name,
     tagline,
     startDate,
     endDate,
     description,
-    microcopy,
-    promotedSpeakers,
     valueProposition,
     venues,
   },
-}: HomeProps) => (
+}: AboutProps) => (
   <div className={styles.container}>
     <header>
       <SectionBlock>
-        <Heading>{name}</Heading>
-        {tagline}
-        <Paragraph>
-          {formatDateWithTime(startDate)} - {formatDateWithTime(endDate)}
-        </Paragraph>
-        {description}
+        <Heading>About {name}</Heading>
       </SectionBlock>
     </header>
 
     <main>
       <SectionBlock>
-        <Heading type="h2">{'Registration/Sign up/tickets ->'}</Heading>
-        {microcopy.map(({ key, action, text }) => (
-          <Link key={key} href={action}>
-            {text}
-          </Link>
-        ))}
+        <Heading type="h2">{tagline}</Heading>
+        <Paragraph>
+          {formatDateWithTime(startDate)} - {formatDateWithTime(endDate)}
+        </Paragraph>
+        {description}
       </SectionBlock>
 
       <SectionBlock>
@@ -106,35 +89,52 @@ const Home = ({
         ))}
       </SectionBlock>
 
-      <SectionBlock>
-        <Heading type="h2">
-          <Link href="#">{'Speakers ->'}</Link>
-        </Heading>
-        <Speakers speakers={promotedSpeakers} />
-      </SectionBlock>
-
-      <SectionBlock>
-        <Heading type="h2">{'Program ->'}</Heading>
-
-        <Heading type="h3">
-          <Link href="#">{'Venues ->'}</Link>
-        </Heading>
-        <ul>
-          {venues.map(({ title }) => (
-            <li key={title}>
-              <Link href="#">{title}</Link>
-            </li>
-          ))}
-        </ul>
-      </SectionBlock>
-
-      <SectionBlock>
-        <Heading type="h2">Sponsors</Heading>
+      <SectionBlock style={{ background: 'none' }}>
         <Paragraph>
-          <Heading type="h3">
-            <Link href="#">{'Become a Sponsor ->'}</Link>
-          </Heading>
+          <Link href="#">Code of Conduct</Link>
         </Paragraph>
+
+        <Heading type="h2">Conference Locations 2022</Heading>
+        {venues.map((venue) => (
+          <Link href={`/venues/${venue.title}`} key={venue.title}>
+            <a>
+              <SectionBlock style={{ margin: '1rem 0' }}>
+                {venue.title}
+              </SectionBlock>
+            </a>
+          </Link>
+        ))}
+
+        <Heading type="h3">Virtual option info</Heading>
+        <Paragraph>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit. This text is not fetched from
+          Sanity.
+        </Paragraph>
+      </SectionBlock>
+
+      <SectionBlock>
+        <Heading type="h2">Additional info</Heading>
+        <Paragraph>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit. This text is not fetched from
+          Sanity.
+        </Paragraph>
+      </SectionBlock>
+
+      <SectionBlock>
+        <Heading type="h2">Sponsor info</Heading>
+        <Paragraph>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit. This text is not fetched from
+          Sanity.
+        </Paragraph>
+        <Heading type="h3">
+          <Link href="#">Become a Sponsor</Link>
+        </Heading>
       </SectionBlock>
 
       <SectionBlock>
@@ -153,4 +153,4 @@ export async function getStaticProps() {
   };
 }
 
-export default Home;
+export default About;

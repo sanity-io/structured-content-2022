@@ -112,7 +112,7 @@ class MyDocument extends Document {
             href="/static/images/favicons/favicon-16x16.png"
           />
         </Head>
-        <body className="min-h-screen font-sans antialiased bg-blue-50">
+        <body className="min-h-screen font-sans antialiased">
           <Main />
           <NextScript />
         </body>
