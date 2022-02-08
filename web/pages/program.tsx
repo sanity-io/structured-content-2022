@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Session as TSession } from "../../types/Session";
+import { Session } from "../../types/Session";
 import { Venue } from "../../types/Venue";
 import client from '../clients/mainClient';
 import SectionBlock from '../components/SectionBlock';
@@ -7,7 +7,7 @@ import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';
 import styles from '../pageResources/shared/shared.module.css';
 import Venues from "../pageResources/program/Venues";
-import Session from "../pageResources/program/Session";
+import Sessions from "../pageResources/program/Sessions";
 
 const QUERY = `
   {
@@ -23,7 +23,7 @@ const QUERY = `
 
 interface ProgramProps {
   data: {
-    sessions: TSession[];
+    sessions: Session[];
     venues: Venue[];
   }
 }
@@ -48,9 +48,7 @@ const Program = ({ data: { sessions, venues } }: ProgramProps) => (
         <Venues venues={venues} />
       </SectionBlock>
 
-      {sessions.map((session) => (
-        <Session session={session} key={session.title} />
-      ))}
+      <Sessions sessions={sessions}  />
 
       <SectionBlock style={{ background: "none" }}>
         <Link href="#">Registration</Link>
