@@ -17,8 +17,6 @@ interface VenueProps {
   data: Venue;
 }
 
-const MAPS_API_KEY = 'AIzaSyAmi7CGrTHuDUz54Lxkz3-lLF9vYRL1SOw';
-
 const mapUrl = (geolocation: { lat: number; lng: number }) =>
   `https://maps.google.com/maps?q=${geolocation.lat},${geolocation.lng}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
