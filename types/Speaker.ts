@@ -7,5 +7,5 @@ export type Speaker = {
     }[]
   }[];
   photo: string,
-    twitter: string;
+  twitter: string;
 };

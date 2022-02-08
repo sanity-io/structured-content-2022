@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Session } from "../../../../types/Session";
 import SectionBlock from "../../../components/SectionBlock";
 import Heading from "../../../components/Heading";
@@ -11,9 +12,11 @@ interface SessionProps {
 
 export const Sessions = ({ sessions }: SessionProps) =>
   <>
-    {sessions.map(({ title, startTime, speakers }) => (
+    {sessions.map(({ _id, title, startTime, speakers }) => (
       <SectionBlock key={title}>
-        <Heading type="h2">{title}</Heading>
+        <Heading type="h2">
+          <Link href={`/sessions/${_id}`}>{title}</Link>
+        </Heading>
         <Paragraph>
           <span>{formatDateWithTime(startTime)}</span>
           {speakers.map(({ name, title }) => (
