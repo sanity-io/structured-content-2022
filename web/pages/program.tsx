@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import { Session } from "../../types/Session";
-import { Venue } from "../../types/Venue";
+import { Session } from '../../types/Session';
+import { Venue } from '../../types/Venue';
 import client from '../clients/mainClient';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';
 import styles from '../pageResources/shared/shared.module.css';
-import Venues from "../pageResources/program/Venues";
-import Sessions from "../pageResources/program/Sessions";
+import Venues from '../pageResources/program/Venues';
+import Sessions from '../pageResources/program/Sessions';
 
 const QUERY = `
   {
@@ -26,7 +26,7 @@ interface ProgramProps {
   data: {
     sessions: Session[];
     venues: Venue[];
-  }
+  };
 }
 
 const Program = ({ data: { sessions, venues } }: ProgramProps) => (
@@ -45,13 +45,13 @@ const Program = ({ data: { sessions, venues } }: ProgramProps) => (
     </header>
 
     <main>
-      <SectionBlock style={{ background: "none" }}>
+      <SectionBlock style={{ background: 'none' }}>
         <Venues venues={venues} />
       </SectionBlock>
 
-      <Sessions sessions={sessions}  />
+      <Sessions sessions={sessions} />
 
-      <SectionBlock style={{ background: "none" }}>
+      <SectionBlock style={{ background: 'none' }}>
         <Link href="#">Registration</Link>
       </SectionBlock>
     </main>

@@ -1,16 +1,16 @@
-import Link from "next/link";
-import { Session } from "../../../../types/Session";
-import SectionBlock from "../../../components/SectionBlock";
-import Heading from "../../../components/Heading";
-import Paragraph from "../../../components/Paragraph";
-import { formatDateWithTime } from "../../../util/date";
-import styles from "./Sessions.module.css";
+import Link from 'next/link';
+import { Session } from '../../../../types/Session';
+import SectionBlock from '../../../components/SectionBlock';
+import Heading from '../../../components/Heading';
+import Paragraph from '../../../components/Paragraph';
+import { formatDateWithTime } from '../../../util/date';
+import styles from './Sessions.module.css';
 
 interface SessionProps {
   sessions: Session[];
 }
 
-export const Sessions = ({ sessions }: SessionProps) =>
+export const Sessions = ({ sessions }: SessionProps) => (
   <>
     {sessions.map(({ _id, title, startTime, speakers }) => (
       <SectionBlock key={title}>
@@ -28,3 +28,4 @@ export const Sessions = ({ sessions }: SessionProps) =>
       </SectionBlock>
     ))}
   </>
+);
