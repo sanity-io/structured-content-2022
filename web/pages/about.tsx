@@ -8,6 +8,7 @@ import styles from '../pageResources/shared/shared.module.css';
 import { groq } from 'next-sanity';
 import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
+import Nav from '../components/Nav';
 
 const QUERY = groq`
   {
@@ -44,6 +45,7 @@ const About = ({
 }: AboutProps) => (
   <div className={styles.container}>
     <header>
+      <Nav />
       <SectionBlock>
         <Heading>{name}</Heading>
       </SectionBlock>

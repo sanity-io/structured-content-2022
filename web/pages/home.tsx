@@ -12,6 +12,7 @@ import TextBlock from '../components/TextBlock';
 import { Section } from '../types/Section';
 import { Sponsor } from '../types/Sponsor';
 import Sponsors from '../pageResources/home/Sponsors';
+import Nav from '../components/Nav';
 
 const QUERY = `
   {
@@ -83,6 +84,7 @@ const Home = ({
 }: HomeProps) => (
   <div className={styles.container}>
     <header>
+      <Nav />
       <SectionBlock>
         <Heading>{name}</Heading>
         {tagline}

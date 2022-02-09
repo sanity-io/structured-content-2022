@@ -9,6 +9,7 @@ import Venues from '../pageResources/program/Venues';
 import Sessions from '../pageResources/program/Sessions';
 import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
+import Nav from '../components/Nav';
 
 const QUERY = `
   {
@@ -47,6 +48,7 @@ const Program = ({
 }: ProgramProps) => (
   <div className={styles.container}>
     <header>
+      <Nav />
       <SectionBlock>
         <Heading>{name}</Heading>
         <Link href="#">Registration</Link>

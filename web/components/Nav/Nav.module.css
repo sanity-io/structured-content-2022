@@ -1,0 +1,15 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  background: #eee;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.nav__items {
+  max-width: 360px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+}
