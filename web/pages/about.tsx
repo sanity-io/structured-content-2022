@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import client from '../lib/sanity.server';
-import blocksToText from '../util/blocksToText';
-import { Speaker } from '../types/Speaker';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';
@@ -9,6 +7,7 @@ import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import styles from '../pageResources/shared/shared.module.css';
 import { groq } from 'next-sanity';
 import TextBlock from '../components/TextBlock';
+import { Section } from '../types/Section';
 
 const QUERY = groq`
   {
@@ -32,22 +31,7 @@ interface AboutProps {
     };
     about: {
       name: string;
-      sections: {
-        _key: string;
-        _type: string;
-        content: {
-          _key: string;
-          _type: string;
-          children: {
-            _key: string;
-            _type: string;
-            marks: [];
-            text: string;
-          }[];
-          markDefs: [];
-          style: string;
-        }[];
-      }[];
+      sections: Section[];
     };
   };
 }
