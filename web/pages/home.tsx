@@ -10,61 +10,75 @@ import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import styles from '../pageResources/shared/shared.module.css';
 import TextBlock from '../components/TextBlock';
 import { Section } from '../types/Section';
+import { Sponsor } from '../types/Sponsor';
+import Sponsors from '../pageResources/home/Sponsors';
 
 const QUERY = `
-  *[_type == "event"][0] {
-    name,
-    description,
-    tagline,
-    startDate,
-    endDate,
-    microcopy,
-    promotedSpeakers[]-> {
+  {
+    "home": *[_type == "event"][0] {
       name,
-      title,
-      bio,
-      "photo": photo.asset->url,
-      "twitter": social.twitter,
+      description,
+      tagline,
+      startDate,
+      endDate,
+      microcopy,
+      promotedSpeakers[]-> {
+        name,
+        title,
+        bio,
+        "photo": photo.asset->url,
+        "twitter": social.twitter,
+      },
+      valueProposition,
+      venues[]-> {
+        title
+      }
     },
-    valueProposition,
-    venues[]-> {
-      title
+    "sponsors": *[_type == "sponsor"] {
+      ...,
+      sponsorship->
     }
   }`;
 
 interface HomeProps {
   data: {
-    name: string;
-    description: string;
-    tagline: string;
-    startDate: string;
-    endDate: string;
-    microcopy: {
-      _key: string;
-      key: string;
-      action: string;
-      text: string;
-      type: 'link';
-    }[];
-    promotedSpeakers: Speaker[];
-    valueProposition: Section[];
-    venues: {
-      title: string;
-    }[];
+    home: {
+      name: string;
+      description: string;
+      tagline: string;
+      startDate: string;
+      endDate: string;
+      microcopy: {
+        _key: string;
+        key: string;
+        action: string;
+        text: string;
+        type: 'link';
+      }[];
+      promotedSpeakers: Speaker[];
+      valueProposition: Section[];
+      venues: {
+        title: string;
+      }[];
+    };
+    sponsors: Sponsor[];
   };
 }
 
 const Home = ({
   data: {
-    name,
-    tagline,
-    startDate,
-    endDate,
-    description,
-    microcopy,
-    promotedSpeakers,
-    valueProposition,
-    venues,
+    home: {
+      name,
+      tagline,
+      startDate,
+      endDate,
+      description,
+      microcopy,
+      promotedSpeakers,
+      valueProposition,
+      venues,
+    },
+    sponsors,
   },
 }: HomeProps) => (
   <div className={styles.container}>
@@ -115,11 +129,8 @@ const Home = ({
 
       <SectionBlock>
         <Heading type="h2">Sponsors</Heading>
-        <Paragraph>
-          <Heading type="h3">
-            <Link href="#">{'Become a Sponsor ->'}</Link>
-          </Heading>
-        </Paragraph>
+        <Sponsors sponsors={sponsors} />
+        <Link href="#">{'Become a Sponsor ->'}</Link>
       </SectionBlock>
 
       <SectionBlock>
