@@ -5,3 +5,7 @@
   max-width: 800px;
   border-radius: 4px;
 }
+
+.sectionBlock--noBackground {
+  background: none;
+}

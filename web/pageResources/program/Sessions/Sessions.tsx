@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Session } from '../../../../types/Session';
+import { Session } from '../../../types/Session';
 import SectionBlock from '../../../components/SectionBlock';
 import Heading from '../../../components/Heading';
 import Paragraph from '../../../components/Paragraph';

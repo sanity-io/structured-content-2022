@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import client from '../../clients/mainClient';
-import { Session } from '../../../types/Session';
+import client from '../../lib/sanity.server';
+import { Session } from '../../types/Session';
 import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Paragraph from '../../components/Paragraph';
@@ -51,14 +51,14 @@ const SessionPage = ({
         </Paragraph>
       </SectionBlock>
 
-      <SectionBlock style={{ background: 'none' }}>
+      <SectionBlock noBackground>
         <Heading type="h2">Speakers</Heading>
         <Paragraph>
           <Speakers speakers={speakers} />
         </Paragraph>
       </SectionBlock>
 
-      <SectionBlock style={{ background: 'none' }}>
+      <SectionBlock noBackground>
         <Paragraph>
           <Link href="/program">See full program</Link>
         </Paragraph>

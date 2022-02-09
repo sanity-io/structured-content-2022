@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { Session } from '../../types/Session';
-import { Venue } from '../../types/Venue';
-import client from '../clients/mainClient';
+import { Session } from '../types/Session';
+import { Venue } from '../types/Venue';
+import client from '../lib/sanity.server';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';
@@ -45,13 +45,13 @@ const Program = ({ data: { sessions, venues } }: ProgramProps) => (
     </header>
 
     <main>
-      <SectionBlock style={{ background: 'none' }}>
+      <SectionBlock noBackground>
         <Venues venues={venues} />
       </SectionBlock>
 
       <Sessions sessions={sessions} />
 
-      <SectionBlock style={{ background: 'none' }}>
+      <SectionBlock noBackground>
         <Link href="#">Registration</Link>
       </SectionBlock>
     </main>

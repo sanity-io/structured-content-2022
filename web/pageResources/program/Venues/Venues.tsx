@@ -1,4 +1,4 @@
-import { Venue } from '../../../../types/Venue';
+import { Venue } from '../../../types/Venue';
 import styles from './Venues.module.css';
 import Link from 'next/link';
 

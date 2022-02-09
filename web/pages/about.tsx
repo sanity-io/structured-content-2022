@@ -1,99 +1,80 @@
 import Link from 'next/link';
-import client from '../clients/mainClient';
-import { formatDateWithTime } from '../util/date';
+import client from '../lib/sanity.server';
 import blocksToText from '../util/blocksToText';
-import { Speaker } from '../../types/Speaker';
+import { Speaker } from '../types/Speaker';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import styles from '../pageResources/shared/shared.module.css';
+import { groq } from 'next-sanity';
+import TextBlock from '../components/TextBlock';
 
-const QUERY = `
-  *[_type == "event"][0] {
-    name,
-    description,
-    tagline,
-    startDate,
-    endDate,
-    valueProposition,
-    venues[]-> {
-      title
+const QUERY = groq`
+  {
+    "event": *[_type == "event"][0] {
+      venues[]-> {
+        title
+      }
+    },
+    "about": *[_id == "4ab00530-7310-4f04-8f90-8be04e747eaa"][0] {
+      name,
+      sections
     }
   }`;
 
 interface AboutProps {
   data: {
-    name: string;
-    description: string;
-    tagline: string;
-    startDate: string;
-    endDate: string;
-    microcopy: {
-      _key: string;
-      key: string;
-      action: string;
-      text: string;
-      type: 'link';
-    }[];
-    promotedSpeakers: Speaker[];
-    valueProposition: {
-      _key: string;
-      _type: string;
-      children: {
+    event: {
+      venues: {
+        title: string;
+      }[];
+    };
+    about: {
+      name: string;
+      sections: {
         _key: string;
         _type: string;
-        marks: [];
-        text: string;
+        content: {
+          _key: string;
+          _type: string;
+          children: {
+            _key: string;
+            _type: string;
+            marks: [];
+            text: string;
+          }[];
+          markDefs: [];
+          style: string;
+        }[];
       }[];
-      markDefs: [];
-      style: string;
-    }[];
-    venues: {
-      title: string;
-    }[];
+    };
   };
 }
 
 const About = ({
   data: {
-    name,
-    tagline,
-    startDate,
-    endDate,
-    description,
-    valueProposition,
-    venues,
+    event: { venues },
+    about: { name, sections },
   },
 }: AboutProps) => (
   <div className={styles.container}>
     <header>
       <SectionBlock>
-        <Heading>About {name}</Heading>
+        <Heading>{name}</Heading>
       </SectionBlock>
     </header>
 
     <main>
-      <SectionBlock>
-        <Heading type="h2">{tagline}</Heading>
-        <Paragraph>
-          {formatDateWithTime(startDate)} - {formatDateWithTime(endDate)}
-        </Paragraph>
-        {description}
-      </SectionBlock>
+      <TextBlock value={sections} />
 
-      <SectionBlock>
-        <Heading type="h2">Why you should go/what this is</Heading>
-        {blocksToText(valueProposition).map((block, i) => (
-          <Paragraph key={i}>{block}</Paragraph>
-        ))}
-      </SectionBlock>
-
-      <SectionBlock style={{ background: 'none' }}>
+      <SectionBlock noBackground>
         <Paragraph>
           <Link href="#">Code of Conduct</Link>
         </Paragraph>
+      </SectionBlock>
 
+      <SectionBlock noBackground>
         <Heading type="h2">Conference Locations 2022</Heading>
         {venues.map((venue) => (
           <Link href={`/venues/${venue.title}`} key={venue.title}>

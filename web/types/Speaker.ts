@@ -4,8 +4,8 @@ export type Speaker = {
   bio: {
     children: {
       text: string;
-    }[]
+    }[];
   }[];
-  photo: string,
+  photo: string;
   twitter: string;
 };

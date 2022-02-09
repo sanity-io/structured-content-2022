@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import client from '../clients/mainClient';
+import client from '../lib/sanity.server';
 import { formatDateWithTime } from '../util/date';
 import blocksToText from '../util/blocksToText';
-import { Speaker } from '../../types/Speaker';
+import { Speaker } from '../types/Speaker';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';

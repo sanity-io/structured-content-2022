@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import client from '../../clients/mainClient';
-import { Venue } from '../../../types/Venue';
+import client from '../../lib/sanity.server';
+import { Venue } from '../../types/Venue';
 import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Paragraph from '../../components/Paragraph';
@@ -68,7 +68,7 @@ const Venue = ({ data: { title, geolocation } }: VenueProps) => (
         </Paragraph>
       </SectionBlock>
 
-      <SectionBlock style={{ background: 'none' }}>
+      <SectionBlock noBackground>
         <Paragraph>
           <Link href="#">{'See program for this venue ->'}</Link>
         </Paragraph>
