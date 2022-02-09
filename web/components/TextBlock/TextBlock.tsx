@@ -14,6 +14,13 @@ const components: Partial<PortableTextComponents> = {
       </SectionBlock>
     ),
   },
+  block: ({ value }) => (
+    <SectionBlock>
+      {value.children.map((children) => (
+        <Paragraph key={children.text}>{children.text}</Paragraph>
+      ))}
+    </SectionBlock>
+  ),
 
   marks: {
     bold: ({ children }) => <strong>{children}</strong>,

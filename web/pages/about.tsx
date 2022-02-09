@@ -7,7 +7,7 @@ import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import styles from '../pageResources/shared/shared.module.css';
 import { groq } from 'next-sanity';
 import TextBlock from '../components/TextBlock';
-import { Section } from '../types/Section';
+import { RichTextSection } from '../types/RichTextSection';
 
 const QUERY = groq`
   {
@@ -31,7 +31,7 @@ interface AboutProps {
     };
     about: {
       name: string;
-      sections: Section[];
+      sections: RichTextSection[];
     };
   };
 }

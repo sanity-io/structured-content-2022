@@ -4,13 +4,11 @@ import { Venue } from '../types/Venue';
 import client from '../lib/sanity.server';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
-import Paragraph from '../components/Paragraph';
 import styles from '../pageResources/shared/shared.module.css';
 import Venues from '../pageResources/program/Venues';
 import Sessions from '../pageResources/program/Sessions';
-import { Section } from '../types/Section';
-import { PortableText } from '@portabletext/react';
 import TextBlock from '../components/TextBlock';
+import { RichTextSection } from '../types/RichTextSection';
 
 const QUERY = `
   {
@@ -33,7 +31,7 @@ interface ProgramProps {
   data: {
     program: {
       name: string;
-      sections: Section[];
+      sections: RichTextSection[];
     };
     sessions: Session[];
     venues: Venue[];

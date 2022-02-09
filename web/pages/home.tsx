@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import client from '../lib/sanity.server';
 import { formatDateWithTime } from '../util/date';
-import blocksToText from '../util/blocksToText';
 import { Speaker } from '../types/Speaker';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
@@ -9,6 +8,8 @@ import Paragraph from '../components/Paragraph';
 import Speakers from '../pageResources/home/Speakers';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import styles from '../pageResources/shared/shared.module.css';
+import TextBlock from '../components/TextBlock';
+import { Section } from '../types/Section';
 
 const QUERY = `
   *[_type == "event"][0] {
@@ -46,18 +47,7 @@ interface HomeProps {
       type: 'link';
     }[];
     promotedSpeakers: Speaker[];
-    valueProposition: {
-      _key: string;
-      _type: string;
-      children: {
-        _key: string;
-        _type: string;
-        marks: [];
-        text: string;
-      }[];
-      markDefs: [];
-      style: string;
-    }[];
+    valueProposition: Section[];
     venues: {
       title: string;
     }[];
@@ -99,12 +89,7 @@ const Home = ({
         ))}
       </SectionBlock>
 
-      <SectionBlock>
-        <Heading type="h2">Why you should go/what this is</Heading>
-        {blocksToText(valueProposition).map((block, i) => (
-          <Paragraph key={i}>{block}</Paragraph>
-        ))}
-      </SectionBlock>
+      <TextBlock value={valueProposition} />
 
       <SectionBlock>
         <Heading type="h2">
