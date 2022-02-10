@@ -43,8 +43,11 @@ const Speakers = ({ data: { speakers } }: SpeakersProps) => (
     <main>
       <SectionBlock noBackground className={speakersStyles.container}>
         {speakers.map((speaker) => (
-          <div className={speakersStyles['container__speaker']}>
-            <Link key={speaker._id} href={`/speakers/${speaker._id}`}>
+          <div
+            key={speaker._id}
+            className={speakersStyles['container__speaker']}
+          >
+            <Link href={`/speakers/${speaker._id}`}>
               <a>
                 <Image
                   src={imageUrlFor(speaker.photo).size(150, 150).url()}
