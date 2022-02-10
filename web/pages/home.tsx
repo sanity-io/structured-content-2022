@@ -129,7 +129,7 @@ const Home = ({
       <SectionBlock>
         <Heading type="h2">Sponsors</Heading>
         <Sponsors sponsors={sponsors} />
-        <Link href="#">{'Become a Sponsor ->'}</Link>
+        <Link href="/sponsor">{'Become a Sponsor ->'}</Link>
       </SectionBlock>
 
       <SectionBlock>

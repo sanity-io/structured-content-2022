@@ -1,11 +1,9 @@
 import Link from 'next/link';
 import { Session } from '../types/Session';
-import { Venue } from '../types/Venue';
 import client from '../lib/sanity.server';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import styles from '../pageResources/shared/shared.module.css';
-import Venues from '../pageResources/program/Venues';
 import Sessions from '../components/Sessions';
 import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
@@ -35,14 +33,12 @@ interface ProgramProps {
       sections: RichTextSection[];
     };
     sessions: Session[];
-    venues: Venue[];
   };
 }
 
 const Program = ({
   data: {
     sessions,
-    venues,
     program: { name, sections },
   },
 }: ProgramProps) => (
@@ -57,10 +53,6 @@ const Program = ({
 
     <main>
       <TextBlock value={sections} />
-      <SectionBlock noBackground>
-        <Venues venues={venues} />
-      </SectionBlock>
-
       <Sessions sessions={sessions} />
 
       <SectionBlock noBackground>
