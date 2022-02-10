@@ -20,6 +20,9 @@ export const Nav = () => (
       <li>
         <Link href="/speakers">Speakers</Link>
       </li>
+      <li>
+        <Link href="/sponsor">Sponsor</Link>
+      </li>
     </ul>
   </nav>
 );

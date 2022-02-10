@@ -25,13 +25,9 @@ const groupBySponsorLevel = (
 
 export const Sponsors = ({ sponsors }: SponsorsProps) => {
   const groupedSponsors = groupBySponsorLevel(sponsors);
-
   const tiers: SponsorLevel[] = ['Premier', 'Gold', 'Silver'];
-
   return (
     <div className="sponsors">
-      <h2>Sponsors</h2>
-
       {tiers.map((tier) => (
         <div key={tier}>
           <Heading type="h3">{tier}</Heading>

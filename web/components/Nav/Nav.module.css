@@ -7,9 +7,15 @@
 }
 
 .nav__items {
-  max-width: 360px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex: 1;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 480px) {
+  .nav__items {
+    max-width: 200px;
+  }
 }
