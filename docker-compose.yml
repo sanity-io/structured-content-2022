@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  studio:
+    build:
+      dockerfile: ./studio/Dockerfile
+      context: .
+    ports:
+      - 3333:3333
+    volumes:
+      - ./studio:/app
+
+  web:
+    build:
+      dockerfile: ./web/Dockerfile
+      context: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./web:/app
