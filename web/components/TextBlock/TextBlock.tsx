@@ -2,6 +2,7 @@ import { PortableText, PortableTextComponents } from '@portabletext/react';
 import Paragraph from '../Paragraph';
 import SectionBlock from '../SectionBlock';
 import { PortableTextBlock } from '@portabletext/types';
+import { RichTextSection } from '../../types/RichTextSection';
 
 const components: Partial<PortableTextComponents> = {
   types: {
@@ -32,7 +33,11 @@ const components: Partial<PortableTextComponents> = {
 };
 
 interface TextBlockProps {
-  value?: PortableTextBlock[] | PortableTextBlock;
+  value?:
+    | PortableTextBlock[]
+    | PortableTextBlock
+    | RichTextSection
+    | RichTextSection[];
 }
 
 export const TextBlock = ({ value }: TextBlockProps) =>
