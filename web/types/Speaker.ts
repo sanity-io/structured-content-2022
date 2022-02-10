@@ -1,7 +1,8 @@
 export type Speaker = {
+  _id: string;
   name: string;
   title: string;
-  bio: {
+  bio?: {
     children: {
       text: string;
     }[];

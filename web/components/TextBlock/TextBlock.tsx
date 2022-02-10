@@ -1,6 +1,7 @@
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 import Paragraph from '../Paragraph';
 import SectionBlock from '../SectionBlock';
+import { PortableTextBlock } from '@portabletext/types';
 
 const components: Partial<PortableTextComponents> = {
   types: {
@@ -30,6 +31,9 @@ const components: Partial<PortableTextComponents> = {
   },
 };
 
-export const TextBlock = ({ value }) => (
-  <PortableText value={value} components={components} />
-);
+interface TextBlockProps {
+  value?: PortableTextBlock[] | PortableTextBlock;
+}
+
+export const TextBlock = ({ value }: TextBlockProps) =>
+  value ? <PortableText value={value} components={components} /> : <></>;

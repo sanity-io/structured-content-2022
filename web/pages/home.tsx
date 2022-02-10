@@ -24,6 +24,7 @@ const QUERY = `
       endDate,
       microcopy,
       promotedSpeakers[]-> {
+        _id,
         name,
         title,
         bio,
