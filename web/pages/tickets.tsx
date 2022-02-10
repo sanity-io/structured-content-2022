@@ -4,6 +4,8 @@ import Heading from '../components/Heading';
 import ticketsStyles from '../pageResources/tickets/Tickets.module.css';
 import styles from '../pageResources/shared/shared.module.css';
 import Nav from '../components/Nav';
+import { RichTextSection } from '../types/RichTextSection';
+import TextBlock from '../components/TextBlock';
 
 const QUERY = `
   {
@@ -12,6 +14,10 @@ const QUERY = `
       price,
       type,
       included,
+    },
+    "registrationInfo": *[_id == "8e0a4c73-2b2a-43c9-84a4-7a00c286aa86"][0] {
+      name,
+      sections
     }
   }`;
 
@@ -23,10 +29,19 @@ interface TicketsProps {
       type: string;
       included?: string[];
     }[];
+    registrationInfo: {
+      name: string;
+      sections: RichTextSection[];
+    };
   };
 }
 
-const Tickets = ({ data: { tickets } }: TicketsProps) => (
+const Tickets = ({
+  data: {
+    tickets,
+    registrationInfo: { name, sections },
+  },
+}: TicketsProps) => (
   <div className={styles.container}>
     <header>
       <Nav />
@@ -63,6 +78,10 @@ const Tickets = ({ data: { tickets } }: TicketsProps) => (
           ))}
         </div>
       </SectionBlock>
+      <SectionBlock>
+        <Heading>{name}</Heading>
+      </SectionBlock>
+      <TextBlock value={sections} />
     </main>
   </div>
 );
