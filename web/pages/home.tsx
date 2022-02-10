@@ -148,6 +148,7 @@ export async function getStaticProps() {
     props: {
       data: await client.fetch(QUERY),
     },
+    revalidate: 180,
   };
 }
 
