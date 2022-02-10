@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.ticket {
+  background: #ccc;
+  padding: 1rem;
+  flex: 1;
+  margin: 1rem;
+}
+
+.ticket__type {
+  font-weight: bold;
+}

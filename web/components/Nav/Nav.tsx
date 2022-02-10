@@ -14,6 +14,9 @@ export const Nav = () => (
       <li>
         <Link href="/program">Program</Link>
       </li>
+      <li>
+        <Link href="/tickets">Tickets</Link>
+      </li>
     </ul>
   </nav>
 );
