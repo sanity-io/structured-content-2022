@@ -23,13 +23,13 @@ interface TicketsProps {
       type: string;
       included?: string[];
     }[];
-  }
+  };
 }
 
 const Tickets = ({ data: { tickets } }: TicketsProps) => (
   <div className={styles.container}>
     <header>
-      <Nav/>
+      <Nav />
       <SectionBlock>
         <Heading>Tickets</Heading>
       </SectionBlock>
@@ -38,16 +38,23 @@ const Tickets = ({ data: { tickets } }: TicketsProps) => (
     <main>
       <SectionBlock noBackground>
         <div className={ticketsStyles.container}>
-          {tickets.map(ticket => (
+          {tickets.map((ticket) => (
             <div key={ticket._id} className={ticketsStyles.ticket}>
-              <div className={ticketsStyles["ticket__type"]}>{ticket.type}</div>
-              <div className={ticketsStyles["ticket__price"]}>
-                <span className={ticketsStyles["ticket__price__currency"]}>$</span>
-                <span className={ticketsStyles["ticket__price__amount"]}>{ticket.price}</span>
+              <div className={ticketsStyles['ticket__type']}>{ticket.type}</div>
+              <div className={ticketsStyles['ticket__price']}>
+                <span className={ticketsStyles['ticket__price__currency']}>
+                  $
+                </span>
+                <span className={ticketsStyles['ticket__price__amount']}>
+                  {ticket.price}
+                </span>
               </div>
-              <div className={ticketsStyles["ticket__included"]}>
-                {ticket.included?.map(included => (
-                  <div key={included} className={ticketsStyles["ticket__included__item"]}>
+              <div className={ticketsStyles['ticket__included']}>
+                {ticket.included?.map((included) => (
+                  <div
+                    key={included}
+                    className={ticketsStyles['ticket__included__item']}
+                  >
                     {included}
                   </div>
                 ))}

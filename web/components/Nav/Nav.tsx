@@ -17,6 +17,9 @@ export const Nav = () => (
       <li>
         <Link href="/tickets">Tickets</Link>
       </li>
+      <li>
+        <Link href="/speakers">Speakers</Link>
+      </li>
     </ul>
   </nav>
 );

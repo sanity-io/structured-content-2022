@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { Session } from '../../../types/Session';
-import SectionBlock from '../../../components/SectionBlock';
-import Heading from '../../../components/Heading';
-import Paragraph from '../../../components/Paragraph';
-import { formatDateWithTime } from '../../../util/date';
+import { Session } from '../../types/Session';
+import SectionBlock from '../SectionBlock';
+import Heading from '../Heading';
+import Paragraph from '../Paragraph';
+import { formatDateWithTime } from '../../util/date';
 import styles from './Sessions.module.css';
 
 interface SessionProps {

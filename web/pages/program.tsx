@@ -6,7 +6,7 @@ import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import styles from '../pageResources/shared/shared.module.css';
 import Venues from '../pageResources/program/Venues';
-import Sessions from '../pageResources/program/Sessions';
+import Sessions from '../components/Sessions';
 import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
 import Nav from '../components/Nav';
