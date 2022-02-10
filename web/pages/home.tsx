@@ -97,7 +97,6 @@ const Home = ({
 
     <main>
       <SectionBlock>
-        <Heading type="h2">{'Registration/Sign up/tickets ->'}</Heading>
         {microcopy.map(({ key, action, text }) => (
           <Link key={key} href={action}>
             {text}
@@ -108,9 +107,6 @@ const Home = ({
       <TextBlock value={valueProposition} />
 
       <SectionBlock>
-        <Heading type="h2">
-          <Link href="#">{'Speakers ->'}</Link>
-        </Heading>
         <Speakers speakers={promotedSpeakers} />
       </SectionBlock>
 
