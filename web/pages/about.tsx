@@ -4,11 +4,11 @@ import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
-import styles from '../pageResources/shared/shared.module.css';
 import { groq } from 'next-sanity';
 import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
 import Nav from '../components/Nav';
+import PageContainer from '../components/PageContainer';
 
 const QUERY = groq`
   {
@@ -43,7 +43,7 @@ const About = ({
     about: { name, sections },
   },
 }: AboutProps) => (
-  <div className={styles.container}>
+  <PageContainer>
     <header>
       <Nav />
       <SectionBlock>
@@ -111,7 +111,7 @@ const About = ({
         <ConferenceUpdatesForm />
       </SectionBlock>
     </main>
-  </div>
+  </PageContainer>
 );
 
 export async function getStaticProps() {

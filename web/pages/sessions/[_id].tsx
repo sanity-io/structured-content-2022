@@ -6,9 +6,9 @@ import Heading from '../../components/Heading';
 import Paragraph from '../../components/Paragraph';
 import { formatDateWithTime } from '../../util/date';
 import { Speakers } from '../../pageResources/home/Speakers/Speakers';
-import sharedStyles from '../../pageResources/shared/shared.module.css';
 import TextBlock from '../../components/TextBlock';
 import Nav from '../../components/Nav';
+import PageContainer from '../../components/PageContainer';
 
 const QUERY = `
   *[_id == $_id][0] {
@@ -41,7 +41,7 @@ interface SessionPageProps {
 const SessionPage = ({
   data: { title, startTime, location, speakers, longDescription },
 }: SessionPageProps) => (
-  <div className={sharedStyles.container}>
+  <PageContainer>
     <header>
       <Nav />
       <SectionBlock key={title}>
@@ -58,9 +58,11 @@ const SessionPage = ({
     </header>
 
     <main>
-      <SectionBlock>
-        <TextBlock value={longDescription} />
-      </SectionBlock>
+      {longDescription && (
+        <SectionBlock>
+          <TextBlock value={longDescription} />
+        </SectionBlock>
+      )}
 
       <SectionBlock noBackground>
         <Heading type="h2">Speakers</Heading>
@@ -73,7 +75,7 @@ const SessionPage = ({
         </Paragraph>
       </SectionBlock>
     </main>
-  </div>
+  </PageContainer>
 );
 
 export async function getServerSideProps({ params: { _id } }) {

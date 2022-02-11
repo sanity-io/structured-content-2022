@@ -1,16 +1,16 @@
+import Link from 'next/link';
+import Image from 'next/image';
 import client from '../../lib/sanity.server';
 import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Nav from '../../components/Nav';
-import styles from '../../pageResources/shared/shared.module.css';
-import speakerStyles from '../../pageResources/speakers/Speaker/Speaker.module.css';
 import { imageUrlFor } from '../../lib/sanity';
-import Link from 'next/link';
-import Image from 'next/image';
 import { Section } from '../../types/Section';
 import TextBlock from '../../components/TextBlock';
 import { Session } from '../../types/Session';
 import Sessions from '../../components/Sessions';
+import PageContainer from '../../components/PageContainer';
+import speakerStyles from '../../pageResources/speakers/Speaker/Speaker.module.css';
 
 const QUERY = `
   {
@@ -51,7 +51,7 @@ const Speakers = ({
     speaker: { name, title, twitter, photo, bio, sessions },
   },
 }: SpeakerProps) => (
-  <div className={styles.container}>
+  <PageContainer>
     <header>
       <Nav />
       <SectionBlock>
@@ -95,7 +95,7 @@ const Speakers = ({
         </div>
       </SectionBlock>
     </main>
-  </div>
+  </PageContainer>
 );
 
 export async function getServerSideProps({ params: { _id } }) {

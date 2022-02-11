@@ -3,11 +3,11 @@ import { Session } from '../types/Session';
 import client from '../lib/sanity.server';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
-import styles from '../pageResources/shared/shared.module.css';
 import Sessions from '../components/Sessions';
 import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
 import Nav from '../components/Nav';
+import PageContainer from '../components/PageContainer';
 
 const QUERY = `
   {
@@ -42,7 +42,7 @@ const Program = ({
     program: { name, sections },
   },
 }: ProgramProps) => (
-  <div className={styles.container}>
+  <PageContainer>
     <header>
       <Nav />
       <SectionBlock>
@@ -62,7 +62,7 @@ const Program = ({
         <Link href="#">Registration</Link>
       </SectionBlock>
     </main>
-  </div>
+  </PageContainer>
 );
 
 export async function getStaticProps() {

@@ -2,10 +2,10 @@ import client from '../lib/sanity.server';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import ticketsStyles from '../pageResources/tickets/Tickets.module.css';
-import styles from '../pageResources/shared/shared.module.css';
 import Nav from '../components/Nav';
 import { RichTextSection } from '../types/RichTextSection';
 import TextBlock from '../components/TextBlock';
+import PageContainer from '../components/PageContainer';
 
 const QUERY = `
   {
@@ -42,7 +42,7 @@ const Tickets = ({
     registrationInfo: { name, sections },
   },
 }: TicketsProps) => (
-  <div className={styles.container}>
+  <PageContainer>
     <header>
       <Nav />
       <SectionBlock>
@@ -84,7 +84,7 @@ const Tickets = ({
         <TextBlock value={sections} />
       </SectionBlock>
     </main>
-  </div>
+  </PageContainer>
 );
 
 export async function getStaticProps() {

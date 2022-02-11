@@ -1,8 +1,8 @@
+import Link from 'next/link';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
-import Paragraph from '../Paragraph';
 import { PortableTextBlock } from '@portabletext/types';
 import { RichTextSection } from '../../types/RichTextSection';
-import Link from 'next/link';
+import Paragraph from '../Paragraph';
 
 const components: Partial<PortableTextComponents> = {
   types: {

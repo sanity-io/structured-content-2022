@@ -4,8 +4,8 @@ import { Venue } from '../../types/Venue';
 import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Paragraph from '../../components/Paragraph';
-import sharedStyles from '../../pageResources/shared/shared.module.css';
 import styles from '../../pageResources/about/venue/venue.module.css';
+import PageContainer from '../../components/PageContainer';
 
 const QUERY = `
   *[_type == "venue"][title == $title][0] {
@@ -21,7 +21,7 @@ const mapUrl = (geolocation: { lat: number; lng: number }) =>
   `https://maps.google.com/maps?q=${geolocation.lat},${geolocation.lng}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
 const Venue = ({ data: { title, geolocation } }: VenueProps) => (
-  <div className={sharedStyles.container}>
+  <PageContainer>
     <header>
       <SectionBlock>
         <Heading>{title}</Heading>
@@ -74,7 +74,7 @@ const Venue = ({ data: { title, geolocation } }: VenueProps) => (
         </Paragraph>
       </SectionBlock>
     </main>
-  </div>
+  </PageContainer>
 );
 
 export async function getServerSideProps({ params: { title } }) {

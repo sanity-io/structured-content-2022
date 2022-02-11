@@ -1,12 +1,12 @@
+import Link from 'next/link';
+import Image from 'next/image';
 import client from '../../lib/sanity.server';
+import { imageUrlFor } from '../../lib/sanity';
 import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Nav from '../../components/Nav';
+import PageContainer from '../../components/PageContainer';
 import speakersStyles from '../../pageResources/speakers/Speakers.module.css';
-import styles from '../../pageResources/shared/shared.module.css';
-import { imageUrlFor } from '../../lib/sanity';
-import Link from 'next/link';
-import Image from 'next/image';
 
 const QUERY = `
   {
@@ -32,7 +32,7 @@ interface SpeakersProps {
 }
 
 const Speakers = ({ data: { speakers } }: SpeakersProps) => (
-  <div className={styles.container}>
+  <PageContainer>
     <header>
       <Nav />
       <SectionBlock>
@@ -73,7 +73,7 @@ const Speakers = ({ data: { speakers } }: SpeakersProps) => (
         ))}
       </SectionBlock>
     </main>
-  </div>
+  </PageContainer>
 );
 
 export async function getStaticProps() {

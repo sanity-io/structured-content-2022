@@ -1,11 +1,11 @@
 import client from '../lib/sanity.server';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
-import styles from '../pageResources/shared/shared.module.css';
 import sponsorStyles from '../pageResources/sponsor/Sponsor.module.css';
 import Nav from '../components/Nav';
 import Paragraph from '../components/Paragraph';
 import Link from 'next/link';
+import PageContainer from '../components/PageContainer';
 
 const QUERY = `{}`;
 
@@ -14,7 +14,7 @@ interface SponsorProps {
 }
 
 const Sponsor = ({ data: {} }: SponsorProps) => (
-  <div className={styles.container}>
+  <PageContainer>
     <header>
       <Nav />
       <SectionBlock>
@@ -124,7 +124,7 @@ const Sponsor = ({ data: {} }: SponsorProps) => (
         </form>
       </SectionBlock>
     </main>
-  </div>
+  </PageContainer>
 );
 
 export async function getStaticProps() {

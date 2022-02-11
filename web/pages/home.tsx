@@ -7,12 +7,12 @@ import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';
 import Speakers from '../pageResources/home/Speakers';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
-import styles from '../pageResources/shared/shared.module.css';
 import TextBlock from '../components/TextBlock';
 import { Section } from '../types/Section';
 import { Sponsor } from '../types/Sponsor';
 import Sponsors from '../pageResources/home/Sponsors';
 import Nav from '../components/Nav';
+import PageContainer from '../components/PageContainer';
 
 const QUERY = `
   {
@@ -83,7 +83,7 @@ const Home = ({
     sponsors,
   },
 }: HomeProps) => (
-  <div className={styles.container}>
+  <PageContainer>
     <header>
       <Nav />
       <SectionBlock>
@@ -139,7 +139,7 @@ const Home = ({
         <ConferenceUpdatesForm />
       </SectionBlock>
     </main>
-  </div>
+  </PageContainer>
 );
 
 export async function getStaticProps() {
