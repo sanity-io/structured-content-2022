@@ -32,9 +32,6 @@ const QUERY = `
         "twitter": social.twitter,
       },
       valueProposition,
-      venues[]-> {
-        title
-      }
     },
     "sponsors": *[_type == "sponsor"] {
       ...,
@@ -59,9 +56,6 @@ interface HomeProps {
       }[];
       promotedSpeakers: Speaker[];
       valueProposition: Section[];
-      venues: {
-        title: string;
-      }[];
     };
     sponsors: Sponsor[];
   };
@@ -78,7 +72,6 @@ const Home = ({
       microcopy,
       promotedSpeakers,
       valueProposition,
-      venues,
     },
     sponsors,
   },
@@ -114,18 +107,11 @@ const Home = ({
       </SectionBlock>
 
       <SectionBlock>
-        <Heading type="h2">{'Program ->'}</Heading>
-
-        <Heading type="h3">
-          <Link href="#">{'Venues ->'}</Link>
+        <Heading type="h2">
+          <Link href="/program">
+            <a>{'Program ->'}</a>
+          </Link>
         </Heading>
-        <ul>
-          {venues.map(({ title }) => (
-            <li key={title}>
-              <Link href="#">{title}</Link>
-            </li>
-          ))}
-        </ul>
       </SectionBlock>
 
       <SectionBlock>
