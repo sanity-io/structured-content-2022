@@ -1,34 +1,53 @@
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 import Paragraph from '../Paragraph';
-import SectionBlock from '../SectionBlock';
 import { PortableTextBlock } from '@portabletext/types';
 import { RichTextSection } from '../../types/RichTextSection';
+import Link from 'next/link';
 
 const components: Partial<PortableTextComponents> = {
   types: {
     richText: ({ value }) => (
-      <SectionBlock>
+      <>
         {value.content
           .reduce((acc, content) => [...acc, ...content.children], [])
           .map((children) => (
-            <Paragraph key={children.text}>{children.text}</Paragraph>
+            <Paragraph key={children._key}>{children.text}</Paragraph>
           ))}
-      </SectionBlock>
+      </>
+    ),
+    person: ({ value: { name, _id } }) => {
+      return (
+        <Link href={`/speakers/${_id}`}>
+          <a>{name}</a>
+        </Link>
+      );
+    },
+    venue: ({ value: { title, _id } }) => (
+      <Link href={`/venues/${title}`}>
+        <a>{title}</a>
+      </Link>
     ),
   },
-  block: ({ value }) => (
-    <SectionBlock>
-      {value.children.map((children) => (
-        <Paragraph key={children.text}>{children.text}</Paragraph>
-      ))}
-    </SectionBlock>
-  ),
+  block: {
+    block: ({ value }) => (
+      <>
+        {value.children.map((children) => (
+          <Paragraph key={children._key}>{children.text}</Paragraph>
+        ))}
+      </>
+    ),
+  },
 
   marks: {
     bold: ({ children }) => <strong>{children}</strong>,
     italic: ({ children }) => <em>{children}</em>,
     underline: ({ children }) => <u>{children}</u>,
     code: ({ children }) => <code>{children}</code>,
+    internalLink: ({ text, value }) => (
+      <Link href={`/${value?.reference?._type}s/${value?.reference?._id}`}>
+        {text}
+      </Link>
+    ),
   },
 };
 

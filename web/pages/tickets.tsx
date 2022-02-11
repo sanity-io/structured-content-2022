@@ -78,10 +78,11 @@ const Tickets = ({
           ))}
         </div>
       </SectionBlock>
+
       <SectionBlock>
         <Heading>{name}</Heading>
+        <TextBlock value={sections} />
       </SectionBlock>
-      <TextBlock value={sections} />
     </main>
   </div>
 );

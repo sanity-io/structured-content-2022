@@ -7,15 +7,31 @@ import Paragraph from '../../components/Paragraph';
 import { formatDateWithTime } from '../../util/date';
 import { Speakers } from '../../pageResources/home/Speakers/Speakers';
 import sharedStyles from '../../pageResources/shared/shared.module.css';
+import TextBlock from '../../components/TextBlock';
+import Nav from '../../components/Nav';
 
 const QUERY = `
-  *[_type == "session"][_id == $_id][0] {
+  *[_id == $_id][0] {
+    ...,
     location->,
     "speakers": speakers[].person-> {
       "photo": photo.asset->url, 
       ...
     },
-    ...
+    longDescription[] {
+      ...,
+      children[] {
+       _type == 'reference' => @->,
+        _type != 'reference' => @,
+      },
+      markDefs[] {
+        ...,
+        reference-> {
+          ...,
+          _ref->,
+        }
+      },
+    },
   }`;
 
 interface SessionPageProps {
@@ -23,10 +39,11 @@ interface SessionPageProps {
 }
 
 const SessionPage = ({
-  data: { title, startTime, location, speakers },
+  data: { title, startTime, location, speakers, longDescription },
 }: SessionPageProps) => (
   <div className={sharedStyles.container}>
     <header>
+      <Nav />
       <SectionBlock key={title}>
         <Heading type="h2">{title}</Heading>
         <div>
@@ -42,20 +59,12 @@ const SessionPage = ({
 
     <main>
       <SectionBlock>
-        <Heading type="h2">Text about the talk</Heading>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. This text is not fetched from
-          Sanity.
-        </Paragraph>
+        <TextBlock value={longDescription} />
       </SectionBlock>
 
       <SectionBlock noBackground>
         <Heading type="h2">Speakers</Heading>
-        <Paragraph>
-          <Speakers speakers={speakers} />
-        </Paragraph>
+        <Speakers speakers={speakers} />
       </SectionBlock>
 
       <SectionBlock noBackground>

@@ -1,5 +1,6 @@
 import { Speaker } from './Speaker';
 import { Venue } from './Venue';
+import { Section } from './Section';
 
 export type Session = {
   _id: string;
@@ -8,4 +9,6 @@ export type Session = {
   duration: number;
   location: Venue;
   speakers: Speaker[];
+  shortDescription?: Section[];
+  longDescription?: Section[];
 };

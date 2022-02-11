@@ -105,7 +105,9 @@ const Home = ({
         ))}
       </SectionBlock>
 
-      <TextBlock value={valueProposition} />
+      <SectionBlock>
+        <TextBlock value={valueProposition} />
+      </SectionBlock>
 
       <SectionBlock>
         <Speakers speakers={promotedSpeakers} />

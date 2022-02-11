@@ -52,7 +52,10 @@ const Program = ({
     </header>
 
     <main>
-      <TextBlock value={sections} />
+      <SectionBlock>
+        <TextBlock value={sections} />
+      </SectionBlock>
+
       <Sessions sessions={sessions} />
 
       <SectionBlock noBackground>

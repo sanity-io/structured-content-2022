@@ -76,8 +76,12 @@ const Speakers = ({
     </header>
 
     <main>
-      <TextBlock value={bio} />
+      <SectionBlock>
+        <TextBlock value={bio} />
+      </SectionBlock>
+
       <Sessions sessions={sessions} />
+
       <SectionBlock noBackground>
         <div>
           <Link href={`/speakers`}>

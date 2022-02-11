@@ -52,7 +52,9 @@ const About = ({
     </header>
 
     <main>
-      <TextBlock value={sections} />
+      <SectionBlock>
+        <TextBlock value={sections} />
+      </SectionBlock>
 
       <SectionBlock noBackground>
         <Paragraph>
