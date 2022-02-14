@@ -1,16 +1,16 @@
 import createSchema from "part:@sanity/base/schema-creator";
 
 import schemaTypes from "all:part:@sanity/base/schema-type";
-import article from "./article";
-import person from "./person";
-import session from "./session";
-import sponsor from "./sponsor";
-import venue from "./venue";
-import ticket from "./ticket";
-import sponsorship from "./sponsorship";
-import event from "./event";
-import page from "./page";
-import route from "./route";
+import article from "./documents/article";
+import person from "./documents/person";
+import session from "./documents/session";
+import sponsor from "./documents/sponsor";
+import venue from "./documents/venue";
+import ticket from "./documents/ticket";
+import sponsorship from "./documents/sponsorship";
+import event from "./documents/event";
+import page from "./documents/page";
+import route from "./documents/route";
 
 // Objects
 import seo from "./objects/seo";
