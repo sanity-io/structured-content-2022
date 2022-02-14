@@ -1,8 +1,5 @@
 import { useEffect } from 'react';
-import CookieConsent, {
-  getCookieConsentValue,
-  Cookies,
-} from 'react-cookie-consent';
+import CookieConsent, { getCookieConsentValue } from 'react-cookie-consent';
 import TagManager from 'react-gtm-module';
 import '../styles/globals.css';
 
