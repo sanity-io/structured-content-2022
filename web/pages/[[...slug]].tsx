@@ -1,11 +1,11 @@
-import { groq } from "next-sanity";
-import client from "../lib/sanity.server";
-import { Section } from "../types/Section";
-import SectionBlock from "../components/SectionBlock";
-import TextBlock from "../components/TextBlock";
-import Heading from "../components/Heading";
-import PageContainer from "../components/PageContainer";
-import Nav from "../components/Nav";
+import { groq } from 'next-sanity';
+import client from '../lib/sanity.server';
+import { Section } from '../types/Section';
+import SectionBlock from '../components/SectionBlock';
+import TextBlock from '../components/TextBlock';
+import Heading from '../components/Heading';
+import PageContainer from '../components/PageContainer';
+import Nav from '../components/Nav';
 
 const QUERY = groq`
   {
@@ -24,22 +24,28 @@ interface RouteProps {
       page: {
         name: string;
         sections: Section[];
-      }
-    }
-  }
+      };
+    };
+  };
 }
 
-const Route = ({ data: { route: { page: { name, sections } } } }: RouteProps) => {
+const Route = ({
+  data: {
+    route: {
+      page: { name, sections },
+    },
+  },
+}: RouteProps) => {
   return (
     <PageContainer>
       <header>
-        <Nav/>
+        <Nav />
         <SectionBlock>
           <Heading>{name}</Heading>
         </SectionBlock>
       </header>
       <SectionBlock>
-        <TextBlock value={sections}/>
+        <TextBlock value={sections} />
       </SectionBlock>
     </PageContainer>
   );

@@ -1,7 +1,7 @@
 import ReactCookieConsent from 'react-cookie-consent';
-import styles from "./CookieConsent.module.css";
+import styles from './CookieConsent.module.css';
 
-export const CookieConsent = () =>
+export const CookieConsent = () => (
   <div className={styles.container}>
     <ReactCookieConsent
       buttonText="OK"
@@ -14,8 +14,8 @@ export const CookieConsent = () =>
       buttonClasses={styles.consentButtonClasses}
       declineButtonClasses={styles.consentDeclineButtonClasses}
     >
-      We use cookies to see how you use our website and to show you related
-      ads later.{' '}
+      We use cookies to see how you use our website and to show you related ads
+      later.{' '}
       <a
         href="https://www.sanity.io/legal/privacy#2426b2eb5396"
         className={styles.consentLink}
@@ -26,3 +26,4 @@ export const CookieConsent = () =>
       </a>
     </ReactCookieConsent>
   </div>
+);
