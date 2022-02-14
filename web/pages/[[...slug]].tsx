@@ -52,7 +52,7 @@ const Route = ({
 };
 
 export async function getServerSideProps({ params }) {
-  const data = await client.fetch(QUERY, { slug: params?.slug?.[0] });
+  const data = await client.fetch(QUERY, { slug: params?.slug?.[0] || '/' });
   if (!data?.route?.page) {
     return { notFound: true };
   }
