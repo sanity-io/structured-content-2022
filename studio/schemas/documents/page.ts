@@ -28,20 +28,13 @@ export default {
       title: "Sections",
       of: [
         {
-          name: "richText",
-          type: "object",
-          title: "Rich text",
-          fields: [
-            {
-              name: "content",
-              type: "array",
-              of: [
-                {
-                  type: "block",
-                },
-              ],
-            },
-          ],
+          type: "richText",
+        },
+        {
+          type: "textAndImage",
+        },
+        {
+          type: "questionAndAnswerCollection",
         },
       ],
     },
