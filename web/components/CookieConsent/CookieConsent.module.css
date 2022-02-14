@@ -1,0 +1,91 @@
+.container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: rgb(19, 25, 34);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+}
+
+.consentContainer {
+  color: rgb(175, 186, 202);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 52rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .consentContainer {
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .consentContainer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .consentContent {
+    max-width: 28rem;
+  }
+}
+
+.consentButtonWrapper {
+  display: flex;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .consentButtonWrapper {
+    margin-top: 0;
+  }
+}
+
+.consentButtonClasses {
+  color: rgb(62, 30, 37);
+  padding: .5rem 1rem;
+  background-color: rgb(243, 100, 88);
+  border: 1px solid rgb(243, 100, 88);
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+@media (min-width: 768px) {
+  .consentButtonClasses {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    flex: 1 1 auto;
+  }
+}
+
+
+.consentDeclineButtonClasses {
+  padding: .5rem 1rem;
+  border: 1px solid rgb(60, 71, 88);
+  flex: 1 1 0;
+  cursor: pointer;
+  background: transparent;
+  color: inherit;
+  font-size: 100%;
+}
+
+@media (min-width: 768px) {
+  .consentDeclineButtonClasses {
+    flex: 1 1 auto;
+  }
+}
+
+.consentLink {
+  color: rgb(243, 100, 88);
+  white-space: nowrap;
+  text-decoration: inherit;
+}
