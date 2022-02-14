@@ -1,10 +1,9 @@
-import { DocumentIcon } from "@sanity/icons";
 import * as sections from "../objects";
+
 export default {
-  name: "page",
-  title: "Pages",
+  name: "sharedSections",
+  title: "Shared Sections",
   type: "document",
-  icon: DocumentIcon,
   preview: {
     select: {
       title: "internalTitle",
@@ -19,21 +18,15 @@ export default {
     },
     {
       name: "name",
-      title: "Page name",
+      title: "Section name",
       type: "string",
-      description: "This will be the editorial headline of the page.",
+      description: "This will be the editorial headline of the section.",
     },
     {
       name: "sections",
       type: "array",
       title: "Sections",
-      of: [
-        ...Object.keys(sections).map((type) => ({ type })),
-        {
-          type: "reference",
-          to: [{ type: "sharedSections" }],
-        },
-      ],
+      of: Object.keys(sections).map((type) => ({ type })),
     },
   ],
 };

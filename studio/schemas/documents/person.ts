@@ -25,6 +25,15 @@ export default {
       description: "Let's figure out how to use this field",
     },
     {
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "name",
+        maxLength: 96,
+      },
+    },
+    {
       name: "title",
       title: "Profesional title",
       type: "string",
