@@ -1,5 +1,5 @@
 .emailInput {
-  height: 3.5rem;
+  height: 1rem;
   padding: 1rem;
   margin-right: 0.5rem;
 }
@@ -8,6 +8,7 @@
   background: #00a0d2;
   color: white;
   padding: 1rem;
+  border: 1px solid blue;
 }
 
 .emailParagraph {
