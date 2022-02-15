@@ -7,6 +7,7 @@ export type Session = {
   _id: string;
   title: string;
   startTime: string;
+  _type: 'session';
   duration: number;
   location: Venue;
   speakers: Speaker[];

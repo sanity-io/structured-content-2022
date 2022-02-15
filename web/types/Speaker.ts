@@ -4,6 +4,7 @@ export type Speaker = {
   _id: string;
   name: string;
   title: string;
+  _type: "person";
   bio?: {
     children: {
       text: string;
