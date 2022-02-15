@@ -17,10 +17,7 @@ const QUERY = `
     },
     "venues": *[_type == "venue"],
     "sessions": *[_type == "session"] {
-      _id,
-      title,
-      startTime,
-      duration,
+      ...,
       location->,
       "speakers": speakers[].person->
     }

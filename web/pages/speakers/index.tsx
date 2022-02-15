@@ -13,13 +13,8 @@ import { Speaker } from "../../types/Speaker";
 const QUERY = `
   {
     "speakers": *[_type == "person"] {
-      _id,
-      name,
-      title,
-      _type,
-      slug,
+      ...,
       "twitter": social.twitter,
-      photo,
     }
   }`;
 

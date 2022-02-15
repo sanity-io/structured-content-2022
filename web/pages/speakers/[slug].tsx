@@ -22,10 +22,7 @@ const QUERY = `
       "twitter": social.twitter,
       photo,
       "sessions": *[_type=='session' && references(^._id)] {
-         _id,
-        title,
-        startTime,
-        duration,
+        ...,
         location->,
         "speakers": speakers[].person->
       }
@@ -60,7 +57,7 @@ const Speakers = ({
             <Heading>{name}</Heading>
             <div>{title}</div>
             <div>
-              <Link href={`https://twitter.com/${name}`}>
+              <Link href={`https://twitter.com/${twitter}`}>
                 <a target="_blank" rel="noopener noreferrer">{twitter}</a>
               </Link>
             </div>

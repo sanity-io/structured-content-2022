@@ -11,7 +11,7 @@ import Nav from '../../components/Nav';
 import PageContainer from '../../components/PageContainer';
 
 const QUERY = `
-  *[_id == $_id][0] {
+  *[_type == "session" && slug.current == $slug][0] {
     ...,
     location->,
     "speakers": speakers[].person-> {
@@ -78,8 +78,8 @@ const SessionPage = ({
   </PageContainer>
 );
 
-export async function getServerSideProps({ params: { _id } }) {
-  const data = await client.fetch(QUERY, { _id: _id || '' });
+export async function getServerSideProps({ params: { slug } }) {
+  const data = await client.fetch(QUERY, { slug: slug || '' });
   if (!data?._id) {
     return { notFound: true };
   }
