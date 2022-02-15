@@ -10,15 +10,15 @@ export const CookieConsent = () => (
       disableStyles
       containerClasses={styles.consentContainer}
       contentClasses={styles.consentContent}
-      buttonWrapperClasses={styles.consentButtonWrapper}
-      buttonClasses={styles.consentButtonClasses}
-      declineButtonClasses={styles.consentDeclineButtonClasses}
+      buttonWrapperClasses={styles.buttonWrapper}
+      buttonClasses={styles.consentButton}
+      declineButtonClasses={styles.declineButton}
     >
       We use cookies to see how you use our website and to show you related ads
       later.{' '}
       <a
         href="https://www.sanity.io/legal/privacy#2426b2eb5396"
-        className={styles.consentLink}
+        className={styles.link}
         target="_blank"
         rel="noreferrer"
       >

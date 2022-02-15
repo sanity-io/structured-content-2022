@@ -38,18 +38,18 @@
   }
 }
 
-.consentButtonWrapper {
+.buttonWrapper {
   display: flex;
   margin-top: 1rem;
 }
 
 @media (min-width: 768px) {
-  .consentButtonWrapper {
+  .buttonWrapper {
     margin-top: 0;
   }
 }
 
-.consentButtonClasses {
+.consentButton {
   color: rgb(62, 30, 37);
   padding: 0.5rem 1rem;
   background-color: rgb(243, 100, 88);
@@ -59,19 +59,19 @@
   flex: 1 1 0;
 }
 
-.consentButtonClasses:hover {
+.consentButton:hover {
   background-color: rgb(246 139 130);
 }
 
 @media (min-width: 768px) {
-  .consentButtonClasses {
+  .consentButton {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     flex: 1 1 auto;
   }
 }
 
-.consentDeclineButtonClasses {
+.declineButton {
   padding: 0.5rem 1rem;
   border: 1px solid rgb(60, 71, 88);
   flex: 1 1 0;
@@ -81,22 +81,22 @@
   font-size: 100%;
 }
 
-.consentDeclineButtonClasses:hover {
+.declineButton:hover {
   background-color: rgb(28 36 48);
 }
 
 @media (min-width: 768px) {
-  .consentDeclineButtonClasses {
+  .declineButton {
     flex: 1 1 auto;
   }
 }
 
-.consentLink {
+.link {
   color: rgb(243, 100, 88);
   white-space: nowrap;
   text-decoration: inherit;
 }
 
-.consentLink:focus-visible {
+.link:focus-visible {
   outline: auto;
 }
