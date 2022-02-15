@@ -1,10 +1,8 @@
 import Link from 'next/link';
 import client from '../lib/sanity.server';
-import { formatDateWithTime } from '../util/date';
 import { Person } from '../types/Person';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
-import Paragraph from '../components/Paragraph';
 import Speakers from '../pageResources/home/Speakers';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import TextBlock from '../components/TextBlock';
@@ -13,6 +11,7 @@ import { Sponsor } from '../types/Sponsor';
 import Sponsors from '../pageResources/home/Sponsors';
 import Nav from '../components/Nav';
 import PageContainer from '../components/PageContainer';
+import ConferenceHeader from '../components/ConferenceHeader';
 
 const QUERY = `
   {
@@ -72,17 +71,15 @@ const Home = ({
   <PageContainer>
     <header>
       <Nav />
-      <SectionBlock>
-        <Heading>{name}</Heading>
-        {tagline}
-        <Paragraph>
-          {formatDateWithTime(startDate)} - {formatDateWithTime(endDate)}
-        </Paragraph>
-        {description}
-      </SectionBlock>
     </header>
 
     <main>
+      <ConferenceHeader
+        name={name}
+        startDate={startDate}
+        endDate={endDate}
+        description={description}
+      />
       <SectionBlock>
         {microcopy.map(({ key, action, text }) => (
           <Link key={key} href={action}>
