@@ -28,6 +28,10 @@ body {
     Noto Color Emoji;
 }
 
+p {
+  margin: 0;
+}
+
 a {
   text-decoration: underline;
 }

@@ -1,0 +1,23 @@
+.root {
+  margin: var(--spacing-small) 0 var(--spacing-large);
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+}
+
+.summary {
+  margin-top: var(--spacing-small);
+  font: var(--font-body-large-medium);
+  letter-spacing: var(--letter-spacing-body-large-medium);
+  display: grid;
+  row-gap: var(--spacing-small);
+}
+
+@media (--large-up) {
+  .summary {
+    column-gap: var(--grid-gutter);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
