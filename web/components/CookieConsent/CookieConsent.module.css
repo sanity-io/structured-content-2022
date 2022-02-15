@@ -100,3 +100,7 @@
 .link:focus-visible {
   outline: auto;
 }
+
+.link:hover {
+  color: rgb(246, 139, 130);
+}
