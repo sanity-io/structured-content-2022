@@ -1,0 +1,34 @@
+.button {
+  color: var(--color-brand-black);
+  text-decoration: none;
+  font: var(--font-ui-sm-medium);
+  letter-spacing: var(--letter-spacing-ui-sm);
+  background: var(--color-brand-orange);
+  padding: 9px 16px;
+  border-radius: 6px;
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-brand-black);
+}
+
+.button:hover {
+  background: var(--color-brand-yellow);
+}
+
+.button:active {
+  background: var(--color-brand-yellow-light);
+}
+
+.button::after {
+  content: ' ->';
+}
+
+@media (--large-up) {
+  .button {
+    font: var(--font-body-base-medium);
+    letter-spacing: var(--letter-spacing-body-base);
+    padding: 12px 20px;
+  }
+}
