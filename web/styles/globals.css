@@ -17,6 +17,12 @@
   src: url('/static/fonts/larsseit-bold.woff2') format('woff2');
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
 }
