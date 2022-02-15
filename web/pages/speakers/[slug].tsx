@@ -53,11 +53,9 @@ const Speakers = ({
             <Heading>{name}</Heading>
             <div>{title}</div>
             <div>
-              <Link href={`https://twitter.com/${twitter}`}>
-                <a target="_blank" rel="noopener noreferrer">
-                  {twitter}
-                </a>
-              </Link>
+              <a href={`https://twitter.com/${twitter}`} target="_blank" rel="noopener noreferrer">
+                {twitter}
+              </a>
             </div>
           </div>
           <Image
