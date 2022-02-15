@@ -60,6 +60,11 @@
   border: 1px solid rgb(243, 100, 88);
   cursor: pointer;
   margin-left: 1rem;
+  flex: 1 1 0;
+}
+
+.consentButtonClasses:hover {
+  background-color: rgb(246 139 130);
 }
 
 @media (min-width: 768px) {
@@ -80,6 +85,10 @@
   font-size: 100%;
 }
 
+.consentDeclineButtonClasses:hover {
+  background-color: rgb(28 36 48);
+}
+
 @media (min-width: 768px) {
   .consentDeclineButtonClasses {
     flex: 1 1 auto;
@@ -90,4 +99,8 @@
   color: rgb(243, 100, 88);
   white-space: nowrap;
   text-decoration: inherit;
+}
+
+.consentLink:focus-visible {
+  outline: auto;
 }
