@@ -13,7 +13,10 @@ const QUERY = groq`
       ...,
       page-> {
         name,
-        sections
+        sections[] {
+          _type == 'reference' => @->,
+          _type != 'reference' => @,
+        }
       }
     }
   }`;
