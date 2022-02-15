@@ -9,8 +9,8 @@ import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
 import Nav from '../components/Nav';
 import PageContainer from '../components/PageContainer';
-import { getEntityPath } from "../util/entityPaths";
-import { Venue } from "../types/Venue";
+import { getEntityPath } from '../util/entityPaths';
+import { Venue } from '../types/Venue';
 
 const QUERY = groq`
   {

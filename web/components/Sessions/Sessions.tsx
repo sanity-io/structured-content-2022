@@ -5,7 +5,7 @@ import Heading from '../Heading';
 import Paragraph from '../Paragraph';
 import { formatDateWithTime } from '../../util/date';
 import styles from './Sessions.module.css';
-import { getEntityPath } from "../../util/entityPaths";
+import { getEntityPath } from '../../util/entityPaths';
 
 interface SessionProps {
   sessions: Session[];

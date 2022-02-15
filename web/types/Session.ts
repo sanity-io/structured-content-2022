@@ -1,7 +1,7 @@
 import { Person } from './Person';
 import { Venue } from './Venue';
 import { Section } from './Section';
-import { Slug } from "./Slug";
+import { Slug } from './Slug';
 
 export type Session = {
   _id: string;

@@ -7,8 +7,8 @@ import Heading from '../../components/Heading';
 import Nav from '../../components/Nav';
 import PageContainer from '../../components/PageContainer';
 import speakersStyles from '../../pageResources/speakers/Speakers.module.css';
-import { getEntityPath } from "../../util/entityPaths";
-import { Person } from "../../types/Person";
+import { getEntityPath } from '../../util/entityPaths';
+import { Person } from '../../types/Person';
 
 const QUERY = `
   {

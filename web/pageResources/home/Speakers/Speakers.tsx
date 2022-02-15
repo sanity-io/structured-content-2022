@@ -2,10 +2,10 @@ import Link from 'next/link';
 import ProfilePicture from './ProfilePicture';
 import Paragraph from '../../../components/Paragraph';
 import blocksToText from '../../../util/blocksToText';
-import { getEntityPath } from "../../../util/entityPaths";
+import { getEntityPath } from '../../../util/entityPaths';
 import { Person } from '../../../types/Person';
 import styles from './Speakers.module.css';
-import { imageUrlFor } from "../../../lib/sanity";
+import { imageUrlFor } from '../../../lib/sanity';
 
 interface SpeakersProps {
   speakers: Person[];
@@ -20,7 +20,10 @@ export const Speakers = ({ speakers }: SpeakersProps) => (
           <div className={styles.profilePicture}>
             <Link href={getEntityPath(speaker)}>
               <a>
-                <ProfilePicture src={imageUrlFor(photo).size(200, 200).url()} alt={name}/>
+                <ProfilePicture
+                  src={imageUrlFor(photo).size(200, 200).url()}
+                  alt={name}
+                />
               </a>
             </Link>
           </div>

@@ -5,7 +5,7 @@ import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Paragraph from '../../components/Paragraph';
 import PageContainer from '../../components/PageContainer';
-import Nav from "../../components/Nav";
+import Nav from '../../components/Nav';
 import styles from '../../pageResources/about/venue/venue.module.css';
 
 const QUERY = `

@@ -10,7 +10,7 @@ import { Session } from '../../types/Session';
 import Sessions from '../../components/Sessions';
 import PageContainer from '../../components/PageContainer';
 import speakerStyles from '../../pageResources/speakers/Speaker/Speaker.module.css';
-import { Person } from "../../types/Person";
+import { Person } from '../../types/Person';
 
 const QUERY = `
   {
@@ -34,7 +34,14 @@ interface SpeakerProps {
 
 const Speakers = ({
   data: {
-    speaker: { name, title, social: { twitter }, photo, bio, sessions },
+    speaker: {
+      name,
+      title,
+      social: { twitter },
+      photo,
+      bio,
+      sessions,
+    },
   },
 }: SpeakerProps) => (
   <PageContainer>
@@ -47,7 +54,9 @@ const Speakers = ({
             <div>{title}</div>
             <div>
               <Link href={`https://twitter.com/${twitter}`}>
-                <a target="_blank" rel="noopener noreferrer">{twitter}</a>
+                <a target="_blank" rel="noopener noreferrer">
+                  {twitter}
+                </a>
               </Link>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { Slug } from "./Slug";
+import { Slug } from './Slug';
 
 export type SponsorLevel = 'Silver' | 'Gold' | 'Premier';
 
