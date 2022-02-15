@@ -9,15 +9,23 @@ interface ConferenceHeaderProps {
   description?: string;
 }
 
-export const ConferenceHeader = (
-  { name, startDate, endDate, description }: ConferenceHeaderProps
-) => {
+export const ConferenceHeader = ({
+  name,
+  startDate,
+  endDate,
+  description,
+}: ConferenceHeaderProps) => {
   return (
     <div className={styles.root}>
       <h1>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={logo.src} className={styles.logo}
-          width={logo.width} height={logo.height} alt={name || ''} />
+        <img
+          src={logo.src}
+          className={styles.logo}
+          width={logo.width}
+          height={logo.height}
+          alt={name || ''}
+        />
       </h1>
       <div className={styles.summary}>
         <p>
@@ -29,9 +37,7 @@ export const ConferenceHeader = (
             <time dateTime={endDate}>{formatDateWithTime(endDate)}</time>
           )}
         </p>
-        <p>
-          {description}
-        </p>
+        <p>{description}</p>
       </div>
     </div>
   );
