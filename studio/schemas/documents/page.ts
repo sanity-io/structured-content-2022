@@ -1,4 +1,5 @@
 import { DocumentIcon } from "@sanity/icons";
+import * as sections from "../objects";
 export default {
   name: "page",
   title: "Pages",
@@ -27,21 +28,10 @@ export default {
       type: "array",
       title: "Sections",
       of: [
+        ...Object.keys(sections).map((type) => ({ type })),
         {
-          name: "richText",
-          type: "object",
-          title: "Rich text",
-          fields: [
-            {
-              name: "content",
-              type: "array",
-              of: [
-                {
-                  type: "block",
-                },
-              ],
-            },
-          ],
+          type: "reference",
+          to: [{ type: "sharedSections" }],
         },
       ],
     },
