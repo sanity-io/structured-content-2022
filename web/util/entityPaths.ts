@@ -1,12 +1,11 @@
 import { Session } from "../types/Session";
 import { Venue } from "../types/Venue";
-import { Speaker } from "../types/Speaker";
+import { Person } from "../types/Person";
 import { Sponsor } from "../types/Sponsor";
 
-type Entity = Speaker | Session | Venue | Sponsor;
+type Entity = Person | Session | Venue | Sponsor;
 
 export const getEntityPath = (entity: Entity) => {
-  console.log(entity.slug?.current);
   if (!entity.slug?.current) {
     return "#";
   }

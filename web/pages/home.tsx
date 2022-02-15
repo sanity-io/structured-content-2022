@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import client from '../lib/sanity.server';
 import { formatDateWithTime } from '../util/date';
-import { Speaker } from '../types/Speaker';
+import { Person } from '../types/Person';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Paragraph from '../components/Paragraph';
@@ -23,16 +23,7 @@ const QUERY = `
       startDate,
       endDate,
       microcopy,
-      promotedSpeakers[]-> {
-        _id,
-        _type,
-        slug,
-        name,
-        title,
-        bio,
-        "photo": photo.asset->url,
-        "twitter": social.twitter,
-      },
+      promotedSpeakers[]->,
       valueProposition,
     },
     "sponsors": *[_type == "sponsor"] {
@@ -56,7 +47,7 @@ interface HomeProps {
         text: string;
         type: 'link';
       }[];
-      promotedSpeakers: Speaker[];
+      promotedSpeakers: Person[];
       valueProposition: Section[];
     };
     sponsors: Sponsor[];

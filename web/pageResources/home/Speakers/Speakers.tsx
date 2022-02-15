@@ -3,11 +3,12 @@ import ProfilePicture from './ProfilePicture';
 import Paragraph from '../../../components/Paragraph';
 import blocksToText from '../../../util/blocksToText';
 import { getEntityPath } from "../../../util/entityPaths";
-import { Speaker } from '../../../types/Speaker';
+import { Person } from '../../../types/Person';
 import styles from './Speakers.module.css';
+import { imageUrlFor } from "../../../lib/sanity";
 
 interface SpeakersProps {
-  speakers: Speaker[];
+  speakers: Person[];
 }
 
 export const Speakers = ({ speakers }: SpeakersProps) => (
@@ -19,7 +20,7 @@ export const Speakers = ({ speakers }: SpeakersProps) => (
           <div className={styles.profilePicture}>
             <Link href={getEntityPath(speaker)}>
               <a>
-                <ProfilePicture src={photo} alt={name}/>
+                <ProfilePicture src={imageUrlFor(photo).size(200, 200).url()} alt={name}/>
               </a>
             </Link>
           </div>

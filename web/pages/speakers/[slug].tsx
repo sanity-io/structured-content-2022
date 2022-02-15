@@ -5,22 +5,17 @@ import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Nav from '../../components/Nav';
 import { imageUrlFor } from '../../lib/sanity';
-import { Section } from '../../types/Section';
 import TextBlock from '../../components/TextBlock';
 import { Session } from '../../types/Session';
 import Sessions from '../../components/Sessions';
 import PageContainer from '../../components/PageContainer';
 import speakerStyles from '../../pageResources/speakers/Speaker/Speaker.module.css';
+import { Person } from "../../types/Person";
 
 const QUERY = `
   {
     "speaker": *[slug.current == $slug][0] {
-      _id,
-      name,
-      title,
-      bio,
-      "twitter": social.twitter,
-      photo,
+      ...,
       "sessions": *[_type=='session' && references(^._id)] {
         ...,
         location->,
@@ -31,13 +26,7 @@ const QUERY = `
 
 interface SpeakerProps {
   data: {
-    speaker: {
-      _id: string;
-      name: string;
-      title: string;
-      bio: Section[];
-      twitter: string;
-      photo: object;
+    speaker: Person & {
       sessions: Session[];
     };
   };
@@ -45,7 +34,7 @@ interface SpeakerProps {
 
 const Speakers = ({
   data: {
-    speaker: { name, title, twitter, photo, bio, sessions },
+    speaker: { name, title, social: { twitter }, photo, bio, sessions },
   },
 }: SpeakerProps) => (
   <PageContainer>

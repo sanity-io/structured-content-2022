@@ -14,10 +14,7 @@ const QUERY = `
   *[_type == "session" && slug.current == $slug][0] {
     ...,
     location->,
-    "speakers": speakers[].person-> {
-      "photo": photo.asset->url, 
-      ...
-    },
+    "speakers": speakers[].person->,
     longDescription[] {
       ...,
       children[] {

@@ -8,19 +8,16 @@ import Nav from '../../components/Nav';
 import PageContainer from '../../components/PageContainer';
 import speakersStyles from '../../pageResources/speakers/Speakers.module.css';
 import { getEntityPath } from "../../util/entityPaths";
-import { Speaker } from "../../types/Speaker";
+import { Person } from "../../types/Person";
 
 const QUERY = `
   {
-    "speakers": *[_type == "person"] {
-      ...,
-      "twitter": social.twitter,
-    }
+    "speakers": *[_type == "person"]
   }`;
 
 interface SpeakersProps {
   data: {
-    speakers: Speaker[];
+    speakers: Person[];
   };
 }
 
@@ -55,11 +52,11 @@ const Speakers = ({ data: { speakers } }: SpeakersProps) => (
               <div>{speaker.title}</div>
               <a
                 className={speakersStyles.speakerTwitter}
-                href={`https://twitter.com/${speaker.twitter}`}
+                href={`https://twitter.com/${speaker.social.twitter}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {speaker.twitter}
+                {speaker.social.twitter}
               </a>
             </div>
           </div>
