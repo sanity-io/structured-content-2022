@@ -8,6 +8,7 @@
   --color-ui-gray-100: #f1f0eb;
   --font-body-base-medium: 500 18px/25px 'Inter', sans-serif;
   --font-body-large-medium: 500 24px/33px 'Inter', sans-serif;
+  --font-display-lg: 700 64px/64px sans-serif; /* Web font not received yet */
   --font-ui-sm-medium: 500 16px/22px 'Inter', sans-serif;
   --grid-gutter: 40px;
   --grid-half-gutter: 20px;

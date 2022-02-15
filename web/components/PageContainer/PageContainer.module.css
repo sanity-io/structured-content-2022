@@ -1,5 +1,11 @@
 .container {
   max-width: var(--grid-width);
-  padding: 0 var(--grid-gutter);
+  padding: 0 var(--grid-half-gutter);
   margin: 0 auto;
+}
+
+@media (--medium-up) {
+  .container {
+    padding: 0 var(--grid-gutter);
+  }
 }
