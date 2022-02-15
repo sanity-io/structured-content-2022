@@ -19,9 +19,13 @@ export const ConferenceHeader = ({name, startDate, endDate, description}: Confer
       </h1>
       <div className={styles.summary}>
         <p>
-          {startDate && formatDateWithTime(startDate)}
+          {startDate && (
+            <time dateTime={startDate}>{formatDateWithTime(startDate)}</time>
+          )}
           –
-          {endDate && formatDateWithTime(endDate)}
+          {endDate && (
+            <time dateTime={endDate}>{formatDateWithTime(endDate)}</time>
+          )}
         </p>
         <p>
           {description}
