@@ -15,11 +15,13 @@ export const ConferenceHeader = ({name, startDate, endDate, description}: Confer
       <h1>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={logo.src} className={styles.logo}
-          width={logo.width} height={logo.height} alt={name} />
+          width={logo.width} height={logo.height} alt={name || ''} />
       </h1>
       <div className={styles.summary}>
         <p>
-          {formatDateWithTime(startDate)}–{formatDateWithTime(endDate)}
+          {startDate && formatDateWithTime(startDate)}
+          –
+          {endDate && formatDateWithTime(endDate)}
         </p>
         <p>
           {description}
