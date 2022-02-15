@@ -14,7 +14,7 @@ import speakerStyles from '../../pageResources/speakers/Speaker/Speaker.module.c
 
 const QUERY = `
   {
-    "speaker": *[_id == $_id][0] {
+    "speaker": *[slug.current == $slug][0] {
       _id,
       name,
       title,
@@ -60,8 +60,8 @@ const Speakers = ({
             <Heading>{name}</Heading>
             <div>{title}</div>
             <div>
-              <Link href={`/speakers/${name}`}>
-                <a>twitter.com/{twitter}</a>
+              <Link href={`https://twitter.com/${name}`}>
+                <a target="_blank" rel="noopener noreferrer">{twitter}</a>
               </Link>
             </div>
           </div>
@@ -98,8 +98,8 @@ const Speakers = ({
   </PageContainer>
 );
 
-export async function getServerSideProps({ params: { _id } }) {
-  const data = await client.fetch(QUERY, { _id: _id || '' });
+export async function getServerSideProps({ params: { slug } }) {
+  const data = await client.fetch(QUERY, { slug: slug || '' });
   if (!data?.speaker?._id) {
     return { notFound: true };
   }

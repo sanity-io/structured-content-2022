@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 import { PortableTextBlock } from '@portabletext/types';
 import { RichTextSection } from '../../types/RichTextSection';
+import { getEntityPath } from "../../util/entityPaths";
 import Paragraph from '../Paragraph';
 
 const components: Partial<PortableTextComponents> = {
@@ -15,10 +16,10 @@ const components: Partial<PortableTextComponents> = {
           ))}
       </>
     ),
-    person: ({ value: { name, _id } }) => {
+    person: ({ value: speaker }) => {
       return (
-        <Link href={`/speakers/${_id}`}>
-          <a>{name}</a>
+        <Link href={getEntityPath(speaker)}>
+          <a>{speaker.name}</a>
         </Link>
       );
     },

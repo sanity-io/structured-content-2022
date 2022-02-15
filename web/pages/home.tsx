@@ -25,6 +25,8 @@ const QUERY = `
       microcopy,
       promotedSpeakers[]-> {
         _id,
+        _type,
+        slug,
         name,
         title,
         bio,
