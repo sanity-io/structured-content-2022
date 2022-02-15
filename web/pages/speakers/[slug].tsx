@@ -14,7 +14,7 @@ import { Person } from '../../types/Person';
 
 const QUERY = `
   {
-    "speaker": *[slug.current == $slug][0] {
+    "speaker": *[_type == 'person' && slug.current == $slug][0] {
       ...,
       "sessions": *[_type=='session' && references(^._id)] {
         ...,
