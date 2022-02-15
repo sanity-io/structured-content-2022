@@ -1,3 +1,5 @@
+import { Slug } from "./Slug";
+
 export type Speaker = {
   _id: string;
   name: string;
@@ -9,4 +11,5 @@ export type Speaker = {
   }[];
   photo: string;
   twitter: string;
+  slug: Slug;
 };

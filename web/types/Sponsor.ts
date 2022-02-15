@@ -1,3 +1,5 @@
+import { Slug } from "./Slug";
+
 export type SponsorLevel = 'Silver' | 'Gold' | 'Premier';
 
 export type Sponsor = {
@@ -16,4 +18,5 @@ export type Sponsor = {
     type: 'sponsorship';
     title: SponsorLevel;
   };
+  slug: Slug;
 };

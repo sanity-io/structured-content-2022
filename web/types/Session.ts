@@ -1,6 +1,7 @@
 import { Speaker } from './Speaker';
 import { Venue } from './Venue';
 import { Section } from './Section';
+import { Slug } from "./Slug";
 
 export type Session = {
   _id: string;
@@ -11,4 +12,5 @@ export type Session = {
   speakers: Speaker[];
   shortDescription?: Section[];
   longDescription?: Section[];
+  slug: Slug;
 };

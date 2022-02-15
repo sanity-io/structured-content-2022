@@ -1,3 +1,5 @@
+import { Slug } from "./Slug";
+
 export type Venue = {
   title: string;
   geolocation?: {
@@ -5,4 +7,5 @@ export type Venue = {
     lat: number;
     lng: number;
   };
+  slug: Slug;
 };
