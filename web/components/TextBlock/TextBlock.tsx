@@ -23,9 +23,9 @@ const components: Partial<PortableTextComponents> = {
         </Link>
       );
     },
-    venue: ({ value: { title, _id } }) => (
-      <Link href={`/venues/${title}`}>
-        <a>{title}</a>
+    venue: ({ value: venue }) => (
+      <Link href={getEntityPath(venue)}>
+        <a>{venue.title}</a>
       </Link>
     ),
   },

@@ -9,13 +9,13 @@ import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
 import Nav from '../components/Nav';
 import PageContainer from '../components/PageContainer';
+import { getEntityPath } from "../util/entityPaths";
+import { Venue } from "../types/Venue";
 
 const QUERY = groq`
   {
     "event": *[_type == "event"][0] {
-      venues[]-> {
-        title
-      }
+      venues[]->
     },
     "about": *[_id == "4ab00530-7310-4f04-8f90-8be04e747eaa"][0] {
       name,
@@ -26,9 +26,7 @@ const QUERY = groq`
 interface AboutProps {
   data: {
     event: {
-      venues: {
-        title: string;
-      }[];
+      venues: Venue[];
     };
     about: {
       name: string;
@@ -65,7 +63,7 @@ const About = ({
       <SectionBlock noBackground>
         <Heading type="h2">Conference Locations 2022</Heading>
         {venues.map((venue) => (
-          <Link href={`/venues/${venue.title}`} key={venue.title}>
+          <Link href={getEntityPath(venue)} key={venue.title}>
             <a>
               <SectionBlock style={{ margin: '1rem 0' }}>
                 {venue.title}
