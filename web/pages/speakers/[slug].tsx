@@ -5,27 +5,19 @@ import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Nav from '../../components/Nav';
 import { imageUrlFor } from '../../lib/sanity';
-import { Section } from '../../types/Section';
 import TextBlock from '../../components/TextBlock';
 import { Session } from '../../types/Session';
 import Sessions from '../../components/Sessions';
 import PageContainer from '../../components/PageContainer';
 import speakerStyles from '../../pageResources/speakers/Speaker/Speaker.module.css';
+import { Person } from '../../types/Person';
 
 const QUERY = `
   {
-    "speaker": *[_id == $_id][0] {
-      _id,
-      name,
-      title,
-      bio,
-      "twitter": social.twitter,
-      photo,
+    "speaker": *[_type == 'person' && slug.current == $slug][0] {
+      ...,
       "sessions": *[_type=='session' && references(^._id)] {
-         _id,
-        title,
-        startTime,
-        duration,
+        ...,
         location->,
         "speakers": speakers[].person->
       }
@@ -34,13 +26,7 @@ const QUERY = `
 
 interface SpeakerProps {
   data: {
-    speaker: {
-      _id: string;
-      name: string;
-      title: string;
-      bio: Section[];
-      twitter: string;
-      photo: object;
+    speaker: Person & {
       sessions: Session[];
     };
   };
@@ -48,7 +34,14 @@ interface SpeakerProps {
 
 const Speakers = ({
   data: {
-    speaker: { name, title, twitter, photo, bio, sessions },
+    speaker: {
+      name,
+      title,
+      social: { twitter },
+      photo,
+      bio,
+      sessions,
+    },
   },
 }: SpeakerProps) => (
   <PageContainer>
@@ -60,9 +53,13 @@ const Speakers = ({
             <Heading>{name}</Heading>
             <div>{title}</div>
             <div>
-              <Link href={`/speakers/${name}`}>
-                <a>twitter.com/{twitter}</a>
-              </Link>
+              <a
+                href={`https://twitter.com/${twitter}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {twitter}
+              </a>
             </div>
           </div>
           <Image
@@ -98,8 +95,8 @@ const Speakers = ({
   </PageContainer>
 );
 
-export async function getServerSideProps({ params: { _id } }) {
-  const data = await client.fetch(QUERY, { _id: _id || '' });
+export async function getServerSideProps({ params: { slug } }) {
+  const data = await client.fetch(QUERY, { slug: slug || '' });
   if (!data?.speaker?._id) {
     return { notFound: true };
   }
