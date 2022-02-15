@@ -9,7 +9,9 @@ interface ConferenceHeaderProps {
   description?: string;
 }
 
-export const ConferenceHeader = ({name, startDate, endDate, description}: ConferenceHeaderProps) => {
+export const ConferenceHeader = (
+  { name, startDate, endDate, description }: ConferenceHeaderProps
+) => {
   return (
     <div className={styles.root}>
       <h1>
