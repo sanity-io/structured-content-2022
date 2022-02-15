@@ -4,11 +4,13 @@ import { Venue } from '../../types/Venue';
 import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Paragraph from '../../components/Paragraph';
-import styles from '../../pageResources/about/venue/venue.module.css';
 import PageContainer from '../../components/PageContainer';
+import Nav from '../../components/Nav';
+import styles from '../../pageResources/about/venue/venue.module.css';
 
 const QUERY = `
-  *[_type == "venue"][title == $title][0] {
+  *[_type == "venue"][slug.current == $slug][0] {
+    _id,
     title,
     geolocation
   }`;
@@ -23,6 +25,7 @@ const mapUrl = (geolocation: { lat: number; lng: number }) =>
 const Venue = ({ data: { title, geolocation } }: VenueProps) => (
   <PageContainer>
     <header>
+      <Nav />
       <SectionBlock>
         <Heading>{title}</Heading>
       </SectionBlock>
@@ -77,9 +80,9 @@ const Venue = ({ data: { title, geolocation } }: VenueProps) => (
   </PageContainer>
 );
 
-export async function getServerSideProps({ params: { title } }) {
-  const data = await client.fetch(QUERY, { title: title || '' });
-  if (!data?.title) {
+export async function getServerSideProps({ params: { slug } }) {
+  const data = await client.fetch(QUERY, { slug: slug || '' });
+  if (!data?._id) {
     return { notFound: true };
   }
 

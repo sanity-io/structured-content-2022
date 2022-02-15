@@ -7,27 +7,17 @@ import Heading from '../../components/Heading';
 import Nav from '../../components/Nav';
 import PageContainer from '../../components/PageContainer';
 import speakersStyles from '../../pageResources/speakers/Speakers.module.css';
+import { getEntityPath } from '../../util/entityPaths';
+import { Person } from '../../types/Person';
 
 const QUERY = `
   {
-    "speakers": *[_type == "person"] {
-      _id,
-      name,
-      title,
-      "twitter": social.twitter,
-      photo,
-    }
+    "speakers": *[_type == "person"]
   }`;
 
 interface SpeakersProps {
   data: {
-    speakers: {
-      _id: string;
-      name: string;
-      title: string;
-      twitter: string;
-      photo: object;
-    }[];
+    speakers: Person[];
   };
 }
 
@@ -47,7 +37,7 @@ const Speakers = ({ data: { speakers } }: SpeakersProps) => (
             key={speaker._id}
             className={speakersStyles['container__speaker']}
           >
-            <Link href={`/speakers/${speaker._id}`}>
+            <Link href={getEntityPath(speaker)}>
               <a>
                 <Image
                   src={imageUrlFor(speaker.photo).size(150, 150).url()}
@@ -62,11 +52,11 @@ const Speakers = ({ data: { speakers } }: SpeakersProps) => (
               <div>{speaker.title}</div>
               <a
                 className={speakersStyles.speakerTwitter}
-                href={`https://twitter.com/${speaker.twitter}`}
+                href={`https://twitter.com/${speaker.social.twitter}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {speaker.twitter}
+                {speaker.social.twitter}
               </a>
             </div>
           </div>

@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import client from '../lib/sanity.server';
-import { Speaker } from '../types/Speaker';
+import { Person } from '../types/Person';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
-import Paragraph from '../components/Paragraph';
 import Speakers from '../pageResources/home/Speakers';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import TextBlock from '../components/TextBlock';
@@ -23,14 +22,7 @@ const QUERY = `
       startDate,
       endDate,
       microcopy,
-      promotedSpeakers[]-> {
-        _id,
-        name,
-        title,
-        bio,
-        "photo": photo.asset->url,
-        "twitter": social.twitter,
-      },
+      promotedSpeakers[]->,
       valueProposition,
     },
     "sponsors": *[_type == "sponsor"] {
@@ -54,7 +46,7 @@ interface HomeProps {
         text: string;
         type: 'link';
       }[];
-      promotedSpeakers: Speaker[];
+      promotedSpeakers: Person[];
       valueProposition: Section[];
     };
     sponsors: Sponsor[];
