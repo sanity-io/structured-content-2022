@@ -3,38 +3,37 @@ import S from "@sanity/desk-tool/structure-builder";
 import { HomeIcon } from "@sanity/icons";
 import Iframe from "sanity-plugin-iframe-pane";
 import DocumentsPane from "sanity-plugin-documents-pane";
+import { getPreviewUrl } from "./urlResolver";
+
+const IncomingRefs = S.view
+  .component(DocumentsPane)
+  .options({
+    query: `*[!(_id in path("drafts.**")) && references($id)]`,
+    params: { id: `_id` },
+    useDraft: false,
+    debug: false,
+  })
+  .title("Incoming References");
 
 export const getDefaultDocumentNode = ({ schemaType }) => {
   // Conditionally return a different configuration based on the schema type
   switch (schemaType) {
-    /*case "person":
+    case "person":
       return S.document().views([
         S.view.form(),
-         S.view
+        IncomingRefs,
+        S.view
           .component(Iframe)
           .options({
-            url: (doc) => {
-              let handle = doc.social.twitter.startsWith("@")
-                ? doc.social.twitter
-                : `@${doc.social.twitter}`;
-              return `https://twitter.com/${handle}`;
-            },
+            url: (doc) =>
+              doc?.slug?.current
+                ? getPreviewUrl(doc._type, doc.slug.current)
+                : getPreviewUrl(doc._type),
           })
-          .title("Twitter"),
-      ]);*/
-    default:
-      return S.document().views([
-        S.view.form(),
-        S.view
-          .component(DocumentsPane)
-          .options({
-            query: `*[!(_id in path("drafts.**")) && references($id)]`,
-            params: { id: `_id` },
-            useDraft: false,
-            debug: false,
-          })
-          .title("Incoming References"),
+          .title("Preview"),
       ]);
+    default:
+      return S.document().views([S.view.form(), IncomingRefs]);
   }
 };
 
@@ -51,6 +50,24 @@ export default () =>
           S.document()
             .schemaType("event")
             .documentId("aad77280-6394-4090-afad-1c0f2a0416c6")
+            .views([
+              S.view.form(),
+              S.view
+                .component(DocumentsPane)
+                .options({
+                  query: `*[!(_id in path("drafts.**")) && references($id)]`,
+                  params: { id: `_id` },
+                  useDraft: false,
+                  debug: false,
+                })
+                .title("Incoming References"),
+              S.view
+                .component(Iframe)
+                .options({
+                  url: getPreviewUrl("event"),
+                })
+                .title("Preview"),
+            ])
         ),
       S.documentTypeListItem("person").title("People"),
       S.documentTypeListItem("session").title("Sessions"),
@@ -58,6 +75,7 @@ export default () =>
       S.divider(),
       S.documentTypeListItem("route").title("Routes (URLs)"),
       S.documentTypeListItem("page").title("Landing Pages"),
+      S.documentTypeListItem("sharedSections").title("Shared Sections"),
       S.documentTypeListItem("article").title("Editorial Articles"),
       S.divider(),
       S.documentTypeListItem("ticket").title("Ticket types"),

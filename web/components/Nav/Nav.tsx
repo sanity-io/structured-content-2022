@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import styles from './Nav.module.css';
 
-// TODO: move inside _app.tsx when current frontpage is no longer needed
 export const Nav = () => (
   <nav className={styles.nav}>
     <ul className={styles['nav__items']}>

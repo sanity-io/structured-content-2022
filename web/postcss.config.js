@@ -1,6 +1,5 @@
 module.exports = {
   plugins: {
-    tailwindcss: {},
     autoprefixer: {},
     'postcss-custom-media': {
       preserve: false,
