@@ -1,4 +1,4 @@
-import { formatDateRange } from "../../util/date";
+import { formatDateRange } from '../../util/date';
 
 interface DateRangeProps {
   startDate: string;
@@ -13,7 +13,8 @@ export const DateRange = ({ startDate, endDate }: DateRangeProps) => {
   const { start, end } = formatDateRange(startDate, endDate);
   return (
     <>
-      <time dateTime={start}>{start.trim()}</time>–<time dateTime={end}>{end.trim()}</time>
+      <time dateTime={start}>{start.trim()}</time>–
+      <time dateTime={end}>{end.trim()}</time>
     </>
-  )
-}
+  );
+};
