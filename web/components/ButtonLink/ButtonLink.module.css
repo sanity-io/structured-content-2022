@@ -24,6 +24,7 @@
 
 .button::after {
   content: ' ->';
+  letter-spacing: normal; /* Chromium disables ligature otherwise */
 }
 
 @media (--large-up) {
