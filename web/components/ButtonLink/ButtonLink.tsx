@@ -6,7 +6,7 @@ interface ButtonLinkProps {
   url: string;
 }
 
-export const ButtonLink = ({ text, url }) => (
+export const ButtonLink = ({ text, url }: ButtonLinkProps) => (
   <Link href={url}>
     <a className={styles.button}>{text}</a>
   </Link>
