@@ -9,9 +9,6 @@ import styles from './Nav.module.css';
 export const Nav = () => {
   const [menuOpened, setMenuOpened] = useState(false);
 
-  function handleClose() {
-    setMenuOpened(false);
-  }
   return (
     <nav className={styles.nav}>
       <PageContainer>
