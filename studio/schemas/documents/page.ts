@@ -12,8 +12,8 @@ export default {
   },
   fields: [
     {
-      name: "internalTitle",
-      title: "Interal title",
+      name: "internalName",
+      title: "Interal name",
       type: "string",
       description: "For internal use.",
     },
