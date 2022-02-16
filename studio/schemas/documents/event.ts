@@ -101,7 +101,10 @@ export default {
       title: "End date",
       group: "practical",
     },
-    /* {
+    /*
+    // Commented out for now. But we might want to add this back again in the future.
+
+    {
       name: "microcopy",
       type: "array",
       title: "Microcopy",
