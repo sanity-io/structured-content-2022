@@ -8,6 +8,7 @@ import styles from './Nav.module.css';
 
 export const Nav = () => {
   const [menuOpened, setMenuOpened] = useState(false);
+  const contentsId = 'nav-menu-contents';
 
   return (
     <nav className={styles.nav}>
@@ -16,12 +17,17 @@ export const Nav = () => {
           <button
             className={styles.menuButton}
             type="button"
+            aria-controls={contentsId}
+            aria-expanded={menuOpened}
             onClick={() => setMenuOpened(true)}
           >
             Menu
           </button>
         </div>
-        <div className={clsx(styles.menuContents, !menuOpened && styles.closed)}>
+        <div
+          id={contentsId}
+          className={clsx(styles.menuContents, !menuOpened && styles.closed)}
+        >
           <Link href="/home">
             <a className={styles.homeLink}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
