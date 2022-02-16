@@ -37,17 +37,19 @@ const Route = ({
   },
 }: RouteProps) => {
   return (
-    <PageContainer>
+    <>
       <header>
         <Nav />
+      </header>
+      <PageContainer>
         <SectionBlock>
           <Heading>{name}</Heading>
         </SectionBlock>
-      </header>
-      <SectionBlock>
-        <TextBlock value={sections} />
-      </SectionBlock>
-    </PageContainer>
+        <SectionBlock>
+          <TextBlock value={sections} />
+        </SectionBlock>
+      </PageContainer>
+    </>
   );
 };
 

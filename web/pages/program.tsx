@@ -39,27 +39,29 @@ const Program = ({
     program: { name, sections },
   },
 }: ProgramProps) => (
-  <PageContainer>
+  <>
     <header>
       <Nav />
-      <SectionBlock>
-        <Heading>{name}</Heading>
-        <Link href="#">Registration</Link>
-      </SectionBlock>
     </header>
+    <PageContainer>
+      <main>
+        <SectionBlock>
+          <Heading>{name}</Heading>
+          <Link href="#">Registration</Link>
+        </SectionBlock>
 
-    <main>
-      <SectionBlock>
-        <TextBlock value={sections} />
-      </SectionBlock>
+        <SectionBlock>
+          <TextBlock value={sections} />
+        </SectionBlock>
 
-      <Sessions sessions={sessions} />
+        <Sessions sessions={sessions} />
 
-      <SectionBlock noBackground>
-        <Link href="#">Registration</Link>
-      </SectionBlock>
-    </main>
-  </PageContainer>
+        <SectionBlock noBackground>
+          <Link href="#">Registration</Link>
+        </SectionBlock>
+      </main>
+    </PageContainer>
+  </>
 );
 
 export async function getStaticProps() {

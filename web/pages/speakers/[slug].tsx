@@ -44,55 +44,57 @@ const Speakers = ({
     },
   },
 }: SpeakerProps) => (
-  <PageContainer>
+  <>
     <header>
       <Nav />
-      <SectionBlock>
-        <div className={speakerStyles.container}>
-          <div>
-            <Heading>{name}</Heading>
-            <div>{title}</div>
-            <div>
-              <a
-                href={`https://twitter.com/${twitter}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {twitter}
-              </a>
-            </div>
-          </div>
-          <Image
-            src={imageUrlFor(photo).size(200, 200).url()}
-            alt={name}
-            width={200}
-            height={200}
-          />
-        </div>
-      </SectionBlock>
     </header>
+    <PageContainer>
+      <main>
+        <SectionBlock>
+          <div className={speakerStyles.container}>
+            <div>
+              <Heading>{name}</Heading>
+              <div>{title}</div>
+              <div>
+                <a
+                  href={`https://twitter.com/${twitter}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {twitter}
+                </a>
+              </div>
+            </div>
+            <Image
+              src={imageUrlFor(photo).size(200, 200).url()}
+              alt={name}
+              width={200}
+              height={200}
+            />
+          </div>
+        </SectionBlock>
 
-    <main>
-      <SectionBlock>
-        <TextBlock value={bio} />
-      </SectionBlock>
+        <SectionBlock>
+          <TextBlock value={bio} />
+        </SectionBlock>
 
-      <Sessions sessions={sessions} />
+        <Sessions sessions={sessions} />
 
-      <SectionBlock noBackground>
-        <div>
-          <Link href={`/speakers`}>
-            <a>All speakers</a>
-          </Link>
-        </div>
-        <div>
-          <Link href={`/program`}>
-            <a>See full program</a>
-          </Link>
-        </div>
-      </SectionBlock>
-    </main>
-  </PageContainer>
+        <SectionBlock noBackground>
+          <div>
+            <Link href={`/speakers`}>
+              <a>All speakers</a>
+            </Link>
+          </div>
+          <div>
+            <Link href={`/program`}>
+              <a>See full program</a>
+            </Link>
+          </div>
+        </SectionBlock>
+      </main>
+    </PageContainer>
+  </>
 );
 
 export async function getServerSideProps({ params: { slug } }) {

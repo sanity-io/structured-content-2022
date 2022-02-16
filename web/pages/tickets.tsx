@@ -42,49 +42,53 @@ const Tickets = ({
     registrationInfo: { name, sections },
   },
 }: TicketsProps) => (
-  <PageContainer>
+  <>
     <header>
       <Nav />
-      <SectionBlock>
-        <Heading>Tickets</Heading>
-      </SectionBlock>
     </header>
+    <PageContainer>
+      <main>
+        <SectionBlock>
+          <Heading>Tickets</Heading>
+        </SectionBlock>
 
-    <main>
-      <SectionBlock noBackground>
-        <div className={ticketsStyles.container}>
-          {tickets.map((ticket) => (
-            <div key={ticket._id} className={ticketsStyles.ticket}>
-              <div className={ticketsStyles['ticket__type']}>{ticket.type}</div>
-              <div className={ticketsStyles['ticket__price']}>
-                <span className={ticketsStyles['ticket__price__currency']}>
-                  $
-                </span>
-                <span className={ticketsStyles['ticket__price__amount']}>
-                  {ticket.price}
-                </span>
+        <SectionBlock noBackground>
+          <div className={ticketsStyles.container}>
+            {tickets.map((ticket) => (
+              <div key={ticket._id} className={ticketsStyles.ticket}>
+                <div className={ticketsStyles['ticket__type']}>
+                  {ticket.type}
+                </div>
+                <div className={ticketsStyles['ticket__price']}>
+                  <span className={ticketsStyles['ticket__price__currency']}>
+                    $
+                  </span>
+                  <span className={ticketsStyles['ticket__price__amount']}>
+                    {ticket.price}
+                  </span>
+                </div>
+                <div className={ticketsStyles['ticket__included']}>
+                  {ticket.included?.map((included) => (
+                    <div
+                      key={included}
+                      className={ticketsStyles['ticket__included__item']}
+                    >
+                      {included}
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className={ticketsStyles['ticket__included']}>
-                {ticket.included?.map((included) => (
-                  <div
-                    key={included}
-                    className={ticketsStyles['ticket__included__item']}
-                  >
-                    {included}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </SectionBlock>
+            ))}
+          </div>
+        </SectionBlock>
 
-      <SectionBlock>
-        <Heading>{name}</Heading>
-        <TextBlock value={sections} />
-      </SectionBlock>
-    </main>
-  </PageContainer>
+        <SectionBlock>
+          <Heading>{name}</Heading>
+          <TextBlock value={sections} />
+        </SectionBlock>
+      </main>
+    </PageContainer>
+  </>
 );
 
 export async function getStaticProps() {

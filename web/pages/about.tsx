@@ -41,75 +41,77 @@ const About = ({
     about: { name, sections },
   },
 }: AboutProps) => (
-  <PageContainer>
+  <>
     <header>
       <Nav />
-      <SectionBlock>
-        <Heading>{name}</Heading>
-      </SectionBlock>
     </header>
+    <PageContainer>
+      <main>
+        <SectionBlock>
+          <Heading>{name}</Heading>
+        </SectionBlock>
 
-    <main>
-      <SectionBlock>
-        <TextBlock value={sections} />
-      </SectionBlock>
+        <SectionBlock>
+          <TextBlock value={sections} />
+        </SectionBlock>
 
-      <SectionBlock noBackground>
-        <Paragraph>
-          <Link href="#">Code of Conduct</Link>
-        </Paragraph>
-      </SectionBlock>
+        <SectionBlock noBackground>
+          <Paragraph>
+            <Link href="#">Code of Conduct</Link>
+          </Paragraph>
+        </SectionBlock>
 
-      <SectionBlock noBackground>
-        <Heading type="h2">Conference Locations 2022</Heading>
-        {venues.map((venue) => (
-          <Link href={getEntityPath(venue)} key={venue.title}>
-            <a>
-              <SectionBlock style={{ margin: '1rem 0' }}>
-                {venue.title}
-              </SectionBlock>
-            </a>
-          </Link>
-        ))}
+        <SectionBlock noBackground>
+          <Heading type="h2">Conference Locations 2022</Heading>
+          {venues.map((venue) => (
+            <Link href={getEntityPath(venue)} key={venue.title}>
+              <a>
+                <SectionBlock style={{ margin: '1rem 0' }}>
+                  {venue.title}
+                </SectionBlock>
+              </a>
+            </Link>
+          ))}
 
-        <Heading type="h3">Virtual option info</Heading>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. This text is not fetched from
-          Sanity.
-        </Paragraph>
-      </SectionBlock>
+          <Heading type="h3">Virtual option info</Heading>
+          <Paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. This text is not fetched from
+            Sanity.
+          </Paragraph>
+        </SectionBlock>
 
-      <SectionBlock>
-        <Heading type="h2">Additional info</Heading>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. This text is not fetched from
-          Sanity.
-        </Paragraph>
-      </SectionBlock>
+        <SectionBlock>
+          <Heading type="h2">Additional info</Heading>
+          <Paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. This text is not fetched from
+            Sanity.
+          </Paragraph>
+        </SectionBlock>
 
-      <SectionBlock>
-        <Heading type="h2">Sponsor info</Heading>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. This text is not fetched from
-          Sanity.
-        </Paragraph>
-        <Heading type="h3">
-          <Link href="#">Become a Sponsor</Link>
-        </Heading>
-      </SectionBlock>
+        <SectionBlock>
+          <Heading type="h2">Sponsor info</Heading>
+          <Paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. This text is not fetched from
+            Sanity.
+          </Paragraph>
+          <Heading type="h3">
+            <Link href="#">Become a Sponsor</Link>
+          </Heading>
+        </SectionBlock>
 
-      <SectionBlock>
-        <Heading type="h2">Get conference updates</Heading>
-        <ConferenceUpdatesForm />
-      </SectionBlock>
-    </main>
-  </PageContainer>
+        <SectionBlock>
+          <Heading type="h2">Get conference updates</Heading>
+          <ConferenceUpdatesForm />
+        </SectionBlock>
+      </main>
+    </PageContainer>
+  </>
 );
 
 export async function getStaticProps() {

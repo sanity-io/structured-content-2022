@@ -22,48 +22,50 @@ interface SpeakersProps {
 }
 
 const Speakers = ({ data: { speakers } }: SpeakersProps) => (
-  <PageContainer>
+  <>
     <header>
       <Nav />
-      <SectionBlock>
-        <Heading>Speakers</Heading>
-      </SectionBlock>
     </header>
+    <PageContainer>
+      <main>
+        <SectionBlock>
+          <Heading>Speakers</Heading>
+        </SectionBlock>
 
-    <main>
-      <SectionBlock noBackground className={speakersStyles.container}>
-        {speakers.map((speaker) => (
-          <div
-            key={speaker._id}
-            className={speakersStyles['container__speaker']}
-          >
-            <Link href={getEntityPath(speaker)}>
-              <a>
-                <Image
-                  src={imageUrlFor(speaker.photo).size(150, 150).url()}
-                  alt={speaker.name}
-                  width={150}
-                  height={150}
-                />
-              </a>
-            </Link>
-            <div>
-              <div>{speaker.name}</div>
-              <div>{speaker.title}</div>
-              <a
-                className={speakersStyles.speakerTwitter}
-                href={`https://twitter.com/${speaker.social.twitter}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {speaker.social.twitter}
-              </a>
+        <SectionBlock noBackground className={speakersStyles.container}>
+          {speakers.map((speaker) => (
+            <div
+              key={speaker._id}
+              className={speakersStyles['container__speaker']}
+            >
+              <Link href={getEntityPath(speaker)}>
+                <a>
+                  <Image
+                    src={imageUrlFor(speaker.photo).size(150, 150).url()}
+                    alt={speaker.name}
+                    width={150}
+                    height={150}
+                  />
+                </a>
+              </Link>
+              <div>
+                <div>{speaker.name}</div>
+                <div>{speaker.title}</div>
+                <a
+                  className={speakersStyles.speakerTwitter}
+                  href={`https://twitter.com/${speaker.social.twitter}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {speaker.social.twitter}
+                </a>
+              </div>
             </div>
-          </div>
-        ))}
-      </SectionBlock>
-    </main>
-  </PageContainer>
+          ))}
+        </SectionBlock>
+      </main>
+    </PageContainer>
+  </>
 );
 
 export async function getStaticProps() {
