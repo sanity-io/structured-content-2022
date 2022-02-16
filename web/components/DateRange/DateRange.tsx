@@ -13,8 +13,8 @@ export const DateRange = ({ startDate, endDate }: DateRangeProps) => {
   const { start, end } = formatDateRange(startDate, endDate);
   return (
     <>
-      <time dateTime={start}>{start.trim()}</time>–
-      <time dateTime={end}>{end.trim()}</time>
+      <time dateTime={startDate}>{start.trim()}</time>–
+      <time dateTime={endDate}>{end.trim()}</time>
     </>
   );
 };
