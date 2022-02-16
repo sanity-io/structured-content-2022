@@ -29,13 +29,19 @@ export const Footer = () => (
 
     <div className={styles.social}>
       <div className={styles['social__item']}>
-        <Image src={instagramLogo} alt="Instagram" width={24} height={24} />
+        <a href="https://www.instagram.com/sanity.io" target="_blank" rel="noreferrer">
+          <Image src={instagramLogo} alt="Instagram" width={24} height={24} />
+        </a>
       </div>
       <div className={styles['social__item']}>
-        <Image src={twitterLogo} alt="Twitter" width={24} height={24} />
+        <a href="https://twitter.com/sanity_io" target="_blank" rel="noreferrer">
+          <Image src={twitterLogo} alt="Twitter" width={24} height={24} />
+        </a>
       </div>
       <div className={styles['social__item']}>
+        <a href="https://www.linkedin.com/company/sanity-io" target="_blank" rel="noreferrer">
         <Image src={linkedinLogo} alt="LinkedIn" width={24} height={24} />
+        </a>
       </div>
     </div>
 
