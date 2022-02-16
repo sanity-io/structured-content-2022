@@ -1,8 +1,8 @@
 import { formatDateRange } from '../../util/date';
 
 interface DateRangeProps {
-  startDate: string;
-  endDate: string;
+  startDate?: string;
+  endDate?: string;
 }
 
 export const DateRange = ({ startDate, endDate }: DateRangeProps) => {
