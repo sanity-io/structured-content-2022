@@ -2,6 +2,7 @@ export default {
   name: "figure",
   title: "Figure",
   type: "image",
+  description: "An image with alternative text and an optional caption",
   options: {
     hotspot: true,
   },
