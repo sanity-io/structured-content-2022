@@ -29,7 +29,7 @@ export const ConferenceHeader = ({
       </h1>
       <div className={styles.summary}>
         <p>
-          <DateRange startDate={startDate} endDate={endDate} />
+          <DateRange startTimestamp={startDate} endTimestamp={endDate} />
         </p>
         <p>{description}</p>
       </div>

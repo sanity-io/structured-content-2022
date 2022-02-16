@@ -27,9 +27,9 @@ const utcDate = (date: string) => {
   };
 };
 
-export const formatDateRange = (date1: string, date2: string) => {
-  const d1 = utcDate(date1);
-  const d2 = utcDate(date2);
+export const formatDateRange = (timestamp1: string, timestamp2: string) => {
+  const d1 = utcDate(timestamp1);
+  const d2 = utcDate(timestamp2);
 
   const y1 = Math.abs(d2.year - d1.year) > 0 ? `, ${d1.year}` : '';
   const m2 =

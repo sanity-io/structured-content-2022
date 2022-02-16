@@ -1,20 +1,20 @@
 import { formatDateRange } from '../../util/date';
 
 interface DateRangeProps {
-  startDate?: string;
-  endDate?: string;
+  startTimestamp?: string;
+  endTimestamp?: string;
 }
 
-export const DateRange = ({ startDate, endDate }: DateRangeProps) => {
-  if (!startDate || !endDate) {
+export const DateRange = ({ startTimestamp, endTimestamp }: DateRangeProps) => {
+  if (!startTimestamp || !endTimestamp) {
     return null;
   }
 
-  const { start, end } = formatDateRange(startDate, endDate);
+  const { start, end } = formatDateRange(startTimestamp, endTimestamp);
   return (
     <>
-      <time dateTime={startDate}>{start.trim()}</time>–
-      <time dateTime={endDate}>{end.trim()}</time>
+      <time dateTime={startTimestamp}>{start.trim()}</time>–
+      <time dateTime={endTimestamp}>{end.trim()}</time>
     </>
   );
 };
