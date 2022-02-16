@@ -1,7 +1,10 @@
+import { CalendarIcon } from "@sanity/icons";
+
 export default {
   name: "event",
   title: "Events",
   type: "document",
+  icon: CalendarIcon,
   groups: [
     {
       name: "messaging",
@@ -98,7 +101,7 @@ export default {
       title: "End date",
       group: "practical",
     },
-    {
+    /* {
       name: "microcopy",
       type: "array",
       title: "Microcopy",
@@ -174,6 +177,6 @@ export default {
           ],
         },
       ],
-    },
+    }, */
   ],
 };
