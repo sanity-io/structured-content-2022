@@ -6,6 +6,7 @@ import TextBlock from '../components/TextBlock';
 import Heading from '../components/Heading';
 import PageContainer from '../components/PageContainer';
 import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 
 const QUERY = groq`
   {
@@ -37,17 +38,20 @@ const Route = ({
   },
 }: RouteProps) => {
   return (
-    <PageContainer>
-      <header>
-        <Nav />
+    <>
+      <PageContainer>
+        <header>
+          <Nav />
+          <SectionBlock>
+            <Heading>{name}</Heading>
+          </SectionBlock>
+        </header>
         <SectionBlock>
-          <Heading>{name}</Heading>
+          <TextBlock value={sections} />
         </SectionBlock>
-      </header>
-      <SectionBlock>
-        <TextBlock value={sections} />
-      </SectionBlock>
-    </PageContainer>
+      </PageContainer>
+      <Footer />
+    </>
   );
 };
 

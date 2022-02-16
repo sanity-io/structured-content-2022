@@ -1,2 +1,4 @@
 /* Temporary breakpoint, actual ones TBD */
 @custom-media --large-up (min-width: 900px);
+@custom-media --medium (max-width: 768px);
+@custom-media --small (max-width: 390px);

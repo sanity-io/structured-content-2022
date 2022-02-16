@@ -4,8 +4,10 @@
   --color-brand-white: #ffffff;
   --color-brand-yellow: #fff17e;
   --color-brand-yellow-light: #fff8e4;
+  --color-ui-gray-600: #6f6d6a;
+  --color-ui-gray-500: #a0a09c;
   --color-ui-gray-300: #deddd9;
-  --color-ui-gray-100: #f1f0eb;
+  --color-ui-gray-100: #f4f3ef;
   --font-body-large-medium: 500 24px/33px 'Inter', sans-serif;
   --grid-gutter: 40px;
   --grid-half-gutter: 20px;

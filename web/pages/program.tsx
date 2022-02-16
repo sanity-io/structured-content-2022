@@ -8,6 +8,7 @@ import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
 import Nav from '../components/Nav';
 import PageContainer from '../components/PageContainer';
+import Footer from '../components/Footer';
 
 const QUERY = `
   {
@@ -39,27 +40,30 @@ const Program = ({
     program: { name, sections },
   },
 }: ProgramProps) => (
-  <PageContainer>
-    <header>
-      <Nav />
-      <SectionBlock>
-        <Heading>{name}</Heading>
-        <Link href="#">Registration</Link>
-      </SectionBlock>
-    </header>
+  <>
+    <PageContainer>
+      <header>
+        <Nav />
+        <SectionBlock>
+          <Heading>{name}</Heading>
+          <Link href="#">Registration</Link>
+        </SectionBlock>
+      </header>
 
-    <main>
-      <SectionBlock>
-        <TextBlock value={sections} />
-      </SectionBlock>
+      <main>
+        <SectionBlock>
+          <TextBlock value={sections} />
+        </SectionBlock>
 
-      <Sessions sessions={sessions} />
+        <Sessions sessions={sessions} />
 
-      <SectionBlock noBackground>
-        <Link href="#">Registration</Link>
-      </SectionBlock>
-    </main>
-  </PageContainer>
+        <SectionBlock noBackground>
+          <Link href="#">Registration</Link>
+        </SectionBlock>
+      </main>
+    </PageContainer>
+    <Footer />
+  </>
 );
 
 export async function getStaticProps() {
