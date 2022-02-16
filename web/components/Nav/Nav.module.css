@@ -64,9 +64,23 @@
     background: var(--color-brand-yellow);
   }
 
+  .menuButton::before {
+    content: url('../../images/menu.svg');
+    line-height: 1;
+    vertical-align: bottom;
+    margin-right: 17px;
+  }
+
   .closeButton {
     background: var(--color-brand-orange);
     align-self: center;
+  }
+
+  .closeButton::before {
+    content: url('../../images/close.svg');
+    line-height: 1;
+    vertical-align: bottom;
+    margin-right: 20px;
   }
 
   .menuButton:active,
