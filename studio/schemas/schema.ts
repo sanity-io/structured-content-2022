@@ -22,7 +22,8 @@ import questionAndAnswerCollection from "./objects/questionAndAnswerCollection";
 import richText from "./objects/richText";
 import textAndImage from "./objects/textAndImage";
 import sharedSections from "./documents/sharedSections";
-import { mailchimp } from "./objects";
+import { mailchimp, simpleCallToAction } from "./objects";
+import spec from "./documents/spec";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -50,7 +51,9 @@ export default createSchema({
     textAndImage,
     questionAndAnswer,
     questionAndAnswerCollection,
+    simpleCallToAction,
     simpleBlockContent,
     blockContent,
+    spec,
   ]),
 });

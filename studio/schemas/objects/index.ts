@@ -4,3 +4,4 @@ export { default as textAndImage } from "./textAndImage";
 export { default as questionAndAnswerCollection } from "./questionAndAnswerCollection";
 //export { default as questionAndAnswer } from "./questionAndAnswer";
 export { default as mailchimp } from "./mailchimp";
+export { default as simpleCallToAction } from "./simpleCallToAction";
