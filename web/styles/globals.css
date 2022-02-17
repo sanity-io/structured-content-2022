@@ -39,6 +39,10 @@ body {
     Noto Color Emoji;
 }
 
+body.main-menu-open {
+  overflow: hidden;
+}
+
 p,
 ul {
   margin: 0;
@@ -47,4 +51,10 @@ ul {
 
 a {
   text-decoration: underline;
+}
+
+@media (--medium-up) {
+  body.main-menu-open {
+    overflow: auto;
+  }
 }

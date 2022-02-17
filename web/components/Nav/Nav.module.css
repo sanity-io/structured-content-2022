@@ -1,4 +1,5 @@
 .nav {
+  background: var(--color-brand-white);
   box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -41,13 +42,14 @@
 
 @media not all and (--medium-up) {
   .nav {
+    background: none;
     box-shadow: none;
   }
 
   .menuButtonWrapper {
     display: block;
-    text-align: right;
-    padding: 24px 0;
+    padding-bottom: 46px;
+    text-align: center;
   }
 
   .menuButton,
@@ -94,11 +96,10 @@
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 1;
     background: var(--color-brand-yellow);
     flex-direction: column;
     align-items: start;
-    padding: 24px var(--grid-half-gutter);
+    padding: 24px var(--grid-half-gutter) 36px;
     overflow: auto;
   }
 
