@@ -20,6 +20,7 @@
     "@sanity/default-layout": "^2.27.0",
     "@sanity/default-login": "^2.27.0",
     "@sanity/desk-tool": "^2.27.0",
+    "@sanity/hierarchical-document-list": "^0.1.1",
     "@sanity/vision": "^2.27.0",
     "prop-types": "^15.7",
     "react": "^17.0",
