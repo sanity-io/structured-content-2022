@@ -10,7 +10,7 @@ import styles from './Footer.module.css';
 export const Footer = () => (
   <footer className={styles.container}>
     <div className={styles.mainContent}>
-      <Image src={sanityLogo} alt="logo" width={139} height={28} />
+      <Image src={sanityLogo} alt="Sanity" width={139} height={28} />
       <Paragraph className={styles.mainContentDescription}>
         Structured Content 2022 is a conference by Sanity
       </Paragraph>
