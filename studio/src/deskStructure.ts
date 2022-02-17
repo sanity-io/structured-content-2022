@@ -33,6 +33,7 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
       ]);
     case "person":
       return S.document().views([
+        ...defaultViews,
         S.view
           .component(Iframe)
           .options({
