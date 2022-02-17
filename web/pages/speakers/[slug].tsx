@@ -8,7 +8,7 @@ import { imageUrlFor } from '../../lib/sanity';
 import TextBlock from '../../components/TextBlock';
 import { Session } from '../../types/Session';
 import Sessions from '../../components/Sessions';
-import PageContainer from '../../components/PageContainer';
+import GridWrapper from '../../components/GridWrapper';
 import speakerStyles from '../../pageResources/speakers/Speaker/Speaker.module.css';
 import { Person } from '../../types/Person';
 
@@ -44,55 +44,57 @@ const Speakers = ({
     },
   },
 }: SpeakerProps) => (
-  <PageContainer>
+  <>
     <header>
       <Nav />
-      <SectionBlock>
-        <div className={speakerStyles.container}>
-          <div>
-            <Heading>{name}</Heading>
-            <div>{title}</div>
-            <div>
-              <a
-                href={`https://twitter.com/${twitter}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {twitter}
-              </a>
-            </div>
-          </div>
-          <Image
-            src={imageUrlFor(photo).size(200, 200).url()}
-            alt={name}
-            width={200}
-            height={200}
-          />
-        </div>
-      </SectionBlock>
     </header>
+    <GridWrapper>
+      <main>
+        <SectionBlock>
+          <div className={speakerStyles.container}>
+            <div>
+              <Heading>{name}</Heading>
+              <div>{title}</div>
+              <div>
+                <a
+                  href={`https://twitter.com/${twitter}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {twitter}
+                </a>
+              </div>
+            </div>
+            <Image
+              src={imageUrlFor(photo).size(200, 200).url()}
+              alt={name}
+              width={200}
+              height={200}
+            />
+          </div>
+        </SectionBlock>
 
-    <main>
-      <SectionBlock>
-        <TextBlock value={bio} />
-      </SectionBlock>
+        <SectionBlock>
+          <TextBlock value={bio} />
+        </SectionBlock>
 
-      <Sessions sessions={sessions} />
+        <Sessions sessions={sessions} />
 
-      <SectionBlock noBackground>
-        <div>
-          <Link href={`/speakers`}>
-            <a>All speakers</a>
-          </Link>
-        </div>
-        <div>
-          <Link href={`/program`}>
-            <a>See full program</a>
-          </Link>
-        </div>
-      </SectionBlock>
-    </main>
-  </PageContainer>
+        <SectionBlock noBackground>
+          <div>
+            <Link href={`/speakers`}>
+              <a>All speakers</a>
+            </Link>
+          </div>
+          <div>
+            <Link href={`/program`}>
+              <a>See full program</a>
+            </Link>
+          </div>
+        </SectionBlock>
+      </main>
+    </GridWrapper>
+  </>
 );
 
 export async function getServerSideProps({ params: { slug } }) {

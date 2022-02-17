@@ -10,7 +10,7 @@ import { Section } from '../types/Section';
 import { Sponsor } from '../types/Sponsor';
 import Sponsors from '../pageResources/home/Sponsors';
 import Nav from '../components/Nav';
-import PageContainer from '../components/PageContainer';
+import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
 
 const QUERY = `
@@ -68,54 +68,56 @@ const Home = ({
     sponsors,
   },
 }: HomeProps) => (
-  <PageContainer>
+  <>
     <header>
       <Nav />
     </header>
 
-    <main>
-      <ConferenceHeader
-        name={name}
-        startDate={startDate}
-        endDate={endDate}
-        description={description}
-      />
-      <SectionBlock>
-        {microcopy.map(({ key, action, text }) => (
-          <Link key={key} href={action}>
-            {text}
-          </Link>
-        ))}
-      </SectionBlock>
+    <GridWrapper>
+      <main>
+        <ConferenceHeader
+          name={name}
+          startDate={startDate}
+          endDate={endDate}
+          description={description}
+        />
+        <SectionBlock>
+          {microcopy.map(({ key, action, text }) => (
+            <Link key={key} href={action}>
+              {text}
+            </Link>
+          ))}
+        </SectionBlock>
 
-      <SectionBlock>
-        <TextBlock value={valueProposition} />
-      </SectionBlock>
+        <SectionBlock>
+          <TextBlock value={valueProposition} />
+        </SectionBlock>
 
-      <SectionBlock>
-        <Speakers speakers={promotedSpeakers} />
-      </SectionBlock>
+        <SectionBlock>
+          <Speakers speakers={promotedSpeakers} />
+        </SectionBlock>
 
-      <SectionBlock>
-        <Heading type="h2">
-          <Link href="/program">
-            <a>{'Program ->'}</a>
-          </Link>
-        </Heading>
-      </SectionBlock>
+        <SectionBlock>
+          <Heading type="h2">
+            <Link href="/program">
+              <a>{'Program ->'}</a>
+            </Link>
+          </Heading>
+        </SectionBlock>
 
-      <SectionBlock>
-        <Heading type="h2">Sponsors</Heading>
-        <Sponsors sponsors={sponsors} />
-        <Link href="/sponsor">{'Become a Sponsor ->'}</Link>
-      </SectionBlock>
+        <SectionBlock>
+          <Heading type="h2">Sponsors</Heading>
+          <Sponsors sponsors={sponsors} />
+          <Link href="/sponsor">{'Become a Sponsor ->'}</Link>
+        </SectionBlock>
 
-      <SectionBlock>
-        <Heading type="h2">Get conference updates</Heading>
-        <ConferenceUpdatesForm />
-      </SectionBlock>
-    </main>
-  </PageContainer>
+        <SectionBlock>
+          <Heading type="h2">Get conference updates</Heading>
+          <ConferenceUpdatesForm />
+        </SectionBlock>
+      </main>
+    </GridWrapper>
+  </>
 );
 
 export async function getStaticProps() {

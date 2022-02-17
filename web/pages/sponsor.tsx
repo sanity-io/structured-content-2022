@@ -5,7 +5,7 @@ import sponsorStyles from '../pageResources/sponsor/Sponsor.module.css';
 import Nav from '../components/Nav';
 import Paragraph from '../components/Paragraph';
 import Link from 'next/link';
-import PageContainer from '../components/PageContainer';
+import GridWrapper from '../components/GridWrapper';
 
 const QUERY = `{}`;
 
@@ -14,117 +14,119 @@ interface SponsorProps {
 }
 
 const Sponsor = ({ data: {} }: SponsorProps) => (
-  <PageContainer>
+  <>
     <header>
       <Nav />
-      <SectionBlock>
-        <Heading>Sponsor partner</Heading>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. This text is not fetched from
-          Sanity.
-        </Paragraph>
-
-        <Link href="#signUp">
-          <a>{'Sign up ->'}</a>
-        </Link>
-      </SectionBlock>
     </header>
+    <GridWrapper>
+      <main>
+        <SectionBlock>
+          <Heading>Sponsor partner</Heading>
+          <Paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. This text is not fetched from
+            Sanity.
+          </Paragraph>
 
-    <main>
-      <SectionBlock>
-        <Heading type="h2">Lorem ipsum</Heading>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. This text is not fetched from
-          Sanity.
-        </Paragraph>
-      </SectionBlock>
+          <Link href="#signUp">
+            <a>{'Sign up ->'}</a>
+          </Link>
+        </SectionBlock>
 
-      <SectionBlock>
-        <table className={sponsorStyles.table}>
-          <thead>
-            <tr>
-              <th />
-              <th>Premier</th>
-              <th>Gold</th>
-              <th>Silver</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Description</td>
-              <td>✅</td>
-              <td>✅</td>
-              <td>✅</td>
-            </tr>
-            <tr>
-              <td>Description</td>
-              <td>✅</td>
-              <td>✅</td>
-              <td />
-            </tr>
-            <tr>
-              <td>Description</td>
-              <td>✅</td>
-              <td>✅</td>
-              <td />
-            </tr>
-            <tr>
-              <td>Description</td>
-              <td>✅</td>
-              <td />
-              <td />
-            </tr>
-            <tr>
-              <td>Description</td>
-              <td>✅</td>
-              <td />
-              <td />
-            </tr>
-            <tr>
-              <td>Description</td>
-              <td>✅</td>
-              <td />
-              <td />
-            </tr>
-          </tbody>
-        </table>
-      </SectionBlock>
+        <SectionBlock>
+          <Heading type="h2">Lorem ipsum</Heading>
+          <Paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. This text is not fetched from
+            Sanity.
+          </Paragraph>
+        </SectionBlock>
 
-      <SectionBlock>
-        <Heading type="h2" id="signUp">
-          Sign up
-        </Heading>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. This text is not fetched from
-          Sanity.
-        </Paragraph>
+        <SectionBlock>
+          <table className={sponsorStyles.table}>
+            <thead>
+              <tr>
+                <th />
+                <th>Premier</th>
+                <th>Gold</th>
+                <th>Silver</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Description</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td>✅</td>
+              </tr>
+              <tr>
+                <td>Description</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td />
+              </tr>
+              <tr>
+                <td>Description</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td />
+              </tr>
+              <tr>
+                <td>Description</td>
+                <td>✅</td>
+                <td />
+                <td />
+              </tr>
+              <tr>
+                <td>Description</td>
+                <td>✅</td>
+                <td />
+                <td />
+              </tr>
+              <tr>
+                <td>Description</td>
+                <td>✅</td>
+                <td />
+                <td />
+              </tr>
+            </tbody>
+          </table>
+        </SectionBlock>
 
-        <form
-          className={sponsorStyles.form}
-          onSubmit={() => alert('This form is not yet implemented.')}
-        >
-          <label htmlFor="company">Your company</label>
-          <input type="text" name="company" />
+        <SectionBlock>
+          <Heading type="h2" id="signUp">
+            Sign up
+          </Heading>
+          <Paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit. This text is not fetched from
+            Sanity.
+          </Paragraph>
 
-          <label htmlFor="name">Your name</label>
-          <input type="text" name="name" />
+          <form
+            className={sponsorStyles.form}
+            onSubmit={() => alert('This form is not yet implemented.')}
+          >
+            <label htmlFor="company">Your company</label>
+            <input type="text" name="company" />
 
-          <label htmlFor="mail">Email</label>
-          <input type="email" />
+            <label htmlFor="name">Your name</label>
+            <input type="text" name="name" />
 
-          <button type="submit" className={sponsorStyles.button}>
-            Submit
-          </button>
-        </form>
-      </SectionBlock>
-    </main>
-  </PageContainer>
+            <label htmlFor="mail">Email</label>
+            <input type="email" />
+
+            <button type="submit" className={sponsorStyles.button}>
+              Submit
+            </button>
+          </form>
+        </SectionBlock>
+      </main>
+    </GridWrapper>
+  </>
 );
 
 export async function getStaticProps() {
