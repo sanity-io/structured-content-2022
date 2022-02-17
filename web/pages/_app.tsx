@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { getCookieConsentValue } from 'react-cookie-consent';
 import TagManager from 'react-gtm-module';
 import CookieConsent from '../components/CookieConsent';
+import Nav from '../components/Nav';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
@@ -17,7 +18,12 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Component {...pageProps} />
+      <header>
+        <Nav />
+      </header>
+      <main>
+        <Component {...pageProps} />
+      </main>
       <CookieConsent />
     </>
   );

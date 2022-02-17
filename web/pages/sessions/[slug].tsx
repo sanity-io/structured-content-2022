@@ -7,7 +7,6 @@ import Paragraph from '../../components/Paragraph';
 import { formatDateWithTime } from '../../util/date';
 import { Speakers } from '../../pageResources/home/Speakers/Speakers';
 import TextBlock from '../../components/TextBlock';
-import Nav from '../../components/Nav';
 import GridWrapper from '../../components/GridWrapper';
 
 const QUERY = `
@@ -38,43 +37,36 @@ interface SessionPageProps {
 const SessionPage = ({
   data: { title, startTime, location, speakers, longDescription },
 }: SessionPageProps) => (
-  <>
-    <header>
-      <Nav />
-    </header>
-    <GridWrapper>
-      <main>
-        <SectionBlock key={title}>
-          <Heading type="h2">{title}</Heading>
-          <div>
-            {formatDateWithTime(startTime)}, {location.title}
-          </div>
-          {speakers.map(({ name, title }) => (
-            <div key={name}>
-              <strong>{name}</strong>, {title}
-            </div>
-          ))}
-        </SectionBlock>
+  <GridWrapper>
+    <SectionBlock key={title}>
+      <Heading type="h2">{title}</Heading>
+      <div>
+        {formatDateWithTime(startTime)}, {location.title}
+      </div>
+      {speakers.map(({ name, title }) => (
+        <div key={name}>
+          <strong>{name}</strong>, {title}
+        </div>
+      ))}
+    </SectionBlock>
 
-        {longDescription && (
-          <SectionBlock>
-            <TextBlock value={longDescription} />
-          </SectionBlock>
-        )}
+    {longDescription && (
+      <SectionBlock>
+        <TextBlock value={longDescription} />
+      </SectionBlock>
+    )}
 
-        <SectionBlock noBackground>
-          <Heading type="h2">Speakers</Heading>
-          <Speakers speakers={speakers} />
-        </SectionBlock>
+    <SectionBlock noBackground>
+      <Heading type="h2">Speakers</Heading>
+      <Speakers speakers={speakers} />
+    </SectionBlock>
 
-        <SectionBlock noBackground>
-          <Paragraph>
-            <Link href="/program">See full program</Link>
-          </Paragraph>
-        </SectionBlock>
-      </main>
-    </GridWrapper>
-  </>
+    <SectionBlock noBackground>
+      <Paragraph>
+        <Link href="/program">See full program</Link>
+      </Paragraph>
+    </SectionBlock>
+  </GridWrapper>
 );
 
 export async function getServerSideProps({ params: { slug } }) {
