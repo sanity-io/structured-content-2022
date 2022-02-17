@@ -122,7 +122,7 @@ export default {
               name: "key",
               type: "string",
               title: "Key",
-              hidden: true // still a bit undeciced if we should use this
+              hidden: true, // still a bit undeciced if we should use this
               validation: (Rule) => [
                 Rule.required(),
                 // Regex for no spaces, no special characters, no numbers
