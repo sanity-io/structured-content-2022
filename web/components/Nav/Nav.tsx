@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ButtonLink from '../ButtonLink';
 import GridWrapper from '../GridWrapper';
 import logo from '../../images/logo.svg';
@@ -9,6 +9,10 @@ import styles from './Nav.module.css';
 export const Nav = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const contentsId = 'nav-menu-contents';
+
+  useEffect(() => {
+    document.body.classList.toggle('main-menu-open', menuOpened);
+  }, [menuOpened]);
 
   return (
     <nav className={styles.nav}>
