@@ -17,7 +17,6 @@ export const Footer = () => (
 
       <Paragraph>
         Inquiries:
-        <br />
         <a
           className={styles.mailLink}
           href="mailto:email@sanity.io"

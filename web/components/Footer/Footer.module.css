@@ -18,6 +18,7 @@
 }
 
 .mailLink {
+  display: block;
   text-decoration: none;
   color: var(--color-ui-gray-600);
 }
