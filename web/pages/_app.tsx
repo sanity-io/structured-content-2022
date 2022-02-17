@@ -8,7 +8,9 @@ import '../styles/globals.css';
 import styles from './app.module.css';
 
 function MyApp({ Component, pageProps, router }) {
-  const [scrollTop, setScrollTop] = useState(0);
+  const [scrollTop, setScrollTop] = useState(
+    typeof document !== 'undefined' ? document.documentElement.scrollTop : 0
+  );
 
   useEffect(() => {
     const hasConsent = getCookieConsentValue();
@@ -28,7 +30,7 @@ function MyApp({ Component, pageProps, router }) {
   const scrollPositionTriggeringFrontPageMenu = 420;
 
   useEffect(() => {
-    const onScroll = e => {
+    const onScroll = (e) => {
       setScrollTop(e.target.documentElement.scrollTop);
     };
     window.addEventListener('scroll', onScroll);
