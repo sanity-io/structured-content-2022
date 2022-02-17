@@ -4,6 +4,7 @@ import TagManager from 'react-gtm-module';
 import CookieConsent from '../components/CookieConsent';
 import Nav from '../components/Nav';
 import '../styles/globals.css';
+import styles from './app.module.css';
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -18,13 +19,15 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <header>
+      <header className={styles.header}>
         <Nav />
       </header>
       <main>
         <Component {...pageProps} />
       </main>
-      <CookieConsent />
+      <div className={styles.cookieConsent}>
+        <CookieConsent />
+      </div>
     </>
   );
 }
