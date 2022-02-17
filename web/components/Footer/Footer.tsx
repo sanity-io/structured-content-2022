@@ -11,7 +11,7 @@ export const Footer = () => (
   <footer className={styles.container}>
     <div className={styles.mainContent}>
       <Image src={sanityLogo} alt="logo" width={139} height={28} />
-      <Paragraph className={styles['mainContent__description']}>
+      <Paragraph className={styles.mainContentDescription}>
         Structured Content 2022 is a conference by Sanity
       </Paragraph>
 
@@ -19,7 +19,7 @@ export const Footer = () => (
         Inquiries:
         <br />
         <a
-          className={styles['mainContent__mailLink']}
+          className={styles.mailLink}
           href="mailto:email@sanity.io"
         >
           email@sanity.io
@@ -28,17 +28,17 @@ export const Footer = () => (
     </div>
 
     <div className={styles.social}>
-      <div className={styles['social__item']}>
+      <div className={styles.socialItem}>
         <a href="https://www.instagram.com/sanity.io" target="_blank" rel="noreferrer">
           <Image src={instagramLogo} alt="Instagram" width={24} height={24} />
         </a>
       </div>
-      <div className={styles['social__item']}>
+      <div className={styles.socialItem}>
         <a href="https://twitter.com/sanity_io" target="_blank" rel="noreferrer">
           <Image src={twitterLogo} alt="Twitter" width={24} height={24} />
         </a>
       </div>
-      <div className={styles['social__item']}>
+      <div className={styles.socialItem}>
         <a href="https://www.linkedin.com/company/sanity-io" target="_blank" rel="noreferrer">
         <Image src={linkedinLogo} alt="LinkedIn" width={24} height={24} />
         </a>
@@ -48,24 +48,24 @@ export const Footer = () => (
     <hr className={styles.separator} />
 
     <ul className={styles.links}>
-      <li className={styles['links__item']}>
+      <li className={styles.linksItem}>
         <Link href="#">
-          <a className={styles['links__item__link']}>Code of conduct</a>
+          <a className={styles.linksItemLink}>Code of conduct</a>
         </Link>
       </li>
-      <li className={styles['links__item']}>
+      <li className={styles.linksItem}>
         <Link href="#">
-          <a className={styles['links__item__link']}>Privacy policy</a>
+          <a className={styles.linksItemLink}>Privacy policy</a>
         </Link>
       </li>
-      <li className={styles['links__item']}>
+      <li className={styles.linksItem}>
         <Link href="#">
-          <a className={styles['links__item__link']}>Contact</a>
+          <a className={styles.linksItemLink}>Contact</a>
         </Link>
       </li>
-      <li className={styles['links__item']}>
+      <li className={styles.linksItem}>
         <Link href="#">
-          <a className={styles['links__item__link']}>Venues</a>
+          <a className={styles.linksItemLink}>Venues</a>
         </Link>
       </li>
     </ul>
