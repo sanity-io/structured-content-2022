@@ -4,9 +4,7 @@ import { Section } from '../types/Section';
 import SectionBlock from '../components/SectionBlock';
 import TextBlock from '../components/TextBlock';
 import Heading from '../components/Heading';
-import PageContainer from '../components/PageContainer';
-import Nav from '../components/Nav';
-import Footer from '../components/Footer';
+import GridWrapper from '../components/GridWrapper';
 
 const QUERY = groq`
   {
@@ -14,7 +12,10 @@ const QUERY = groq`
       ...,
       page-> {
         name,
-        sections
+        sections[] {
+          _type == 'reference' => @->,
+          _type != 'reference' => @,
+        }
       }
     }
   }`;
@@ -38,20 +39,14 @@ const Route = ({
   },
 }: RouteProps) => {
   return (
-    <>
-      <PageContainer>
-        <header>
-          <Nav />
-          <SectionBlock>
-            <Heading>{name}</Heading>
-          </SectionBlock>
-        </header>
-        <SectionBlock>
-          <TextBlock value={sections} />
-        </SectionBlock>
-      </PageContainer>
-      <Footer />
-    </>
+    <GridWrapper>
+      <SectionBlock>
+        <Heading>{name}</Heading>
+      </SectionBlock>
+      <SectionBlock>
+        <TextBlock value={sections} />
+      </SectionBlock>
+    </GridWrapper>
   );
 };
 

@@ -8,11 +8,16 @@
   --color-ui-gray-500: #a0a09c;
   --color-ui-gray-300: #deddd9;
   --color-ui-gray-100: #f4f3ef;
-  --font-body-large-medium: 500 24px/33px 'Inter', sans-serif;
+  --font-body-base-medium: 500 18px/25px 'Inter', sans-serif;
+  --font-body-large-medium: 500 20px/30px 'Inter', sans-serif;
+  --font-display-lg: 700 64px/64px sans-serif; /* Web font not received yet */
+  --font-ui-sm-medium: 500 16px/22px 'Inter', sans-serif;
   --grid-gutter: 40px;
   --grid-half-gutter: 20px;
   --grid-width: 1440px;
-  --letter-spacing-body-large-medium: -0.019em;
+  --letter-spacing-body-base: -0.014em;
+  --letter-spacing-body-large: -0.017em;
+  --letter-spacing-ui-sm: -0.011em;
   --spacing-small: 40px;
   --spacing-medium: 64px;
   --spacing-large: 128px;

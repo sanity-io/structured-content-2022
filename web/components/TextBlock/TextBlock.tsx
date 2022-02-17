@@ -3,52 +3,23 @@ import { PortableText, PortableTextComponents } from '@portabletext/react';
 import { PortableTextBlock } from '@portabletext/types';
 import { RichTextSection } from '../../types/RichTextSection';
 import { getEntityPath } from '../../util/entityPaths';
-import Paragraph from '../Paragraph';
-
-const RichText = ({ value }) => (
-  <>
-    {value.content
-      .reduce((acc, content) => [...acc, ...content.children], [])
-      .map((children) => (
-        <Paragraph key={children._key}>{children.text}</Paragraph>
-      ))}
-  </>
-);
-
-const Person = ({ value: speaker }) => (
-  <Link href={getEntityPath(speaker)}>
-    <a>{speaker.name}</a>
-  </Link>
-);
-
-const Venue = ({ value: venue }) => (
-  <Link href={getEntityPath(venue)}>
-    <a>{venue.title}</a>
-  </Link>
-);
+import { SharedSections } from './SharedSections';
+import { Person } from './Person';
+import { RichText } from './RichText';
+import { Block } from './Block';
+import { Venue } from './Venue';
+import { QuestionAndAnswerCollection } from './QuestionAndAnswerCollection';
+import { TextAndImage } from './TextAndImage';
 
 const components: Partial<PortableTextComponents> = {
   types: {
     richText: RichText,
     person: Person,
     venue: Venue,
-    block: ({ value }) =>
-      value.children.map((child, index) => {
-        if (!child._key && child._type) {
-          switch (child._type) {
-            case 'richText':
-              return <RichText value={child} />;
-            case 'person':
-              return <Person value={child} />;
-            case 'venue':
-              return <Venue value={child} />;
-            default:
-              return null;
-          }
-        }
-
-        return <span key={index}>{child.text}</span>;
-      }),
+    questionAndAnswerCollection: QuestionAndAnswerCollection,
+    block: Block,
+    textAndImage: TextAndImage,
+    sharedSections: SharedSections,
   },
   marks: {
     bold: ({ children }) => <strong>{children}</strong>,

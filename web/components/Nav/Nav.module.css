@@ -1,22 +1,139 @@
 .nav {
-  display: flex;
-  justify-content: center;
-  background: #eee;
-  padding: 1rem;
-  margin: 1rem;
+  background: var(--color-brand-white);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
 }
 
-.nav__items {
+.menuContents {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  flex: 1;
-  flex-wrap: wrap;
-  list-style: none;
+  align-items: center;
+  padding: 20px 0;
 }
 
-@media screen and (max-width: 480px) {
-  .nav__items {
-    max-width: 200px;
+.logo {
+  width: auto;
+  height: 48px;
+}
+
+.items {
+  list-style: none;
+  display: flex;
+}
+
+.menuButtonWrapper,
+.ticketItem,
+.closeButton {
+  display: none;
+}
+
+.link {
+  color: var(--color-brand-black);
+  display: block;
+  margin: 0 10px;
+  text-decoration: none;
+  font: var(--font-ui-sm-medium);
+  letter-spacing: var(--letter-spacing-ui-sm);
+}
+
+.link:hover,
+.link:focus {
+  text-decoration: underline;
+}
+
+@media not all and (--medium-up) {
+  .nav {
+    background: none;
+    box-shadow: none;
+  }
+
+  .menuButtonWrapper {
+    display: block;
+    padding-bottom: 46px;
+    text-align: center;
+  }
+
+  .menuButton,
+  .closeButton {
+    display: inline-block;
+    padding: 18px 24px;
+    border-radius: 6px;
+    border: none;
+    font: var(--font-body-large-medium);
+    letter-spacing: var(--letter-spacing-body-large);
+  }
+
+  .menuButton {
+    background: var(--color-brand-yellow);
+  }
+
+  .menuButton::before {
+    content: url('../../images/menu.svg');
+    line-height: 1;
+    vertical-align: bottom;
+    margin-right: 17px;
+  }
+
+  .closeButton {
+    background: var(--color-brand-orange);
+    align-self: center;
+  }
+
+  .closeButton::before {
+    content: url('../../images/close.svg');
+    line-height: 1;
+    vertical-align: bottom;
+    margin-right: 20px;
+  }
+
+  .menuButton:active,
+  .closeButton:active {
+    background: var(--color-brand-yellow-light);
+  }
+
+  .menuContents {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-brand-yellow);
+    flex-direction: column;
+    align-items: start;
+    padding: 24px var(--grid-half-gutter) 36px;
+    overflow: auto;
+  }
+
+  .menuContents.closed {
+    display: none;
+  }
+
+  .homeLink,
+  .ticketButton {
+    display: none;
+  }
+
+  .items {
+    display: block;
+  }
+
+  .ticketItem {
+    display: list-item;
+  }
+
+  .link {
+    font: var(--font-display-lg);
+    letter-spacing: normal;
+  }
+}
+
+@media (--large-up) {
+  .menuContents {
+    padding: 24px 0;
+  }
+
+  .link {
+    margin: 0 12px;
+    font: var(--font-body-base-medium);
+    letter-spacing: var(--letter-spacing-body-base);
   }
 }

@@ -1,6 +1,6 @@
-import { formatDateWithTime } from '../../util/date';
 import logo from '../../images/logo.svg';
 import styles from './ConferenceHeader.module.css';
+import DateRange from '../DateRange';
 
 interface ConferenceHeaderProps {
   name?: string;
@@ -29,13 +29,7 @@ export const ConferenceHeader = ({
       </h1>
       <div className={styles.summary}>
         <p>
-          {startDate && (
-            <time dateTime={startDate}>{formatDateWithTime(startDate)}</time>
-          )}
-          –
-          {endDate && (
-            <time dateTime={endDate}>{formatDateWithTime(endDate)}</time>
-          )}
+          <DateRange startTimestamp={startDate} endTimestamp={endDate} />
         </p>
         <p>{description}</p>
       </div>

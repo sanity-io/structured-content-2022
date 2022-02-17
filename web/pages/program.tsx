@@ -6,9 +6,7 @@ import Heading from '../components/Heading';
 import Sessions from '../components/Sessions';
 import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
-import Nav from '../components/Nav';
-import PageContainer from '../components/PageContainer';
-import Footer from '../components/Footer';
+import GridWrapper from '../components/GridWrapper';
 
 const QUERY = `
   {
@@ -40,30 +38,24 @@ const Program = ({
     program: { name, sections },
   },
 }: ProgramProps) => (
-  <>
-    <PageContainer>
-      <header>
-        <Nav />
-        <SectionBlock>
-          <Heading>{name}</Heading>
-          <Link href="#">Registration</Link>
-        </SectionBlock>
-      </header>
+  <GridWrapper>
+    <main>
+      <SectionBlock>
+        <Heading>{name}</Heading>
+        <Link href="#">Registration</Link>
+      </SectionBlock>
 
-      <main>
-        <SectionBlock>
-          <TextBlock value={sections} />
-        </SectionBlock>
+      <SectionBlock>
+        <TextBlock value={sections} />
+      </SectionBlock>
 
-        <Sessions sessions={sessions} />
+      <Sessions sessions={sessions} />
 
-        <SectionBlock noBackground>
-          <Link href="#">Registration</Link>
-        </SectionBlock>
-      </main>
-    </PageContainer>
-    <Footer />
-  </>
+      <SectionBlock noBackground>
+        <Link href="#">Registration</Link>
+      </SectionBlock>
+    </main>
+  </GridWrapper>
 );
 
 export async function getStaticProps() {

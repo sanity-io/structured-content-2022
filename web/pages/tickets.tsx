@@ -1,12 +1,10 @@
 import client from '../lib/sanity.server';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
-import Nav from '../components/Nav';
+import ticketsStyles from '../pageResources/tickets/Tickets.module.css';
 import { RichTextSection } from '../types/RichTextSection';
 import TextBlock from '../components/TextBlock';
-import PageContainer from '../components/PageContainer';
-import Footer from '../components/Footer';
-import ticketsStyles from '../pageResources/tickets/Tickets.module.css';
+import GridWrapper from '../components/GridWrapper';
 
 const QUERY = `
   {
@@ -43,54 +41,44 @@ const Tickets = ({
     registrationInfo: { name, sections },
   },
 }: TicketsProps) => (
-  <>
-    <PageContainer>
-      <header>
-        <Nav />
-        <SectionBlock>
-          <Heading>Tickets</Heading>
-        </SectionBlock>
-      </header>
+  <GridWrapper>
+    <SectionBlock>
+      <Heading>Tickets</Heading>
+    </SectionBlock>
 
-      <main>
-        <SectionBlock noBackground>
-          <div className={ticketsStyles.container}>
-            {tickets.map((ticket) => (
-              <div key={ticket._id} className={ticketsStyles.ticket}>
-                <div className={ticketsStyles['ticket__type']}>
-                  {ticket.type}
+    <SectionBlock noBackground>
+      <div className={ticketsStyles.container}>
+        {tickets.map((ticket) => (
+          <div key={ticket._id} className={ticketsStyles.ticket}>
+            <div className={ticketsStyles['ticket__type']}>{ticket.type}</div>
+            <div className={ticketsStyles['ticket__price']}>
+              <span className={ticketsStyles['ticket__price__currency']}>
+                $
+              </span>
+              <span className={ticketsStyles['ticket__price__amount']}>
+                {ticket.price}
+              </span>
+            </div>
+            <div className={ticketsStyles['ticket__included']}>
+              {ticket.included?.map((included) => (
+                <div
+                  key={included}
+                  className={ticketsStyles['ticket__included__item']}
+                >
+                  {included}
                 </div>
-                <div className={ticketsStyles['ticket__price']}>
-                  <span className={ticketsStyles['ticket__price__currency']}>
-                    $
-                  </span>
-                  <span className={ticketsStyles['ticket__price__amount']}>
-                    {ticket.price}
-                  </span>
-                </div>
-                <div className={ticketsStyles['ticket__included']}>
-                  {ticket.included?.map((included) => (
-                    <div
-                      key={included}
-                      className={ticketsStyles['ticket__included__item']}
-                    >
-                      {included}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </SectionBlock>
+        ))}
+      </div>
+    </SectionBlock>
 
-        <SectionBlock>
-          <Heading>{name}</Heading>
-          <TextBlock value={sections} />
-        </SectionBlock>
-      </main>
-    </PageContainer>
-    <Footer />
-  </>
+    <SectionBlock>
+      <Heading>{name}</Heading>
+      <TextBlock value={sections} />
+    </SectionBlock>
+  </GridWrapper>
 );
 
 export async function getStaticProps() {
