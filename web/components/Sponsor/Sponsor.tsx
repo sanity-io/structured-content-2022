@@ -47,8 +47,6 @@ export const Sponsor = ({
     .url()
     .replace(/rect=\d+,\d+,\d+,\d+&/, '');
 
-  console.log(src);
-
   return (
     <div className={clsx(styles.sponsor, dimension.className)}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
