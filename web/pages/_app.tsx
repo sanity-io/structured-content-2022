@@ -5,7 +5,7 @@ import CookieConsent from '../components/CookieConsent';
 import Nav from '../components/Nav';
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps, router }) {
+function MyApp({ Component, pageProps }) {
   useEffect(() => {
     const hasConsent = getCookieConsentValue();
     if (
