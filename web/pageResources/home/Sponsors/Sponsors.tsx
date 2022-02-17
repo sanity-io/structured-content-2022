@@ -12,7 +12,7 @@ const groupBySponsorLevel = (
 ): { [level in SponsorLevel]: TSponsor[] } =>
   sponsors.reduce(
     (acc, sponsor) => {
-      const sponsorLevel = sponsor.sponsorship.title;
+      const sponsorLevel = sponsor.sponsorship.type;
       acc[sponsorLevel] = [...(acc[sponsorLevel] || []), sponsor];
       return acc;
     },
@@ -25,19 +25,19 @@ const groupBySponsorLevel = (
 
 export const Sponsors = ({ sponsors }: SponsorsProps) => {
   const groupedSponsors = groupBySponsorLevel(sponsors);
-  const tiers: SponsorLevel[] = ['Premier', 'Gold', 'Silver'];
+  const levels: SponsorLevel[] = ['Premier', 'Gold', 'Silver'];
   return (
-    <div className="sponsors">
-      {tiers.map((tier) => (
-        <div key={tier}>
-          <Heading type="h3">{tier}</Heading>
+    <>
+      {levels.map((level) => (
+        <div key={level} className={styles.sponsorLevel}>
+          <Heading type="h3">{level}</Heading>
           <div className={styles.sponsors}>
-            {groupedSponsors[tier].map((sponsor) => (
+            {groupedSponsors[level].map((sponsor) => (
               <Sponsor key={sponsor._id} sponsor={sponsor} />
             ))}
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };

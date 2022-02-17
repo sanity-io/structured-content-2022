@@ -1,8 +1,33 @@
 .sponsor {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  margin: 2px;
+  background: white;
+  border-radius: 8px;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.image {
-  max-width: 200px;
+.sponsor--Premier {
+  width: 288px;
+  height: 130px;
+}
+
+.sponsor--Gold {
+  width: 192px;
+  height: 88px;
+}
+
+.sponsor--Silver {
+  width: 128px;
+  height: 60px;
+}
+
+@media (--small) {
+  .sponsor--Gold,
+  .sponsor--Silver {
+    width: 128px;
+    height: 60px;
+  }
 }
