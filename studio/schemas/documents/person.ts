@@ -40,6 +40,12 @@ export default {
       type: "string",
     },
     {
+      name: "company",
+      title: "Company",
+      type: "string",
+      description: "Company or affiliation",
+    },
+    {
       name: "pronouns",
       type: "string",
       title: "Pronouns",
