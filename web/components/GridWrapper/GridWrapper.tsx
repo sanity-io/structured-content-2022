@@ -5,6 +5,6 @@ interface GridWrapperProps {
   children: ReactNode;
 }
 
-export const GridWrapper = ({ children }) => (
+export const GridWrapper = ({ children }: GridWrapperProps) => (
   <div className={styles.container}>{children}</div>
 );
