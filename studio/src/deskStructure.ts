@@ -1,9 +1,10 @@
 // deskStructure.js
 import S from "@sanity/desk-tool/structure-builder";
-import { HomeIcon } from "@sanity/icons";
+import { HomeIcon, MenuIcon } from "@sanity/icons";
 import Iframe from "sanity-plugin-iframe-pane";
 import DocumentsPane from "sanity-plugin-documents-pane";
 import { createDeskHierarchy } from "@sanity/hierarchical-document-list";
+import documentStore from "part:@sanity/base/datastore/document";
 
 import { getPreviewUrl } from "./urlResolver";
 import SpecPreview from "./spec";
@@ -84,13 +85,47 @@ export default () =>
             ])
         ),
       S.documentTypeListItem("event").title("Events"),
-      S.documentTypeListItem("person").title("People"),
+      S.listItem()
+        .title("People")
+        .schemaType("person")
+        .child(
+          S.list()
+            .title("People")
+            .items([S.documentTypeListItem("person").title("Everyone")])
+        ),
       S.documentTypeListItem("session").title("Sessions"),
       S.documentTypeListItem("venue").title("Venues"),
       S.divider(),
       S.documentTypeListItem("route").title("Routes (URLs)"),
       S.documentTypeListItem("page").title("Landing Pages"),
       S.documentTypeListItem("sharedSections").title("Shared Sections"),
+      S.listItem()
+        .title("Navigation")
+        .icon(MenuIcon)
+        .child(
+          S.list()
+            .items([
+              createDeskHierarchy({
+                title: "Primary Navigation",
+
+                // The hierarchy will be stored in this document ID 👇
+                documentId: "primary-nav",
+
+                // Document types editors should be able to include in the hierarchy
+                referenceTo: ["route"],
+              }).icon(MenuIcon),
+              createDeskHierarchy({
+                title: "Secondary Navigation",
+
+                // The hierarchy will be stored in this document ID 👇
+                documentId: "secondary-nav",
+
+                // Document types editors should be able to include in the hierarchy
+                referenceTo: ["route"],
+              }).icon(MenuIcon),
+            ])
+            .title("Navigation")
+        ),
       //S.documentTypeListItem("article").title("Editorial Articles"), // disabled for now
       S.divider(),
       S.documentTypeListItem("ticket").title("Ticket types"),
