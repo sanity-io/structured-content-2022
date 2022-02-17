@@ -14,6 +14,8 @@ export const Nav = () => {
     document.body.classList.toggle('main-menu-open', menuOpened);
   }, [menuOpened]);
 
+  const closeMenu = () => setMenuOpened(false);
+
   return (
     <nav className={styles.nav}>
       <GridWrapper>
@@ -47,22 +49,22 @@ export const Nav = () => {
           <ul className={styles.items}>
             <li className={styles.ticketItem}>
               <Link href="/tickets">
-                <a className={styles.link}>Tickets</a>
+                <a className={styles.link} onClick={closeMenu}>Tickets</a>
               </Link>
             </li>
             <li>
               <Link href="/program">
-                <a className={styles.link}>Program</a>
+                <a className={styles.link} onClick={closeMenu}>Program</a>
               </Link>
             </li>
             <li>
               <Link href="/speakers">
-                <a className={styles.link}>Speakers</a>
+                <a className={styles.link} onClick={closeMenu}>Speakers</a>
               </Link>
             </li>
             <li>
               <Link href="/about">
-                <a className={styles.link}>About</a>
+                <a className={styles.link} onClick={closeMenu}>About</a>
               </Link>
             </li>
           </ul>
@@ -72,7 +74,7 @@ export const Nav = () => {
           <button
             type="button"
             className={styles.closeButton}
-            onClick={() => setMenuOpened(false)}
+            onClick={closeMenu}
           >
             Close
           </button>
