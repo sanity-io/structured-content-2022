@@ -19,7 +19,6 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <>
       <header>
-        <code>{router.asPath}</code>
         <Nav />
       </header>
       <main>
