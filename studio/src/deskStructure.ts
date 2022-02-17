@@ -89,7 +89,7 @@ export default () =>
       S.documentTypeListItem("route").title("Routes (URLs)"),
       S.documentTypeListItem("page").title("Landing Pages"),
       S.documentTypeListItem("sharedSections").title("Shared Sections"),
-      S.documentTypeListItem("article").title("Editorial Articles"),
+      //S.documentTypeListItem("article").title("Editorial Articles"), // disabled for now
       S.divider(),
       S.documentTypeListItem("ticket").title("Ticket types"),
       S.documentTypeListItem("sponsorship").title("Sponsorships"),
