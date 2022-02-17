@@ -3,6 +3,8 @@ import S from "@sanity/desk-tool/structure-builder";
 import { HomeIcon } from "@sanity/icons";
 import Iframe from "sanity-plugin-iframe-pane";
 import DocumentsPane from "sanity-plugin-documents-pane";
+import { createDeskHierarchy } from "@sanity/hierarchical-document-list";
+
 import { getPreviewUrl } from "./urlResolver";
 import SpecPreview from "./spec";
 
@@ -92,7 +94,25 @@ export default () =>
       //S.documentTypeListItem("article").title("Editorial Articles"), // disabled for now
       S.divider(),
       S.documentTypeListItem("ticket").title("Ticket types"),
-      S.documentTypeListItem("sponsorship").title("Sponsorships"),
+      S.listItem()
+        .title("Sponsorships")
+        .child(
+          S.list()
+            .items([
+              S.documentTypeListItem("sponsorship").title("Sponsorships"),
+              createDeskHierarchy({
+                title: "Sponsorship tiers",
+
+                // The hierarchy will be stored in this document ID 👇
+                documentId: "sponsorship-tiers",
+
+                // Document types editors should be able to include in the hierarchy
+                referenceTo: ["sponsorship"],
+              }),
+            ])
+            .title("Sponsorships")
+        ),
+      //S.documentTypeListItem("sponsorship").title("Sponsorships"),
       S.documentTypeListItem("sponsor").title("Sponsors"),
       S.divider(),
       S.documentTypeListItem("spec").title("Content Specification Sheets"),
