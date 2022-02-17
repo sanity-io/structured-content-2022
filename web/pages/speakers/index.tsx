@@ -5,7 +5,7 @@ import { imageUrlFor } from '../../lib/sanity';
 import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Nav from '../../components/Nav';
-import PageContainer from '../../components/PageContainer';
+import GridWrapper from '../../components/GridWrapper';
 import speakersStyles from '../../pageResources/speakers/Speakers.module.css';
 import { getEntityPath } from '../../util/entityPaths';
 import { Person } from '../../types/Person';
@@ -26,7 +26,7 @@ const Speakers = ({ data: { speakers } }: SpeakersProps) => (
     <header>
       <Nav />
     </header>
-    <PageContainer>
+    <GridWrapper>
       <main>
         <SectionBlock>
           <Heading>Speakers</Heading>
@@ -64,7 +64,7 @@ const Speakers = ({ data: { speakers } }: SpeakersProps) => (
           ))}
         </SectionBlock>
       </main>
-    </PageContainer>
+    </GridWrapper>
   </>
 );
 

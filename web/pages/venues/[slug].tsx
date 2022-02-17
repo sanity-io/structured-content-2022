@@ -4,7 +4,7 @@ import { Venue } from '../../types/Venue';
 import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Paragraph from '../../components/Paragraph';
-import PageContainer from '../../components/PageContainer';
+import GridWrapper from '../../components/GridWrapper';
 import Nav from '../../components/Nav';
 import styles from '../../pageResources/about/venue/venue.module.css';
 
@@ -27,7 +27,7 @@ const Venue = ({ data: { title, geolocation } }: VenueProps) => (
     <header>
       <Nav />
     </header>
-    <PageContainer>
+    <GridWrapper>
       <main>
         <SectionBlock>
           <Heading>{title}</Heading>
@@ -78,7 +78,7 @@ const Venue = ({ data: { title, geolocation } }: VenueProps) => (
           </Paragraph>
         </SectionBlock>
       </main>
-    </PageContainer>
+    </GridWrapper>
   </>
 );
 

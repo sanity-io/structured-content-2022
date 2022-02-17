@@ -7,7 +7,7 @@ import Sessions from '../components/Sessions';
 import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
 import Nav from '../components/Nav';
-import PageContainer from '../components/PageContainer';
+import GridWrapper from '../components/GridWrapper';
 
 const QUERY = `
   {
@@ -43,7 +43,7 @@ const Program = ({
     <header>
       <Nav />
     </header>
-    <PageContainer>
+    <GridWrapper>
       <main>
         <SectionBlock>
           <Heading>{name}</Heading>
@@ -60,7 +60,7 @@ const Program = ({
           <Link href="#">Registration</Link>
         </SectionBlock>
       </main>
-    </PageContainer>
+    </GridWrapper>
   </>
 );
 

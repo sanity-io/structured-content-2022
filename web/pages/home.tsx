@@ -10,7 +10,7 @@ import { Section } from '../types/Section';
 import { Sponsor } from '../types/Sponsor';
 import Sponsors from '../pageResources/home/Sponsors';
 import Nav from '../components/Nav';
-import PageContainer from '../components/PageContainer';
+import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
 
 const QUERY = `
@@ -73,7 +73,7 @@ const Home = ({
       <Nav />
     </header>
 
-    <PageContainer>
+    <GridWrapper>
       <main>
         <ConferenceHeader
           name={name}
@@ -116,7 +116,7 @@ const Home = ({
           <ConferenceUpdatesForm />
         </SectionBlock>
       </main>
-    </PageContainer>
+    </GridWrapper>
   </>
 );
 

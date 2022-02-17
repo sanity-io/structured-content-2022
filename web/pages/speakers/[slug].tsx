@@ -8,7 +8,7 @@ import { imageUrlFor } from '../../lib/sanity';
 import TextBlock from '../../components/TextBlock';
 import { Session } from '../../types/Session';
 import Sessions from '../../components/Sessions';
-import PageContainer from '../../components/PageContainer';
+import GridWrapper from '../../components/GridWrapper';
 import speakerStyles from '../../pageResources/speakers/Speaker/Speaker.module.css';
 import { Person } from '../../types/Person';
 
@@ -48,7 +48,7 @@ const Speakers = ({
     <header>
       <Nav />
     </header>
-    <PageContainer>
+    <GridWrapper>
       <main>
         <SectionBlock>
           <div className={speakerStyles.container}>
@@ -93,7 +93,7 @@ const Speakers = ({
           </div>
         </SectionBlock>
       </main>
-    </PageContainer>
+    </GridWrapper>
   </>
 );
 

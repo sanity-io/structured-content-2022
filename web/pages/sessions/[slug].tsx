@@ -8,7 +8,7 @@ import { formatDateWithTime } from '../../util/date';
 import { Speakers } from '../../pageResources/home/Speakers/Speakers';
 import TextBlock from '../../components/TextBlock';
 import Nav from '../../components/Nav';
-import PageContainer from '../../components/PageContainer';
+import GridWrapper from '../../components/GridWrapper';
 
 const QUERY = `
   *[_type == "session" && slug.current == $slug][0] {
@@ -42,7 +42,7 @@ const SessionPage = ({
     <header>
       <Nav />
     </header>
-    <PageContainer>
+    <GridWrapper>
       <main>
         <SectionBlock key={title}>
           <Heading type="h2">{title}</Heading>
@@ -73,7 +73,7 @@ const SessionPage = ({
           </Paragraph>
         </SectionBlock>
       </main>
-    </PageContainer>
+    </GridWrapper>
   </>
 );
 

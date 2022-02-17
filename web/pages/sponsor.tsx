@@ -5,7 +5,7 @@ import sponsorStyles from '../pageResources/sponsor/Sponsor.module.css';
 import Nav from '../components/Nav';
 import Paragraph from '../components/Paragraph';
 import Link from 'next/link';
-import PageContainer from '../components/PageContainer';
+import GridWrapper from '../components/GridWrapper';
 
 const QUERY = `{}`;
 
@@ -18,7 +18,7 @@ const Sponsor = ({ data: {} }: SponsorProps) => (
     <header>
       <Nav />
     </header>
-    <PageContainer>
+    <GridWrapper>
       <main>
         <SectionBlock>
           <Heading>Sponsor partner</Heading>
@@ -125,7 +125,7 @@ const Sponsor = ({ data: {} }: SponsorProps) => (
           </form>
         </SectionBlock>
       </main>
-    </PageContainer>
+    </GridWrapper>
   </>
 );
 

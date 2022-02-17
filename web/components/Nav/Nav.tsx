@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useState } from 'react';
 import ButtonLink from '../ButtonLink';
-import PageContainer from '../PageContainer';
+import GridWrapper from '../GridWrapper';
 import logo from '../../images/logo.svg';
 import styles from './Nav.module.css';
 
@@ -12,7 +12,7 @@ export const Nav = () => {
 
   return (
     <nav className={styles.nav}>
-      <PageContainer>
+      <GridWrapper>
         <div className={styles.menuButtonWrapper}>
           <button
             className={styles.menuButton}
@@ -73,7 +73,7 @@ export const Nav = () => {
             Close
           </button>
         </div>
-      </PageContainer>
+      </GridWrapper>
     </nav>
   );
 };

@@ -4,7 +4,7 @@ import { Section } from '../types/Section';
 import SectionBlock from '../components/SectionBlock';
 import TextBlock from '../components/TextBlock';
 import Heading from '../components/Heading';
-import PageContainer from '../components/PageContainer';
+import GridWrapper from '../components/GridWrapper';
 import Nav from '../components/Nav';
 
 const QUERY = groq`
@@ -41,14 +41,14 @@ const Route = ({
       <header>
         <Nav />
       </header>
-      <PageContainer>
+      <GridWrapper>
         <SectionBlock>
           <Heading>{name}</Heading>
         </SectionBlock>
         <SectionBlock>
           <TextBlock value={sections} />
         </SectionBlock>
-      </PageContainer>
+      </GridWrapper>
     </>
   );
 };

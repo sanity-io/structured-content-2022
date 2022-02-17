@@ -5,7 +5,7 @@ import ticketsStyles from '../pageResources/tickets/Tickets.module.css';
 import Nav from '../components/Nav';
 import { RichTextSection } from '../types/RichTextSection';
 import TextBlock from '../components/TextBlock';
-import PageContainer from '../components/PageContainer';
+import GridWrapper from '../components/GridWrapper';
 
 const QUERY = `
   {
@@ -46,7 +46,7 @@ const Tickets = ({
     <header>
       <Nav />
     </header>
-    <PageContainer>
+    <GridWrapper>
       <main>
         <SectionBlock>
           <Heading>Tickets</Heading>
@@ -87,7 +87,7 @@ const Tickets = ({
           <TextBlock value={sections} />
         </SectionBlock>
       </main>
-    </PageContainer>
+    </GridWrapper>
   </>
 );
 

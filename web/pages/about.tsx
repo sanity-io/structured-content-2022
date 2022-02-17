@@ -8,7 +8,7 @@ import { groq } from 'next-sanity';
 import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
 import Nav from '../components/Nav';
-import PageContainer from '../components/PageContainer';
+import GridWrapper from '../components/GridWrapper';
 import { getEntityPath } from '../util/entityPaths';
 import { Venue } from '../types/Venue';
 
@@ -45,7 +45,7 @@ const About = ({
     <header>
       <Nav />
     </header>
-    <PageContainer>
+    <GridWrapper>
       <main>
         <SectionBlock>
           <Heading>{name}</Heading>
@@ -110,7 +110,7 @@ const About = ({
           <ConferenceUpdatesForm />
         </SectionBlock>
       </main>
-    </PageContainer>
+    </GridWrapper>
   </>
 );
 
