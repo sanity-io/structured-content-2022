@@ -6,8 +6,7 @@ import Heading from '../components/Heading';
 import Sessions from '../components/Sessions';
 import TextBlock from '../components/TextBlock';
 import { RichTextSection } from '../types/RichTextSection';
-import Nav from '../components/Nav';
-import PageContainer from '../components/PageContainer';
+import GridWrapper from '../components/GridWrapper';
 
 const QUERY = `
   {
@@ -39,16 +38,13 @@ const Program = ({
     program: { name, sections },
   },
 }: ProgramProps) => (
-  <PageContainer>
-    <header>
-      <Nav />
+  <GridWrapper>
+    <main>
       <SectionBlock>
         <Heading>{name}</Heading>
         <Link href="#">Registration</Link>
       </SectionBlock>
-    </header>
 
-    <main>
       <SectionBlock>
         <TextBlock value={sections} />
       </SectionBlock>
@@ -59,7 +55,7 @@ const Program = ({
         <Link href="#">Registration</Link>
       </SectionBlock>
     </main>
-  </PageContainer>
+  </GridWrapper>
 );
 
 export async function getStaticProps() {
