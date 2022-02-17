@@ -25,6 +25,11 @@
 }
 
 @media (--small) {
+  .sponsor--Premier {
+    width: 192px;
+    height: 88px;
+  }
+
   .sponsor--Gold,
   .sponsor--Silver {
     width: 128px;
