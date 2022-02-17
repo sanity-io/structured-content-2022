@@ -30,7 +30,7 @@ export const SharedSections = ({ value: { name, sections } }) => (
         case 'figure':
           return <Figure key={section._key} value={section} />;
         default:
-          console.log(
+          console.error(
             `Unrecognized SharedSections section type '${section._type}'`
           );
           return null;

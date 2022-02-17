@@ -13,7 +13,7 @@ export const Block = ({ value }) =>
         case 'venue':
           return <Venue value={child} />;
         default:
-          console.log(`Unknown Block child type: "${child._type}"`);
+          console.error(`Unknown Block child type: "${child._type}"`);
           return null;
       }
     }
