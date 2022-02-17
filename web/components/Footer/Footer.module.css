@@ -1,20 +1,13 @@
 .container {
-  height: 424px;
   background: var(--color-ui-gray-100);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
-}
-
-.mainContent {
-  padding: 0.5rem;
+  padding: var(--spacing-medium) 0 var(--spacing-large);
+  font: var(--font-ui-sm-medium);
+  letter-spacing: var(--letter-spacing-ui-sm);
 }
 
 .logoContainer {
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
 }
 
 .mailLink {
@@ -23,15 +16,26 @@
   color: var(--color-ui-gray-600);
 }
 
+.mailLink:hover {
+  text-decoration: underline;
+}
+
 .social {
-  padding-top: 1rem;
+  margin: 38px 0;
   text-align: center;
-  margin: 0 auto;
 }
 
 .socialItem {
-  padding: 12px;
-  float: left;
+  padding: 0 12px;
+}
+
+/* Including the link itself here to make it contain the image, for a better
+ * focus outline
+ */
+.socialItem,
+.socialLink {
+  display: inline-block;
+  line-height: 1;
 }
 
 .separator {
@@ -43,18 +47,14 @@
 }
 
 .links {
-  padding: 0;
   list-style: none;
-
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  margin: 20px -12px 0;
+  text-align: center;
 }
 
 .linksItem {
-  flex: 1;
-  white-space: nowrap;
-  padding: 12px;
+  display: inline-block;
+  padding: 12px 12px 0;
 }
 
 .linksItemLink {
@@ -62,12 +62,6 @@
   text-decoration: none;
 }
 
-@media (--small) {
-  .links {
-    width: 254px;
-  }
-
-  .linksItem {
-    padding: 0;
-  }
+.linksItemLink:hover {
+  text-decoration: underline;
 }
