@@ -5,3 +5,4 @@ export { default as questionAndAnswerCollection } from "./questionAndAnswerColle
 //export { default as questionAndAnswer } from "./questionAndAnswer";
 export { default as mailchimp } from "./mailchimp";
 export { default as simpleCallToAction } from "./simpleCallToAction";
+export { default as speakers } from "./speakers";
