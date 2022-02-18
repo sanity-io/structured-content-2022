@@ -65,3 +65,13 @@
 .linksItemLink:hover {
   text-decoration: underline;
 }
+
+@media (--medium-up) {
+  .container {
+    padding-bottom: 32px;
+  }
+
+  .social {
+    margin-bottom: 70px;
+  }
+}
