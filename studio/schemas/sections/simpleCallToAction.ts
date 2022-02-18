@@ -16,7 +16,7 @@ export default {
       type: "url",
       title: "Call to Action URL",
       description: "The target URL.",
-      hidden: ({ document }) => !document.url && document.reference,
+      hidden: ({ parent }) => !parent.url && parent.reference,
       validation: (Rule) =>
         Rule.regex(/(?<=utm_[a-z]+=)\w+/).warning(
           "You might want to include UTM tags."
@@ -26,7 +26,7 @@ export default {
       name: "reference",
       type: "reference",
       title: "Reference",
-      hidden: ({ document }) => !document.reference && document.url,
+      hidden: ({ parent }) => !parent.reference && parent.url,
       to: [{ type: "route" }],
     },
   ],
