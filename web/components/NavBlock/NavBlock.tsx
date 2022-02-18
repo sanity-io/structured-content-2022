@@ -18,15 +18,15 @@ export const NavBlock = () => (
           styles.desktop
         )}
         aria-hidden="true"
-      ></li>
+      />
       <li
         className={clsx(styles.fakeItem, styles.tablet, styles.desktop)}
         aria-hidden="true"
-      ></li>
+      />
       <li
         className={clsx(styles.fakeItem, styles.desktop)}
         aria-hidden="true"
-      ></li>
+      />
       <li
         className={clsx(
           styles.divider,
@@ -35,7 +35,7 @@ export const NavBlock = () => (
           styles.desktop
         )}
         aria-hidden="true"
-      ></li>
+      />
       <li
         className={clsx(
           styles.fakeItem,
@@ -44,15 +44,15 @@ export const NavBlock = () => (
           styles.desktop
         )}
         aria-hidden="true"
-      ></li>
+      />
       <li
         className={clsx(styles.fakeItem, styles.tablet, styles.desktop)}
         aria-hidden="true"
-      ></li>
+      />
       <li
         className={clsx(styles.fakeItem, styles.desktop)}
         aria-hidden="true"
-      ></li>
+      />
       <li className={styles.item}>
         <Link href="/speakers">
           <a className={styles.link}>Speakers</a>
@@ -66,7 +66,7 @@ export const NavBlock = () => (
           styles.desktop
         )}
         aria-hidden="true"
-      ></li>
+      />
       <li className={styles.item}>
         <Link href="/about">
           <a className={styles.link}>About</a>
@@ -80,15 +80,15 @@ export const NavBlock = () => (
           styles.desktop
         )}
         aria-hidden="true"
-      ></li>
+      />
       <li
         className={clsx(styles.divider, styles.mobile)}
         aria-hidden="true"
-      ></li>
+      />
       <li
         className={clsx(styles.fakeItem, styles.mobile)}
         aria-hidden="true"
-      ></li>
+      />
       <li className={styles.item}>
         <Link href="/tickets">
           <a className={styles.link}>Early-bird tickets</a>
@@ -97,7 +97,7 @@ export const NavBlock = () => (
       <li
         className={clsx(styles.fakeItem, styles.desktop)}
         aria-hidden="true"
-      ></li>
+      />
     </ul>
   </nav>
 );
