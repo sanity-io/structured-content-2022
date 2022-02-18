@@ -1,4 +1,3 @@
-// deskStructure.js
 import S from "@sanity/desk-tool/structure-builder";
 import { HomeIcon, MenuIcon } from "@sanity/icons";
 import Iframe from "sanity-plugin-iframe-pane";
