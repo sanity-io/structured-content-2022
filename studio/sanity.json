@@ -16,7 +16,8 @@
     "leaflet-input",
     "media",
     "iframe-pane",
-    "documents-pane"
+    "documents-pane",
+    "@sanity/hierarchical-document-list"
   ],
   "env": {
     "development": {
