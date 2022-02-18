@@ -30,7 +30,7 @@ export default {
       title: 'Slug',
       validation: (Rule) => Rule.required(),
       options: {
-        source: 'title',
+        source: 'seo.title',
       }
     },
     {
