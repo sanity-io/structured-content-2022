@@ -1,11 +1,8 @@
-import Paragraph from '../Paragraph';
+import { TextBlock } from './TextBlock';
+import SectionBlock from '../SectionBlock';
 
 export const RichText = ({ value }) => (
-  <>
-    {value.content
-      .reduce((acc, content) => [...acc, ...content.children], [])
-      .map((children) => (
-        <Paragraph key={children._key}>{children.text}</Paragraph>
-      ))}
-  </>
+  <SectionBlock>
+    <TextBlock value={value.content} />
+  </SectionBlock>
 );

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { imageUrlFor } from '../../lib/sanity';
 import Heading from '../Heading';
+import { RichText } from './RichText';
 
 const MailchimpSection = ({ value: { buttonText, id, title } }) => (
   <form>
@@ -29,6 +30,8 @@ export const SharedSections = ({ value: { name, sections } }) => (
           return <MailchimpSection key={section._key} value={section} />;
         case 'figure':
           return <Figure key={section._key} value={section} />;
+        case 'richText':
+          return <RichText key={section._key} value={section} />;
         default:
           console.error(
             `Unrecognized SharedSections section type '${section._type}'`
