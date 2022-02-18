@@ -13,16 +13,16 @@ import page from "./documents/page";
 import route from "./documents/route";
 
 // Objects
-import seo from "./objects/seo";
-import figure from "./objects/figure";
+
 import simpleBlockContent from "./arrays/simpleBlockContent";
 import blockContent from "./arrays/blockContent";
+import { figure, richText, seo } from "./objects";
 import questionAndAnswer from "./objects/questionAndAnswer";
-import questionAndAnswerCollection from "./objects/questionAndAnswerCollection";
-import richText from "./objects/richText";
-import textAndImage from "./objects/textAndImage";
+
 import sharedSections from "./documents/sharedSections";
-import { mailchimp } from "./objects";
+
+import spec from "./documents/spec";
+import * as sections from "./sections";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -32,6 +32,11 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     /* Your types here! */
+    ...Object.values(sections),
+    figure,
+    questionAndAnswer,
+    richText,
+    seo,
     event,
     session,
     person,
@@ -42,15 +47,9 @@ export default createSchema({
     venue,
     sponsorship,
     ticket,
-    seo,
-    mailchimp,
-    figure,
     sharedSections,
-    richText,
-    textAndImage,
-    questionAndAnswer,
-    questionAndAnswerCollection,
     simpleBlockContent,
     blockContent,
+    spec,
   ]),
 });

@@ -2,15 +2,16 @@ export default {
   name: "mailchimp",
   type: "object",
   title: "Mailchimp",
+  description: "A form for subscribing to a Mailchimp list",
   preview: {
     select: {
-      title: "title",
+      title: "heading",
       subtitle: "tagline",
     },
   },
   fields: [
     {
-      name: "title",
+      name: "heading",
       type: "string",
     },
     {
