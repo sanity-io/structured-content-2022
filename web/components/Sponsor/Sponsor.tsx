@@ -44,8 +44,8 @@ export const Sponsor = ({
     .bg('fff')
     .size(dimension.width, dimension.height)
     .fit('max')
+    .ignoreImageParams()
     .url()
-    .replace(/rect=\d+,\d+,\d+,\d+&/, '');
 
   return (
     <div className={clsx(styles.sponsor, dimension.className)}>
