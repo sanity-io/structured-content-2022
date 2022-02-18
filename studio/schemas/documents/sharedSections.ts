@@ -1,4 +1,4 @@
-import * as sections from "../objects";
+import * as sections from "../sections";
 
 export default {
   name: "sharedSections",
@@ -7,6 +7,15 @@ export default {
   preview: {
     select: {
       title: "internalName",
+      sections: "sections",
+    },
+    prepare({ title, sections }) {
+      return {
+        title,
+        subtitle: sections.length
+          ? sections.map(({ _type }) => _type).join(", ")
+          : undefined,
+      };
     },
   },
   fields: [
@@ -17,16 +26,14 @@ export default {
       description: "For internal use.",
     },
     {
-      name: "name",
-      title: "Section name",
-      type: "string",
-      description: "This will be the editorial headline of the section.",
-    },
-    {
       name: "sections",
       type: "array",
       title: "Sections",
-      of: Object.keys(sections).map((type) => ({ type })),
+      of: [
+        { type: "figure" },
+        { type: "richText" },
+        ...Object.keys(sections).map((type) => ({ type })),
+      ],
     },
   ],
 };
