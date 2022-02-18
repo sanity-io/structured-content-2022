@@ -16,6 +16,8 @@
   --font-ui-sm-medium: 500 16px/22px 'Inter', sans-serif;
   --grid-gutter: 40px;
   --grid-half-gutter: 20px;
+  --grid-medium-gutter: 32px; /* These could be set in @media if we drop IE11 */
+  --grid-medium-half-gutter: 16px;
   --grid-width: 1440px;
   --letter-spacing-body-base: -0.014em;
   --letter-spacing-body-large: -0.017em;
