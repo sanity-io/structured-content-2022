@@ -1,16 +1,18 @@
 import Link from 'next/link';
 import client from '../lib/sanity.server';
 import { Person } from '../types/Person';
+import { Section } from '../types/Section';
+import { Sponsor } from '../types/Sponsor';
+import { Venue } from "../types/Venue";
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Speakers from '../pageResources/home/Speakers';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import TextBlock from '../components/TextBlock';
-import { Section } from '../types/Section';
-import { Sponsor } from '../types/Sponsor';
 import Sponsors from '../pageResources/home/Sponsors';
 import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
+import VenueNames from "../components/VenueNames";
 
 const QUERY = `
   {
@@ -27,7 +29,8 @@ const QUERY = `
     "sponsors": *[_type == "sponsor"] {
       ...,
       sponsorship->
-    }
+    },
+    "venues": *[_type == "venue"]
   }`;
 
 interface HomeProps {
@@ -49,6 +52,7 @@ interface HomeProps {
       valueProposition: Section[];
     };
     sponsors: Sponsor[];
+    venues: Venue[];
   };
 }
 
@@ -65,6 +69,7 @@ const Home = ({
       valueProposition,
     },
     sponsors,
+    venues,
   },
 }: HomeProps) => (
   <GridWrapper>
@@ -81,6 +86,8 @@ const Home = ({
         </Link>
       ))}
     </SectionBlock>
+
+    <VenueNames venues={venues} />
 
     <SectionBlock>
       <TextBlock value={valueProposition} />
