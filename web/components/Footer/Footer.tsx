@@ -63,22 +63,22 @@ export const Footer = () => (
     <GridWrapper>
       <ul className={styles.links}>
         <li className={styles.linksItem}>
-          <Link href="#">
+          <Link href="/code-of-conduct">
             <a className={styles.linksItemLink}>Code of conduct</a>
           </Link>
         </li>
         <li className={styles.linksItem}>
-          <Link href="#">
+          <Link href="/privacy-policy">
             <a className={styles.linksItemLink}>Privacy policy</a>
           </Link>
         </li>
         <li className={styles.linksItem}>
-          <Link href="#">
+          <Link href="/contact">
             <a className={styles.linksItemLink}>Contact</a>
           </Link>
         </li>
         <li className={styles.linksItem}>
-          <Link href="#">
+          <Link href="/venues">
             <a className={styles.linksItemLink}>Venues</a>
           </Link>
         </li>
