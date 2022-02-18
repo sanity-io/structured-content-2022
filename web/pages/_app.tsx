@@ -3,6 +3,7 @@ import { getCookieConsentValue } from 'react-cookie-consent';
 import TagManager from 'react-gtm-module';
 import clsx from 'clsx';
 import CookieConsent from '../components/CookieConsent';
+import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 import '../styles/globals.css';
 import styles from './app.module.css';
@@ -54,6 +55,7 @@ function MyApp({ Component, pageProps, router }) {
       <main>
         <Component {...pageProps} />
       </main>
+      <Footer />
       <div className={styles.cookieConsent}>
         <CookieConsent />
       </div>

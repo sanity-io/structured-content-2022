@@ -39,22 +39,20 @@ const Program = ({
   },
 }: ProgramProps) => (
   <GridWrapper>
-    <main>
-      <SectionBlock>
-        <Heading>{name}</Heading>
-        <Link href="#">Registration</Link>
-      </SectionBlock>
+    <SectionBlock>
+      <Heading>{name}</Heading>
+      <Link href="#">Registration</Link>
+    </SectionBlock>
 
-      <SectionBlock>
-        <TextBlock value={sections} />
-      </SectionBlock>
+    <SectionBlock>
+      <TextBlock value={sections} />
+    </SectionBlock>
 
-      <Sessions sessions={sessions} />
+    <Sessions sessions={sessions} />
 
-      <SectionBlock noBackground>
-        <Link href="#">Registration</Link>
-      </SectionBlock>
-    </main>
+    <SectionBlock noBackground>
+      <Link href="#">Registration</Link>
+    </SectionBlock>
   </GridWrapper>
 );
 
