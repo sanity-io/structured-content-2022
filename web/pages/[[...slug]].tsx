@@ -43,9 +43,7 @@ const Route = ({
       <SectionBlock>
         <Heading>{name}</Heading>
       </SectionBlock>
-      <SectionBlock>
-        <TextBlock value={sections} />
-      </SectionBlock>
+      <TextBlock value={sections} />
     </GridWrapper>
   );
 };
