@@ -11,7 +11,6 @@ import { Sponsor } from '../types/Sponsor';
 import Sponsors from '../pageResources/home/Sponsors';
 import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
-import Footer from '../components/Footer';
 
 const QUERY = `
   {

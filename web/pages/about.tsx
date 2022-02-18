@@ -10,7 +10,6 @@ import { RichTextSection } from '../types/RichTextSection';
 import GridWrapper from '../components/GridWrapper';
 import { getEntityPath } from '../util/entityPaths';
 import { Venue } from '../types/Venue';
-import Footer from '../components/Footer';
 
 const QUERY = groq`
   {
