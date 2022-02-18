@@ -27,7 +27,10 @@ const utcDate = (date: string) => {
   };
 };
 
-export const formatDateRangeInUtc = (timestamp1: string, timestamp2: string) => {
+export const formatDateRangeInUtc = (
+  timestamp1: string,
+  timestamp2: string
+) => {
   const d1 = utcDate(timestamp1);
   const d2 = utcDate(timestamp2);
 
