@@ -11,6 +11,7 @@ import { Sponsor } from '../types/Sponsor';
 import Sponsors from '../pageResources/home/Sponsors';
 import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
+import NavBlock from '../components/NavBlock';
 
 const QUERY = `
   {
@@ -74,6 +75,9 @@ const Home = ({
       endDate={endDate}
       description={description}
     />
+
+    <NavBlock />
+
     <SectionBlock>
       {microcopy.map(({ key, action, text }) => (
         <Link key={key} href={action}>
