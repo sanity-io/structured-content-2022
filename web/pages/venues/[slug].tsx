@@ -5,7 +5,6 @@ import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
 import Paragraph from '../../components/Paragraph';
 import GridWrapper from '../../components/GridWrapper';
-import Nav from '../../components/Nav';
 import styles from '../../pageResources/about/venue/venue.module.css';
 
 const QUERY = `
@@ -23,63 +22,54 @@ const mapUrl = (geolocation: { lat: number; lng: number }) =>
   `https://maps.google.com/maps?q=${geolocation.lat},${geolocation.lng}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
 const Venue = ({ data: { title, geolocation } }: VenueProps) => (
-  <>
-    <header>
-      <Nav />
-    </header>
-    <GridWrapper>
-      <main>
-        <SectionBlock>
-          <Heading>{title}</Heading>
-        </SectionBlock>
+  <GridWrapper>
+    <SectionBlock>
+      <Heading>{title}</Heading>
+    </SectionBlock>
 
-        <SectionBlock>
-          <div className={styles.location}>
-            <div>
-              <Heading type="h2">Location</Heading>
-              <Paragraph>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
-                ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-                dolor sit amet, consectetur adipiscing elit. This text is not
-                fetched from Sanity.
-              </Paragraph>
-            </div>
-            <div className={styles.map}>
-              {geolocation?.lat && geolocation?.lng && (
-                <iframe src={mapUrl(geolocation)} />
-              )}
-            </div>
-          </div>
-        </SectionBlock>
-
-        <SectionBlock>
-          <Heading type="h2">Attendee details</Heading>
+    <SectionBlock>
+      <div className={styles.location}>
+        <div>
+          <Heading type="h2">Location</Heading>
           <Paragraph>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
             dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
             amet, consectetur adipiscing elit. This text is not fetched from
             Sanity.
           </Paragraph>
-        </SectionBlock>
+        </div>
+        <div className={styles.map}>
+          {geolocation?.lat && geolocation?.lng && (
+            <iframe src={mapUrl(geolocation)} />
+          )}
+        </div>
+      </div>
+    </SectionBlock>
 
-        <SectionBlock>
-          <Heading type="h2">Associated company/contact</Heading>
-          <Paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit. This text is not fetched from
-            Sanity.
-          </Paragraph>
-        </SectionBlock>
+    <SectionBlock>
+      <Heading type="h2">Attendee details</Heading>
+      <Paragraph>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+        dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. This text is not fetched from Sanity.
+      </Paragraph>
+    </SectionBlock>
 
-        <SectionBlock noBackground>
-          <Paragraph>
-            <Link href="#">{'See program for this venue ->'}</Link>
-          </Paragraph>
-        </SectionBlock>
-      </main>
-    </GridWrapper>
-  </>
+    <SectionBlock>
+      <Heading type="h2">Associated company/contact</Heading>
+      <Paragraph>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+        dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. This text is not fetched from Sanity.
+      </Paragraph>
+    </SectionBlock>
+
+    <SectionBlock noBackground>
+      <Paragraph>
+        <Link href="#">{'See program for this venue ->'}</Link>
+      </Paragraph>
+    </SectionBlock>
+  </GridWrapper>
 );
 
 export async function getServerSideProps({ params: { slug } }) {

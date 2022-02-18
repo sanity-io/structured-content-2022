@@ -3,7 +3,6 @@ import Image from 'next/image';
 import client from '../../lib/sanity.server';
 import SectionBlock from '../../components/SectionBlock';
 import Heading from '../../components/Heading';
-import Nav from '../../components/Nav';
 import { imageUrlFor } from '../../lib/sanity';
 import TextBlock from '../../components/TextBlock';
 import { Session } from '../../types/Session';
@@ -44,57 +43,50 @@ const Speakers = ({
     },
   },
 }: SpeakerProps) => (
-  <>
-    <header>
-      <Nav />
-    </header>
-    <GridWrapper>
-      <main>
-        <SectionBlock>
-          <div className={speakerStyles.container}>
-            <div>
-              <Heading>{name}</Heading>
-              <div>{title}</div>
-              <div>
-                <a
-                  href={`https://twitter.com/${twitter}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {twitter}
-                </a>
-              </div>
-            </div>
-            <Image
-              src={imageUrlFor(photo).size(200, 200).url()}
-              alt={name}
-              width={200}
-              height={200}
-            />
-          </div>
-        </SectionBlock>
-
-        <SectionBlock>
-          <TextBlock value={bio} />
-        </SectionBlock>
-
-        <Sessions sessions={sessions} />
-
-        <SectionBlock noBackground>
+  <GridWrapper>
+    <SectionBlock>
+      <div className={speakerStyles.container}>
+        <div>
+          <Heading>{name}</Heading>
+          <div>{title}</div>
           <div>
-            <Link href={`/speakers`}>
-              <a>All speakers</a>
-            </Link>
+            <a
+              href={`https://twitter.com/${twitter}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {twitter}
+            </a>
           </div>
-          <div>
-            <Link href={`/program`}>
-              <a>See full program</a>
-            </Link>
-          </div>
-        </SectionBlock>
-      </main>
-    </GridWrapper>
-  </>
+        </div>
+        <Image
+          src={imageUrlFor(photo).size(200, 200).url()}
+          alt={name}
+          width={200}
+          height={200}
+        />
+      </div>
+    </SectionBlock>
+
+    <SectionBlock>
+      <TextBlock value={bio} />
+    </SectionBlock>
+
+    <Sessions sessions={sessions} />
+
+    <SectionBlock noBackground>
+      <div>
+        <Link href={`/speakers`}>
+          <a>All speakers</a>
+        </Link>
+      </div>
+      <div>
+        <Link href={`/program`}>
+          <a>See full program</a>
+        </Link>
+      </div>
+    </SectionBlock>
+  </GridWrapper>
 );
 
 export async function getServerSideProps({ params: { slug } }) {
