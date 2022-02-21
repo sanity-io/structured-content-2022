@@ -7,7 +7,7 @@ import Heading from '../components/Heading';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import TextBlock from '../components/TextBlock';
 import GridWrapper from '../components/GridWrapper';
-import VenueNames from "../components/VenueNames";
+import VenueNames from '../components/VenueNames';
 
 const QUERY = groq`
   {
@@ -50,15 +50,9 @@ const About = ({
   data: {
     venues,
     about: { name, sections },
-    conferenceLocations: {
-      sections: conferenceLocationSections
-    },
-    codeOfConduct: {
-      sections: codeOfConductSections
-    },
-    sponsorship: {
-      sections: sponsorshipSections
-    },
+    conferenceLocations: { sections: conferenceLocationSections },
+    codeOfConduct: { sections: codeOfConductSections },
+    sponsorship: { sections: sponsorshipSections },
   },
 }: AboutProps) => (
   <GridWrapper>

@@ -1,5 +1,5 @@
 import { Venue } from '../../types/Venue';
-import { getEntityPath } from "../../util/entityPaths";
+import { getEntityPath } from '../../util/entityPaths';
 import styles from './VenueNames.module.css';
 
 interface VenueNamesProps {

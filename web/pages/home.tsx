@@ -1,8 +1,8 @@
 import client from '../lib/sanity.server';
 import { Section } from '../types/Section';
 import { Sponsor } from '../types/Sponsor';
-import { Venue } from "../types/Venue";
-import { RichTextSection } from "../types/RichTextSection";
+import { Venue } from '../types/Venue';
+import { RichTextSection } from '../types/RichTextSection';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
@@ -11,9 +11,9 @@ import Sponsors from '../pageResources/home/Sponsors';
 import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
 import NavBlock from '../components/NavBlock';
-import VenueNames from "../components/VenueNames";
-import PlaceholderImage from "../components/PlaceholderImage";
-import styles from "../pageResources/home/home.module.css";
+import VenueNames from '../components/VenueNames';
+import PlaceholderImage from '../components/PlaceholderImage';
+import styles from '../pageResources/home/home.module.css';
 
 const QUERY = `
   {
@@ -54,13 +54,7 @@ interface HomeProps {
 
 const Home = ({
   data: {
-    home: {
-      name,
-      startDate,
-      endDate,
-      description,
-      valueProposition,
-    },
+    home: { name, startDate, endDate, description, valueProposition },
     sponsors,
     sponsorship,
     venues,
@@ -87,7 +81,7 @@ const Home = ({
     </div>
 
     <SectionBlock className={styles.centered}>
-      <PlaceholderImage width={406} height={370}  />
+      <PlaceholderImage width={406} height={370} />
       <div>
         <TextBlock value={valueProposition} />
       </div>

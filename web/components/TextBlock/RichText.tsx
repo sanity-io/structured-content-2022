@@ -1,7 +1,7 @@
 import { TextBlock } from './TextBlock';
 import SectionBlock from '../SectionBlock';
 import Heading from '../Heading';
-import { RichTextSection } from "../../types/RichTextSection";
+import { RichTextSection } from '../../types/RichTextSection';
 
 interface RichTextProps {
   value: RichTextSection;

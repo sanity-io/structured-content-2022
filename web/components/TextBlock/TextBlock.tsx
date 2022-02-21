@@ -10,7 +10,7 @@ import { Block } from './Block';
 import { Venue } from './Venue';
 import { QuestionAndAnswerCollection } from './QuestionAndAnswerCollection';
 import { TextAndImage } from './TextAndImage';
-import Paragraph from "../Paragraph";
+import Paragraph from '../Paragraph';
 
 const components: Partial<PortableTextComponents> = {
   types: {
@@ -32,9 +32,8 @@ const components: Partial<PortableTextComponents> = {
     ),
   },
   block: {
-    normal: ({ children }) =>
-      <Paragraph>{children}</Paragraph>,
-  }
+    normal: ({ children }) => <Paragraph>{children}</Paragraph>,
+  },
 };
 
 interface TextBlockProps {
