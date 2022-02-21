@@ -68,17 +68,17 @@ const Home = ({
     schedule,
   },
 }: HomeProps) => (
-  <GridWrapper>
-    <ConferenceHeader
-      name={name}
-      startDate={startDate}
-      endDate={endDate}
-      description={description}
-    />
-
-    <NavBlock />
-
+  <>
     <GridWrapper>
+      <ConferenceHeader
+        name={name}
+        startDate={startDate}
+        endDate={endDate}
+        description={description}
+      />
+
+      <NavBlock />
+
       <VenueNames venues={venues} />
     </GridWrapper>
 
@@ -112,7 +112,7 @@ const Home = ({
         <ConferenceUpdatesForm />
       </div>
     </SectionBlock>
-  </GridWrapper>
+  </>
 );
 
 export async function getStaticProps() {

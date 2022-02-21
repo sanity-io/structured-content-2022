@@ -9,5 +9,13 @@
 }
 
 .h2 {
-  font-size: 1.5rem;
+  font: var(--font-display-xs);
+  margin-bottom: 18px;
+}
+
+@media (--medium-up) {
+  .h2 {
+    font: var(--font-display-base);
+    margin-bottom: 30px;
+  }
 }

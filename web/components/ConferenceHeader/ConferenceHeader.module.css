@@ -15,6 +15,11 @@
   row-gap: 24px;
 }
 
+.dates,
+.description {
+  margin: 0;
+}
+
 @media (--medium-up) {
   .root {
     margin: 32px 0 96px;
