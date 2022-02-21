@@ -30,9 +30,7 @@ const QUERY = `
     },
     "sponsorship": *[_id == "e629b448-75d1-497a-96be-86e5464ad5b2"],
     "venues": *[_type == "venue"],
-    "frontpage": *[_id == "229058a3-6067-4f8d-b6e1-c59db187d2a8"] {
-      sections[0] 
-    },
+    "broadcastInfo": *[_id == "229058a3-6067-4f8d-b6e1-c59db187d2a8"].sections[0],
     "schedule": *[_id == "5a574e94-5423-4e83-bbf3-3a2f83a5c88b"].sections[0]
   }`;
 
@@ -49,9 +47,7 @@ interface HomeProps {
     sponsors: Sponsor[];
     sponsorship: RichTextSection[];
     venues: Venue[];
-    frontpage: {
-      sections: RichTextSection[]
-    }[];
+    broadcastInfo: RichTextSection[];
     schedule: RichTextSection[];
   };
 }
@@ -68,7 +64,7 @@ const Home = ({
     sponsors,
     sponsorship,
     venues,
-    frontpage,
+    broadcastInfo,
     schedule,
   },
 }: HomeProps) => (
@@ -87,7 +83,7 @@ const Home = ({
     </GridWrapper>
 
     <div className={styles.centered}>
-      <TextBlock value={frontpage[0].sections} />
+      <TextBlock value={broadcastInfo} />
     </div>
 
     <SectionBlock className={styles.centered}>
