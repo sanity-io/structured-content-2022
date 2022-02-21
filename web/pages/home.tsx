@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import client from '../lib/sanity.server';
 import { Section } from '../types/Section';
 import { Sponsor } from '../types/Sponsor';
 import { Venue } from "../types/Venue";
+import { RichTextSection } from "../types/RichTextSection";
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
@@ -12,6 +12,8 @@ import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
 import NavBlock from '../components/NavBlock';
 import VenueNames from "../components/VenueNames";
+import PlaceholderImage from "../components/PlaceholderImage";
+import styles from "../pageResources/home/home.module.css";
 
 const QUERY = `
   {
@@ -26,7 +28,12 @@ const QUERY = `
       ...,
       sponsorship->
     },
-    "venues": *[_type == "venue"]
+    "sponsorship": *[_id == "e629b448-75d1-497a-96be-86e5464ad5b2"],
+    "venues": *[_type == "venue"],
+    "frontpage": *[_id == "229058a3-6067-4f8d-b6e1-c59db187d2a8"] {
+      sections[0] 
+    },
+    "schedule": *[_id == "5a574e94-5423-4e83-bbf3-3a2f83a5c88b"].sections[0]
   }`;
 
 interface HomeProps {
@@ -40,7 +47,12 @@ interface HomeProps {
       valueProposition: Section[];
     };
     sponsors: Sponsor[];
+    sponsorship: RichTextSection[];
     venues: Venue[];
+    frontpage: {
+      sections: RichTextSection[]
+    }[];
+    schedule: RichTextSection[];
   };
 }
 
@@ -54,7 +66,10 @@ const Home = ({
       valueProposition,
     },
     sponsors,
+    sponsorship,
     venues,
+    frontpage,
+    schedule,
   },
 }: HomeProps) => (
   <GridWrapper>
@@ -71,19 +86,35 @@ const Home = ({
       <VenueNames venues={venues} />
     </GridWrapper>
 
-    <SectionBlock>
-      <TextBlock value={valueProposition} />
+    <div className={styles.centered}>
+      <TextBlock value={frontpage[0].sections} />
+    </div>
+
+    <SectionBlock className={styles.centered}>
+      <PlaceholderImage width={406} height={370}  />
+      <div>
+        <TextBlock value={valueProposition} />
+      </div>
     </SectionBlock>
 
-    <SectionBlock>
-      <Heading type="h2">Sponsors</Heading>
+    <div className={styles.centered}>
+      <TextBlock value={schedule} />
+    </div>
+
+    <div className={styles.centered}>
+      <TextBlock value={sponsorship} />
+    </div>
+
+    <SectionBlock gray>
       <Sponsors sponsors={sponsors} />
-      <Link href="/sponsor">{'Become a Sponsor ->'}</Link>
     </SectionBlock>
 
-    <SectionBlock>
-      <Heading type="h2">Get conference updates</Heading>
-      <ConferenceUpdatesForm />
+    <SectionBlock className={styles.centered}>
+      <PlaceholderImage width={330} height={459} />
+      <div>
+        <Heading type="h2">Get conference updates</Heading>
+        <ConferenceUpdatesForm />
+      </div>
     </SectionBlock>
   </GridWrapper>
 );
