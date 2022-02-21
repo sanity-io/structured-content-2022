@@ -20,7 +20,7 @@
   --grid-half-gutter: 20px;
   --grid-medium-gutter: 32px; /* These could be set in @media if we drop IE11 */
   --grid-medium-half-gutter: 16px;
-  --grid-width: 1440px;
+  --grid-width: 1520px;
   --letter-spacing-body-base: -0.014em;
   --letter-spacing-body-large: -0.017em;
   --letter-spacing-body-xl: -0.019em;
