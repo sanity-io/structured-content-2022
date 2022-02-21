@@ -1,12 +1,10 @@
 import Link from 'next/link';
 import client from '../lib/sanity.server';
-import { Person } from '../types/Person';
 import { Section } from '../types/Section';
 import { Sponsor } from '../types/Sponsor';
 import { Venue } from "../types/Venue";
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
-import Speakers from '../pageResources/home/Speakers';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import TextBlock from '../components/TextBlock';
 import Sponsors from '../pageResources/home/Sponsors';
@@ -20,11 +18,8 @@ const QUERY = `
     "home": *[_type == "event"][0] {
       name,
       description,
-      tagline,
       startDate,
       endDate,
-      microcopy,
-      promotedSpeakers[]->,
       valueProposition,
     },
     "sponsors": *[_type == "sponsor"] {
@@ -42,14 +37,6 @@ interface HomeProps {
       tagline: string;
       startDate: string;
       endDate: string;
-      microcopy: {
-        _key: string;
-        key: string;
-        action: string;
-        text: string;
-        type: 'link';
-      }[];
-      promotedSpeakers: Person[];
       valueProposition: Section[];
     };
     sponsors: Sponsor[];
@@ -61,12 +48,9 @@ const Home = ({
   data: {
     home: {
       name,
-      tagline,
       startDate,
       endDate,
       description,
-      microcopy,
-      promotedSpeakers,
       valueProposition,
     },
     sponsors,
@@ -83,32 +67,12 @@ const Home = ({
 
     <NavBlock />
 
-    <SectionBlock>
-      {microcopy.map(({ key, action, text }) => (
-        <Link key={key} href={action}>
-          {text}
-        </Link>
-      ))}
-    </SectionBlock>
-
     <GridWrapper>
       <VenueNames venues={venues} />
     </GridWrapper>
 
     <SectionBlock>
       <TextBlock value={valueProposition} />
-    </SectionBlock>
-
-    <SectionBlock>
-      <Speakers speakers={promotedSpeakers} />
-    </SectionBlock>
-
-    <SectionBlock>
-      <Heading type="h2">
-        <Link href="/program">
-          <a>{'Program ->'}</a>
-        </Link>
-      </Heading>
     </SectionBlock>
 
     <SectionBlock>
