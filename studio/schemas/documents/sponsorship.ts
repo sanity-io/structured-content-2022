@@ -15,8 +15,19 @@ export default {
       name: "available",
       type: "number",
       title: "Available sponsorships",
-      description: "When 0, the sponsorship is sold out.",
+      description: "Sets the upper limit of sponsors on this tier.",
       validation: (Rule) => Rule.min(0),
+    },
+    {
+      name: "sponsors",
+      type: "array",
+      title: "Sponsors",
+      of: [{ type: "sponsor" }],
+      validation: (Rule) => [
+        Rule.unique(),
+        Rule.min(1),
+        Rule.max(Rule.valueOfField("available")),
+      ],
     },
     {
       name: "price",
