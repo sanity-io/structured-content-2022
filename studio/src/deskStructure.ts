@@ -134,15 +134,6 @@ export default () =>
           S.list()
             .items([
               S.documentTypeListItem("sponsorship").title("Sponsorships"),
-              createDeskHierarchy({
-                title: "Sponsorship tiers",
-
-                // The hierarchy will be stored in this document ID 👇
-                documentId: "sponsorship-tiers",
-
-                // Document types editors should be able to include in the hierarchy
-                referenceTo: ["sponsorship"],
-              }),
             ])
             .title("Sponsorships")
         ),
