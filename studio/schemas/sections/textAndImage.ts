@@ -1,3 +1,4 @@
+import { toPlainText } from "@portabletext/react";
 export default {
   name: "textAndImage",
   title: "Text and Image",
@@ -7,6 +8,14 @@ export default {
       title: "title",
       subtitle: "subtitle",
       media: "image",
+      text: "text",
+    },
+    prepare({ title, subtitle, text = [], media }) {
+      return {
+        title: title || subtitle || toPlainText(text),
+        subtitle: "Text and image",
+        media,
+      };
     },
   },
   fields: [
