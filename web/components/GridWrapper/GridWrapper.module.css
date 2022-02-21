@@ -6,6 +6,12 @@
 
 @media (--medium-up) {
   .container {
+    padding: 0 var(--grid-medium-gutter);
+  }
+}
+
+@media (--large-up) {
+  .container {
     padding: 0 var(--grid-gutter);
   }
 }
