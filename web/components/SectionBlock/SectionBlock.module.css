@@ -1,9 +1,12 @@
 .sectionBlock {
-  background: #eee;
+  background: var(--color-brand-yellow-light);
   padding: 1rem;
-  margin: 1rem;
-  max-width: 800px;
-  border-radius: 4px;
+  border-radius: 12px;
+  margin: 1rem 1rem var(--spacing-large);
+}
+
+.sectionBlock--gray {
+  background: var(--color-ui-gray-100);
 }
 
 .sectionBlock--noBackground {
