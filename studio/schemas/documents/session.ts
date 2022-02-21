@@ -15,9 +15,39 @@ export default {
       name: "slug",
       type: "slug",
       title: "Slug",
+      validation: (Rule) => Rule.required(),
       options: {
         source: "title",
         maxLength: 96,
+      },
+    },
+    {
+      name: "events",
+      type: "array",
+      title: "Events",
+      description: "Which event(s) this session is part of",
+      validation: (Rule) => Rule.unique(),
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "event" }],
+        },
+      ],
+    },
+    {
+      name: "type",
+      type: "string",
+      title: "Type",
+      description: "The type of session",
+      initialValue: "talk",
+      options: {
+        list: [
+          { value: "talk", title: "Talk" },
+          { value: "panel", title: "Panel" },
+          { value: "break", title: "Break" },
+          { value: "social", title: "Social" },
+          { value: "workshop", title: "Workshop" },
+        ],
       },
     },
     {

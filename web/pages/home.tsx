@@ -12,6 +12,7 @@ import TextBlock from '../components/TextBlock';
 import Sponsors from '../pageResources/home/Sponsors';
 import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
+import NavBlock from '../components/NavBlock';
 import VenueNames from "../components/VenueNames";
 
 const QUERY = `
@@ -79,6 +80,9 @@ const Home = ({
       endDate={endDate}
       description={description}
     />
+
+    <NavBlock />
+
     <SectionBlock>
       {microcopy.map(({ key, action, text }) => (
         <Link key={key} href={action}>
@@ -87,7 +91,9 @@ const Home = ({
       ))}
     </SectionBlock>
 
-    <VenueNames venues={venues} />
+    <GridWrapper>
+      <VenueNames venues={venues} />
+    </GridWrapper>
 
     <SectionBlock>
       <TextBlock value={valueProposition} />

@@ -1,5 +1,5 @@
-import { DocumentIcon } from "@sanity/icons";
-import * as sections from "../objects";
+import { DocumentIcon, SyncIcon } from "@sanity/icons";
+import * as sections from "../sections";
 export default {
   name: "page",
   title: "Pages",
@@ -7,13 +7,13 @@ export default {
   icon: DocumentIcon,
   preview: {
     select: {
-      title: "internalTitle",
+      title: "internalName",
     },
   },
   fields: [
     {
-      name: "internalTitle",
-      title: "Interal title",
+      name: "internalName",
+      title: "Interal name",
       type: "string",
       description: "For internal use.",
     },
@@ -28,11 +28,15 @@ export default {
       type: "array",
       title: "Sections",
       of: [
-        ...Object.keys(sections).map((type) => ({ type })),
         {
           type: "reference",
+          title: "Shared section",
+          icon: SyncIcon,
           to: [{ type: "sharedSections" }],
         },
+        { type: "figure" },
+        { type: "richText" },
+        ...Object.keys(sections).map((type) => ({ type })),
       ],
     },
   ],
