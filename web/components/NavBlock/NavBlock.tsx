@@ -24,6 +24,7 @@ export const NavBlock = () => (
   <nav className={styles.nav}>
     <ul className={styles.list}>
       <FakeItem mobile />
+
       <li className={styles.item}>
         <Link href="/program">
           <a className={styles.link}>Program</a>
