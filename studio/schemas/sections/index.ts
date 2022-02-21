@@ -11,3 +11,5 @@ export { default as mailchimp } from "./mailchimp";
 export { default as simpleCallToAction } from "../sections/simpleCallToAction";
 export { default as speakers } from "../sections/speakers";
 export { default as sessions } from "../sections/sessions";
+export { default as venues } from "../sections/venues";
+export { default as sponsors } from "../sections/sponsors";
