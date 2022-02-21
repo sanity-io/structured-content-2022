@@ -62,6 +62,18 @@ export default {
       group: "messaging",
     },
     {
+      name: "startDate",
+      type: "datetime",
+      title: "Start date",
+      group: "practical",
+    },
+    {
+      name: "endDate",
+      type: "datetime",
+      title: "End date",
+      group: "practical",
+    },
+    {
       name: "promotedSpeakers",
       type: "array",
       title: "Promoted speakers",
@@ -90,16 +102,28 @@ export default {
       ],
     },
     {
-      name: "startDate",
-      type: "datetime",
-      title: "Start date",
+      name: "sponsorships",
+      type: "array",
+      title: "Sponsorships(s)",
+      description:
+        "Sponsorship packages for the event. Remember to put them in an intentional order",
       group: "practical",
-    },
-    {
-      name: "endDate",
-      type: "datetime",
-      title: "End date",
-      group: "practical",
+      validation: (Rule) => Rule.unique(),
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "sponsorship" }],
+          options: {
+            // Filter out if the sponsorship is already in the event
+            filter: ({ parent }) => ({
+              filter: "!(_id in $current)",
+              params: {
+                current: parent?.map(({ _ref }) => _ref),
+              },
+            }),
+          },
+        },
+      ],
     },
     {
       name: "microcopy",
