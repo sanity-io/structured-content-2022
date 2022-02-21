@@ -1,22 +1,94 @@
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--color-brand-yellow-light);
+  margin: 80px 0;
+}
+
+.image {
+  display: none;
+}
+
+.formContents {
+  position: relative;
 }
 
 .emailInput {
-  height: 1rem;
-  padding: 1rem;
-  margin-right: 0.5rem;
+  border: none;
+  /* Design sketch has left padding 24px but then the placeholder won't fit */
+  padding: 19.5px 56px 19.5px 10px;
+  width: 100%;
 }
 
 .submitButton {
-  background: #00a0d2;
-  color: white;
-  padding: 1rem;
-  border: 1px solid blue;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: none;
+  background: var(--color-brand-orange);
+  border-radius: 4px;
+  min-width: 48px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background: var(--color-brand-yellow);
+}
+
+.submitButton:active {
+  background: var(--color-brand-yellow-light);
 }
 
 .emailParagraph {
-  padding-top: 1rem;
+  margin: 24px 0 0;
+  font: var(--font-ui-sm-medium);
+  letter-spacing: var(--letter-spacing-ui-sm);
+}
+
+@media (--small-up) {
+  .emailInput {
+    padding-left: 24px;
+  }
+}
+
+@media (--medium-up) {
+  .container {
+    padding: 64px 48px;
+    margin: 96px 0;
+  }
+
+  .formContents {
+    /* Simplification due to time constraints. Sketch has it cover exactly 4
+     * columns, but on desktop it doesn't match the grid columns anyway, so it
+     * seems somewhat arbitrary.
+     */
+    max-width: 19em;
+    margin: 0 auto;
+  }
+}
+
+@media (--large-up) {
+  .container {
+    text-align: left;
+    padding: 116px 0;
+    margin: 128px 0;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+  }
+
+  .image {
+    display: block;
+    grid-column: 2 / span 4;
+  }
+
+  .mainContents {
+    grid-column: 7 / span 4;
+  }
+
+  .formContents {
+    max-width: 100%;
+    margin: 0;
+  }
 }
