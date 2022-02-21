@@ -33,11 +33,5 @@ export default {
       title: "Image",
       type: "image",
     },
-    {
-      name: "sponsorship",
-      title: "Sponsorship",
-      type: "reference",
-      to: [{ type: "sponsorship" }],
-    },
   ],
 };
