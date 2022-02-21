@@ -1,7 +1,7 @@
 import { Slug } from './Slug';
 
 export type Venue = {
-  title: string;
+  name: string;
   _type: 'venue';
   geolocation?: {
     _type: 'geopoint';

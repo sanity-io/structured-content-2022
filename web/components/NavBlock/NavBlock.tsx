@@ -9,16 +9,17 @@ interface FakeItemProps {
   desktop?: boolean;
 }
 
-const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) =>
+const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) => (
   <li
     className={clsx(
-     divider ? styles.divider : styles.fakeItem,
+      divider ? styles.divider : styles.fakeItem,
       mobile && styles.mobile,
       tablet && styles.tablet,
       desktop && styles.desktop
     )}
     aria-hidden="true"
   />
+);
 
 export const NavBlock = () => (
   <nav className={styles.nav}>

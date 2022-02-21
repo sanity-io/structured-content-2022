@@ -1,3 +1,9 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .emailInput {
   height: 1rem;
   padding: 1rem;

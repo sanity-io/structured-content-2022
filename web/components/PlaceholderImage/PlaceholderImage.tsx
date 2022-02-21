@@ -4,7 +4,11 @@ interface PlaceholderImageProps {
   height: number;
 }
 
-export const PlaceholderImage = ({ width, height, ...otherProps }: PlaceholderImageProps) =>
+export const PlaceholderImage = ({
+  width,
+  height,
+  ...otherProps
+}: PlaceholderImageProps) => (
   // eslint-disable-next-line @next/next/no-img-element
   <img
     {...otherProps}
@@ -12,4 +16,5 @@ export const PlaceholderImage = ({ width, height, ...otherProps }: PlaceholderIm
     width={width}
     height={height}
     alt="Placeholder"
-  />;
+  />
+);

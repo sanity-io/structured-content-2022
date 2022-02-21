@@ -15,7 +15,7 @@ export const SectionBlock = forwardRef<HTMLDivElement, SectionBlockProps>(
         className,
         styles.sectionBlock,
         noBackground && styles['sectionBlock--noBackground'],
-        gray && styles['sectionBlock--gray'],
+        gray && styles['sectionBlock--gray']
       )}
       ref={ref}
     />
