@@ -1,6 +1,47 @@
 .venues {
+  text-align: center;
+  margin: 80px 0 48px;
 }
 
 .venue {
-  font: var(--font-display-lg);
+  display: inline-block;
+  font: var(--font-display-sm);
+}
+
+.link {
+  color: var(--color-brand-black);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.venue:nth-child(n + 2)::before {
+  content: '•';
+  margin: 0 6px;
+}
+
+@media (--medium-up) {
+  .venues {
+    margin: 96px 0 64px;
+  }
+
+  .venue {
+    font: var(--font-display-lg);
+  }
+
+  .venue:nth-child(n + 2)::before {
+    margin: 0 10px;
+  }
+}
+
+@media (--large-up) {
+  .venues {
+    margin: 128px 0 80px;
+  }
+
+  .venue {
+    font: var(--font-display-xl);
+  }
 }
