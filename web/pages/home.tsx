@@ -106,11 +106,7 @@ const Home = ({
     </SectionBlock>
 
     <SectionBlock className={styles.centered}>
-      <PlaceholderImage width={330} height={459} />
-      <div>
-        <Heading type="h2">Get conference updates</Heading>
-        <ConferenceUpdatesForm />
-      </div>
+      <ConferenceUpdatesForm />
     </SectionBlock>
   </GridWrapper>
 );
