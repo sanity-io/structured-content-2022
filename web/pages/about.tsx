@@ -1,34 +1,46 @@
-import Link from 'next/link';
+import { groq } from 'next-sanity';
 import client from '../lib/sanity.server';
+import { RichTextSection } from '../types/RichTextSection';
+import { Venue } from '../types/Venue';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
-import Paragraph from '../components/Paragraph';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
-import { groq } from 'next-sanity';
 import TextBlock from '../components/TextBlock';
-import { RichTextSection } from '../types/RichTextSection';
 import GridWrapper from '../components/GridWrapper';
-import { getEntityPath } from '../util/entityPaths';
-import { Venue } from '../types/Venue';
+import VenueNames from "../components/VenueNames";
 
 const QUERY = groq`
   {
-    "event": *[_type == "event"][0] {
-      venues[]->
-    },
+    "venues": *[_type == "venue"],
     "about": *[_id == "4ab00530-7310-4f04-8f90-8be04e747eaa"][0] {
       name,
-      sections
-    }
+      sections[0]
+    },
+    "conferenceLocations": *[_id == "4ab00530-7310-4f04-8f90-8be04e747eaa"][0] {
+      sections[2]
+    },
+    "codeOfConduct": *[_id == "4ab00530-7310-4f04-8f90-8be04e747eaa"][0] {
+      sections[3]
+    },
+    "sponsorship": *[_id == "4ab00530-7310-4f04-8f90-8be04e747eaa"][0] {
+      sections[4]->
+    },
   }`;
 
 interface AboutProps {
   data: {
-    event: {
-      venues: Venue[];
-    };
+    venues: Venue[];
     about: {
       name: string;
+      sections: RichTextSection[];
+    };
+    conferenceLocations: {
+      sections: RichTextSection[];
+    };
+    codeOfConduct: {
+      sections: RichTextSection[];
+    };
+    sponsorship: {
       sections: RichTextSection[];
     };
   };
@@ -36,8 +48,17 @@ interface AboutProps {
 
 const About = ({
   data: {
-    event: { venues },
+    venues,
     about: { name, sections },
+    conferenceLocations: {
+      sections: conferenceLocationSections
+    },
+    codeOfConduct: {
+      sections: codeOfConductSections
+    },
+    sponsorship: {
+      sections: sponsorshipSections
+    },
   },
 }: AboutProps) => (
   <GridWrapper>
@@ -45,59 +66,18 @@ const About = ({
       <Heading>{name}</Heading>
     </SectionBlock>
 
-    <SectionBlock>
-      <TextBlock value={sections} />
-    </SectionBlock>
-
-    <SectionBlock noBackground>
-      <Paragraph>
-        <Link href="#">Code of Conduct</Link>
-      </Paragraph>
-    </SectionBlock>
-
-    <SectionBlock noBackground>
-      <Heading type="h2">Conference Locations 2022</Heading>
-      {venues.map((venue) => (
-        <Link href={getEntityPath(venue)} key={venue.title}>
-          <a>
-            <SectionBlock style={{ margin: '1rem 0' }}>
-              {venue.title}
-            </SectionBlock>
-          </a>
-        </Link>
-      ))}
-
-      <Heading type="h3">Virtual option info</Heading>
-      <Paragraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-        dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. This text is not fetched from Sanity.
-      </Paragraph>
-    </SectionBlock>
+    <TextBlock value={sections} />
 
     <SectionBlock>
-      <Heading type="h2">Additional info</Heading>
-      <Paragraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-        dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. This text is not fetched from Sanity.
-      </Paragraph>
+      <VenueNames venues={venues} />
+      <TextBlock value={conferenceLocationSections} />
     </SectionBlock>
 
-    <SectionBlock>
-      <Heading type="h2">Sponsor info</Heading>
-      <Paragraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-        dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. This text is not fetched from Sanity.
-      </Paragraph>
-      <Heading type="h3">
-        <Link href="#">Become a Sponsor</Link>
-      </Heading>
-    </SectionBlock>
+    <TextBlock value={codeOfConductSections} />
+
+    <TextBlock value={sponsorshipSections} />
 
     <SectionBlock>
-      <Heading type="h2">Get conference updates</Heading>
       <ConferenceUpdatesForm />
     </SectionBlock>
   </GridWrapper>
