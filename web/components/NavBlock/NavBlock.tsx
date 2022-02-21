@@ -23,17 +23,18 @@ const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) =>
 export const NavBlock = () => (
   <nav className={styles.nav}>
     <ul className={styles.list}>
+      <FakeItem mobile />
       <li className={styles.item}>
         <Link href="/program">
           <a className={styles.link}>Program</a>
         </Link>
       </li>
 
-      <FakeItem mobile tablet desktop />
+      <FakeItem tablet desktop />
       <FakeItem tablet desktop />
       <FakeItem desktop />
       <FakeItem divider mobile tablet desktop />
-      <FakeItem mobile tablet desktop />
+      <FakeItem tablet desktop />
       <FakeItem tablet desktop />
       <FakeItem desktop />
 
@@ -43,7 +44,9 @@ export const NavBlock = () => (
         </Link>
       </li>
 
+      <FakeItem mobile />
       <FakeItem divider mobile tablet desktop />
+      <FakeItem mobile />
 
       <li className={styles.item}>
         <Link href="/about">
@@ -51,9 +54,8 @@ export const NavBlock = () => (
         </Link>
       </li>
 
-      <FakeItem mobile tablet desktop />
+      <FakeItem tablet desktop />
       <FakeItem divider mobile />
-      <FakeItem mobile />
 
       <li className={styles.item}>
         <Link href="/tickets">
@@ -61,7 +63,7 @@ export const NavBlock = () => (
         </Link>
       </li>
 
-      <FakeItem desktop />
+      <FakeItem desktop mobile />
     </ul>
   </nav>
 );
