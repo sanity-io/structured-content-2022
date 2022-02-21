@@ -42,8 +42,9 @@ body.main-menu-open {
 }
 
 p,
-ul {
-  margin: 0;
+ul,
+ol {
+  margin: 0 0 1em;
   padding: 0;
 }
 
