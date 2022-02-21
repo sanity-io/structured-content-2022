@@ -38,20 +38,5 @@ export default {
         },
       ],
     },
-    {
-      name: "heading",
-      type: "string",
-      title: "Heading",
-    },
-    {
-      name: "subheading",
-      type: "string",
-      title: "Subheading",
-    },
-    {
-      name: "description",
-      type: "simpleBlockContent",
-      title: "Description",
-    },
   ],
 };
