@@ -49,6 +49,7 @@ ol {
 }
 
 a {
+  color: var(--color-sanity-blue);
   text-decoration: underline;
 }
 
