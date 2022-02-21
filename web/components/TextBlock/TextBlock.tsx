@@ -10,7 +10,6 @@ import { Block } from './Block';
 import { Venue } from './Venue';
 import { QuestionAndAnswerCollection } from './QuestionAndAnswerCollection';
 import { TextAndImage } from './TextAndImage';
-import Paragraph from '../Paragraph';
 
 const components: Partial<PortableTextComponents> = {
   types: {
@@ -30,9 +29,6 @@ const components: Partial<PortableTextComponents> = {
     internalLink: ({ text, value }) => (
       <Link href={getEntityPath(value.reference)}>{text}</Link>
     ),
-  },
-  block: {
-    normal: ({ children }) => <Paragraph>{children}</Paragraph>,
   },
 };
 
