@@ -28,6 +28,7 @@ export default {
       name: "slug",
       title: "Slug",
       type: "slug",
+      validation: (Rule) => Rule.required(),
       options: {
         source: "name",
         maxLength: 96,
@@ -37,6 +38,12 @@ export default {
       name: "title",
       title: "Profesional title",
       type: "string",
+    },
+    {
+      name: "company",
+      title: "Company",
+      type: "string",
+      description: "Company or affiliation",
     },
     {
       name: "pronouns",
