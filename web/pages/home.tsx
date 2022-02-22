@@ -4,7 +4,6 @@ import { Sponsor } from '../types/Sponsor';
 import { Venue } from '../types/Venue';
 import { RichTextSection } from '../types/RichTextSection';
 import SectionBlock from '../components/SectionBlock';
-import Heading from '../components/Heading';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import TextBlock from '../components/TextBlock';
 import Sponsors from '../pageResources/home/Sponsors';
@@ -17,7 +16,7 @@ import styles from '../pageResources/home/home.module.css';
 
 const QUERY = `
   {
-    "home": *[_type == "event"][0] {
+    "home": *[_id == "aad77280-6394-4090-afad-1c0f2a0416c6"][0] {
       name,
       description,
       startDate,
@@ -99,7 +98,14 @@ const Home = ({
       <Sponsors sponsors={sponsors} />
     </SectionBlock>
 
-    <ConferenceUpdatesForm />
+    <ConferenceUpdatesForm
+      value={{
+        buttonText: 'Sign up',
+        heading: 'Get conference updates',
+        id: '3e99a07b5e03ed5b07a234a57',
+      }}
+      {...({} as any)}
+    />
   </>
 );
 

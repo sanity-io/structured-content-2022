@@ -10,6 +10,8 @@ import { Block } from './Block';
 import { Venue } from './Venue';
 import { QuestionAndAnswerCollection } from './QuestionAndAnswerCollection';
 import { TextAndImage } from './TextAndImage';
+import SimpleCallToAction from './SimpleCallToAction';
+import ConferenceUpdatesForm from '../ConferenceUpdatesForm';
 
 const components: Partial<PortableTextComponents> = {
   types: {
@@ -18,8 +20,10 @@ const components: Partial<PortableTextComponents> = {
     venue: Venue,
     questionAndAnswerCollection: QuestionAndAnswerCollection,
     block: Block,
-    textAndImage: TextAndImage,
+    textAndImageSection: TextAndImage,
     sharedSections: SharedSections,
+    simpleCallToAction: SimpleCallToAction,
+    mailchimpSection: ConferenceUpdatesForm,
   },
   marks: {
     bold: ({ children }) => <strong>{children}</strong>,

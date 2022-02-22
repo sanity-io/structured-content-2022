@@ -13,6 +13,7 @@ export const RichText = ({ value }: RichTextProps) => (
     <div className={styles.container}>
       <div className={styles.content}>
         {value.heading && <Heading type="h2">{value.heading}</Heading>}
+        {value.subheading && <Heading type="h3">{value.subheading}</Heading>}
         <TextBlock value={value.content} />
       </div>
     </div>
