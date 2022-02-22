@@ -43,6 +43,7 @@ body.main-menu-open {
 
 h1 {
   font: var(--font-display-base);
+  margin: 0;
 }
 
 p,
