@@ -3,6 +3,12 @@ import client from '../lib/sanity.server';
 import { Section } from '../types/Section';
 import Hero from '../components/Hero';
 import TextBlock from '../components/TextBlock';
+import Heading from '../components/Heading';
+import GridWrapper from '../components/GridWrapper';
+import ConferenceHeader from '../components/ConferenceHeader';
+import NavBlock from '../components/NavBlock';
+import VenueNames from '../components/VenueNames';
+import { Venue } from '../types/Venue';
 
 const QUERY = groq`
   {
@@ -11,11 +17,27 @@ const QUERY = groq`
       page-> {
         name,
         sections[] {
-          _type == 'reference' => @->,
+          _type == 'reference' => @-> {
+            sections[] {
+              ...,
+              content[] {
+                ...,
+                reference->,
+              },
+            },
+            ...,
+          },
           _type != 'reference' => @,
         }
       }
-    }
+    },
+    "home": *[_id == "aad77280-6394-4090-afad-1c0f2a0416c6"][0] {
+      name,
+      startDate,
+      endDate,
+      description,
+    },
+    "venues": *[_type == "venue"],
   }`;
 
 interface RouteProps {
@@ -26,7 +48,15 @@ interface RouteProps {
         sections: Section[];
       };
     };
+    home: {
+      name: string;
+      startDate: string;
+      endDate: string;
+      description: string;
+    };
+    venues: Venue[];
   };
+  slug: string;
 }
 
 const Route = ({
@@ -34,23 +64,38 @@ const Route = ({
     route: {
       page: { name, sections },
     },
+    home: { name: homeName, startDate, endDate, description },
+    venues,
   },
-}: RouteProps) => {
-  return (
-    <>
+  slug,
+}: RouteProps) => (
+  <>
+    {slug === '/' ? (
+      <GridWrapper>
+        <ConferenceHeader
+          name={homeName}
+          startDate={startDate}
+          endDate={endDate}
+          description={description}
+        />
+        <NavBlock />
+        <VenueNames venues={venues} />
+      </GridWrapper>
+    ) : (
       <Hero heading={name} />
-      <TextBlock value={sections} />
-    </>
-  );
-};
+    )}
+    <TextBlock value={sections} />
+  </>
+);
 
 export async function getServerSideProps({ params }) {
-  const data = await client.fetch(QUERY, { slug: params?.slug?.[0] || '/' });
+  const slug = params?.slug?.[0] || '/';
+  const data = await client.fetch(QUERY, { slug });
   if (!data?.route?.page) {
     return { notFound: true };
   }
 
-  return { props: { data } };
+  return { props: { data, slug } };
 }
 
 export default Route;

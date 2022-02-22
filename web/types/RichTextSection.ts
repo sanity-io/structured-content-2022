@@ -5,4 +5,5 @@ export type RichTextSection = {
   _type: 'richText';
   content: Section[];
   heading?: string;
+  subheading?: string;
 };
