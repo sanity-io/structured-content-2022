@@ -7,6 +7,10 @@ import styles from './RichText.module.css';
 
 interface RichTextProps {
   value: RichTextSection;
+  /* TODO: This is currently unused. Investigate if caller can set it based on
+   * some rules related to the section's index or similar (e.g. "the nth
+   * RichText section should have its background set")
+   */
   background?: boolean;
 }
 
