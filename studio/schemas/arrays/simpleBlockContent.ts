@@ -6,5 +6,8 @@ export default {
     {
       type: "block",
     },
+    {
+      type: "simpleCallToAction",
+    },
   ],
 };
