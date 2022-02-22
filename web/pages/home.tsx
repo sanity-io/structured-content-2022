@@ -99,9 +99,7 @@ const Home = ({
       <Sponsors sponsors={sponsors} />
     </SectionBlock>
 
-    <SectionBlock className={styles.centered}>
-      <ConferenceUpdatesForm />
-    </SectionBlock>
+    <ConferenceUpdatesForm />
   </>
 );
 

@@ -53,6 +53,11 @@ a {
   text-decoration: underline;
 }
 
+button,
+input {
+  font: inherit;
+}
+
 @media (--medium-up) {
   body.main-menu-open {
     overflow: auto;
