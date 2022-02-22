@@ -69,7 +69,7 @@ const Route = ({
   },
   slug,
 }: RouteProps) => (
-  <GridWrapper>
+  <>
     {slug === '/' ? (
       <GridWrapper>
         <ConferenceHeader
@@ -85,7 +85,7 @@ const Route = ({
       <Hero heading={name} />
     )}
     <TextBlock value={sections} />
-  </GridWrapper>
+  </>
 );
 
 export async function getServerSideProps({ params }) {
