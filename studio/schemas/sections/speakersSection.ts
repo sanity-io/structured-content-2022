@@ -1,7 +1,7 @@
 export default {
-  name: "sponsors",
+  name: "speakersSection",
   type: "object",
-  title: "Sponsors section",
+  title: "Speakers section",
   fields: [
     {
       name: "type",
@@ -10,16 +10,16 @@ export default {
       description: "",
       options: {
         list: [
-          { title: "All sponsors", value: "all" },
-          { title: "Highlighted sponsors", value: "highlighted" },
-          { title: "No sponsors", value: "none" },
+          { title: "All speakers", value: "all" },
+          { title: "Highlighted speakers", value: "highlighted" },
+          { title: "No speakers", value: "none" },
         ],
       },
     },
     {
-      name: "sponsors",
+      name: "speakers",
       type: "array",
-      title: "sponsor",
+      title: "Speakers",
       hidden: ({ parent }) => parent?.type !== "highlighted",
       of: [
         {
@@ -29,7 +29,7 @@ export default {
             // Just include people that's part of a session, and that hasn't been selected already
             filter: ({ parent }) => ({
               filter:
-                '_id in *[_type == "event"].sponsors[]._ref && !(_id in $current)',
+                '_id in *[_type == "session"].speakers[].person._ref && !(_id in $current)',
               params: {
                 current: parent?.map(({ _ref }) => _ref),
               },

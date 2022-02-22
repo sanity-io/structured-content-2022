@@ -1,11 +1,19 @@
+import { toPlainText } from "@portabletext/react";
 export default {
-  name: "article",
+  name: "articleSection",
   title: "Article",
   type: "object",
   preview: {
     select: {
-      title: "heading",
-      subtitle: "subheading",
+      heading: "heading",
+      subheading: "subheading",
+      content: "content",
+    },
+    prepare({ heading, subheading, content = [] }) {
+      return {
+        title: heading || subheading || toPlainText(content),
+        subtitle: "Rich text",
+      };
     },
   },
   description:
@@ -22,9 +30,9 @@ export default {
       title: "Subheading",
     },
     {
-      name: "text",
+      name: "content",
       type: "simpleBlockContent",
-      title: "Text",
+      title: "Content",
     },
   ],
 };

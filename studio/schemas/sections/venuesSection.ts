@@ -1,5 +1,5 @@
 export default {
-  name: "venues",
+  name: "venuesSection",
   type: "object",
   title: "Venues section",
   fields: [

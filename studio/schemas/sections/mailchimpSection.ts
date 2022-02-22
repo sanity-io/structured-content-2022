@@ -1,5 +1,5 @@
 export default {
-  name: "mailchimp",
+  name: "mailchimpSection",
   type: "object",
   title: "Mailchimp",
   description: "A form for subscribing to a Mailchimp list",

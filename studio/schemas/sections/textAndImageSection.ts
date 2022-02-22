@@ -1,6 +1,6 @@
 import { toPlainText } from "@portabletext/react";
 export default {
-  name: "textAndImage",
+  name: "textAndImageSection",
   title: "Text and Image",
   type: "object",
   preview: {

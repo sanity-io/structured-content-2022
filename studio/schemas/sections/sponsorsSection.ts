@@ -1,24 +1,7 @@
-const typeOptions = [
-  { title: "All sessions", value: "all" },
-  { title: "Highlighted sessions", value: "highlighted" },
-  { title: "No sessions", value: "none" },
-];
-
 export default {
-  name: "sessions",
+  name: "sponsorsSection",
   type: "object",
-  title: "Sessions section",
-  preview: {
-    select: {
-      type: "type",
-    },
-    prepare({ type }) {
-      return {
-        title: typeOptions.find(({ value }) => value === type)?.title,
-        subtitle: "Sessions section",
-      };
-    },
-  },
+  title: "Sponsors section",
   fields: [
     {
       name: "type",
@@ -26,22 +9,27 @@ export default {
       title: "Section type",
       description: "",
       options: {
-        list: typeOptions,
+        list: [
+          { title: "All sponsors", value: "all" },
+          { title: "Highlighted sponsors", value: "highlighted" },
+          { title: "No sponsors", value: "none" },
+        ],
       },
     },
     {
-      name: "sessions",
+      name: "sponsors",
       type: "array",
-      title: "Sessions list",
+      title: "sponsor",
       hidden: ({ parent }) => parent?.type !== "highlighted",
       of: [
         {
           type: "reference",
-          to: [{ type: "session" }],
+          to: [{ type: "person" }],
           options: {
             // Just include people that's part of a session, and that hasn't been selected already
             filter: ({ parent }) => ({
-              filter: "events != null && !(_id in $current)",
+              filter:
+                '_id in *[_type == "event"].sponsors[]._ref && !(_id in $current)',
               params: {
                 current: parent?.map(({ _ref }) => _ref),
               },
