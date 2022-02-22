@@ -3,7 +3,6 @@ import client from '../lib/sanity.server';
 import { Section } from '../types/Section';
 import Hero from '../components/Hero';
 import TextBlock from '../components/TextBlock';
-import Heading from '../components/Heading';
 import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
 import NavBlock from '../components/NavBlock';
@@ -27,7 +26,13 @@ const QUERY = groq`
             },
             ...,
           },
-          _type != 'reference' => @,
+          _type != 'reference' => @ {
+            ...,
+            content[] {
+              ...,
+              reference->,
+            },
+          },
         }
       }
     },

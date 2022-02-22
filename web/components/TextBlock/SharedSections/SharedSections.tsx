@@ -1,9 +1,10 @@
 import Image from 'next/image';
-import { imageUrlFor } from '../../lib/sanity';
-import Heading from '../Heading';
-import { RichText } from './RichText';
-import SimpleCallToAction from './SimpleCallToAction';
-import ConferenceUpdatesForm from '../ConferenceUpdatesForm';
+import { imageUrlFor } from '../../../lib/sanity';
+import ConferenceUpdatesForm from '../../ConferenceUpdatesForm';
+import Heading from '../../Heading';
+import RichText from '../RichText';
+import SimpleCallToAction from '../SimpleCallToAction';
+import VenuesSection from '../VenuesSection';
 
 const Figure = ({ value: { alt, asset } }) => (
   <Image
@@ -13,16 +14,6 @@ const Figure = ({ value: { alt, asset } }) => (
     alt={alt}
   />
 );
-
-const VenuesSection = ({ value: { type } }) => {
-  if (type !== 'all') {
-    console.error(`Unrecognized VenuesSection type: '${type}'`);
-    return null;
-  }
-
-  // TODO: fetch Venues from Sanity
-  return null;
-};
 
 const SponsorsSection = ({ value: { type } }) => {
   if (type !== 'all') {

@@ -12,6 +12,7 @@ type SimpleCallToActionProps = {
 
 export const SimpleCallToAction = ({
   value: { text, reference },
-}: PortableTextComponentProps<SimpleCallToActionProps>) => (
-  <ButtonLink text={text} url={`/${reference?.slug?.current}`} />
-);
+}: PortableTextComponentProps<SimpleCallToActionProps>) => {
+  const url = reference?.slug?.current ? `/${reference?.slug?.current}` : '#';
+  return <ButtonLink text={text} url={url} />;
+};

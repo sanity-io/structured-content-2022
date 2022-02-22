@@ -1,6 +1,6 @@
-import { imageUrlFor } from '../../lib/sanity';
-import Heading from '../Heading';
-import { Block } from './Block';
+import { imageUrlFor } from '../../../lib/sanity';
+import Heading from '../../Heading';
+import Block from '../Block';
 import styles from './TextAndImage.module.css';
 
 interface TextAndImageProps {
