@@ -98,9 +98,7 @@ const Home = ({
       <Sponsors sponsors={sponsors} />
     </SectionBlock>
 
-    <SectionBlock className={styles.centered}>
-      <ConferenceUpdatesForm value={{ buttonText: "Sign up", heading: "Get conference updates", id: "3e99a07b5e03ed5b07a234a57" }} {...{} as any} />
-    </SectionBlock>
+    <ConferenceUpdatesForm value={{ buttonText: "Sign up", heading: "Get conference updates", id: "3e99a07b5e03ed5b07a234a57" }} {...{} as any} />
   </>
 );
 

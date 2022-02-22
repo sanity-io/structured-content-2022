@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Session } from '../types/Session';
 import client from '../lib/sanity.server';
+import Hero from '../components/Hero';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import Sessions from '../components/Sessions';
@@ -38,7 +39,8 @@ const Program = ({
     program: { name, sections },
   },
 }: ProgramProps) => (
-  <GridWrapper>
+  <>
+    <Hero heading={name} cta={{ url: '#', text: 'Registration' }} />
     <SectionBlock>
       <Heading>{name}</Heading>
       <Link href="#">Registration</Link>
@@ -48,12 +50,14 @@ const Program = ({
       <TextBlock value={sections} />
     </SectionBlock>
 
-    <Sessions sessions={sessions} />
+    <GridWrapper>
+      <Sessions sessions={sessions} />
 
-    <SectionBlock noBackground>
-      <Link href="#">Registration</Link>
-    </SectionBlock>
-  </GridWrapper>
+      <SectionBlock noBackground>
+        <Link href="#">Registration</Link>
+      </SectionBlock>
+    </GridWrapper>
+  </>
 );
 
 export async function getStaticProps() {

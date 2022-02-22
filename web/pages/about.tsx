@@ -2,8 +2,8 @@ import { groq } from 'next-sanity';
 import client from '../lib/sanity.server';
 import { RichTextSection } from '../types/RichTextSection';
 import { Venue } from '../types/Venue';
+import Hero from '../components/Hero';
 import SectionBlock from '../components/SectionBlock';
-import Heading from '../components/Heading';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import TextBlock from '../components/TextBlock';
 import GridWrapper from '../components/GridWrapper';
@@ -55,17 +55,17 @@ const About = ({
     sponsorship: { sections: sponsorshipSections },
   },
 }: AboutProps) => (
-  <GridWrapper>
-    <SectionBlock>
-      <Heading>{name}</Heading>
-    </SectionBlock>
+  <>
+    <Hero heading={name} />
 
     <TextBlock value={sections} />
 
-    <SectionBlock>
-      <VenueNames venues={venues} />
-      <TextBlock value={conferenceLocationSections} />
-    </SectionBlock>
+    <GridWrapper>
+      <SectionBlock>
+        <VenueNames venues={venues} />
+        <TextBlock value={conferenceLocationSections} />
+      </SectionBlock>
+    </GridWrapper>
 
     <TextBlock value={codeOfConductSections} />
 
@@ -74,7 +74,7 @@ const About = ({
     <SectionBlock>
       <ConferenceUpdatesForm />
     </SectionBlock>
-  </GridWrapper>
+  </>
 );
 
 export async function getStaticProps() {

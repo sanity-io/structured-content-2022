@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity';
 import client from '../lib/sanity.server';
 import { Section } from '../types/Section';
-import SectionBlock from '../components/SectionBlock';
+import Hero from '../components/Hero';
 import TextBlock from '../components/TextBlock';
 import Heading from '../components/Heading';
 import GridWrapper from '../components/GridWrapper';
@@ -82,9 +82,7 @@ const Route = ({
           <VenueNames venues={venues}/>
         </GridWrapper>
       ) : (
-        <SectionBlock>
-          <Heading>{name}</Heading>
-        </SectionBlock>
+        <Hero heading={name} />
       )}
       <TextBlock value={sections}/>
     </GridWrapper>
