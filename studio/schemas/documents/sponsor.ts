@@ -31,7 +31,8 @@ export default {
     {
       name: "image",
       title: "Image",
-      type: "image",
+      type: "figure",
+      description: "Preferably SVG, and the monochrome version of the logo",
     },
   ],
 };
