@@ -41,7 +41,7 @@ const SessionPage = ({
     <SectionBlock key={title}>
       <Heading type="h2">{title}</Heading>
       <div>
-        {formatDateWithTime(startTime)}, {location.title}
+        {formatDateWithTime(startTime)}, {location.name}
       </div>
       {speakers.map(({ name, title }) => (
         <div key={name}>

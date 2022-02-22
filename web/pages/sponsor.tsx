@@ -1,9 +1,9 @@
+import Link from 'next/link';
 import client from '../lib/sanity.server';
 import SectionBlock from '../components/SectionBlock';
 import Heading from '../components/Heading';
 import sponsorStyles from '../pageResources/sponsor/Sponsor.module.css';
 import Paragraph from '../components/Paragraph';
-import Link from 'next/link';
 import GridWrapper from '../components/GridWrapper';
 
 const QUERY = `{}`;

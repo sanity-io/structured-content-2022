@@ -1,5 +1,5 @@
 .root {
-  margin: var(--spacing-small) 0 var(--spacing-large);
+  margin: 24px 0 80px;
 }
 
 .logo {
@@ -8,16 +8,49 @@
 }
 
 .summary {
-  margin-top: var(--spacing-small);
-  font: var(--font-body-large-medium);
-  letter-spacing: var(--letter-spacing-body-large);
+  margin-top: 24px;
+  font: var(--font-body-base-medium);
+  letter-spacing: var(--letter-spacing-body-base);
   display: grid;
-  row-gap: var(--spacing-small);
+  row-gap: 24px;
+}
+
+.dates,
+.description {
+  margin: 0;
+}
+
+@media (--medium-up) {
+  .root {
+    margin: 32px 0 96px;
+  }
+
+  .summary {
+    margin-top: 32px;
+    column-gap: var(--grid-medium-gutter);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dates {
+    font: var(--font-body-xl-medium);
+    letter-spacing: var(--letter-spacing-body-xl);
+  }
 }
 
 @media (--large-up) {
+  .root {
+    margin: 40px 0 128px;
+  }
+
   .summary {
+    margin-top: 40px;
     column-gap: var(--grid-gutter);
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    font: var(--font-body-xl-medium);
+    letter-spacing: var(--letter-spacing-body-xl);
+  }
+
+  .dates {
+    font: var(--font-ui-xxl-medium);
+    letter-spacing: var(--letter-spacing-ui-xxl);
   }
 }

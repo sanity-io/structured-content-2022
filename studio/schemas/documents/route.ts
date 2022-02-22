@@ -8,7 +8,7 @@ export default {
   preview: {
     select: {
       title: 'seo.title',
-      subtitle: 'internalTitle',
+      subtitle: 'internalName',
     },
   },
   groups: [
@@ -19,17 +19,18 @@ export default {
   ],
   fields: [
     {
-      name: 'internalTitle',
+      name: 'internalName',
       type: 'string',
-      title: 'Internal title',
+      title: 'Internal name',
       description: 'Used to identify a route ',
     },
     {
       name: 'slug',
       type: 'slug',
       title: 'Slug',
+      validation: (Rule) => Rule.required(),
       options: {
-        source: 'title',
+        source: 'seo.title',
       }
     },
     {

@@ -12,24 +12,26 @@ export default {
       type: "string",
     },
     {
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      options: {
-        source: "title",
-        maxLength: 96,
-      },
+      name: "url",
+      type: "url",
+      title: "URL",
+      description: "Main URL of the sponsor",
+    },
+    {
+      name: "callToActionURL",
+      type: "url",
+      title: "Call to Action URL",
+      description:
+        "The sponsor's target URL for where they want to direct people to.",
+      validation: (Rule) =>
+        Rule.regex(/(?<=utm_[a-z]+=)\w+/).warning(
+          "Remember to ask this sponsor if they want to include UTM tags."
+        ),
     },
     {
       name: "image",
       title: "Image",
       type: "image",
-    },
-    {
-      name: "sponsorship",
-      title: "Sponsorship",
-      type: "reference",
-      to: [{ type: "sponsorship" }],
     },
   ],
 };

@@ -1,18 +1,34 @@
+import { EditIcon } from "@sanity/icons";
+import { toPlainText } from "@portabletext/react";
 export default {
   name: "richText",
   type: "object",
   title: "Rich text",
+  icon: EditIcon,
   preview: {
     select: {
-      title: "content", // <= You can preview Portable Text here without a `prepare` function
+      heading: "heading",
+      subheading: "subheading",
+      content: "content",
     },
-    /* prepare({ title }) {
+    prepare({ heading, subheading, content = [] }) {
       return {
-        title, // <= This will error
+        title: heading || subheading || toPlainText(content),
+        subtitle: "Rich text",
       };
-    }, */
+    },
   },
   fields: [
+    {
+      name: "heading",
+      type: "string",
+      title: "Heading",
+    },
+    {
+      name: "subheading",
+      type: "string",
+      title: "Subheading",
+    },
     {
       name: "content",
       type: "simpleBlockContent",

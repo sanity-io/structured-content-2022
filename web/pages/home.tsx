@@ -1,33 +1,37 @@
-import Link from 'next/link';
 import client from '../lib/sanity.server';
-import { Person } from '../types/Person';
-import SectionBlock from '../components/SectionBlock';
-import Heading from '../components/Heading';
-import Speakers from '../pageResources/home/Speakers';
-import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
-import TextBlock from '../components/TextBlock';
 import { Section } from '../types/Section';
 import { Sponsor } from '../types/Sponsor';
+import { Venue } from '../types/Venue';
+import { RichTextSection } from '../types/RichTextSection';
+import SectionBlock from '../components/SectionBlock';
+import Heading from '../components/Heading';
+import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
+import TextBlock from '../components/TextBlock';
 import Sponsors from '../pageResources/home/Sponsors';
 import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
+import NavBlock from '../components/NavBlock';
+import VenueNames from '../components/VenueNames';
+import PlaceholderImage from '../components/PlaceholderImage';
+import styles from '../pageResources/home/home.module.css';
 
 const QUERY = `
   {
     "home": *[_type == "event"][0] {
       name,
       description,
-      tagline,
       startDate,
       endDate,
-      microcopy,
-      promotedSpeakers[]->,
       valueProposition,
     },
     "sponsors": *[_type == "sponsor"] {
       ...,
       sponsorship->
-    }
+    },
+    "sponsorship": *[_id == "e629b448-75d1-497a-96be-86e5464ad5b2"],
+    "venues": *[_type == "venue"],
+    "broadcastInfo": *[_id == "229058a3-6067-4f8d-b6e1-c59db187d2a8"].sections[0],
+    "schedule": *[_id == "5a574e94-5423-4e83-bbf3-3a2f83a5c88b"].sections[0]
   }`;
 
 interface HomeProps {
@@ -38,77 +42,65 @@ interface HomeProps {
       tagline: string;
       startDate: string;
       endDate: string;
-      microcopy: {
-        _key: string;
-        key: string;
-        action: string;
-        text: string;
-        type: 'link';
-      }[];
-      promotedSpeakers: Person[];
       valueProposition: Section[];
     };
     sponsors: Sponsor[];
+    sponsorship: RichTextSection[];
+    venues: Venue[];
+    broadcastInfo: RichTextSection[];
+    schedule: RichTextSection[];
   };
 }
 
 const Home = ({
   data: {
-    home: {
-      name,
-      tagline,
-      startDate,
-      endDate,
-      description,
-      microcopy,
-      promotedSpeakers,
-      valueProposition,
-    },
+    home: { name, startDate, endDate, description, valueProposition },
     sponsors,
+    sponsorship,
+    venues,
+    broadcastInfo,
+    schedule,
   },
 }: HomeProps) => (
-  <GridWrapper>
-    <ConferenceHeader
-      name={name}
-      startDate={startDate}
-      endDate={endDate}
-      description={description}
-    />
-    <SectionBlock>
-      {microcopy.map(({ key, action, text }) => (
-        <Link key={key} href={action}>
-          {text}
-        </Link>
-      ))}
+  <>
+    <GridWrapper>
+      <ConferenceHeader
+        name={name}
+        startDate={startDate}
+        endDate={endDate}
+        description={description}
+      />
+
+      <NavBlock />
+
+      <VenueNames venues={venues} />
+    </GridWrapper>
+
+    <div className={styles.centered}>
+      <TextBlock value={broadcastInfo} />
+    </div>
+
+    <SectionBlock className={styles.centered}>
+      <PlaceholderImage width={406} height={370} />
+      <div>
+        <TextBlock value={valueProposition} />
+      </div>
     </SectionBlock>
 
-    <SectionBlock>
-      <TextBlock value={valueProposition} />
-    </SectionBlock>
+    <div className={styles.centered}>
+      <TextBlock value={schedule} />
+    </div>
 
-    <SectionBlock>
-      <Speakers speakers={promotedSpeakers} />
-    </SectionBlock>
+    <div className={styles.centered}>
+      <TextBlock value={sponsorship} />
+    </div>
 
-    <SectionBlock>
-      <Heading type="h2">
-        <Link href="/program">
-          <a>{'Program ->'}</a>
-        </Link>
-      </Heading>
-    </SectionBlock>
-
-    <SectionBlock>
-      <Heading type="h2">Sponsors</Heading>
+    <SectionBlock gray>
       <Sponsors sponsors={sponsors} />
-      <Link href="/sponsor">{'Become a Sponsor ->'}</Link>
     </SectionBlock>
 
-    <SectionBlock>
-      <Heading type="h2">Get conference updates</Heading>
-      <ConferenceUpdatesForm />
-    </SectionBlock>
-  </GridWrapper>
+    <ConferenceUpdatesForm />
+  </>
 );
 
 export async function getStaticProps() {

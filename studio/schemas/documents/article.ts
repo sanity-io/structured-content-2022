@@ -5,12 +5,40 @@ export default {
   title: "Editorial Articles",
   type: "document",
   icon: DocumentsIcon,
+  preview: {
+    select: {
+      title: "heading",
+      subtitle: "slug.current",
+      media: "mainImage",
+    },
+  },
   fields: [
     {
-      name: "title",
-      title: "Title",
+      name: "heading",
+      title: "Heading",
       type: "string",
-      //description: 'This will be the headline of the article',
+      description: "This will be the heading of the article",
+    },
+    {
+      name: "slug",
+      type: "slug",
+      title: "Slug",
+      description: "/article/:slug",
+      options: {
+        source: "heading",
+      },
+    },
+    {
+      name: "publishedAt",
+      type: "datetime",
+      title: "Publish time",
+      description:
+        "Publish date for this article. This article should be hidden if no date is set.",
+    },
+    {
+      name: "mainImage",
+      type: "figure",
+      title: "Main image",
     },
     {
       name: "summary",
@@ -24,6 +52,11 @@ export default {
         ),
         Rule.required(),
       ],
+    },
+    {
+      name: "content",
+      title: "Content",
+      type: "blockContent",
     },
   ],
 };

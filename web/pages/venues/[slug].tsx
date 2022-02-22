@@ -10,7 +10,7 @@ import styles from '../../pageResources/about/venue/venue.module.css';
 const QUERY = `
   *[_type == "venue"][slug.current == $slug][0] {
     _id,
-    title,
+    name,
     geolocation
   }`;
 
@@ -21,10 +21,10 @@ interface VenueProps {
 const mapUrl = (geolocation: { lat: number; lng: number }) =>
   `https://maps.google.com/maps?q=${geolocation.lat},${geolocation.lng}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
-const Venue = ({ data: { title, geolocation } }: VenueProps) => (
+const Venue = ({ data: { name, geolocation } }: VenueProps) => (
   <GridWrapper>
     <SectionBlock>
-      <Heading>{title}</Heading>
+      <Heading>{name}</Heading>
     </SectionBlock>
 
     <SectionBlock>

@@ -1,11 +1,20 @@
-import Paragraph from '../Paragraph';
+import { TextBlock } from './TextBlock';
+import GridWrapper from '../GridWrapper';
+import Heading from '../Heading';
+import { RichTextSection } from '../../types/RichTextSection';
+import styles from './RichText.module.css';
 
-export const RichText = ({ value }) => (
-  <>
-    {value.content
-      .reduce((acc, content) => [...acc, ...content.children], [])
-      .map((children) => (
-        <Paragraph key={children._key}>{children.text}</Paragraph>
-      ))}
-  </>
+interface RichTextProps {
+  value: RichTextSection;
+}
+
+export const RichText = ({ value }: RichTextProps) => (
+  <GridWrapper>
+    <div className={styles.container}>
+      <div className={styles.content}>
+        {value.heading && <Heading type="h2">{value.heading}</Heading>}
+        <TextBlock value={value.content} />
+      </div>
+    </div>
+  </GridWrapper>
 );

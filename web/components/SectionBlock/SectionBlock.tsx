@@ -4,16 +4,18 @@ import styles from './SectionBlock.module.css';
 
 interface SectionBlockProps extends HTMLAttributes<HTMLDivElement> {
   noBackground?: boolean;
+  gray?: boolean;
 }
 
 export const SectionBlock = forwardRef<HTMLDivElement, SectionBlockProps>(
-  ({ className, noBackground, ...props }: SectionBlockProps, ref) => (
+  ({ className, noBackground, gray, ...props }: SectionBlockProps, ref) => (
     <div
       {...props}
       className={clsx(
         className,
         styles.sectionBlock,
-        noBackground && styles['sectionBlock--noBackground']
+        noBackground && styles['sectionBlock--noBackground'],
+        gray && styles['sectionBlock--gray']
       )}
       ref={ref}
     />

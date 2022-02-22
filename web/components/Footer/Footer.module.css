@@ -1,0 +1,77 @@
+.container {
+  background: var(--color-ui-gray-100);
+  text-align: center;
+  padding: var(--spacing-medium) 0 var(--spacing-large);
+  font: var(--font-ui-sm-medium);
+  letter-spacing: var(--letter-spacing-ui-sm);
+}
+
+.logoContainer {
+  margin-bottom: 20px;
+}
+
+.mailLink {
+  display: block;
+  text-decoration: none;
+  color: var(--color-ui-gray-600);
+}
+
+.mailLink:hover {
+  text-decoration: underline;
+}
+
+.social {
+  margin: 38px 0;
+  text-align: center;
+}
+
+.socialItem {
+  padding: 0 12px;
+}
+
+/* Including the link itself here to make it contain the image, for a better
+ * focus outline
+ */
+.socialItem,
+.socialLink {
+  display: inline-block;
+  line-height: 1;
+}
+
+.separator {
+  border-top: 1px solid var(--color-ui-gray-300);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.links {
+  list-style: none;
+  margin: 20px -12px 0;
+  text-align: center;
+}
+
+.linksItem {
+  display: inline-block;
+  padding: 12px 12px 0;
+}
+
+.linksItemLink {
+  color: var(--color-ui-gray-600);
+  text-decoration: none;
+}
+
+.linksItemLink:hover {
+  text-decoration: underline;
+}
+
+@media (--medium-up) {
+  .container {
+    padding-bottom: 32px;
+  }
+
+  .social {
+    margin-bottom: 70px;
+  }
+}

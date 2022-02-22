@@ -1,7 +1,7 @@
 import { HelpCircleIcon } from "@sanity/icons";
 
 export default {
-  name: "questionAndAnswerCollection",
+  name: "questionAndAnswerCollectionSection",
   title: "Question and Answer Collection",
   type: "object",
   icon: HelpCircleIcon,
