@@ -33,7 +33,7 @@ html {
 
 body {
   margin: 0;
-  font: var(--font-body-base-medium);
+  font: var(--font-body-base);
   letter-spacing: var(--letter-spacing-body-base);
 }
 
