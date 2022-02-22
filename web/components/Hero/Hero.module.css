@@ -4,9 +4,17 @@
   padding: 40px 0 80px;
 }
 
+.cta {
+  margin-top: 32px;
+}
+
 @media (--medium-up) {
   .container {
     padding: 96px 0;
+  }
+
+  .cta {
+    margin-top: 40px;
   }
 }
 
@@ -21,7 +29,8 @@
     column-gap: var(--grid-gutter);
   }
 
-  .heading {
+  .heading,
+  .cta {
     grid-column: 3 / span 8;
   }
 }
