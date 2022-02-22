@@ -13,7 +13,16 @@ const QUERY = groq`
       page-> {
         name,
         sections[] {
-          _type == 'reference' => @->,
+          _type == 'reference' => @-> {
+            sections[] {
+              ...,
+              content[] {
+                ...,
+                reference->,
+              },
+            },
+            ...,
+          },
           _type != 'reference' => @,
         }
       }

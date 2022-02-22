@@ -4,7 +4,6 @@ import { Sponsor } from '../types/Sponsor';
 import { Venue } from '../types/Venue';
 import { RichTextSection } from '../types/RichTextSection';
 import SectionBlock from '../components/SectionBlock';
-import Heading from '../components/Heading';
 import ConferenceUpdatesForm from '../components/ConferenceUpdatesForm';
 import TextBlock from '../components/TextBlock';
 import Sponsors from '../pageResources/home/Sponsors';
@@ -100,7 +99,7 @@ const Home = ({
     </SectionBlock>
 
     <SectionBlock className={styles.centered}>
-      <ConferenceUpdatesForm />
+      <ConferenceUpdatesForm value={{ buttonText: "Sign up", heading: "Get conference updates", id: "3e99a07b5e03ed5b07a234a57" }} {...{} as any} />
     </SectionBlock>
   </>
 );
