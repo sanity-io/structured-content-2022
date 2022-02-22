@@ -1,17 +1,23 @@
 .container {
+  margin: 80px 0;
+}
+
+.container.background {
   background: var(--color-brand-yellow-light);
   padding: 80px 20px;
   border-radius: 12px;
-  margin: 80px 0;
 }
 
 @media (--medium-up) {
   .container {
-    padding: 96px 0;
     margin: 96px 0;
     display: grid;
     grid-template-columns: repeat(8, minmax(0, 1fr));
     column-gap: var(--grid-medium-gutter);
+  }
+
+  .container.background {
+    padding: 96px 0;
   }
 
   .content {
@@ -21,10 +27,13 @@
 
 @media (--large-up) {
   .container {
-    padding: 128px 0;
     margin: 128px 0;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: var(--grid-gutter);
+  }
+
+  .container.background {
+    padding: 128px 0;
   }
 
   .content {
