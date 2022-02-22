@@ -15,11 +15,23 @@ export const TextAndImage = ({ value: { image, tagline, text, title } }) => (
   <section className={styles.container}>
     <GridWrapper>
       <div className={styles.contents}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={imageUrlFor(image).ignoreImageParams().url()} alt="" className={styles.image} />
-        <div>
-          <Heading type="h2">{title}</Heading>
-          <Heading type="h3">{tagline}</Heading>
+        <div className={styles.imageContainer}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={imageUrlFor(image).ignoreImageParams().url()}
+            alt=""
+            className={styles.image}
+          />
+        </div>
+        <div className={styles.text}>
+          {title && (
+            <hgroup>
+              <Heading type="h2">{title}</Heading>
+              {tagline && (
+                <h3 className={styles.tagline}>{tagline}</h3>
+              )}
+            </hgroup>
+          )}
           {text.map((value) => (
             <Block key={value._key} value={value} />
           ))}
