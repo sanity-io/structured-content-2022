@@ -1,8 +1,36 @@
 .sponsor {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  background: var(--color-brand-white);
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sponsor.premier {
+  width: 192px;
+  height: 88px;
+}
+
+.sponsor.gold,
+.sponsor.silver {
+  width: 128px;
+  height: 60px;
 }
 
 .image {
-  max-width: 200px;
+  max-width: 60%;
+  max-height: 60%;
+}
+
+@media (--medium-up) {
+  .sponsor.premier {
+    width: 288px;
+    height: 130px;
+  }
+
+  .sponsor.gold {
+    width: 192px;
+    height: 88px;
+  }
 }

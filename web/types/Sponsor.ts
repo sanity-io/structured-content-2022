@@ -15,8 +15,8 @@ export type Sponsor = {
   };
   sponsorship: {
     _id: string;
-    type: 'sponsorship';
-    title: SponsorLevel;
+    _type: 'sponsorship';
+    type: SponsorLevel;
   };
   slug: Slug;
 };

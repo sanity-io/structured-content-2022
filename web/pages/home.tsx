@@ -94,9 +94,7 @@ const Home = ({
       <TextBlock value={sponsorship} />
     </div>
 
-    <SectionBlock gray>
-      <Sponsors sponsors={sponsors} />
-    </SectionBlock>
+    <Sponsors sponsors={sponsors} />
 
     <ConferenceUpdatesForm
       value={{

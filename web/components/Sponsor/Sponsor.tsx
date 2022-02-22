@@ -1,22 +1,58 @@
-import { Sponsor as TSponsor } from '../../types/Sponsor';
+import { Sponsor as TSponsor, SponsorLevel } from '../../types/Sponsor';
 import { imageUrlFor } from '../../lib/sanity';
 import styles from './Sponsor.module.css';
+import clsx from 'clsx';
 
 interface SponsorProps {
   sponsor: TSponsor;
 }
 
-export const Sponsor = ({ sponsor }: SponsorProps) => {
-  // TODO: .fit does not seem to work correctly here -- why?
-  const src = imageUrlFor(sponsor.image)
+const assumedScaleFactor = 0.6;
+
+const imgDimensions: {
+  [key in SponsorLevel]: {
+    width: number;
+    height: number;
+    className: string;
+  };
+} = {
+  Premier: {
+    width: Math.round(288 * assumedScaleFactor),
+    height: Math.round(130 * assumedScaleFactor),
+    className: styles.premier,
+  },
+  Gold: {
+    width: Math.round(192 * assumedScaleFactor),
+    height: Math.round(88 * assumedScaleFactor),
+    className: styles.gold,
+  },
+  Silver: {
+    width: Math.round(128 * assumedScaleFactor),
+    height: Math.round(60 * assumedScaleFactor),
+    className: styles.silver,
+  },
+};
+
+export const Sponsor = ({
+  sponsor: {
+    sponsorship: { type },
+    image,
+    title,
+  },
+}: SponsorProps) => {
+  const dimension = imgDimensions[type] || imgDimensions.Silver;
+  const src = imageUrlFor(image)
     .auto('format')
-    .height(100)
-    .fit('clip')
+    .bg('fff')
+    .size(dimension.width, dimension.height)
+    .fit('max')
+    .ignoreImageParams()
     .url();
+
   return (
-    <div className={styles.sponsor}>
+    <div className={clsx(styles.sponsor, dimension.className)}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.image} src={src} alt={sponsor.title} />
+      <img src={src} alt={title} className={styles.image} />
     </div>
   );
 };
