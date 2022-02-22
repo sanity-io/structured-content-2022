@@ -35,6 +35,13 @@ export default {
       ],
     },
     {
+      name: "publishedAt",
+      type: "datetime",
+      title: "Publish time",
+      description:
+        "Publish date for this session. The type string can be used as an placeholder before this date. This details of this session should be hidden if no date is set.",
+    },
+    {
       name: "type",
       type: "string",
       title: "Type",
