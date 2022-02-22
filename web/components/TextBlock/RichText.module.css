@@ -8,6 +8,10 @@
   border-radius: 12px;
 }
 
+.subHeading {
+  font: var(--font-body-base-medium);
+}
+
 @media (--medium-up) {
   .container {
     margin: 96px 0;
