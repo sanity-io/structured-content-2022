@@ -2,39 +2,35 @@ import createSchema from "part:@sanity/base/schema-creator";
 
 import schemaTypes from "all:part:@sanity/base/schema-type";
 import article from "./documents/article";
-import person from "./documents/person";
-import session from "./documents/session";
-import sponsor from "./documents/sponsor";
-import venue from "./documents/venue";
-import ticket from "./documents/ticket";
-import sponsorship from "./documents/sponsorship";
 import event from "./documents/event";
 import page from "./documents/page";
+import person from "./documents/person";
 import route from "./documents/route";
+import session from "./documents/session";
+import sharedSections from "./documents/sharedSections";
+import sponsor from "./documents/sponsor";
+import sponsorship from "./documents/sponsorship";
+import ticket from "./documents/ticket";
+import venue from "./documents/venue";
 
 // Objects
 
-import simpleBlockContent from "./arrays/simpleBlockContent";
+import { figure, richText, seo, simpleCallToAction } from "./objects";
 import blockContent from "./arrays/blockContent";
-import { figure, richText, seo } from "./objects";
 import questionAndAnswer from "./objects/questionAndAnswer";
+import simpleBlockContent from "./arrays/simpleBlockContent";
 
-import sharedSections from "./documents/sharedSections";
-
-import spec from "./documents/spec";
 import * as sections from "./sections";
 
-// Then we give our schema to the builder and provide the result to Sanity
+import spec from "./documents/spec";
+
 export default createSchema({
-  // We name our schema
   name: "default",
-  // Then proceed to concatenate our document type
-  // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
-    /* Your types here! */
     ...Object.values(sections),
     figure,
     questionAndAnswer,
+    simpleCallToAction,
     richText,
     seo,
     event,
