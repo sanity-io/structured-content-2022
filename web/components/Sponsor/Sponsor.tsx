@@ -7,6 +7,8 @@ interface SponsorProps {
   sponsor: TSponsor;
 }
 
+const assumedScaleFactor = 0.6;
+
 const imgDimensions: {
   [key in SponsorLevel]: {
     width: number;
@@ -15,18 +17,18 @@ const imgDimensions: {
   };
 } = {
   Premier: {
-    width: Math.round(288 / 2),
-    height: Math.round(130 / 2),
+    width: Math.round(288 * assumedScaleFactor),
+    height: Math.round(130 * assumedScaleFactor),
     className: styles['sponsor--Premier'],
   },
   Gold: {
-    width: Math.round(192 / 2),
-    height: Math.round(88 / 2),
+    width: Math.round(192 * assumedScaleFactor),
+    height: Math.round(88 * assumedScaleFactor),
     className: styles['sponsor--Gold'],
   },
   Silver: {
-    width: Math.round(128 / 2),
-    height: Math.round(60 / 2),
+    width: Math.round(128 * assumedScaleFactor),
+    height: Math.round(60 * assumedScaleFactor),
     className: styles['sponsor--Silver'],
   },
 };
@@ -50,7 +52,7 @@ export const Sponsor = ({
   return (
     <div className={clsx(styles.sponsor, dimension.className)}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={title} />
+      <img src={src} alt={title} className={styles.image} />
     </div>
   );
 };

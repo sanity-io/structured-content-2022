@@ -24,6 +24,11 @@
   height: 60px;
 }
 
+.image {
+  max-width: 60%;
+  max-height: 60%;
+}
+
 @media (--small) {
   .sponsor--Premier {
     width: 192px;
