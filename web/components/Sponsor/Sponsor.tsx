@@ -19,17 +19,17 @@ const imgDimensions: {
   Premier: {
     width: Math.round(288 * assumedScaleFactor),
     height: Math.round(130 * assumedScaleFactor),
-    className: styles['sponsor--Premier'],
+    className: styles.premier,
   },
   Gold: {
     width: Math.round(192 * assumedScaleFactor),
     height: Math.round(88 * assumedScaleFactor),
-    className: styles['sponsor--Gold'],
+    className: styles.gold,
   },
   Silver: {
     width: Math.round(128 * assumedScaleFactor),
     height: Math.round(60 * assumedScaleFactor),
-    className: styles['sponsor--Silver'],
+    className: styles.silver,
   },
 };
 
@@ -47,7 +47,7 @@ export const Sponsor = ({
     .size(dimension.width, dimension.height)
     .fit('max')
     .ignoreImageParams()
-    .url()
+    .url();
 
   return (
     <div className={clsx(styles.sponsor, dimension.className)}>

@@ -1,25 +1,20 @@
 .sponsor {
   margin: 2px;
-  background: white;
+  background: var(--color-brand-white);
   border-radius: 8px;
-  box-sizing: border-box;
 
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.sponsor--Premier {
-  width: 288px;
-  height: 130px;
-}
-
-.sponsor--Gold {
+.sponsor.premier {
   width: 192px;
   height: 88px;
 }
 
-.sponsor--Silver {
+.sponsor.gold,
+.sponsor.silver {
   width: 128px;
   height: 60px;
 }
@@ -29,15 +24,14 @@
   max-height: 60%;
 }
 
-@media (--small) {
-  .sponsor--Premier {
-    width: 192px;
-    height: 88px;
+@media (--medium-up) {
+  .sponsor.premier {
+    width: 288px;
+    height: 130px;
   }
 
-  .sponsor--Gold,
-  .sponsor--Silver {
-    width: 128px;
-    height: 60px;
+  .sponsor.gold {
+    width: 192px;
+    height: 88px;
   }
 }
