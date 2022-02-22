@@ -1,4 +1,8 @@
 .container {
+  background: var(--color-brand-yellow-light);
+}
+
+.contents {
   display: flex;
   flex-direction: row;
   align-items: center;
