@@ -27,9 +27,7 @@ export const TextAndImage = ({ value: { image, tagline, text, title } }) => (
           {title && (
             <hgroup>
               <Heading type="h2">{title}</Heading>
-              {tagline && (
-                <h3 className={styles.tagline}>{tagline}</h3>
-              )}
+              {tagline && <h3 className={styles.tagline}>{tagline}</h3>}
             </hgroup>
           )}
           {text.map((value) => (
