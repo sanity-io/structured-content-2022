@@ -2,16 +2,18 @@ import GridWrapper from '../GridWrapper';
 import Heading from '../Heading';
 import PlaceholderImage from '../PlaceholderImage';
 import styles from './ConferenceUpdatesForm.module.css';
-import { PortableTextComponentProps } from "@portabletext/react";
+import { PortableTextComponentProps } from '@portabletext/react';
 
 type ConferenceUpdatesFormProps = {
   buttonText: string;
   heading: string;
   subheading?: string;
   id: string;
-}
+};
 
-export const ConferenceUpdatesForm = ({ value: { buttonText, heading, id } }: PortableTextComponentProps<ConferenceUpdatesFormProps>) => (
+export const ConferenceUpdatesForm = ({
+  value: { buttonText, heading, id },
+}: PortableTextComponentProps<ConferenceUpdatesFormProps>) => (
   <GridWrapper>
     <article className={styles.container}>
       <PlaceholderImage width={330} height={459} className={styles.image} />

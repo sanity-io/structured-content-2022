@@ -5,10 +5,10 @@ import Hero from '../components/Hero';
 import TextBlock from '../components/TextBlock';
 import Heading from '../components/Heading';
 import GridWrapper from '../components/GridWrapper';
-import ConferenceHeader from "../components/ConferenceHeader";
-import NavBlock from "../components/NavBlock";
-import VenueNames from "../components/VenueNames";
-import { Venue } from "../types/Venue";
+import ConferenceHeader from '../components/ConferenceHeader';
+import NavBlock from '../components/NavBlock';
+import VenueNames from '../components/VenueNames';
+import { Venue } from '../types/Venue';
 
 const QUERY = groq`
   {
@@ -69,24 +69,24 @@ const Route = ({
   },
   slug,
 }: RouteProps) => (
-    <GridWrapper>
-      {slug === '/' ? (
-        <GridWrapper>
-          <ConferenceHeader
-            name={homeName}
-            startDate={startDate}
-            endDate={endDate}
-            description={description}
-          />
-          <NavBlock/>
-          <VenueNames venues={venues}/>
-        </GridWrapper>
-      ) : (
-        <Hero heading={name} />
-      )}
-      <TextBlock value={sections}/>
-    </GridWrapper>
-  );
+  <GridWrapper>
+    {slug === '/' ? (
+      <GridWrapper>
+        <ConferenceHeader
+          name={homeName}
+          startDate={startDate}
+          endDate={endDate}
+          description={description}
+        />
+        <NavBlock />
+        <VenueNames venues={venues} />
+      </GridWrapper>
+    ) : (
+      <Hero heading={name} />
+    )}
+    <TextBlock value={sections} />
+  </GridWrapper>
+);
 
 export async function getServerSideProps({ params }) {
   const slug = params?.slug?.[0] || '/';

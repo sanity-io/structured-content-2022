@@ -10,8 +10,8 @@ import { Block } from './Block';
 import { Venue } from './Venue';
 import { QuestionAndAnswerCollection } from './QuestionAndAnswerCollection';
 import { TextAndImage } from './TextAndImage';
-import SimpleCallToAction from "./SimpleCallToAction";
-import ConferenceUpdatesForm from "../ConferenceUpdatesForm";
+import SimpleCallToAction from './SimpleCallToAction';
+import ConferenceUpdatesForm from '../ConferenceUpdatesForm';
 
 const components: Partial<PortableTextComponents> = {
   types: {

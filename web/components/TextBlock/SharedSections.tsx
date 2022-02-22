@@ -2,8 +2,8 @@ import Image from 'next/image';
 import { imageUrlFor } from '../../lib/sanity';
 import Heading from '../Heading';
 import { RichText } from './RichText';
-import SimpleCallToAction from "./SimpleCallToAction";
-import ConferenceUpdatesForm from "../ConferenceUpdatesForm";
+import SimpleCallToAction from './SimpleCallToAction';
+import ConferenceUpdatesForm from '../ConferenceUpdatesForm';
 
 const Figure = ({ value: { alt, asset } }) => (
   <Image
@@ -30,9 +30,9 @@ const SponsorsSection = ({ value: { type } }) => {
     return null;
   }
 
-  // TODO: fetch Venues from Sanity
+  // TODO: fetch Sponsors from Sanity
   return null;
-}
+};
 
 export const SharedSections = ({ value: { name, sections, ...rest } }) => (
   <>
@@ -41,7 +41,13 @@ export const SharedSections = ({ value: { name, sections, ...rest } }) => (
       switch (section._type) {
         case 'mailchimp':
         case 'mailchimpSection':
-          return <ConferenceUpdatesForm key={section._key} value={section} {...rest as any} />;
+          return (
+            <ConferenceUpdatesForm
+              key={section._key}
+              value={section}
+              {...(rest as any)}
+            />
+          );
         case 'figure':
           return <Figure key={section._key} value={section} />;
         case 'richText':
@@ -50,7 +56,13 @@ export const SharedSections = ({ value: { name, sections, ...rest } }) => (
         case 'venuesSection':
           return <VenuesSection key={section._key} value={section} />;
         case 'simpleCallToAction':
-          return <SimpleCallToAction key={section._key} value={section} {...rest as any} />;
+          return (
+            <SimpleCallToAction
+              key={section._key}
+              value={section}
+              {...(rest as any)}
+            />
+          );
         case 'sponsors':
           return <SponsorsSection key={section._key} value={section} />;
         default:
