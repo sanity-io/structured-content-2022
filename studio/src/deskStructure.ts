@@ -125,7 +125,7 @@ export default () =>
             ])
             .title("Navigation")
         ),
-      //S.documentTypeListItem("article").title("Editorial Articles"), // disabled for now
+      S.documentTypeListItem("article").title("Editorial Articles"),
       S.divider(),
       S.documentTypeListItem("ticket").title("Ticket types"),
       S.listItem()
