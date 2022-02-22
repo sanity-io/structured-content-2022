@@ -41,6 +41,11 @@ body.main-menu-open {
   overflow: hidden;
 }
 
+h1 {
+  font: var(--font-display-base);
+  margin: 0;
+}
+
 p,
 ul,
 ol {
@@ -61,5 +66,15 @@ input {
 @media (--medium-up) {
   body.main-menu-open {
     overflow: auto;
+  }
+
+  h1 {
+    font: var(--font-display-xl);
+  }
+}
+
+@media (--large-up) {
+  h1 {
+    font: var(--font-display-2xl);
   }
 }

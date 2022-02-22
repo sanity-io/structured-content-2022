@@ -12,6 +12,7 @@
   --font-body-base-medium: 500 18px/25px 'Inter', sans-serif;
   --font-body-large-medium: 500 20px/30px 'Inter', sans-serif;
   --font-body-xl-medium: 500 24px/33px 'Inter', sans-serif;
+  --font-display-2xl: 700 96px/92.16px sans-serif; /* Web font not received yet */
   --font-display-base: 700 40px/39px sans-serif; /* Web font not received yet */
   --font-display-lg: 700 64px/64px sans-serif; /* Web font not received yet */
   --font-display-sm: 700 32px/35px sans-serif; /* Web font not received yet */
