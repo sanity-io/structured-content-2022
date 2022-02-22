@@ -16,7 +16,7 @@ import styles from '../pageResources/home/home.module.css';
 
 const QUERY = `
   {
-    "home": *[_type == "event"][0] {
+    "home": *[_id == "aad77280-6394-4090-afad-1c0f2a0416c6"][0] {
       name,
       description,
       startDate,
