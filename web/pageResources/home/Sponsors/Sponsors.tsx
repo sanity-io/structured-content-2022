@@ -1,4 +1,5 @@
 import { Sponsor as TSponsor, SponsorLevel } from '../../../types/Sponsor';
+import GridWrapper from '../../../components/GridWrapper';
 import Heading from '../../../components/Heading';
 import Sponsor from '../../../components/Sponsor';
 import styles from './Sponsors.module.css';
@@ -27,17 +28,19 @@ export const Sponsors = ({ sponsors }: SponsorsProps) => {
   const groupedSponsors = groupBySponsorLevel(sponsors);
   const levels: SponsorLevel[] = ['Premier', 'Gold', 'Silver'];
   return (
-    <>
+    <GridWrapper>
       {levels.map((level) => (
-        <div key={level} className={styles.sponsorLevel}>
+        <section key={level} className={styles.sponsorLevel}>
           <Heading type="h3">{level}</Heading>
-          <div className={styles.sponsors}>
+          <ul className={styles.sponsors}>
             {groupedSponsors[level].map((sponsor) => (
-              <Sponsor key={sponsor._id} sponsor={sponsor} />
+              <li key={sponsor._id} className={styles.sponsor}>
+                <Sponsor sponsor={sponsor} />
+              </li>
             ))}
-          </div>
-        </div>
+          </ul>
+        </section>
       ))}
-    </>
+    </GridWrapper>
   );
 };

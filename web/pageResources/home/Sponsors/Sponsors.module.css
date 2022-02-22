@@ -1,9 +1,35 @@
 .sponsorLevel {
   text-align: center;
+  background: var(--color-ui-gray-100);
+  border-radius: 12px;
+  padding: 32px 24px;
+  margin: 8px 0;
 }
 
 .sponsors {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 24px -4px 0;
+}
+
+.sponsor {
+  margin: 8px 4px 0;
+}
+
+@media (--medium-up) {
+  .sponsorLevel {
+    padding: 48px 56px;
+  }
+
+  .sponsors {
+    margin-top: 40px;
+  }
+}
+
+@media (--large-up) {
+  .sponsors {
+    margin-top: 45px;
+  }
 }
