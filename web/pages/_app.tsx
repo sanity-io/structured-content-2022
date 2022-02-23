@@ -39,7 +39,7 @@ function MyApp({ Component, pageProps, router }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, [scrollTop]);
 
-  const isFrontPage = router.asPath === '/home' || router.asPath === '/';
+  const isFrontPage = router.asPath === '/';
   const scrolledFarEnough = scrollTop > scrollPositionTriggeringFrontPageMenu;
   const headerClasses = clsx(
     styles.header,

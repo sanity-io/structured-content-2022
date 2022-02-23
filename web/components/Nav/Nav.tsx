@@ -39,7 +39,7 @@ export const Nav = ({ onFrontPage }: NavProps) => {
           id={contentsId}
           className={clsx(styles.menuContents, !menuOpened && styles.closed)}
         >
-          <Link href="/home">
+          <Link href="/">
             <a
               className={clsx(
                 styles.homeLink,

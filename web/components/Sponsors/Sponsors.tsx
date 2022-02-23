@@ -1,7 +1,7 @@
-import { Sponsor as TSponsor, SponsorLevel } from '../../../types/Sponsor';
-import GridWrapper from '../../../components/GridWrapper';
-import Heading from '../../../components/Heading';
-import Sponsor from '../../../components/Sponsor';
+import { Sponsor as TSponsor, SponsorLevel } from '../../types/Sponsor';
+import GridWrapper from '../GridWrapper';
+import Heading from '../Heading';
+import Sponsor from '../Sponsor';
 import styles from './Sponsors.module.css';
 
 interface SponsorsProps {
