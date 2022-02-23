@@ -1,1 +1,1 @@
-export { AccordionProgramItem as default } from "./AccordionProgramItem";
+export { AccordionProgramItem as default } from './AccordionProgramItem';

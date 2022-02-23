@@ -18,7 +18,8 @@
   outline: none;
 }
 
-.active, .accordion:hover {
+.active,
+.accordion:hover {
   background-color: var(--color-ui-gray-300);
 }
 
@@ -33,7 +34,6 @@
 .accordion.active .expandCollapseIndicator::after {
   content: '-';
 }
-
 
 .panel {
   background-color: var(--color-brand-yellow-light);

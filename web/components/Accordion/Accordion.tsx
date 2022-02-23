@@ -1,5 +1,5 @@
-import styles from "./Accordion.module.css";
-import { Fragment, ReactNode } from "react";
+import styles from './Accordion.module.css';
+import { Fragment, ReactNode } from 'react';
 
 interface AccordionProps {
   items: {
@@ -14,23 +14,24 @@ export const Accordion = ({ items }: AccordionProps) => {
 
     const panel = e.target.nextElementSibling;
     console.log(panel.style.display);
-    if (panel.style.display !== "block") {
+    if (panel.style.display !== 'block') {
       panel.style.display = 'block';
     } else {
       panel.style.display = 'none';
     }
   };
 
-  return <div className={styles.container}>
-    {items.map(({ title, content }, index) => (
-      <Fragment key={index}>
-
-        <button onClick={onClick} className={styles.accordion}>
-          {title}
-          <span className={styles.expandCollapseIndicator} />
-        </button>
-        <div className={styles.panel}>{content}</div>
-      </Fragment>
-    ))}
-  </div>;
-}
+  return (
+    <div className={styles.container}>
+      {items.map(({ title, content }, index) => (
+        <Fragment key={index}>
+          <button onClick={onClick} className={styles.accordion}>
+            {title}
+            <span className={styles.expandCollapseIndicator} />
+          </button>
+          <div className={styles.panel}>{content}</div>
+        </Fragment>
+      ))}
+    </div>
+  );
+};

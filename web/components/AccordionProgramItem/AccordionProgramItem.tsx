@@ -1,6 +1,6 @@
-import { formatTime } from "../../util/date";
-import { Session } from "../../types/Session";
-import styles from "./AccordionProgramItem.module.css";
+import { formatTime } from '../../util/date';
+import { Session } from '../../types/Session';
+import styles from './AccordionProgramItem.module.css';
 
 interface AccordionProgramItemProps {
   programSession: {
@@ -11,16 +11,23 @@ interface AccordionProgramItemProps {
   };
 }
 
-export const AccordionProgramItem = ({ programSession }: AccordionProgramItemProps) =>
-    <div className={styles.container}>
-      {programSession._type === 'padding' ?
-        <>
-          <span>{programSession.duration} minutes</span>
-          <span className={styles.sessionTitle}>Pause</span>
-        </>
-        : <>
-          {/* TODO: This is shown in user's local time */}
-          {formatTime(programSession.session.startTime)}
-        <span className={styles.sessionTitle}>{programSession.session.title}</span>
-        </>}
-    </div>
+export const AccordionProgramItem = ({
+  programSession,
+}: AccordionProgramItemProps) => (
+  <div className={styles.container}>
+    {programSession._type === 'padding' ? (
+      <>
+        <span>{programSession.duration} minutes</span>
+        <span className={styles.sessionTitle}>Pause</span>
+      </>
+    ) : (
+      <>
+        {/* TODO: This is shown in user's local time */}
+        {formatTime(programSession.session.startTime)}
+        <span className={styles.sessionTitle}>
+          {programSession.session.title}
+        </span>
+      </>
+    )}
+  </div>
+);

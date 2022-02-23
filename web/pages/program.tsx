@@ -1,9 +1,9 @@
-import { Fragment } from "react";
+import { Fragment } from 'react';
 import client from '../lib/sanity.server';
-import Accordion from "../components/Accordion";
-import { Session } from "../types/Session";
-import { formatDateWithDay } from "../util/date";
-import AccordionProgramItem from "../components/AccordionProgramItem";
+import Accordion from '../components/Accordion';
+import { Session } from '../types/Session';
+import { formatDateWithDay } from '../util/date';
+import AccordionProgramItem from '../components/AccordionProgramItem';
 
 const QUERY = `
   {
@@ -36,21 +36,21 @@ interface ProgramProps {
   };
 }
 
-const Program = ({ data: { programs, }, }: ProgramProps) => (
-  <Accordion items={
-    programs.map((program) => ({
+const Program = ({ data: { programs } }: ProgramProps) => (
+  <Accordion
+    items={programs.map((program) => ({
       title: program.internalName,
       content: (
         <div key={program._id}>
           <h2>{formatDateWithDay(program.startDateTime)}</h2>
           {program.sessions.map((session, index) => (
             <Fragment key={session._key}>
-              <AccordionProgramItem programSession={session}/>
-              {index !== program.sessions.length - 1 && <hr/>}
+              <AccordionProgramItem programSession={session} />
+              {index !== program.sessions.length - 1 && <hr />}
             </Fragment>
           ))}
         </div>
-      )
+      ),
     }))}
   />
 );
