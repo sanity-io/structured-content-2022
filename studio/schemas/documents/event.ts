@@ -126,6 +126,30 @@ export default {
       ],
     },
     {
+      name: "tickets",
+      type: "array",
+      title: "Ticket(s)",
+      description:
+        "Tickets for the event. Remember to put them in an intentional order",
+      group: "practical",
+      validation: (Rule) => Rule.unique(),
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "ticket" }],
+          options: {
+            // Filter out if the sponsorship is already in the event
+            filter: ({ parent }) => ({
+              filter: "!(_id in $current)",
+              params: {
+                current: parent?.map(({ _ref }) => _ref),
+              },
+            }),
+          },
+        },
+      ],
+    },
+    {
       name: "microcopy",
       type: "array",
       title: "Microcopy",

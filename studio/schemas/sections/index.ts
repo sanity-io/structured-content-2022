@@ -15,3 +15,4 @@ export { default as speakersSection } from "./speakersSection";
 export { default as sessionsSection } from "./sessionsSection";
 export { default as venuesSection } from "./venuesSection";
 export { default as sponsorsSection } from "./sponsorsSection";
+export { default as ticketsSection } from "./ticketsSection";
