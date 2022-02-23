@@ -1,17 +1,18 @@
 import Link from 'next/link';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 import { PortableTextBlock } from '@portabletext/types';
-import { RichTextSection } from '../../types/RichTextSection';
-import { getEntityPath } from '../../util/entityPaths';
-import { SharedSections } from './SharedSections';
-import { Person } from './Person';
-import { RichText } from './RichText';
-import { Block } from './Block';
-import { Venue } from './Venue';
-import { QuestionAndAnswerCollection } from './QuestionAndAnswerCollection';
-import { TextAndImage } from './TextAndImage';
-import SimpleCallToAction from './SimpleCallToAction';
-import ConferenceUpdatesForm from '../ConferenceUpdatesForm';
+import { RichTextSection } from '../../../types/RichTextSection';
+import { getEntityPath } from '../../../util/entityPaths';
+import SharedSections from '../SharedSections';
+import Person from '../Person';
+import RichText from '../RichText';
+import Block from '../Block';
+import Venue from '../Venue';
+import QuestionAndAnswerCollection from '../QuestionAndAnswerCollection';
+import TextAndImage from '../TextAndImage';
+import SimpleCallToAction from '../SimpleCallToAction';
+import ConferenceUpdatesForm from '../../ConferenceUpdatesForm';
+import VenuesSection from '../VenuesSection';
 
 const components: Partial<PortableTextComponents> = {
   types: {
@@ -24,6 +25,8 @@ const components: Partial<PortableTextComponents> = {
     sharedSections: SharedSections,
     simpleCallToAction: SimpleCallToAction,
     mailchimpSection: ConferenceUpdatesForm,
+    articleSection: RichText,
+    venuesSection: VenuesSection,
   },
   marks: {
     bold: ({ children }) => <strong>{children}</strong>,

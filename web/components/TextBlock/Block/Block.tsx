@@ -1,6 +1,6 @@
-import { RichText } from './RichText';
-import { Person } from './Person';
-import { Venue } from './Venue';
+import RichText from '../RichText';
+import Person from '../Person';
+import Venue from '../Venue';
 
 export const Block = ({ value }) =>
   value.children.map((child, index) => {
