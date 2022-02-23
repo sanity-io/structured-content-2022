@@ -44,7 +44,7 @@
 
 @media not all and (--medium-up) {
   .nav {
-    background: none;
+    background: var(--color-brand-yellow-light);
     box-shadow: none;
   }
 
@@ -94,6 +94,11 @@
 
   .menuButton:active {
     background: var(--color-brand-yellow-light);
+  }
+
+  .menuContents {
+    justify-content: center;
+    padding: 48px 0 40px;
   }
 
   .items {
