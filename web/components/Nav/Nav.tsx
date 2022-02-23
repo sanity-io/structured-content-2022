@@ -22,7 +22,7 @@ export const Nav = ({ onFrontPage }: NavProps) => {
   const closeMenu = () => setMenuOpened(false);
 
   return (
-    <nav className={styles.nav}>
+    <nav className={clsx(styles.nav, onFrontPage && styles.onFrontPage)}>
       <GridWrapper>
         <div className={styles.menuButtonWrapper}>
           <button

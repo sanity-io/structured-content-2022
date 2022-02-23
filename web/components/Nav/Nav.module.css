@@ -48,6 +48,11 @@
     box-shadow: none;
   }
 
+  .nav.onFrontPage {
+    /* Avoid GridWrapper taking up vertical space */
+    height: 0;
+  }
+
   .menuButtonWrapper {
     display: block;
     text-align: center;
