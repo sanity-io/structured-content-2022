@@ -13,7 +13,6 @@ export const Accordion = ({ items }: AccordionProps) => {
     e.target.classList.toggle(styles.active);
 
     const panel = e.target.nextElementSibling;
-    console.log(panel.style.display);
     if (panel.style.display !== 'block') {
       panel.style.display = 'block';
     } else {

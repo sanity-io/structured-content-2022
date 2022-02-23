@@ -6,8 +6,6 @@ import TextBlock from '../components/TextBlock';
 import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
 import NavBlock from '../components/NavBlock';
-import VenueNames from '../components/VenueNames';
-import { Venue } from '../types/Venue';
 
 const QUERY = groq`
   {
@@ -19,6 +17,17 @@ const QUERY = groq`
           _type == 'reference' => @-> {
             sections[] {
               ...,
+              _type == "sponsorsSection" => {
+                ...,
+                "sponsors": *[_type == "sponsor"] {
+                  ...,
+                  sponsorship->,
+                },
+              },
+              _type == "venuesSection" => {
+                ...,
+                "venues": *[_type == "venue"]
+              },
               content[] {
                 ...,
                 reference->,
@@ -41,8 +50,7 @@ const QUERY = groq`
       startDate,
       endDate,
       description,
-    },
-    "venues": *[_type == "venue"],
+    }
   }`;
 
 interface RouteProps {
@@ -59,7 +67,6 @@ interface RouteProps {
       endDate: string;
       description: string;
     };
-    venues: Venue[];
   };
   slug: string;
 }
@@ -70,7 +77,6 @@ const Route = ({
       page: { name, sections },
     },
     home: { name: homeName, startDate, endDate, description },
-    venues,
   },
   slug,
 }: RouteProps) => (
@@ -84,7 +90,6 @@ const Route = ({
           description={description}
         />
         <NavBlock />
-        <VenueNames venues={venues} />
       </GridWrapper>
     ) : (
       <Hero heading={name} />

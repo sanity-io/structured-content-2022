@@ -13,6 +13,7 @@ import TextAndImage from '../TextAndImage';
 import SimpleCallToAction from '../SimpleCallToAction';
 import ConferenceUpdatesForm from '../../ConferenceUpdatesForm';
 import VenuesSection from '../VenuesSection';
+import SponsorsSection from '../SponsorsSection';
 
 const components: Partial<PortableTextComponents> = {
   types: {
@@ -27,6 +28,7 @@ const components: Partial<PortableTextComponents> = {
     mailchimpSection: ConferenceUpdatesForm,
     articleSection: RichText,
     venuesSection: VenuesSection,
+    sponsorsSection: SponsorsSection,
   },
   marks: {
     bold: ({ children }) => <strong>{children}</strong>,

@@ -5,6 +5,7 @@ import Heading from '../../Heading';
 import RichText from '../RichText';
 import SimpleCallToAction from '../SimpleCallToAction';
 import VenuesSection from '../VenuesSection';
+import SponsorsSection from "../SponsorsSection";
 
 const Figure = ({ value: { alt, asset } }) => (
   <Image
@@ -15,17 +16,7 @@ const Figure = ({ value: { alt, asset } }) => (
   />
 );
 
-const SponsorsSection = ({ value: { type } }) => {
-  if (type !== 'all') {
-    console.error(`Unrecognized SponsorsSection type: '${type}'`);
-    return null;
-  }
-
-  // TODO: fetch Sponsors from Sanity
-  return null;
-};
-
-export const SharedSections = ({ value: { name, sections, ...rest } }) => (
+export const SharedSections = ({ value: { name, sections, ...rest }, ...rest2 }) => (
   <>
     <Heading type="h2">{name}</Heading>
     {sections.map((section) => {
@@ -55,6 +46,7 @@ export const SharedSections = ({ value: { name, sections, ...rest } }) => (
             />
           );
         case 'sponsors':
+        case 'sponsorsSection':
           return <SponsorsSection key={section._key} value={section} />;
         default:
           console.error(
