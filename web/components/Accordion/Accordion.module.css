@@ -1,0 +1,44 @@
+.container {
+  max-width: 728px;
+  margin: 0 auto;
+}
+
+.accordion {
+  font: var(--font-body-xl-medium);
+  width: 100%;
+
+  background: var(--color-ui-gray-100);
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 64px 48px;
+  margin: 4px 0;
+
+  text-align: left;
+  border: none;
+  outline: none;
+}
+
+.active,
+.accordion:hover {
+  background-color: var(--color-ui-gray-300);
+}
+
+.expandCollapseIndicator {
+  float: right;
+}
+
+.accordion .expandCollapseIndicator::after {
+  content: '+';
+}
+
+.accordion.active .expandCollapseIndicator::after {
+  content: '-';
+}
+
+.panel {
+  background-color: var(--color-brand-yellow-light);
+  overflow: hidden;
+  padding: 48px 64px;
+  border-radius: 12px;
+  display: none;
+}

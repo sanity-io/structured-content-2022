@@ -1,6 +1,6 @@
-import Heading from '../Heading';
-import { Block } from './Block';
-import SectionBlock from '../SectionBlock';
+import Heading from '../../Heading';
+import Block from '../Block';
+import SectionBlock from '../../SectionBlock';
 import styles from './QuestionAndAnswerCollection.module.css';
 
 export const QuestionAndAnswerCollection = ({

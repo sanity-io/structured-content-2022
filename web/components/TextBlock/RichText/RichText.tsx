@@ -1,8 +1,8 @@
 import clsx from 'clsx';
-import { TextBlock } from './TextBlock';
-import GridWrapper from '../GridWrapper';
-import Heading from '../Heading';
-import { RichTextSection } from '../../types/RichTextSection';
+import TextBlock from '../TextBlock';
+import GridWrapper from '../../GridWrapper';
+import Heading from '../../Heading';
+import { RichTextSection } from '../../../types/RichTextSection';
 import styles from './RichText.module.css';
 
 interface RichTextProps {

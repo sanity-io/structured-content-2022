@@ -1,7 +1,7 @@
-import { imageUrlFor } from '../../lib/sanity';
-import GridWrapper from '../GridWrapper';
-import Heading from '../Heading';
-import { Block } from './Block';
+import { imageUrlFor } from '../../../lib/sanity';
+import GridWrapper from '../../GridWrapper';
+import Heading from '../../Heading';
+import Block from '../Block';
 import styles from './TextAndImage.module.css';
 
 interface TextAndImageProps {
