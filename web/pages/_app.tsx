@@ -50,7 +50,7 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <>
       <header className={headerClasses}>
-        <Nav />
+        <Nav onFrontPage={isFrontPage} />
       </header>
       <main>
         <Component {...pageProps} />

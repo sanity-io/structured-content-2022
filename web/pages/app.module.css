@@ -1,22 +1,12 @@
 .header {
   width: 100%;
+  position: relative;
   z-index: 1;
 }
 
 .cookieConsent {
   position: relative;
   z-index: 2;
-}
-
-/* Separate media query ensures IE11 can fall back to static position for
- * medium-up
- */
-@media not all and (--medium-up) {
-  .header {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-  }
 }
 
 @media (--medium-up) {
