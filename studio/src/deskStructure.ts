@@ -92,6 +92,7 @@ export default () =>
             .title("People")
             .items([S.documentTypeListItem("person").title("Everyone")])
         ),
+      S.documentTypeListItem("program").title("Programs"),
       S.documentTypeListItem("session").title("Sessions"),
       S.documentTypeListItem("venue").title("Venues"),
       S.divider(),

@@ -4,8 +4,26 @@ export default {
   name: "session",
   title: "Sessions",
   type: "document",
+  preview: {
+    select: {
+      title: "title",
+      internalName: "internalName",
+      duration: "duration",
+    },
+    prepare({ title = "", internalName = "", duration = 0 }) {
+      return {
+        title: [internalName, title].filter(Boolean).join(" - "),
+        subtitle: `${duration} minutes`,
+      };
+    },
+  },
   icon: RestoreIcon,
   fields: [
+    {
+      name: "internalName",
+      title: "Internal Session Name",
+      type: "string",
+    },
     {
       name: "title",
       title: "Session title",
@@ -20,19 +38,6 @@ export default {
         source: "title",
         maxLength: 96,
       },
-    },
-    {
-      name: "events",
-      type: "array",
-      title: "Events",
-      description: "Which event(s) this session is part of",
-      validation: (Rule) => Rule.unique(),
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "event" }],
-        },
-      ],
     },
     {
       name: "publishedAt",
@@ -61,12 +66,6 @@ export default {
       name: "location",
       type: "reference",
       to: [{ type: "venue" }],
-    },
-    {
-      name: "startTime",
-      title: "Start time",
-      type: "datetime",
-      description: "Use Pacific timezone",
     },
     {
       name: "duration",

@@ -23,6 +23,7 @@ import simpleBlockContent from "./arrays/simpleBlockContent";
 import * as sections from "./sections";
 
 import spec from "./documents/spec";
+import program from "./documents/program";
 
 export default createSchema({
   name: "default",
@@ -47,5 +48,6 @@ export default createSchema({
     simpleBlockContent,
     blockContent,
     spec,
+    program,
   ]),
 });
