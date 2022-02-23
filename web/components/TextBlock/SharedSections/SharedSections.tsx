@@ -16,10 +16,7 @@ const Figure = ({ value: { alt, asset } }) => (
   />
 );
 
-export const SharedSections = ({
-  value: { name, sections, ...rest },
-  ...rest2
-}) => (
+export const SharedSections = ({ value: { name, sections, ...rest } }) => (
   <>
     <Heading type="h2">{name}</Heading>
     {sections.map((section) => {
