@@ -1,4 +1,4 @@
-import Sponsors from '../../../pageResources/home/Sponsors';
+import Sponsors from '../../Sponsors';
 
 export const SponsorsSection = ({ value: { type, sponsors } }) => {
   if (type !== 'all') {
