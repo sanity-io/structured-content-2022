@@ -5,7 +5,7 @@ import Heading from '../../Heading';
 import RichText from '../RichText';
 import SimpleCallToAction from '../SimpleCallToAction';
 import VenuesSection from '../VenuesSection';
-import SponsorsSection from "../SponsorsSection";
+import SponsorsSection from '../SponsorsSection';
 
 const Figure = ({ value: { alt, asset } }) => (
   <Image
@@ -16,7 +16,10 @@ const Figure = ({ value: { alt, asset } }) => (
   />
 );
 
-export const SharedSections = ({ value: { name, sections, ...rest }, ...rest2 }) => (
+export const SharedSections = ({
+  value: { name, sections, ...rest },
+  ...rest2
+}) => (
   <>
     <Heading type="h2">{name}</Heading>
     {sections.map((section) => {

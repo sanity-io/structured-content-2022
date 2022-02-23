@@ -1,1 +1,1 @@
-export { SponsorsSection as default } from "./SponsorsSection";
+export { SponsorsSection as default } from './SponsorsSection';

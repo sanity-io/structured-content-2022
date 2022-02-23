@@ -1,4 +1,4 @@
-import VenueNames from "../../VenueNames";
+import VenueNames from '../../VenueNames';
 
 export const VenuesSection = ({ value: { type, venues } }) => {
   if (type !== 'all') {

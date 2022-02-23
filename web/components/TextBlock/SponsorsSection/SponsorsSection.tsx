@@ -1,4 +1,4 @@
-import Sponsors from "../../../pageResources/home/Sponsors";
+import Sponsors from '../../../pageResources/home/Sponsors';
 
 export const SponsorsSection = ({ value: { type, sponsors } }) => {
   if (type !== 'all') {
@@ -7,7 +7,9 @@ export const SponsorsSection = ({ value: { type, sponsors } }) => {
   }
 
   if (!Array.isArray(sponsors) || sponsors.length === 0) {
-    console.error(`SponsorsSection missing or invalid sponsors array: '${sponsors}'`);
+    console.error(
+      `SponsorsSection missing or invalid sponsors array: '${sponsors}'`
+    );
     return null;
   }
 
