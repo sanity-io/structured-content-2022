@@ -20,7 +20,7 @@ const components: Partial<PortableTextComponents> = {
     richText: RichText,
     person: Person,
     venue: Venue,
-    questionAndAnswerCollection: QuestionAndAnswerCollection,
+    questionAndAnswerCollectionSection: QuestionAndAnswerCollection,
     block: Block,
     textAndImageSection: TextAndImage,
     sharedSections: SharedSections,
