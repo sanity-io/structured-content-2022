@@ -76,11 +76,8 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
 
       <div className={styles.list}>
         {tickets.map((ticket) => (
-          <>
-            <div
-              key={ticket._id}
-              className={clsx(styles.ticketInfo, styles.ticketInfoListItem)}
-            >
+          <section key={ticket._id}>
+            <div className={clsx(styles.ticketInfo, styles.ticketInfoListItem)}>
               <div className={styles.name}>{ticket.type}</div>
               <div>
                 <div>Price</div>
@@ -99,7 +96,7 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
                 </li>
               ))}
             </ul>
-          </>
+          </section>
         ))}
       </div>
     </GridWrapper>
