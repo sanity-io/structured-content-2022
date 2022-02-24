@@ -7,7 +7,7 @@ import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import GridWrapper from '../GridWrapper';
 import Paragraph from '../Paragraph';
 import styles from './Footer.module.css';
-import { Slug } from "../../types/Slug";
+import { Slug } from '../../types/Slug';
 
 interface FooterProps {
   links: {
@@ -73,12 +73,12 @@ export const Footer = ({ links }: FooterProps) => (
         {links
           ?.filter(({ slug }) => slug.current)
           .map(({ name, slug }) => (
-          <li key={name} className={styles.linksItem}>
-            <Link href={`/${slug.current}`}>
-              <a className={styles.linksItemLink}>{name}</a>
-            </Link>
-          </li>
-        ))}
+            <li key={name} className={styles.linksItem}>
+              <Link href={`/${slug.current}`}>
+                <a className={styles.linksItemLink}>{name}</a>
+              </Link>
+            </li>
+          ))}
       </ul>
     </GridWrapper>
   </footer>

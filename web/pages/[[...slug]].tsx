@@ -6,8 +6,8 @@ import TextBlock from '../components/TextBlock';
 import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
 import NavBlock from '../components/NavBlock';
-import Footer from "../components/Footer";
-import { Slug } from "../types/Slug";
+import Footer from '../components/Footer';
+import { Slug } from '../types/Slug';
 
 const QUERY = groq`
   {
@@ -97,20 +97,20 @@ const Route = ({
 }: RouteProps) => (
   <>
     <main>
-    {slug === '/' ? (
-      <GridWrapper>
-        <ConferenceHeader
-          name={homeName}
-          startDate={startDate}
-          endDate={endDate}
-          description={description}
-        />
-        <NavBlock />
-      </GridWrapper>
-    ) : (
-      <Hero heading={name} />
-    )}
-    <TextBlock value={sections} />
+      {slug === '/' ? (
+        <GridWrapper>
+          <ConferenceHeader
+            name={homeName}
+            startDate={startDate}
+            endDate={endDate}
+            description={description}
+          />
+          <NavBlock />
+        </GridWrapper>
+      ) : (
+        <Hero heading={name} />
+      )}
+      <TextBlock value={sections} />
     </main>
     <Footer links={footer.links} />
   </>
