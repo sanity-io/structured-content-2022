@@ -1,5 +1,7 @@
 import { Ticket } from '../../../types/Ticket';
 import GridWrapper from '../../GridWrapper';
+import checkmarkIcon from '../../../images/checkmark.svg';
+import crossIcon from '../../../images/cross.svg';
 import styles from './Tickets.module.css';
 import clsx from 'clsx';
 
@@ -61,11 +63,25 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
                       featureIncluded && styles.featureIncluded
                     )}
                   >
+                    {/* eslint-disable @next/next/no-img-element */}
                     {featureIncluded ? (
-                      <div className={styles.checkmark}>&#10004;</div>
+                      <img
+                        src={checkmarkIcon.src}
+                        className={styles.icon}
+                        width={checkmarkIcon.width}
+                        height={checkmarkIcon.height}
+                        alt="Included"
+                      />
                     ) : (
-                      <div className={styles.cross}>&#10008;</div>
+                      <img
+                        src={crossIcon.src}
+                        className={styles.icon}
+                        width={crossIcon.width}
+                        height={crossIcon.height}
+                        alt="Not included"
+                      />
                     )}
+                    {/* eslint-enable @next/next/no-img-element */}
                   </td>
                 );
               })}
@@ -89,7 +105,14 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
             <ul className={styles.ticketFeaturesListItem}>
               {ticket.included.map((included) => (
                 <li key={included} className={styles.includedFeature}>
-                  <span className={styles.checkmark}>&#10004;</span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={checkmarkIcon.src}
+                    className={styles.icon}
+                    width={checkmarkIcon.width}
+                    height={checkmarkIcon.height}
+                    alt=""
+                  />
                   <span className={styles.includedFeatureDescription}>
                     {included}
                   </span>

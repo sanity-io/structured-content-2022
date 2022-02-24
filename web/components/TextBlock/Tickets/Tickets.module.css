@@ -58,23 +58,8 @@
   background-color: var(--color-brand-yellow-light);
 }
 
-.checkmark {
-  border-radius: 4px;
-  background-color: var(--color-brand-orange);
-  text-align: center;
-}
-
-.cross {
-  border-radius: 16px;
-  background-color: var(--color-ui-gray-300);
-}
-
-.checkmark,
-.cross {
-  width: 24px;
-  height: 24px;
-  margin: 0 auto;
-  display: inline-block;
+.icon {
+  vertical-align: top;
 }
 
 .list {
