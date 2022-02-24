@@ -1,11 +1,9 @@
 import Heading from '../../Heading';
 import Block from '../Block';
-import GridWrapper from "../../GridWrapper";
+import GridWrapper from '../../GridWrapper';
 import styles from './QuestionAndAnswerCollection.module.css';
 
-export const QuestionAndAnswerCollection = ({
-  value: { questions },
-}) => (
+export const QuestionAndAnswerCollection = ({ value: { questions } }) => (
   <GridWrapper>
     {questions.map(({ _key, question, answer }) => (
       <div key={_key} className={styles.question}>
