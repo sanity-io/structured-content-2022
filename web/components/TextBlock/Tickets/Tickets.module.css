@@ -82,7 +82,13 @@
   background-color: var(--color-brand-yellow-light);
 }
 
-@media (--medium-up) {
+@media (-medium-up) {
+  .sections {
+    margin: 64px 0;
+  }
+}
+
+@media (--large-up) {
   .table {
     display: table;
   }
