@@ -6,6 +6,8 @@ import TextBlock from '../components/TextBlock';
 import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
 import NavBlock from '../components/NavBlock';
+import Footer from '../components/Footer';
+import { Slug } from '../types/Slug';
 
 const QUERY = groq`
   {
@@ -50,7 +52,14 @@ const QUERY = groq`
       startDate,
       endDate,
       description,
-    }
+    },
+    "footer": *[_id == "secondary-nav"][0] {
+      "links": tree[].value.reference-> {
+        "name": seo.title,
+        slug,
+        _id,
+      }
+    },
   }`;
 
 interface RouteProps {
@@ -67,6 +76,13 @@ interface RouteProps {
       endDate: string;
       description: string;
     };
+    footer: {
+      links: {
+        name: string;
+        slug: Slug;
+        _id: string;
+      }[];
+    };
   };
   slug: string;
 }
@@ -77,24 +93,28 @@ const Route = ({
       page: { name, sections },
     },
     home: { name: homeName, startDate, endDate, description },
+    footer,
   },
   slug,
 }: RouteProps) => (
   <>
-    {slug === '/' ? (
-      <GridWrapper>
-        <ConferenceHeader
-          name={homeName}
-          startDate={startDate}
-          endDate={endDate}
-          description={description}
-        />
-        <NavBlock />
-      </GridWrapper>
-    ) : (
-      <Hero heading={name} />
-    )}
-    <TextBlock value={sections} />
+    <main>
+      {slug === '/' ? (
+        <GridWrapper>
+          <ConferenceHeader
+            name={homeName}
+            startDate={startDate}
+            endDate={endDate}
+            description={description}
+          />
+          <NavBlock />
+        </GridWrapper>
+      ) : (
+        <Hero heading={name} />
+      )}
+      <TextBlock value={sections} />
+    </main>
+    <Footer links={footer.links} />
   </>
 );
 
