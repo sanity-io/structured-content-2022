@@ -19,4 +19,8 @@
     font: var(--font-display-base);
     margin-bottom: 30px;
   }
+
+  .h3 {
+    font: var(--font-display-sm);
+  }
 }

@@ -31,6 +31,7 @@
   --letter-spacing-body-xl: -0.019em;
   --letter-spacing-ui-sm: -0.011em;
   --letter-spacing-ui-xxl: -0.022em;
+  --max-body-text-width: 37.5rem;
   --spacing-small: 40px;
   --spacing-medium: 64px;
   --spacing-large: 128px;
