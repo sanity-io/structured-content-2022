@@ -119,5 +119,27 @@ export default {
         },
       ],
     },
+    {
+      name: "sponsoredBy",
+      title: "Sponsored by",
+      type: "array",
+      validation: (Rule) => Rule.unique(),
+      of: [
+        {
+          type: "reference",
+          title: "Sponsor",
+          to: [{ type: "sponsor" }],
+          option: {
+            // Filter out if the sponsorship is already in the event
+            filter: ({ parent }) => ({
+              filter: "!(_id in $current)",
+              params: {
+                current: parent?.map(({ _ref }) => _ref),
+              },
+            }),
+          },
+        },
+      ],
+    },
   ],
 };
