@@ -30,16 +30,23 @@ export default {
       description: "Price in USD",
     },
     {
-      name: "availableFrom",
-      title: "Available form",
-      type: "datetime",
-      description: "This ticket is available to purchase from this date",
-    },
-    {
-      name: "availableTo",
-      title: "Available to",
-      type: "datetime",
-      description: "This ticket is available to purchase until this date",
+      name: "available",
+      title: "Available from-to",
+      type: "object",
+      fields: [
+        {
+          name: "from",
+          title: "Available form",
+          type: "datetime",
+          description: "This ticket is available to purchase from this date",
+        },
+        {
+          name: "to",
+          title: "Available to",
+          type: "datetime",
+          description: "This ticket is available to purchase until this date",
+        },
+      ],
     },
     {
       name: "included",
