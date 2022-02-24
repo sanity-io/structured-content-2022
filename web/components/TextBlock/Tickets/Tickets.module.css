@@ -1,5 +1,8 @@
 .table {
   display: none;
+  width: 100%;
+  border-spacing: 8px;
+  margin: 96px 0;
 }
 
 .sections {
@@ -12,14 +15,11 @@
   background-color: var(--color-brand-yellow);
   padding: 24px;
   border-radius: 8px;
+  font: inherit;
+  text-align: left;
 }
 
-.ticketInfoColumn {
-  width: 265px;
-  margin: 4px;
-}
-
-.ticketInfoListItem {
+.ticketInfo.inSections {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -65,17 +65,23 @@
   text-transform: capitalize;
 }
 
-.feature {
-  border: 1px solid #f4f3ef;
+.feature,
+.featurePresence {
+  border: 1px solid var(--color-ui-gray-100);
   width: 265px;
   height: 114px;
-  text-align: center;
   padding: 24px;
+  border-radius: 8px;
+}
+
+.feature {
+  font: inherit;
+  text-align: left;
   text-transform: capitalize;
 }
 
-.feature:first-of-type {
-  text-align: left;
+.featurePresence {
+  text-align: center;
 }
 
 .featureIncluded {

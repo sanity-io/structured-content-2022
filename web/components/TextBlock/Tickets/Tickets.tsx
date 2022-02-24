@@ -32,34 +32,33 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <td />
+            <th />
             {tickets.map((ticket) => (
-              <td
-                key={ticket._id}
-                className={clsx(styles.ticketInfo, styles.ticketInfoColumn)}
-              >
+              <th key={ticket._id} scope="col" className={styles.ticketInfo}>
                 <div className={styles.name}>{ticket.type}</div>
-                <div>
-                  <div>Price</div>
-                  <div className={styles.price}>
+                <dl className={styles.priceList}>
+                  <dt className={styles.priceLabel}>Price</dt>
+                  <dd className={styles.price}>
                     {ticket.price ? `$${ticket.price}` : 'Free'}
-                  </div>
-                </div>
-              </td>
+                  </dd>
+                </dl>
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {includedTypes.map((includedType) => (
             <tr key={includedType}>
-              <td className={styles.feature}>{includedType}</td>
+              <th className={styles.feature} scope="row">
+                {includedType}
+              </th>
               {tickets.map((ticket) => {
                 const featureIncluded = ticket.included.includes(includedType);
                 return (
                   <td
                     key={ticket._id}
                     className={clsx(
-                      styles.feature,
+                      styles.featurePresence,
                       featureIncluded && styles.featureIncluded
                     )}
                   >
@@ -93,7 +92,7 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
       <div className={styles.sections}>
         {tickets.map((ticket) => (
           <section key={ticket._id}>
-            <div className={clsx(styles.ticketInfo, styles.ticketInfoListItem)}>
+            <div className={clsx(styles.ticketInfo, styles.inSections)}>
               <h3 className={styles.name}>{ticket.type}</h3>
               <dl className={styles.priceList}>
                 <dt className={styles.priceLabel}>Price</dt>
