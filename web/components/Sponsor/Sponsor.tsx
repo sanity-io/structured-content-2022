@@ -1,7 +1,7 @@
+import clsx from 'clsx';
 import { Sponsor as TSponsor, SponsorLevel } from '../../types/Sponsor';
 import { imageUrlFor } from '../../lib/sanity';
 import styles from './Sponsor.module.css';
-import clsx from 'clsx';
 
 interface SponsorProps {
   sponsor: TSponsor;
@@ -21,15 +21,15 @@ const imgDimensions: {
     height: Math.round(130 * assumedScaleFactor),
     className: styles.premier,
   },
-  Gold: {
+  Partner: {
     width: Math.round(192 * assumedScaleFactor),
     height: Math.round(88 * assumedScaleFactor),
-    className: styles.gold,
+    className: styles.partner,
   },
-  Silver: {
+  Community: {
     width: Math.round(128 * assumedScaleFactor),
     height: Math.round(60 * assumedScaleFactor),
-    className: styles.silver,
+    className: styles.community,
   },
 };
 
@@ -40,7 +40,7 @@ export const Sponsor = ({
     title,
   },
 }: SponsorProps) => {
-  const dimension = imgDimensions[type] || imgDimensions.Silver;
+  const dimension = imgDimensions[type] || imgDimensions.Community;
   const src = imageUrlFor(image)
     .auto('format')
     .bg('fff')
