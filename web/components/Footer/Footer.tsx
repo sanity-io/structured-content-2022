@@ -7,8 +7,16 @@ import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import GridWrapper from '../GridWrapper';
 import Paragraph from '../Paragraph';
 import styles from './Footer.module.css';
+import { Slug } from "../../types/Slug";
 
-export const Footer = () => (
+interface FooterProps {
+  links: {
+    name: string;
+    slug: Slug;
+  }[];
+}
+
+export const Footer = ({ links }: FooterProps) => (
   <footer className={styles.container}>
     <GridWrapper>
       <div className={styles.logoContainer}>
@@ -62,26 +70,15 @@ export const Footer = () => (
 
     <GridWrapper>
       <ul className={styles.links}>
-        <li className={styles.linksItem}>
-          <Link href="/code-of-conduct">
-            <a className={styles.linksItemLink}>Code of conduct</a>
-          </Link>
-        </li>
-        <li className={styles.linksItem}>
-          <Link href="/privacy-policy">
-            <a className={styles.linksItemLink}>Privacy policy</a>
-          </Link>
-        </li>
-        <li className={styles.linksItem}>
-          <Link href="/contact">
-            <a className={styles.linksItemLink}>Contact</a>
-          </Link>
-        </li>
-        <li className={styles.linksItem}>
-          <Link href="/venues">
-            <a className={styles.linksItemLink}>Venues</a>
-          </Link>
-        </li>
+        {links
+          ?.filter(({ slug }) => slug.current)
+          .map(({ name, slug }) => (
+          <li key={name} className={styles.linksItem}>
+            <Link href={`/${slug.current}`}>
+              <a className={styles.linksItemLink}>{name}</a>
+            </Link>
+          </li>
+        ))}
       </ul>
     </GridWrapper>
   </footer>
