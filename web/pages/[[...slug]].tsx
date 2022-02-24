@@ -8,6 +8,7 @@ import ConferenceHeader from '../components/ConferenceHeader';
 import NavBlock from '../components/NavBlock';
 import Footer from '../components/Footer';
 import { Slug } from '../types/Slug';
+import { mainEventId } from "../util/entityPaths";
 
 const QUERY = groq`
   {
@@ -32,7 +33,7 @@ const QUERY = groq`
               },
               _type == "venuesSection" => {
                 ...,
-                "venues": *[_type == "venue"]
+                "venues": *[_id == "${mainEventId}"][0].venues[]->,
               },
               content[] {
                 ...,
