@@ -1,9 +1,36 @@
-.ticketType {
+.ticketInfo {
   background-color: var(--color-brand-yellow);
-  margin: 4px;
   padding: 24px;
   border-radius: 8px;
+}
+
+.ticketInfoColumn {
   width: 265px;
+  margin: 4px;
+}
+
+.ticketInfoListItem {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ticketFeaturesListItem {
+  list-style-type: none;
+  padding: 24px;
+  vertical-align: center;
+  border: 1px solid var(--color-brand-yellow);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+
+.includedFeature:not(:last-child) {
+  padding-bottom: 12px;
+}
+
+.includedFeatureDescription {
+  padding-left: 12px;
+  text-transform: capitalize;
 }
 
 .name {
@@ -35,6 +62,7 @@
 .checkmark {
   border-radius: 4px;
   background-color: var(--color-brand-orange);
+  text-align: center;
 }
 
 .cross {
@@ -47,4 +75,19 @@
   width: 24px;
   height: 24px;
   margin: 0 auto;
+  display: inline-block;
+}
+
+.list {
+  display: none;
+}
+
+@media not all and (--medium-up) {
+  .table {
+    display: none;
+  }
+
+  .list {
+    display: block;
+  }
 }

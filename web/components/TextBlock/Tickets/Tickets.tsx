@@ -25,12 +25,13 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
     new Set(tickets.map((ticket) => ticket.included).flat())
   );
   return (
-    <table>
+    <>
+    <table className={styles.table}>
       <thead>
         <tr>
           <td />
           {tickets.map((ticket) => (
-            <td key={ticket._id} className={styles.ticketType}>
+            <td key={ticket._id} className={clsx(styles.ticketInfo, styles.ticketInfoColumn)}>
               <div className={styles.name}>{ticket.type}</div>
               <div>
                 <div>Price</div>
@@ -68,5 +69,28 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
         ))}
       </tbody>
     </table>
+
+    <div className={styles.list}>
+      {tickets.map((ticket) => (
+        <>
+        <div key={ticket._id} className={clsx(styles.ticketInfo, styles.ticketInfoListItem)}>
+          <div className={styles.name}>{ticket.type}</div>
+          <div>
+            <div>Price</div>
+            <div className={styles.price}>{ticket.price ? `$${ticket.price}` : 'Free'}</div>
+          </div>
+        </div>
+          <ul className={styles.ticketFeaturesListItem}>
+            {ticket.included.map((included) => (
+              <li key={included} className={styles.includedFeature}>
+                <span className={styles.checkmark}>&#10004;</span>
+                <span className={styles.includedFeatureDescription}>{included}</span>
+              </li>
+            ))}
+          </ul>
+        </>
+      ))}
+    </div>
+  </>
   );
 };
