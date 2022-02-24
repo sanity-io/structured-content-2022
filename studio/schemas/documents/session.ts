@@ -63,11 +63,6 @@ export default {
       },
     },
     {
-      name: "location",
-      type: "reference",
-      to: [{ type: "venue" }],
-    },
-    {
       name: "duration",
       title: "Duration",
       type: "number",
