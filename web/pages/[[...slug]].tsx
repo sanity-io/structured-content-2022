@@ -26,6 +26,10 @@ const QUERY = groq`
                   sponsorship->,
                 },
               },
+              _type == "simpleCallToAction" => {
+                ...,
+                reference->,
+              },
               _type == "venuesSection" => {
                 ...,
                 "venues": *[_type == "venue"]

@@ -1,3 +1,10 @@
+.question {
+  margin: 4px 80px;
+  background: var(--color-brand-yellow-light);
+  padding: 80px 20px;
+  border-radius: 12px;
+}
+
 .question:not(:last-child) {
-  padding-bottom: 1rem;
+  padding-bottom: var(--spacing-small);
 }
