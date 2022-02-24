@@ -15,9 +15,6 @@
 @media (--medium-up) {
   .container {
     margin: 96px 0;
-    display: grid;
-    grid-template-columns: repeat(8, minmax(0, 1fr));
-    column-gap: var(--grid-medium-gutter);
   }
 
   .container.background {
@@ -25,22 +22,17 @@
   }
 
   .content {
-    grid-column: 2 / span 6;
+    max-width: 37.5rem;
+    margin: 0 auto;
   }
 }
 
 @media (--large-up) {
   .container {
     margin: 128px 0;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: var(--grid-gutter);
   }
 
   .container.background {
     padding: 128px 0;
-  }
-
-  .content {
-    grid-column: 4 / span 6;
   }
 }

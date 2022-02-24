@@ -16,16 +16,14 @@
 @media (--medium-up) {
   .container {
     margin: 96px 0;
-    display: grid;
-    grid-template-columns: repeat(8, minmax(0, 1fr));
-    column-gap: var(--grid-medium-gutter);
   }
 
   .section {
     padding: 64px 52px;
-    grid-column: 2 / span 6;
-    margin-left: -52px;
-    margin-right: -52px;
+    box-sizing: content-box;
+    max-width: 37.5rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -38,8 +36,5 @@
 
   .section {
     padding: 64px;
-    grid-column: 4 / span 6;
-    margin-left: -64px;
-    margin-right: -64px;
   }
 }
