@@ -1,4 +1,5 @@
 import { Ticket } from '../../../types/Ticket';
+import GridWrapper from '../../GridWrapper';
 import styles from './Tickets.module.css';
 import clsx from 'clsx';
 
@@ -25,7 +26,7 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
     new Set(tickets.map((ticket) => ticket.included).flat())
   );
   return (
-    <>
+    <GridWrapper>
       <table className={styles.table}>
         <thead>
           <tr>
@@ -101,6 +102,6 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
           </>
         ))}
       </div>
-    </>
+    </GridWrapper>
   );
 };
