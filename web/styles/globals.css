@@ -10,11 +10,11 @@
 }
 
 @font-face {
-  font-family: 'Larsseit';
+  font-family: 'National 2 Narrow';
   font-weight: 700;
   font-style: normal;
   font-display: swap;
-  src: url('/static/fonts/larsseit-bold.woff2') format('woff2');
+  src: url('/static/fonts/national-2-narrow-bold.woff2') format('woff2');
 }
 
 *,
