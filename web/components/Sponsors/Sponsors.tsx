@@ -19,14 +19,14 @@ const groupBySponsorLevel = (
     },
     {
       Premier: [],
-      Gold: [],
-      Silver: [],
+      Partner: [],
+      Community: [],
     }
   );
 
 export const Sponsors = ({ sponsors }: SponsorsProps) => {
   const groupedSponsors = groupBySponsorLevel(sponsors);
-  const levels: SponsorLevel[] = ['Premier', 'Gold', 'Silver'];
+  const levels: SponsorLevel[] = ['Premier', 'Partner', 'Community'];
   return (
     <GridWrapper>
       {levels.map((level) => (
