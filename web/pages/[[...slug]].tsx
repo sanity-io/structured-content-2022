@@ -57,6 +57,7 @@ const QUERY = groq`
       "links": tree[].value.reference-> {
         "name": seo.title,
         slug,
+        _id,
       }
     },
   }`;
@@ -79,6 +80,7 @@ interface RouteProps {
       links: {
         name: string;
         slug: Slug;
+        _id: string;
       }[];
     };
   };

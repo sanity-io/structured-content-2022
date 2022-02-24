@@ -13,6 +13,7 @@ interface FooterProps {
   links: {
     name: string;
     slug: Slug;
+    _id: string;
   }[];
 }
 
@@ -72,8 +73,8 @@ export const Footer = ({ links }: FooterProps) => (
       <ul className={styles.links}>
         {links
           ?.filter(({ slug }) => slug.current)
-          .map(({ name, slug }) => (
-            <li key={name} className={styles.linksItem}>
+          .map(({ name, slug, _id }) => (
+            <li key={_id} className={styles.linksItem}>
               <Link href={`/${slug.current}`}>
                 <a className={styles.linksItemLink}>{name}</a>
               </Link>
