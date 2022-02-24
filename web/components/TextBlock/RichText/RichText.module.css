@@ -22,7 +22,7 @@
   }
 
   .content {
-    max-width: 37.5rem;
+    max-width: var(--max-body-text-width);
     margin: 0 auto;
   }
 }

@@ -21,7 +21,7 @@
   .section {
     padding: 64px 52px;
     box-sizing: content-box;
-    max-width: 37.5rem;
+    max-width: var(--max-body-text-width);
     margin-left: auto;
     margin-right: auto;
   }
