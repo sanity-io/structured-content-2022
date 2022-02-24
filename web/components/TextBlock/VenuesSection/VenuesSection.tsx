@@ -1,3 +1,4 @@
+import GridWrapper from '../../GridWrapper';
 import VenueNames from '../../VenueNames';
 
 export const VenuesSection = ({ value: { type, venues } }) => {
@@ -6,5 +7,9 @@ export const VenuesSection = ({ value: { type, venues } }) => {
     return null;
   }
 
-  return <VenueNames venues={venues} />;
+  return (
+    <GridWrapper>
+      <VenueNames venues={venues} />
+    </GridWrapper>
+  );
 };
