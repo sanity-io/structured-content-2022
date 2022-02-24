@@ -42,19 +42,36 @@ export default {
       title: "Offering",
       options: {
         list: [
-          { title: "Logo + link on conference website", value: "logoLink" },
+          {
+            title: "Logo + link on conference website",
+            value: "Logo + link on conference website",
+          },
           {
             title: "Logo + link on conference website - Premium location",
-            value: "premiumLocation",
+            value: "Logo + link on conference website - Premium location",
           },
-          { title: "Social media mention", value: "soMeMention" },
+          {
+            title: "Social media mention - Group post",
+            value: "Social media mention - Group post",
+          },
           {
             title: "Social media mention - Dedicated post",
-            value: "soMeMentionDedicated",
+            value: "Social media mention - Dedicated post",
           },
-          { title: "On-stage mention", value: "onStageMention" },
-          { title: "Virtual booth", value: "virtualBooth" },
-          { title: "Sizzle reel spot", value: "sizzleReelSpot" },
+          { title: "On-stage mention", value: "On-stage mention" },
+          { title: "Virtual booth", value: "Virtual booth" },
+          {
+            title: "Sizzle reel spot - Before keynote & 1 talk of choice",
+            value: "Sizzle reel spot - Before keynote & 1 talk of choice",
+          },
+          {
+            title: "Sizzle reel spot - Before 1 talk of choice",
+            value: "Sizzle reel spot - Before 1 talk of choice",
+          },
+          {
+            title: "Sponsor a talk of your choice",
+            value: "Sponsor a talk of your choice",
+          },
         ],
       },
       of: [
