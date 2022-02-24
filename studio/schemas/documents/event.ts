@@ -126,6 +126,13 @@ export default {
       ],
     },
     {
+      name: "registrationUrl",
+      type: "url",
+      title: "Registration URL",
+      group: "practical",
+      description: "URL to the event registration page (Hopin, Zoom, etc.)",
+    },
+    {
       name: "tickets",
       type: "array",
       title: "Ticket(s)",
