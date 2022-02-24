@@ -90,19 +90,19 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
         </tbody>
       </table>
 
-      <div className={styles.list}>
+      <div className={styles.sections}>
         {tickets.map((ticket) => (
           <section key={ticket._id}>
             <div className={clsx(styles.ticketInfo, styles.ticketInfoListItem)}>
-              <div className={styles.name}>{ticket.type}</div>
-              <div>
-                <div>Price</div>
-                <div className={styles.price}>
+              <h3 className={styles.name}>{ticket.type}</h3>
+              <dl className={styles.priceList}>
+                <dt className={styles.priceLabel}>Price</dt>
+                <dd className={styles.price}>
                   {ticket.price ? `$${ticket.price}` : 'Free'}
-                </div>
-              </div>
+                </dd>
+              </dl>
             </div>
-            <ul className={styles.ticketFeaturesListItem}>
+            <ul className={styles.ticketFeatures}>
               {ticket.included.map((included) => (
                 <li key={included} className={styles.includedFeature}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
