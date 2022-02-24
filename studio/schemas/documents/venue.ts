@@ -50,8 +50,9 @@ export default {
           type: "string",
         },
         {
-          name: "zip",
+          name: "postalCode",
           type: "string",
+          title: "ZIP/Postal Code",
         },
         { name: "country", type: "string" },
       ],
