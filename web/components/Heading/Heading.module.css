@@ -1,13 +1,26 @@
 .heading {
-  font-weight: 700;
-  line-height: 1.2;
   margin: 0;
 }
 
-.h1 {
-  font-size: 2.5rem;
+.h2 {
+  font: var(--font-display-xs);
+  margin-bottom: 18px;
 }
 
-.h2 {
-  font-size: 1.5rem;
+.h3 {
+  /* Heading hierarchy in sketches seems a bit unclear, this is currently the
+   * same as the h2...
+   */
+  font: var(--font-display-xs);
+}
+
+@media (--medium-up) {
+  .h2 {
+    font: var(--font-display-base);
+    margin-bottom: 30px;
+  }
+
+  .h3 {
+    font: var(--font-display-sm);
+  }
 }

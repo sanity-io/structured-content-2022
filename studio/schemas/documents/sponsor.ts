@@ -31,13 +31,8 @@ export default {
     {
       name: "image",
       title: "Image",
-      type: "image",
-    },
-    {
-      name: "sponsorship",
-      title: "Sponsorship",
-      type: "reference",
-      to: [{ type: "sponsorship" }],
+      type: "figure",
+      description: "Preferably SVG, and the monochrome version of the logo",
     },
   ],
 };

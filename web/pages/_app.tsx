@@ -3,7 +3,6 @@ import { getCookieConsentValue } from 'react-cookie-consent';
 import TagManager from 'react-gtm-module';
 import clsx from 'clsx';
 import CookieConsent from '../components/CookieConsent';
-import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 import '../styles/globals.css';
 import styles from './app.module.css';
@@ -39,7 +38,7 @@ function MyApp({ Component, pageProps, router }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, [scrollTop]);
 
-  const isFrontPage = router.asPath === '/home' || router.asPath === '/';
+  const isFrontPage = router.asPath === '/';
   const scrolledFarEnough = scrollTop > scrollPositionTriggeringFrontPageMenu;
   const headerClasses = clsx(
     styles.header,
@@ -50,12 +49,9 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <>
       <header className={headerClasses}>
-        <Nav />
+        <Nav onFrontPage={isFrontPage} />
       </header>
-      <main>
-        <Component {...pageProps} />
-      </main>
-      <Footer />
+      <Component {...pageProps} />
       <div className={styles.cookieConsent}>
         <CookieConsent />
       </div>

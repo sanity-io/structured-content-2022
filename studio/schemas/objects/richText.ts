@@ -8,11 +8,12 @@ export default {
   preview: {
     select: {
       heading: "heading",
+      subheading: "subheading",
       content: "content",
     },
-    prepare({ heading, content }) {
+    prepare({ heading, subheading, content = [] }) {
       return {
-        title: toPlainText(content) || heading,
+        title: heading || subheading || toPlainText(content),
         subtitle: "Rich text",
       };
     },

@@ -1,6 +1,8 @@
 .nav {
   background: var(--color-brand-white);
   box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 0;
 }
 
 .menuContents {
@@ -16,13 +18,14 @@
 }
 
 .items {
+  margin: 0;
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .menuButtonWrapper,
-.ticketItem,
-.closeButton {
+.ticketItem {
   display: none;
 }
 
@@ -42,27 +45,32 @@
 
 @media not all and (--medium-up) {
   .nav {
-    background: none;
+    background: var(--color-brand-yellow-light);
     box-shadow: none;
+  }
+
+  .nav.onFrontPage {
+    /* Avoid GridWrapper taking up vertical space */
+    height: 0;
   }
 
   .menuButtonWrapper {
     display: block;
-    padding-bottom: 46px;
     text-align: center;
+    position: fixed;
+    bottom: 46px;
+    left: 0;
+    right: 0;
+    z-index: 1;
   }
 
-  .menuButton,
-  .closeButton {
+  .menuButton {
     display: inline-block;
     padding: 18px 24px;
     border-radius: 6px;
     border: none;
     font: var(--font-body-large-medium);
     letter-spacing: var(--letter-spacing-body-large);
-  }
-
-  .menuButton {
     background: var(--color-brand-yellow);
   }
 
@@ -73,47 +81,46 @@
     margin-right: 17px;
   }
 
-  .closeButton {
+  .menuButton.menuOpen {
     background: var(--color-brand-orange);
     align-self: center;
   }
 
-  .closeButton::before {
+  .menuButton.menuOpen::before {
     content: url('../../images/close.svg');
     line-height: 1;
     vertical-align: bottom;
     margin-right: 20px;
   }
 
-  .menuButton:active,
-  .closeButton:active {
+  .menuButton:active {
     background: var(--color-brand-yellow-light);
   }
 
   .menuContents {
+    justify-content: center;
+    padding: 48px 0 40px;
+  }
+
+  .items {
+    display: block;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     background: var(--color-brand-yellow);
-    flex-direction: column;
-    align-items: start;
-    padding: 24px var(--grid-half-gutter) 36px;
+    padding: 24px var(--grid-half-gutter) 112px;
     overflow: auto;
   }
 
-  .menuContents.closed {
+  .items.menuClosed {
     display: none;
   }
 
-  .homeLink,
+  .homeLink.onFrontPage,
   .ticketButton {
     display: none;
-  }
-
-  .items {
-    display: block;
   }
 
   .ticketItem {
@@ -123,6 +130,7 @@
   .link {
     font: var(--font-display-lg);
     letter-spacing: normal;
+    display: inline;
   }
 }
 

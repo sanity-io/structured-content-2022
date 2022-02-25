@@ -1,0 +1,40 @@
+.container {
+  margin: 80px 0;
+}
+
+.section {
+  margin: 8px 0;
+  background: var(--color-brand-yellow-light);
+  padding: 48px 32px;
+  border-radius: 12px;
+}
+
+.answer {
+  margin-top: 22px;
+}
+
+@media (--medium-up) {
+  .container {
+    margin: 96px 0;
+  }
+
+  .section {
+    padding: 64px 52px;
+    box-sizing: content-box;
+    max-width: var(--max-body-text-width);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (--large-up) {
+  .container {
+    margin: 128px 0;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--grid-gutter);
+  }
+
+  .section {
+    padding: 64px;
+  }
+}

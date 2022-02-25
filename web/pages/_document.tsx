@@ -32,9 +32,9 @@ class MyDocument extends Document {
           />
           <link
             rel="preload"
-            href="/static/fonts/larsseit-bold.woff2"
+            href="/static/fonts/national-2-narrow-bold.woff2"
             as="font"
-            type="font/woff"
+            type="font/woff2"
             crossOrigin="anonymous"
           />
           <link

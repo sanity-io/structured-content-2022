@@ -6,7 +6,11 @@ import GridWrapper from '../GridWrapper';
 import logo from '../../images/logo.svg';
 import styles from './Nav.module.css';
 
-export const Nav = () => {
+interface NavProps {
+  onFrontPage: boolean;
+}
+
+export const Nav = ({ onFrontPage }: NavProps) => {
   const [menuOpened, setMenuOpened] = useState(false);
   const contentsId = 'nav-menu-contents';
 
@@ -14,28 +18,34 @@ export const Nav = () => {
     document.body.classList.toggle('main-menu-open', menuOpened);
   }, [menuOpened]);
 
+  const toggleMenu = () => setMenuOpened(!menuOpened);
   const closeMenu = () => setMenuOpened(false);
 
   return (
-    <nav className={styles.nav}>
+    <nav className={clsx(styles.nav, onFrontPage && styles.onFrontPage)}>
       <GridWrapper>
         <div className={styles.menuButtonWrapper}>
           <button
-            className={styles.menuButton}
+            className={clsx(styles.menuButton, menuOpened && styles.menuOpen)}
             type="button"
             aria-controls={contentsId}
             aria-expanded={menuOpened}
-            onClick={() => setMenuOpened(true)}
+            onClick={toggleMenu}
           >
-            Menu
+            {menuOpened ? 'Close' : 'Menu'}
           </button>
         </div>
         <div
           id={contentsId}
           className={clsx(styles.menuContents, !menuOpened && styles.closed)}
         >
-          <Link href="/home">
-            <a className={styles.homeLink}>
+          <Link href="/">
+            <a
+              className={clsx(
+                styles.homeLink,
+                onFrontPage && styles.onFrontPage
+              )}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={logo.src}
@@ -46,38 +56,46 @@ export const Nav = () => {
               />
             </a>
           </Link>
-          <ul className={styles.items}>
+          <ul className={clsx(styles.items, !menuOpened && styles.menuClosed)}>
             <li className={styles.ticketItem}>
               <Link href="/tickets">
-                <a className={styles.link} onClick={closeMenu}>Tickets</a>
+                <a className={styles.link} onClick={closeMenu}>
+                  Tickets
+                </a>
               </Link>
             </li>
             <li>
               <Link href="/program">
-                <a className={styles.link} onClick={closeMenu}>Program</a>
+                <a className={styles.link} onClick={closeMenu}>
+                  Program
+                </a>
               </Link>
             </li>
             <li>
-              <Link href="/speakers">
-                <a className={styles.link} onClick={closeMenu}>Speakers</a>
+              <Link href="/sponsorship-information">
+                <a className={styles.link} onClick={closeMenu}>
+                  Sponsorship
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/venues">
+                <a className={styles.link} onClick={closeMenu}>
+                  Venues
+                </a>
               </Link>
             </li>
             <li>
               <Link href="/about">
-                <a className={styles.link} onClick={closeMenu}>About</a>
+                <a className={styles.link} onClick={closeMenu}>
+                  About
+                </a>
               </Link>
             </li>
           </ul>
           <div className={styles.ticketButton}>
             <ButtonLink url="/tickets" text="Tickets" />
           </div>
-          <button
-            type="button"
-            className={styles.closeButton}
-            onClick={closeMenu}
-          >
-            Close
-          </button>
         </div>
       </GridWrapper>
     </nav>

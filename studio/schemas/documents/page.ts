@@ -35,7 +35,7 @@ export default {
           to: [{ type: "sharedSections" }],
         },
         { type: "figure" },
-        { type: "richText" },
+        { type: "article" },
         ...Object.keys(sections).map((type) => ({ type })),
       ],
     },

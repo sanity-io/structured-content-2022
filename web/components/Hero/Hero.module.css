@@ -1,0 +1,36 @@
+.container {
+  background: var(--color-brand-yellow-light);
+  text-align: center;
+  padding: 40px 0 80px;
+}
+
+.cta {
+  margin-top: 32px;
+}
+
+@media (--medium-up) {
+  .container {
+    padding: 96px 0;
+  }
+
+  .cta {
+    margin-top: 40px;
+  }
+}
+
+@media (--large-up) {
+  .container {
+    padding: 128px 0;
+  }
+
+  .headingContainer {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--grid-gutter);
+  }
+
+  .heading,
+  .cta {
+    grid-column: 3 / span 8;
+  }
+}

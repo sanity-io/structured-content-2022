@@ -92,6 +92,7 @@ export default () =>
             .title("People")
             .items([S.documentTypeListItem("person").title("Everyone")])
         ),
+      S.documentTypeListItem("program").title("Programs"),
       S.documentTypeListItem("session").title("Sessions"),
       S.documentTypeListItem("venue").title("Venues"),
       S.divider(),
@@ -125,7 +126,7 @@ export default () =>
             ])
             .title("Navigation")
         ),
-      //S.documentTypeListItem("article").title("Editorial Articles"), // disabled for now
+      S.documentTypeListItem("article").title("Editorial Articles"),
       S.divider(),
       S.documentTypeListItem("ticket").title("Ticket types"),
       S.listItem()
@@ -134,15 +135,6 @@ export default () =>
           S.list()
             .items([
               S.documentTypeListItem("sponsorship").title("Sponsorships"),
-              createDeskHierarchy({
-                title: "Sponsorship tiers",
-
-                // The hierarchy will be stored in this document ID 👇
-                documentId: "sponsorship-tiers",
-
-                // Document types editors should be able to include in the hierarchy
-                referenceTo: ["sponsorship"],
-              }),
             ])
             .title("Sponsorships")
         ),

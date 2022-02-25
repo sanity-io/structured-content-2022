@@ -1,10 +1,14 @@
 import { groq } from 'next-sanity';
 import client from '../lib/sanity.server';
 import { Section } from '../types/Section';
-import SectionBlock from '../components/SectionBlock';
+import Hero from '../components/Hero';
 import TextBlock from '../components/TextBlock';
-import Heading from '../components/Heading';
 import GridWrapper from '../components/GridWrapper';
+import ConferenceHeader from '../components/ConferenceHeader';
+import NavBlock from '../components/NavBlock';
+import Footer from '../components/Footer';
+import { Slug } from '../types/Slug';
+import { mainEventId } from '../util/entityPaths';
 
 const QUERY = groq`
   {
@@ -13,11 +17,62 @@ const QUERY = groq`
       page-> {
         name,
         sections[] {
-          _type == 'reference' => @->,
-          _type != 'reference' => @,
+          _type == 'reference' => @-> {
+            sections[] {
+              ...,
+              _type == "sponsorsSection" => {
+                ...,
+                "sponsors": *[_type == "sponsor"] {
+                  ...,
+                  sponsorship->,
+                },
+              },
+              _type == "simpleCallToAction" => {
+                ...,
+                reference->,
+              },
+              _type == "venuesSection" => {
+                ...,
+                "venues": *[_id == "${mainEventId}"][0].venues[]->,
+              },
+              content[] {
+                ...,
+                reference->,
+              },
+            },
+            ...,
+          },
+          _type != 'reference' => @ {
+            ...,
+            _type == "ticketsSection" => {
+              ...,
+              "tickets": *[_id == "${mainEventId}"][0].tickets[]->
+            },
+            _type == "venuesSection" => {
+              ...,
+              "venues": *[_id == "${mainEventId}"][0].venues[]->,
+            },
+            content[] {
+              ...,
+              reference->,
+            },
+          },
         }
       }
-    }
+    },
+    "home": *[_id == "aad77280-6394-4090-afad-1c0f2a0416c6"][0] {
+      name,
+      startDate,
+      endDate,
+      description,
+    },
+    "footer": *[_id == "secondary-nav"][0] {
+      "links": tree[].value.reference-> {
+        "name": seo.title,
+        slug,
+        _id,
+      }
+    },
   }`;
 
 interface RouteProps {
@@ -28,7 +83,21 @@ interface RouteProps {
         sections: Section[];
       };
     };
+    home: {
+      name: string;
+      startDate: string;
+      endDate: string;
+      description: string;
+    };
+    footer: {
+      links: {
+        name: string;
+        slug: Slug;
+        _id: string;
+      }[];
+    };
   };
+  slug: string;
 }
 
 const Route = ({
@@ -36,25 +105,40 @@ const Route = ({
     route: {
       page: { name, sections },
     },
+    home: { name: homeName, startDate, endDate, description },
+    footer,
   },
-}: RouteProps) => {
-  return (
-    <GridWrapper>
-      <SectionBlock>
-        <Heading>{name}</Heading>
-      </SectionBlock>
+  slug,
+}: RouteProps) => (
+  <>
+    <main>
+      {slug === '/' ? (
+        <GridWrapper>
+          <ConferenceHeader
+            name={homeName}
+            startDate={startDate}
+            endDate={endDate}
+            description={description}
+          />
+          <NavBlock />
+        </GridWrapper>
+      ) : (
+        <Hero heading={name} />
+      )}
       <TextBlock value={sections} />
-    </GridWrapper>
-  );
-};
+    </main>
+    <Footer links={footer.links} />
+  </>
+);
 
 export async function getServerSideProps({ params }) {
-  const data = await client.fetch(QUERY, { slug: params?.slug?.[0] || '/' });
+  const slug = params?.slug?.[0] || '/';
+  const data = await client.fetch(QUERY, { slug });
   if (!data?.route?.page) {
     return { notFound: true };
   }
 
-  return { props: { data } };
+  return { props: { data, slug } };
 }
 
 export default Route;

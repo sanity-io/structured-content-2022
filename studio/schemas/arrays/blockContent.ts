@@ -59,6 +59,14 @@ export default {
                 name: "href",
                 type: "url",
                 title: "URL",
+                validation: (Rule) => [
+                  Rule.uri({
+                    allowRelative: false,
+                  }).warning(
+                    "Consider the internal link annotation for relative URLs"
+                  ),
+                  Rule.uri({ scheme: ["https", "mailto", "tel"] }),
+                ],
               },
               {
                 title: "Open in new tab",

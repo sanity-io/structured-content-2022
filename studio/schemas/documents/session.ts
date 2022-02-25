@@ -4,8 +4,26 @@ export default {
   name: "session",
   title: "Sessions",
   type: "document",
+  preview: {
+    select: {
+      title: "title",
+      internalName: "internalName",
+      duration: "duration",
+    },
+    prepare({ title = "", internalName = "", duration = 0 }) {
+      return {
+        title: [internalName, title].filter(Boolean).join(" - "),
+        subtitle: `${duration} minutes`,
+      };
+    },
+  },
   icon: RestoreIcon,
   fields: [
+    {
+      name: "internalName",
+      title: "Internal Session Name",
+      type: "string",
+    },
     {
       name: "title",
       title: "Session title",
@@ -22,17 +40,11 @@ export default {
       },
     },
     {
-      name: "events",
-      type: "array",
-      title: "Events",
-      description: "Which event(s) this session is part of",
-      validation: (Rule) => Rule.unique(),
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "event" }],
-        },
-      ],
+      name: "publishedAt",
+      type: "datetime",
+      title: "Publish time",
+      description:
+        "Publish date for this session. The type string can be used as an placeholder before this date. This details of this session should be hidden if no date is set.",
     },
     {
       name: "type",
@@ -49,17 +61,6 @@ export default {
           { value: "workshop", title: "Workshop" },
         ],
       },
-    },
-    {
-      name: "location",
-      type: "reference",
-      to: [{ type: "venue" }],
-    },
-    {
-      name: "startTime",
-      title: "Start time",
-      type: "datetime",
-      description: "Use Pacific timezone",
     },
     {
       name: "duration",
@@ -110,6 +111,28 @@ export default {
               },
             },
           ],
+        },
+      ],
+    },
+    {
+      name: "sponsoredBy",
+      title: "Sponsored by",
+      type: "array",
+      validation: (Rule) => Rule.unique(),
+      of: [
+        {
+          type: "reference",
+          title: "Sponsor",
+          to: [{ type: "sponsor" }],
+          option: {
+            // Filter out if the sponsorship is already in the event
+            filter: ({ parent }) => ({
+              filter: "!(_id in $current)",
+              params: {
+                current: parent?.map(({ _ref }) => _ref),
+              },
+            }),
+          },
         },
       ],
     },

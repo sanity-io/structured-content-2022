@@ -31,7 +31,6 @@ export default {
       title: "Sections",
       of: [
         { type: "figure" },
-        { type: "richText" },
         ...Object.keys(sections).map((type) => ({ type })),
       ],
     },

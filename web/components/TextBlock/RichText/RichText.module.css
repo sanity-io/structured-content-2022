@@ -1,0 +1,38 @@
+.container {
+  margin: 80px 0;
+}
+
+.container.background {
+  background: var(--color-brand-yellow-light);
+  padding: 80px 20px;
+  border-radius: 12px;
+}
+
+.subHeading {
+  font: var(--font-body-base-medium);
+}
+
+@media (--medium-up) {
+  .container {
+    margin: 96px 0;
+  }
+
+  .container.background {
+    padding: 96px 0;
+  }
+
+  .content {
+    max-width: var(--max-body-text-width);
+    margin: 0 auto;
+  }
+}
+
+@media (--large-up) {
+  .container {
+    margin: 128px 0;
+  }
+
+  .container.background {
+    padding: 128px 0;
+  }
+}

@@ -5,6 +5,8 @@ import { Sponsor } from '../types/Sponsor';
 
 type Entity = Person | Session | Venue | Sponsor;
 
+export const mainEventId = 'aad77280-6394-4090-afad-1c0f2a0416c6';
+
 export const getEntityPath = (entity: Entity) => {
   if (!entity.slug?.current) {
     return '#';

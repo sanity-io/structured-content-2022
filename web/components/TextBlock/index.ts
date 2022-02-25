@@ -1,1 +1,1 @@
-export { TextBlock as default } from './TextBlock';
+export { TextBlock as default } from './TextBlock/TextBlock';
