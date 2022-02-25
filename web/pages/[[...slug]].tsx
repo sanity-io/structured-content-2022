@@ -1,14 +1,18 @@
+import clsx from "clsx";
 import { groq } from 'next-sanity';
-import client from '../lib/sanity.server';
-import { Section } from '../types/Section';
+import { useEffect, useState } from "react";
 import Hero from '../components/Hero';
 import TextBlock from '../components/TextBlock';
 import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
 import NavBlock from '../components/NavBlock';
 import Footer from '../components/Footer';
+import Nav from "../components/Nav";
+import client from '../lib/sanity.server';
 import { Slug } from '../types/Slug';
+import { Section } from '../types/Section';
 import { mainEventId } from '../util/entityPaths';
+import styles from "./app.module.css";
 
 const QUERY = groq`
   {
@@ -60,11 +64,12 @@ const QUERY = groq`
         }
       }
     },
-    "home": *[_id == "aad77280-6394-4090-afad-1c0f2a0416c6"][0] {
+    "home": *[_id == "${mainEventId}"][0] {
       name,
       startDate,
       endDate,
       description,
+      "ticketsUrl": microcopy[key == "mainCta"][0].action,
     },
     "footer": *[_id == "secondary-nav"][0] {
       "links": tree[].value.reference-> {
@@ -88,6 +93,7 @@ interface RouteProps {
       startDate: string;
       endDate: string;
       description: string;
+      ticketsUrl: string;
     };
     footer: {
       links: {
@@ -105,31 +111,65 @@ const Route = ({
     route: {
       page: { name, sections },
     },
-    home: { name: homeName, startDate, endDate, description },
+    home: { name: homeName, startDate, endDate, description, ticketsUrl },
     footer,
   },
   slug,
-}: RouteProps) => (
-  <>
-    <main>
-      {slug === '/' ? (
-        <GridWrapper>
-          <ConferenceHeader
-            name={homeName}
-            startDate={startDate}
-            endDate={endDate}
-            description={description}
-          />
-          <NavBlock />
-        </GridWrapper>
-      ) : (
-        <Hero heading={name} />
-      )}
-      <TextBlock value={sections} />
-    </main>
-    <Footer links={footer.links} />
-  </>
-);
+}: RouteProps) => {
+  const [scrollTop, setScrollTop] = useState(
+    typeof document !== 'undefined' ? document.documentElement.scrollTop : 0
+  );
+
+  /* This is a hack. What we really want is to enable the menu once we've
+ * scrolled past the top logo on the front page. Probably a better way would
+ * be to give the page a callback so it can use IntersectionObserver and
+ * notify us when the right elements have appeared/disappeared from view.
+ */
+  const scrollPositionTriggeringFrontPageMenu = 420;
+
+  useEffect(() => {
+    const onScroll = (e) => {
+      setScrollTop(e.target.documentElement.scrollTop);
+    };
+    window.addEventListener('scroll', onScroll);
+
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [scrollTop]);
+
+  const isFrontPage = slug === '/';
+  const scrolledFarEnough = scrollTop > scrollPositionTriggeringFrontPageMenu;
+  const headerClasses = clsx(
+    styles.header,
+    isFrontPage && styles.onFrontPage,
+    isFrontPage && scrolledFarEnough && styles.onScrolledFrontPage
+  );
+
+
+  return (
+    <>
+      <header className={headerClasses}>
+        <Nav onFrontPage={isFrontPage} ticketsUrl={ticketsUrl}/>
+      </header>
+      <main>
+        {slug === '/' ? (
+          <GridWrapper>
+            <ConferenceHeader
+              name={homeName}
+              startDate={startDate}
+              endDate={endDate}
+              description={description}
+            />
+            <NavBlock ticketsUrl={ticketsUrl}/>
+          </GridWrapper>
+        ) : (
+          <Hero heading={name}/>
+        )}
+        <TextBlock value={sections}/>
+      </main>
+      <Footer links={footer.links}/>
+    </>
+  );
+};
 
 export async function getServerSideProps({ params }) {
   const slug = params?.slug?.[0] || '/';

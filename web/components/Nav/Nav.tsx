@@ -8,9 +8,10 @@ import styles from './Nav.module.css';
 
 interface NavProps {
   onFrontPage: boolean;
+  ticketsUrl: string;
 }
 
-export const Nav = ({ onFrontPage }: NavProps) => {
+export const Nav = ({ onFrontPage, ticketsUrl }: NavProps) => {
   const [menuOpened, setMenuOpened] = useState(false);
   const contentsId = 'nav-menu-contents';
 
@@ -58,7 +59,7 @@ export const Nav = ({ onFrontPage }: NavProps) => {
           </Link>
           <ul className={clsx(styles.items, !menuOpened && styles.menuClosed)}>
             <li className={styles.ticketItem}>
-              <Link href="/tickets">
+              <Link href={ticketsUrl}>
                 <a className={styles.link} onClick={closeMenu}>
                   Tickets
                 </a>
@@ -94,7 +95,7 @@ export const Nav = ({ onFrontPage }: NavProps) => {
             </li>
           </ul>
           <div className={styles.ticketButton}>
-            <ButtonLink url="/tickets" text="Tickets" />
+            <ButtonLink url={ticketsUrl} text="Tickets" />
           </div>
         </div>
       </GridWrapper>
