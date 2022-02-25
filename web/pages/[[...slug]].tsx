@@ -44,6 +44,10 @@ const QUERY = groq`
           },
           _type != 'reference' => @ {
             ...,
+            _type == "ticketsSection" => {
+              ...,
+              "tickets": *[_id == "${mainEventId}"][0].tickets[]->
+            },
             _type == "venuesSection" => {
               ...,
               "venues": *[_id == "${mainEventId}"][0].venues[]->,
