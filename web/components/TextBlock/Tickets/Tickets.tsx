@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { Fragment } from 'react';
 import Block from '../Block';
 import { compareAsc, parseISO } from 'date-fns';
+import { PortableText } from '@portabletext/react';
 
 interface TicketsProps {
   value: {
@@ -55,9 +56,7 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
                   <div className={styles.name}>{ticket.type}</div>
                   {ticket.description && (
                     <div className={styles.description}>
-                      {ticket.description.map((value) => (
-                        <Block key={value._key} value={value} />
-                      ))}
+                      <PortableText value={ticket.description} />
                     </div>
                   )}
                   <dl className={styles.priceList}>
@@ -137,9 +136,7 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
                 <h3 className={styles.name}>{ticket.type}</h3>
                 {ticket.description && (
                   <div className={styles.description}>
-                    {ticket.description.map((value) => (
-                      <Block key={value._key} value={value} />
-                    ))}
+                    <PortableText value={ticket.description} />
                   </div>
                 )}
                 <dl className={styles.priceList}>
