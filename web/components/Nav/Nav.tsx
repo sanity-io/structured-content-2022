@@ -72,9 +72,16 @@ export const Nav = ({ onFrontPage }: NavProps) => {
               </Link>
             </li>
             <li>
-              <Link href="/speakers">
+              <Link href="/sponsorship-information">
                 <a className={styles.link} onClick={closeMenu}>
-                  Speakers
+                  Sponsorship
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/venues">
+                <a className={styles.link} onClick={closeMenu}>
+                  Venues
                 </a>
               </Link>
             </li>
