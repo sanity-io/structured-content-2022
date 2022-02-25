@@ -11,17 +11,45 @@ export default {
       event: "event.name",
       start: "startDateTime",
       sessions: "sessions",
+      duration0: "sessions.0.session.duration",
+      duration1: "sessions.1.session.duration",
+      duration2: "sessions.2.session.duration",
+      duration3: "sessions.3.session.duration",
+      duration4: "sessions.4.session.duration",
+      duration5: "sessions.5.session.duration",
+      duration6: "sessions.6.session.duration",
+      duration7: "sessions.7.session.duration",
+      duration8: "sessions.8.session.duration",
+      duration9: "sessions.9.session.duration",
+      duration10: "sessions.10.session.duration",
+      duration11: "sessions.11.session.duration",
+      duration12: "sessions.12.session.duration",
     },
-    prepare({ internalName, venue, event, start, sessions }) {
+    prepare({
+      internalName,
+      venue,
+      event,
+      start,
+      sessions = [],
+      ...durations
+    }) {
+      console.log({ sessions, durations });
       const startDate = new Date(start).toLocaleDateString();
       const numberOfVenues = venue.length;
-      const totalMinutes = sessions.reduce((total, session = 0) => {
-        return total + Number(session.duration);
-      }, 0);
+      const sessionsDurations = Object.values(sessions).filter(Boolean);
+      const totalMinutes = sessionsDurations.reduce(
+        (total, { session, durationOverride }) => {
+          const duration = durationOverride || session.duration;
+          return total + duration;
+        },
+        0
+      );
 
       return {
         title: `${internalName} at ${event}`,
-        subtitle: `${startDate} (${totalMinutes}mins) at ${numberOfVenues} venues`,
+        subtitle: `${startDate} (${totalMinutes}mins) at ${numberOfVenues} venue${
+          numberOfVenues > 1 ? "s" : ""
+        }`,
       };
     },
   },
