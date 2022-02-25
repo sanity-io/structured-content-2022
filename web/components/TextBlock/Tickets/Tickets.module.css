@@ -32,16 +32,12 @@
 }
 
 .priceList {
-  margin: 0;
+  margin: 24px 0 0 0;
 }
 
 .priceLabel,
 .description {
   color: var(--color-material-gray-600);
-}
-
-.description {
-  margin: 0 0 24px;
 }
 
 .price {

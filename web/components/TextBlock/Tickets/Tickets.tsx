@@ -53,11 +53,13 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
               return (
                 <th key={ticket._id} scope="col" className={styles.ticketInfo}>
                   <div className={styles.name}>{ticket.type}</div>
-                  <div className={styles.description}>
-                    {ticket.description?.map((value) => (
-                      <Block key={value._key} value={value} />
-                    ))}
-                  </div>
+                  {ticket.description && (
+                    <div className={styles.description}>
+                      {ticket.description.map((value) => (
+                        <Block key={value._key} value={value} />
+                      ))}
+                    </div>
+                  )}
                   <dl className={styles.priceList}>
                     {ticket.priceAndAvailability.map(
                       ({ _key, label, price }) => (
@@ -132,11 +134,13 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
             <section key={ticket._id}>
               <div className={clsx(styles.ticketInfo, styles.inSections)}>
                 <h3 className={styles.name}>{ticket.type}</h3>
-                <div className={styles.description}>
-                  {ticket.description?.map((value) => (
-                    <Block key={value._key} value={value} />
-                  ))}
-                </div>
+                {ticket.description && (
+                  <div className={styles.description}>
+                    {ticket.description.map((value) => (
+                      <Block key={value._key} value={value} />
+                    ))}
+                  </div>
+                )}
                 <dl className={styles.priceList}>
                   {ticket.priceAndAvailability.map(({ _key, label, price }) => (
                     <Fragment key={_key}>
