@@ -52,7 +52,7 @@
   margin: 0;
 }
 
-.currentPrice {
+.price.current {
   text-decoration: none;
   font: var(--font-body-small-bold);
   color: var(--color-brand-black);

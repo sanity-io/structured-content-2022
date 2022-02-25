@@ -70,7 +70,7 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
                           <dd
                             className={clsx(
                               styles.price,
-                              currentPrice._key == _key && styles.currentPrice
+                              currentPrice._key == _key && styles.current
                             )}
                           >
                             {price ? `$${price}` : 'Free'}
@@ -150,7 +150,7 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
                       <dd
                         className={clsx(
                           styles.price,
-                          currentPrice._key == _key && styles.currentPrice
+                          currentPrice._key == _key && styles.current
                         )}
                       >
                         {price ? `$${price}` : 'Free'}
