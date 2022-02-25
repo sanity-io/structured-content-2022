@@ -1,18 +1,18 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 import { groq } from 'next-sanity';
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import Hero from '../components/Hero';
 import TextBlock from '../components/TextBlock';
 import GridWrapper from '../components/GridWrapper';
 import ConferenceHeader from '../components/ConferenceHeader';
 import NavBlock from '../components/NavBlock';
 import Footer from '../components/Footer';
-import Nav from "../components/Nav";
+import Nav from '../components/Nav';
 import client from '../lib/sanity.server';
 import { Slug } from '../types/Slug';
 import { Section } from '../types/Section';
 import { mainEventId } from '../util/entityPaths';
-import styles from "./app.module.css";
+import styles from './app.module.css';
 
 const QUERY = groq`
   {
@@ -121,10 +121,10 @@ const Route = ({
   );
 
   /* This is a hack. What we really want is to enable the menu once we've
- * scrolled past the top logo on the front page. Probably a better way would
- * be to give the page a callback so it can use IntersectionObserver and
- * notify us when the right elements have appeared/disappeared from view.
- */
+   * scrolled past the top logo on the front page. Probably a better way would
+   * be to give the page a callback so it can use IntersectionObserver and
+   * notify us when the right elements have appeared/disappeared from view.
+   */
   const scrollPositionTriggeringFrontPageMenu = 420;
 
   useEffect(() => {
@@ -144,11 +144,10 @@ const Route = ({
     isFrontPage && scrolledFarEnough && styles.onScrolledFrontPage
   );
 
-
   return (
     <>
       <header className={headerClasses}>
-        <Nav onFrontPage={isFrontPage} ticketsUrl={ticketsUrl}/>
+        <Nav onFrontPage={isFrontPage} ticketsUrl={ticketsUrl} />
       </header>
       <main>
         {slug === '/' ? (
@@ -159,14 +158,14 @@ const Route = ({
               endDate={endDate}
               description={description}
             />
-            <NavBlock ticketsUrl={ticketsUrl}/>
+            <NavBlock ticketsUrl={ticketsUrl} />
           </GridWrapper>
         ) : (
-          <Hero heading={name}/>
+          <Hero heading={name} />
         )}
-        <TextBlock value={sections}/>
+        <TextBlock value={sections} />
       </main>
-      <Footer links={footer.links}/>
+      <Footer links={footer.links} />
     </>
   );
 };
