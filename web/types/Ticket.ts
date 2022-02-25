@@ -1,4 +1,4 @@
-import { Section } from "./Section";
+import { Section } from './Section';
 
 export type Ticket = {
   _id: string;
