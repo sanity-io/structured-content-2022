@@ -1,9 +1,8 @@
-import { ProjectConfig } from 'next-sanity';
-
-export const projectConfig: ProjectConfig = {
+const projectConfig = {
   projectId: '33zsuc7i',
   dataset: 'production',
 };
+
 const config = {
   sanity: {
     baseConfig: {
@@ -13,4 +12,7 @@ const config = {
   },
 };
 
-export default config;
+module.exports = {
+  default: config,
+  projectConfig,
+};

@@ -21,7 +21,11 @@ const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) => (
   />
 );
 
-export const NavBlock = () => (
+interface NavBlockProps {
+  ticketsUrl: string;
+}
+
+export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
   <nav className={styles.nav}>
     <ul className={styles.list}>
       <FakeItem mobile />
@@ -60,7 +64,7 @@ export const NavBlock = () => (
       <FakeItem divider mobile />
 
       <li className={styles.item}>
-        <Link href="/tickets">
+        <Link href={ticketsUrl}>
           <a className={styles.link}>Early-bird tickets</a>
         </Link>
       </li>
