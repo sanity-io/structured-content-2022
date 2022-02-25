@@ -28,21 +28,21 @@ export const Nav = ({ onFrontPage, currentPath }: NavProps) => {
   }: {
     urlPath: string;
     label: string;
-  }) => {
-    const isCurrentPage = urlPath === currentPath;
-    return (
-      <li>
-        <Link href={urlPath}>
-          <a
-            className={clsx(styles.link, isCurrentPage && styles.current)}
-            onClick={closeMenu}
-          >
-            {label}
-          </a>
-        </Link>
-      </li>
-    );
-  };
+  }) => (
+    <li>
+      <Link href={urlPath}>
+        <a
+          className={clsx(
+            styles.link,
+            urlPath === currentPath && styles.current
+          )}
+          onClick={closeMenu}
+        >
+          {label}
+        </a>
+      </Link>
+    </li>
+  );
 
   return (
     <nav className={clsx(styles.nav, onFrontPage && styles.onFrontPage)}>
