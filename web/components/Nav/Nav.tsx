@@ -21,6 +21,22 @@ export const Nav = ({ onFrontPage }: NavProps) => {
   const toggleMenu = () => setMenuOpened(!menuOpened);
   const closeMenu = () => setMenuOpened(false);
 
+  const BasicMenuItem = ({
+    urlPath,
+    label,
+  }: {
+    urlPath: string;
+    label: string;
+  }) => (
+    <li>
+      <Link href={urlPath}>
+        <a className={styles.link} onClick={closeMenu}>
+          {label}
+        </a>
+      </Link>
+    </li>
+  );
+
   return (
     <nav className={clsx(styles.nav, onFrontPage && styles.onFrontPage)}>
       <GridWrapper>
@@ -64,34 +80,13 @@ export const Nav = ({ onFrontPage }: NavProps) => {
                 </a>
               </Link>
             </li>
-            <li>
-              <Link href="/program">
-                <a className={styles.link} onClick={closeMenu}>
-                  Program
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/sponsorship-information">
-                <a className={styles.link} onClick={closeMenu}>
-                  Sponsorship
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/venues">
-                <a className={styles.link} onClick={closeMenu}>
-                  Venues
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/about">
-                <a className={styles.link} onClick={closeMenu}>
-                  About
-                </a>
-              </Link>
-            </li>
+            <BasicMenuItem urlPath="/program" label="Program" />
+            <BasicMenuItem
+              urlPath="/sponsorship-information"
+              label="Sponsorship"
+            />
+            <BasicMenuItem urlPath="/venues" label="Venues" />
+            <BasicMenuItem urlPath="/about" label="About" />
           </ul>
           <div className={styles.ticketButton}>
             <ButtonLink url="/tickets" text="Tickets" />
