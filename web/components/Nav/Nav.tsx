@@ -8,9 +8,10 @@ import styles from './Nav.module.css';
 
 interface NavProps {
   onFrontPage: boolean;
+  currentPath: string;
 }
 
-export const Nav = ({ onFrontPage }: NavProps) => {
+export const Nav = ({ onFrontPage, currentPath }: NavProps) => {
   const [menuOpened, setMenuOpened] = useState(false);
   const contentsId = 'nav-menu-contents';
 
@@ -27,15 +28,21 @@ export const Nav = ({ onFrontPage }: NavProps) => {
   }: {
     urlPath: string;
     label: string;
-  }) => (
-    <li>
-      <Link href={urlPath}>
-        <a className={styles.link} onClick={closeMenu}>
-          {label}
-        </a>
-      </Link>
-    </li>
-  );
+  }) => {
+    const isCurrentPage = urlPath === currentPath;
+    return (
+      <li>
+        <Link href={urlPath}>
+          <a
+            className={clsx(styles.link, isCurrentPage && styles.current)}
+            onClick={closeMenu}
+          >
+            {label}
+          </a>
+        </Link>
+      </li>
+    );
+  };
 
   return (
     <nav className={clsx(styles.nav, onFrontPage && styles.onFrontPage)}>
