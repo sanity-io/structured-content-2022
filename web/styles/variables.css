@@ -4,6 +4,7 @@
   --color-brand-white: #ffffff;
   --color-brand-yellow: #fff17e;
   --color-brand-yellow-light: #fff8e4;
+  --color-material-gray-600: rgba(31, 30, 29, 0.65);
   --color-sanity-blue: #2962ff;
   --color-ui-gray-600: #6f6d6a;
   --color-ui-gray-500: #a0a09c;
@@ -11,7 +12,10 @@
   --color-ui-gray-100: #f4f3ef;
   --font-body-base: 400 18px/25px 'Inter', sans-serif;
   --font-body-base-medium: 500 18px/25px 'Inter', sans-serif;
+  --font-body-large-bold: 700 20px/30px 'Inter', sans-serif;
   --font-body-large-medium: 500 20px/30px 'Inter', sans-serif;
+  --font-body-small-bold: 700 16px/22px 'Inter', sans-serif;
+  --font-body-small-medium: 500 16px/22px 'Inter', sans-serif;
   --font-body-xl-medium: 500 24px/33px 'Inter', sans-serif;
   --font-display-2xl: 700 96px/92.16px 'National 2 Narrow', sans-serif;
   --font-display-base: 700 40px/39px 'National 2 Narrow', sans-serif;
@@ -26,11 +30,13 @@
   --grid-medium-gutter: 32px; /* These could be set in @media if we drop IE11 */
   --grid-medium-half-gutter: 16px;
   --grid-width: 1520px;
+  --letter-spacing-body-small: -0.011em;
   --letter-spacing-body-base: -0.014em;
   --letter-spacing-body-large: -0.017em;
   --letter-spacing-body-xl: -0.019em;
   --letter-spacing-ui-sm: -0.011em;
   --letter-spacing-ui-xxl: -0.022em;
+  --max-body-text-width: 37.5rem;
   --spacing-small: 40px;
   --spacing-medium: 64px;
   --spacing-large: 128px;

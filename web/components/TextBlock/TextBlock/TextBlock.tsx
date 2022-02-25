@@ -14,6 +14,7 @@ import SimpleCallToAction from '../SimpleCallToAction';
 import ConferenceUpdatesForm from '../../ConferenceUpdatesForm';
 import VenuesSection from '../VenuesSection';
 import SponsorsSection from '../SponsorsSection';
+import Tickets from '../Tickets';
 import Figure from '../Figure';
 
 const components: Partial<PortableTextComponents> = {
@@ -30,6 +31,7 @@ const components: Partial<PortableTextComponents> = {
     articleSection: RichText,
     venuesSection: VenuesSection,
     sponsorsSection: SponsorsSection,
+    ticketsSection: Tickets,
     figure: Figure,
   },
   marks: {

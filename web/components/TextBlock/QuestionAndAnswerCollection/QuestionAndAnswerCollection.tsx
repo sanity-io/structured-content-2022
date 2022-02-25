@@ -5,13 +5,17 @@ import styles from './QuestionAndAnswerCollection.module.css';
 
 export const QuestionAndAnswerCollection = ({ value: { questions } }) => (
   <GridWrapper>
-    {questions.map(({ _key, question, answer }) => (
-      <div key={_key} className={styles.question}>
-        <Heading type="h3">{question}</Heading>
-        {answer.map((value) => (
-          <Block key={value._key} value={value} />
-        ))}
-      </div>
-    ))}
+    <div className={styles.container}>
+      {questions.map(({ _key, question, answer }) => (
+        <section key={_key} className={styles.section}>
+          <Heading type="h3">{question}</Heading>
+          <div className={styles.answer}>
+            {answer.map((value) => (
+              <Block key={value._key} value={value} />
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
   </GridWrapper>
 );
