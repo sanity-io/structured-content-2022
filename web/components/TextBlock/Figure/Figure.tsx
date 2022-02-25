@@ -22,6 +22,7 @@ export const Figure = ({
       <img
         src={imageUrlFor(asset).width(894).ignoreImageParams().url()}
         alt={alt}
+        className={styles.image}
       />
     </figure>
   </GridWrapper>
