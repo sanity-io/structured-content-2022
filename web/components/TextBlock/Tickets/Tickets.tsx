@@ -4,6 +4,8 @@ import checkmarkIcon from '../../../images/checkmark.svg';
 import crossIcon from '../../../images/cross.svg';
 import styles from './Tickets.module.css';
 import clsx from 'clsx';
+import { Fragment } from 'react';
+import Block from "../Block";
 
 interface TicketsProps {
   value: {
@@ -36,11 +38,18 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
             {tickets.map((ticket) => (
               <th key={ticket._id} scope="col" className={styles.ticketInfo}>
                 <div className={styles.name}>{ticket.type}</div>
+                <div className={styles.description}>
+                  {ticket.description?.map((value) => (
+                    <Block key={value._key} value={value} />
+                  ))}
+                </div>
                 <dl className={styles.priceList}>
-                  <dt className={styles.priceLabel}>Price</dt>
-                  <dd className={styles.price}>
-                    {ticket.price ? `$${ticket.price}` : 'Free'}
-                  </dd>
+                  {ticket.priceAndAvailability.map(({ _key, label, price }) => (
+                    <Fragment key={_key}>
+                      <dt className={styles.priceLabel}>Price {label ? `(${label})` : null}</dt>
+                      <dd className={clsx(styles.price, styles.currentPrice)}>{price ? `$${price}` : 'Free'}</dd>
+                    </Fragment>
+                  ))}
                 </dl>
               </th>
             ))}
@@ -94,11 +103,18 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
           <section key={ticket._id}>
             <div className={clsx(styles.ticketInfo, styles.inSections)}>
               <h3 className={styles.name}>{ticket.type}</h3>
+              <div className={styles.description}>
+                {ticket.description?.map((value) => (
+                  <Block key={value._key} value={value} />
+                ))}
+              </div>
               <dl className={styles.priceList}>
-                <dt className={styles.priceLabel}>Price</dt>
-                <dd className={styles.price}>
-                  {ticket.price ? `$${ticket.price}` : 'Free'}
-                </dd>
+                {ticket.priceAndAvailability.map(({ _key, label, price }) => (
+                  <Fragment key={_key}>
+                    <dt className={styles.priceLabel}>{label}</dt>
+                    <dd className={styles.price}>{price ? `$${price}` : 'Free'}</dd>
+                  </Fragment>
+                ))}
               </dl>
             </div>
             <ul className={styles.ticketFeatures}>

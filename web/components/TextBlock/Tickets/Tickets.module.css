@@ -17,6 +17,7 @@
   border-radius: 8px;
   font: inherit;
   text-align: left;
+  vertical-align: top;
 }
 
 .ticketInfo.inSections {
@@ -25,7 +26,7 @@
 }
 
 .name {
-  margin: 0 0 24px;
+  margin: 0 0 4px;
   font: var(--font-body-large-bold);
   letter-spacing: var(--font-body-large);
 }
@@ -34,14 +35,29 @@
   margin: 0;
 }
 
-.priceLabel {
+.priceLabel,
+.description {
   color: var(--color-material-gray-600);
 }
 
-.price {
-  margin: 0;
-  font: var(--font-body-small-bold);
+.description {
+  margin: 0 0 24px;
 }
+
+.price {
+  margin: 0 0 8px;
+  text-decoration: line-through;
+  color: var(--color-material-gray-600);
+  font: var(--font-body-small-medium);
+}
+
+.price:last-child {
+  text-decoration: none;
+  font: var(--font-body-small-bold);
+  color: var(--color-brand-black);
+  margin: 0;
+}
+
 
 .ticketFeatures {
   list-style-type: none;
