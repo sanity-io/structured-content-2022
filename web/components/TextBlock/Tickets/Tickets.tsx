@@ -67,14 +67,15 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
                           <dt className={styles.priceLabel}>
                             Price {label ? `(${label})` : null}
                           </dt>
-                          <dd
-                            className={clsx(
-                              styles.price,
-                              currentPrice._key == _key && styles.current
-                            )}
-                          >
-                            {price ? `$${price}` : 'Free'}
-                          </dd>
+                          {currentPrice._key == _key ? (
+                            <dd className={clsx(styles.price, styles.current)}>
+                              <strong>{price ? `$${price}` : 'Free'}</strong>
+                            </dd>
+                          ) : (
+                            <dd className={styles.price}>
+                              {price ? `$${price}` : 'Free'}
+                            </dd>
+                          )}
                         </Fragment>
                       )
                     )}
@@ -147,14 +148,15 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
                       <dt className={styles.priceLabel}>
                         Price {label ? `(${label})` : null}
                       </dt>
-                      <dd
-                        className={clsx(
-                          styles.price,
-                          currentPrice._key == _key && styles.current
-                        )}
-                      >
-                        {price ? `$${price}` : 'Free'}
-                      </dd>
+                      {currentPrice._key == _key ? (
+                        <dd className={clsx(styles.price, styles.current)}>
+                          <strong>{price ? `$${price}` : 'Free'}</strong>
+                        </dd>
+                      ) : (
+                        <dd className={styles.price}>
+                          {price ? `$${price}` : 'Free'}
+                        </dd>
+                      )}
                     </Fragment>
                   ))}
                 </dl>
