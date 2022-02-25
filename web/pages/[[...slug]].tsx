@@ -137,6 +137,7 @@ const Route = ({
   }, [scrollTop]);
 
   const isFrontPage = slug === '/';
+  const currentPath = slug.charAt(0) === '/' ? slug : `/${slug}`;
   const scrolledFarEnough = scrollTop > scrollPositionTriggeringFrontPageMenu;
   const headerClasses = clsx(
     styles.header,
@@ -147,7 +148,11 @@ const Route = ({
   return (
     <>
       <header className={headerClasses}>
-        <Nav onFrontPage={isFrontPage} ticketsUrl={ticketsUrl} />
+        <Nav
+          onFrontPage={isFrontPage}
+          currentPath={currentPath}
+          ticketsUrl={ticketsUrl}
+        />
       </header>
       <main>
         {slug === '/' ? (

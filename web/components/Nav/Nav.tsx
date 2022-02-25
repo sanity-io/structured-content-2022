@@ -8,10 +8,11 @@ import styles from './Nav.module.css';
 
 interface NavProps {
   onFrontPage: boolean;
+  currentPath: string;
   ticketsUrl: string;
 }
 
-export const Nav = ({ onFrontPage, ticketsUrl }: NavProps) => {
+export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
   const [menuOpened, setMenuOpened] = useState(false);
   const contentsId = 'nav-menu-contents';
 
@@ -21,6 +22,28 @@ export const Nav = ({ onFrontPage, ticketsUrl }: NavProps) => {
 
   const toggleMenu = () => setMenuOpened(!menuOpened);
   const closeMenu = () => setMenuOpened(false);
+
+  const BasicMenuItem = ({
+    urlPath,
+    label,
+  }: {
+    urlPath: string;
+    label: string;
+  }) => (
+    <li>
+      <Link href={urlPath}>
+        <a
+          className={clsx(
+            styles.link,
+            urlPath === currentPath && styles.current
+          )}
+          onClick={closeMenu}
+        >
+          {label}
+        </a>
+      </Link>
+    </li>
+  );
 
   return (
     <nav className={clsx(styles.nav, onFrontPage && styles.onFrontPage)}>
@@ -65,34 +88,13 @@ export const Nav = ({ onFrontPage, ticketsUrl }: NavProps) => {
                 </a>
               </Link>
             </li>
-            <li>
-              <Link href="/program">
-                <a className={styles.link} onClick={closeMenu}>
-                  Program
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/sponsorship-information">
-                <a className={styles.link} onClick={closeMenu}>
-                  Sponsorship
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/venues">
-                <a className={styles.link} onClick={closeMenu}>
-                  Venues
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/about">
-                <a className={styles.link} onClick={closeMenu}>
-                  About
-                </a>
-              </Link>
-            </li>
+            <BasicMenuItem urlPath="/program" label="Program" />
+            <BasicMenuItem
+              urlPath="/sponsorship-information"
+              label="Sponsorship"
+            />
+            <BasicMenuItem urlPath="/venues" label="Venues" />
+            <BasicMenuItem urlPath="/about" label="About" />
           </ul>
           <div className={styles.ticketButton}>
             <ButtonLink url={ticketsUrl} text="Tickets" />
