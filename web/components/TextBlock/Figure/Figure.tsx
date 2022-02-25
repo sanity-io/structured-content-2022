@@ -17,12 +17,12 @@ export const Figure = ({
   value: { asset, alt },
 }: PortableTextComponentProps<FigureProps>) => (
   <GridWrapper>
-    <div className={styles.container}>
+    <figure className={styles.container}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={imageUrlFor(asset).width(894).ignoreImageParams().url()}
         alt={alt}
       />
-    </div>
+    </figure>
   </GridWrapper>
 );
