@@ -38,7 +38,8 @@ function MyApp({ Component, pageProps, router }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, [scrollTop]);
 
-  const isFrontPage = router.asPath === '/';
+  const currentPath = router.asPath;
+  const isFrontPage = currentPath === '/';
   const scrolledFarEnough = scrollTop > scrollPositionTriggeringFrontPageMenu;
   const headerClasses = clsx(
     styles.header,
@@ -49,7 +50,7 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <>
       <header className={headerClasses}>
-        <Nav onFrontPage={isFrontPage} />
+        <Nav onFrontPage={isFrontPage} currentPath={currentPath} />
       </header>
       <Component {...pageProps} />
       <div className={styles.cookieConsent}>

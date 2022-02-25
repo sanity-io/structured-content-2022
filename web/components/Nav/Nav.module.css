@@ -134,6 +134,12 @@
   }
 }
 
+@media (--medium-up) {
+  .link.current {
+    text-decoration: underline;
+  }
+}
+
 @media (--large-up) {
   .menuContents {
     padding: 24px 0;
