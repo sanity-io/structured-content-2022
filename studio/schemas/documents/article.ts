@@ -36,6 +36,17 @@ export default {
         "Publish date for this article. This article should be hidden if no date is set.",
     },
     {
+      name: "authors",
+      type: "array",
+      title: "Authors",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "person" }],
+        },
+      ],
+    },
+    {
       name: "mainImage",
       type: "figure",
       title: "Main image",
@@ -57,6 +68,50 @@ export default {
       name: "content",
       title: "Content",
       type: "blockContent",
+    },
+    {
+      name: "realtedTo",
+      type: "object",
+      title: "Related to",
+      description: "Related to",
+      fields: [
+        {
+          name: "sessions",
+          type: "array",
+          validation: (Rule) => Rule.unique(),
+          title: "Sessions",
+          of: [
+            {
+              type: "reference",
+              to: [{ type: "session" }],
+            },
+          ],
+        },
+        {
+          name: "venues",
+          type: "array",
+          validation: (Rule) => Rule.unique(),
+          title: "Venues",
+          of: [
+            {
+              type: "reference",
+              to: [{ type: "venue" }],
+            },
+          ],
+        },
+        {
+          name: "people",
+          type: "array",
+          validation: (Rule) => Rule.unique(),
+          title: "People",
+          of: [
+            {
+              type: "reference",
+              to: [{ type: "person" }],
+            },
+          ],
+        },
+      ],
     },
   ],
 };
