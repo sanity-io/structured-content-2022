@@ -5,7 +5,8 @@ import crossIcon from '../../../images/cross.svg';
 import styles from './Tickets.module.css';
 import clsx from 'clsx';
 import { Fragment } from 'react';
-import Block from "../Block";
+import Block from '../Block';
+import { compareAsc, parseISO } from 'date-fns';
 
 interface TicketsProps {
   value: {
@@ -29,30 +30,56 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
   const includedTypes = Array.from(
     new Set(tickets.map((ticket) => ticket.included).flat())
   );
+
+  const currentPriceAndAvailability = (ticket: Ticket) =>
+    ticket.priceAndAvailability?.reduce((acc, current) => {
+      const fromDate = parseISO(current.from);
+      const currentDate = new Date();
+      // Check if current date is before the from date
+      if (compareAsc(currentDate, fromDate) == 1) {
+        return current;
+      }
+      return acc;
+    }, ticket.priceAndAvailability[0]);
+
   return (
     <GridWrapper>
       <table className={styles.table}>
         <thead>
           <tr>
             <th />
-            {tickets.map((ticket) => (
-              <th key={ticket._id} scope="col" className={styles.ticketInfo}>
-                <div className={styles.name}>{ticket.type}</div>
-                <div className={styles.description}>
-                  {ticket.description?.map((value) => (
-                    <Block key={value._key} value={value} />
-                  ))}
-                </div>
-                <dl className={styles.priceList}>
-                  {ticket.priceAndAvailability.map(({ _key, label, price }) => (
-                    <Fragment key={_key}>
-                      <dt className={styles.priceLabel}>Price {label ? `(${label})` : null}</dt>
-                      <dd className={clsx(styles.price, styles.currentPrice)}>{price ? `$${price}` : 'Free'}</dd>
-                    </Fragment>
-                  ))}
-                </dl>
-              </th>
-            ))}
+            {tickets.map((ticket) => {
+              const currentPrice = currentPriceAndAvailability(ticket);
+              return (
+                <th key={ticket._id} scope="col" className={styles.ticketInfo}>
+                  <div className={styles.name}>{ticket.type}</div>
+                  <div className={styles.description}>
+                    {ticket.description?.map((value) => (
+                      <Block key={value._key} value={value} />
+                    ))}
+                  </div>
+                  <dl className={styles.priceList}>
+                    {ticket.priceAndAvailability.map(
+                      ({ _key, label, price }) => (
+                        <Fragment key={_key}>
+                          <dt className={styles.priceLabel}>
+                            Price {label ? `(${label})` : null}
+                          </dt>
+                          <dd
+                            className={clsx(
+                              styles.price,
+                              currentPrice._key == _key && styles.currentPrice
+                            )}
+                          >
+                            {price ? `$${price}` : 'Free'}
+                          </dd>
+                        </Fragment>
+                      )
+                    )}
+                  </dl>
+                </th>
+              );
+            })}
           </tr>
         </thead>
         <tbody>
@@ -99,43 +126,55 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
       </table>
 
       <div className={styles.sections}>
-        {tickets.map((ticket) => (
-          <section key={ticket._id}>
-            <div className={clsx(styles.ticketInfo, styles.inSections)}>
-              <h3 className={styles.name}>{ticket.type}</h3>
-              <div className={styles.description}>
-                {ticket.description?.map((value) => (
-                  <Block key={value._key} value={value} />
-                ))}
+        {tickets.map((ticket) => {
+          const currentPrice = currentPriceAndAvailability(ticket);
+          return (
+            <section key={ticket._id}>
+              <div className={clsx(styles.ticketInfo, styles.inSections)}>
+                <h3 className={styles.name}>{ticket.type}</h3>
+                <div className={styles.description}>
+                  {ticket.description?.map((value) => (
+                    <Block key={value._key} value={value} />
+                  ))}
+                </div>
+                <dl className={styles.priceList}>
+                  {ticket.priceAndAvailability.map(({ _key, label, price }) => (
+                    <Fragment key={_key}>
+                      <dt className={styles.priceLabel}>
+                        Price {label ? `(${label})` : null}
+                      </dt>
+                      <dd
+                        className={clsx(
+                          styles.price,
+                          currentPrice._key == _key && styles.currentPrice
+                        )}
+                      >
+                        {price ? `$${price}` : 'Free'}
+                      </dd>
+                    </Fragment>
+                  ))}
+                </dl>
               </div>
-              <dl className={styles.priceList}>
-                {ticket.priceAndAvailability.map(({ _key, label, price }) => (
-                  <Fragment key={_key}>
-                    <dt className={styles.priceLabel}>{label}</dt>
-                    <dd className={styles.price}>{price ? `$${price}` : 'Free'}</dd>
-                  </Fragment>
+              <ul className={styles.ticketFeatures}>
+                {ticket.included.map((included) => (
+                  <li key={included} className={styles.includedFeature}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={checkmarkIcon.src}
+                      className={styles.icon}
+                      width={checkmarkIcon.width}
+                      height={checkmarkIcon.height}
+                      alt=""
+                    />
+                    <span className={styles.includedFeatureDescription}>
+                      {included}
+                    </span>
+                  </li>
                 ))}
-              </dl>
-            </div>
-            <ul className={styles.ticketFeatures}>
-              {ticket.included.map((included) => (
-                <li key={included} className={styles.includedFeature}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={checkmarkIcon.src}
-                    className={styles.icon}
-                    width={checkmarkIcon.width}
-                    height={checkmarkIcon.height}
-                    alt=""
-                  />
-                  <span className={styles.includedFeatureDescription}>
-                    {included}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
+              </ul>
+            </section>
+          );
+        })}
       </div>
     </GridWrapper>
   );

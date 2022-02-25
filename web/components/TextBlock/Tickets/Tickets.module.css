@@ -52,12 +52,14 @@
 }
 
 .price:last-child {
-  text-decoration: none;
-  font: var(--font-body-small-bold);
-  color: var(--color-brand-black);
   margin: 0;
 }
 
+.currentPrice {
+  text-decoration: none;
+  font: var(--font-body-small-bold);
+  color: var(--color-brand-black);
+}
 
 .ticketFeatures {
   list-style-type: none;
