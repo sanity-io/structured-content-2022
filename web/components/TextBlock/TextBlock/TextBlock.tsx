@@ -15,6 +15,7 @@ import ConferenceUpdatesForm from '../../ConferenceUpdatesForm';
 import VenuesSection from '../VenuesSection';
 import SponsorsSection from '../SponsorsSection';
 import Tickets from '../Tickets';
+import Figure from '../Figure';
 
 const components: Partial<PortableTextComponents> = {
   types: {
@@ -31,6 +32,7 @@ const components: Partial<PortableTextComponents> = {
     venuesSection: VenuesSection,
     sponsorsSection: SponsorsSection,
     ticketsSection: Tickets,
+    figure: Figure,
   },
   marks: {
     bold: ({ children }) => <strong>{children}</strong>,
