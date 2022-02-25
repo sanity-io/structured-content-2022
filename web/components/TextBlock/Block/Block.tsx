@@ -3,7 +3,7 @@ import Person from '../Person';
 import Venue from '../Venue';
 
 export const Block = ({ value }) =>
-  value.children.map((child, index) => {
+  value.children?.map((child, index) => {
     if (!child._key && child._type) {
       switch (child._type) {
         case 'richText':
@@ -19,4 +19,4 @@ export const Block = ({ value }) =>
     }
 
     return <span key={index}>{child.text}</span>;
-  });
+  }) || null;
