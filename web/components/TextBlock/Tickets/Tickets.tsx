@@ -5,7 +5,6 @@ import crossIcon from '../../../images/cross.svg';
 import styles from './Tickets.module.css';
 import clsx from 'clsx';
 import { Fragment } from 'react';
-import Block from '../Block';
 import { compareAsc, parseISO } from 'date-fns';
 import { PortableText } from '@portabletext/react';
 
