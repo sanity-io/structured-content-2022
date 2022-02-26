@@ -5,6 +5,16 @@ export default {
   title: "Pages",
   type: "document",
   icon: DocumentIcon,
+  groups: [
+    {
+      title: "Hero",
+      name: "hero",
+    },
+    {
+      title: "Sections",
+      name: "sections",
+    },
+  ],
   preview: {
     select: {
       title: "internalName",
@@ -18,13 +28,32 @@ export default {
       description: "For internal use.",
     },
     {
-      name: "name",
-      title: "Page name",
-      type: "string",
-      description: "This will be the editorial headline of the page.",
+      name: "hero",
+      title: "Hero",
+      type: "object",
+      group: "hero",
+      fields: [
+        {
+          name: "heading",
+          title: "Hero heading",
+          type: "string",
+          description: "This will be the editorial headline of the page.",
+        },
+        {
+          name: "summary",
+          title: "Hero summary",
+          type: "text",
+        },
+        {
+          name: "callToAction",
+          title: "Hero call to action",
+          type: "simpleCallToAction",
+        },
+      ],
     },
     {
       name: "sections",
+      group: "sections",
       type: "array",
       title: "Sections",
       of: [
