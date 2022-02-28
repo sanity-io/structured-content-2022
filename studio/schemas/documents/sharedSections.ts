@@ -1,9 +1,12 @@
+import { BlockElementIcon } from "@sanity/icons";
+
 import * as sections from "../sections";
 
 export default {
   name: "sharedSections",
   title: "Shared Sections",
   type: "document",
+  icon: BlockElementIcon,
   preview: {
     select: {
       title: "internalName",

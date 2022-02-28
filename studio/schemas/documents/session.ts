@@ -1,4 +1,4 @@
-import { RestoreIcon } from "@sanity/icons";
+import { PresentationIcon } from "@sanity/icons";
 
 export default {
   name: "session",
@@ -17,7 +17,7 @@ export default {
       };
     },
   },
-  icon: RestoreIcon,
+  icon: PresentationIcon,
   fields: [
     {
       name: "internalName",

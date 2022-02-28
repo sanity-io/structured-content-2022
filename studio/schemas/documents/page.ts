@@ -43,6 +43,8 @@ export default {
           name: "summary",
           title: "Hero summary",
           type: "text",
+          validation: (Rule) =>
+            Rule.max(315).warning("Keep it short and sweet!"),
         },
         {
           name: "callToAction",
