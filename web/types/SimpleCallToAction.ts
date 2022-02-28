@@ -1,7 +1,7 @@
 import { Slug } from './Slug';
 
 export type SimpleCallToAction = {
-  text: string;
+  text?: string;
   reference?: {
     slug?: Slug;
   };

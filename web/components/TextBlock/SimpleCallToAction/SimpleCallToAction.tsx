@@ -5,6 +5,6 @@ import ButtonLink from '../../ButtonLink';
 export const SimpleCallToAction = ({
   value: { text, reference },
 }: PortableTextComponentProps<SimpleCallToActionProps>) =>
-  reference?.slug?.current ? (
+  text && reference?.slug?.current ? (
     <ButtonLink text={text} url={`/${reference?.slug?.current}`} />
   ) : null;
