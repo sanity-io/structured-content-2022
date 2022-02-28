@@ -1,18 +1,7 @@
 import { PortableTextComponentProps } from '@portabletext/react';
-import ButtonLink from '../../ButtonLink';
-
-type SimpleCallToActionProps = {
-  text: string;
-  reference?: {
-    slug?: {
-      current: string;
-    };
-  };
-};
+import { SimpleCallToAction as SimpleCallToActionProps } from '../../../types/SimpleCallToAction';
+import Cta from '../../SimpleCallToAction';
 
 export const SimpleCallToAction = ({
-  value: { text, reference },
-}: PortableTextComponentProps<SimpleCallToActionProps>) =>
-  reference?.slug?.current ? (
-    <ButtonLink text={text} url={`/${reference?.slug?.current}`} />
-  ) : null;
+  value,
+}: PortableTextComponentProps<SimpleCallToActionProps>) => <Cta {...value} />;

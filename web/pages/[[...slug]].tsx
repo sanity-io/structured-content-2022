@@ -11,6 +11,7 @@ import Nav from '../components/Nav';
 import client from '../lib/sanity.server';
 import { Slug } from '../types/Slug';
 import { Section } from '../types/Section';
+import { Hero as HeroProps } from '../types/Hero';
 import { mainEventId } from '../util/entityPaths';
 import styles from './app.module.css';
 
@@ -20,6 +21,7 @@ const QUERY = groq`
       ...,
       page-> {
         name,
+        hero,
         sections[] {
           _type == 'reference' => @-> {
             sections[] {
@@ -84,7 +86,8 @@ interface RouteProps {
   data: {
     route: {
       page: {
-        name: string;
+        name?: string;
+        hero?: HeroProps;
         sections: Section[];
       };
     };
@@ -109,7 +112,7 @@ interface RouteProps {
 const Route = ({
   data: {
     route: {
-      page: { name, sections },
+      page: { name, hero, sections },
     },
     home: { name: homeName, startDate, endDate, description, ticketsUrl },
     footer,
@@ -166,7 +169,7 @@ const Route = ({
             <NavBlock ticketsUrl={ticketsUrl} />
           </GridWrapper>
         ) : (
-          <Hero heading={name} />
+          <Hero {...hero} />
         )}
         <TextBlock value={sections} />
       </main>

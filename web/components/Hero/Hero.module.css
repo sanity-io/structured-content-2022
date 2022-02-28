@@ -4,6 +4,13 @@
   padding: 40px 0 80px;
 }
 
+.summary {
+  font: var(--font-body-small-medium);
+  letter-spacing: var(--letter-spacing-body-small);
+  margin: 32px auto 0 auto;
+  max-width: var(--max-body-text-width);
+}
+
 .cta {
   margin-top: 32px;
 }
@@ -11,6 +18,12 @@
 @media (--medium-up) {
   .container {
     padding: 96px 0;
+  }
+
+  .summary {
+    font: var(--font-body-base-medium);
+    letter-spacing: var(--letter-spacing-body-base);
+    margin-top: 40px;
   }
 
   .cta {
@@ -32,5 +45,10 @@
   .heading,
   .cta {
     grid-column: 3 / span 8;
+  }
+
+  .summary {
+    grid-column: 4 / span 6;
+    max-width: none;
   }
 }
