@@ -1,4 +1,4 @@
-import { SimpleCallToAction as SimpleCallToActionProps } from '../../../types/SimpleCallToAction';
+import { SimpleCallToAction as SimpleCallToActionProps } from '../../types/SimpleCallToAction';
 import ButtonLink from '../ButtonLink';
 
 export const SimpleCallToAction = ({
