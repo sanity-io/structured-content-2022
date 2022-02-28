@@ -2,14 +2,13 @@ import clsx from 'clsx';
 import { groq } from 'next-sanity';
 import { useEffect, useState } from 'react';
 import Hero from '../../components/Hero';
-import TextBlock from '../../components/TextBlock';
+import RichText from '../../components/TextBlock/RichText';
 import Footer from '../../components/Footer';
 import Nav from '../../components/Nav';
 import client from '../../lib/sanity.server';
 import { Slug } from '../../types/Slug';
 import styles from '../app.module.css';
 import { mainEventId } from '../../util/entityPaths';
-import GridWrapper from '../../components/GridWrapper';
 import { Article } from '../../types/Article';
 
 const QUERY = groq`
@@ -62,9 +61,7 @@ const ArticleRoute = ({
     </header>
     <main>
       <Hero heading={heading} summary={summary} />
-      <GridWrapper>
-        <TextBlock value={content} />
-      </GridWrapper>
+      <RichText value={{ content }} />
     </main>
     <Footer links={footer.links} />
   </>
