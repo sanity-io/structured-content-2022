@@ -65,6 +65,11 @@ input {
 }
 
 @media (--medium-up) {
+  body {
+    font: var(--font-body-large);
+    letter-spacing: var(--letter-spacing-body-large);
+  }
+
   body.main-menu-open {
     overflow: auto;
   }
