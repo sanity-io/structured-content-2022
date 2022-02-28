@@ -17,3 +17,4 @@ export { default as sponsorsSection } from "./sponsorsSection";
 export { default as sponsorshipsSection } from "./sponsorshipsSection";
 export { default as ticketsSection } from "./ticketsSection";
 export { default as formSection } from "./formSection";
+export { default as graphSection } from "./graphSection";
