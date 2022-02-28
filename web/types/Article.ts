@@ -1,5 +1,5 @@
-import { Slug } from "./Slug";
-import { Section } from "./Section";
+import { Slug } from './Slug';
+import { Section } from './Section';
 
 export type Article = {
   _id: string;

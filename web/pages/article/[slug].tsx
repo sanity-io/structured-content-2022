@@ -10,7 +10,7 @@ import { Slug } from '../../types/Slug';
 import styles from '../app.module.css';
 import { mainEventId } from '../../util/entityPaths';
 import GridWrapper from '../../components/GridWrapper';
-import { Article } from "../../types/Article";
+import { Article } from '../../types/Article';
 
 const QUERY = groq`
   {
