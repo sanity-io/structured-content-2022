@@ -16,6 +16,7 @@ import VenuesSection from '../VenuesSection';
 import SponsorsSection from '../SponsorsSection';
 import Tickets from '../Tickets';
 import Figure from '../Figure';
+import Sponsorships from "../Sponsorships";
 
 const components: Partial<PortableTextComponents> = {
   types: {
@@ -31,6 +32,7 @@ const components: Partial<PortableTextComponents> = {
     articleSection: RichText,
     venuesSection: VenuesSection,
     sponsorsSection: SponsorsSection,
+    sponsorshipsSection: Sponsorships,
     ticketsSection: Tickets,
     figure: Figure,
   },
