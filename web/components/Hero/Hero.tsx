@@ -1,6 +1,6 @@
 import { Hero as HeroProps } from '../../types/Hero';
 import GridWrapper from '../GridWrapper';
-import SimpleCallToAction from '../TextBlock/SimpleCallToAction';
+import SimpleCallToAction from '../SimpleCallToAction';
 import styles from './Hero.module.css';
 
 export const Hero = ({ heading, summary, callToAction }: HeroProps) => (
@@ -11,7 +11,7 @@ export const Hero = ({ heading, summary, callToAction }: HeroProps) => (
         {summary && <p className={styles.summary}>{summary}</p>}
         {callToAction && (
           <div className={styles.cta}>
-            <SimpleCallToAction value={callToAction} />
+            <SimpleCallToAction {...callToAction} />
           </div>
         )}
       </div>
