@@ -22,6 +22,7 @@
 
 .social {
   margin: 38px 0;
+  padding: 0;
   text-align: center;
 }
 
@@ -49,6 +50,7 @@
 .links {
   list-style: none;
   margin: 20px -12px 0;
+  padding: 0;
   text-align: center;
 }
 
