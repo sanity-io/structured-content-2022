@@ -28,7 +28,8 @@ const QUERY = groq`
               ...,
               _type == "sponsorsSection" => {
                 ...,
-                "sponsors": *[_type == "sponsor"] {
+                sponsors[]->,
+                "allSponsors": *[_type == "sponsor"] {
                   ...,
                   sponsorship->,
                 },
@@ -39,8 +40,19 @@ const QUERY = groq`
               },
               _type == "venuesSection" => {
                 ...,
-                "venues": *[_id == "${mainEventId}"][0].venues[]->,
+                venues[]->,
+                "allVenues": *[_id == "${mainEventId}"][0].venues[]->,
               },
+              _type == "sessionsSection" => {
+                ...,
+                sessions[]->,
+                "allSessions": *[_type == "session"],
+              },
+              _type == "speakersSection" => {
+                ...,
+                speakers[]->,
+                "allSpeakers": *[_type == "person"],
+              },              
               content[] {
                 ...,
                 reference->,
@@ -56,7 +68,8 @@ const QUERY = groq`
             },
             _type == "venuesSection" => {
               ...,
-              "venues": *[_id == "${mainEventId}"][0].venues[]->,
+              venues[]->,
+              "allVenues": *[_id == "${mainEventId}"][0].venues[]->,
             },
             content[] {
               ...,

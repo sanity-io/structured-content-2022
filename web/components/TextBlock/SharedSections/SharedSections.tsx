@@ -3,7 +3,6 @@ import { imageUrlFor } from '../../../lib/sanity';
 import ConferenceUpdatesForm from '../../ConferenceUpdatesForm';
 import Heading from '../../Heading';
 import RichText from '../RichText';
-import SimpleCallToAction from '../SimpleCallToAction';
 import VenuesSection from '../VenuesSection';
 import SponsorsSection from '../SponsorsSection';
 import TextAndImage from "../TextAndImage";
@@ -32,10 +31,10 @@ export const SharedSections = ({ value: { name, sections, ...rest } }) => (
         case 'articleSection':
           return <RichText key={section._key} value={section} />;
         case 'textAndImageSection':
-          return <TextAndImage key={section.key} value={section} />;
+          return <TextAndImage key={section._key} value={section} />;
         case 'questionAndAnswerCollectionSection':
-          return <QuestionAndAnswerCollection key={section.key} value={section} />;
-        case 'mailchimpSection':
+          return <QuestionAndAnswerCollection key={section._key} value={section} />;
+        case 'formSection':
           return (
             <ConferenceUpdatesForm
               key={section._key}
@@ -44,23 +43,15 @@ export const SharedSections = ({ value: { name, sections, ...rest } }) => (
             />
           );
         case 'speakersSection':
-          return <Speakers key={section.key} value={section} />;
-        case 'sessionsSection': // TODO: implement
-          return <Sessions {...{} as any}  />;
+          return <Speakers key={section._key} value={section} {...{} as any} />;
+        case 'sessionsSection':
+          return <Sessions key={section._key} value={section} {...{} as any} />;
         case 'venuesSection':
-          return <VenuesSection key={section._key} value={section} />;
+          return <VenuesSection key={section._key} value={section} {...{} as any} />;
         case 'sponsorsSection':
-          return <SponsorsSection key={section._key} value={section} />;
-        case 'sponsorshipSection':
+          return <SponsorsSection key={section._key} value={section} {...{} as any} />;
+        case 'sponsorshipsSection':
           return null; // Implemented in PR #66
-        case 'simpleCallToAction':
-          return (
-            <SimpleCallToAction
-              key={section._key}
-              value={section}
-              {...(rest as any)}
-            />
-          );
         default:
           console.error(
             `Unrecognized SharedSections section type '${section._type}'`
