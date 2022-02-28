@@ -1,10 +1,11 @@
 import { Slug } from "./Slug";
+import { Section } from "./Section";
 
 export type Article = {
   _id: string;
   _rev: string;
   _type: 'article';
-  content: any[];
+  content: Section[];
   heading: string;
   publishedAt: string;
   slug: Slug;
