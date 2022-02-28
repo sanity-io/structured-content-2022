@@ -6,6 +6,10 @@ import RichText from '../RichText';
 import SimpleCallToAction from '../SimpleCallToAction';
 import VenuesSection from '../VenuesSection';
 import SponsorsSection from '../SponsorsSection';
+import TextAndImage from "../TextAndImage";
+import QuestionAndAnswerCollection from "../QuestionAndAnswerCollection";
+import Speakers from "../Speakers";
+import Sessions from "../../Sessions";
 
 const Figure = ({ value: { alt, asset } }) => (
   <Image
@@ -20,8 +24,17 @@ export const SharedSections = ({ value: { name, sections, ...rest } }) => (
   <>
     <Heading type="h2">{name}</Heading>
     {sections.map((section) => {
+      // Matches /studio/schemas/sections/index.ts
+      // plus "figure" from /studio/schemas/documents/sharedSections.ts
       switch (section._type) {
-        case 'mailchimp':
+        case 'figure':
+          return <Figure key={section._key} value={section} />;
+        case 'articleSection':
+          return <RichText key={section._key} value={section} />;
+        case 'textAndImageSection':
+          return <TextAndImage key={section.key} value={section} />;
+        case 'questionAndAnswerCollectionSection':
+          return <QuestionAndAnswerCollection key={section.key} value={section} />;
         case 'mailchimpSection':
           return (
             <ConferenceUpdatesForm
@@ -30,13 +43,16 @@ export const SharedSections = ({ value: { name, sections, ...rest } }) => (
               {...(rest as any)}
             />
           );
-        case 'figure':
-          return <Figure key={section._key} value={section} />;
-        case 'richText':
-        case 'articleSection':
-          return <RichText key={section._key} value={section} />;
+        case 'speakersSection':
+          return <Speakers key={section.key} value={section} />;
+        case 'sessionsSection': // TODO: implement
+          return <Sessions {...{} as any}  />;
         case 'venuesSection':
           return <VenuesSection key={section._key} value={section} />;
+        case 'sponsorsSection':
+          return <SponsorsSection key={section._key} value={section} />;
+        case 'sponsorshipSection':
+          return null; // Implemented in PR #66
         case 'simpleCallToAction':
           return (
             <SimpleCallToAction
@@ -45,9 +61,6 @@ export const SharedSections = ({ value: { name, sections, ...rest } }) => (
               {...(rest as any)}
             />
           );
-        case 'sponsors':
-        case 'sponsorsSection':
-          return <SponsorsSection key={section._key} value={section} />;
         default:
           console.error(
             `Unrecognized SharedSections section type '${section._type}'`
