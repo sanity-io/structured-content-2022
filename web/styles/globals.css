@@ -47,6 +47,11 @@ h2 {
   margin: 80px 0 18px;
 }
 
+h3 {
+  font: var(--font-body-base-bold);
+  margin: 1em 0;
+}
+
 p,
 ul,
 ol {
@@ -81,6 +86,10 @@ input {
   h2 {
     font: var(--font-display-base);
     margin: 96px 0 30px;
+  }
+
+  h3 {
+    font: var(--font-body-large-bold);
   }
 }
 
