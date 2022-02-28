@@ -18,12 +18,14 @@ export const RichText = ({ value, background }: RichTextProps) => (
   <GridWrapper>
     <div className={clsx(styles.container, background && styles.background)}>
       <div className={styles.content}>
-        <hgroup>
-          {value.heading && <Heading type="h2">{value.heading}</Heading>}
-          {value.subheading && (
-            <h3 className={styles.subHeading}>{value.subheading}</h3>
-          )}
-        </hgroup>
+        {value.heading && (
+          <hgroup>
+            {value.heading && <Heading type="h2">{value.heading}</Heading>}
+            {value.subheading && (
+              <h3 className={styles.subHeading}>{value.subheading}</h3>
+            )}
+          </hgroup>
+        )}
         <TextBlock value={value.content} />
       </div>
     </div>
