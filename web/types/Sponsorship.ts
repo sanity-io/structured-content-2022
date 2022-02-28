@@ -1,18 +1,18 @@
-import { SponsorLevel } from "./Sponsor";
+import { SponsorLevel } from './Sponsor';
 
 export type Sponsorship = {
   _createdAt: string;
   _id: string;
   _rev: string;
-  _type: "sponsorship",
+  _type: 'sponsorship';
   _updatedAt: string;
-  available: number,
+  available: number;
   offering: string[];
   passes: {
     inPerson: number;
     online: number;
     workshop: number;
-  },
-  price: number,
+  };
+  price: number;
   type: SponsorLevel;
-}
+};

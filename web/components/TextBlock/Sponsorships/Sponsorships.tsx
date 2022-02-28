@@ -1,14 +1,16 @@
-import { Sponsorship } from "../../../types/Sponsorship";
-import GridWrapper from "../../GridWrapper";
+import { Sponsorship } from '../../../types/Sponsorship';
+import GridWrapper from '../../GridWrapper';
 
 interface SponsorshipsProps {
   value: {
     type: 'all' | 'highlighted' | 'none';
     sponsorships: Sponsorship[];
-  }
+  };
 }
 
-export const Sponsorships = ({ value: { type, sponsorships } }: SponsorshipsProps) => {
+export const Sponsorships = ({
+  value: { type, sponsorships },
+}: SponsorshipsProps) => {
   if (type === 'none') {
     return null;
   }
@@ -21,7 +23,7 @@ export const Sponsorships = ({ value: { type, sponsorships } }: SponsorshipsProp
   if (type === 'all') {
     return (
       <GridWrapper>
-        {sponsorships.map(sponsorship => {
+        {sponsorships.map((sponsorship) => {
           return null; // TODO: render content here
         })}
       </GridWrapper>
@@ -30,4 +32,4 @@ export const Sponsorships = ({ value: { type, sponsorships } }: SponsorshipsProp
 
   console.error(`Unrecognized Sponsorships type: '${type}'`);
   return null;
-}
+};

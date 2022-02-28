@@ -1,1 +1,1 @@
-export { Sponsorships as default } from "./Sponsorships";
+export { Sponsorships as default } from './Sponsorships';

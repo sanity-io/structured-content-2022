@@ -16,7 +16,7 @@ import VenuesSection from '../VenuesSection';
 import SponsorsSection from '../SponsorsSection';
 import Tickets from '../Tickets';
 import Figure from '../Figure';
-import Sponsorships from "../Sponsorships";
+import Sponsorships from '../Sponsorships';
 
 const components: Partial<PortableTextComponents> = {
   types: {
