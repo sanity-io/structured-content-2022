@@ -1,10 +1,10 @@
-import { PresentationIcon } from "@sanity/icons";
+import { HeartFilledIcon } from "@sanity/icons";
 
 export default {
   name: "sponsor",
   title: "Sponsors",
   type: "document",
-  icon: PresentationIcon,
+  icon: HeartFilledIcon,
   fields: [
     {
       name: "title",

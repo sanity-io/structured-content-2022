@@ -131,6 +131,7 @@ export default () =>
       S.documentTypeListItem("ticket").title("Ticket types"),
       S.listItem()
         .title("Sponsorships")
+        .schemaType("sponsorship")
         .child(
           S.list()
             .items([

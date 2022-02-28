@@ -1,9 +1,12 @@
+import { UlistIcon } from "@sanity/icons";
+
 import SlotPreview from "../../src/SlotPreview";
 
 export default {
   name: "program",
   title: "Program",
   type: "document",
+  icon: UlistIcon,
   preview: {
     select: {
       internalName: "internalName",
