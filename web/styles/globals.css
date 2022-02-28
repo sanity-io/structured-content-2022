@@ -27,10 +27,6 @@
   outline: 2px solid var(--color-brand-black);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
   font: var(--font-body-base);
