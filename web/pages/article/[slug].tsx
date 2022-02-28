@@ -46,7 +46,7 @@ interface ArticleRouteProps {
 
 const ArticleRoute = ({
   data: {
-    article: { heading, content },
+    article: { heading, summary, content },
     home: { ticketsUrl },
     footer,
   },
@@ -61,7 +61,7 @@ const ArticleRoute = ({
       />
     </header>
     <main>
-      <Hero heading={heading} />
+      <Hero heading={heading} summary={summary} />
       <GridWrapper>
         <TextBlock value={content} />
       </GridWrapper>
