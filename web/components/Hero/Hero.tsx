@@ -1,25 +1,17 @@
-import ButtonLink from '../ButtonLink';
+import { Hero as HeroProps } from '../../types/Hero';
 import GridWrapper from '../GridWrapper';
+import SimpleCallToAction from '../TextBlock/SimpleCallToAction';
 import styles from './Hero.module.css';
 
-interface HeroProps {
-  heading?: string;
-  summary?: string;
-  cta?: {
-    url: string;
-    text: string;
-  };
-}
-
-export const Hero = ({ heading, summary, cta }: HeroProps) => (
+export const Hero = ({ heading, summary, callToAction }: HeroProps) => (
   <div className={styles.container}>
     <GridWrapper>
       <div className={styles.headingContainer}>
         <h1 className={styles.heading}>{heading}</h1>
         {summary && <p className={styles.summary}>{summary}</p>}
-        {cta && (
+        {callToAction && (
           <div className={styles.cta}>
-            <ButtonLink text={cta.text} url={cta.url} />
+            <SimpleCallToAction value={callToAction} />
           </div>
         )}
       </div>

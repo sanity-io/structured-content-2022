@@ -169,11 +169,7 @@ const Route = ({
             <NavBlock ticketsUrl={ticketsUrl} />
           </GridWrapper>
         ) : (
-          <Hero
-            heading={hero?.heading || name}
-            summary={hero?.summary}
-            cta={hero?.callToAction}
-          />
+          <Hero {...hero} />
         )}
         <TextBlock value={sections} />
       </main>
