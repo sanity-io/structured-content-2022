@@ -28,21 +28,22 @@ interface NavBlockProps {
 export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
   <nav className={styles.nav}>
     <ul className={styles.list}>
-      <FakeItem mobile />
-
       <li className={styles.item}>
         <Link href="/program">
           <a className={styles.link}>Program</a>
         </Link>
       </li>
 
+      <FakeItem mobile tablet desktop />
+      <FakeItem mobile tablet desktop />
       <FakeItem tablet desktop />
       <FakeItem tablet desktop />
-      <FakeItem desktop />
       <FakeItem divider mobile tablet desktop />
       <FakeItem tablet desktop />
       <FakeItem tablet desktop />
-      <FakeItem desktop />
+      <FakeItem tablet desktop />
+      <FakeItem mobile tablet desktop />
+      <FakeItem mobile />
 
       <li className={styles.item}>
         <Link href="/speakers">
@@ -50,9 +51,7 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
         </Link>
       </li>
 
-      <FakeItem mobile />
       <FakeItem divider mobile tablet desktop />
-      <FakeItem mobile />
 
       <li className={styles.item}>
         <Link href="/about">
@@ -60,8 +59,10 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
         </Link>
       </li>
 
-      <FakeItem tablet desktop />
+      <FakeItem mobile />
+      <FakeItem mobile tablet desktop />
       <FakeItem divider mobile />
+      <FakeItem desktop />
 
       <li className={styles.item}>
         <Link href={ticketsUrl}>
@@ -69,7 +70,8 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
         </Link>
       </li>
 
-      <FakeItem desktop mobile />
+      <FakeItem tablet desktop />
+      <FakeItem mobile desktop />
     </ul>
   </nav>
 );
