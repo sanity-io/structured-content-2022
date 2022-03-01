@@ -50,6 +50,10 @@
   background: url('../../images/navblock_plus.svg') 100% 100% no-repeat;
 }
 
+.fakeItem.shapeC {
+  background: url('../../images/navblock_c.svg') 100% 100% no-repeat;
+}
+
 .fakeItem.mobile {
   display: block;
 }
