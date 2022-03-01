@@ -1,5 +1,4 @@
 import ConferenceUpdatesForm from '../../ConferenceUpdatesForm';
-import Heading from '../../Heading';
 import Figure from '../Figure';
 import RichText from '../RichText';
 import VenuesSection from '../VenuesSection';
@@ -10,9 +9,8 @@ import Speakers from '../Speakers';
 import Sessions from '../../Sessions';
 import Tickets from '../Tickets';
 
-export const SharedSections = ({ value: { name, sections, ...rest } }) => (
+export const SharedSections = ({ value: { sections, ...rest } }) => (
   <>
-    <Heading type="h2">{name}</Heading>
     {sections.map((section) => {
       // Matches /studio/schemas/sections/index.ts
       // plus "figure" from /studio/schemas/documents/sharedSections.ts
