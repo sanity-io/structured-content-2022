@@ -29,15 +29,17 @@ export const SponsorsSection = ({
 
   if (type === 'highlighted') {
     return (
-      <section className={styles.sponsorLevel}>
-        <ul className={styles.sponsors}>
-          {sponsors.map((sponsor, index) => (
-            <li key={sponsor._id} className={styles.sponsor}>
-              <Sponsor sponsor={sponsor} />
-            </li>
-          ))}
-        </ul>
-      </section>
+      <GridWrapper>
+        <section className={styles.sponsorLevel}>
+          <ul className={styles.sponsors}>
+            {sponsors.map((sponsor, index) => (
+              <li key={sponsor._id} className={styles.sponsor}>
+                <Sponsor sponsor={sponsor} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      </GridWrapper>
     );
   }
 
