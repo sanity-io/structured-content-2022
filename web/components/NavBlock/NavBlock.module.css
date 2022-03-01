@@ -62,6 +62,10 @@
   background: url('../../images/navblock_o.svg') 100% 100% no-repeat;
 }
 
+.fakeItem.shapeHalfOval {
+  background: url('../../images/navblock_halfoval.svg') 100% 100% no-repeat;
+}
+
 .fakeItem.mobile {
   display: block;
 }
