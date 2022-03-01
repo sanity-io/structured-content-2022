@@ -12,6 +12,7 @@
   flex-wrap: wrap;
   justify-content: center;
   margin: 24px -4px 0;
+  padding: 0;
 }
 
 .sponsor {
