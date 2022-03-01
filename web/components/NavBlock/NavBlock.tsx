@@ -7,15 +7,23 @@ interface FakeItemProps {
   mobile?: boolean;
   tablet?: boolean;
   desktop?: boolean;
+  shape?: 'Plus';
 }
 
-const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) => (
+const FakeItem = ({
+  divider,
+  mobile,
+  tablet,
+  desktop,
+  shape,
+}: FakeItemProps) => (
   <li
     className={clsx(
       divider ? styles.divider : styles.fakeItem,
       mobile && styles.mobile,
       tablet && styles.tablet,
-      desktop && styles.desktop
+      desktop && styles.desktop,
+      shape && styles[`shape${shape}`]
     )}
     aria-hidden="true"
   />
@@ -35,7 +43,7 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
       </li>
 
       <FakeItem mobile tablet desktop />
-      <FakeItem mobile tablet desktop />
+      <FakeItem mobile tablet desktop shape="Plus" />
       <FakeItem tablet desktop />
       <FakeItem tablet desktop />
       <FakeItem divider mobile tablet desktop />
