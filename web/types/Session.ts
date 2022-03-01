@@ -1,17 +1,22 @@
 import { Person } from './Person';
-import { Venue } from './Venue';
 import { Section } from './Section';
 import { Slug } from './Slug';
+import { Sponsor } from './Sponsor';
 
 export type Session = {
+  createdAt: string;
   _id: string;
-  title: string;
-  startTime: string;
+  _rev: string;
   _type: 'session';
+  _updatedAt: string;
   duration: number;
-  location: Venue;
-  speakers: Person[];
+  internalName: string;
+  slug: Slug;
+  title: string;
+  type: 'talk' | 'panel' | 'break' | 'social' | 'workshop';
+  publishedAt?: string;
   shortDescription?: Section[];
   longDescription?: Section[];
-  slug: Slug;
+  speakers: Person[];
+  sponsoredBy?: Sponsor[];
 };

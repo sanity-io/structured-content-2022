@@ -58,7 +58,7 @@ const QUERY = groq`
                 ...,
                 speakers[]->,
                 "allSpeakers": *[_type == "person"],
-              },              
+              },
               _type == "ticketsSection" => {
                 ...,
                 tickets[]->,
@@ -87,6 +87,17 @@ const QUERY = groq`
               ...,
               sponsors[]->,
               "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
+            },
+            _type == "programsSection" => {
+              ...,
+              "allPrograms": *[_type == "program"] {
+                ...,
+                sessions[] {
+                  ...,
+                  session->,
+                },
+                venues[]->,
+              }
             },
             content[] {
               ...,

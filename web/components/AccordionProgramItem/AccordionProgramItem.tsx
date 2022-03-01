@@ -1,6 +1,7 @@
-import { formatTime } from '../../util/date';
 import { Session } from '../../types/Session';
 import styles from './AccordionProgramItem.module.css';
+import { formatTime } from '../../util/date';
+import { addMinutes } from 'date-fns';
 
 interface AccordionProgramItemProps {
   programSession: {
@@ -9,25 +10,25 @@ interface AccordionProgramItemProps {
     _type: 'padding' | 'slot';
     session?: Session;
   };
+  startTime: Date;
 }
 
 export const AccordionProgramItem = ({
   programSession,
+  startTime,
 }: AccordionProgramItemProps) => (
   <div className={styles.container}>
-    {programSession._type === 'padding' ? (
-      <>
-        <span>{programSession.duration} minutes</span>
-        <span className={styles.sessionTitle}>Pause</span>
-      </>
-    ) : (
-      <>
-        {/* TODO: This is shown in user's local time */}
-        {formatTime(programSession.session.startTime)}
-        <span className={styles.sessionTitle}>
-          {programSession.session.title}
-        </span>
-      </>
-    )}
+    {programSession._type === 'padding'
+      ? 'Pause'
+      : programSession.session.title}
+    <span className={styles.sessionDuration}>
+      {formatTime(startTime.toISOString())} -{' '}
+      {formatTime(
+        addMinutes(
+          startTime,
+          programSession.session?.duration || programSession.duration
+        ).toISOString()
+      )}
+    </span>
   </div>
 );
