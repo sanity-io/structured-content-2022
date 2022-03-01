@@ -7,15 +7,23 @@ interface FakeItemProps {
   mobile?: boolean;
   tablet?: boolean;
   desktop?: boolean;
+  shape?: 'Plus' | 'C' | 'Ovals' | 'O' | 'HalfOval';
 }
 
-const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) => (
+const FakeItem = ({
+  divider,
+  mobile,
+  tablet,
+  desktop,
+  shape,
+}: FakeItemProps) => (
   <li
     className={clsx(
       divider ? styles.divider : styles.fakeItem,
       mobile && styles.mobile,
       tablet && styles.tablet,
-      desktop && styles.desktop
+      desktop && styles.desktop,
+      shape && styles[`shape${shape}`]
     )}
     aria-hidden="true"
   />
@@ -28,21 +36,22 @@ interface NavBlockProps {
 export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
   <nav className={styles.nav}>
     <ul className={styles.list}>
-      <FakeItem mobile />
-
       <li className={styles.item}>
         <Link href="/program">
           <a className={styles.link}>Program</a>
         </Link>
       </li>
 
+      <FakeItem mobile tablet desktop />
+      <FakeItem mobile tablet desktop shape="Plus" />
       <FakeItem tablet desktop />
       <FakeItem tablet desktop />
-      <FakeItem desktop />
       <FakeItem divider mobile tablet desktop />
       <FakeItem tablet desktop />
+      <FakeItem tablet desktop shape="C" />
       <FakeItem tablet desktop />
-      <FakeItem desktop />
+      <FakeItem mobile tablet desktop shape="Ovals" />
+      <FakeItem mobile />
 
       <li className={styles.item}>
         <Link href="/speakers">
@@ -50,9 +59,7 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
         </Link>
       </li>
 
-      <FakeItem mobile />
       <FakeItem divider mobile tablet desktop />
-      <FakeItem mobile />
 
       <li className={styles.item}>
         <Link href="/about">
@@ -60,8 +67,10 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
         </Link>
       </li>
 
-      <FakeItem tablet desktop />
+      <FakeItem mobile shape="HalfOval" />
+      <FakeItem mobile tablet desktop />
       <FakeItem divider mobile />
+      <FakeItem desktop shape="O" />
 
       <li className={styles.item}>
         <Link href={ticketsUrl}>
@@ -69,7 +78,8 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
         </Link>
       </li>
 
-      <FakeItem desktop mobile />
+      <FakeItem tablet desktop shape="HalfOval" />
+      <FakeItem mobile desktop />
     </ul>
   </nav>
 );
