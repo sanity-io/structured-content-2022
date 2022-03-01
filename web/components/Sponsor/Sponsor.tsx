@@ -5,6 +5,7 @@ import styles from './Sponsor.module.css';
 
 interface SponsorProps {
   sponsor: TSponsor;
+  type?: SponsorLevel;
 }
 
 const assumedScaleFactor = 0.6;
@@ -34,11 +35,8 @@ const imgDimensions: {
 };
 
 export const Sponsor = ({
-  sponsor: {
-    sponsorship: { type },
-    image,
-    title,
-  },
+  sponsor: { image, title, callToActionURL },
+  type,
 }: SponsorProps) => {
   const dimension = imgDimensions[type] || imgDimensions.Community;
   const src = imageUrlFor(image)
@@ -50,9 +48,11 @@ export const Sponsor = ({
     .url();
 
   return (
-    <div className={clsx(styles.sponsor, dimension.className)}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={title} className={styles.image} />
-    </div>
+    <a href={callToActionURL}>
+      <div className={clsx(styles.sponsor, dimension.className)}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt={title} className={styles.image} />
+      </div>
+    </a>
   );
 };

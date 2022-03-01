@@ -1,4 +1,4 @@
-import { SponsorLevel } from './Sponsor';
+import { Sponsor, SponsorLevel } from './Sponsor';
 
 export type Sponsorship = {
   _createdAt: string;
@@ -14,5 +14,6 @@ export type Sponsorship = {
     workshop: number;
   };
   price: number;
+  sponsors?: Omit<Sponsor, '_id'>[];
   type: SponsorLevel;
 };

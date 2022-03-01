@@ -1,33 +1,69 @@
 import { PortableTextComponentProps } from '@portabletext/react/dist/react-portable-text.esm';
-import { Sponsor } from '../../../types/Sponsor';
+import { Sponsor as TSponsor } from '../../../types/Sponsor';
+import { Sponsorship } from '../../../types/Sponsorship';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
-import Sponsors from '../../Sponsors';
+import Sponsor from '../../Sponsor';
+import GridWrapper from '../../GridWrapper';
+import Heading from '../../Heading';
+import styles from './SponsorsSection.module.css';
 
 type SponsorsSectionProps = {
   type: EntitySectionSelection;
-  allSponsors: Sponsor[];
-  sponsors?: Sponsor[];
+  allSponsorships: Sponsorship[];
+  sponsors?: TSponsor[];
 };
 
 export const SponsorsSection = ({
-  value: { type, allSponsors, sponsors },
+  value: { type, allSponsorships, sponsors },
 }: PortableTextComponentProps<SponsorsSectionProps>) => {
-  if (!Array.isArray(allSponsors) || allSponsors.length === 0) {
+  if (!Array.isArray(allSponsorships) || allSponsorships.length === 0) {
     console.error(
-      `SponsorsSection missing or invalid sponsors array: '${allSponsors}'`
+      `SponsorsSection missing or invalid sponsorships array: '${allSponsorships}'`
     );
     return null;
   }
 
-  switch (type) {
-    case 'all':
-      return <Sponsors sponsors={allSponsors} />;
-    case 'highlighted':
-      return <Sponsors sponsors={sponsors} />;
-    case 'none':
-      return null;
-    default:
-      console.error(`Unrecognized SponsorsSection type: '${type}'`);
-      return null;
+  if (type === 'none') {
+    return null;
   }
+
+  if (type === 'highlighted') {
+    return (
+      <GridWrapper>
+        <section className={styles.sponsorLevel}>
+          <ul className={styles.sponsors}>
+            {sponsors.map((sponsor) => (
+              <li key={sponsor._id} className={styles.sponsor}>
+                <Sponsor sponsor={sponsor} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      </GridWrapper>
+    );
+  }
+
+  if (type === 'all') {
+    return (
+      <GridWrapper>
+        {allSponsorships
+          .filter((sponsorship) => sponsorship.sponsors?.length > 0)
+          .map(({ _id, type, sponsors }) => (
+            <section key={_id} className={styles.sponsorLevel}>
+              <Heading type="h3">{type}</Heading>
+              <ul className={styles.sponsors}>
+                {sponsors.map((sponsor) => (
+                  <li key={sponsor._key} className={styles.sponsor}>
+                    <Sponsor sponsor={sponsor as TSponsor} type={type} />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+      </GridWrapper>
+    );
+  }
+
+  console.error(`Unrecognized SponsorsSection type: '${type}'`);
+  return null;
 };
