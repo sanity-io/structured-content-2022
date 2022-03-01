@@ -1,0 +1,20 @@
+.container {
+  margin: 80px 0;
+}
+
+@media (--medium-up) {
+  .container {
+    margin: 96px 0;
+  }
+
+  .content {
+    max-width: var(--max-body-text-width);
+    margin: 0 auto;
+  }
+}
+
+@media (--large-up) {
+  .container {
+    margin: 128px 0;
+  }
+}

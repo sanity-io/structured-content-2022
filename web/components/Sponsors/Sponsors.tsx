@@ -13,7 +13,7 @@ const groupBySponsorLevel = (
 ): { [level in SponsorLevel]: TSponsor[] } =>
   sponsors.reduce(
     (acc, sponsor) => {
-      const sponsorLevel = sponsor.sponsorship.type;
+      const sponsorLevel = sponsor.sponsorship?.type;
       acc[sponsorLevel] = [...(acc[sponsorLevel] || []), sponsor];
       return acc;
     },

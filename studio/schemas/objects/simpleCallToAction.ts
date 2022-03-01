@@ -18,7 +18,7 @@ export default {
       description: "The target URL.",
       hidden: ({ parent }) => !parent.url && parent.reference,
       validation: (Rule) =>
-        Rule.regex(/(?<=utm_[a-z]+=)\w+/).warning(
+        Rule.regex(/(?<=utm_[a-z]+=)\w+/).info(
           "You might want to include UTM tags."
         ),
     },

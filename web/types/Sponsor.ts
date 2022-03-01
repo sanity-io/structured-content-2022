@@ -13,7 +13,7 @@ export type Sponsor = {
       _type: 'reference';
     };
   };
-  sponsorship: {
+  sponsorship?: {
     _id: string;
     _type: 'sponsorship';
     type: SponsorLevel;

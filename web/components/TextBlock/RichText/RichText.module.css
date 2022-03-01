@@ -25,6 +25,10 @@
     max-width: var(--max-body-text-width);
     margin: 0 auto;
   }
+
+  .subHeading {
+    font: var(--font-body-large-medium);
+  }
 }
 
 @media (--large-up) {
