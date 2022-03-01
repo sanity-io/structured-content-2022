@@ -47,23 +47,26 @@
 }
 
 .fakeItem.shapePlus {
-  background: url('../../images/navblock_plus.svg') 100% 100% no-repeat;
+  background: url('../../images/navblock_plus.svg') top left / 100% 100%
+    no-repeat;
 }
 
 .fakeItem.shapeC {
-  background: url('../../images/navblock_c.svg') 100% 100% no-repeat;
+  background: url('../../images/navblock_c.svg') top left / 100% 100% no-repeat;
 }
 
 .fakeItem.shapeOvals {
-  background: url('../../images/navblock_ovals.svg') 100% 100% no-repeat;
+  background: url('../../images/navblock_ovals.svg') top left / 100% 100%
+    no-repeat;
 }
 
 .fakeItem.shapeO {
-  background: url('../../images/navblock_o.svg') 100% 100% no-repeat;
+  background: url('../../images/navblock_o.svg') top left / 100% 100% no-repeat;
 }
 
 .fakeItem.shapeHalfOval {
-  background: url('../../images/navblock_halfoval.svg') 100% 100% no-repeat;
+  background: url('../../images/navblock_halfoval.svg') top left / 100% 100%
+    no-repeat;
 }
 
 .fakeItem.mobile {
