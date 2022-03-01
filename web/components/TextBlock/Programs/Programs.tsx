@@ -31,7 +31,12 @@ export const Programs = ({
                       <Fragment key={index}>
                         {session._type === 'padding' ? (
                           <h3>
-                            {formatDateWithDay(currentTime.toISOString())}
+                            {formatDateWithDay(
+                              addMinutes(
+                                currentTime,
+                                session.duration
+                              ).toISOString()
+                            )}
                           </h3>
                         ) : (
                           <>
