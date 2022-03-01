@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { groq } from 'next-sanity';
-import { NextSeo } from "next-seo";
-import urlJoin from "proper-url-join";
+import { NextSeo } from 'next-seo';
+import urlJoin from 'proper-url-join';
 import { useEffect, useState } from 'react';
 import Hero from '../components/Hero';
 import TextBlock from '../components/TextBlock';
@@ -93,14 +93,14 @@ interface RouteProps {
         sections: Section[];
       };
       seo: {
-        _type: 'seo',
+        _type: 'seo';
         title: string;
         description: string;
         image?: {
           asset: {
             url: string;
-          }
-        },
+          };
+        };
         noIndex?: boolean;
       };
     };
@@ -169,7 +169,7 @@ const Route = ({
         description={seoDescription}
         canonical={urlJoin('https://structuredcontent.live', currentPath)}
         noindex={noIndex}
-        openGraph={image ? { images: [{ url: image?.asset?.url }] }  : undefined}
+        openGraph={image ? { images: [{ url: image?.asset?.url }] } : undefined}
       />
       <header className={headerClasses}>
         <Nav
