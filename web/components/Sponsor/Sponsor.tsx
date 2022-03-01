@@ -34,7 +34,10 @@ const imgDimensions: {
   },
 };
 
-export const Sponsor = ({ sponsor: { image, title }, type }: SponsorProps) => {
+export const Sponsor = ({
+  sponsor: { image, title, callToActionURL },
+  type,
+}: SponsorProps) => {
   const dimension = imgDimensions[type] || imgDimensions.Community;
   const src = imageUrlFor(image)
     .auto('format')
@@ -45,9 +48,11 @@ export const Sponsor = ({ sponsor: { image, title }, type }: SponsorProps) => {
     .url();
 
   return (
-    <div className={clsx(styles.sponsor, dimension.className)}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={title} className={styles.image} />
-    </div>
+    <a href={callToActionURL}>
+      <div className={clsx(styles.sponsor, dimension.className)}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt={title} className={styles.image} />
+      </div>
+    </a>
   );
 };

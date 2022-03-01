@@ -31,8 +31,8 @@ export const SponsorsSection = ({
     return (
       <section className={styles.sponsorLevel}>
         <ul className={styles.sponsors}>
-          {sponsors.map((sponsor) => (
-            <li key={sponsor._key} className={styles.sponsor}>
+          {sponsors.map((sponsor, index) => (
+            <li key={sponsor._id} className={styles.sponsor}>
               <Sponsor sponsor={sponsor} />
             </li>
           ))}
