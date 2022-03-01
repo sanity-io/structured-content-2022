@@ -28,7 +28,8 @@ const QUERY = groq`
               ...,
               _type == "sponsorsSection" => {
                 ...,
-                "sponsors": *[_type == "sponsor"] {
+                sponsors[]->,
+                "allSponsors": *[_type == "sponsor"] {
                   ...,
                   sponsorship->,
                 },
@@ -39,7 +40,23 @@ const QUERY = groq`
               },
               _type == "venuesSection" => {
                 ...,
-                "venues": *[_id == "${mainEventId}"][0].venues[]->,
+                venues[]->,
+                "allVenues": *[_id == "${mainEventId}"][0].venues[]->,
+              },
+              _type == "sessionsSection" => {
+                ...,
+                sessions[]->,
+                "allSessions": *[_type == "session"],
+              },
+              _type == "speakersSection" => {
+                ...,
+                speakers[]->,
+                "allSpeakers": *[_type == "person"],
+              },              
+              _type == "ticketsSection" => {
+                ...,
+                tickets[]->,
+                "allTickets": *[_id == "${mainEventId}"][0].tickets[]->
               },
               content[] {
                 ...,
@@ -52,11 +69,13 @@ const QUERY = groq`
             ...,
             _type == "ticketsSection" => {
               ...,
-              "tickets": *[_id == "${mainEventId}"][0].tickets[]->
+              tickets[]->,
+              "allTickets": *[_id == "${mainEventId}"][0].tickets[]->
             },
             _type == "venuesSection" => {
               ...,
-              "venues": *[_id == "${mainEventId}"][0].venues[]->,
+              venues[]->,
+              "allVenues": *[_id == "${mainEventId}"][0].venues[]->,
             },
             content[] {
               ...,

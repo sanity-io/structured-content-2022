@@ -4,30 +4,28 @@ import SectionBlock from '../SectionBlock';
 import Heading from '../Heading';
 import Paragraph from '../Paragraph';
 import { formatDateWithTime } from '../../util/date';
-import styles from './Sessions.module.css';
 import { getEntityPath } from '../../util/entityPaths';
+import { PortableTextComponentProps } from '@portabletext/react/dist/react-portable-text.esm';
+import { EntitySectionSelection } from '../../types/EntitySectionSelection';
 
-interface SessionProps {
-  sessions: Session[];
-}
+type SessionProps = {
+  type: EntitySectionSelection;
+  allSessions: Session[];
+  sessions?: Session[];
+};
 
-export const Sessions = ({ sessions }: SessionProps) => (
+export const Sessions = ({
+  value: { allSessions, sessions },
+}: PortableTextComponentProps<SessionProps>) => (
   <>
-    {sessions.map((session) => {
-      const { title, startTime, speakers } = session;
+    {(sessions || allSessions).map((session) => {
+      const { title, startTime, _id } = session;
       return (
-        <SectionBlock key={title}>
+        <SectionBlock key={_id}>
           <Heading type="h2">
             <Link href={getEntityPath(session)}>{title}</Link>
           </Heading>
-          <Paragraph>
-            <span>{formatDateWithTime(startTime)}</span>
-            {speakers.map(({ name, title }) => (
-              <span key={name} className={styles.speaker}>
-                <strong>{name}</strong>, {title}
-              </span>
-            ))}
-          </Paragraph>
+          <Paragraph>{<span>{formatDateWithTime(startTime)}</span>}</Paragraph>
         </SectionBlock>
       );
     })}
