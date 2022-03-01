@@ -5,6 +5,7 @@ import styles from './Sponsor.module.css';
 
 interface SponsorProps {
   sponsor: TSponsor;
+  type?: SponsorLevel;
 }
 
 const assumedScaleFactor = 0.6;
@@ -33,13 +34,7 @@ const imgDimensions: {
   },
 };
 
-export const Sponsor = ({
-  sponsor: {
-    sponsorship: { type },
-    image,
-    title,
-  },
-}: SponsorProps) => {
+export const Sponsor = ({ sponsor: { image, title }, type }: SponsorProps) => {
   const dimension = imgDimensions[type] || imgDimensions.Community;
   const src = imageUrlFor(image)
     .auto('format')

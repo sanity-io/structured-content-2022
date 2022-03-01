@@ -38,10 +38,7 @@ const QUERY = groq`
               _type == "sponsorsSection" => {
                 ...,
                 sponsors[]->,
-                "allSponsors": *[_type == "sponsor"] {
-                  ...,
-                  sponsorship->,
-                },
+                "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
               },
               _type == "simpleCallToAction" => {
                 ...,
@@ -88,7 +85,8 @@ const QUERY = groq`
             },
             _type == "sponsorshipsSection" => {
               ...,
-              "sponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
+              sponsors[]->,
+              "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
             },
             content[] {
               ...,
