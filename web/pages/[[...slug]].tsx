@@ -1,5 +1,7 @@
 import clsx from 'clsx';
 import { groq } from 'next-sanity';
+import { NextSeo } from "next-seo";
+import urlJoin from "proper-url-join";
 import { useEffect, useState } from 'react';
 import Hero from '../components/Hero';
 import TextBlock from '../components/TextBlock';
@@ -90,6 +92,17 @@ interface RouteProps {
         hero?: HeroProps;
         sections: Section[];
       };
+      seo: {
+        _type: 'seo',
+        title: string;
+        description: string;
+        image?: {
+          asset: {
+            url: string;
+          }
+        },
+        noIndex?: boolean;
+      };
     };
     home: {
       name: string;
@@ -113,6 +126,7 @@ const Route = ({
   data: {
     route: {
       page: { name, hero, sections },
+      seo: { title, description: seoDescription, image, noIndex },
     },
     home: { name: homeName, startDate, endDate, description, ticketsUrl },
     footer,
@@ -150,6 +164,13 @@ const Route = ({
 
   return (
     <>
+      <NextSeo
+        title={title}
+        description={seoDescription}
+        canonical={urlJoin('https://structuredcontent.live', currentPath)}
+        noindex={noIndex}
+        openGraph={image ? { images: [{ url: image?.asset?.url }] }  : undefined}
+      />
       <header className={headerClasses}>
         <Nav
           onFrontPage={isFrontPage}
