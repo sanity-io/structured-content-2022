@@ -24,7 +24,7 @@ export default {
       of: [
         {
           type: "reference",
-          to: [{ type: "person" }],
+          to: [{ type: "sponsor" }],
           options: {
             // Just include people that's part of a session, and that hasn't been selected already
             filter: ({ parent }) => ({
