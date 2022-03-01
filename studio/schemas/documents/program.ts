@@ -1,4 +1,5 @@
 import { UlistIcon } from "@sanity/icons";
+import { intervalToDuration, addMinutes, parseISO } from "date-fns";
 
 import SlotPreview from "../../src/SlotPreview";
 
@@ -36,21 +37,36 @@ export default {
       sessions = [],
       ...durations
     }) {
-      console.log({ sessions, durations });
       const startDate = new Date(start).toLocaleDateString();
       const numberOfVenues = venue.length;
-      const sessionsDurations = Object.values(sessions).filter(Boolean);
-      const totalMinutes = sessionsDurations.reduce(
-        (total, { session, durationOverride }) => {
-          const duration = durationOverride || session.duration;
-          return total + duration;
-        },
-        0
+      const sessionsDurations = Object.values(sessions).filter(
+        (session) => session?._type === "slot" && session.session
       );
 
+      const totalMinutes = (): number => {
+        return sessionsDurations.length > 0
+          ? sessionsDurations.reduce((total, { session, durationOverride }) => {
+              const duration = durationOverride || session?.duration;
+              return total + duration;
+            }, 0)
+          : 0;
+      };
+      const duration = (): string => {
+        return Object.entries(
+          intervalToDuration({
+            start: parseISO(start),
+            end: addMinutes(parseISO(start), totalMinutes()),
+          })
+        )
+          .map(([key, value]) =>
+            ["hours", "minutes"].includes(key) ? `${value} ${key}` : undefined
+          )
+          .filter(Boolean)
+          .join(", ");
+      };
       return {
         title: `${internalName} at ${event}`,
-        subtitle: `${startDate} (${totalMinutes}mins) at ${numberOfVenues} venue${
+        subtitle: `${startDate} (${duration()}) at ${numberOfVenues} venue${
           numberOfVenues > 1 ? "s" : ""
         }`,
       };
