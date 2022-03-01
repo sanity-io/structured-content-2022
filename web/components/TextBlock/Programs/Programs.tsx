@@ -27,11 +27,7 @@ export const Programs = ({
                 <div key={program._id}>
                   <h3>{formatDateWithDay(program.startDateTime)}</h3>
                   {program.sessions.map((session, index) => {
-                    currentTime = addMinutes(
-                      currentTime,
-                      session.session?.duration || session.duration
-                    );
-                    return (
+                    const Session = (
                       <Fragment key={index}>
                         {session._type === 'padding' ? (
                           <h3>
@@ -50,6 +46,12 @@ export const Programs = ({
                         )}
                       </Fragment>
                     );
+
+                    currentTime = addMinutes(
+                      currentTime,
+                      session.session?.duration || session.duration
+                    );
+                    return Session;
                   })}
                 </div>
               ),
