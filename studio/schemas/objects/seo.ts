@@ -6,7 +6,12 @@ export default {
       { name: "title", type: "string", title: "Title" },
       { name: "description", type: "string", title: "Description" },
     ].map((field) => ({ ...field, validation: (Rule) => Rule.required() })),
-    { name: "image", type: "figure", title: "Image" },
+    {
+      name: "image",
+      type: "figure",
+      title: "Image",
+      description: "Override the automatically generated SEO image",
+    },
     {
       name: "noIndex",
       type: "boolean",
