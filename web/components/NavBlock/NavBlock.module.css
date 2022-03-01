@@ -107,6 +107,10 @@
     padding: 28.5px 39px;
   }
 
+  .fakeItem {
+    border-radius: 12px;
+  }
+
   .fakeItem.tablet,
   .divider.tablet {
     display: none;
