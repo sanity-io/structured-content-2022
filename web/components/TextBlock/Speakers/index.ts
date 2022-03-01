@@ -1,1 +1,1 @@
-export { Speakers as default } from "./Speakers";
+export { Speakers as default } from './Speakers';

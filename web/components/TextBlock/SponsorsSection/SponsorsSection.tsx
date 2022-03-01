@@ -1,6 +1,6 @@
-import { PortableTextComponentProps } from "@portabletext/react/dist/react-portable-text.esm";
-import { Sponsor } from "../../../types/Sponsor";
-import { EntitySectionSelection } from "../../../types/EntitySectionSelection";
+import { PortableTextComponentProps } from '@portabletext/react/dist/react-portable-text.esm';
+import { Sponsor } from '../../../types/Sponsor';
+import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import Sponsors from '../../Sponsors';
 
 type SponsorsSectionProps = {
@@ -9,7 +9,9 @@ type SponsorsSectionProps = {
   sponsors?: Sponsor[];
 };
 
-export const SponsorsSection = ({ value: { type, allSponsors, sponsors } }: PortableTextComponentProps<SponsorsSectionProps>) => {
+export const SponsorsSection = ({
+  value: { type, allSponsors, sponsors },
+}: PortableTextComponentProps<SponsorsSectionProps>) => {
   if (!Array.isArray(allSponsors) || allSponsors.length === 0) {
     console.error(
       `SponsorsSection missing or invalid sponsors array: '${allSponsors}'`
@@ -18,9 +20,9 @@ export const SponsorsSection = ({ value: { type, allSponsors, sponsors } }: Port
   }
 
   switch (type) {
-    case "all":
+    case 'all':
       return <Sponsors sponsors={allSponsors} />;
-    case "highlighted":
+    case 'highlighted':
       return <Sponsors sponsors={sponsors} />;
     case 'none':
       return null;

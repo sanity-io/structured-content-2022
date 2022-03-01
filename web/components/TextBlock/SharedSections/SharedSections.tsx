@@ -5,10 +5,10 @@ import Heading from '../../Heading';
 import RichText from '../RichText';
 import VenuesSection from '../VenuesSection';
 import SponsorsSection from '../SponsorsSection';
-import TextAndImage from "../TextAndImage";
-import QuestionAndAnswerCollection from "../QuestionAndAnswerCollection";
-import Speakers from "../Speakers";
-import Sessions from "../../Sessions";
+import TextAndImage from '../TextAndImage';
+import QuestionAndAnswerCollection from '../QuestionAndAnswerCollection';
+import Speakers from '../Speakers';
+import Sessions from '../../Sessions';
 
 const Figure = ({ value: { alt, asset } }) => (
   <Image
@@ -33,7 +33,9 @@ export const SharedSections = ({ value: { name, sections, ...rest } }) => (
         case 'textAndImageSection':
           return <TextAndImage key={section._key} value={section} />;
         case 'questionAndAnswerCollectionSection':
-          return <QuestionAndAnswerCollection key={section._key} value={section} />;
+          return (
+            <QuestionAndAnswerCollection key={section._key} value={section} />
+          );
         case 'formSection':
           return (
             <ConferenceUpdatesForm
@@ -43,13 +45,29 @@ export const SharedSections = ({ value: { name, sections, ...rest } }) => (
             />
           );
         case 'speakersSection':
-          return <Speakers key={section._key} value={section} {...{} as any} />;
+          return (
+            <Speakers key={section._key} value={section} {...({} as any)} />
+          );
         case 'sessionsSection':
-          return <Sessions key={section._key} value={section} {...{} as any} />;
+          return (
+            <Sessions key={section._key} value={section} {...({} as any)} />
+          );
         case 'venuesSection':
-          return <VenuesSection key={section._key} value={section} {...{} as any} />;
+          return (
+            <VenuesSection
+              key={section._key}
+              value={section}
+              {...({} as any)}
+            />
+          );
         case 'sponsorsSection':
-          return <SponsorsSection key={section._key} value={section} {...{} as any} />;
+          return (
+            <SponsorsSection
+              key={section._key}
+              value={section}
+              {...({} as any)}
+            />
+          );
         case 'sponsorshipsSection':
           return null; // Implemented in PR #66
         default:

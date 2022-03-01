@@ -1,8 +1,8 @@
+import { useRouter } from 'next/router';
 import { PortableTextComponentProps } from '@portabletext/react';
 import GridWrapper from '../GridWrapper';
 import PlaceholderImage from '../PlaceholderImage';
 import styles from './ConferenceUpdatesForm.module.css';
-import { useRouter } from "next/router";
 
 type ConferenceUpdatesFormProps = {
   type: 'contact' | 'registration' | 'newsletter';
@@ -13,7 +13,7 @@ type ConferenceUpdatesFormProps = {
 };
 
 export const ConferenceUpdatesForm = ({
-  value: { type, id, buttonText, target, redirect  },
+  value: { type, id, buttonText, target, redirect },
 }: PortableTextComponentProps<ConferenceUpdatesFormProps>) => {
   const router = useRouter();
 
@@ -25,7 +25,7 @@ export const ConferenceUpdatesForm = ({
   return (
     <GridWrapper>
       <article className={styles.container}>
-        <PlaceholderImage width={330} height={459} className={styles.image}/>
+        <PlaceholderImage width={330} height={459} className={styles.image} />
 
         <div className={styles.mainContents}>
           <form
@@ -39,8 +39,8 @@ export const ConferenceUpdatesForm = ({
             }}
           >
             <div className={styles.formContents}>
-              <input type="hidden" name="u" value={id}/>
-              <input type="hidden" name="id" value="cca563332b"/>
+              <input type="hidden" name="u" value={id} />
+              <input type="hidden" name="id" value="cca563332b" />
               <input
                 id="mce-EMAIL"
                 name="EMAIL"
