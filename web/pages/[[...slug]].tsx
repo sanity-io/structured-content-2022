@@ -16,6 +16,7 @@ import { Section } from '../types/Section';
 import { Hero as HeroProps } from '../types/Hero';
 import { mainEventId } from '../util/entityPaths';
 import styles from './app.module.css';
+import { imageUrlFor } from '../lib/sanity';
 
 const QUERY = groq`
   {
@@ -188,7 +189,20 @@ const Route = ({
         description={seoDescription}
         canonical={urlJoin('https://structuredcontent.live', currentPath)}
         noindex={noIndex}
-        openGraph={image ? { images: [{ url: image?.asset?.url }] } : undefined}
+        openGraph={
+          image
+            ? {
+                images: [
+                  {
+                    url: imageUrlFor(image)
+                      .ignoreImageParams()
+                      .size(1260, 630)
+                      .url(),
+                  },
+                ],
+              }
+            : undefined
+        }
       />
       <header className={headerClasses}>
         <Nav
