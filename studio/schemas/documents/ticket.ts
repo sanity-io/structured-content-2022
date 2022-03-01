@@ -130,26 +130,25 @@ export default {
       options: {
         list: [
           {
-            title: "Conference recordings after the event",
-            value: "Conference recordings after the event",
+            title: "Recordings after the event",
+            value: "Recordings after the event",
           },
           {
             title: "Access to the conference community",
             value: "Access to the conference community",
           },
-          { title: "Live-streamed session", value: "Live-streamed session" },
+          { title: "Live-streamed sessions", value: "Live-streamed sessions" },
           { title: "Virtual networking", value: "Virtual networking" },
-          { title: "Swag kit", value: "Swag kit" },
           {
             title: "Access to in-person event",
             value: "Access to in-person event",
           },
           {
-            title: "Access to in-person networking events",
-            value: "Access to in-person networking events",
+            title: "Access to in-person networking",
+            value: "Access to in-person networking",
           },
+          { title: "Swag kit", value: "Swag kit" },
           { title: "Workshop", value: "Workshop" },
-          { title: "Recordings", value: "Recordings" },
         ],
       },
     },
