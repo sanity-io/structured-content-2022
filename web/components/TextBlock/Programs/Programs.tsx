@@ -25,7 +25,7 @@ export const Programs = ({
               title: program.internalName,
               content: (
                 <div key={program._id}>
-                  <h2>{formatDateWithDay(program.startDateTime)}</h2>
+                  <h3>{formatDateWithDay(program.startDateTime)}</h3>
                   {program.sessions.map((session, index) => {
                     currentTime = addMinutes(
                       currentTime,
@@ -33,11 +33,21 @@ export const Programs = ({
                     );
                     return (
                       <Fragment key={index}>
-                        <AccordionProgramItem
-                          programSession={session}
-                          startTime={currentTime}
-                        />
-                        {index !== program.sessions.length - 1 && <hr />}
+                        {session._type === 'padding' ? (
+                          <h3>
+                            {formatDateWithDay(currentTime.toISOString())}
+                          </h3>
+                        ) : (
+                          <>
+                            <AccordionProgramItem
+                              programSession={session}
+                              startTime={currentTime}
+                            />
+                            {index !== program.sessions.length - 1 &&
+                              program.sessions[index + 1]?._type !==
+                                'padding' && <hr />}
+                          </>
+                        )}
                       </Fragment>
                     );
                   })}
