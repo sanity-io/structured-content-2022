@@ -1,34 +1,40 @@
-import { Ticket } from '../../../types/Ticket';
-import GridWrapper from '../../GridWrapper';
+import clsx from 'clsx';
+import { compareAsc, parseISO } from 'date-fns';
+import { PortableText, PortableTextComponentProps } from '@portabletext/react';
+import { Fragment } from 'react';
 import checkmarkIcon from '../../../images/checkmark.svg';
 import crossIcon from '../../../images/cross.svg';
+import { Ticket } from '../../../types/Ticket';
+import GridWrapper from '../../GridWrapper';
+import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import styles from './Tickets.module.css';
-import clsx from 'clsx';
-import { Fragment } from 'react';
-import { compareAsc, parseISO } from 'date-fns';
-import { PortableText } from '@portabletext/react';
 
 interface TicketsProps {
-  value: {
-    type: 'all';
-    tickets: Ticket[];
-  };
+  type: EntitySectionSelection;
+  allTickets: Ticket[];
+  tickets?: Ticket[];
 }
 
-export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
-  if (type !== 'all') {
-    console.error(`Unrecognized SponsorsSection type: '${type}'`);
+export const Tickets = ({
+  value: { type, tickets, allTickets },
+}: PortableTextComponentProps<TicketsProps>) => {
+  if (!Array.isArray(allTickets) || allTickets.length === 0) {
+    console.error(`Tickets missing or invalid tickets array: '${allTickets}'`);
     return null;
   }
 
-  if (!Array.isArray(tickets) || tickets.length === 0) {
-    console.error(`Tickets missing or invalid tickets array: '${tickets}'`);
+  if (type === 'none') {
+    return null;
+  }
+
+  if (type !== 'highlighted' && type !== 'all') {
+    console.error(`Unrecognized Tickets type: '${type}'`);
     return null;
   }
 
   // GROQ has no "distinct"/"set" function
   const includedTypes = Array.from(
-    new Set(tickets.map((ticket) => ticket.included).flat())
+    new Set(allTickets.map((ticket) => ticket.included).flat())
   );
 
   const currentPriceAndAvailability = (ticket: Ticket) =>
@@ -48,7 +54,7 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
         <thead>
           <tr>
             <th />
-            {tickets.map((ticket) => {
+            {(tickets || allTickets).map((ticket) => {
               const currentPrice = currentPriceAndAvailability(ticket);
               return (
                 <th key={ticket._id} scope="col" className={styles.ticketInfo}>
@@ -89,7 +95,7 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
               <th className={styles.feature} scope="row">
                 {includedType}
               </th>
-              {tickets.map((ticket) => {
+              {(tickets || allTickets).map((ticket) => {
                 const featureIncluded = ticket.included.includes(includedType);
                 return (
                   <td
@@ -127,7 +133,7 @@ export const Tickets = ({ value: { type, tickets } }: TicketsProps) => {
       </table>
 
       <div className={styles.sections}>
-        {tickets.map((ticket) => {
+        {(tickets || allTickets).map((ticket) => {
           const currentPrice = currentPriceAndAvailability(ticket);
           return (
             <section key={ticket._id}>

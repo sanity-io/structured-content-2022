@@ -1,3 +1,4 @@
+import urlJoin from 'proper-url-join';
 import { Session } from '../types/Session';
 import { Venue } from '../types/Venue';
 import { Person } from '../types/Person';
@@ -14,13 +15,10 @@ export const getEntityPath = (entity: Entity) => {
 
   switch (entity._type) {
     case 'session':
-      return `/sessions/${entity.slug?.current}`;
     case 'person':
-      return `/speakers/${entity.slug?.current}`;
     case 'venue':
-      return `/venues/${entity.slug?.current}`;
     case 'sponsor':
-      return `/sponsors/${entity.slug?.current}`;
+      return urlJoin(`${entity._type}s`, entity.slug?.current);
     default:
       return '';
   }
