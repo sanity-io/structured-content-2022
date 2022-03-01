@@ -32,7 +32,7 @@ export const SponsorsSection = ({
       <GridWrapper>
         <section className={styles.sponsorLevel}>
           <ul className={styles.sponsors}>
-            {sponsors.map((sponsor, index) => (
+            {sponsors.map((sponsor) => (
               <li key={sponsor._id} className={styles.sponsor}>
                 <Sponsor sponsor={sponsor} />
               </li>
