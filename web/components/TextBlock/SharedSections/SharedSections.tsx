@@ -8,6 +8,7 @@ import TextAndImage from '../TextAndImage';
 import QuestionAndAnswerCollection from '../QuestionAndAnswerCollection';
 import Speakers from '../Speakers';
 import Sessions from '../../Sessions';
+import Tickets from '../Tickets';
 
 export const SharedSections = ({ value: { name, sections, ...rest } }) => (
   <>
@@ -60,6 +61,10 @@ export const SharedSections = ({ value: { name, sections, ...rest } }) => (
           );
         case 'sponsorshipsSection':
           return null; // Implemented in PR #66
+        case 'ticketsSection':
+          return (
+            <Tickets key={section._key} value={section} {...({} as any)} />
+          );
         default:
           console.error(
             `Unrecognized SharedSections section type '${section._type}'`
