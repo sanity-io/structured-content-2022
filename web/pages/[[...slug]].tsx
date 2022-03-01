@@ -24,7 +24,13 @@ const QUERY = groq`
       ...,
       page-> {
         name,
-        hero,
+        hero {
+          ...,
+          callToAction {
+            ...,
+            reference->{slug},
+          },
+        },
         sections[] {
           _type == 'reference' => @-> {
             sections[] {
