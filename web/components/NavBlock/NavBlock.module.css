@@ -58,6 +58,10 @@
   background: url('../../images/navblock_ovals.svg') 100% 100% no-repeat;
 }
 
+.fakeItem.shapeO {
+  background: url('../../images/navblock_o.svg') 100% 100% no-repeat;
+}
+
 .fakeItem.mobile {
   display: block;
 }

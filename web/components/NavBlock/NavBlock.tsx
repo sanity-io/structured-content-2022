@@ -7,7 +7,7 @@ interface FakeItemProps {
   mobile?: boolean;
   tablet?: boolean;
   desktop?: boolean;
-  shape?: 'Plus' | 'C' | 'Ovals';
+  shape?: 'Plus' | 'C' | 'Ovals' | 'O';
 }
 
 const FakeItem = ({
@@ -70,7 +70,7 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
       <FakeItem mobile />
       <FakeItem mobile tablet desktop />
       <FakeItem divider mobile />
-      <FakeItem desktop />
+      <FakeItem desktop shape="O" />
 
       <li className={styles.item}>
         <Link href={ticketsUrl}>
