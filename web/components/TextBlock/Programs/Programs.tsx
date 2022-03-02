@@ -15,15 +15,13 @@ type ProgramsProps = {
 
 export const Programs = ({
   value: { type, allPrograms },
+  index,
 }: PortableTextComponentProps<ProgramsProps>) => {
   if (type === 'all') {
-    /* TODO the baseId needs to be made unique in case there are multiple
-     * Programs sections in the same document
-     */
     return (
       <GridWrapper>
         <Accordion
-          baseId="accordion"
+          baseId={`accordion-${index}`}
           items={allPrograms.map((program) => {
             let currentTime = parseISO(program.startDateTime);
             return {
