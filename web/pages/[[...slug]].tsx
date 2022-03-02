@@ -216,6 +216,11 @@ const Route = ({
               }
             : undefined
         }
+        twitter={{
+          cardType: image ? 'summary_large_image' : 'summary',
+          site: '@sanity_io',
+          handle: '@sanity_io',
+        }}
       />
       <header className={headerClasses}>
         <Nav
