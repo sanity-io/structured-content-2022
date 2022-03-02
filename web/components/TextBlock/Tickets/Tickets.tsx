@@ -81,7 +81,11 @@ export const Tickets = ({
                       ({ _key, label, price, isExpired, expires }) => (
                         <Fragment key={_key}>
                           <dt className={styles.priceLabel}>
-                            Price {label ? `(${label})` : null}
+                            {label || (
+                              <span className={styles.visuallyHidden}>
+                                Price
+                              </span>
+                            )}
                           </dt>
                           {isExpired ? (
                             <dd className={clsx(styles.price, styles.expired)}>
@@ -160,7 +164,9 @@ export const Tickets = ({
                     ({ _key, label, price, isExpired, expires }) => (
                       <Fragment key={_key}>
                         <dt className={styles.priceLabel}>
-                          Price {label ? `(${label})` : null}
+                          {label || (
+                            <span className={styles.visuallyHidden}>Price</span>
+                          )}
                         </dt>
                         {isExpired ? (
                           <dd className={clsx(styles.price, styles.expired)}>

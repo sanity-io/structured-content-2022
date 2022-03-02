@@ -42,6 +42,14 @@
   color: var(--color-material-gray-600);
 }
 
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+}
+
 .price {
   margin: 0 0 8px;
   color: var(--color-brand-black);
