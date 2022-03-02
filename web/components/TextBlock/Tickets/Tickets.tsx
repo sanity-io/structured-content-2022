@@ -1,5 +1,8 @@
 import clsx from 'clsx';
 import { compareAsc, parseISO } from 'date-fns';
+import enUS from 'date-fns/locale/en-US';
+import sub from 'date-fns/sub';
+import { format } from 'date-fns-tz';
 import { PortableText, PortableTextComponentProps } from '@portabletext/react';
 import { Fragment } from 'react';
 import checkmarkIcon from '../../../images/checkmark.svg';
@@ -61,6 +64,19 @@ export const Tickets = ({
     });
   };
 
+  const expiryString = (timestamp: Date): string => {
+    /* TODO: investigate if this is safe to do or if it needs to be done in a
+     * way that is aware of the PST timezone, in case of daylight saving corner
+     * cases
+     */
+    const oneDayBeforeExpiry = sub(timestamp, { days: 1 });
+    const formattedDay = format(oneDayBeforeExpiry, 'MMMM d', {
+      timeZone: 'PST8PDT',
+      locale: enUS,
+    });
+    return ` (thru ${formattedDay})`;
+  };
+
   return (
     <GridWrapper>
       <table className={styles.table}>
@@ -86,6 +102,7 @@ export const Tickets = ({
                                 Price
                               </span>
                             )}
+                            {expires && expiryString(expires)}
                           </dt>
                           {isExpired ? (
                             <dd className={clsx(styles.price, styles.expired)}>
@@ -167,6 +184,7 @@ export const Tickets = ({
                           {label || (
                             <span className={styles.visuallyHidden}>Price</span>
                           )}
+                          {expires && expiryString(expires)}
                         </dt>
                         {isExpired ? (
                           <dd className={clsx(styles.price, styles.expired)}>
