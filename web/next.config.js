@@ -30,4 +30,15 @@ module.exports = {
       },
     ];
   },
+  async rewrites() {
+    const articleSlugs = await client.fetch(`*[_type == "article"].slug.current`);
+    const rewrites = articleSlugs.map((slug) => ({
+      source: `/${slug}`,
+      destination: `/article/${slug}`,
+    }));
+
+    console.log(`Rewriting ${rewrites.length} article slugs:`);
+    rewrites.forEach((rewrite) => console.log(rewrite.source, '->', rewrite.destination));
+    return rewrites;
+  }
 };
