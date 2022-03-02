@@ -15,6 +15,14 @@ interface TicketsProps {
   tickets?: Ticket[];
 }
 
+type AvailabilityInfo = {
+  _key: string;
+  price?: number;
+  isExpired: boolean;
+  expires?: Date;
+  label?: string;
+};
+
 export const Tickets = ({
   value: { type, tickets, allTickets },
 }: PortableTextComponentProps<TicketsProps>) => {
@@ -37,16 +45,21 @@ export const Tickets = ({
     new Set(allTickets.map((ticket) => ticket.included).flat())
   );
 
-  const currentPriceAndAvailability = (ticket: Ticket) =>
-    ticket.priceAndAvailability?.reduce((acc, current) => {
-      const fromDate = parseISO(current.from);
-      const currentDate = new Date();
-      // Check if current date is before the from date
-      if (compareAsc(currentDate, fromDate) == 1) {
-        return current;
-      }
-      return acc;
-    }, ticket.priceAndAvailability[0]);
+  const availabilityData = (ticket: Ticket): AvailabilityInfo[] => {
+    const currentDate = new Date();
+    return ticket.priceAndAvailability?.map((item, index, array) => {
+      const nextPriceStart = array?.[index + 1]?.from;
+      const expiryTime = nextPriceStart ? parseISO(nextPriceStart) : null;
+      return {
+        _key: item._key,
+        price: item.price,
+        expires: expiryTime,
+        // Check if current time is at or after the expiry time
+        isExpired: expiryTime && compareAsc(currentDate, expiryTime) >= 0,
+        label: item.label,
+      };
+    });
+  };
 
   return (
     <GridWrapper>
@@ -55,7 +68,6 @@ export const Tickets = ({
           <tr>
             <th />
             {(tickets || allTickets).map((ticket) => {
-              const currentPrice = currentPriceAndAvailability(ticket);
               return (
                 <th key={ticket._id} scope="col" className={styles.ticketInfo}>
                   <div className={styles.name}>{ticket.type}</div>
@@ -65,19 +77,19 @@ export const Tickets = ({
                     </div>
                   )}
                   <dl className={styles.priceList}>
-                    {ticket.priceAndAvailability.map(
-                      ({ _key, label, price }) => (
+                    {availabilityData(ticket)?.map(
+                      ({ _key, label, price, isExpired, expires }) => (
                         <Fragment key={_key}>
                           <dt className={styles.priceLabel}>
                             Price {label ? `(${label})` : null}
                           </dt>
-                          {currentPrice._key == _key ? (
-                            <dd className={clsx(styles.price, styles.current)}>
-                              <strong>{price ? `$${price}` : 'Free'}</strong>
+                          {isExpired ? (
+                            <dd className={clsx(styles.price, styles.expired)}>
+                              {price ? `$${price}` : 'Free'}
                             </dd>
                           ) : (
                             <dd className={styles.price}>
-                              {price ? `$${price}` : 'Free'}
+                              <strong>{price ? `$${price}` : 'Free'}</strong>
                             </dd>
                           )}
                         </Fragment>
@@ -134,7 +146,6 @@ export const Tickets = ({
 
       <div className={styles.sections}>
         {(tickets || allTickets).map((ticket) => {
-          const currentPrice = currentPriceAndAvailability(ticket);
           return (
             <section key={ticket._id}>
               <div className={clsx(styles.ticketInfo, styles.inSections)}>
@@ -145,22 +156,24 @@ export const Tickets = ({
                   </div>
                 )}
                 <dl className={styles.priceList}>
-                  {ticket.priceAndAvailability.map(({ _key, label, price }) => (
-                    <Fragment key={_key}>
-                      <dt className={styles.priceLabel}>
-                        Price {label ? `(${label})` : null}
-                      </dt>
-                      {currentPrice._key == _key ? (
-                        <dd className={clsx(styles.price, styles.current)}>
-                          <strong>{price ? `$${price}` : 'Free'}</strong>
-                        </dd>
-                      ) : (
-                        <dd className={styles.price}>
-                          {price ? `$${price}` : 'Free'}
-                        </dd>
-                      )}
-                    </Fragment>
-                  ))}
+                  {availabilityData(ticket)?.map(
+                    ({ _key, label, price, isExpired, expires }) => (
+                      <Fragment key={_key}>
+                        <dt className={styles.priceLabel}>
+                          Price {label ? `(${label})` : null}
+                        </dt>
+                        {isExpired ? (
+                          <dd className={clsx(styles.price, styles.expired)}>
+                            {price ? `$${price}` : 'Free'}
+                          </dd>
+                        ) : (
+                          <dd className={styles.price}>
+                            <strong>{price ? `$${price}` : 'Free'}</strong>
+                          </dd>
+                        )}
+                      </Fragment>
+                    )
+                  )}
                 </dl>
               </div>
               <ul className={styles.ticketFeatures}>

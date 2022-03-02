@@ -44,17 +44,16 @@
 
 .price {
   margin: 0 0 8px;
-  text-decoration: line-through;
-  color: var(--color-material-gray-600);
+  color: var(--color-brand-black);
 }
 
 .price:last-child {
   margin: 0;
 }
 
-.price.current {
-  text-decoration: none;
-  color: var(--color-brand-black);
+.price.expired {
+  text-decoration: line-through;
+  color: var(--color-material-gray-600);
 }
 
 .ticketFeatures {
