@@ -32,7 +32,12 @@ module.exports = {
   },
   async rewrites() {
     const articleSlugs = await client.fetch(`*[_type == "article"].slug.current`);
-    const rewrites = articleSlugs.map((slug) => ({
+    if (!Array.isArray(articleSlugs) || !articleSlugs.length) {
+      console.error("Next.js rewrites: could not find any Editorial Articles!");
+      return [];
+    }
+
+    const rewrites = articleSlugs.filter(Boolean).map((slug) => ({
       source: `/${slug}`,
       destination: `/article/${slug}`,
     }));
