@@ -21,15 +21,16 @@ const AccordionSection = ({ title, content, baseId }) => {
 
   return (
     <>
-      <button
-        onClick={onClick}
-        className={clsx(styles.accordion, open && styles.active)}
-        aria-controls={panelId}
-        aria-expanded={open}
-      >
-        {title}
-        <span className={styles.expandCollapseIndicator} />
-      </button>
+      <h2 className={styles.heading}>
+        <button
+          onClick={onClick}
+          className={clsx(styles.accordion, open && styles.active)}
+          aria-controls={panelId}
+          aria-expanded={open}
+        >
+          {title}
+        </button>
+      </h2>
       <div className={clsx(styles.panel, open && styles.open)} id={panelId}>
         {content}
       </div>

@@ -1,48 +1,97 @@
 .container {
-  max-width: 728px;
-  margin: 0 auto;
+  margin: 80px auto;
+  max-width: var(--max-body-text-width);
 }
 
 .accordion {
-  font: var(--font-body-xl-medium);
+  display: block;
   width: 100%;
 
-  background: var(--color-ui-gray-100);
+  background-color: var(--color-ui-gray-100);
+  background-image: url('../../images/plus.svg');
+  background-repeat: no-repeat;
+  background-position: right 32px center;
   border-radius: 12px;
   cursor: pointer;
-  padding: 64px 48px;
-  margin: 4px 0;
+  padding: 32px 88px 32px 32px;
+  margin: 8px 0;
 
   text-align: left;
   border: none;
-  outline: none;
 }
 
-.active,
+.heading {
+  font: var(--font-display-xxs);
+  margin: 0;
+}
+
 .accordion:hover {
   background-color: var(--color-ui-gray-300);
 }
 
-.expandCollapseIndicator {
-  float: right;
-}
-
-.accordion .expandCollapseIndicator::after {
-  content: '+';
-}
-
-.accordion.active .expandCollapseIndicator::after {
-  content: '-';
+.accordion.active {
+  background-image: url('../../images/minus.svg');
+  background-color: var(--color-brand-yellow-light);
+  margin-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .panel {
   background-color: var(--color-brand-yellow-light);
-  overflow: hidden;
-  padding: 48px 64px;
-  border-radius: 12px;
+  padding: 1px 32px 32px; /* 1px is just to contain any top margin */
+  border-radius: 0 0 12px 12px;
   display: none;
 }
 
 .panel.open {
   display: block;
+}
+
+@media (--medium-up) {
+  .container {
+    margin: 96px auto;
+  }
+
+  .heading,
+  .panel {
+    margin-left: -52px;
+    margin-right: -52px;
+  }
+
+  .accordion,
+  .panel {
+    padding-left: 52px;
+    padding-right: 52px;
+    padding-bottom: 48px;
+  }
+
+  .accordion {
+    padding-top: 48px;
+    padding-right: 108px;
+    background-position: right 52px center;
+  }
+}
+
+@media (--large-up) {
+  .container {
+    margin: 128px auto;
+  }
+
+  .heading,
+  .panel {
+    margin-left: -64px;
+    margin-right: -64px;
+  }
+
+  .accordion,
+  .panel {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+
+  .accordion {
+    padding-right: 120px;
+    background-position: right 64px center;
+  }
 }
