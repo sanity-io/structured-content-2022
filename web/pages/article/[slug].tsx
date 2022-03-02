@@ -1,17 +1,16 @@
-import clsx from 'clsx';
 import { groq } from 'next-sanity';
-import { useEffect, useState } from 'react';
 import Hero from '../../components/Hero';
 import TextBlock from '../../components/TextBlock';
 import Footer from '../../components/Footer';
 import Nav from '../../components/Nav';
 import client from '../../lib/sanity.server';
 import { Slug } from '../../types/Slug';
-import styles from '../app.module.css';
-import articleStyles from './article.module.css';
 import { mainEventId } from '../../util/entityPaths';
 import GridWrapper from '../../components/GridWrapper';
 import { Article } from '../../types/Article';
+import articleStyles from './article.module.css';
+import styles from '../app.module.css';
+import MetaTags from '../../components/MetaTags';
 
 const QUERY = groq`
   {
@@ -26,6 +25,7 @@ const QUERY = groq`
         _id,
       }
     },
+    "rewrittenArticleSlugs": *[_type == "article"].slug.current,
   }`;
 
 interface ArticleRouteProps {
@@ -41,6 +41,7 @@ interface ArticleRouteProps {
         _id: string;
       }[];
     };
+    rewrittenArticleSlugs?: string[];
   };
   slug: string;
 }
@@ -50,10 +51,17 @@ const ArticleRoute = ({
     article: { heading, summary, content },
     home: { ticketsUrl },
     footer,
+    rewrittenArticleSlugs,
   },
   slug,
 }: ArticleRouteProps) => (
   <>
+    <MetaTags
+      title={heading}
+      description={summary}
+      currentPath={slug}
+      rewrittenArticleSlugs={rewrittenArticleSlugs}
+    />
     <header className={styles.header}>
       <Nav
         onFrontPage={false}
