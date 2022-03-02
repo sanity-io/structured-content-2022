@@ -47,6 +47,11 @@ export const MetaTags = ({
             }
           : undefined
       }
+      twitter={{
+        cardType: image ? 'summary_large_image' : 'summary',
+        site: '@sanity_io',
+        handle: '@sanity_io',
+      }}
     />
   );
 };
