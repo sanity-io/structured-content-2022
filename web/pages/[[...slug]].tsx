@@ -1,7 +1,5 @@
 import clsx from 'clsx';
 import { groq } from 'next-sanity';
-import { NextSeo } from 'next-seo';
-import urlJoin from 'proper-url-join';
 import { useEffect, useState } from 'react';
 import Hero from '../components/Hero';
 import TextBlock from '../components/TextBlock';
@@ -10,13 +8,13 @@ import ConferenceHeader from '../components/ConferenceHeader';
 import NavBlock from '../components/NavBlock';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
+import MetaTags from '../components/MetaTags';
 import client from '../lib/sanity.server';
 import { Slug } from '../types/Slug';
 import { Section } from '../types/Section';
 import { Hero as HeroProps } from '../types/Hero';
 import { mainEventId } from '../util/entityPaths';
 import styles from './app.module.css';
-import { imageUrlFor } from '../lib/sanity';
 
 const QUERY = groq`
   {
@@ -158,7 +156,7 @@ interface RouteProps {
 const Route = ({
   data: {
     route: {
-      page: { name, hero, sections },
+      page: { hero, sections },
       seo: { title, description: seoDescription, image, noIndex },
     },
     home: { name: homeName, startDate, endDate, description, ticketsUrl },
@@ -197,25 +195,8 @@ const Route = ({
 
   return (
     <>
-      <NextSeo
-        title={title}
-        description={seoDescription}
-        canonical={urlJoin('https://structuredcontent.live', currentPath)}
-        noindex={noIndex}
-        openGraph={
-          image
-            ? {
-                images: [
-                  {
-                    url: imageUrlFor(image)
-                      .ignoreImageParams()
-                      .size(1260, 630)
-                      .url(),
-                  },
-                ],
-              }
-            : undefined
-        }
+      <MetaTags
+        {...{ title, description: seoDescription, image, currentPath, noIndex }}
       />
       <header className={headerClasses}>
         <Nav
