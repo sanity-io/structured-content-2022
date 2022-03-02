@@ -1,7 +1,42 @@
+.dayHeader {
+  font: var(--font-body-small-bold);
+  letter-spacing: var(--letter-spacing-body-small);
+  margin: 32px 0;
+}
+
+.dayHeader.first {
+  margin-top: 0;
+}
+
 .sessionItem {
-  padding: 24px 0;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-material-gray-300);
+  margin-bottom: 24px;
+  font: var(--font-ui-sm-medium);
+  letter-spacing: var(--letter-spacing-ui-sm);
+}
+
+.sessionItem:last-child {
+  margin-bottom: 0;
 }
 
 .sessionDuration {
-  float: right;
+  font: inherit;
+  margin: 0 0 16px;
+}
+
+@media (--medium-up) {
+  .dayHeader {
+    margin: 48px 0;
+  }
+
+  .sessionItem {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 32px;
+  }
+
+  .sessionDuration {
+    margin-bottom: 0;
+  }
 }

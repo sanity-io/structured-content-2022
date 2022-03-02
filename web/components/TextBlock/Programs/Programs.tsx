@@ -1,6 +1,7 @@
 import { addMinutes, parseISO } from 'date-fns';
 import { Fragment } from 'react';
 import { PortableTextComponentProps } from '@portabletext/react';
+import clsx from 'clsx';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { Program } from '../../../types/Program';
 import { formatDateWithDay, formatTime } from '../../../util/date';
@@ -24,16 +25,22 @@ export const Programs = ({
           baseId={`accordion-${index}`}
           items={allPrograms.map((program) => {
             let currentTime = parseISO(program.startDateTime);
+            /* This should perhaps be outputting a list instead, i.e. a <dl>
+             * or <ul>, rather than a lot of <h4>s. Not done due to dev time
+             * constraints.
+             */
             return {
               title: program.internalName,
               content: (
                 <div key={program._id}>
-                  <h3>{formatDateWithDay(program.startDateTime)}</h3>
+                  <h3 className={clsx(styles.dayHeader, styles.first)}>
+                    {formatDateWithDay(program.startDateTime)}
+                  </h3>
                   {program.sessions.map((session, index) => {
                     const Session = (
                       <Fragment key={index}>
                         {session._type === 'padding' ? (
-                          <h3>
+                          <h3 className={styles.dayHeader}>
                             {formatDateWithDay(
                               addMinutes(
                                 currentTime,
@@ -44,8 +51,7 @@ export const Programs = ({
                         ) : (
                           <>
                             <div className={styles.sessionItem}>
-                              {session.session.title}
-                              <span className={styles.sessionDuration}>
+                              <h4 className={styles.sessionDuration}>
                                 {formatTime(currentTime.toISOString())} -{' '}
                                 {formatTime(
                                   addMinutes(
@@ -53,11 +59,9 @@ export const Programs = ({
                                     session.session.duration
                                   ).toISOString()
                                 )}
-                              </span>
+                              </h4>
+                              <div>{session.session.title}</div>
                             </div>
-                            {index !== program.sessions.length - 1 &&
-                              program.sessions[index + 1]?._type !==
-                                'padding' && <hr />}
                           </>
                         )}
                       </Fragment>
