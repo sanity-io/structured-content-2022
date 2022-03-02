@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import { PortableTextComponentProps } from '@portabletext/react';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
+import { formatDateWithDay, formatTime } from '../../../util/date';
 import { Program } from '../../../types/Program';
-import AccordionProgramItem from '../../AccordionProgramItem';
 import Accordion from '../../Accordion';
-import { formatDateWithDay } from '../../../util/date';
 import { addMinutes, parseISO } from 'date-fns';
+import styles from './Programs.module.css';
 
 type ProgramsProps = {
   type: EntitySectionSelection;
@@ -40,10 +40,18 @@ export const Programs = ({
                           </h3>
                         ) : (
                           <>
-                            <AccordionProgramItem
-                              programSession={session}
-                              startTime={currentTime}
-                            />
+                            <div className={styles.sessionItem}>
+                              {session.session.title}
+                              <span className={styles.sessionDuration}>
+                                {formatTime(currentTime.toISOString())} -{' '}
+                                {formatTime(
+                                  addMinutes(
+                                    currentTime,
+                                    session.session.duration
+                                  ).toISOString()
+                                )}
+                              </span>
+                            </div>
                             {index !== program.sessions.length - 1 &&
                               program.sessions[index + 1]?._type !==
                                 'padding' && <hr />}
