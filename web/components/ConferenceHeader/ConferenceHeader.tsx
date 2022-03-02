@@ -30,6 +30,7 @@ export const ConferenceHeader = ({
       <div className={styles.summary}>
         <p className={styles.dates}>
           <DateRange startTimestamp={startDate} endTimestamp={endDate} />
+          <span className={styles.label}>Hosted by Sanity</span>
         </p>
         <p className={styles.description}>{description}</p>
       </div>

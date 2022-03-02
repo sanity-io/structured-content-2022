@@ -20,6 +20,10 @@
   margin: 0;
 }
 
+.label {
+  display: block;
+}
+
 @media (--medium-up) {
   .root {
     margin: 32px 0 96px;
