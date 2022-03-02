@@ -88,6 +88,11 @@ const QUERY = groq`
               sponsors[]->,
               "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
             },
+            _type == "sponsorsSection" => {
+              ...,
+              sponsors[]->,
+              "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
+            },
             content[] {
               ...,
               reference->,
