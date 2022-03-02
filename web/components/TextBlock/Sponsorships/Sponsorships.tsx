@@ -5,7 +5,7 @@ import GridWrapper from '../../GridWrapper';
 interface SponsorshipsProps {
   value: {
     type: EntitySectionSelection;
-    sponsorships: Sponsorship[];
+    sponsorships?: Sponsorship[];
   };
 }
 
@@ -24,7 +24,7 @@ export const Sponsorships = ({
   if (type === 'all') {
     return (
       <GridWrapper>
-        {sponsorships.map((sponsorship) => {
+        {sponsorships?.map((sponsorship) => {
           return null; // TODO: render content here
         })}
       </GridWrapper>
