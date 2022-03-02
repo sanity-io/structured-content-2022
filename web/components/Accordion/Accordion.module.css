@@ -53,6 +53,10 @@
     max-width: var(--max-body-text-width);
   }
 
+  .heading {
+    font: var(--font-display-xs);
+  }
+
   .heading,
   .panel {
     margin-left: -52px;
