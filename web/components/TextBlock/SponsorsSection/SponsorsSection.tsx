@@ -1,4 +1,4 @@
-import { PortableTextComponentProps } from '@portabletext/react/dist/react-portable-text.esm';
+import { PortableTextComponentProps } from '@portabletext/react';
 import { Sponsor as TSponsor } from '../../../types/Sponsor';
 import { Sponsorship } from '../../../types/Sponsorship';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
@@ -28,6 +28,13 @@ export const SponsorsSection = ({
   }
 
   if (type === 'highlighted') {
+    if (!Array.isArray(sponsors) || sponsors.length === 0) {
+      console.error(
+        `SponsorsSection(type: 'highlighted') missing or invalid sponsors array: '${sponsors}'`
+      );
+      return null;
+    }
+
     return (
       <GridWrapper>
         <section className={styles.sponsorLevel}>
