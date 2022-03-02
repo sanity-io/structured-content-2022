@@ -42,3 +42,7 @@
   border-radius: 12px;
   display: none;
 }
+
+.panel.open {
+  display: block;
+}
