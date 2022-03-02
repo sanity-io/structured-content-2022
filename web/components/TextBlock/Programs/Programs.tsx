@@ -1,10 +1,11 @@
+import { addMinutes, parseISO } from 'date-fns';
 import { Fragment } from 'react';
 import { PortableTextComponentProps } from '@portabletext/react';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
-import { formatDateWithDay, formatTime } from '../../../util/date';
 import { Program } from '../../../types/Program';
+import { formatDateWithDay, formatTime } from '../../../util/date';
 import Accordion from '../../Accordion';
-import { addMinutes, parseISO } from 'date-fns';
+import GridWrapper from '../../GridWrapper';
 import styles from './Programs.module.css';
 
 type ProgramsProps = {
@@ -17,7 +18,7 @@ export const Programs = ({
 }: PortableTextComponentProps<ProgramsProps>) => {
   if (type === 'all') {
     return (
-      <div>
+      <GridWrapper>
         <Accordion
           items={allPrograms.map((program) => {
             let currentTime = parseISO(program.startDateTime);
@@ -71,7 +72,7 @@ export const Programs = ({
             };
           })}
         />
-      </div>
+      </GridWrapper>
     );
   }
 
