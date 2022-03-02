@@ -1,9 +1,10 @@
+import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { Sponsorship } from '../../../types/Sponsorship';
 import GridWrapper from '../../GridWrapper';
 
 interface SponsorshipsProps {
   value: {
-    type: 'all' | 'highlighted' | 'none';
+    type: EntitySectionSelection;
     sponsorships?: Sponsorship[];
   };
 }
