@@ -17,10 +17,7 @@ export default {
       title: "Call to Action URL",
       description: "The target URL.",
       hidden: ({ parent }) => !parent.url && parent.reference,
-      validation: (Rule) =>
-        Rule.regex(/(?<=utm_[a-z]+=)\w+/).info(
-          "You might want to include UTM tags."
-        ),
+      validation: (Rule) => Rule.uri({ scheme: ["https", "mailto", "tel"] }),
     },
     {
       name: "reference",
