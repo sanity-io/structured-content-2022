@@ -20,7 +20,7 @@ export const SharedSections = ({ value: { sections, ...rest } }) => (
         case 'articleSection':
           return <RichText key={section._key} value={section} />;
         case 'textAndImageSection':
-          return <TextAndImage key={section._key} value={section} />;
+          return <TextAndImage key={section._key} value={section} {...({} as any)} />;
         case 'questionAndAnswerCollectionSection':
           return (
             <QuestionAndAnswerCollection key={section._key} value={section} />
