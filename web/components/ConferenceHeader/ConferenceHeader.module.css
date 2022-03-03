@@ -16,6 +16,7 @@
 }
 
 .dates,
+.hostedBy,
 .description {
   margin: 0;
 }
@@ -35,7 +36,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .dates {
+  .datesAndHostedByWrapper {
     font: var(--font-body-xl-medium);
     letter-spacing: var(--letter-spacing-body-xl);
   }
@@ -53,7 +54,7 @@
     letter-spacing: var(--letter-spacing-body-xl);
   }
 
-  .dates {
+  .datesAndHostedByWrapper {
     font: var(--font-ui-xxl-medium);
     letter-spacing: var(--letter-spacing-ui-xxl);
   }

@@ -28,10 +28,12 @@ export const ConferenceHeader = ({
         />
       </h1>
       <div className={styles.summary}>
-        <p className={styles.dates}>
-          <DateRange startTimestamp={startDate} endTimestamp={endDate} />
-          <span className={styles.label}>Hosted by Sanity</span>
-        </p>
+        <div className={styles.datesAndHostedByWrapper}>
+          <p className={styles.dates}>
+            <DateRange startTimestamp={startDate} endTimestamp={endDate} />
+          </p>
+          <p className={styles.hostedBy}>Hosted by Sanity</p>
+        </div>
         <p className={styles.description}>{description}</p>
       </div>
     </div>
