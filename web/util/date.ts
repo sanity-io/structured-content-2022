@@ -1,4 +1,6 @@
 import { format } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
+import enUS from 'date-fns/locale/en-US';
 
 export const formatDateWithTime = (date: string) =>
   format(new Date(date), 'MMMM d, yyyy');
@@ -48,3 +50,14 @@ export const formatDateRangeInUtc = (
     end: `${m2}${d2.day}, ${d2.year}`,
   };
 };
+
+/* Converts an IANA time zone name, which typically refers to a specific city,
+ * into a long-form "non-location" format.
+ * Example: given the locationTimezone "Europe/Paris", this will yield "Central
+ * European Time" or "Central European Summer Time" depending on the timestamp.
+ */
+export const getNonLocationTimezone = (
+  timestamp: Date,
+  locationTimezone: string
+): string =>
+  formatInTimeZone(timestamp, locationTimezone, 'zzzz', { locale: enUS });
