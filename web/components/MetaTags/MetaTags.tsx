@@ -1,5 +1,6 @@
 import { NextSeo } from 'next-seo';
 import urlJoin from 'proper-url-join';
+import opengraphImage from '../../public/static/images/opengraph-image.svg';
 import { imageUrlFor } from '../../lib/sanity';
 
 interface MetaTagsProps {
@@ -33,22 +34,17 @@ export const MetaTags = ({
       description={description}
       canonical={urlJoin('https://structuredcontent.live', canonicalPath)}
       noindex={noIndex}
-      openGraph={
-        image
-          ? {
-              images: [
-                {
-                  url: imageUrlFor(image)
-                    .ignoreImageParams()
-                    .size(1260, 630)
-                    .url(),
-                },
-              ],
-            }
-          : undefined
-      }
+      openGraph={{
+        images: [
+          {
+            url: image
+              ? imageUrlFor(image).ignoreImageParams().size(1260, 630).url()
+              : '/static/images/opengraph-image.svg',
+          },
+        ],
+      }}
       twitter={{
-        cardType: image ? 'summary_large_image' : 'summary',
+        cardType: 'summary_large_image',
         site: '@sanity_io',
         handle: '@sanity_io',
       }}
