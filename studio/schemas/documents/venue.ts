@@ -1,3 +1,5 @@
+import timezones from "timezones-list";
+
 import { PinIcon } from "@sanity/icons";
 
 export default {
@@ -20,6 +22,17 @@ export default {
       options: {
         source: "title",
         maxLength: 96,
+      },
+    },
+    {
+      name: "timezone",
+      title: "Timezone",
+      type: "string",
+      options: {
+        list: timezones.map(({ label, tzCode }) => ({
+          title: label,
+          value: tzCode,
+        })),
       },
     },
     {
