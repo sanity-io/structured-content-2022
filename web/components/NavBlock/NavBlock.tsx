@@ -44,18 +44,25 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
 
       <FakeItem mobile tablet desktop />
       <FakeItem mobile tablet desktop shape="Plus" />
-      <FakeItem tablet desktop />
+      <FakeItem divider mobile />
+      <FakeItem mobile />
+
+      <li className={styles.item}>
+        <Link href="/sponsorship-information">
+          <a className={styles.link}>Sponsorship</a>
+        </Link>
+      </li>
+
       <FakeItem tablet desktop />
       <FakeItem divider mobile tablet desktop />
       <FakeItem tablet desktop />
       <FakeItem tablet desktop shape="C" />
       <FakeItem tablet desktop />
       <FakeItem mobile tablet desktop shape="Ovals" />
-      <FakeItem mobile />
 
       <li className={styles.item}>
-        <Link href="/speakers">
-          <a className={styles.link}>Speakers</a>
+        <Link href="/registration-info">
+          <a className={styles.link}>Registration info</a>
         </Link>
       </li>
 
@@ -74,7 +81,7 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
 
       <li className={styles.item}>
         <Link href={ticketsUrl}>
-          <a className={styles.link}>Early-bird tickets</a>
+          <a className={styles.link}>Tickets</a>
         </Link>
       </li>
 
