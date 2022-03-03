@@ -17,7 +17,8 @@
     "media",
     "iframe-pane",
     "documents-pane",
-    "@sanity/hierarchical-document-list"
+    "@sanity/hierarchical-document-list",
+    "@sanity/production-preview"
   ],
   "env": {
     "development": {
@@ -34,6 +35,10 @@
     {
       "name": "part:@sanity/desk-tool/structure",
       "path": "./src/deskStructure.ts"
+    },
+    {
+      "implements": "part:@sanity/production-preview/resolve-production-url",
+      "path": "./src/resolveProductionUrl.ts"
     }
   ]
 }

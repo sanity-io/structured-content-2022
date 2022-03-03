@@ -7,3 +7,14 @@ Now you can do the following things:
 - [Read “getting started” in the docs](https://www.sanity.io/docs/introduction/getting-started?utm_source=readme)
 - [Join the community Slack](https://slack.sanity.io/?utm_source=readme)
 - [Extend and build plugins](https://www.sanity.io/docs/content-studio/extending?utm_source=readme)
+
+## Enabling Live Preview
+
+[Live Preview][0] is a great way to test your content in real-time. Your local page can reflect your Studio drafts.
+
+You can enable Live Preview by adding a _.env.development_ file to the _/studio_ directory with a `SANITY_STUDIO_PREVIEW_SECRET` variable.
+Fetch the value for this key [in the "Environment Variables" section of the Vercel project][1]. Once added, restart the project locally.
+Now, pages will load draft content client-side after the initial render.
+
+[0]: https://www.sanity.io/guides/nextjs-live-preview
+[1]: https://vercel.com/sanity-io/structured-content-2022-studio/settings/environment-variables
