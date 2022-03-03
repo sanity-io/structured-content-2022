@@ -1,3 +1,5 @@
+import { Figure } from './Figure';
+
 export type SponsorLevel = 'Community' | 'Partner' | 'Premier';
 
 export type Sponsor = {
@@ -5,13 +7,7 @@ export type Sponsor = {
   _type: 'sponsor';
   _key: string;
   callToActionURL: string;
-  image?: {
-    _type: 'figure';
-    asset: {
-      _ref: string;
-      _type: 'reference';
-    };
-  };
+  image?: Figure;
   title: string;
   url: string;
 };

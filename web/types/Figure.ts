@@ -1,5 +1,6 @@
 export type Figure = {
   _type: 'figure';
+  _key: string;
   alt?: string;
   caption?: string;
   asset: {
