@@ -1,9 +1,5 @@
-import { format } from 'date-fns';
 import { formatInTimeZone } from 'date-fns-tz';
 import enUS from 'date-fns/locale/en-US';
-
-export const formatDateWithTime = (date: string) =>
-  format(new Date(date), 'MMMM d, yyyy');
 
 export const formatTime = (date: string, timezone: string) =>
   formatInTimeZone(new Date(date), timezone, 'HH:mm', { locale: enUS });
