@@ -1,36 +1,52 @@
+import { useState, ReactNode } from 'react';
+import clsx from 'clsx';
 import styles from './Accordion.module.css';
-import { Fragment, ReactNode } from 'react';
 
 interface AccordionProps {
+  baseId: string;
   items: {
     title: string;
     content: ReactNode | ReactNode[];
   }[];
 }
 
-export const Accordion = ({ items }: AccordionProps) => {
-  const onClick = (e) => {
-    e.target.classList.toggle(styles.active);
+const AccordionSection = ({ title, content, baseId }) => {
+  const [open, setOpen] = useState(false);
 
-    const panel = e.target.nextElementSibling;
-    if (panel.style.display !== 'block') {
-      panel.style.display = 'block';
-    } else {
-      panel.style.display = 'none';
-    }
+  const onClick = (e) => {
+    setOpen(!open);
   };
 
+  const panelId = `${baseId}-panel`;
+
   return (
-    <div className={styles.container}>
-      {items.map(({ title, content }, index) => (
-        <Fragment key={index}>
-          <button onClick={onClick} className={styles.accordion}>
-            {title}
-            <span className={styles.expandCollapseIndicator} />
-          </button>
-          <div className={styles.panel}>{content}</div>
-        </Fragment>
-      ))}
-    </div>
+    <>
+      <h2 className={styles.heading}>
+        <button
+          onClick={onClick}
+          className={clsx(styles.accordion, open && styles.active)}
+          aria-controls={panelId}
+          aria-expanded={open}
+        >
+          {title}
+        </button>
+      </h2>
+      <div className={clsx(styles.panel, open && styles.open)} id={panelId}>
+        {content}
+      </div>
+    </>
   );
 };
+
+export const Accordion = ({ baseId, items }: AccordionProps) => (
+  <div className={styles.container}>
+    {items.map(({ title, content }, index) => (
+      <AccordionSection
+        key={index}
+        title={title}
+        content={content}
+        baseId={`${baseId}-${index}`}
+      />
+    ))}
+  </div>
+);

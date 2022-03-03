@@ -32,7 +32,8 @@
     "sanity-plugin-iframe-pane": "^1.0.15",
     "sanity-plugin-leaflet-input": "^1.0.1",
     "sanity-plugin-media": "^1.4.4",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "timezones-list": "^3.0.1"
   },
   "devDependencies": {
     "@sanity/cli": "^2.27.0",
