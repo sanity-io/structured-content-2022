@@ -1,7 +1,7 @@
 import Heading from '../../Heading';
 import GridWrapper from '../../GridWrapper';
+import TextBlock from '../TextBlock';
 import styles from './QuestionAndAnswerCollection.module.css';
-import TextBlock from "../TextBlock";
 
 export const QuestionAndAnswerCollection = ({ value: { questions } }) => (
   <GridWrapper>
