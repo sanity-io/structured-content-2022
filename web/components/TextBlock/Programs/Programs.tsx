@@ -24,13 +24,15 @@ export const Programs = ({
         <Accordion
           baseId={`accordion-${index}`}
           items={allPrograms.map((program) => {
+            const firstVenue = program?.venues[0];
+            const programName = firstVenue?.name || program.internalName;
             let currentTime = parseISO(program.startDateTime);
             /* This should perhaps be outputting a list instead, i.e. a <dl>
              * or <ul>, rather than a lot of <h4>s. Not done due to dev time
              * constraints.
              */
             return {
-              title: program.internalName,
+              title: programName,
               content: (
                 <div key={program._id}>
                   <h3 className={clsx(styles.dayHeader, styles.first)}>
