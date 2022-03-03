@@ -43,8 +43,6 @@ export const MetaTags = ({
           image
             ? {
                 url: imageUrlBuilder.url(),
-                width: imageUrlBuilder.options.width,
-                height: imageUrlBuilder.options.height,
                 alt: image.alt,
               }
             : {
