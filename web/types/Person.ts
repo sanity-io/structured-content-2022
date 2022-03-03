@@ -1,5 +1,6 @@
 import { Slug } from './Slug';
 import { Section } from './Section';
+import { Figure } from './Figure';
 
 export type Person = {
   _id: string;
@@ -7,13 +8,7 @@ export type Person = {
   title: string;
   _type: 'person';
   bio?: Section[];
-  photo: {
-    _type: 'figure';
-    asset: {
-      _ref: string;
-      _type: 'reference';
-    };
-  };
+  photo: Figure;
   social: {
     twitter: string;
   };

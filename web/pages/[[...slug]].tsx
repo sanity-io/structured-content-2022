@@ -15,6 +15,7 @@ import { Section } from '../types/Section';
 import { Hero as HeroProps } from '../types/Hero';
 import { mainEventId } from '../util/entityPaths';
 import styles from './app.module.css';
+import { Figure } from '../types/Figure';
 
 const QUERY = groq`
   {
@@ -138,11 +139,7 @@ interface RouteProps {
         _type: 'seo';
         title: string;
         description: string;
-        image?: {
-          asset: {
-            url: string;
-          };
-        };
+        image?: Figure;
         noIndex?: boolean;
       };
     };
