@@ -6,4 +6,4 @@ export type Figure = {
     _ref: string;
     _type: 'reference';
   };
-}
+};

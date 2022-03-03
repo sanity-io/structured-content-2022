@@ -2,7 +2,7 @@ import { NextSeo } from 'next-seo';
 import urlJoin from 'proper-url-join';
 import opengraphImage from '../../public/static/images/opengraph-image.svg';
 import { imageUrlFor } from '../../lib/sanity';
-import { Figure } from "../../types/Figure";
+import { Figure } from '../../types/Figure';
 
 interface MetaTagsProps {
   title: string;
@@ -29,7 +29,9 @@ export const MetaTags = ({
   const canonicalPath = isRewrittenPath
     ? urlJoin('article', currentPath)
     : currentPath;
-  const imageUrlBuilder = imageUrlFor(image).ignoreImageParams().size(1260, 630);
+  const imageUrlBuilder = imageUrlFor(image)
+    .ignoreImageParams()
+    .size(1260, 630);
   return (
     <NextSeo
       title={title}
@@ -38,16 +40,18 @@ export const MetaTags = ({
       noindex={noIndex}
       openGraph={{
         images: [
-          image ? {
-            url: imageUrlBuilder.url(),
-            width: imageUrlBuilder.options.width,
-            height: imageUrlBuilder.options.height,
-            alt: image.alt,
-          } : {
-            url: '/static/images/opengraph-image.svg',
-            width: opengraphImage.width,
-            height: opengraphImage.height,
-          },
+          image
+            ? {
+                url: imageUrlBuilder.url(),
+                width: imageUrlBuilder.options.width,
+                height: imageUrlBuilder.options.height,
+                alt: image.alt,
+              }
+            : {
+                url: '/static/images/opengraph-image.svg',
+                width: opengraphImage.width,
+                height: opengraphImage.height,
+              },
         ],
       }}
       twitter={{
