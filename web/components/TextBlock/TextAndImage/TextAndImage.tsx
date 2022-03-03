@@ -1,9 +1,9 @@
-import { PortableTextComponentProps } from "@portabletext/react";
+import { PortableTextComponentProps } from '@portabletext/react';
 import { imageUrlFor } from '../../../lib/sanity';
-import { Section } from "../../../types/Section";
+import { Section } from '../../../types/Section';
 import GridWrapper from '../../GridWrapper';
 import Heading from '../../Heading';
-import TextBlock from "../TextBlock";
+import TextBlock from '../TextBlock';
 import styles from './TextAndImage.module.css';
 
 type TextAndImageProps = {
@@ -11,9 +11,11 @@ type TextAndImageProps = {
   text: Section[];
   tagline?: string;
   title?: string;
-}
+};
 
-export const TextAndImage = ({ value: { image, tagline, text, title } }: PortableTextComponentProps<TextAndImageProps>) => (
+export const TextAndImage = ({
+  value: { image, tagline, text, title },
+}: PortableTextComponentProps<TextAndImageProps>) => (
   <section className={styles.container}>
     <GridWrapper>
       <div className={styles.contents}>
