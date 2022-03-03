@@ -33,7 +33,7 @@ export const Programs = ({
             const timezone = firstVenue?.timezone || 'UTC';
             let currentTime = parseISO(program.startDateTime);
             const formattedTimezone = getNonLocationTimezone(
-              program.startDateTime,
+              currentTime,
               timezone
             );
             /* This should perhaps be outputting a list instead, i.e. a <dl>

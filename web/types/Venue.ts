@@ -9,4 +9,5 @@ export type Venue = {
     lng: number;
   };
   slug: Slug;
+  timezone?: string;
 };
