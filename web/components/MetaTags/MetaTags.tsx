@@ -29,9 +29,6 @@ export const MetaTags = ({
   const canonicalPath = isRewrittenPath
     ? urlJoin('article', currentPath)
     : currentPath;
-  const imageUrlBuilder = imageUrlFor(image)
-    .ignoreImageParams()
-    .size(1260, 630);
   return (
     <NextSeo
       title={title}
@@ -42,7 +39,10 @@ export const MetaTags = ({
         images: [
           image
             ? {
-                url: imageUrlBuilder.url(),
+                url: imageUrlFor(image)
+                  .ignoreImageParams()
+                  .size(1260, 630)
+                  .url(),
                 alt: image.alt,
               }
             : {
