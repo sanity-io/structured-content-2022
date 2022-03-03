@@ -5,10 +5,11 @@ import enUS from 'date-fns/locale/en-US';
 export const formatDateWithTime = (date: string) =>
   format(new Date(date), 'MMMM d, yyyy');
 
-export const formatTime = (date: string) => format(new Date(date), 'HH:mm');
+export const formatTime = (date: string, timezone: string) =>
+  formatInTimeZone(new Date(date), timezone, 'HH:mm', { locale: enUS });
 
-export const formatDateWithDay = (date: string) =>
-  format(new Date(date), 'eeee – MMMM d');
+export const formatDateWithDay = (date: string, timezone: string) =>
+  formatInTimeZone(new Date(date), timezone, 'eeee – MMMM d', { locale: enUS });
 
 const monthNames = [
   'January',

@@ -45,7 +45,7 @@ export const Programs = ({
               content: (
                 <div key={program._id}>
                   <h3 className={clsx(styles.dayHeader, styles.first)}>
-                    {formatDateWithDay(program.startDateTime)}
+                    {formatDateWithDay(program.startDateTime, timezone)}
                   </h3>
                   {program.sessions.map((session, index) => {
                     const Session = (
@@ -56,19 +56,25 @@ export const Programs = ({
                               addMinutes(
                                 currentTime,
                                 session.duration
-                              ).toISOString()
+                              ).toISOString(),
+                              timezone
                             )}
                           </h3>
                         ) : (
                           <>
                             <div className={styles.sessionItem}>
                               <h4 className={styles.sessionDuration}>
-                                {formatTime(currentTime.toISOString())} -{' '}
+                                {formatTime(
+                                  currentTime.toISOString(),
+                                  timezone
+                                )}{' '}
+                                -{' '}
                                 {formatTime(
                                   addMinutes(
                                     currentTime,
                                     session.session.duration
-                                  ).toISOString()
+                                  ).toISOString(),
+                                  timezone
                                 )}
                               </h4>
                               <div>{session.session.title}</div>
