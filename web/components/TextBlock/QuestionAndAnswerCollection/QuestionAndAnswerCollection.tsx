@@ -1,7 +1,7 @@
 import Heading from '../../Heading';
-import Block from '../Block';
 import GridWrapper from '../../GridWrapper';
 import styles from './QuestionAndAnswerCollection.module.css';
+import TextBlock from "../TextBlock";
 
 export const QuestionAndAnswerCollection = ({ value: { questions } }) => (
   <GridWrapper>
@@ -10,9 +10,7 @@ export const QuestionAndAnswerCollection = ({ value: { questions } }) => (
         <section key={_key} className={styles.section}>
           <Heading type="h3">{question}</Heading>
           <div className={styles.answer}>
-            {answer.map((value) => (
-              <Block key={value._key} value={value} />
-            ))}
+            <TextBlock value={answer} />
           </div>
         </section>
       ))}
