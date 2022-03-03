@@ -1,6 +1,6 @@
 import { NextSeo } from 'next-seo';
 import urlJoin from 'proper-url-join';
-import opengraphImage from '../../public/static/images/opengraph-image.svg';
+import opengraphImage from '../../images/opengraph-image.png';
 import { imageUrlFor } from '../../lib/sanity';
 import { Figure } from '../../types/Figure';
 
@@ -46,7 +46,7 @@ export const MetaTags = ({
                 alt: image.alt,
               }
             : {
-                url: '/static/images/opengraph-image.svg',
+                url: opengraphImage.src,
                 width: opengraphImage.width,
                 height: opengraphImage.height,
               },
