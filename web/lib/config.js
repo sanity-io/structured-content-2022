@@ -8,7 +8,7 @@ const config = {
     baseConfig: {
       ...projectConfig,
       useCdn: false,
-      apiVersion: '2022-03-03'
+      apiVersion: '2022-03-03',
     },
   },
 };

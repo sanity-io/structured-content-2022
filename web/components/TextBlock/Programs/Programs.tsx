@@ -15,19 +15,20 @@ import styles from './Programs.module.css';
 
 type ProgramsProps = {
   type: EntitySectionSelection;
+  programs?: Program[];
   allPrograms: Program[];
 };
 
 export const Programs = ({
-  value: { type, allPrograms },
+  value: { type, programs, allPrograms },
   index,
 }: PortableTextComponentProps<ProgramsProps>) => {
-  if (type === 'all') {
+  if (type === 'all' || type === 'highlighted') {
     return (
       <GridWrapper>
         <Accordion
           baseId={`accordion-${index}`}
-          items={allPrograms.map((program) => {
+          items={(programs || allPrograms).map((program) => {
             const firstVenue = program?.venues[0];
             const programName = firstVenue?.name || program.internalName;
             const timezone = firstVenue?.timezone || 'UTC';
