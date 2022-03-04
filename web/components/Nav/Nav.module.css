@@ -129,9 +129,10 @@
   }
 
   .link {
-    font: var(--font-display-lg);
-    letter-spacing: normal;
-    display: inline;
+    font: var(--font-display-base);
+    letter-spacing: -0.01em;
+    display: inline-block; /* 'block' would make blank space be clickable */
+    margin: 0 0 8px;
   }
 }
 
