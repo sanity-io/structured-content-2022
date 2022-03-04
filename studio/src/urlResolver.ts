@@ -4,8 +4,8 @@ export const rootURLs = {
     web: "https://structuredcontent.live",
   },
   staging: {
-    studio: "https://admin.structuredcontent.staging",
-    web: "https://structured-content-2022.sanity.build",
+    studio: "https://stagingadmin.structuredcontent.live/",
+    web: "https://structured-content-2022.sanity.build/",
   },
   development: {
     studio: "http://localhost:3333",
@@ -30,6 +30,9 @@ export const getEnvironment = () => {
     return "development";
   }
   if (location.includes("build")) {
+    return "staging";
+  }
+  if (location.includes("stagingadmin")) {
     return "staging";
   }
   if (location.includes("live")) {
