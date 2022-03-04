@@ -1,6 +1,5 @@
 import logo from '../../images/logo.svg';
 import styles from './ConferenceHeader.module.css';
-import DateRange from '../DateRange';
 
 interface ConferenceHeaderProps {
   name?: string;
