@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { GetServerSideProps } from 'next';
 import { groq } from 'next-sanity';
 import { useEffect, useState } from 'react';
 import Hero from '../components/Hero';
@@ -9,6 +10,7 @@ import NavBlock from '../components/NavBlock';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
 import MetaTags from '../components/MetaTags';
+import { usePreviewSubscription } from '../lib/sanity';
 import client from '../lib/sanity.server';
 import { Slug } from '../types/Slug';
 import { Section } from '../types/Section';
@@ -32,6 +34,7 @@ const QUERY = groq`
         },
         sections[] {
           _type == 'reference' => @-> {
+            ...,
             sections[] {
               ...,
               _type == "sponsorsSection" => {
@@ -68,7 +71,6 @@ const QUERY = groq`
                 reference->,
               },
             },
-            ...,
           },
           _type != 'reference' => @ {
             ...,
@@ -159,19 +161,25 @@ interface RouteProps {
     };
   };
   slug: string;
+  preview: boolean;
 }
 
-const Route = ({
-  data: {
-    route: {
-      page: { hero, sections },
-      seo: { title, description: seoDescription, image, noIndex },
+const Route = ({ data: initialData, slug, preview }: RouteProps) => {
+  const {
+    data: {
+      route: {
+        page: { hero, sections },
+        seo: { title, description: seoDescription, image, noIndex },
+      },
+      home: { name: homeName, startDate, endDate, description, ticketsUrl },
+      footer,
     },
-    home: { name: homeName, startDate, endDate, description, ticketsUrl },
-    footer,
-  },
-  slug,
-}: RouteProps) => {
+  } = usePreviewSubscription(QUERY, {
+    params: { slug },
+    initialData,
+    enabled: preview,
+  });
+
   const [scrollTop, setScrollTop] = useState(
     typeof document !== 'undefined' ? document.documentElement.scrollTop : 0
   );
@@ -234,14 +242,17 @@ const Route = ({
   );
 };
 
-export async function getServerSideProps({ params }) {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  preview = false,
+}) => {
   const slug = params?.slug?.[0] || '/';
   const data = await client.fetch(QUERY, { slug });
   if (!data?.route?.page) {
     return { notFound: true };
   }
 
-  return { props: { data, slug } };
-}
+  return { props: { preview, data, slug } };
+};
 
 export default Route;

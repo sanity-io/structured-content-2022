@@ -24,7 +24,7 @@ export const paths = {
   event: "home",
 };
 
-export const getEnvironment = (): string => {
+export const getEnvironment = () => {
   const location = window.location.href;
   if (location.includes("localhost")) {
     return "development";
