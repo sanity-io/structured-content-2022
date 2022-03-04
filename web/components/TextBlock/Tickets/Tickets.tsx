@@ -11,6 +11,7 @@ import { Ticket } from '../../../types/Ticket';
 import GridWrapper from '../../GridWrapper';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import styles from './Tickets.module.css';
+import { getCollectionForSelectionType } from "../../../util/entity";
 
 interface TicketsProps {
   type: EntitySectionSelection;
@@ -83,7 +84,7 @@ export const Tickets = ({
         <thead>
           <tr>
             <th />
-            {(tickets || allTickets).map((ticket) => {
+            {getCollectionForSelectionType(type, allTickets, tickets).map((ticket) => {
               return (
                 <th key={ticket._id} scope="col" className={styles.ticketInfo}>
                   <div className={styles.name}>{ticket.type}</div>
@@ -128,7 +129,7 @@ export const Tickets = ({
               <th className={styles.feature} scope="row">
                 {includedType}
               </th>
-              {(tickets || allTickets).map((ticket) => {
+              {getCollectionForSelectionType(type, allTickets, tickets).map((ticket) => {
                 const featureIncluded = ticket.included.includes(includedType);
                 return (
                   <td
@@ -166,7 +167,7 @@ export const Tickets = ({
       </table>
 
       <div className={styles.sections}>
-        {(tickets || allTickets).map((ticket) => {
+        {getCollectionForSelectionType(type, allTickets, tickets).map((ticket) => {
           return (
             <section key={ticket._id}>
               <div className={clsx(styles.ticketInfo, styles.inSections)}>

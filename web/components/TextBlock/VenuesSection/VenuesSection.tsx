@@ -3,6 +3,7 @@ import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { Venue } from '../../../types/Venue';
 import GridWrapper from '../../GridWrapper';
 import VenueNames from '../../VenueNames';
+import { getCollectionForSelectionType } from "../../../util/entity";
 
 type VenuesSectionProps = {
   type: EntitySectionSelection;
@@ -11,7 +12,7 @@ type VenuesSectionProps = {
 };
 
 export const VenuesSection = ({
-  value: { type, venues, allVenues },
+  value: { type, allVenues, venues },
 }: PortableTextComponentProps<VenuesSectionProps>) => {
   if (!Array.isArray(allVenues) || allVenues.length === 0) {
     console.error(
@@ -20,26 +21,9 @@ export const VenuesSection = ({
     return null;
   }
 
-  switch (type) {
-    case 'all':
-      return (
-        <GridWrapper>
-          <VenueNames venues={allVenues} />
-        </GridWrapper>
-      );
-
-    case 'highlighted':
-      return (
-        <GridWrapper>
-          <VenueNames venues={venues} />
-        </GridWrapper>
-      );
-
-    case 'none':
-      return null;
-
-    default:
-      console.error(`Unrecognized VenuesSection type: '${type}'`);
-      return null;
-  }
+  return (
+    <GridWrapper>
+      <VenueNames venues={getCollectionForSelectionType(type, allVenues, venues)} />
+    </GridWrapper>
+  );
 };

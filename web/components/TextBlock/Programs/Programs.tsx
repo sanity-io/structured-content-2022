@@ -12,15 +12,16 @@ import {
 import Accordion from '../../Accordion';
 import GridWrapper from '../../GridWrapper';
 import styles from './Programs.module.css';
+import { getCollectionForSelectionType } from "../../../util/entity";
 
 type ProgramsProps = {
   type: EntitySectionSelection;
-  programs?: Program[];
   allPrograms: Program[];
+  programs?: Program[];
 };
 
 export const Programs = ({
-  value: { type, programs, allPrograms },
+  value: { type, allPrograms, programs },
   index,
 }: PortableTextComponentProps<ProgramsProps>) => {
   if (type === 'all' || type === 'highlighted') {
@@ -28,7 +29,7 @@ export const Programs = ({
       <GridWrapper>
         <Accordion
           baseId={`accordion-${index}`}
-          items={(programs || allPrograms).map((program) => {
+          items={getCollectionForSelectionType(type, allPrograms, programs).map((program) => {
             const firstVenue = program?.venues[0];
             const programName = firstVenue?.name || program.internalName;
             const timezone = firstVenue?.timezone || 'UTC';
