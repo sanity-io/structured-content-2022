@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg">
-  <ellipse cx="12.5%" cy="50%" rx="12.5%" ry="50%" fill="#ffba00" />
-  <ellipse cx="37.5%" cy="50%" rx="12.5%" ry="50%" fill="#ffba00" />
-  <ellipse cx="62.5%" cy="50%" rx="12.5%" ry="50%" fill="#ffba00" />
-  <ellipse cx="87.5%" cy="50%" rx="12.5%" ry="50%" fill="#ffba00" />
+  <ellipse cx="12.5%" cy="50%" rx="12.5%" ry="50%" fill="#fbd024" />
+  <ellipse cx="37.5%" cy="50%" rx="12.5%" ry="50%" fill="#fbd024" />
+  <ellipse cx="62.5%" cy="50%" rx="12.5%" ry="50%" fill="#fbd024" />
+  <ellipse cx="87.5%" cy="50%" rx="12.5%" ry="50%" fill="#fbd024" />
 </svg>
