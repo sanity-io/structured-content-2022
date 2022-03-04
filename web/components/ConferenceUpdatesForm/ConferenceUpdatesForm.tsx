@@ -35,6 +35,7 @@ export const ConferenceUpdatesForm = ({
         />
 
         <div className={styles.mainContents}>
+          <h2>Get conference updates</h2>
           <form
             action={target}
             method="POST"
