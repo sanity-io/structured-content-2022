@@ -4,7 +4,9 @@ import Iframe from "sanity-plugin-iframe-pane";
 import DocumentsPane from "sanity-plugin-documents-pane";
 import { createDeskHierarchy } from "@sanity/hierarchical-document-list";
 import documentStore from "part:@sanity/base/datastore/document";
+import client from "part:@sanity/base/client";
 
+import resolveProductionUrl from "./resolveProductionUrl";
 import { getPreviewUrl } from "./urlResolver";
 import SpecPreview from "./spec";
 
@@ -18,11 +20,22 @@ const IncomingRefs = S.view
   })
   .title("Incoming References");
 
-const defaultViews = [S.view.form(), IncomingRefs, SpecPreview];
+const defaultViews = [S.view.form(), IncomingRefs /* SpecPreview */];
 
 export const getDefaultDocumentNode = ({ schemaType }) => {
   // Conditionally return a different configuration based on the schema type
   switch (schemaType) {
+    case "route":
+      return S.document().views([
+        ...defaultViews,
+        S.view
+          .component(Iframe)
+          .options({
+            url: (doc) => resolveProductionUrl(doc),
+          })
+          .title("Preview"),
+      ]);
+
     case "event":
       return S.document().views([
         S.view
@@ -39,10 +52,7 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
         S.view
           .component(Iframe)
           .options({
-            url: (doc) =>
-              doc?.slug?.current
-                ? getPreviewUrl(doc._type, doc.slug.current)
-                : getPreviewUrl(doc._type),
+            url: (doc) => resolveProductionUrl(doc),
           })
           .title("Preview"),
       ]);
@@ -97,7 +107,42 @@ export default () =>
       S.documentTypeListItem("venue").title("Venues"),
       S.divider(),
       S.documentTypeListItem("route").title("Routes (URLs)"),
-      S.documentTypeListItem("page").title("Landing Pages"),
+      S.listItem()
+        .title("Pages")
+        .id("page")
+        .schemaType("page")
+        .child(
+          S.documentTypeList("page")
+            .schemaType("page")
+            .child(async (docId) => {
+              const currentDoc = await client
+                .withConfig({ apiVersion: "2022-03-03" })
+                .fetch(`*[_type =="route" && page._ref == $id][0]`, {
+                  id: docId,
+                });
+
+              if (!currentDoc) {
+                return S.document().views(defaultViews);
+              }
+
+              return S.document().views([
+                ...defaultViews,
+                S.view
+                  .component(Iframe)
+                  .options({
+                    url: () => resolveProductionUrl(currentDoc) || "",
+                  })
+                  .title("Preview")
+                  .id(docId),
+              ]);
+            })
+        ),
+
+      /* S.documentTypeListItem("page")
+        .title("Landing Pages")
+        .child(
+          S.documentList("page")
+        ), */
       S.documentTypeListItem("sharedSections").title("Shared Sections"),
       S.listItem()
         .title("Navigation")

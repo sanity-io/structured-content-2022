@@ -21,7 +21,7 @@ export const paths = {
   sponsorship: "sponsorships",
   ticket: "tickets",
   article: "articles",
-  event: "home",
+  event: "",
 };
 
 export const getEnvironment = () => {
@@ -44,7 +44,7 @@ export const getEnvironment = () => {
  * @returns The URL based on the document type and environment
  */
 export const getPath = (root: string, type: string): string => {
-  return `${root}/${paths[type]}`;
+  return `${root}${paths[type] ? `/${paths[type]}` : ""}`;
 };
 
 export const getPreviewUrl = (type: string, slug: string = ""): string => {
