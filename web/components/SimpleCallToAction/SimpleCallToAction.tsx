@@ -8,7 +8,7 @@ export const SimpleCallToAction = ({
   reference,
 }: SimpleCallToActionProps) =>
   text && reference?.slug?.current ? (
-    <ButtonLink text={text} url={urlJoin(reference?.slug?.current, { trailingSlash: true })} />
+    <ButtonLink text={text} url={urlJoin(reference?.slug?.current)} />
   ) : text && url ? (
     <ButtonLink text={text} url={url} />
   ) : null;
