@@ -26,41 +26,44 @@ export const getDefaultDocumentNode = ({ schemaType, documentId }) => {
   // Conditionally return a different configuration based on the schema type
   switch (schemaType) {
     case "route":
-      return S.document().views([
-        ...defaultViews,
-        S.view
-          .component(Iframe)
-          .options({
-            url: (doc) => resolveProductionUrl(doc),
-          })
-          .id(documentId)
-          .title("Preview"),
-      ]);
+      return S.document()
+        .id(documentId)
+        .views([
+          ...defaultViews,
+          S.view
+            .component(Iframe)
+            .options({
+              url: (doc) => resolveProductionUrl(doc),
+            })
+            .title("Preview"),
+        ]);
 
     case "event":
-      return S.document().views([
-        S.view
-          .component(Iframe)
-          .options({
-            url: getPreviewUrl("event"),
-          })
-          .id(documentId)
-          .title("Preview"),
-        ...defaultViews,
-      ]);
+      return S.document()
+        .id(documentId)
+        .views([
+          S.view
+            .component(Iframe)
+            .options({
+              url: getPreviewUrl("event"),
+            })
+            .title("Preview"),
+          ...defaultViews,
+        ]);
     case "person":
-      return S.document().views([
-        ...defaultViews,
-        S.view
-          .component(Iframe)
-          .options({
-            url: (doc) => resolveProductionUrl(doc),
-          })
-          .id(documentId)
-          .title("Preview"),
-      ]);
+      return S.document()
+        .id(documentId)
+        .views([
+          ...defaultViews,
+          S.view
+            .component(Iframe)
+            .options({
+              url: (doc) => resolveProductionUrl(doc),
+            })
+            .title("Preview"),
+        ]);
     default:
-      return S.document().views(defaultViews);
+      return S.document().id(documentId).views(defaultViews);
   }
 };
 
@@ -127,21 +130,22 @@ export default () =>
 
               if (!currentDoc) {
                 return S.document()
-                  .schemaType("page")
                   .id(docId)
+                  .schemaType("page")
                   .views(defaultViews);
               }
 
-              return S.document().views([
-                ...defaultViews,
-                S.view
-                  .component(Iframe)
-                  .options({
-                    url: () => resolveProductionUrl(currentDoc) || "",
-                  })
-                  .title("Preview")
-                  .id(docId),
-              ]);
+              return S.document()
+                .id(docId)
+                .views([
+                  ...defaultViews,
+                  S.view
+                    .component(Iframe)
+                    .options({
+                      url: () => resolveProductionUrl(currentDoc) || "",
+                    })
+                    .title("Preview"),
+                ]);
             })
         ),
       S.documentTypeListItem("sharedSections").title("Shared Sections"),
