@@ -22,7 +22,7 @@ const IncomingRefs = S.view
 
 const defaultViews = [S.view.form(), IncomingRefs /* SpecPreview */];
 
-export const getDefaultDocumentNode = ({ schemaType }) => {
+export const getDefaultDocumentNode = ({ schemaType, documentId }) => {
   // Conditionally return a different configuration based on the schema type
   switch (schemaType) {
     case "route":
@@ -33,6 +33,7 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
           .options({
             url: (doc) => resolveProductionUrl(doc),
           })
+          .id(documentId)
           .title("Preview"),
       ]);
 
@@ -43,6 +44,7 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
           .options({
             url: getPreviewUrl("event"),
           })
+          .id(documentId)
           .title("Preview"),
         ...defaultViews,
       ]);
@@ -54,6 +56,7 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
           .options({
             url: (doc) => resolveProductionUrl(doc),
           })
+          .id(documentId)
           .title("Preview"),
       ]);
     default:
@@ -123,7 +126,10 @@ export default () =>
                 });
 
               if (!currentDoc) {
-                return S.document().views(defaultViews).id(docId);
+                return S.document()
+                  .schemaType("page")
+                  .id(docId)
+                  .views(defaultViews);
               }
 
               return S.document().views([
@@ -138,12 +144,6 @@ export default () =>
               ]);
             })
         ),
-
-      /* S.documentTypeListItem("page")
-        .title("Landing Pages")
-        .child(
-          S.documentList("page")
-        ), */
       S.documentTypeListItem("sharedSections").title("Shared Sections"),
       S.listItem()
         .title("Navigation")
