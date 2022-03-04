@@ -9,6 +9,11 @@
   display: none;
 }
 
+.heading {
+  font: var(--font-display-sm);
+  margin: 0 0 32px;
+}
+
 .formContents {
   position: relative;
 }
@@ -53,6 +58,10 @@
 }
 
 @media (--medium-up) {
+  .heading {
+    font: var(--font-display-base);
+  }
+
   .container {
     padding: 64px 48px;
     margin: 96px 0;
@@ -69,6 +78,10 @@
 }
 
 @media (--large-up) {
+  .heading {
+    font: var(--font-display-lg);
+  }
+
   .container {
     text-align: left;
     padding: 116px 0;
