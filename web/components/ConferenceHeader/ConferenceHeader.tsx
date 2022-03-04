@@ -29,9 +29,8 @@ export const ConferenceHeader = ({
       </h1>
       <div className={styles.summary}>
         <div className={styles.datesAndHostedByWrapper}>
-          <p className={styles.dates}>
-            <DateRange startTimestamp={startDate} endTimestamp={endDate} />
-          </p>
+          <p className={styles.dates}>US: May 24–25, 2022</p>
+          <p className={styles.dates}>UK &amp; Europe: May 25–26, 2022</p>
           <p className={styles.hostedBy}>Hosted by Sanity</p>
         </div>
         <p className={styles.description}>{description}</p>
