@@ -111,8 +111,9 @@ export default () =>
         .title("Pages")
         .id("page")
         .schemaType("page")
-        .child(
+        .child((pageId) =>
           S.documentTypeList("page")
+            .id(pageId)
             .schemaType("page")
             .child(async (docId) => {
               const currentDoc = await client
@@ -122,7 +123,7 @@ export default () =>
                 });
 
               if (!currentDoc) {
-                return S.document().views(defaultViews);
+                return S.document().views(defaultViews).id(docId);
               }
 
               return S.document().views([
@@ -187,6 +188,6 @@ export default () =>
       //S.documentTypeListItem("sponsorship").title("Sponsorships"),
       S.documentTypeListItem("sponsor").title("Sponsors"),
       S.divider(),
-      S.documentTypeListItem("spec").title("Content Specification Sheets"),
+      /* S.documentTypeListItem("spec").title("Content Specification Sheets"), */
       ...S.documentTypeListItems().filter(FilteredTypes),
     ]);
