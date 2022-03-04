@@ -83,7 +83,6 @@
   }
 
   .menuButton.menuOpen {
-    background: var(--color-brand-orange);
     align-self: center;
   }
 
@@ -110,7 +109,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--color-brand-yellow);
+    background: var(--color-brand-orange);
     padding: 24px var(--grid-half-gutter) 112px;
     overflow: auto;
   }
