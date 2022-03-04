@@ -115,8 +115,6 @@ const QUERY = groq`
     },
     "home": *[_id == "${mainEventId}"][0] {
       name,
-      startDate,
-      endDate,
       description,
       "ticketsUrl": microcopy[key == "mainCta"][0].action,
     },
@@ -147,8 +145,6 @@ interface RouteProps {
     };
     home: {
       name: string;
-      startDate: string;
-      endDate: string;
       description: string;
       ticketsUrl: string;
     };
@@ -171,7 +167,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
         page: { hero, sections },
         seo: { title, description: seoDescription, image, noIndex },
       },
-      home: { name: homeName, startDate, endDate, description, ticketsUrl },
+      home: { name: homeName, description, ticketsUrl },
       footer,
     },
   } = usePreviewSubscription(QUERY, {
@@ -224,12 +220,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
       <main>
         {slug === '/' ? (
           <GridWrapper>
-            <ConferenceHeader
-              name={homeName}
-              startDate={startDate}
-              endDate={endDate}
-              description={description}
-            />
+            <ConferenceHeader name={homeName} description={description} />
             <NavBlock ticketsUrl={ticketsUrl} />
           </GridWrapper>
         ) : (

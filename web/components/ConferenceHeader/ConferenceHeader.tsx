@@ -3,15 +3,11 @@ import styles from './ConferenceHeader.module.css';
 
 interface ConferenceHeaderProps {
   name?: string;
-  startDate?: string;
-  endDate?: string;
   description?: string;
 }
 
 export const ConferenceHeader = ({
   name,
-  startDate,
-  endDate,
   description,
 }: ConferenceHeaderProps) => {
   return (
