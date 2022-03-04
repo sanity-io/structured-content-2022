@@ -3,9 +3,11 @@ import { HomeIcon, MenuIcon } from "@sanity/icons";
 import Iframe from "sanity-plugin-iframe-pane";
 import DocumentsPane from "sanity-plugin-documents-pane";
 import { createDeskHierarchy } from "@sanity/hierarchical-document-list";
-import documentStore from "part:@sanity/base/datastore/document";
+import SocialPreview from "part:social-preview/component";
+
 import client from "part:@sanity/base/client";
 
+import documentStore from "part:@sanity/base/datastore/document";
 import resolveProductionUrl from "./resolveProductionUrl";
 import { getPreviewUrl } from "./urlResolver";
 import SpecPreview from "./spec";
@@ -36,6 +38,24 @@ export const getDefaultDocumentNode = ({ schemaType, documentId }) => {
               url: (doc) => resolveProductionUrl(doc),
             })
             .title("Preview"),
+          S.view
+            .component(
+              SocialPreview({
+                prepareFunction: (doc) => {
+                  const { seo } = doc;
+                  return {
+                    title: seo?.title,
+                    description: seo?.description,
+                    ogImage: seo.ogImage || {
+                      _ref: "image-1cedb02a5c2d3bd30aebe1a15999f6c83a804ff5-1200x630-svg",
+                    },
+                    siteUrl: getPreviewUrl(doc).replace(/\/\/$/, "/"),
+                    slug: doc?.slug?.current,
+                  };
+                },
+              })
+            )
+            .title("Social & SEO"),
         ]);
 
     case "event":

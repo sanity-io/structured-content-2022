@@ -1660,6 +1660,11 @@
   resolved "https://registry.npmjs.org/@sanity/icons/-/icons-1.2.3.tgz#58b1f3c0d2a8bb13731c5d91ca96461c29bc5cd9"
   integrity sha512-yp/o9Kd/4gEncihLrly/PNXo77Z6+xHkEZP4K2/C+PJ7/dXR7Nyy4Lj729tR/0SQKA/Rc8WEapGQCPmWVBvHOQ==
 
+"@sanity/image-url@^0.140.22":
+  version "0.140.22"
+  resolved "https://registry.npmjs.org/@sanity/image-url/-/image-url-0.140.22.tgz#7a65f56bb751f7b1c5dfacfadd34ee10fc4f0fde"
+  integrity sha512-CAmQZnj+KM7FSEYiWlIGDit072syicYuAw0w7R2ctMzHiZ4p9mE/g6dBnYqrqFUrw2J+GpJgPt+RVspKP8vdqA==
+
 "@sanity/image-url@^1.0.1":
   version "1.0.1"
   resolved "https://registry.npmjs.org/@sanity/image-url/-/image-url-1.0.1.tgz#960d649b2f4396da0adb31cf94503c929495cea0"
@@ -9675,6 +9680,13 @@ sanity-plugin-media@^1.4.4:
     styled-components "^5.2.1"
     theme-ui "0.3.5"
     yup "0.32.8"
+
+sanity-plugin-social-preview@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.npmjs.org/sanity-plugin-social-preview/-/sanity-plugin-social-preview-0.1.5.tgz#4f1f10e9078b9906b6d0924f99f7c79d379efb07"
+  integrity sha512-xHmFcEYlNQI3E3ICCBi+cc4m1YkYymOq9I7VFJRGm9ggrHWeq+ZOG50jDDVwX5sFXWQh/aWr91RmYJgPqMkS3A==
+  dependencies:
+    "@sanity/image-url" "^0.140.22"
 
 sax@~1.2.4:
   version "1.2.4"

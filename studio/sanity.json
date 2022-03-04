@@ -18,7 +18,8 @@
     "iframe-pane",
     "documents-pane",
     "@sanity/hierarchical-document-list",
-    "@sanity/production-preview"
+    "@sanity/production-preview",
+    "social-preview"
   ],
   "env": {
     "development": {
