@@ -96,6 +96,14 @@ const QUERY = groq`
             },
             _type == "programsSection" => {
               ...,
+              programs[]-> {
+                ...,
+                sessions[] {
+                  ...,
+                  session->,
+                },
+                venues[]->,
+              },
               "allPrograms": *[_type == "program"] {
                 ...,
                 sessions[] {
