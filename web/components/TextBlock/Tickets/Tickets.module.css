@@ -83,7 +83,6 @@
 
 .includedFeatureDescription {
   padding-left: 12px;
-  text-transform: capitalize;
 }
 
 .feature,
@@ -98,7 +97,6 @@
 .feature {
   font: inherit;
   text-align: left;
-  text-transform: capitalize;
 }
 
 .featurePresence {
