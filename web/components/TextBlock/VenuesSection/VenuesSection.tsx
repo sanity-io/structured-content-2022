@@ -21,11 +21,10 @@ export const VenuesSection = ({
     return null;
   }
 
-  return (
+  const sectionVenues = getCollectionForSelectionType(type, allVenues, venues);
+  return sectionVenues.length === 0 ? null : (
     <GridWrapper>
-      <VenueNames
-        venues={getCollectionForSelectionType(type, allVenues, venues)}
-      />
+      <VenueNames venues={sectionVenues} />
     </GridWrapper>
   );
 };
