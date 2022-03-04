@@ -30,7 +30,7 @@
 .name {
   margin: 0 0 4px;
   font: var(--font-body-large-bold);
-  letter-spacing: var(--font-body-large);
+  letter-spacing: var(--letter-spacing-body-large);
 }
 
 .priceList {
