@@ -1,6 +1,10 @@
-import { EntitySectionSelection } from "../types/EntitySectionSelection";
+import { EntitySectionSelection } from '../types/EntitySectionSelection';
 
-export const getCollectionForSelectionType = <T>(type: EntitySectionSelection, all: T[], highlighted?: T[]): T[] => {
+export const getCollectionForSelectionType = <T>(
+  type: EntitySectionSelection,
+  all: T[],
+  highlighted?: T[]
+): T[] => {
   switch (type) {
     case 'highlighted':
       return Array.isArray(highlighted) ? highlighted : [];

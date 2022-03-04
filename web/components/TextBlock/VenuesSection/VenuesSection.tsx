@@ -3,7 +3,7 @@ import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { Venue } from '../../../types/Venue';
 import GridWrapper from '../../GridWrapper';
 import VenueNames from '../../VenueNames';
-import { getCollectionForSelectionType } from "../../../util/entity";
+import { getCollectionForSelectionType } from '../../../util/entity';
 
 type VenuesSectionProps = {
   type: EntitySectionSelection;
@@ -23,7 +23,9 @@ export const VenuesSection = ({
 
   return (
     <GridWrapper>
-      <VenueNames venues={getCollectionForSelectionType(type, allVenues, venues)} />
+      <VenueNames
+        venues={getCollectionForSelectionType(type, allVenues, venues)}
+      />
     </GridWrapper>
   );
 };
