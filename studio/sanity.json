@@ -19,15 +19,9 @@
     "documents-pane",
     "@sanity/hierarchical-document-list",
     "@sanity/production-preview",
+    "@sanity/vision",
     "social-preview"
   ],
-  "env": {
-    "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
-    }
-  },
   "parts": [
     {
       "name": "part:@sanity/base/schema",
