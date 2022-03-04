@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { PortableTextComponentProps } from '@portabletext/react';
+import newsletterShapes from '../../images/newsletter-shapes.svg';
 import GridWrapper from '../GridWrapper';
-import PlaceholderImage from '../PlaceholderImage';
 import styles from './ConferenceUpdatesForm.module.css';
 
 type ConferenceUpdatesFormProps = {
@@ -25,7 +25,14 @@ export const ConferenceUpdatesForm = ({
   return (
     <GridWrapper>
       <article className={styles.container}>
-        <PlaceholderImage width={330} height={459} className={styles.image} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={newsletterShapes.src}
+          width={newsletterShapes.width}
+          height={newsletterShapes.height}
+          className={styles.image}
+          alt=""
+        />
 
         <div className={styles.mainContents}>
           <form

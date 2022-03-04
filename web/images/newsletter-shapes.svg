@@ -1,0 +1,20 @@
+<svg width="362" height="475" viewBox="0 0 362 475" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1095_9553)">
+<rect x="44.25" width="88.5" height="153" rx="16" fill="#FBD024"/>
+<rect x="177" y="38.25" width="76.5" height="177" rx="16" transform="rotate(90 177 38.25)" fill="#FBD024"/>
+</g>
+<rect x="185" width="177" height="153" rx="16" fill="#FBD024"/>
+<rect x="185" y="161" width="177" height="153" rx="16" fill="#FBD024"/>
+<rect width="55.3125" height="98.125" transform="translate(185 107.938)" fill="#FBD024"/>
+<rect y="161" width="177" height="45.6667" rx="16" fill="#FBD024"/>
+<rect y="214.667" width="177" height="45.6667" rx="16" fill="#FBD024"/>
+<rect y="268.333" width="177" height="45.6667" rx="16" fill="#FBD024"/>
+<rect width="55.3125" height="54.6429" transform="translate(121.688 237.5)" fill="#FBD024"/>
+<rect width="55.3125" height="54.6429" transform="translate(0 182.856)" fill="#FBD024"/>
+<path d="M0 338C0 329.163 7.16344 322 16 322H346C354.837 322 362 329.163 362 338V459C362 467.837 354.837 475 346 475H16C7.16344 475 0 467.837 0 459V338Z" fill="#FBD024"/>
+<defs>
+<clipPath id="clip0_1095_9553">
+<rect width="177" height="153" fill="white"/>
+</clipPath>
+</defs>
+</svg>
