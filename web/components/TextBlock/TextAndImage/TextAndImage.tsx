@@ -1,5 +1,6 @@
 import { PortableTextComponentProps } from '@portabletext/react';
 import { imageUrlFor } from '../../../lib/sanity';
+import { Figure } from "../../../types/Figure";
 import { Section } from '../../../types/Section';
 import GridWrapper from '../../GridWrapper';
 import TextBlock from '../TextBlock';
@@ -8,7 +9,7 @@ import styles from './TextAndImage.module.css';
 type TextAndImageProps = {
   _key: string;
   _type: 'textAndImageSection';
-  image: any;
+  image: Figure;
   text: Section[];
   tagline?: string;
   title?: string;
@@ -24,7 +25,7 @@ export const TextAndImage = ({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={imageUrlFor(image).ignoreImageParams().url()}
-            alt=""
+            alt={image.alt || ''}
             className={styles.image}
           />
         </div>
