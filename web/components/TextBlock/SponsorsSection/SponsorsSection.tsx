@@ -4,6 +4,7 @@ import { Sponsorship } from '../../../types/Sponsorship';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import Sponsor from '../../Sponsor';
 import GridWrapper from '../../GridWrapper';
+import Heading from "../../Heading";
 import styles from './SponsorsSection.module.css';
 
 type SponsorsSectionProps = {
