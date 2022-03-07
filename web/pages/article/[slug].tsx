@@ -20,7 +20,10 @@ const QUERY = groq`
         ...,
         markDefs[] {
           ...,
-          reference->,
+          reference-> {
+            _type,
+            slug,
+          },
         },
       },
     },
