@@ -36,15 +36,7 @@ export const TextAndImage = ({
               <Heading type="h2" id={`heading-h2-${_key}`}>
                 {title}
               </Heading>
-              {tagline && (
-                <Heading
-                  type="h3"
-                  id={`heading-h3-${_key}`}
-                  className={styles.tagline}
-                >
-                  {tagline}
-                </Heading>
-              )}
+              {tagline && <h3 className={styles.tagline}>{tagline}</h3>}
             </hgroup>
           )}
 
