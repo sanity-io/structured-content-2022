@@ -24,7 +24,7 @@ export const TextAndImage = ({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={imageUrlFor(image).ignoreImageParams().url()}
-            alt={image.alt}
+            alt={image.alt || ''}
             className={styles.image}
           />
         </div>
