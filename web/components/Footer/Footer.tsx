@@ -28,8 +28,8 @@ export const Footer = ({ links }: FooterProps) => (
 
       <Paragraph>
         Inquiries:
-        <a className={styles.mailLink} href="mailto:email@sanity.io">
-          email@sanity.io
+        <a className={styles.mailLink} href="mailto:confinfo@sanity.io">
+          confinfo@sanity.io
         </a>
       </Paragraph>
 
