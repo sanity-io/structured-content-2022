@@ -42,6 +42,7 @@ const components: Partial<PortableTextComponents> = {
     underline: ({ children }) => <u>{children}</u>,
     code: ({ children }) => <code>{children}</code>,
     internalLink: ({ text, value }) => (
+      /* href has been seen in a case where both link and internalLink marks applied */
       <Link href={value?.href || getEntityPath(value)}>{text}</Link>
     ),
   },
