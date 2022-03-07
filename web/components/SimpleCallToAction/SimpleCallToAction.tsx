@@ -1,6 +1,6 @@
 import { SimpleCallToAction as SimpleCallToActionProps } from '../../types/SimpleCallToAction';
 import ButtonLink from '../ButtonLink';
-import urlJoin from "proper-url-join";
+import urlJoin from 'proper-url-join';
 
 export const SimpleCallToAction = ({
   text,

@@ -1,6 +1,6 @@
 import { PortableTextComponentProps } from '@portabletext/react';
 import { imageUrlFor } from '../../../lib/sanity';
-import { Figure } from "../../../types/Figure";
+import { Figure } from '../../../types/Figure';
 import { Section } from '../../../types/Section';
 import GridWrapper from '../../GridWrapper';
 import Heading from '../../Heading';
