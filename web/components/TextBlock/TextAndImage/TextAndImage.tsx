@@ -6,6 +6,8 @@ import TextBlock from '../TextBlock';
 import styles from './TextAndImage.module.css';
 
 type TextAndImageProps = {
+  _key: string;
+  _type: 'textAndImageSection';
   image: any;
   text: Section[];
   tagline?: string;
@@ -13,7 +15,7 @@ type TextAndImageProps = {
 };
 
 export const TextAndImage = ({
-  value: { image, tagline, text, title },
+  value: { image, tagline, text, title, _key },
 }: PortableTextComponentProps<TextAndImageProps>) => (
   <section className={styles.container}>
     <GridWrapper>
@@ -29,8 +31,12 @@ export const TextAndImage = ({
         <div className={styles.text}>
           {title && (
             <hgroup>
-              <h2>{title}</h2>
-              {tagline && <h3 className={styles.tagline}>{tagline}</h3>}
+              <h2 id={`heading-h2-${_key}`}>{title}</h2>
+              {tagline && (
+                <h3 id={`heading-h3-${_key}`} className={styles.tagline}>
+                  {tagline}
+                </h3>
+              )}
             </hgroup>
           )}
 

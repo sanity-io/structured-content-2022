@@ -7,7 +7,9 @@ export const Hero = ({ heading, summary, callToAction }: HeroProps) => (
   <div className={styles.container}>
     <GridWrapper>
       <div className={styles.headingContainer}>
-        <h1 className={styles.heading}>{heading}</h1>
+        <h1 id="heading-h1-hero" className={styles.heading}>
+          {heading}
+        </h1>
         {summary && <p className={styles.summary}>{summary}</p>}
         {callToAction && (
           <div className={styles.cta}>

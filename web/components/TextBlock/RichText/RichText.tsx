@@ -19,9 +19,13 @@ export const RichText = ({ value, background }: RichTextProps) => (
       <div className={styles.content}>
         {value.heading && (
           <hgroup>
-            {value.heading && <h2>{value.heading}</h2>}
+            {value.heading && (
+              <h2 id={`heading-h2-${value._key}`}>{value.heading}</h2>
+            )}
             {value.subheading && (
-              <h3 className={styles.subHeading}>{value.subheading}</h3>
+              <h3 id={`heading-h3-${value._key}`} className={styles.subHeading}>
+                {value.subheading}
+              </h3>
             )}
           </hgroup>
         )}
