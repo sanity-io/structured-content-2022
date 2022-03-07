@@ -21,7 +21,7 @@ const AccordionSection = ({ title, content, baseId }) => {
 
   return (
     <>
-      <h2 className={styles.heading}>
+      <h2 className={styles.heading} id={`heading-h2-${baseId}`}>
         <button
           onClick={onClick}
           className={clsx(styles.accordion, open && styles.active)}
