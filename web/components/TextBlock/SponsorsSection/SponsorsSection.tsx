@@ -56,7 +56,7 @@ export const SponsorsSection = ({
           .filter((sponsorship) => sponsorship.sponsors?.length > 0)
           .map(({ _id, type, sponsors }) => (
             <section key={_id} className={styles.sponsorLevel}>
-              <h3>{type}</h3>
+              <Heading type="h3">{type}</Heading>
               <ul className={styles.sponsors}>
                 {sponsors.map((sponsor) => (
                   <li key={sponsor._key} className={styles.sponsor}>

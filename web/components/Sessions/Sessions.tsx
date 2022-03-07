@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Session } from '../../types/Session';
 import SectionBlock from '../SectionBlock';
+import Heading from '../Heading';
 import { getEntityPath } from '../../util/entityPaths';
 import { PortableTextComponentProps } from '@portabletext/react/dist/react-portable-text.esm';
 import { EntitySectionSelection } from '../../types/EntitySectionSelection';
@@ -21,9 +22,9 @@ export const Sessions = ({
         const { title, _id } = session;
         return (
           <SectionBlock key={_id}>
-            <h2>
+            <Heading type="h2">
               <Link href={getEntityPath(session)}>{title}</Link>
-            </h2>
+            </Heading>
           </SectionBlock>
         );
       }

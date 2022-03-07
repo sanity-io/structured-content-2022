@@ -1,0 +1,26 @@
+.heading {
+  margin: 0;
+}
+
+.h2 {
+  font: var(--font-display-xs);
+  margin-bottom: 18px;
+}
+
+.h3 {
+  /* Heading hierarchy in sketches seems a bit unclear, this is currently the
+   * same as the h2...
+   */
+  font: var(--font-display-xs);
+}
+
+@media (--medium-up) {
+  .h2 {
+    font: var(--font-display-base);
+    margin-bottom: 30px;
+  }
+
+  .h3 {
+    font: var(--font-display-sm);
+  }
+}
