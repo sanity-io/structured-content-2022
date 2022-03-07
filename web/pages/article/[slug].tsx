@@ -14,7 +14,16 @@ import MetaTags from '../../components/MetaTags';
 
 const QUERY = groq`
   {
-    "article": *[_type == "article" && slug.current == $slug][0],
+    "article": *[_type == "article" && slug.current == $slug][0] {
+      ...,
+      content[] {
+        ...,
+        markDefs[] {
+          ...,
+          reference->,
+        },
+      },
+    },
     "home": *[_id == "${mainEventId}"][0] {
       "ticketsUrl": microcopy[key == "mainCta"][0].action,
     },
