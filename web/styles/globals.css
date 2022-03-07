@@ -70,6 +70,7 @@ a {
 
 button,
 input {
+  color: var(--color-brand-black);
   font: inherit;
 }
 
