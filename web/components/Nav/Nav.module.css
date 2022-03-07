@@ -59,7 +59,7 @@
     display: block;
     text-align: center;
     position: fixed;
-    bottom: 46px;
+    bottom: 38px;
     left: 0;
     right: 0;
     z-index: 1;
@@ -67,34 +67,27 @@
 
   .menuButton {
     display: inline-block;
-    padding: 18px 24px;
+    padding: 18px 24px 18px 65px;
     border-radius: 6px;
     border: none;
     font: var(--font-body-large-medium);
     letter-spacing: var(--letter-spacing-body-large);
-    background: var(--color-brand-yellow);
-  }
-
-  .menuButton::before {
-    content: url('../../images/menu.svg');
-    line-height: 1;
-    vertical-align: bottom;
-    margin-right: 17px;
+    background-color: var(--color-brand-yellow);
+    background-image: url('../../images/menu.svg');
+    background-repeat: no-repeat;
+    background-position: 24px 22px;
   }
 
   .menuButton.menuOpen {
     align-self: center;
   }
 
-  .menuButton.menuOpen::before {
-    content: url('../../images/close.svg');
-    line-height: 1;
-    vertical-align: bottom;
-    margin-right: 20px;
+  .menuButton.menuOpen {
+    background-image: url('../../images/close.svg');
   }
 
   .menuButton:active {
-    background: var(--color-brand-yellow-light);
+    background-color: var(--color-brand-yellow-light);
   }
 
   .menuContents {
