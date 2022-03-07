@@ -7,8 +7,8 @@ type Entity = Person | Session | Venue;
 
 export const mainEventId = 'aad77280-6394-4090-afad-1c0f2a0416c6';
 
-export const getEntityPath = (entity: Entity) => {
-  if (!entity.slug?.current) {
+export const getEntityPath = (entity?: Entity) => {
+  if (!entity?.slug?.current) {
     return '#';
   }
 
