@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import TextBlock from '../TextBlock';
 import GridWrapper from '../../GridWrapper';
-import Heading from '../../Heading';
 import { RichTextSection } from '../../../types/RichTextSection';
 import styles from './RichText.module.css';
 
@@ -20,7 +19,7 @@ export const RichText = ({ value, background }: RichTextProps) => (
       <div className={styles.content}>
         {value.heading && (
           <hgroup>
-            {value.heading && <Heading type="h2">{value.heading}</Heading>}
+            {value.heading && <h2>{value.heading}</h2>}
             {value.subheading && (
               <h3 className={styles.subHeading}>{value.subheading}</h3>
             )}

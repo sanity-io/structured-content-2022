@@ -2,7 +2,6 @@ import { PortableTextComponentProps } from '@portabletext/react';
 import { imageUrlFor } from '../../../lib/sanity';
 import { Section } from '../../../types/Section';
 import GridWrapper from '../../GridWrapper';
-import Heading from '../../Heading';
 import TextBlock from '../TextBlock';
 import styles from './TextAndImage.module.css';
 
@@ -30,7 +29,7 @@ export const TextAndImage = ({
         <div className={styles.text}>
           {title && (
             <hgroup>
-              <Heading type="h2">{title}</Heading>
+              <h2>{title}</h2>
               {tagline && <h3 className={styles.tagline}>{tagline}</h3>}
             </hgroup>
           )}
