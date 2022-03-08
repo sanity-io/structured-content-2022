@@ -64,12 +64,13 @@ ul {
 }
 
 a {
-  color: var(--color-sanity-blue);
+  color: var(--color-brand-black);
   text-decoration: underline;
 }
 
 button,
 input {
+  color: var(--color-brand-black);
   font: inherit;
 }
 

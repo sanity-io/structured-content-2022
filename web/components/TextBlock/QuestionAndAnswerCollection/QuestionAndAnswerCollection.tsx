@@ -3,9 +3,16 @@ import GridWrapper from '../../GridWrapper';
 import TextBlock from '../TextBlock';
 import styles from './QuestionAndAnswerCollection.module.css';
 
-export const QuestionAndAnswerCollection = ({ value: { questions, _key } }) => (
+export const QuestionAndAnswerCollection = ({
+  value: { questions, title, _key },
+}) => (
   <GridWrapper>
     <div className={styles.container}>
+      {title && (
+        <h2 id={`heading-h2-${_key}`} className={styles.title}>
+          {title}
+        </h2>
+      )}
       {questions.map(({ _key, question, answer }) => (
         <section key={_key} className={styles.section}>
           <Heading type="h3" id={`heading-h3-${_key}`}>
