@@ -24,6 +24,11 @@
   white-space: nowrap;
 }
 
+.link::after {
+  content: ' ->';
+  letter-spacing: normal; /* to enable -> ligature in Chrome */
+}
+
 .buttonWrapper {
   display: flex;
   margin-top: 1rem;
