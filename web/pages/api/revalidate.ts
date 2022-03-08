@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import urlJoin from 'proper-url-join';
 import { assertValidRequest } from '@sanity/webhook';
 import client from '../../lib/sanity.server';
 
@@ -20,7 +21,20 @@ export default async function revalidate(
   }
 
   const relatedRoutes = await client.fetch(QUERY, { id });
-  console.log(relatedRoutes);
+  if (!Array.isArray(relatedRoutes) || !relatedRoutes.length) {
+    return res
+      .status(401)
+      .json({ message: 'No pages reference updated object' });
+  }
 
-  return res.status(200).json({ message: 'OK', relatedRoutes });
+  try {
+    await Promise.all(
+      relatedRoutes.map((route) => res.unstable_revalidate(urlJoin(route)))
+    );
+    return res
+      .status(200)
+      .json({ message: `Updated routes: ${relatedRoutes.join(', ')}` });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
 }
