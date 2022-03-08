@@ -46,7 +46,7 @@ export default async function revalidate(
     return res.status(401).json({ message: invalidId });
   }
 
-  log(`Querying for type '${_type}' ..`);
+  log(`Querying for _id '${id}', type '${_type}' ..`);
   const relatedRoutes = await client.fetch(getQueryForType(_type), { id });
   if (!Array.isArray(relatedRoutes) || !relatedRoutes.length) {
     const noUpdatedObjects = 'No pages reference updated object';
