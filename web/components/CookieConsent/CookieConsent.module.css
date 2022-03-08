@@ -6,7 +6,7 @@
   background-color: var(--color-brand-yellow-light);
   font: var(--font-body-small-medium);
   letter-spacing: var(--letter-spacing-body-small);
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .consentContainer {
@@ -83,5 +83,11 @@
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     flex: 1 1 auto;
+  }
+}
+
+@media (--large-up) {
+  .container {
+    border-radius: 12px;
   }
 }
