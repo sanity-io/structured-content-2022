@@ -15,7 +15,9 @@ export const QuestionAndAnswerCollection = ({
       )}
       {questions.map(({ _key, question, answer }) => (
         <section key={_key} className={styles.section}>
-          <Heading type="h3">{question}</Heading>
+          <Heading type="h3" id={`heading-h3-${_key}`}>
+            {question}
+          </Heading>
           <div className={styles.answer}>
             <TextBlock value={answer} />
           </div>
