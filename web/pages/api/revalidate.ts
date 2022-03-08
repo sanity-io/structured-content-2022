@@ -14,11 +14,7 @@ export default async function revalidate(
 ) {
   assertValidRequest(req, process.env.SANITY_STUDIO_REVALIDATE_SECRET);
 
-  console.log("BODY", req.body);
-  return res.status(200).json({ message: 'OK' });
-
-/*
-  const { _id: id } = JSON.parse(req.body);
+  const { _id: id } = req.body;
   if (typeof id !== 'string' || !id) {
     return res.status(401).json({ message: 'Invalid _id' });
   }
@@ -27,5 +23,4 @@ export default async function revalidate(
   console.log(relatedRoutes);
 
   return res.status(200).json({ message: 'OK', relatedRoutes });
-*/
 }
