@@ -17,23 +17,24 @@ export default async function revalidate(
 
   const { _id: id } = req.body;
   if (typeof id !== 'string' || !id) {
-    return res.status(401).json({ message: 'Invalid _id' });
+    const invalidId = 'Invalid _id';
+    console.error(invalidId);
+    return res.status(401).json({ message: invalidId });
   }
 
   const relatedRoutes = await client.fetch(QUERY, { id });
   if (!Array.isArray(relatedRoutes) || !relatedRoutes.length) {
-    return res
-      .status(401)
-      .json({ message: 'No pages reference updated object' });
+    const noUpdatedObjects = 'No pages reference updated object';
+    return res.status(401).json({ message: noUpdatedObjects });
   }
 
   try {
     await Promise.all(
       relatedRoutes.map((route) => res.unstable_revalidate(urlJoin(route)))
     );
-    return res
-      .status(200)
-      .json({ message: `Updated routes: ${relatedRoutes.join(', ')}` });
+    const updatedRoutes = `Updated routes: ${relatedRoutes.join(', ')}`;
+    console.log(updatedRoutes);
+    return res.status(200).json({ message: updatedRoutes });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
