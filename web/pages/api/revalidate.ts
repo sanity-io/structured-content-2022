@@ -10,11 +10,6 @@ const SECTION_UPDATED_QUERY = `
 const PAGE_UPDATED_QUERY = `*[_type == "route" && references($id)].slug.current`;
 const ROUTE_UPDATED_QUERY = `*[_type == "route" && _id == $id].slug.current`;
 
-type Body = {
-  _id: string;
-  _type: string;
-}
-
 const getQueryForType = (type: string) => {
   switch (type) {
     case 'route':
@@ -27,19 +22,19 @@ const getQueryForType = (type: string) => {
 };
 
 const log = (msg: string, error?: boolean) =>
-  console[error ? "error" : "log"](`[revalidate] ${msg}`);
+  console[error ? 'error' : 'log'](`[revalidate] ${msg}`);
 
 export default async function revalidate(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (!isValidRequest(req, process.env.SANITY_STUDIO_REVALIDATE_SECRET)) {
-    const invalidRequest = 'Invalid request'
+    const invalidRequest = 'Invalid request';
     log(invalidRequest, true);
     return res.status(401).json({ message: invalidRequest });
   }
 
-  const { _id: id, _type } = req.body as Body;
+  const { _id: id, _type } = req.body as { _id: string; _type: string };
   if (typeof id !== 'string' || !id) {
     const invalidId = 'Invalid _id';
     log(invalidId, true);
