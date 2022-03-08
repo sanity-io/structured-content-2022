@@ -2,6 +2,10 @@
   margin: 80px 0;
 }
 
+.title {
+  margin-bottom: 40px;
+}
+
 .section {
   margin: 8px 0;
   background: var(--color-brand-yellow-light);
@@ -20,12 +24,20 @@
     margin: 96px 0;
   }
 
+  .title,
   .section {
-    padding: 64px 52px;
     box-sizing: content-box;
     max-width: var(--max-body-text-width);
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .title {
+    margin-bottom: 48px;
+  }
+
+  .section {
+    padding: 64px 52px;
   }
 
   .answer {
@@ -40,6 +52,10 @@
     margin: 128px 0;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: var(--grid-gutter);
+  }
+
+  .title {
+    margin-bottom: 64px;
   }
 
   .section {
