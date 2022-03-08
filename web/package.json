@@ -23,6 +23,7 @@
     "react-gtm-module": "^2.0.11"
   },
   "devDependencies": {
+    "@types/node": "^14.18.12",
     "@types/proper-url-join": "^2.1.1",
     "@types/react": "^17.0.38",
     "autoprefixer": "^10.4.2",
