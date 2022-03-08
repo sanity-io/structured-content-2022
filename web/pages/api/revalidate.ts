@@ -1,19 +1,26 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { assertValidRequest } from '@sanity/webhook';
+import client from '../../lib/sanity.server';
+
+const QUERY = `
+  *[_type == "page" && references($id)] {
+    "slug": *[_type == "route" && references(^._id)].slug.current
+  }["slug"][]
+`;
 
 export default async function revalidate(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   assertValidRequest(req, process.env.SANITY_STUDIO_REVALIDATE_SECRET);
-  if (!req.query.slug || typeof req.query.slug !== 'string') {
-    return res.status(401).json({ message: 'Invalid slug' });
+
+  const { _id: id } = JSON.parse(req.body);
+  if (typeof id !== 'string' || !id) {
+    return res.status(401).json({ message: 'Invalid _id' });
   }
 
-  try {
-    await res.unstable_revalidate(req.query.slug);
-    return res.json({ revalidated: true });
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
+  const relatedRoutes = await client.fetch(QUERY, { id });
+  console.log(relatedRoutes);
+
+  return res.status(200).json({ message: 'OK', relatedRoutes });
 }
