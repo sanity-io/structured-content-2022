@@ -38,7 +38,7 @@ export default async function revalidate(
   if (typeof id !== 'string' || !id) {
     const invalidId = 'Invalid _id';
     log(invalidId, true);
-    return res.status(401).json({ message: invalidId });
+    return res.status(400).json({ message: invalidId });
   }
 
   log(`Querying for _id '${id}', type '${_type}' ..`);
@@ -46,7 +46,7 @@ export default async function revalidate(
   if (!Array.isArray(relatedRoutes) || !relatedRoutes.length) {
     const noUpdatedObjects = 'No pages reference updated object';
     log(noUpdatedObjects, true);
-    return res.status(401).json({ message: noUpdatedObjects });
+    return res.status(200).json({ message: noUpdatedObjects });
   }
 
   try {
