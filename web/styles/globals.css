@@ -31,6 +31,13 @@ body {
   margin: 0;
   font: var(--font-body-base);
   letter-spacing: var(--letter-spacing-body-base);
+  /* Intentionally using only the non-standard prefixed properties, because
+   * this is a workaround for a Mac-only issue. Requested by designer
+   * (globally, not just for light-on-dark special cases, of which we currently
+   * have none).
+   */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body.main-menu-open {
