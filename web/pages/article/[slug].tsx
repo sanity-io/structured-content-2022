@@ -1,4 +1,6 @@
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
+import urlJoin from 'proper-url-join';
 import Hero from '../../components/Hero';
 import TextBlock from '../../components/TextBlock';
 import Footer from '../../components/Footer';
@@ -99,18 +101,32 @@ const ArticleRoute = ({
   </>
 );
 
-export async function getServerSideProps({ params }) {
-  const slug = params?.slug;
-  if (!slug) {
-    return { notFound: true };
-  }
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allSlugsQuery = groq`*[defined(slug.current) && _type == 'article'][].slug.current`;
+  const pages = await client.fetch(allSlugsQuery);
+  const paths = pages
+    .map((slug) => ({
+      params: {
+        slug: urlJoin(slug, { leadingSlash: false }),
+      },
+    }))
+    .filter(({ params: { slug } }) => Boolean(slug));
 
+  return { paths, fallback: 'blocking' };
+};
+
+export const getStaticProps: GetStaticProps = async ({
+  params: { slug: slugParam },
+}) => {
+  const slug = Array.isArray(slugParam)
+    ? urlJoin.apply(null, [...slugParam, { leadingSlash: false }])
+    : slugParam;
   const data = await client.fetch(QUERY, { slug });
   if (!data?.article?._id) {
     return { notFound: true };
   }
 
   return { props: { data, slug } };
-}
+};
 
 export default ArticleRoute;
