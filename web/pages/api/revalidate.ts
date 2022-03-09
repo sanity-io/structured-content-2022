@@ -9,6 +9,7 @@ const SECTION_UPDATED_QUERY = `
   }["slug"][]`;
 const PAGE_UPDATED_QUERY = `*[_type == "route" && references($id)].slug.current`;
 const ROUTE_UPDATED_QUERY = `*[_type == "route" && _id == $id].slug.current`;
+const ARTICLE_UPDATED_QUERY = `*[_type == "article" && _id == $id].slug.current`;
 
 const getQueryForType = (type: string) => {
   switch (type) {
@@ -16,6 +17,8 @@ const getQueryForType = (type: string) => {
       return ROUTE_UPDATED_QUERY;
     case 'page':
       return PAGE_UPDATED_QUERY;
+    case 'article':
+      return ARTICLE_UPDATED_QUERY;
     default:
       return SECTION_UPDATED_QUERY;
   }
@@ -51,7 +54,10 @@ export default async function revalidate(
 
   try {
     await Promise.all(
-      relatedRoutes.map((route) => res.unstable_revalidate(urlJoin(route)))
+      relatedRoutes.map((route) => {
+        const path = urlJoin(_type === 'article' ? 'article' : '', route);
+        return res.unstable_revalidate(path);
+      })
     );
     const updatedRoutes = `Updated routes: ${relatedRoutes.join(', ')}`;
     log(updatedRoutes);
