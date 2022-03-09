@@ -255,12 +255,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({
-  params: { slug: s = '/' },
+  params: { slug: slugParam },
   preview = false,
 }) => {
-  const slug = Array.isArray(s)
-    ? urlJoin.apply(null, [...s, { leadingSlash: false }])
-    : s;
+  const slug = Array.isArray(slugParam)
+    ? urlJoin.apply(null, [...slugParam, { leadingSlash: false }])
+    : slugParam || '/';
   const data = await client.fetch(QUERY, { slug });
   if (!data?.route?.page) {
     return { notFound: true };
