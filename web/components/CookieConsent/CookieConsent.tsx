@@ -22,7 +22,7 @@ export const CookieConsent = () => (
         target="_blank"
         rel="noreferrer"
       >
-        Learn more →
+        Learn more
       </a>
     </ReactCookieConsent>
   </div>

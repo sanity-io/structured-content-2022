@@ -1,41 +1,32 @@
 .container {
   position: fixed;
-  bottom: 0;
+  bottom: 16px;
   left: 0;
   right: 0;
-  width: 100%;
-  background-color: rgb(19, 25, 34);
+  max-width: var(--grid-width);
+  padding: 0 var(--grid-half-gutter);
+  margin: 0 auto;
+  font: var(--font-body-small-medium);
+  letter-spacing: var(--letter-spacing-body-small);
 }
 
 .consentContainer {
-  color: rgb(175, 186, 202);
-  padding: 1rem;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  max-width: 52rem;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  background-color: var(--color-brand-yellow-light);
+  border-radius: 8px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
 }
 
-@media (min-width: 768px) {
-  .consentContainer {
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-  }
+.link {
+  white-space: nowrap;
 }
 
-@media (min-width: 1024px) {
-  .consentContainer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
-@media (min-width: 768px) {
-  .consentContent {
-    max-width: 28rem;
-  }
+.link::after {
+  content: ' ->';
+  letter-spacing: normal; /* to enable -> ligature in Chrome */
 }
 
 .buttonWrapper {
@@ -43,38 +34,11 @@
   margin-top: 1rem;
 }
 
-@media (min-width: 768px) {
-  .buttonWrapper {
-    margin-top: 0;
-  }
-}
-
-.consentButton {
-  color: rgb(62, 30, 37);
-  padding: 0.5rem 1rem;
-  background-color: rgb(243, 100, 88);
-  border: 1px solid rgb(243, 100, 88);
-  cursor: pointer;
-  margin-left: 1rem;
-  flex: 1 1 0;
-}
-
-.consentButton:hover {
-  background-color: rgb(246 139 130);
-}
-
-@media (min-width: 768px) {
-  .consentButton {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    flex: 1 1 auto;
-  }
-}
-
 .declineButton {
   padding: 0.5rem 1rem;
-  border: 1px solid rgb(60, 71, 88);
-  flex: 1 1 0;
+  border: 1px solid black;
+  border-radius: 6px;
+  flex: 1 1 auto;
   cursor: pointer;
   background: transparent;
   color: inherit;
@@ -82,25 +46,59 @@
 }
 
 .declineButton:hover {
-  background-color: rgb(28 36 48);
+  background-color: var(--color-brand-yellow);
 }
 
-@media (min-width: 768px) {
-  .declineButton {
+.consentButton {
+  color: rgb(62, 30, 37);
+  padding: 0.5rem 1rem;
+  background-color: var(--color-brand-orange);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 1rem;
+  flex: 1 1 0;
+}
+
+.consentButton:hover {
+  background-color: var(--color-brand-yellow);
+}
+
+.consentButton:active {
+  background-color: var(--color-brand-yellow-light);
+}
+
+@media (--medium-up) {
+  .container {
+    padding: 0 var(--grid-medium-gutter);
+  }
+
+  .consentContainer {
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .consentContent {
+    max-width: var(--max-body-text-width);
+    margin-right: 24px;
+  }
+
+  .buttonWrapper {
+    margin-top: 0;
+    flex: none;
+  }
+
+  .consentButton {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     flex: 1 1 auto;
   }
 }
 
-.link {
-  color: rgb(243, 100, 88);
-  white-space: nowrap;
-  text-decoration: inherit;
-}
-
-.link:focus-visible {
-  outline: auto;
-}
-
-.link:hover {
-  color: rgb(246, 139, 130);
+@media (--large-up) {
+  .container {
+    padding: 0 var(--grid-gutter);
+    border-radius: 12px;
+  }
 }
