@@ -247,7 +247,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const pages = await client.fetch(allSlugsQuery);
   const paths = pages.map((slug) => ({
     params: {
-      slug: [urlJoin(slug, { leadingSlash: false })],
+      slug: [urlJoin(slug, { leadingSlash: false })].filter(Boolean),
     },
   }));
 
