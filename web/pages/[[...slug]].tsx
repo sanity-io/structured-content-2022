@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import { GetServerSideProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
+import urlJoin from 'proper-url-join';
 import { useEffect, useState } from 'react';
 import Hero from '../components/Hero';
 import TextBlock from '../components/TextBlock';
@@ -12,12 +13,12 @@ import Nav from '../components/Nav';
 import MetaTags from '../components/MetaTags';
 import { usePreviewSubscription } from '../lib/sanity';
 import client from '../lib/sanity.server';
+import { Figure } from '../types/Figure';
 import { Slug } from '../types/Slug';
 import { Section } from '../types/Section';
 import { Hero as HeroProps } from '../types/Hero';
 import { mainEventId } from '../util/entityPaths';
 import styles from './app.module.css';
-import { Figure } from '../types/Figure';
 
 const QUERY = groq`
   {
@@ -241,11 +242,25 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({
-  params,
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allSlugsQuery = groq`*[defined(slug.current) && _type == 'route'][].slug.current`;
+  const pages = await client.fetch(allSlugsQuery);
+  const paths = pages.map((slug) => ({
+    params: {
+      slug: [urlJoin(slug, { leadingSlash: false })].filter(Boolean),
+    },
+  }));
+
+  return { paths, fallback: 'blocking' };
+};
+
+export const getStaticProps: GetStaticProps = async ({
+  params: { slug: slugParam },
   preview = false,
 }) => {
-  const slug = params?.slug?.[0] || '/';
+  const slug = Array.isArray(slugParam)
+    ? urlJoin.apply(null, [...slugParam, { leadingSlash: false }])
+    : slugParam || '/';
   const data = await client.fetch(QUERY, { slug });
   if (!data?.route?.page) {
     return { notFound: true };
