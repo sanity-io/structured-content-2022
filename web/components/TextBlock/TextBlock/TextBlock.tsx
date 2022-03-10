@@ -45,6 +45,16 @@ const components: Partial<PortableTextComponents> = {
       /* href has been seen in a case where both link and internalLink marks applied */
       <Link href={value?.href || getEntityPath(value.reference)}>{text}</Link>
     ),
+    link: ({ children, value }) =>
+      value?.href && (
+        <a
+          href={value.href}
+          target={value?.blank && '_blank'}
+          rel={value?.blank && 'noreferrer'}
+        >
+          {children}
+        </a>
+      ),
   },
 };
 
