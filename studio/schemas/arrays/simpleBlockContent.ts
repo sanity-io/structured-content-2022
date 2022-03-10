@@ -5,6 +5,14 @@ export default {
   of: [
     {
       type: "block",
+      marks: {
+        annotations: [
+          {
+            name: "link",
+            type: "link",
+          },
+        ],
+      },
     },
     {
       type: "simpleCallToAction",
