@@ -20,7 +20,14 @@ export const Footer = ({ links }: FooterProps) => (
   <footer className={styles.container}>
     <GridWrapper>
       <div className={styles.logoContainer}>
-        <Image src={sanityLogo} alt="Sanity" width={139} height={28} />
+        <a
+          href="https://sanity.io/"
+          className={styles.logoLink}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Image src={sanityLogo} alt="Sanity" width={139} height={28} />
+        </a>
       </div>
 
       <p>Structured Content 2022 is a conference by Sanity</p>
