@@ -48,6 +48,11 @@ function MyApp({ Component, pageProps }) {
           sizes="16x16"
           href={favicon16x16.src}
         />
+        <link
+          rel="apple-touch-icon"
+          sizes="128x128"
+          href={favicon128x128.src}
+        />
       </Head>
       <Component {...pageProps} />
       <div className={styles.cookieConsent}>
