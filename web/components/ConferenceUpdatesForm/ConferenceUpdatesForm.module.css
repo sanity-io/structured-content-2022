@@ -24,6 +24,7 @@
   /* Design sketch has left padding 24px but then the placeholder won't fit */
   padding: 19.5px 56px 19.5px 10px;
   width: 100%;
+  border-radius: 8px;
 }
 
 .submitButton {
