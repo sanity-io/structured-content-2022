@@ -19,10 +19,10 @@ const getRandomShape = (): Shape => {
 };
 
 const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) => {
-  const [shape, setShape] = useState<string>(null);
+  const [shapeClass, setShapeClass] = useState<string>(null);
   useEffect(() => {
     if (Math.random() <= RANDOM_SHAPE_PERCENT_CHANCE) {
-      setShape(styles[`shape${getRandomShape()}`]);
+      setShapeClass(styles[`shape${getRandomShape()}`]);
     }
   }, []);
 
@@ -33,7 +33,7 @@ const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) => {
         mobile && styles.mobile,
         tablet && styles.tablet,
         desktop && styles.desktop,
-        shape
+        shapeClass
       )}
       aria-hidden="true"
     />
