@@ -15,7 +15,7 @@ import venue from "./documents/venue";
 
 // Objects
 
-import { figure, richText, seo, simpleCallToAction } from "./objects";
+import { figure, richText, seo, simpleCallToAction, link } from "./objects";
 import blockContent from "./arrays/blockContent";
 import questionAndAnswer from "./objects/questionAndAnswer";
 import simpleBlockContent from "./arrays/simpleBlockContent";
@@ -35,6 +35,7 @@ export default createSchema({
     richText,
     seo,
     event,
+    link,
     session,
     person,
     article,
