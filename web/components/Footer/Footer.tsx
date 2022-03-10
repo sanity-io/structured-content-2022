@@ -27,7 +27,6 @@ export const Footer = ({ links }: FooterProps) => (
       <Paragraph>Structured Content 2022 is a conference by Sanity</Paragraph>
 
       <Paragraph>
-        Inquiries:
         <a className={styles.mailLink} href="mailto:confinfo@sanity.io">
           confinfo@sanity.io
         </a>
