@@ -65,6 +65,11 @@ ol {
   margin: 0 0 1em;
 }
 
+address {
+  margin: 0 0 1em;
+  font: inherit;
+}
+
 ul {
   padding-left: 1.5em;
   list-style-type: disc;
