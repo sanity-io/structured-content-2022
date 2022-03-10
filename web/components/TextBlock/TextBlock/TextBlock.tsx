@@ -46,14 +46,15 @@ const components: Partial<PortableTextComponents> = {
       <Link href={value?.href || getEntityPath(value.reference)}>{text}</Link>
     ),
     link: ({ children, value }) =>
-      value?.href && (
+      value?.href ? (
         <a
           href={value.href}
-          target={value?.blank && '_blank'}
-          rel={value?.blank && 'noreferrer'}
+          {...(value?.blank ? { target: '_blank', rel: 'noreferrer' } : {})}
         >
           {children}
         </a>
+      ) : (
+        <>{children}</>
       ),
   },
 };
