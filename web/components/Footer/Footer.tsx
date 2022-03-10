@@ -5,7 +5,6 @@ import instagramLogo from '../../images/instagram_logo_black.svg';
 import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import GridWrapper from '../GridWrapper';
-import Paragraph from '../Paragraph';
 import styles from './Footer.module.css';
 import { Slug } from '../../types/Slug';
 
@@ -24,13 +23,13 @@ export const Footer = ({ links }: FooterProps) => (
         <Image src={sanityLogo} alt="Sanity" width={139} height={28} />
       </div>
 
-      <Paragraph>Structured Content 2022 is a conference by Sanity</Paragraph>
+      <p>Structured Content 2022 is a conference by Sanity</p>
 
-      <Paragraph>
+      <p>
         <a className={styles.mailLink} href="mailto:confinfo@sanity.io">
           confinfo@sanity.io
         </a>
-      </Paragraph>
+      </p>
 
       <ul className={styles.social}>
         <li className={styles.socialItem}>
