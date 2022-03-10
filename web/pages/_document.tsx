@@ -22,7 +22,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta name="theme-color" content="#E8F1FE" />
           <link
             rel="preload"
             href="/static/fonts/inter-var-latin.woff2"
