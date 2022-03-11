@@ -30,7 +30,10 @@ const QUERY = groq`
           ...,
           callToAction {
             ...,
-            reference->{slug},
+            link {
+              ...,
+              internal->{slug},
+            },
           },
         },
         sections[] {
@@ -69,7 +72,10 @@ const QUERY = groq`
               },
               content[] {
                 ...,
-                reference->,
+                link {
+                  ...,
+                  internal->{slug},
+                },
               },
             },
           },
@@ -116,7 +122,10 @@ const QUERY = groq`
             },
             content[] {
               ...,
-              reference->,
+              link {
+                ...,
+                internal->{slug},
+              },
             },
           },
         }
