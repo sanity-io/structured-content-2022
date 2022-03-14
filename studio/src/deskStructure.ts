@@ -169,7 +169,8 @@ export default () =>
             })
         ),
       S.documentTypeListItem("sharedSections").title("Shared Sections"),
-      S.listItem()
+      S.documentTypeListItem("navigation").title("Navigation"),
+      /* S.listItem()
         .title("Navigation")
         .icon(MenuIcon)
         .child(
@@ -195,7 +196,7 @@ export default () =>
               }).icon(MenuIcon),
             ])
             .title("Navigation")
-        ),
+        ), */
       S.documentTypeListItem("article").title("Editorial Articles"),
       S.divider(),
       S.documentTypeListItem("ticket").title("Ticket types"),

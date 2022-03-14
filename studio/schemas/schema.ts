@@ -24,6 +24,8 @@ import * as sections from "./sections";
 
 import spec from "./documents/spec";
 import program from "./documents/program";
+import navigation from "./documents/navigation";
+import navigationItem from "./objects/navigationItem";
 
 export default createSchema({
   name: "default",
@@ -38,6 +40,8 @@ export default createSchema({
     link,
     session,
     person,
+    navigation,
+    navigationItem,
     article,
     page,
     route,
