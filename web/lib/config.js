@@ -1,7 +1,12 @@
 const projectConfig = {
   projectId: '33zsuc7i',
-  dataset: 'production',
+  dataset:
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      ? 'production'
+      : 'staging',
 };
+
+console.log(`Using ${projectConfig.dataset} dataset`);
 
 const config = {
   sanity: {
