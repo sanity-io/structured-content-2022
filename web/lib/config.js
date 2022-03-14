@@ -6,8 +6,6 @@ const projectConfig = {
       : 'staging',
 };
 
-console.log(`Using ${projectConfig.dataset} dataset`);
-
 const config = {
   sanity: {
     baseConfig: {
