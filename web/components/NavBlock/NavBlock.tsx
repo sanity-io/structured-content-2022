@@ -73,7 +73,7 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
 
       <li className={styles.item}>
         <Link href="/registration-info">
-          <a className={styles.link}>Registration info</a>
+          <a className={styles.link}>Registration</a>
         </Link>
       </li>
 
