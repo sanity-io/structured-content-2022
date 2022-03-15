@@ -65,7 +65,7 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
 
   useInterval(
     () => setMenuItemsCount(menuItemsCount + 1),
-    menuOpened && menuItemsCount < menuItems.length ? 100 : null
+    menuOpened && menuItemsCount < menuItems.length ? 50 : null
   );
 
   const isMdUp =
