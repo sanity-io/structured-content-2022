@@ -1,6 +1,16 @@
 const FIGURE = '_type, alt, asset';
 const SIMPLE_CALL_TO_ACTION = 'text, url, reference->{slug}';
 
+const BLOCK_CONTENT = `
+  ...,
+  markDefs[] {
+    ...,
+    reference-> {
+      _type,
+      slug,
+    },
+  },
+`;
 const SIMPLE_BLOCK_CONTENT = `
   ...,
   _type == "simpleCallToAction" => { ${SIMPLE_CALL_TO_ACTION} },
@@ -35,6 +45,7 @@ const TICKET = `
 
 export {
   ARTICLE_SECTION,
+  BLOCK_CONTENT,
   FIGURE,
   HERO,
   PROGRAM,
