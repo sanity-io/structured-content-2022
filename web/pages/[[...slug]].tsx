@@ -84,7 +84,7 @@ const QUERY = groq`
         sections[] {
           _type == 'reference' => @-> {
             ...,
-            sections[] { ${SHARED_SECTIONS} },
+            sections[] { _key, ${SHARED_SECTIONS} },
           },
           _type != 'reference' => @ { ${SHARED_SECTIONS} }
         }
