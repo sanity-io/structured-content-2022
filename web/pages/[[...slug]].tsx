@@ -51,8 +51,8 @@ const QUERY = groq`
               },
               _type == "venuesSection" => {
                 ...,
-                venues[]->,
-                "allVenues": *[_id == "${mainEventId}"][0].venues[]->,
+                venues[]->{name},
+                "allVenues": *[_id == "${mainEventId}"][0].venues[]->{name},
               },
               _type == "sessionsSection" => {
                 ...,
