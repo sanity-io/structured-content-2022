@@ -65,8 +65,7 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
 
   useInterval(
     () => setMenuItemsCount(menuItemsCount + 1),
-    // @ts-ignore
-    menuOpened && menuItemsCount < menuItems.length ? window.delay || 100 : null
+    menuOpened && menuItemsCount < menuItems.length ? 100 : null
   );
 
   return (
