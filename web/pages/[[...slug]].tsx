@@ -49,10 +49,6 @@ const QUERY = groq`
                 sponsors[]->,
                 "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
               },
-              _type == "simpleCallToAction" => {
-                ...,
-                reference->,
-              },
               _type == "venuesSection" => {
                 ...,
                 venues[]->,
