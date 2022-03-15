@@ -30,7 +30,7 @@ import {
 import styles from './app.module.css';
 
 const SHARED_SECTIONS = `
-  ...,
+  _type,
   _type == "figure" => { ${FIGURE} },
   _type == "articleSection" => { ${ARTICLE_SECTION} },
   _type == "textAndImageSection" => { ${TEXT_AND_IMAGE_SECTION} },
@@ -67,6 +67,7 @@ const SHARED_SECTIONS = `
     tickets[]->{ ${TICKET} },
     "allTickets": *[_id == "${mainEventId}"][0].tickets[]->{ ${TICKET} }
   },
+  _type == "formSection" => { ... },
   _type == "programsSection" => {
     type,
     programs[]-> { ${PROGRAM} },
