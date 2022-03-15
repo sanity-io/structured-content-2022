@@ -18,21 +18,18 @@ import { Slug } from '../types/Slug';
 import { Section } from '../types/Section';
 import { Hero as HeroProps } from '../types/Hero';
 import { mainEventId } from '../util/entityPaths';
+import {
+  FIGURE,
+  HERO,
+} from '../util/queries';
 import styles from './app.module.css';
 
 const QUERY = groq`
   {
     "route": *[_type == "route" && slug.current == $slug][0] {
-      ...,
+      seo { title, description, image { ${FIGURE} }, noIndex },
       page-> {
-        name,
-        hero {
-          ...,
-          callToAction {
-            ...,
-            reference->{slug},
-          },
-        },
+        hero { ${HERO} },
         sections[] {
           _type == 'reference' => @-> {
             ...,
