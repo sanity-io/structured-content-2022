@@ -68,6 +68,9 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
     menuOpened && menuItemsCount < menuItems.length ? 100 : null
   );
 
+  const isMdUp =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(min-width: 768px)').matches;
   return (
     <nav className={clsx(styles.nav, onFrontPage && styles.onFrontPage)}>
       <GridWrapper>
@@ -104,7 +107,7 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
             </a>
           </Link>
           <ul className={clsx(styles.items, !menuOpened && styles.menuClosed)}>
-            {menuItems.slice(0, menuItemsCount)}
+            {isMdUp ? menuItems : menuItems.slice(0, menuItemsCount)}
           </ul>
           <div className={styles.ticketButton}>
             <ButtonLink url={ticketsUrl} text="Tickets" />
