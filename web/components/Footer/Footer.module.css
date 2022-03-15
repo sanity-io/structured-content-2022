@@ -10,8 +10,11 @@
   margin-bottom: 20px;
 }
 
+.logoLink {
+  display: inline-block; /* nicer focus outline */
+}
+
 .mailLink {
-  display: block;
   text-decoration: none;
   color: var(--color-ui-gray-600);
 }
