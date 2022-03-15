@@ -205,10 +205,10 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
     return () => window.removeEventListener('scroll', onScroll);
   }, [scrollTop]);
 
-  const [hasSeenHeader, setHasSeenHeader] = useState(false);
+  const [seenHeader, setSeenHeader] = useState(false);
   useEffect(() => {
     if (scrollTop > scrollPositionTriggeringFrontPageMenu) {
-      setHasSeenHeader(true);
+      setSeenHeader(true);
     }
   }, [scrollTop]);
 
@@ -219,7 +219,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
     styles.header,
     isFrontPage && styles.onFrontPage,
     isFrontPage && scrolledFarEnough && styles.onScrolledFrontPage,
-    hasSeenHeader && styles.slideOut
+    seenHeader && styles.slideOut
   );
 
   return (
