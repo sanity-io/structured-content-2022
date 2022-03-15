@@ -27,7 +27,7 @@ const getRandomShape = (): Shape => {
 
 const getRandomAnimation = (): RandomAnimation => {
   const rotation = Math.floor(Math.random() * 30) - 15;
-  const distance = Math.floor(Math.random() * 120) + 30;
+  const distance = Math.floor(Math.random() * 150);
   const duration = Math.floor(Math.random() * 300) + 300;
   const delay = Math.floor(Math.random() * 750);
 
@@ -35,7 +35,7 @@ const getRandomAnimation = (): RandomAnimation => {
     '--rotation': `${rotation}deg`,
     '--distance': `${distance}px`,
     '--duration': `${duration}ms`,
-    '--delay': `${delay}deg`,
+    '--delay': `${delay}ms`,
   };
 };
 
