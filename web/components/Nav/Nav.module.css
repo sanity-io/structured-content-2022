@@ -105,7 +105,7 @@
     background: var(--color-brand-orange);
     padding: 24px var(--grid-half-gutter) 112px;
     overflow: auto;
-    animation: fadeInBackground 250ms cubic-bezier(0.25, 0.92, 0.37, 1);
+    animation: fadeInBackground .5s cubic-bezier(0.25, 0.92, 0.37, 1);
   }
 
   .items.menuClosed {
