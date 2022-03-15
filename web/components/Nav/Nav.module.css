@@ -126,7 +126,7 @@
     letter-spacing: -0.01em;
     display: inline-block; /* 'block' would make blank space be clickable */
     margin: 0 0 8px;
-    animation: slideIn 250ms cubic-bezier(0.25, 0.92, 0.37, 1);
+    animation: slideIn 350ms cubic-bezier(0.25, 0.92, 0.37, 1);
   }
 }
 
@@ -160,7 +160,7 @@
 
 @keyframes slideIn {
   from {
-    transform: translateY(100%);
+    transform: translateY(75%);
   }
 
   to {
