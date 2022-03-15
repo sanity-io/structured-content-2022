@@ -53,7 +53,7 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
       key={4}
       {...{ currentPath, closeMenu }}
       href="/registration-info"
-      label="Registration info"
+      label="Registration"
     />,
     <MenuItem
       key={5}
