@@ -160,7 +160,7 @@
 
 @keyframes slideIn {
   from {
-    transform: translateY(-100%);
+    transform: translateY(100%);
   }
 
   to {
