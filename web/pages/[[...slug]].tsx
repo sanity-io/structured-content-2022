@@ -205,13 +205,21 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
     return () => window.removeEventListener('scroll', onScroll);
   }, [scrollTop]);
 
+  const [hasSeenHeader, setHasSeenHeader] = useState(false);
+  useEffect(() => {
+    if (scrollTop > scrollPositionTriggeringFrontPageMenu) {
+      setHasSeenHeader(true);
+    }
+  }, [scrollTop]);
+
   const isFrontPage = slug === '/';
   const currentPath = slug.charAt(0) === '/' ? slug : `/${slug}`;
   const scrolledFarEnough = scrollTop > scrollPositionTriggeringFrontPageMenu;
   const headerClasses = clsx(
     styles.header,
     isFrontPage && styles.onFrontPage,
-    isFrontPage && scrolledFarEnough && styles.onScrolledFrontPage
+    isFrontPage && scrolledFarEnough && styles.onScrolledFrontPage,
+    hasSeenHeader && styles.slideOut
   );
 
   return (
