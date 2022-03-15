@@ -27,6 +27,69 @@ import {
 } from '../util/queries';
 import styles from './app.module.css';
 
+const SHARED_SECTIONS = `
+  ...,
+  _type == "figure" => { ${FIGURE} },
+  _type == "articleSection" => { ${ARTICLE_SECTION} },
+  _type == "textAndImageSection" => { ${TEXT_AND_IMAGE_SECTION} },
+  _type == "questionAndAnswerCollectionSection" => {
+    ${QUESTION_AND_ANSWER_COLLECTION_SECTION}
+  },
+  _type == "speakersSection" => {
+    ...,
+    speakers[]->,
+    "allSpeakers": *[_type == "person"],
+  },
+  _type == "sessionsSection" => {
+    ...,
+    sessions[]->,
+    "allSessions": *[_type == "session"],
+  },
+  _type == "venuesSection" => {
+    ...,
+    venues[]->{name},
+    "allVenues": *[_id == "${mainEventId}"][0].venues[]->{name},
+  },
+  _type == "sponsorsSection" => {
+    ...,
+    sponsors[]->,
+    "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
+  },
+  _type == "sponsorshipsSection" => {
+    ...,
+    sponsors[]->,
+    "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
+  },
+  _type == "ticketsSection" => {
+    ...,
+    tickets[]->,
+    "allTickets": *[_id == "${mainEventId}"][0].tickets[]->
+  },
+  _type == "programsSection" => {
+    ...,
+    programs[]-> {
+      ...,
+      sessions[] {
+        ...,
+        session->,
+      },
+      venues[]->,
+    },
+    "allPrograms": *[_type == "program"] {
+      ...,
+      sessions[] {
+        ...,
+        session->,
+      },
+      venues[]->,
+    }
+  },
+  content[] {
+    ...,
+    reference->,
+  },
+`;
+
 const QUERY = groq`
   {
     "route": *[_type == "route" && slug.current == $slug][0] {
@@ -36,97 +99,9 @@ const QUERY = groq`
         sections[] {
           _type == 'reference' => @-> {
             ...,
-            sections[] {
-              ...,
-              _type == "figure" => { ${FIGURE} },
-              _type == "articleSection" => { ${ARTICLE_SECTION} },
-              _type == "textAndImageSection" => { ${TEXT_AND_IMAGE_SECTION} },
-              _type == "questionAndAnswerCollectionSection" => {
-                ${QUESTION_AND_ANSWER_COLLECTION_SECTION}
-              },
-              _type == "sponsorsSection" => {
-                ...,
-                sponsors[]->,
-                "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
-              },
-              _type == "venuesSection" => {
-                ...,
-                venues[]->{name},
-                "allVenues": *[_id == "${mainEventId}"][0].venues[]->{name},
-              },
-              _type == "sessionsSection" => {
-                ...,
-                sessions[]->,
-                "allSessions": *[_type == "session"],
-              },
-              _type == "speakersSection" => {
-                ...,
-                speakers[]->,
-                "allSpeakers": *[_type == "person"],
-              },              
-              _type == "ticketsSection" => {
-                ...,
-                tickets[]->,
-                "allTickets": *[_id == "${mainEventId}"][0].tickets[]->
-              },
-              content[] {
-                ...,
-                reference->,
-              },
-            },
+            sections[] { ${SHARED_SECTIONS} },
           },
-          _type != 'reference' => @ {
-            ...,
-            _type == "figure" => { ${FIGURE} },
-            _type == "articleSection" => { ${ARTICLE_SECTION} },
-            _type == "textAndImageSection" => { ${TEXT_AND_IMAGE_SECTION} },
-            _type == "questionAndAnswerCollectionSection" => {
-              ${QUESTION_AND_ANSWER_COLLECTION_SECTION}
-            },
-            _type == "ticketsSection" => {
-              ...,
-              tickets[]->,
-              "allTickets": *[_id == "${mainEventId}"][0].tickets[]->
-            },
-            _type == "venuesSection" => {
-              ...,
-              venues[]->,
-              "allVenues": *[_id == "${mainEventId}"][0].venues[]->,
-            },
-            _type == "sponsorshipsSection" => {
-              ...,
-              sponsors[]->,
-              "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
-            },
-            _type == "sponsorsSection" => {
-              ...,
-              sponsors[]->,
-              "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
-            },
-            _type == "programsSection" => {
-              ...,
-              programs[]-> {
-                ...,
-                sessions[] {
-                  ...,
-                  session->,
-                },
-                venues[]->,
-              },
-              "allPrograms": *[_type == "program"] {
-                ...,
-                sessions[] {
-                  ...,
-                  session->,
-                },
-                venues[]->,
-              }
-            },
-            content[] {
-              ...,
-              reference->,
-            },
-          },
+          _type != 'reference' => @ { ${SHARED_SECTIONS} }
         }
       }
     },
