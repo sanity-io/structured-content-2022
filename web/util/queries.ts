@@ -14,6 +14,14 @@ const QUESTION_AND_ANSWER_COLLECTION_SECTION = `
 const TEXT_AND_IMAGE_SECTION = `
   title, tagline, text[]{ ${SIMPLE_BLOCK_CONTENT} }, image{ ${FIGURE} }
 `;
+const TICKET = `
+  _id,
+  _type,
+  description[]{ ${SIMPLE_BLOCK_CONTENT} },
+  included,
+  priceAndAvailability,
+  type,
+`;
 
 export {
   ARTICLE_SECTION,
@@ -22,4 +30,5 @@ export {
   QUESTION_AND_ANSWER_COLLECTION_SECTION,
   SIMPLE_CALL_TO_ACTION,
   TEXT_AND_IMAGE_SECTION,
+  TICKET,
 };

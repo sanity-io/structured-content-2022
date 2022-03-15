@@ -24,6 +24,7 @@ import {
   HERO,
   QUESTION_AND_ANSWER_COLLECTION_SECTION,
   TEXT_AND_IMAGE_SECTION,
+  TICKET,
 } from '../util/queries';
 import styles from './app.module.css';
 
@@ -61,9 +62,9 @@ const SHARED_SECTIONS = `
     "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
   },
   _type == "ticketsSection" => {
-    ...,
-    tickets[]->,
-    "allTickets": *[_id == "${mainEventId}"][0].tickets[]->
+    type,
+    tickets[]->{ ${TICKET} },
+    "allTickets": *[_id == "${mainEventId}"][0].tickets[]->{ ${TICKET} }
   },
   _type == "programsSection" => {
     ...,
