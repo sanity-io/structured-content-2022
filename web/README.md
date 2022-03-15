@@ -20,6 +20,14 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Environment variables
+
+To override defaults, add a _.env_ file to this _/web_ directory. The file should not be committed to your repository. The
+following variables are supported:
+
+- SANITY_STUDIO_API_DATASET: The name of the dataset to use for the Sanity API. If not specified, `staging` will be used
+  locally and for Live Previews, and `production` in production.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
