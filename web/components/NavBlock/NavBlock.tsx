@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import clsx from 'clsx';
 import styles from './NavBlock.module.css';
-import { useEffect, useState } from 'react';
+import { useMemo, CSSProperties } from 'react';
 
 const RANDOM_SHAPE_PERCENT_CHANCE = 0.33;
 type Shape = 'Plus' | 'C' | 'Ovals' | 'O' | 'HalfOval';
@@ -13,21 +13,45 @@ interface FakeItemProps {
   desktop?: boolean;
 }
 
+interface RandomAnimation {
+  '--rotation': string;
+  '--distance': string;
+  '--duration': string;
+  '--delay': string;
+}
+
 const getRandomShape = (): Shape => {
   const shapes: Shape[] = ['Plus', 'C', 'Ovals', 'O', 'HalfOval'];
   return shapes[Math.floor(Math.random() * shapes.length)];
 };
 
+const getRandomAnimation = (): RandomAnimation => {
+  const rotation = Math.floor(Math.random() * 30) - 15;
+  const distance = Math.floor(Math.random() * 120) + 30;
+  const duration = Math.floor(Math.random() * 300) + 300;
+  const delay = Math.floor(Math.random() * 750);
+
+  return {
+    '--rotation': `${rotation}deg`,
+    '--distance': `${distance}px`,
+    '--duration': `${duration}ms`,
+    '--delay': `${delay}deg`,
+  };
+};
+
 const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) => {
-  const [shapeClass, setShapeClass] = useState<string>(null);
-  useEffect(() => {
+  const shapeClass: string | null = useMemo(() => {
     if (Math.random() <= RANDOM_SHAPE_PERCENT_CHANCE) {
-      setShapeClass(styles[`shape${getRandomShape()}`]);
+      return styles[`shape${getRandomShape()}`];
     }
+
+    return null;
   }, []);
+  const animation = useMemo(getRandomAnimation, []) as CSSProperties;
 
   return (
     <li
+      style={animation}
       className={clsx(
         divider ? styles.divider : styles.fakeItem,
         mobile && styles.mobile,
@@ -44,59 +68,67 @@ interface NavBlockProps {
   ticketsUrl: string;
 }
 
-export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
-  <nav className={styles.nav}>
-    <ul className={styles.list}>
-      <li className={styles.item}>
-        <Link href="/program">
-          <a className={styles.link}>Program</a>
-        </Link>
-      </li>
+export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
+  const animation1 = useMemo(getRandomAnimation, []) as CSSProperties;
+  const animation2 = useMemo(getRandomAnimation, []) as CSSProperties;
+  const animation3 = useMemo(getRandomAnimation, []) as CSSProperties;
+  const animation4 = useMemo(getRandomAnimation, []) as CSSProperties;
+  const animation5 = useMemo(getRandomAnimation, []) as CSSProperties;
 
-      <FakeItem mobile tablet desktop />
-      <FakeItem mobile tablet desktop />
-      <FakeItem divider mobile />
-      <FakeItem mobile />
+  return (
+    <nav className={styles.nav}>
+      <ul className={styles.list}>
+        <li className={styles.item} style={animation1}>
+          <Link href="/program">
+            <a className={styles.link}>Program</a>
+          </Link>
+        </li>
 
-      <li className={styles.item}>
-        <Link href="/sponsorship-information">
-          <a className={styles.link}>Sponsorship</a>
-        </Link>
-      </li>
+        <FakeItem mobile tablet desktop />
+        <FakeItem mobile tablet desktop />
+        <FakeItem divider mobile />
+        <FakeItem mobile />
 
-      <FakeItem tablet desktop />
-      <FakeItem divider mobile tablet desktop />
-      <FakeItem tablet desktop />
-      <FakeItem tablet desktop />
-      <FakeItem tablet desktop />
-      <FakeItem mobile tablet desktop />
+        <li className={styles.item} style={animation2}>
+          <Link href="/sponsorship-information">
+            <a className={styles.link}>Sponsorship</a>
+          </Link>
+        </li>
 
-      <li className={styles.item}>
-        <Link href="/registration-info">
-          <a className={styles.link}>Registration</a>
-        </Link>
-      </li>
+        <FakeItem tablet desktop />
+        <FakeItem divider mobile tablet desktop />
+        <FakeItem tablet desktop />
+        <FakeItem tablet desktop />
+        <FakeItem tablet desktop />
+        <FakeItem mobile tablet desktop />
 
-      <FakeItem divider mobile tablet desktop />
+        <li className={styles.item} style={animation3}>
+          <Link href="/registration-info">
+            <a className={styles.link}>Registration</a>
+          </Link>
+        </li>
 
-      <li className={styles.item}>
-        <Link href="/about">
-          <a className={styles.link}>About</a>
-        </Link>
-      </li>
+        <FakeItem divider mobile tablet desktop />
 
-      <FakeItem mobile tablet desktop />
-      <FakeItem mobile desktop />
-      <FakeItem divider mobile />
+        <li className={styles.item} style={animation4}>
+          <Link href="/about">
+            <a className={styles.link}>About</a>
+          </Link>
+        </li>
 
-      <li className={styles.item}>
-        <Link href={ticketsUrl}>
-          <a className={styles.link}>Tickets</a>
-        </Link>
-      </li>
+        <FakeItem mobile tablet desktop />
+        <FakeItem mobile desktop />
+        <FakeItem divider mobile />
 
-      <FakeItem tablet desktop />
-      <FakeItem mobile desktop />
-    </ul>
-  </nav>
-);
+        <li className={styles.item} style={animation5}>
+          <Link href={ticketsUrl}>
+            <a className={styles.link}>Tickets</a>
+          </Link>
+        </li>
+
+        <FakeItem tablet desktop />
+        <FakeItem mobile desktop />
+      </ul>
+    </nav>
+  );
+};

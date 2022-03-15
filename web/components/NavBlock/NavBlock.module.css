@@ -13,7 +13,21 @@
 
 .item,
 .fakeItem {
+  --rotation: -5deg; /* -15 - 15 */
+  --distance: 75px; /* 0 - 150 */
+  --duration: 450ms; /* 300 - 600 */
+  --delay: 450ms; /* 0 - 750 */
+
   margin: 0 8px 8px 0;
+
+  animation: item-enter var(--duration) cubic-bezier(0.21, 0.55, 0.37, 1) both;
+  animation-delay: var(--delay);
+}
+
+@keyframes item-enter {
+  from {
+    transform: translateY(var(--distance)) rotate(var(--rotation));
+  }
 }
 
 .link {
