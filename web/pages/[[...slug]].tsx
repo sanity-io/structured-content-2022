@@ -22,6 +22,7 @@ import {
   ARTICLE_SECTION,
   FIGURE,
   HERO,
+  PROGRAM,
   QUESTION_AND_ANSWER_COLLECTION_SECTION,
   TEXT_AND_IMAGE_SECTION,
   TICKET,
@@ -67,27 +68,9 @@ const SHARED_SECTIONS = `
     "allTickets": *[_id == "${mainEventId}"][0].tickets[]->{ ${TICKET} }
   },
   _type == "programsSection" => {
-    ...,
-    programs[]-> {
-      ...,
-      sessions[] {
-        ...,
-        session->,
-      },
-      venues[]->,
-    },
-    "allPrograms": *[_type == "program"] {
-      ...,
-      sessions[] {
-        ...,
-        session->,
-      },
-      venues[]->,
-    }
-  },
-  content[] {
-    ...,
-    reference->,
+    type,
+    programs[]-> { ${PROGRAM} },
+    "allPrograms": *[_type == "program"] { ${PROGRAM} }
   },
 `;
 
