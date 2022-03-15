@@ -19,8 +19,11 @@ import { Section } from '../types/Section';
 import { Hero as HeroProps } from '../types/Hero';
 import { mainEventId } from '../util/entityPaths';
 import {
+  ARTICLE_SECTION,
   FIGURE,
   HERO,
+  QUESTION_AND_ANSWER_COLLECTION_SECTION,
+  TEXT_AND_IMAGE_SECTION,
 } from '../util/queries';
 import styles from './app.module.css';
 
@@ -35,6 +38,12 @@ const QUERY = groq`
             ...,
             sections[] {
               ...,
+              _type == "figure" => { ${FIGURE} },
+              _type == "articleSection" => { ${ARTICLE_SECTION} },
+              _type == "textAndImageSection" => { ${TEXT_AND_IMAGE_SECTION} },
+              _type == "questionAndAnswerCollectionSection" => {
+                ${QUESTION_AND_ANSWER_COLLECTION_SECTION}
+              },
               _type == "sponsorsSection" => {
                 ...,
                 sponsors[]->,
@@ -72,6 +81,12 @@ const QUERY = groq`
           },
           _type != 'reference' => @ {
             ...,
+            _type == "figure" => { ${FIGURE} },
+            _type == "articleSection" => { ${ARTICLE_SECTION} },
+            _type == "textAndImageSection" => { ${TEXT_AND_IMAGE_SECTION} },
+            _type == "questionAndAnswerCollectionSection" => {
+              ${QUESTION_AND_ANSWER_COLLECTION_SECTION}
+            },
             _type == "ticketsSection" => {
               ...,
               tickets[]->,
