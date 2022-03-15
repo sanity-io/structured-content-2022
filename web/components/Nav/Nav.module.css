@@ -105,7 +105,6 @@
     background: var(--color-brand-orange);
     padding: 24px var(--grid-half-gutter) 112px;
     overflow: auto;
-    animation: fadeInBackground .5s cubic-bezier(0.25, 0.92, 0.37, 1);
   }
 
   .items.menuClosed {
@@ -126,7 +125,7 @@
     letter-spacing: -0.01em;
     display: inline-block; /* 'block' would make blank space be clickable */
     margin: 0 0 8px;
-    animation: slideIn 350ms cubic-bezier(0.25, 0.92, 0.37, 1);
+    animation: slideIn .5s cubic-bezier(0.25, 0.92, 0.37, 1);
   }
 }
 
@@ -145,16 +144,6 @@
     margin: 0 12px;
     font: var(--font-body-base-medium);
     letter-spacing: var(--letter-spacing-body-base);
-  }
-}
-
-@keyframes fadeInBackground {
-  from {
-    background-color: transparent;
-  }
-
-  to {
-    background-color: var(--color-brand-orange);
   }
 }
 
