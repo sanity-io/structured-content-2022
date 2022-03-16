@@ -127,39 +127,38 @@ const ArticleRoute = ({
          */}
         <GridWrapper>
           <div className={articleStyles.container}>
-            <div className={articleStyles.content}>
-              <div>
-                <TextBlock value={content} />
+            <div className={articleStyles.mainContent}>
+              <TextBlock value={content} />
+            </div>
+            <div className={articleStyles.asides}>
+              {Array.isArray(sessions) && sessions.length && (
+                <div>
+                  <h3>Related sessions</h3>
+                  {sessions.map((title, index) => (
+                    <Card key={`${title}_${index}`}>{title}</Card>
+                  ))}
+                </div>
+              )}
 
-                {Array.isArray(sessions) && sessions.length && (
-                  <div>
-                    <h3>Related sessions</h3>
-                    {sessions.map((title, index) => (
-                      <Card key={`${title}_${index}`}>{title}</Card>
-                    ))}
-                  </div>
-                )}
+              {Array.isArray(people) && people.length && (
+                <div>
+                  <h3>Related people</h3>
+                  {people.map(({ name, photo }, index) => (
+                    <Card key={`${name}_${index}`} figure={photo}>
+                      {name}
+                    </Card>
+                  ))}
+                </div>
+              )}
 
-                {Array.isArray(people) && people.length && (
-                  <div>
-                    <h3>Related people</h3>
-                    {people.map(({ name, photo }, index) => (
-                      <Card key={`${name}_${index}`} figure={photo}>
-                        {name}
-                      </Card>
-                    ))}
-                  </div>
-                )}
-
-                {Array.isArray(venues) && venues.length && (
-                  <div>
-                    <h3>Related venues</h3>
-                    {venues.map((name, index) => (
-                      <Card key={`${name}_${index}`}>{name}</Card>
-                    ))}
-                  </div>
-                )}
-              </div>
+              {Array.isArray(venues) && venues.length && (
+                <div>
+                  <h3>Related venues</h3>
+                  {venues.map((name, index) => (
+                    <Card key={`${name}_${index}`}>{name}</Card>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </GridWrapper>
