@@ -6,14 +6,9 @@
   margin-top: 48px;
 }
 
-.pipe {
-  display: none;
-}
-
-.timestamps {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+.publishedAt,
+.updatedAt {
+  margin: 0;
 }
 
 @media (--medium-up) {
@@ -29,11 +24,14 @@
   .extraHeroContent {
     margin-top: 64px;
   }
-}
 
-@media (min-width: 510px) {
-  .pipe {
+  .publishedAt,
+  .updatedAt {
     display: inline;
+  }
+
+  .updatedAt::before {
+    content: ' | ';
   }
 }
 

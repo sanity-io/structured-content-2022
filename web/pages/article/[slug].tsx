@@ -108,13 +108,14 @@ const ArticleRoute = ({
                   </Card>
                 ))}
             </div>
-            <div className={articleStyles.timestamps}>
-              <div>Published on: {formatDate(_createdAt, 'UTC')}</div>
+            <div>
+              <p className={articleStyles.publishedAt}>
+                Published on: {formatDate(_createdAt, 'UTC')}
+              </p>
               {_updatedAt && (
-                <div className={articleStyles.pipe}>&nbsp;|&nbsp;</div>
-              )}
-              {_updatedAt && (
-                <div>Updated on: {formatDate(_updatedAt, 'UTC')}</div>
+                <p className={articleStyles.updatedAt}>
+                  Updated on: {formatDate(_updatedAt, 'UTC')}
+                </p>
               )}
             </div>
           </div>
