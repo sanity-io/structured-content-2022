@@ -99,7 +99,7 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
             />
             <BasicMenuItem
               urlPath="/registration-info"
-              label="Registration info"
+              label="Registration"
             />
             <BasicMenuItem urlPath="/about" label="About" />
           </ul>

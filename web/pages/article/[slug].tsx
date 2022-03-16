@@ -13,21 +13,15 @@ import { Article } from '../../types/Article';
 import articleStyles from './article.module.css';
 import styles from '../app.module.css';
 import MetaTags from '../../components/MetaTags';
+import { BLOCK_CONTENT } from '../../util/queries';
 
 const QUERY = groq`
   {
     "article": *[_type == "article" && slug.current == $slug][0] {
-      ...,
-      content[] {
-        ...,
-        markDefs[] {
-          ...,
-          reference-> {
-            _type,
-            slug,
-          },
-        },
-      },
+      _id,
+      heading,
+      summary,
+      content[] { ${BLOCK_CONTENT} },
     },
     "home": *[_id == "${mainEventId}"][0] {
       "ticketsUrl": microcopy[key == "mainCta"][0].action,

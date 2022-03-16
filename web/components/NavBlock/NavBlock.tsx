@@ -1,33 +1,44 @@
 import Link from 'next/link';
 import clsx from 'clsx';
 import styles from './NavBlock.module.css';
+import { useEffect, useState } from 'react';
+
+const RANDOM_SHAPE_PERCENT_CHANCE = 0.33;
+type Shape = 'Plus' | 'C' | 'Ovals' | 'O' | 'HalfOval';
 
 interface FakeItemProps {
   divider?: boolean;
   mobile?: boolean;
   tablet?: boolean;
   desktop?: boolean;
-  shape?: 'Plus' | 'C' | 'Ovals' | 'O' | 'HalfOval';
 }
 
-const FakeItem = ({
-  divider,
-  mobile,
-  tablet,
-  desktop,
-  shape,
-}: FakeItemProps) => (
-  <li
-    className={clsx(
-      divider ? styles.divider : styles.fakeItem,
-      mobile && styles.mobile,
-      tablet && styles.tablet,
-      desktop && styles.desktop,
-      shape && styles[`shape${shape}`]
-    )}
-    aria-hidden="true"
-  />
-);
+const getRandomShape = (): Shape => {
+  const shapes: Shape[] = ['Plus', 'C', 'Ovals', 'O', 'HalfOval'];
+  return shapes[Math.floor(Math.random() * shapes.length)];
+};
+
+const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) => {
+  const [shapeClass, setShapeClass] = useState<string>(null);
+  useEffect(() => {
+    if (Math.random() <= RANDOM_SHAPE_PERCENT_CHANCE) {
+      setShapeClass(styles[`shape${getRandomShape()}`]);
+    }
+  }, []);
+
+  return (
+    <li
+      className={clsx(
+        divider ? styles.divider : styles.fakeItem,
+        mobile && styles.mobile,
+        tablet && styles.tablet,
+        desktop && styles.desktop,
+        shapeClass
+      )}
+      aria-hidden="true"
+    />
+  );
+};
 
 interface NavBlockProps {
   ticketsUrl: string;
@@ -43,7 +54,7 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
       </li>
 
       <FakeItem mobile tablet desktop />
-      <FakeItem mobile tablet desktop shape="Plus" />
+      <FakeItem mobile tablet desktop />
       <FakeItem divider mobile />
       <FakeItem mobile />
 
@@ -56,13 +67,13 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
       <FakeItem tablet desktop />
       <FakeItem divider mobile tablet desktop />
       <FakeItem tablet desktop />
-      <FakeItem tablet desktop shape="C" />
       <FakeItem tablet desktop />
-      <FakeItem mobile tablet desktop shape="Ovals" />
+      <FakeItem tablet desktop />
+      <FakeItem mobile tablet desktop />
 
       <li className={styles.item}>
         <Link href="/registration-info">
-          <a className={styles.link}>Registration info</a>
+          <a className={styles.link}>Registration</a>
         </Link>
       </li>
 
@@ -74,10 +85,9 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
         </Link>
       </li>
 
-      <FakeItem mobile shape="HalfOval" />
       <FakeItem mobile tablet desktop />
+      <FakeItem mobile desktop />
       <FakeItem divider mobile />
-      <FakeItem desktop shape="O" />
 
       <li className={styles.item}>
         <a
@@ -90,7 +100,7 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
         </a>
       </li>
 
-      <FakeItem tablet desktop shape="HalfOval" />
+      <FakeItem tablet desktop />
       <FakeItem mobile desktop />
     </ul>
   </nav>

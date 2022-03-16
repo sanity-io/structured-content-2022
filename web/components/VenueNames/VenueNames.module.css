@@ -6,7 +6,7 @@
 
 .venue {
   display: inline-block;
-  font: var(--font-display-sm);
+  font: var(--font-display-base);
 }
 
 .link {

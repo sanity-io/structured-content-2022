@@ -18,112 +18,75 @@ import { Slug } from '../types/Slug';
 import { Section } from '../types/Section';
 import { Hero as HeroProps } from '../types/Hero';
 import { mainEventId } from '../util/entityPaths';
+import {
+  ARTICLE_SECTION,
+  FIGURE,
+  HERO,
+  PROGRAM,
+  QUESTION_AND_ANSWER_COLLECTION_SECTION,
+  TEXT_AND_IMAGE_SECTION,
+  TICKET,
+} from '../util/queries';
 import styles from './app.module.css';
+
+const SHARED_SECTIONS = `
+  _type,
+  _type == "figure" => { ${FIGURE} },
+  _type == "articleSection" => { ${ARTICLE_SECTION} },
+  _type == "textAndImageSection" => { ${TEXT_AND_IMAGE_SECTION} },
+  _type == "questionAndAnswerCollectionSection" => {
+    ${QUESTION_AND_ANSWER_COLLECTION_SECTION}
+  },
+  _type == "speakersSection" => {
+    ...,
+    speakers[]->,
+    "allSpeakers": *[_type == "person"],
+  },
+  _type == "sessionsSection" => {
+    ...,
+    sessions[]->,
+    "allSessions": *[_type == "session"],
+  },
+  _type == "venuesSection" => {
+    ...,
+    venues[]->{name},
+    "allVenues": *[_id == "${mainEventId}"][0].venues[]->{name},
+  },
+  _type == "sponsorsSection" => {
+    ...,
+    sponsors[]->,
+    "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
+  },
+  _type == "sponsorshipsSection" => {
+    ...,
+    sponsors[]->,
+    "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
+  },
+  _type == "ticketsSection" => {
+    type,
+    tickets[]->{ ${TICKET} },
+    "allTickets": *[_id == "${mainEventId}"][0].tickets[]->{ ${TICKET} }
+  },
+  _type == "formSection" => { ... },
+  _type == "programsSection" => {
+    type,
+    programs[]-> { ${PROGRAM} },
+    "allPrograms": *[_type == "program"] { ${PROGRAM} }
+  },
+`;
 
 const QUERY = groq`
   {
     "route": *[_type == "route" && slug.current == $slug][0] {
-      ...,
+      seo { title, description, image { ${FIGURE} }, noIndex },
       page-> {
-        name,
-        hero {
-          ...,
-          callToAction {
-            ...,
-            link {
-              ...,
-              internal->{slug},
-            },
-          },
-        },
+        hero { ${HERO} },
         sections[] {
           _type == 'reference' => @-> {
             ...,
-            sections[] {
-              ...,
-              _type == "sponsorsSection" => {
-                ...,
-                sponsors[]->,
-                "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
-              },
-              _type == "venuesSection" => {
-                ...,
-                venues[]->,
-                "allVenues": *[_id == "${mainEventId}"][0].venues[]->,
-              },
-              _type == "sessionsSection" => {
-                ...,
-                sessions[]->,
-                "allSessions": *[_type == "session"],
-              },
-              _type == "speakersSection" => {
-                ...,
-                speakers[]->,
-                "allSpeakers": *[_type == "person"],
-              },              
-              _type == "ticketsSection" => {
-                ...,
-                tickets[]->,
-                "allTickets": *[_id == "${mainEventId}"][0].tickets[]->
-              },
-              content[] {
-                ...,
-                link {
-                  ...,
-                  internal->{slug},
-                },
-              },
-            },
+            sections[] { _key, ${SHARED_SECTIONS} },
           },
-          _type != 'reference' => @ {
-            ...,
-            _type == "ticketsSection" => {
-              ...,
-              tickets[]->,
-              "allTickets": *[_id == "${mainEventId}"][0].tickets[]->
-            },
-            _type == "venuesSection" => {
-              ...,
-              venues[]->,
-              "allVenues": *[_id == "${mainEventId}"][0].venues[]->,
-            },
-            _type == "sponsorshipsSection" => {
-              ...,
-              sponsors[]->,
-              "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
-            },
-            _type == "sponsorsSection" => {
-              ...,
-              sponsors[]->,
-              "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
-            },
-            _type == "programsSection" => {
-              ...,
-              programs[]-> {
-                ...,
-                sessions[] {
-                  ...,
-                  session->,
-                },
-                venues[]->,
-              },
-              "allPrograms": *[_type == "program"] {
-                ...,
-                sessions[] {
-                  ...,
-                  session->,
-                },
-                venues[]->,
-              }
-            },
-            content[] {
-              ...,
-              link {
-                ...,
-                internal->{slug},
-              },
-            },
-          },
+          _type != 'reference' => @ { ${SHARED_SECTIONS} }
         }
       }
     },
