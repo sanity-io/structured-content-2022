@@ -1,7 +1,9 @@
+import { useRef, useMemo, CSSProperties } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 import styles from './NavBlock.module.css';
-import { useMemo, CSSProperties } from 'react';
+
+import useIntersection from '../../hooks/useIntersection';
 
 const RANDOM_SHAPE_PERCENT_CHANCE = 0.33;
 type Shape = 'Plus' | 'C' | 'Ovals' | 'O' | 'HalfOval';
@@ -20,16 +22,20 @@ interface RandomAnimation {
   '--delay': string;
 }
 
+function randomize(min: number, max: number): number {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 const getRandomShape = (): Shape => {
   const shapes: Shape[] = ['Plus', 'C', 'Ovals', 'O', 'HalfOval'];
   return shapes[Math.floor(Math.random() * shapes.length)];
 };
 
 const getRandomAnimation = (): RandomAnimation => {
-  const rotation = Math.floor(Math.random() * 30) - 15;
-  const distance = Math.floor(Math.random() * 150);
-  const duration = Math.floor(Math.random() * 300) + 300;
-  const delay = Math.floor(Math.random() * 750);
+  const rotation = randomize(-16, 16);
+  const distance = randomize(0, 150);
+  const duration = randomize(300, 500);
+  const delay = randomize(100, 650);
 
   return {
     '--rotation': `${rotation}deg`,
@@ -69,6 +75,9 @@ interface NavBlockProps {
 }
 
 export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
+  const wrapperRef = useRef<HTMLElement>();
+  const isIntersecting = useIntersection(wrapperRef);
+
   const animation1 = useMemo(getRandomAnimation, []) as CSSProperties;
   const animation2 = useMemo(getRandomAnimation, []) as CSSProperties;
   const animation3 = useMemo(getRandomAnimation, []) as CSSProperties;
@@ -76,7 +85,10 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
   const animation5 = useMemo(getRandomAnimation, []) as CSSProperties;
 
   return (
-    <nav className={styles.nav}>
+    <nav
+      className={clsx(styles.nav, isIntersecting && styles.navEnter)}
+      ref={wrapperRef}
+    >
       <ul className={styles.list}>
         <li className={styles.item} style={animation1}>
           <Link href="/program">
