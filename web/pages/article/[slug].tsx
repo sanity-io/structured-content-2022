@@ -100,14 +100,15 @@ const ArticleRoute = ({
       <main>
         <Hero heading={heading} summary={summary}>
           <div className={articleStyles.extraHeroContent}>
-            <div>
-              {Array.isArray(authors) &&
-                authors.map(({ name, photo }) => (
-                  <Card key={name} figure={photo}>
-                    {name}
-                  </Card>
+            {Array.isArray(authors) && (
+              <ul className={articleStyles.authors}>
+                {authors.map(({ name, photo }) => (
+                  <li key={name} className={articleStyles.author}>
+                    <Card figure={photo}>{name}</Card>
+                  </li>
                 ))}
-            </div>
+              </ul>
+            )}
             <div className={articleStyles.timestamps}>
               <p className={articleStyles.publishedAt}>
                 Published on: {formatDate(_createdAt, 'UTC')}

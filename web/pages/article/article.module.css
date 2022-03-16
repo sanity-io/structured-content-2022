@@ -2,6 +2,16 @@
   margin-top: 48px;
 }
 
+.authors {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.author {
+  display: inline-block;
+}
+
 .timestamps {
   margin-top: 24px;
   font: var(--font-ui-xs);
