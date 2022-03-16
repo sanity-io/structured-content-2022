@@ -2,6 +2,20 @@
   margin: 80px 0;
 }
 
+.extraHeroContent {
+  margin-top: 48px;
+}
+
+.pipe {
+  display: none;
+}
+
+.timestamps {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 @media (--medium-up) {
   .container {
     margin: 96px 0;
@@ -11,10 +25,24 @@
     max-width: var(--max-body-text-width);
     margin: 0 auto;
   }
+
+  .extraHeroContent {
+    margin-top: 64px;
+  }
+}
+
+@media (min-width: 510px) {
+  .pipe {
+    display: inline;
+  }
 }
 
 @media (--large-up) {
   .container {
     margin: 128px 0;
+  }
+
+  .extraHeroContent {
+    margin-top: 80px;
   }
 }
