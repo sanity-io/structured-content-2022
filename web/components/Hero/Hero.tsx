@@ -1,9 +1,15 @@
+import { ReactNode } from 'react';
 import { Hero as HeroProps } from '../../types/Hero';
 import GridWrapper from '../GridWrapper';
 import SimpleCallToAction from '../SimpleCallToAction';
 import styles from './Hero.module.css';
 
-export const Hero = ({ heading, summary, callToAction }: HeroProps) => (
+export const Hero = ({
+  heading,
+  summary,
+  callToAction,
+  children,
+}: HeroProps & { children?: ReactNode }) => (
   <div className={styles.container}>
     <GridWrapper>
       <div className={styles.headingContainer}>
@@ -15,6 +21,7 @@ export const Hero = ({ heading, summary, callToAction }: HeroProps) => (
           </div>
         )}
       </div>
+      {children}
     </GridWrapper>
   </div>
 );
