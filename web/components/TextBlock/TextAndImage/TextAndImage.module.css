@@ -18,6 +18,20 @@
   margin: 0 0 1em;
 }
 
+.enter .imageContainer,
+.enter .text {
+  transform-origin: bottom;
+  animation: var(--item-enter-animation);
+  animation-delay: var(--delay);
+}
+
+@keyframes item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--distance)) rotate(var(--rotation));
+  }
+}
+
 @media (--medium-up) {
   .container {
     padding: 96px 0;

@@ -1,8 +1,11 @@
+import { useRef, useMemo, CSSProperties } from 'react';
 import clsx from 'clsx';
 import TextBlock from '../TextBlock';
 import GridWrapper from '../../GridWrapper';
 import { RichTextSection } from '../../../types/RichTextSection';
 import styles from './RichText.module.css';
+import useIntersection from '../../../hooks/useIntersection';
+import { getRandomAnimation } from '../../../lib/animation';
 
 interface RichTextProps {
   value: RichTextSection;
@@ -13,22 +16,41 @@ interface RichTextProps {
   background?: boolean;
 }
 
-export const RichText = ({ value, background }: RichTextProps) => (
-  <GridWrapper>
-    <div className={clsx(styles.container, background && styles.background)}>
-      <div className={styles.content}>
-        {value.heading && (
-          <hgroup>
-            {value.heading && (
-              <h2 id={`heading-h2-${value._key}`}>{value.heading}</h2>
-            )}
-            {value.subheading && (
-              <h3 className={styles.subHeading}>{value.subheading}</h3>
-            )}
-          </hgroup>
+export const RichText = ({ value, background }: RichTextProps) => {
+  const wrapperRef = useRef<HTMLDivElement>();
+  const isIntersecting = useIntersection(wrapperRef);
+
+  const animation1 = useMemo(getRandomAnimation, []) as CSSProperties;
+  const animation2 = useMemo(getRandomAnimation, []) as CSSProperties;
+
+  return (
+    <GridWrapper>
+      <div
+        className={clsx(
+          styles.container,
+          background && styles.background,
+          isIntersecting && styles.enter
         )}
-        <TextBlock value={value.content} />
+        ref={wrapperRef}
+      >
+        <div className={styles.content}>
+          {value.heading && (
+            <hgroup style={animation1}>
+              {value.heading && (
+                <h2 id={`heading-h2-${value._key}`} className={styles.heading}>
+                  {value.heading}
+                </h2>
+              )}
+              {value.subheading && (
+                <h3 className={styles.subHeading}>{value.subheading}</h3>
+              )}
+            </hgroup>
+          )}
+          <div style={animation2} className={styles.text}>
+            <TextBlock value={value.content} />
+          </div>
+        </div>
       </div>
-    </div>
-  </GridWrapper>
-);
+    </GridWrapper>
+  );
+};

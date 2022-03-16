@@ -119,3 +119,10 @@ input {
     margin-top: 128px;
   }
 }
+
+@keyframes item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--distance)) rotate(var(--rotation));
+  }
+}

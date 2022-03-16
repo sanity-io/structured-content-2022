@@ -4,6 +4,21 @@
   padding: 40px 0 80px;
 }
 
+.enter .heading,
+.enter .summary,
+.enter .cta {
+  transform-origin: bottom;
+  animation: var(--item-enter-animation);
+  animation-delay: var(--delay);
+}
+
+@keyframes item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--distance)) rotate(var(--rotation));
+  }
+}
+
 .summary {
   font: var(--font-body-small-medium);
   letter-spacing: var(--letter-spacing-body-small);

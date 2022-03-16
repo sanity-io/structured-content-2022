@@ -26,7 +26,7 @@ export const VenueNames = ({ venues }: VenueNamesProps) => {
 
   return (
     <ul
-      className={clsx(styles.venues, isIntersecting && styles.venuesEnter)}
+      className={clsx(styles.venues, isIntersecting && styles.enter)}
       ref={wrapperRef}
     >
       {venues?.map((venue) => (

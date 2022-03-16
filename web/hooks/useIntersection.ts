@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function useIntersection(
   ref: React.MutableRefObject<HTMLElement | null>,
-  rootMargin = '5% 0px'
+  rootMargin = '1% 0px'
 ): boolean {
   const [isIntersecting, setIntersecting] = useState(false);
 
