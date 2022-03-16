@@ -108,7 +108,7 @@ const ArticleRoute = ({
                   </Card>
                 ))}
             </div>
-            <div>
+            <div className={articleStyles.timestamps}>
               <p className={articleStyles.publishedAt}>
                 Published on: {formatDate(_createdAt, 'UTC')}
               </p>

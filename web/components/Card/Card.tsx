@@ -17,14 +17,12 @@ export const Card = ({ children, figure }: CardProps) => (
           .fit('min')
           .ignoreImageParams()
           .url()}
-        alt={figure.alt}
+        alt={figure.alt || ''}
         width={28}
         height={28}
         className={styles.figure}
       />
-    ) : (
-      <span className={styles.spacer} />
-    )}
+    ) : null}
     {children}
   </div>
 );

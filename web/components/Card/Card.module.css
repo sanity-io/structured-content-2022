@@ -1,17 +1,18 @@
 .card {
   border-radius: 4px;
-  padding: 10px;
-  border: 1px solid #000;
-  margin: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--color-brand-black);
+  margin: 2px;
   display: inline-flex;
-}
-
-.spacer {
-  height: 28px;
+  align-items: center;
+  min-height: 50px;
+  vertical-align: top;
+  font: var(--font-ui-xs);
+  letter-spacing: var(--letter-spacing-ui-xs);
 }
 
 .figure {
-  margin: 0 14px 0 4px;
+  margin: 0 14px 0 0;
   height: 28px;
   width: 28px;
   border-radius: 2px;
