@@ -1,19 +1,20 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import urlJoin from 'proper-url-join';
+import Card from "../../components/Card";
 import Hero from '../../components/Hero';
-import TextBlock from '../../components/TextBlock';
 import Footer from '../../components/Footer';
-import Nav from '../../components/Nav';
-import client from '../../lib/sanity.server';
-import { Slug } from '../../types/Slug';
-import { mainEventId } from '../../util/entityPaths';
 import GridWrapper from '../../components/GridWrapper';
-import { Article } from '../../types/Article';
-import articleStyles from './article.module.css';
-import styles from '../app.module.css';
 import MetaTags from '../../components/MetaTags';
+import Nav from '../../components/Nav';
+import TextBlock from '../../components/TextBlock';
+import client from '../../lib/sanity.server';
+import { mainEventId } from '../../util/entityPaths';
 import { BLOCK_CONTENT } from '../../util/queries';
+import { Article } from '../../types/Article';
+import { Slug } from '../../types/Slug';
+import styles from '../app.module.css';
+import articleStyles from './article.module.css';
 
 const QUERY = groq`
   {
@@ -22,6 +23,12 @@ const QUERY = groq`
       heading,
       summary,
       content[] { ${BLOCK_CONTENT} },
+      authors[]->{name, photo},
+      relatedTo {
+        people[]->{name, photo},
+        "sessions": sessions[]->{title}.title,
+        "venues": venues[]->{name}.name,
+      },
     },
     "home": *[_id == "${mainEventId}"][0] {
       "ticketsUrl": microcopy[key == "mainCta"][0].action,
@@ -56,7 +63,7 @@ interface ArticleRouteProps {
 
 const ArticleRoute = ({
   data: {
-    article: { heading, summary, content },
+    article: { heading, summary, content, relatedTo: { people, sessions, venues } },
     home: { ticketsUrl },
     footer,
     rewrittenArticleSlugs,
@@ -86,7 +93,31 @@ const ArticleRoute = ({
       <GridWrapper>
         <div className={articleStyles.container}>
           <div className={articleStyles.content}>
-            <TextBlock value={content} />
+
+            <div>
+              <TextBlock value={content} />
+
+              <div>
+                <h3>Related Sessions</h3>
+                {sessions.map((title, index) => (
+                  <Card key={`${title}_${index}`}>{title}</Card>
+                ))}
+              </div>
+
+              <div>
+                <h3>Related people</h3>
+                {people.map(({ name, photo }, index) => (
+                  <Card key={`${name}_${index}`} figure={photo}>{name}</Card>
+                ))}
+              </div>
+
+              <div>
+                <h3>Related venues</h3>
+                {venues.map((name, index) => (
+                  <Card key={`${name}_${index}`}>{name}</Card>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </GridWrapper>
