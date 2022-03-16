@@ -131,7 +131,7 @@ const ArticleRoute = ({
 
                 {Array.isArray(sessions) && sessions.length && (
                   <div>
-                    <h3>Related Sessions</h3>
+                    <h3>Related sessions</h3>
                     {sessions.map((title, index) => (
                       <Card key={`${title}_${index}`}>{title}</Card>
                     ))}
