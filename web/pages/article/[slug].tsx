@@ -132,32 +132,38 @@ const ArticleRoute = ({
             </div>
             <div className={articleStyles.asides}>
               {Array.isArray(sessions) && sessions.length && (
-                <div>
-                  <h3>Related sessions</h3>
+                <aside className={articleStyles.relatedItems}>
+                  <h2 className={articleStyles.relatedItemsHeading}>
+                    Related sessions
+                  </h2>
                   {sessions.map((title, index) => (
                     <Card key={`${title}_${index}`}>{title}</Card>
                   ))}
-                </div>
+                </aside>
               )}
 
               {Array.isArray(people) && people.length && (
-                <div>
-                  <h3>Related people</h3>
+                <aside className={articleStyles.relatedItems}>
+                  <h2 className={articleStyles.relatedItemsHeading}>
+                    Related people
+                  </h2>
                   {people.map(({ name, photo }, index) => (
                     <Card key={`${name}_${index}`} figure={photo}>
                       {name}
                     </Card>
                   ))}
-                </div>
+                </aside>
               )}
 
               {Array.isArray(venues) && venues.length && (
-                <div>
-                  <h3>Related venues</h3>
+                <aside className={articleStyles.relatedItems}>
+                  <h2 className={articleStyles.relatedItemsHeading}>
+                    Related venues
+                  </h2>
                   {venues.map((name, index) => (
                     <Card key={`${name}_${index}`}>{name}</Card>
                   ))}
-                </div>
+                </aside>
               )}
             </div>
           </div>

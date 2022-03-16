@@ -31,6 +31,16 @@
   margin-top: 80px;
 }
 
+.relatedItems:nth-child(n + 2) {
+  margin-top: 32px;
+}
+
+.relatedItemsHeading {
+  font: var(--font-ui-xs-medium);
+  letter-spacing: var(--letter-spacing-ui-xs);
+  margin: 0 0 10px;
+}
+
 @media (--medium-up) {
   .extraHeroContent {
     margin-top: 64px;
@@ -81,5 +91,9 @@
     max-width: none;
     margin: 0;
     grid-column: 8 / span 5;
+  }
+
+  .relatedItemsHeading {
+    font: var(--font-ui-xs-semi);
   }
 }
