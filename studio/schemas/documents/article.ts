@@ -70,7 +70,7 @@ export default {
       type: "blockContent",
     },
     {
-      name: "realtedTo",
+      name: "relatedTo",
       type: "object",
       title: "Related to",
       description: "Related to",
