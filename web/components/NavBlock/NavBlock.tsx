@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import styles from './NavBlock.module.css';
 
 import useIntersection from '../../hooks/useIntersection';
+import { getRandomAnimation } from '../../lib/animation';
 
 const RANDOM_SHAPE_PERCENT_CHANCE = 0.33;
 type Shape = 'Plus' | 'C' | 'Ovals' | 'O' | 'HalfOval';
@@ -15,34 +16,9 @@ interface FakeItemProps {
   desktop?: boolean;
 }
 
-interface RandomAnimation {
-  '--rotation': string;
-  '--distance': string;
-  '--duration': string;
-  '--delay': string;
-}
-
-function randomize(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
 const getRandomShape = (): Shape => {
   const shapes: Shape[] = ['Plus', 'C', 'Ovals', 'O', 'HalfOval'];
   return shapes[Math.floor(Math.random() * shapes.length)];
-};
-
-const getRandomAnimation = (): RandomAnimation => {
-  const rotation = randomize(-16, 16);
-  const distance = randomize(0, 150);
-  const duration = randomize(300, 500);
-  const delay = randomize(100, 650);
-
-  return {
-    '--rotation': `${rotation}deg`,
-    '--distance': `${distance}px`,
-    '--duration': `${duration}ms`,
-    '--delay': `${delay}ms`,
-  };
 };
 
 const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) => {
