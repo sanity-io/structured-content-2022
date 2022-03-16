@@ -15,6 +15,17 @@ const BLOCK_CONTENT = `
 `;
 const SIMPLE_BLOCK_CONTENT = `
   ...,
+  markDefs[] {
+    ...,
+    _type == "link" => {
+      external,
+      blank,
+      internal-> {
+        _type,
+        slug,
+      },
+    },
+  },
   _type == "simpleCallToAction" => { ${SIMPLE_CALL_TO_ACTION} },
 `;
 
