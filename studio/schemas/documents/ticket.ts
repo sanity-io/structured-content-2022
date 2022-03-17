@@ -40,79 +40,110 @@ export default {
       type: "string",
     },
     {
-      name: "priceAndAvailability",
-      title: "Price and availability",
+      name: "groups",
+      title: "Ticket groups",
       type: "array",
-      description:
-        "Add a price and availability. If you don't add a price, the ticket will be free.",
       of: [
         {
-          name: "available",
-          title: "Available from-to",
           type: "object",
-          description:
-            "If no other date slot comes after, then the event date will be used as the final ticket date",
-          preview: {
-            select: {
-              price: "price",
-              from: "from",
-              label: "label",
-            },
-            prepare({ price, from, label }) {
-              return {
-                title: "$" + price,
-                subtitle: [new Date(from).toLocaleDateString(), label]
-                  .filter(Boolean)
-                  .join(" - "),
-              };
-            },
-          },
+          name: "group",
+          title: "Group",
           fields: [
             {
-              name: "price",
-              title: "Price",
-              type: "number",
-              description: "Price in USD",
-            },
-            {
-              name: "from",
-              title: "Available from",
-              type: "datetime",
-              validation: (Rule) => [
-                Rule.required(),
-                Rule.custom((value, context) => {
-                  // find the index with this current value
-                  const { priceAndAvailability } = context?.document;
-                  const currentDate = parseISO(value);
-                  const index = priceAndAvailability.findIndex(
-                    ({ from }) => from === value
-                  );
-                  const previousDate = parseISO(
-                    priceAndAvailability[index - 1]?.from
-                  );
-                  if (!previousDate) {
-                    return true;
-                  }
-                  if (compareAsc(currentDate, previousDate) === -1) {
-                    return "Date must be after previous date";
-                  }
-
-                  return true;
-                }),
-              ],
-              description:
-                "This ticket is available to purchase from this date",
-            },
-            {
-              name: "label",
+              name: "name",
+              title: "Ticket group name",
               type: "string",
-              title: "Ticket price label (optional)",
-              description: 'For example: "Early bird"',
+            },
+            {
+              name: "priceAndAvailability",
+              title: "Price and availability",
+              type: "array",
+              description:
+                "Add a price and availability. If you don't add a price, the ticket will be free.",
+              of: [
+                {
+                  name: "available",
+                  title: "Available from-to",
+                  type: "object",
+                  description:
+                    "If no other date slot comes after, then the event date will be used as the final ticket date",
+                  preview: {
+                    select: {
+                      price: "price",
+                      from: "from",
+                      label: "label",
+                    },
+                    prepare({ price, from, label }) {
+                      return {
+                        title: "$" + price,
+                        subtitle: [new Date(from).toLocaleDateString(), label]
+                          .filter(Boolean)
+                          .join(" - "),
+                      };
+                    },
+                  },
+                  fields: [
+                    {
+                      name: "price",
+                      title: "Price",
+                      type: "number",
+                      description: "Price in USD",
+                    },
+                    {
+                      name: "from",
+                      title: "Available from",
+                      type: "datetime",
+                      validation: (Rule) => [
+                        Rule.required(),
+                        Rule.custom((value, context) => {
+                          // find the index with this current value
+                          const { priceAndAvailability } = context?.document;
+                          const currentDate = parseISO(value);
+                          const index = priceAndAvailability.findIndex(
+                            ({ from }) => from === value
+                          );
+                          const previousDate = parseISO(
+                            priceAndAvailability[index - 1]?.from
+                          );
+                          if (!previousDate) {
+                            return true;
+                          }
+                          if (compareAsc(currentDate, previousDate) === -1) {
+                            return "Date must be after previous date";
+                          }
+
+                          return true;
+                        }),
+                      ],
+                      description:
+                        "This ticket is available to purchase from this date",
+                    },
+                    {
+                      name: "label",
+                      type: "string",
+                      title: "Ticket price label (optional)",
+                      description: 'For example: "Early bird"',
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              name: "venues",
+              title: "Venues",
+              type: "array",
+              of: [
+                {
+                  type: "reference",
+                  to: [{ type: "venue" }],
+                },
+              ],
             },
           ],
         },
       ],
     },
+
     {
       name: "description",
       title: "Description",
