@@ -59,7 +59,6 @@ const SHARED_SECTIONS = `
   },
   _type == "sponsorshipsSection" => {
     ...,
-    sponsors[]->,
     "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
   },
   _type == "ticketsSection" => {

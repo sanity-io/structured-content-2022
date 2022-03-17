@@ -12,6 +12,7 @@ import GridWrapper from '../../GridWrapper';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import styles from './Tickets.module.css';
 import { getCollectionForSelectionType } from '../../../util/entity';
+import FeatureCheckmark from '../../FeatureCheckmark';
 
 interface TicketsProps {
   type: EntitySectionSelection;
@@ -149,25 +150,10 @@ export const Tickets = ({
                         featureIncluded && styles.featureIncluded
                       )}
                     >
-                      {/* eslint-disable @next/next/no-img-element */}
-                      {featureIncluded ? (
-                        <img
-                          src={checkmarkIcon.src}
-                          className={styles.icon}
-                          width={checkmarkIcon.width}
-                          height={checkmarkIcon.height}
-                          alt="Included"
-                        />
-                      ) : (
-                        <img
-                          src={crossIcon.src}
-                          className={styles.icon}
-                          width={crossIcon.width}
-                          height={crossIcon.height}
-                          alt="Not included"
-                        />
-                      )}
-                      {/* eslint-enable @next/next/no-img-element */}
+                      <FeatureCheckmark
+                        included={featureIncluded}
+                        className={styles.icon}
+                      />
                     </td>
                   );
                 }

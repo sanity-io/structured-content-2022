@@ -7,6 +7,7 @@ import TextAndImage from '../TextAndImage';
 import QuestionAndAnswerCollection from '../QuestionAndAnswerCollection';
 import Speakers from '../Speakers';
 import Sessions from '../../Sessions';
+import Sponsorships from '../Sponsorships';
 import Tickets from '../Tickets';
 
 export const SharedSections = ({ value: { sections, ...rest } }) => (
@@ -60,7 +61,9 @@ export const SharedSections = ({ value: { sections, ...rest } }) => (
             />
           );
         case 'sponsorshipsSection':
-          return null; // Implemented in PR #66
+          return (
+            <Sponsorships key={section._key} value={section} {...({} as any)} />
+          );
         case 'ticketsSection':
           return (
             <Tickets key={section._key} value={section} {...({} as any)} />

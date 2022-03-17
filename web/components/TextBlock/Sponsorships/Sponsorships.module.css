@@ -1,0 +1,57 @@
+.container {
+  padding: 24px;
+  margin: 8px;
+  border-spacing: 8px;
+}
+
+.container th,
+.container td {
+  padding: 24px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.container th,
+.container td.active {
+  background-color: var(--color-brand-yellow-light);
+}
+
+.container th {
+  font-weight: normal;
+}
+
+.container tr {
+  height: 114px;
+}
+
+.container td {
+  font: var(--font-body-small-medium);
+  border: 2px solid #f4f3ef;
+}
+
+.container td:first-of-type,
+.container th:first-of-type {
+  background-color: white;
+}
+
+.container td:first-of-type {
+  border-radius: 8px;
+  text-align: left;
+  padding: 24px;
+}
+
+.sponsorshipName {
+  margin: 0 0 24px;
+  font: var(--font-body-large-bold);
+}
+
+.spotsAvailable {
+  border: 1px solid var(--color-brand-black);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.price {
+  margin-top: 48px;
+  text-align: left;
+}
