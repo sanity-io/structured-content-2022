@@ -8,7 +8,7 @@ export type Sponsorship = {
   _updatedAt: string;
   available: number;
   offering: string[];
-  passes: {
+  passes?: {
     inPerson: number;
     online: number;
     workshop: number;

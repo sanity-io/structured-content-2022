@@ -60,21 +60,25 @@ export const Sponsorships = ({
           </thead>
           <tbody>
             <tr>
-              <td className={styles.cell}>In-person passes included</td>
-              {sponsorships.map(({ _id, passes: { inPerson } }) => (
-                <td key={_id} className={clsx(inPerson > 0 && styles.active)}>
-                  {inPerson > 0 ? inPerson : <FeatureCheckmark />}
-                </td>
-              ))}
+              <td>In-person passes included</td>
+              {sponsorships.map(
+                ({ _id, passes: { inPerson } = { inPerson: 0 } }) => (
+                  <td key={_id} className={clsx(inPerson > 0 && styles.active)}>
+                    {inPerson > 0 ? inPerson : <FeatureCheckmark />}
+                  </td>
+                )
+              )}
             </tr>
 
             <tr>
               <td>Workshop passes included</td>
-              {sponsorships.map(({ _id, passes: { workshop } }) => (
-                <td key={_id} className={clsx(workshop > 0 && styles.active)}>
-                  {workshop > 0 ? workshop : <FeatureCheckmark />}
-                </td>
-              ))}
+              {sponsorships.map(
+                ({ _id, passes: { workshop } = { workshop: 0 } }) => (
+                  <td key={_id} className={clsx(workshop > 0 && styles.active)}>
+                    {workshop > 0 ? workshop : <FeatureCheckmark />}
+                  </td>
+                )
+              )}
             </tr>
 
             {allOfferings.map((offering, index) => (
