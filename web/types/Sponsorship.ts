@@ -7,7 +7,7 @@ export type Sponsorship = {
   _type: 'sponsorship';
   _updatedAt: string;
   available: number;
-  offering: string[];
+  offering?: string[];
   passes?: {
     inPerson: number;
     online: number;

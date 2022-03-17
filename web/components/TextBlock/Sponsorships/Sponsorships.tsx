@@ -15,9 +15,9 @@ interface SponsorshipsProps {
   };
 }
 
-const baseOfferingWithPerk = (offerings: string[], currentOffering: string) =>
+const baseOfferingWithPerk = (currentOffering: string, offerings?: string[]) =>
   offerings
-    .map((o) => o.split(' - '))
+    ?.map((o) => o.split(' - '))
     .map(([baseOffering, extraPerk]) => ({ baseOffering, extraPerk }))
     .find((o) => o.baseOffering === currentOffering);
 
@@ -85,7 +85,7 @@ export const Sponsorships = ({
               <tr key={`${offering}_${index}`}>
                 <td>{offering}</td>
                 {sponsorships.map(({ _id, offering: offerings }) => {
-                  const o = baseOfferingWithPerk(offerings, offering);
+                  const o = baseOfferingWithPerk(offering, offerings);
                   return (
                     <td key={_id} className={clsx(Boolean(o) && styles.active)}>
                       <FeatureCheckmark included={Boolean(o)} />
