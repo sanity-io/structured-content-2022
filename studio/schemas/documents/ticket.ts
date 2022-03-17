@@ -1,4 +1,3 @@
-import { toPlainText } from "@portabletext/react";
 import { BillIcon } from "@sanity/icons";
 import { compareAsc, parseISO } from "date-fns";
 
@@ -93,30 +92,9 @@ export default {
                       name: "from",
                       title: "Available from",
                       type: "datetime",
-                      validation: (Rule) => [
-                        Rule.required(),
-                        Rule.custom((value, context) => {
-                          // find the index with this current value
-                          const { priceAndAvailability } = context?.document;
-                          const currentDate = parseISO(value);
-                          const index = priceAndAvailability.findIndex(
-                            ({ from }) => from === value
-                          );
-                          const previousDate = parseISO(
-                            priceAndAvailability[index - 1]?.from
-                          );
-                          if (!previousDate) {
-                            return true;
-                          }
-                          if (compareAsc(currentDate, previousDate) === -1) {
-                            return "Date must be after previous date";
-                          }
-
-                          return true;
-                        }),
-                      ],
+                      validation: (Rule) => Rule.required(),
                       description:
-                        "This ticket is available to purchase from this date",
+                        "This ticket is available to purchase from this date. Must be after previous date",
                     },
                     {
                       name: "label",
