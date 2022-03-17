@@ -38,7 +38,8 @@
 }
 
 .groupName {
-  font: var(--font-ui-sm-medium-semibold);
+  font: var(--font-ui-sm-semi);
+  letter-spacing: var(--letter-spacing-ui-sm);
   margin: 0 0 24px;
 }
 
@@ -67,7 +68,8 @@
 
 .price {
   margin: 0 0 8px;
-  font: var(--font-ui-xs-medium);
+  font: var(--font-ui-xs);
+  letter-spacing: var(--letter-spacing-ui-xs);
 }
 
 .currentLabel {
