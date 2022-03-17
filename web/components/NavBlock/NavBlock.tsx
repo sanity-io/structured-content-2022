@@ -16,6 +16,11 @@ interface FakeItemProps {
   desktop?: boolean;
 }
 
+interface ItemProps {
+  name: string;
+  href: string;
+}
+
 const getRandomShape = (): Shape => {
   const shapes: Shape[] = ['Plus', 'C', 'Ovals', 'O', 'HalfOval'];
   return shapes[Math.floor(Math.random() * shapes.length)];
@@ -28,8 +33,9 @@ const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) => {
     }
 
     return null;
-  }, []);
-  const animation = useMemo(getRandomAnimation, []) as CSSProperties;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, ['random']);
+  const animation = useMemo(getRandomAnimation, ['animation']) as CSSProperties;
 
   return (
     <li
@@ -46,6 +52,18 @@ const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) => {
   );
 };
 
+const Item = ({ name, href }: ItemProps) => {
+  const animation = useMemo(getRandomAnimation, ['animation']) as CSSProperties;
+
+  return (
+    <li className={styles.item} style={animation}>
+      <Link href={href}>
+        <a className={styles.link}>{name}</a>
+      </Link>
+    </li>
+  );
+};
+
 interface NavBlockProps {
   ticketsUrl: string;
 }
@@ -54,34 +72,20 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
   const wrapperRef = useRef<HTMLElement>();
   const isIntersecting = useIntersection(wrapperRef);
 
-  const animation1 = useMemo(getRandomAnimation, []) as CSSProperties;
-  const animation2 = useMemo(getRandomAnimation, []) as CSSProperties;
-  const animation3 = useMemo(getRandomAnimation, []) as CSSProperties;
-  const animation4 = useMemo(getRandomAnimation, []) as CSSProperties;
-  const animation5 = useMemo(getRandomAnimation, []) as CSSProperties;
-
   return (
     <nav
-      className={clsx(styles.nav, isIntersecting && styles.navEnter)}
+      className={clsx(styles.nav, isIntersecting && styles.isIntersecting)}
       ref={wrapperRef}
     >
       <ul className={styles.list}>
-        <li className={styles.item} style={animation1}>
-          <Link href="/program">
-            <a className={styles.link}>Program</a>
-          </Link>
-        </li>
+        <Item name="Program" href="/program" />
 
         <FakeItem mobile tablet desktop />
         <FakeItem mobile tablet desktop />
         <FakeItem divider mobile />
         <FakeItem mobile />
 
-        <li className={styles.item} style={animation2}>
-          <Link href="/sponsorship-information">
-            <a className={styles.link}>Sponsorship</a>
-          </Link>
-        </li>
+        <Item name="Sponsorship" href="/sponsorship-information" />
 
         <FakeItem tablet desktop />
         <FakeItem divider mobile tablet desktop />
@@ -90,29 +94,17 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
         <FakeItem tablet desktop />
         <FakeItem mobile tablet desktop />
 
-        <li className={styles.item} style={animation3}>
-          <Link href="/registration-info">
-            <a className={styles.link}>Registration</a>
-          </Link>
-        </li>
+        <Item name="Registration" href="/registration-info" />
 
         <FakeItem divider mobile tablet desktop />
 
-        <li className={styles.item} style={animation4}>
-          <Link href="/about">
-            <a className={styles.link}>About</a>
-          </Link>
-        </li>
+        <Item name="About" href="/about" />
 
         <FakeItem mobile tablet desktop />
         <FakeItem mobile desktop />
         <FakeItem divider mobile />
 
-        <li className={styles.item} style={animation5}>
-          <Link href={ticketsUrl}>
-            <a className={styles.link}>Tickets</a>
-          </Link>
-        </li>
+        <Item name="Tickets" href={ticketsUrl} />
 
         <FakeItem tablet desktop />
         <FakeItem mobile desktop />

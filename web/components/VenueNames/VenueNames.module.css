@@ -4,22 +4,20 @@
   padding: 0;
 }
 
-.enter .venue {
+.venues.isIntersecting .venue {
   transform-origin: bottom;
   animation: var(--item-enter-animation);
   animation-delay: var(--delay);
 }
 
-@keyframes item-enter {
-  from {
-    opacity: 0;
-    transform: translateY(var(--distance)) rotate(var(--rotation));
-  }
-}
-
 .venue {
   display: inline-block;
   font: var(--font-display-base);
+}
+
+.venue:nth-child(n + 2)::before {
+  content: '•';
+  margin: 0 6px;
 }
 
 .link {
@@ -29,11 +27,6 @@
 
 .link:hover {
   text-decoration: underline;
-}
-
-.venue:nth-child(n + 2)::before {
-  content: '•';
-  margin: 0 6px;
 }
 
 @media (--medium-up) {
@@ -57,5 +50,12 @@
 
   .venue {
     font: var(--font-display-xl);
+  }
+}
+
+@keyframes item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--distance)) rotate(var(--rotation));
   }
 }

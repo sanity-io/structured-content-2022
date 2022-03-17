@@ -36,7 +36,10 @@ export const ConferenceUpdatesForm = ({
   return (
     <GridWrapper>
       <article
-        className={clsx(styles.container, isIntersecting && styles.enter)}
+        className={clsx(
+          styles.container,
+          isIntersecting && styles.isIntersecting
+        )}
         ref={wrapperRef}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}

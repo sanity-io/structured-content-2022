@@ -17,7 +17,10 @@ export const Hero = ({ heading, summary, callToAction }: HeroProps) => {
 
   return (
     <div
-      className={clsx(styles.container, isIntersecting && styles.enter)}
+      className={clsx(
+        styles.container,
+        isIntersecting && styles.isIntersecting
+      )}
       ref={wrapperRef}
     >
       <GridWrapper>

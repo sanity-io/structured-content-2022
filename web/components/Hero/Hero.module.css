@@ -4,19 +4,12 @@
   padding: 40px 0 80px;
 }
 
-.enter .heading,
-.enter .summary,
-.enter .cta {
+.container.isIntersecting .heading,
+.container.isIntersecting .summary,
+.container.isIntersecting .cta {
   transform-origin: bottom;
   animation: var(--item-enter-animation);
   animation-delay: var(--delay);
-}
-
-@keyframes item-enter {
-  from {
-    opacity: 0;
-    transform: translateY(var(--distance)) rotate(var(--rotation));
-  }
 }
 
 .summary {
@@ -65,5 +58,12 @@
   .summary {
     grid-column: 4 / span 6;
     max-width: none;
+  }
+}
+
+@keyframes item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--distance)) rotate(var(--rotation));
   }
 }

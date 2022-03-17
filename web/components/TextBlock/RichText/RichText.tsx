@@ -29,7 +29,7 @@ export const RichText = ({ value, background }: RichTextProps) => {
         className={clsx(
           styles.container,
           background && styles.background,
-          isIntersecting && styles.enter
+          isIntersecting && styles.isIntersecting
         )}
         ref={wrapperRef}
       >

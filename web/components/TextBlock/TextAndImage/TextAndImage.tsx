@@ -31,7 +31,10 @@ export const TextAndImage = ({
 
   return (
     <section
-      className={clsx(styles.container, isIntersecting && styles.enter)}
+      className={clsx(
+        styles.container,
+        isIntersecting && styles.isIntersecting
+      )}
       ref={wrapperRef}
     >
       <GridWrapper>
