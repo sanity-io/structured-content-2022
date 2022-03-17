@@ -37,9 +37,19 @@
   margin: 24px 0 0 0;
 }
 
-.priceLabel,
-.description {
-  color: var(--color-material-gray-600);
+.groupName {
+  font: var(--font-ui-sm-medium-semibold);
+  margin: 0 0 24px;
+}
+
+.group {
+  border: 1px solid var(--color-brand-black);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.group:not(:last-child) {
+  margin-bottom: 12px;
 }
 
 .visuallyHidden {
@@ -50,8 +60,22 @@
   overflow: hidden;
 }
 
+.price,
+.priceLabel {
+  color: var(--color-material-gray-600);
+}
+
 .price {
   margin: 0 0 8px;
+  font: var(--font-ui-xs-medium);
+}
+
+.currentLabel {
+  color: var(--color-brand-black);
+}
+
+.currentPrice {
+  font: var(--font-body-xl-medium);
   color: var(--color-brand-black);
 }
 
@@ -59,9 +83,8 @@
   margin: 0;
 }
 
-.price.expired {
+.expired {
   text-decoration: line-through;
-  color: var(--color-material-gray-600);
 }
 
 .ticketFeatures {

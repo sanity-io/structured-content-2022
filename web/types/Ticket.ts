@@ -1,16 +1,20 @@
 import { Section } from './Section';
 
-export type Ticket = {
-  _id: string;
-  _type: 'ticket';
-  description?: Section[];
-  included: string[];
+export type TicketGroup = {
+  name: string;
   priceAndAvailability: {
     _key: string;
-    _type: 'available';
     from: string;
     label: string;
     price: number;
   }[];
+};
+
+export type Ticket = {
+  _id: string;
+  _type: 'ticket';
+  description?: Section[];
+  groups: TicketGroup[];
+  included: string[];
   type: string;
 };
