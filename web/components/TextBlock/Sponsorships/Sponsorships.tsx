@@ -3,8 +3,8 @@ import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { Sponsorship } from '../../../types/Sponsorship';
 import BenefitRow from './BenefitRow';
 import GridWrapper from '../../GridWrapper';
-import styles from './Sponsorships.module.css';
 import SponsorshipHeadColumn from './SponsorshipHeadColumn';
+import styles from './Sponsorships.module.css';
 
 interface SponsorshipsProps {
   value: {
@@ -15,11 +15,12 @@ interface SponsorshipsProps {
 }
 
 const allBenefitNamesSortOrderPreserved = (allSponsorships: Sponsorship[]) => {
-  const benefits = allSponsorships
-    .map((s, index) => s.benefits.map((b) => ({ name: b.benefit.name, index })))
-    .flat();
-  const sorted = benefits.sort((a, b) => a.index - b.index).map((b) => b.name);
-  return Array.from(new Set(sorted));
+  const benefitNames = allSponsorships
+    .map((s, index) => s.benefits.map((b) => ({ ...b.benefit, index })))
+    .flat()
+    .sort((a, b) => a.index - b.index)
+    .map((b) => b.name);
+  return Array.from(new Set(benefitNames));
 };
 
 export const Sponsorships = ({
