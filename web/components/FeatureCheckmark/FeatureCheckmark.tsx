@@ -6,9 +6,7 @@ interface FeatureCheckmarkProps {
   className?: string;
 }
 
-{
-  /* eslint-disable @next/next/no-img-element */
-}
+/* eslint-disable @next/next/no-img-element */
 export const FeatureCheckmark = ({
   included,
   className,
@@ -30,6 +28,4 @@ export const FeatureCheckmark = ({
       alt="Not included"
     />
   );
-{
-  /* eslint-enable @next/next/no-img-element */
-}
+/* eslint-enable @next/next/no-img-element */
