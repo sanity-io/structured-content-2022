@@ -1,10 +1,9 @@
-import clsx from 'clsx';
 import { getCollectionForSelectionType } from '../../../util/entity';
 import { formatPrice } from '../../../util/number';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { Sponsorship } from '../../../types/Sponsorship';
+import BenefitRow from './BenefitRow';
 import GridWrapper from '../../GridWrapper';
-import FeatureCheckmark from '../../FeatureCheckmark';
 import styles from './Sponsorships.module.css';
 
 interface SponsorshipsProps {
@@ -15,11 +14,13 @@ interface SponsorshipsProps {
   };
 }
 
-const baseOfferingWithPerk = (currentOffering: string, offerings?: string[]) =>
-  offerings
-    ?.map((o) => o.split(' - '))
-    .map(([baseOffering, extraPerk]) => ({ baseOffering, extraPerk }))
-    .find((o) => o.baseOffering === currentOffering);
+const allBenefitNamesSortOrderPreserved = (allSponsorships: Sponsorship[]) => {
+  const benefits = allSponsorships
+    .map((s, index) => s.benefits.map((b) => ({ name: b.benefit.name, index })))
+    .flat();
+  const sorted = benefits.sort((a, b) => a.index - b.index).map((b) => b.name);
+  return Array.from(new Set(sorted));
+};
 
 export const Sponsorships = ({
   value: { type, sponsorships: highlightedSponsorships, allSponsorships },
@@ -29,9 +30,6 @@ export const Sponsorships = ({
   }
 
   if (type === 'highlighted' || type === 'all') {
-    const allOfferings = Array.from(
-      new Set(allSponsorships.map((sponsorship) => sponsorship.offering).flat())
-    ).map((offering) => offering.split(' - ')[0]);
     const sponsorships = getCollectionForSelectionType(
       type,
       allSponsorships,
@@ -59,42 +57,15 @@ export const Sponsorships = ({
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>In-person passes included</td>
-              {sponsorships.map(
-                ({ _id, passes: { inPerson } = { inPerson: 0 } }) => (
-                  <td key={_id} className={clsx(inPerson > 0 && styles.active)}>
-                    {inPerson > 0 ? inPerson : <FeatureCheckmark />}
-                  </td>
-                )
-              )}
-            </tr>
-
-            <tr>
-              <td>Workshop passes included</td>
-              {sponsorships.map(
-                ({ _id, passes: { workshop } = { workshop: 0 } }) => (
-                  <td key={_id} className={clsx(workshop > 0 && styles.active)}>
-                    {workshop > 0 ? workshop : <FeatureCheckmark />}
-                  </td>
-                )
-              )}
-            </tr>
-
-            {allOfferings.map((offering, index) => (
-              <tr key={`${offering}_${index}`}>
-                <td>{offering}</td>
-                {sponsorships.map(({ _id, offering: offerings }) => {
-                  const o = baseOfferingWithPerk(offering, offerings);
-                  return (
-                    <td key={_id} className={clsx(Boolean(o) && styles.active)}>
-                      <FeatureCheckmark included={Boolean(o)} />
-                      {o?.extraPerk && <div>{o.extraPerk}</div>}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
+            {allBenefitNamesSortOrderPreserved(allSponsorships).map(
+              (benefit) => (
+                <BenefitRow
+                  key={benefit}
+                  name={benefit}
+                  sponsorships={sponsorships}
+                />
+              )
+            )}
           </tbody>
         </table>
       </GridWrapper>
