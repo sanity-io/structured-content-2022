@@ -24,12 +24,14 @@ import * as sections from "./sections";
 
 import spec from "./documents/spec";
 import program from "./documents/program";
+import benefit from "./documents/benefit";
 
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
     ...Object.values(sections),
     figure,
+    benefit,
     questionAndAnswer,
     simpleCallToAction,
     richText,
