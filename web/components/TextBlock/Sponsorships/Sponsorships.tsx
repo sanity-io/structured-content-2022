@@ -1,10 +1,10 @@
 import { getCollectionForSelectionType } from '../../../util/entity';
-import { formatPrice } from '../../../util/number';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { Sponsorship } from '../../../types/Sponsorship';
 import BenefitRow from './BenefitRow';
 import GridWrapper from '../../GridWrapper';
 import styles from './Sponsorships.module.css';
+import SponsorshipHeadColumn from './SponsorshipHeadColumn';
 
 interface SponsorshipsProps {
   value: {
@@ -41,31 +41,15 @@ export const Sponsorships = ({
           <thead>
             <tr>
               <th />
-              {sponsorships.map(({ _id, type, available, price }) => (
-                <th key={_id}>
-                  <h2 className={styles.sponsorshipName}>{type}</h2>
-
-                  {available > 0 && (
-                    <div className={styles.spotsAvailable}>
-                      {available} available sponsorship
-                      {available > 1 ? 's' : null}
-                    </div>
-                  )}
-                  <div className={styles.price}>{formatPrice(price)}</div>
-                </th>
+              {sponsorships.map((s) => (
+                <SponsorshipHeadColumn key={s._id} sponsorship={s} />
               ))}
             </tr>
           </thead>
           <tbody>
-            {allBenefitNamesSortOrderPreserved(allSponsorships).map(
-              (benefit) => (
-                <BenefitRow
-                  key={benefit}
-                  name={benefit}
-                  sponsorships={sponsorships}
-                />
-              )
-            )}
+            {allBenefitNamesSortOrderPreserved(allSponsorships).map((b) => (
+              <BenefitRow key={b} name={b} sponsorships={sponsorships} />
+            ))}
           </tbody>
         </table>
       </GridWrapper>
