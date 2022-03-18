@@ -2,14 +2,14 @@ import { Sponsorship } from '../../../../types/Sponsorship';
 import { formatPrice } from '../../../../util/number';
 import styles from '../Sponsorships.module.css';
 
-interface SponsorshipHeadColumnProps {
+interface SponsorshipInfoProps {
   sponsorship: Sponsorship;
 }
 
-export const SponsorshipHeadColumn = ({
+export const SponsorshipInfo = ({
   sponsorship: { _id, type, available, price },
-}: SponsorshipHeadColumnProps) => (
-  <th key={_id}>
+}: SponsorshipInfoProps) => (
+  <>
     <h2 className={styles.sponsorshipName}>{type}</h2>
 
     {available > 0 && (
@@ -19,5 +19,5 @@ export const SponsorshipHeadColumn = ({
       </div>
     )}
     <div className={styles.price}>{formatPrice(price)}</div>
-  </th>
+  </>
 );

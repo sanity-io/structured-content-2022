@@ -73,18 +73,6 @@
   margin-bottom: 8px;
 }
 
-.includedFeature:not(:last-child) {
-  padding-bottom: 16px;
-}
-
-.icon {
-  vertical-align: top;
-}
-
-.includedFeatureDescription {
-  padding-left: 12px;
-}
-
 .feature,
 .featurePresence {
   border: 1px solid var(--color-ui-gray-100);

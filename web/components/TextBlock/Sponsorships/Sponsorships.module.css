@@ -2,6 +2,7 @@
   padding: 24px;
   margin: 8px;
   border-spacing: 8px;
+  display: none;
 }
 
 .container th,
@@ -55,4 +56,15 @@
 .price {
   margin-top: 48px;
   text-align: left;
+  font: var(--font-ui-xl-medium);
+}
+
+@media (--medium-up) {
+  .container {
+    display: table;
+  }
+
+  .listContainer {
+    display: none;
+  }
 }

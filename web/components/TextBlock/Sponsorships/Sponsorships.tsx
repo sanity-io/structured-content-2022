@@ -1,9 +1,10 @@
-import { getCollectionForSelectionType } from '../../../util/entity';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { Sponsorship } from '../../../types/Sponsorship';
-import BenefitRow from './BenefitRow';
+import { getCollectionForSelectionType } from '../../../util/entity';
+import FeatureSection from '../../FeatureSection';
 import GridWrapper from '../../GridWrapper';
-import SponsorshipHeadColumn from './SponsorshipHeadColumn';
+import BenefitRow from './BenefitRow';
+import SponsorshipInfo from './SponsorshipInfo';
 import styles from './Sponsorships.module.css';
 
 interface SponsorshipsProps {
@@ -43,7 +44,9 @@ export const Sponsorships = ({
             <tr>
               <th />
               {sponsorships.map((s) => (
-                <SponsorshipHeadColumn key={s._id} sponsorship={s} />
+                <th key={s._id}>
+                  <SponsorshipInfo sponsorship={s} />
+                </th>
               ))}
             </tr>
           </thead>
@@ -53,6 +56,22 @@ export const Sponsorships = ({
             ))}
           </tbody>
         </table>
+
+        <div className={styles.listContainer}>
+          {sponsorships.map((s) => {
+            const features = s.benefits.map(
+              ({ number, benefit, description }) =>
+                (typeof number === 'number' ? `${number} ` : '') +
+                benefit.name +
+                (description ? ` – ${description}` : '')
+            );
+            return (
+              <FeatureSection features={features} key={s._id}>
+                <SponsorshipInfo sponsorship={s} />
+              </FeatureSection>
+            );
+          })}
+        </div>
       </GridWrapper>
     );
   }
