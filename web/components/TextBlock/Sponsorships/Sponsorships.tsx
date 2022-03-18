@@ -37,6 +37,11 @@ export const Sponsorships = ({
       allSponsorships,
       highlightedSponsorships
     );
+    if (!Array.isArray(sponsorships)) {
+      console.error(`Invalid sponsorships parameter: '${sponsorships}'`);
+      return null;
+    }
+
     return (
       <GridWrapper>
         <table className={styles.container}>
