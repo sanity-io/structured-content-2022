@@ -64,7 +64,7 @@ export const Sponsorships = ({
 
         <div className={styles.listContainer}>
           {sponsorships.map((s) => {
-            const features = s.benefits.map(
+            const features = s.benefits?.map(
               ({ number, benefit, description }) =>
                 (typeof number === 'number' ? `${number} ` : '') +
                 benefit.name +

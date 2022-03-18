@@ -12,7 +12,7 @@ export const BenefitRow = ({ name, sponsorships }: BenefitRowProps) => (
   <tr key={name}>
     <td>{name}</td>
     {sponsorships.map(({ _id, benefits }) => {
-      const sponsorBenefit = benefits.find((b) => b.benefit.name === name);
+      const sponsorBenefit = benefits?.find((b) => b.benefit.name === name);
       return (
         <td
           key={_id}
