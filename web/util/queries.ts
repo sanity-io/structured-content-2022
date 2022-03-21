@@ -1,5 +1,4 @@
-const LINK = 'internal->{slug}, external, blank';
-const LINK_MARK = 'internal->{_type, slug}, external, blank';
+const LINK = 'internal->{_type, slug}, external, blank';
 
 const FIGURE = '_type, alt, asset';
 const SIMPLE_CALL_TO_ACTION = `text, link{ ${LINK} }`;
@@ -12,14 +11,14 @@ const BLOCK_CONTENT = `
   },
   markDefs[] {
     ...,
-    _type == "link" => { ${LINK_MARK} },
+    _type == "link" => { ${LINK} },
   },
 `;
 const SIMPLE_BLOCK_CONTENT = `
   ...,
   markDefs[] {
     ...,
-    _type == "link" => { ${LINK_MARK} },
+    _type == "link" => { ${LINK} },
   },
   _type == "simpleCallToAction" => { ${SIMPLE_CALL_TO_ACTION} },
 `;

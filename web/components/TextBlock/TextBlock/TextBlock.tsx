@@ -45,14 +45,11 @@ const components: Partial<PortableTextComponents> = {
       /* href has been seen in a case where both link and internalLink marks applied */
       <Link href={value?.href || getEntityPath(value.reference)}>{text}</Link>
     ),
-    /* There are two different link marks, but currently TextBlock is used for
-     * everything. One variant is in blockContent (href), another in
-     * simpleBlockContent (internal/external). Would prefer to refactor the
-     * TextBlock approach, but it'd be a pretty big job.
-     */
     link: ({ children, value }) => {
-      const url =
-        value?.href || value?.internal?.slug?.current || value?.external;
+      const resolvedSlug = value?.internal?.slug?.current
+        ? getEntityPath(value.internal)
+        : null;
+      const url = resolvedSlug || value?.external;
       return url ? (
         <a
           href={url}
