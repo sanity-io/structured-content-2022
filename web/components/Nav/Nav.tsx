@@ -36,33 +36,26 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
       href={ticketsUrl}
       target="_blank"
       rel="noreferrer"
-      label="Tickets"
       className={styles.ticketItem}
-    />,
-    <MenuItem
-      key={2}
-      {...{ currentPath, closeMenu }}
-      href="/program"
-      label="Program"
-    />,
+    >
+      Tickets
+    </MenuItem>,
+    <MenuItem key={2} {...{ currentPath, closeMenu }} href="/program">
+      Program
+    </MenuItem>,
     <MenuItem
       key={3}
       {...{ currentPath, closeMenu }}
       href="/sponsorship-information"
-      label="Sponsorship"
-    />,
-    <MenuItem
-      key={4}
-      {...{ currentPath, closeMenu }}
-      href="/registration-info"
-      label="Registration"
-    />,
-    <MenuItem
-      key={5}
-      {...{ currentPath, closeMenu }}
-      href="/about"
-      label="About"
-    />,
+    >
+      Sponsorship
+    </MenuItem>,
+    <MenuItem key={4} {...{ currentPath, closeMenu }} href="/registration-info">
+      Registration
+    </MenuItem>,
+    <MenuItem key={5} {...{ currentPath, closeMenu }} href="/about">
+      About
+    </MenuItem>,
   ];
 
   useInterval(
