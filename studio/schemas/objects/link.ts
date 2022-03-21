@@ -28,10 +28,12 @@ export default {
       type: "url",
       hidden: ({ parent }) => !!parent?.internal && !parent.external,
       validation: (Rule) => [
-        Rule.uri({ scheme: ["https", "mailto", "tel"] }),
+        Rule.uri({ scheme: ["https", "mailto", "tel"] }).error(
+          "Valid URL schemes are `https`, `mailto` and `tel`"
+        ),
         Rule.custom((value, context) => {
-          return value && context.parent?.internal ? warning : true;
-        }),
+          return value && context.parent?.internal;
+        }).warning(warning),
       ],
       title: "External",
       description:
