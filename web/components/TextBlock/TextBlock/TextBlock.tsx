@@ -42,10 +42,7 @@ const components: Partial<PortableTextComponents> = {
     underline: ({ children }) => <u>{children}</u>,
     code: ({ children }) => <code>{children}</code>,
     link: ({ children, value }) => {
-      const resolvedSlug = value?.internal?.slug?.current
-        ? getEntityPath(value.internal)
-        : null;
-      const url = resolvedSlug || value?.external;
+      const url = getEntityPath(value?.internal) || value?.external;
       return url ? (
         <a
           href={url}
