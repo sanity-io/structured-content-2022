@@ -180,7 +180,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
   const headerClasses = clsx(
     styles.header,
     isFrontPage && styles.onFrontPage,
-    isFrontPage && scrolledFarEnough && styles.onScrolledFrontPage,
+    isFrontPage && scrolledFarEnough && styles.onScrolledFrontPage
   );
 
   return (
