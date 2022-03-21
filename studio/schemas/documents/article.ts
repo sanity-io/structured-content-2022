@@ -36,6 +36,13 @@ export default {
         "Publish date for this article. This article should be hidden if no date is set.",
     },
     {
+      name: "updatedAt",
+      type: "datetime",
+      title: "Updated at",
+      description:
+        'Intentionally set the "updated at" date for meaningfull changes. Will also signal freshness to Google etc. ',
+    },
+    {
       name: "authors",
       type: "array",
       title: "Authors",

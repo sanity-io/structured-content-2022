@@ -34,6 +34,8 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
       key={1}
       {...{ currentPath, closeMenu }}
       href={ticketsUrl}
+      target="_blank"
+      rel="noreferrer"
       label="Tickets"
       className={styles.ticketItem}
     />,
@@ -110,7 +112,7 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
             {isMdUp ? menuItems : menuItems.slice(0, menuItemsCount)}
           </ul>
           <div className={styles.ticketButton}>
-            <ButtonLink url={ticketsUrl} text="Tickets" />
+            <ButtonLink url={ticketsUrl} text="Tickets" openInNewTab={true} />
           </div>
         </div>
       </GridWrapper>

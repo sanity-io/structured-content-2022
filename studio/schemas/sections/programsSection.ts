@@ -4,6 +4,11 @@ export default {
   title: "Programs section",
   fields: [
     {
+      name: "heading",
+      type: "string",
+      title: "Section heading",
+    },
+    {
       name: "type",
       type: "string",
       title: "Section type",
