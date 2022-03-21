@@ -14,38 +14,16 @@
     position: sticky;
     top: 0;
     left: 0;
-    transform: translateY(-100%);
-  }
-
-  .slideOut {
-    animation: slideOut 0.5s cubic-bezier(0.25, 0.92, 0.37, 1) forwards;
   }
 
   .header.onFrontPage {
     position: fixed;
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.25, 0.92, 0.37, 1);
   }
 
   .header.onScrolledFrontPage {
-    animation: slideIn 0.5s cubic-bezier(0.25, 0.92, 0.37, 1) forwards;
-  }
-}
-
-@keyframes slideIn {
-  0% {
-    transform: translateY(-100%);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideOut {
-  0% {
-    transform: translateY(0);
-  }
-
-  100% {
-    transform: translateY(-100%);
+    position: fixed;
+    transform: translateY(0%);
   }
 }
