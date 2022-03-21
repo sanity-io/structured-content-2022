@@ -153,9 +153,6 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
     enabled: preview,
   });
 
-  const [scrollTop, setScrollTop] = useState(
-    typeof document !== 'undefined' ? document.documentElement.scrollTop : 0
-  );
   const [scrolledFarEnough, setScrolledFarEnough] = useState(false);
 
   /* This is a hack. What we really want is to enable the menu once we've
@@ -166,14 +163,15 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
   const scrollPositionTriggeringFrontPageMenu = 420;
 
   useEffect(() => {
-    const onScroll = (e) => {
-      setScrollTop(e.target.documentElement.scrollTop);
-      setScrolledFarEnough(scrollTop > scrollPositionTriggeringFrontPageMenu);
-    };
+    const onScroll = (e) =>
+      setScrolledFarEnough(
+        e.target.documentElement.scrollTop >
+          scrollPositionTriggeringFrontPageMenu
+      );
     window.addEventListener('scroll', onScroll);
 
     return () => window.removeEventListener('scroll', onScroll);
-  }, [scrollTop]);
+  }, []);
 
   const isFrontPage = slug === '/';
   const currentPath = slug.charAt(0) === '/' ? slug : `/${slug}`;
