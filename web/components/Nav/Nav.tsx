@@ -58,9 +58,11 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
     </MenuItem>,
   ];
 
+  const isMenuAnimationActive = menuOpened && menuItemsCount < menuItems.length;
   useInterval(
     () => setMenuItemsCount(menuItemsCount + 1),
-    menuOpened && menuItemsCount < menuItems.length ? 50 : null
+    isMenuAnimationActive ? 50 : null,
+    isMenuAnimationActive
   );
 
   const isMdUp =
