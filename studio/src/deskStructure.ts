@@ -169,33 +169,7 @@ export default () =>
             })
         ),
       S.documentTypeListItem("sharedSections").title("Shared Sections"),
-      S.listItem()
-        .title("Navigation")
-        .icon(MenuIcon)
-        .child(
-          S.list()
-            .items([
-              createDeskHierarchy({
-                title: "Primary Navigation",
-
-                // The hierarchy will be stored in this document ID 👇
-                documentId: "primary-nav",
-
-                // Document types editors should be able to include in the hierarchy
-                referenceTo: ["route"],
-              }).icon(MenuIcon),
-              createDeskHierarchy({
-                title: "Secondary Navigation",
-
-                // The hierarchy will be stored in this document ID 👇
-                documentId: "secondary-nav",
-
-                // Document types editors should be able to include in the hierarchy
-                referenceTo: ["route"],
-              }).icon(MenuIcon),
-            ])
-            .title("Navigation")
-        ),
+      S.documentTypeListItem("navigation").title("Navigation"),
       S.documentTypeListItem("article").title("Editorial Articles"),
       S.divider(),
       S.documentTypeListItem("ticket").title("Ticket types"),

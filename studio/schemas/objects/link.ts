@@ -6,7 +6,7 @@ export default {
   fields: [
     {
       name: "internal",
-      type: "reference",l
+      type: "reference",
       title: "Internal link",
       description: "Use this to link to something on this site.",
       hidden: ({ parent }) => !!parent?.external && !parent.internal,
