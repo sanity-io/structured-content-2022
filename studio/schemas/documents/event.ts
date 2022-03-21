@@ -156,7 +156,10 @@ export default {
         },
       ],
     },
-    {
+    /**
+     * We're keeping this code because we might want to use it later.
+     */
+    /* {
       name: "microcopy",
       type: "array",
       title: "Microcopy",
@@ -233,6 +236,6 @@ export default {
           ],
         },
       ],
-    },
+    }, */
   ],
 };
