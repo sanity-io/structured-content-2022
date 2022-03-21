@@ -1,11 +1,10 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, HTMLProps } from 'react';
 import useInterval from 'use-interval';
 import logo from '../../images/logo.svg';
 import ButtonLink from '../ButtonLink';
 import GridWrapper from '../GridWrapper';
-import MenuItem from './MenuItem';
 import styles from './Nav.module.css';
 
 interface NavProps {
@@ -29,40 +28,48 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
   const toggleMenu = () => setMenuOpened(!menuOpened);
   const closeMenu = () => setMenuOpened(false);
 
+  const MenuItem = ({
+    href,
+    className,
+    ...rest
+  }: HTMLProps<HTMLAnchorElement>) => (
+    <li>
+      <Link href={href}>
+        <a
+          {...rest}
+          className={clsx(
+            styles.link,
+            href === currentPath && styles.current,
+            className
+          )}
+          onClick={closeMenu}
+        />
+      </Link>
+    </li>
+  );
+
   const menuItems = [
     <MenuItem
       key={1}
-      {...{ currentPath, closeMenu }}
       href={ticketsUrl}
       target="_blank"
       rel="noreferrer"
-      label="Tickets"
       className={styles.ticketItem}
-    />,
-    <MenuItem
-      key={2}
-      {...{ currentPath, closeMenu }}
-      href="/program"
-      label="Program"
-    />,
-    <MenuItem
-      key={3}
-      {...{ currentPath, closeMenu }}
-      href="/sponsorship-information"
-      label="Sponsorship"
-    />,
-    <MenuItem
-      key={4}
-      {...{ currentPath, closeMenu }}
-      href="/registration-info"
-      label="Registration"
-    />,
-    <MenuItem
-      key={5}
-      {...{ currentPath, closeMenu }}
-      href="/about"
-      label="About"
-    />,
+    >
+      Tickets
+    </MenuItem>,
+    <MenuItem key={2} href="/program">
+      Program
+    </MenuItem>,
+    <MenuItem key={3} href="/sponsorship-information">
+      Sponsorship
+    </MenuItem>,
+    <MenuItem key={4} href="/registration-info">
+      Registration
+    </MenuItem>,
+    <MenuItem key={5} href="/about">
+      About
+    </MenuItem>,
   ];
 
   useInterval(
