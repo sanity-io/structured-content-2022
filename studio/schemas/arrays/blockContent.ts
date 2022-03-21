@@ -36,7 +36,7 @@ export default {
           {
             name: "link",
             type: "link",
-            title: "External link",
+            title: "Link to internal or external content",
           },
         ],
       },
