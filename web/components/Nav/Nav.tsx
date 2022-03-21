@@ -82,11 +82,15 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
           </Link>
           <ul className={clsx(styles.items, !menuOpened && styles.menuClosed)}>
             <li className={styles.ticketItem}>
-              <Link href={ticketsUrl}>
-                <a className={styles.link} onClick={closeMenu}>
-                  Tickets
-                </a>
-              </Link>
+              <a
+                className={styles.link}
+                href={ticketsUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={closeMenu}
+              >
+                Tickets
+              </a>
             </li>
             <BasicMenuItem urlPath="/program" label="Program" />
             <BasicMenuItem
@@ -100,7 +104,7 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
             <BasicMenuItem urlPath="/about" label="About" />
           </ul>
           <div className={styles.ticketButton}>
-            <ButtonLink url={ticketsUrl} text="Tickets" />
+            <ButtonLink url={ticketsUrl} text="Tickets" openInNewTab={true} />
           </div>
         </div>
       </GridWrapper>
