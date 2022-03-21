@@ -57,44 +57,46 @@ const expiryString = (timestamp: Date): string => {
 };
 
 const priceList = (ticket: Ticket) => (
-  <dl className={styles.priceList}>
+  <ul className={styles.priceList}>
     {ticket.groups.map((group) => {
       const currentTicket = availabilityData(group).find(
         (item) => !item.isExpired
       );
       return (
-        <div key={group.name} className={styles.group}>
-          {group.name && <h3 className={styles.groupName}>{group.name}</h3>}
-          {availabilityData(group)?.map(
-            ({ _key, label, price, isExpired, expires }) => (
-              <Fragment key={_key}>
-                <dt
-                  className={clsx(
-                    styles.priceLabel,
-                    isExpired && styles.expired,
-                    !label && !expires && styles.visuallyHidden,
-                    currentTicket?._key === _key && styles.currentLabel
-                  )}
-                >
-                  {label || 'Price'}
-                  {expires && expiryString(expires)}
-                </dt>
-                <dd
-                  className={clsx(
-                    styles.price,
-                    isExpired && styles.expired,
-                    currentTicket?._key === _key && styles.currentPrice
-                  )}
-                >
-                  {price ? `$${price}` : 'Free'}
-                </dd>
-              </Fragment>
-            )
-          )}
-        </div>
+        <li key={group.name} className={styles.group}>
+          {group.name && <div className={styles.groupName}>{group.name}</div>}
+          <dl className={styles.priceGroup}>
+            {availabilityData(group)?.map(
+              ({ _key, label, price, isExpired, expires }) => (
+                <Fragment key={_key}>
+                  <dt
+                    className={clsx(
+                      styles.priceLabel,
+                      isExpired && styles.expired,
+                      !label && !expires && styles.visuallyHidden,
+                      currentTicket?._key === _key && styles.currentLabel
+                    )}
+                  >
+                    {label || 'Price'}
+                    {expires && expiryString(expires)}
+                  </dt>
+                  <dd
+                    className={clsx(
+                      styles.price,
+                      isExpired && styles.expired,
+                      currentTicket?._key === _key && styles.currentPrice
+                    )}
+                  >
+                    {price ? `$${price}` : 'Free'}
+                  </dd>
+                </Fragment>
+              )
+            )}
+          </dl>
+        </li>
       );
     })}
-  </dl>
+  </ul>
 );
 
 export const Tickets = ({
@@ -128,7 +130,7 @@ export const Tickets = ({
             {getCollectionForSelectionType(type, allTickets, tickets).map(
               (ticket) => (
                 <th key={ticket._id} scope="col" className={styles.ticketInfo}>
-                  <h2 className={styles.name}>{ticket.type}</h2>
+                  <strong className={styles.name}>{ticket.type}</strong>
                   {ticket.description && (
                     <div className={styles.description}>
                       <PortableText value={ticket.description} />
