@@ -3,7 +3,7 @@ import { Slug } from '../types/Slug';
 
 export const mainEventId = 'aad77280-6394-4090-afad-1c0f2a0416c6';
 
-export const getEntityPath = (entity?: { _type: string; slug: Slug }) => {
+export const getEntityPath = (entity?: { _type: string; slug?: Slug }) => {
   if (!entity?.slug?.current) {
     return '#';
   }

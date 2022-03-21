@@ -8,10 +8,7 @@ export const SimpleCallToAction = ({ text, link }: SimpleCallToActionProps) => {
     return (
       <ButtonLink
         text={text}
-        url={getEntityPath({
-          _type: link.internal._type,
-          slug: link.internal.slug,
-        })}
+        url={getEntityPath(link.internal)}
         openInNewTab={openInNewTab}
       />
     );
