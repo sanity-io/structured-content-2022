@@ -6,6 +6,10 @@ const SIMPLE_CALL_TO_ACTION = `text, link{ ${LINK} }`;
 
 const BLOCK_CONTENT = `
   ...,
+  children[] {
+    ...,
+    _type == "simpleCallToAction" => { ${SIMPLE_CALL_TO_ACTION} },
+  },
   markDefs[] {
     ...,
     _type == "link" => { ${LINK_MARK} },
