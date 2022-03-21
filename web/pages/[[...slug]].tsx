@@ -156,6 +156,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
   const [scrollTop, setScrollTop] = useState(
     typeof document !== 'undefined' ? document.documentElement.scrollTop : 0
   );
+  const [scrolledFarEnough, setScrolledFarEnough] = useState(false);
 
   /* This is a hack. What we really want is to enable the menu once we've
    * scrolled past the top logo on the front page. Probably a better way would
@@ -167,6 +168,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
   useEffect(() => {
     const onScroll = (e) => {
       setScrollTop(e.target.documentElement.scrollTop);
+      setScrolledFarEnough(scrollTop > scrollPositionTriggeringFrontPageMenu);
     };
     window.addEventListener('scroll', onScroll);
 
@@ -175,7 +177,6 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
 
   const isFrontPage = slug === '/';
   const currentPath = slug.charAt(0) === '/' ? slug : `/${slug}`;
-  const scrolledFarEnough = scrollTop > scrollPositionTriggeringFrontPageMenu;
   const headerClasses = clsx(
     styles.header,
     isFrontPage && styles.onFrontPage,
