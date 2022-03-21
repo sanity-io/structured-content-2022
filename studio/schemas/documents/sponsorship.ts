@@ -55,7 +55,7 @@ export default {
       name: "sponsors",
       type: "array",
       title: "Sponsors",
-      of: [{ type: "sponsor" }],
+      of: [{ type: "reference", to: [{ type: "sponsor" }] }],
       validation: (Rule) => [
         Rule.unique(),
         Rule.min(1),

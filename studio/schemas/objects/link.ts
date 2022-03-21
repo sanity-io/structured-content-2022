@@ -6,7 +6,7 @@ export default {
   fields: [
     {
       name: "internal",
-      type: "reference",l
+      type: "reference",
       title: "Internal link",
       description: "Use this to link to something on this site.",
       hidden: ({ parent }) => !!parent?.external && !parent.internal,
@@ -28,10 +28,16 @@ export default {
       type: "url",
       hidden: ({ parent }) => !!parent?.internal && !parent.external,
       validation: (Rule) => [
-        Rule.uri({ scheme: ["https", "mailto", "tel"] }),
-        Rule.custom((value, context) => {
+        // Comment this out until bug is fixed
+        /* Rule.custom((value, context) => {
+          if (value === undefined) {
+            return true;
+          }
           return value && context.parent?.internal ? warning : true;
-        }),
+        }).warning(), */
+        Rule.uri({ scheme: ["https", "mailto", "tel"] }).error(
+          "Valid URL schemes are `https`, `mailto` and `tel`"
+        ),
       ],
       title: "External",
       description:
