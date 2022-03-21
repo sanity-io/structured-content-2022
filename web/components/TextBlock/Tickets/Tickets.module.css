@@ -50,10 +50,7 @@
   border: 1px solid var(--color-brand-black);
   border-radius: 4px;
   padding: 16px;
-}
-
-.group:not(:last-child) {
-  margin-bottom: 8px;
+  margin-top: 8px;
 }
 
 .groupName {
@@ -145,6 +142,17 @@
   .sections {
     margin: 64px 0;
   }
+
+  .priceList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .group {
+    margin-top: 0;
+    flex-basis: calc(50% - 4px);
+  }
 }
 
 @media (--large-up) {
@@ -154,5 +162,13 @@
 
   .sections {
     display: none;
+  }
+
+  .priceList {
+    display: block;
+  }
+
+  .group {
+    margin-top: 8px;
   }
 }
