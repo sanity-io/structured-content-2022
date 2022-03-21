@@ -28,12 +28,16 @@ export default {
       type: "url",
       hidden: ({ parent }) => !!parent?.internal && !parent.external,
       validation: (Rule) => [
+        // Comment this out until bug is fixed
+        /* Rule.custom((value, context) => {
+          if (value === undefined) {
+            return true;
+          }
+          return value && context.parent?.internal ? warning : true;
+        }).warning(), */
         Rule.uri({ scheme: ["https", "mailto", "tel"] }).error(
           "Valid URL schemes are `https`, `mailto` and `tel`"
         ),
-        Rule.custom((value, context) => {
-          return value && context.parent?.internal;
-        }).warning(warning),
       ],
       title: "External",
       description:
