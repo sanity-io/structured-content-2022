@@ -3,6 +3,10 @@ export default {
   name: "link",
   type: "object",
   title: "Link",
+  modal: {
+    type: "popover",
+    width: "medium",
+  },
   fields: [
     {
       name: "internal",
