@@ -29,21 +29,21 @@
 
 .name {
   display: block;
-  margin: 0 0 4px;
-  font: var(--font-body-large-bold);
+  margin: 0 0 8px;
+  font: var(--font-body-large-semi);
   letter-spacing: var(--letter-spacing-body-large);
+}
+
+.description {
+  font: var(--font-body-small);
+  letter-spacing: var(--letter-spacing-body-small);
+  color: var(--color-material-gray-600);
 }
 
 .priceList {
   list-style: none;
   padding: 0;
   margin: 24px 0 0 0;
-}
-
-.groupName {
-  font: var(--font-ui-sm-semi);
-  letter-spacing: var(--letter-spacing-ui-sm);
-  margin: 0 0 24px;
 }
 
 .group {
@@ -53,7 +53,13 @@
 }
 
 .group:not(:last-child) {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+}
+
+.groupName {
+  font: var(--font-ui-sm-semi);
+  letter-spacing: var(--letter-spacing-ui-sm);
+  margin: 0 0 24px;
 }
 
 .visuallyHidden {
@@ -67,10 +73,6 @@
 .price,
 .priceLabel {
   color: var(--color-material-gray-600);
-}
-
-.price {
-  margin: 0 0 8px;
   font: var(--font-ui-xs);
   letter-spacing: var(--letter-spacing-ui-xs);
 }
@@ -79,13 +81,17 @@
   color: var(--color-brand-black);
 }
 
-.currentPrice {
-  font: var(--font-body-xl-medium);
-  color: var(--color-brand-black);
+.price {
+  margin: 0 0 8px;
 }
 
 .price:last-child {
   margin: 0;
+}
+
+.currentPrice {
+  font: var(--font-body-xl-medium);
+  color: var(--color-brand-black);
 }
 
 .expired {
