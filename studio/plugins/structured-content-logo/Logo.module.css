@@ -1,0 +1,16 @@
+@keyframes spin {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(160deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+.logo {
+  display: block;
+  animation: spin 20s infinite ease-in-out;
+  font-weight: bold;
+}
