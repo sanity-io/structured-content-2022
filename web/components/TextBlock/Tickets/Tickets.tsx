@@ -149,10 +149,7 @@ export const Tickets = ({
                         featureIncluded && styles.featureIncluded
                       )}
                     >
-                      <FeatureCheckmark
-                        included={featureIncluded}
-                        className={styles.icon}
-                      />
+                      <FeatureCheckmark included={featureIncluded} />
                     </td>
                   );
                 }
