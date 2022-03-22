@@ -22,11 +22,6 @@
   vertical-align: top;
 }
 
-.ticketInfo.inSections {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
 .name {
   margin: 0 0 4px;
   font: var(--font-body-large-bold);

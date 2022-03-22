@@ -166,7 +166,7 @@ export const Tickets = ({
         {getCollectionForSelectionType(type, allTickets, tickets).map(
           (ticket) => (
             <FeatureSection features={ticket.included} key={ticket._id}>
-              <div className={clsx(styles.ticketInfo, styles.inSections)}>
+              <>
                 <h3 className={styles.name}>{ticket.type}</h3>
                 {ticket.description && (
                   <div className={styles.description}>
@@ -196,7 +196,7 @@ export const Tickets = ({
                     )
                   )}
                 </dl>
-              </div>
+              </>
             </FeatureSection>
           )
         )}
