@@ -56,7 +56,7 @@ const TICKET = `
   type,
 `;
 
-const SPONSORHIP = `
+const SPONSORSHIP = `
   _createdAt,
   _id,
   _rev,
@@ -91,5 +91,5 @@ export {
   SIMPLE_CALL_TO_ACTION,
   TEXT_AND_IMAGE_SECTION,
   TICKET,
-  SPONSORHIP,
+  SPONSORSHIP,
 };
