@@ -18,10 +18,11 @@
 
   .header.onFrontPage {
     position: fixed;
-    display: none;
+    transform: translateY(calc(-100% - 6px)); /* 6px for the header box shadow */
+    transition: transform 0.5s cubic-bezier(0.25, 0.92, 0.37, 1);
   }
 
-  .header.onScrolledFrontPage {
-    display: block;
+  .header.onFrontPage.scrolledDown {
+    transform: translateY(0%);
   }
 }

@@ -125,6 +125,7 @@
     letter-spacing: -0.01em;
     display: inline-block; /* 'block' would make blank space be clickable */
     margin: 0 0 8px;
+    animation: slideIn 0.5s cubic-bezier(0.25, 0.92, 0.37, 1) both;
   }
 }
 
@@ -143,5 +144,21 @@
     margin: 0 12px;
     font: var(--font-body-base-medium);
     letter-spacing: var(--letter-spacing-body-base);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    visibility: hidden;
+    transform: translateY(75%);
+  }
+
+  1% {
+    visibility: visible;
+  }
+
+  100% {
+    visibility: visible;
+    transform: translateY(0);
   }
 }
