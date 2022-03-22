@@ -17,115 +17,83 @@ import { Figure } from '../types/Figure';
 import { Slug } from '../types/Slug';
 import { Section } from '../types/Section';
 import { Hero as HeroProps } from '../types/Hero';
-import { mainEventId } from '../util/entityPaths';
+import { mainEventId } from '../util/constants';
+import {
+  ARTICLE_SECTION,
+  FIGURE,
+  HERO,
+  PROGRAM,
+  QUESTION_AND_ANSWER_COLLECTION_SECTION,
+  TEXT_AND_IMAGE_SECTION,
+  TICKET,
+} from '../util/queries';
 import styles from './app.module.css';
+
+const SHARED_SECTIONS = `
+  _type,
+  _type == "figure" => { ${FIGURE} },
+  _type == "articleSection" => { ${ARTICLE_SECTION} },
+  _type == "textAndImageSection" => { ${TEXT_AND_IMAGE_SECTION} },
+  _type == "questionAndAnswerCollectionSection" => {
+    ${QUESTION_AND_ANSWER_COLLECTION_SECTION}
+  },
+  _type == "speakersSection" => {
+    ...,
+    speakers[]->,
+    "allSpeakers": *[_type == "person"],
+  },
+  _type == "sessionsSection" => {
+    ...,
+    sessions[]->,
+    "allSessions": *[_type == "session"],
+  },
+  _type == "venuesSection" => {
+    ...,
+    venues[]->{name},
+    "allVenues": *[_id == "${mainEventId}"][0].venues[]->{name},
+  },
+  _type == "sponsorsSection" => {
+    ...,
+    sponsors[]->,
+    "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
+  },
+  _type == "sponsorshipsSection" => {
+    ...,
+    sponsors[]->,
+    "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
+  },
+  _type == "ticketsSection" => {
+    type,
+    tickets[]->{ ${TICKET} },
+    "allTickets": *[_id == "${mainEventId}"][0].tickets[]->{ ${TICKET} }
+  },
+  _type == "formSection" => { ... },
+  _type == "programsSection" => {
+    type,
+    programs[]-> { ${PROGRAM} },
+    "allPrograms": *[_type == "program"] { ${PROGRAM} }
+  },
+`;
 
 const QUERY = groq`
   {
     "route": *[_type == "route" && slug.current == $slug][0] {
-      ...,
+      seo { title, description, image { ${FIGURE} }, noIndex },
       page-> {
-        name,
-        hero {
-          ...,
-          callToAction {
-            ...,
-            reference->{slug},
-          },
-        },
+        hero { ${HERO} },
         sections[] {
           _type == 'reference' => @-> {
             ...,
-            sections[] {
-              ...,
-              _type == "sponsorsSection" => {
-                ...,
-                sponsors[]->,
-                "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
-              },
-              _type == "simpleCallToAction" => {
-                ...,
-                reference->,
-              },
-              _type == "venuesSection" => {
-                ...,
-                venues[]->,
-                "allVenues": *[_id == "${mainEventId}"][0].venues[]->,
-              },
-              _type == "sessionsSection" => {
-                ...,
-                sessions[]->,
-                "allSessions": *[_type == "session"],
-              },
-              _type == "speakersSection" => {
-                ...,
-                speakers[]->,
-                "allSpeakers": *[_type == "person"],
-              },              
-              _type == "ticketsSection" => {
-                ...,
-                tickets[]->,
-                "allTickets": *[_id == "${mainEventId}"][0].tickets[]->
-              },
-              content[] {
-                ...,
-                reference->,
-              },
-            },
+            sections[] { _key, ${SHARED_SECTIONS} },
           },
-          _type != 'reference' => @ {
-            ...,
-            _type == "ticketsSection" => {
-              ...,
-              tickets[]->,
-              "allTickets": *[_id == "${mainEventId}"][0].tickets[]->
-            },
-            _type == "venuesSection" => {
-              ...,
-              venues[]->,
-              "allVenues": *[_id == "${mainEventId}"][0].venues[]->,
-            },
-            _type == "sponsorshipsSection" => {
-              ...,
-              sponsors[]->,
-              "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
-            },
-            _type == "sponsorsSection" => {
-              ...,
-              sponsors[]->,
-              "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
-            },
-            _type == "programsSection" => {
-              ...,
-              programs[]-> {
-                ...,
-                sessions[] {
-                  ...,
-                  session->,
-                },
-                venues[]->,
-              },
-              "allPrograms": *[_type == "program"] {
-                ...,
-                sessions[] {
-                  ...,
-                  session->,
-                },
-                venues[]->,
-              }
-            },
-            content[] {
-              ...,
-              reference->,
-            },
-          },
+          _type != 'reference' => @ { ${SHARED_SECTIONS} }
         }
       }
     },
     "home": *[_id == "${mainEventId}"][0] {
       name,
       description,
-      "ticketsUrl": microcopy[key == "mainCta"][0].action,
+      "ticketsUrl": registrationUrl,
     },
     "footer": *[_id == "secondary-nav"][0] {
       "links": tree[].value.reference-> {
@@ -195,13 +163,11 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
   const scrollPositionTriggeringFrontPageMenu = 420;
 
   useEffect(() => {
-    const onScroll: EventListener = (e: any) => {
-      const scrolledFarEnough =
+    const onScroll = (e) =>
+      setScrolledFarEnough(
         e.target.documentElement.scrollTop >
-        scrollPositionTriggeringFrontPageMenu;
-      setScrolledFarEnough(scrolledFarEnough);
-    };
-
+          scrollPositionTriggeringFrontPageMenu
+      );
     window.addEventListener('scroll', onScroll);
 
     return () => window.removeEventListener('scroll', onScroll);
@@ -212,7 +178,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
   const headerClasses = clsx(
     styles.header,
     isFrontPage && styles.onFrontPage,
-    isFrontPage && scrolledFarEnough && styles.onScrolledFrontPage
+    isFrontPage && scrolledFarEnough && styles.scrolledDown
   );
 
   return (

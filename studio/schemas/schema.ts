@@ -15,7 +15,7 @@ import venue from "./documents/venue";
 
 // Objects
 
-import { figure, richText, seo, simpleCallToAction } from "./objects";
+import { figure, richText, seo, simpleCallToAction, link } from "./objects";
 import blockContent from "./arrays/blockContent";
 import questionAndAnswer from "./objects/questionAndAnswer";
 import simpleBlockContent from "./arrays/simpleBlockContent";
@@ -24,19 +24,26 @@ import * as sections from "./sections";
 
 import spec from "./documents/spec";
 import program from "./documents/program";
+import navigation from "./documents/navigation";
+import navigationItem from "./objects/navigationItem";
+import benefit from "./documents/benefit";
 
 export default createSchema({
   name: "default",
   types: schemaTypes.concat([
     ...Object.values(sections),
     figure,
+    benefit,
     questionAndAnswer,
     simpleCallToAction,
     richText,
     seo,
     event,
+    link,
     session,
     person,
+    navigation,
+    navigationItem,
     article,
     page,
     route,

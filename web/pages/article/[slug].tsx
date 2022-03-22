@@ -7,30 +7,24 @@ import Footer from '../../components/Footer';
 import Nav from '../../components/Nav';
 import client from '../../lib/sanity.server';
 import { Slug } from '../../types/Slug';
-import { mainEventId } from '../../util/entityPaths';
+import { mainEventId } from '../../util/constants';
 import GridWrapper from '../../components/GridWrapper';
 import { Article } from '../../types/Article';
 import articleStyles from './article.module.css';
 import styles from '../app.module.css';
 import MetaTags from '../../components/MetaTags';
+import { BLOCK_CONTENT } from '../../util/queries';
 
 const QUERY = groq`
   {
     "article": *[_type == "article" && slug.current == $slug][0] {
-      ...,
-      content[] {
-        ...,
-        markDefs[] {
-          ...,
-          reference-> {
-            _type,
-            slug,
-          },
-        },
-      },
+      _id,
+      heading,
+      summary,
+      content[] { ${BLOCK_CONTENT} },
     },
     "home": *[_id == "${mainEventId}"][0] {
-      "ticketsUrl": microcopy[key == "mainCta"][0].action,
+      "ticketsUrl": registrationUrl,
     },
     "footer": *[_id == "secondary-nav"][0] {
       "links": tree[].value.reference-> {

@@ -24,7 +24,7 @@ export default {
       description:
         "The sponsor's target URL for where they want to direct people to.",
       validation: (Rule) =>
-        Rule.regex(/(?<=utm_[a-z]+=)\w+/).warning(
+        Rule.regex(/utm_[a-z]+=\w+/).warning(
           "Remember to ask this sponsor if they want to include UTM tags."
         ),
     },

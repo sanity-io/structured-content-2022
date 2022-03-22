@@ -104,7 +104,16 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
         <FakeItem mobile desktop />
         <FakeItem divider mobile />
 
-        <Item name="Tickets" href={ticketsUrl} />
+        <li className={styles.item}>
+          <a
+            className={styles.link}
+            href={ticketsUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Tickets
+          </a>
+        </li>
 
         <FakeItem tablet desktop />
         <FakeItem mobile desktop />

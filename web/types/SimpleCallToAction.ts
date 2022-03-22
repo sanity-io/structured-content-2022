@@ -1,9 +1,6 @@
-import { Slug } from './Slug';
+import { Link } from './Link';
 
 export type SimpleCallToAction = {
   text?: string;
-  url?: string;
-  reference?: {
-    slug?: Slug;
-  };
+  link?: Link;
 };
