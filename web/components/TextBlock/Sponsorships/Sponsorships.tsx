@@ -49,7 +49,7 @@ export const Sponsorships = ({
             <tr>
               <th />
               {sponsorships.map((s) => (
-                <th key={s._id} className={styles.columnHeader}>
+                <th key={s._id} scope="col" className={styles.columnHeader}>
                   <SponsorshipInfo sponsorship={s} />
                 </th>
               ))}

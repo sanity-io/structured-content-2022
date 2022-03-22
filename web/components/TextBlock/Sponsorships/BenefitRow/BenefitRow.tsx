@@ -10,7 +10,9 @@ interface BenefitRowProps {
 
 export const BenefitRow = ({ name, sponsorships }: BenefitRowProps) => (
   <tr key={name}>
-    <td className={styles.rowHeader}>{name}</td>
+    <th scope="row" className={styles.rowHeader}>
+      {name}
+    </th>
     {sponsorships.map(({ _id, benefits }) => {
       const sponsorBenefit = benefits?.find((b) => b.benefit.name === name);
       return (
