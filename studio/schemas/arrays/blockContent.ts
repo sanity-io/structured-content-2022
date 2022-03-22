@@ -22,9 +22,6 @@ export default {
             { type: "ticket" },
           ],
         },
-        {
-          type: "simpleCallToAction",
-        },
       ],
       marks: {
         decorators: [
@@ -40,6 +37,9 @@ export default {
           },
         ],
       },
+    },
+    {
+      type: "simpleCallToAction",
     },
   ],
 };
