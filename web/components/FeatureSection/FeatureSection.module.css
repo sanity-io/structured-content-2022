@@ -13,6 +13,11 @@
   margin-bottom: 8px;
 }
 
+.feature {
+  margin-left: 36px;
+  text-indent: -36px;
+}
+
 .feature:not(:last-child) {
   padding-bottom: 16px;
 }
