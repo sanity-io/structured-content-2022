@@ -7,7 +7,7 @@ import Footer from '../../components/Footer';
 import Nav from '../../components/Nav';
 import client from '../../lib/sanity.server';
 import { Slug } from '../../types/Slug';
-import { mainEventId } from '../../util/entityPaths';
+import { mainEventId } from '../../util/constants';
 import GridWrapper from '../../components/GridWrapper';
 import { Article } from '../../types/Article';
 import articleStyles from './article.module.css';

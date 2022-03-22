@@ -17,7 +17,7 @@ import { Figure } from '../types/Figure';
 import { Slug } from '../types/Slug';
 import { Section } from '../types/Section';
 import { Hero as HeroProps } from '../types/Hero';
-import { mainEventId } from '../util/entityPaths';
+import { mainEventId } from '../util/constants';
 import {
   ARTICLE_SECTION,
   FIGURE,

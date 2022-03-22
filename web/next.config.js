@@ -1,4 +1,5 @@
 const client = require('./lib/sanity.server');
+const { mainEventId } = require('./util/constants');
 
 module.exports = {
   reactStrictMode: true,
@@ -6,26 +7,19 @@ module.exports = {
     domains: ['cdn.sanity.io'],
   },
   async redirects() {
-    // ".microcopy[key == "mainCta"]" filtering does not work, so we have to filter server side
-    const microCopy = await client.fetch(
-      `*[_id == "aad77280-6394-4090-afad-1c0f2a0416c6"][0].microcopy[]`
+    const registrationUrl = await client.fetch(
+      `*[_id == "${mainEventId}"][0].registrationUrl`
     );
-    if (!Array.isArray(microCopy) || !microCopy.length) {
-      console.error("Could not find 'microcopy' attribute of main event!");
+    if (!registrationUrl) {
+      console.error("Could not find 'registrationUrl' of main event!");
       return [];
     }
 
-    const mainCta = microCopy.find((microCopy) => microCopy.key === 'mainCta');
-    if (!mainCta?.action) {
-      console.error("Could not find 'mainCta' element in microcopy array!");
-      return [];
-    }
-
-    console.log(`Redirecting /tickets to ${mainCta.action}`);
+    console.log(`Redirecting /tickets to ${registrationUrl}`);
     return [
       {
         source: '/tickets',
-        destination: mainCta.action,
+        destination: registrationUrl,
         permanent: true,
       },
     ];

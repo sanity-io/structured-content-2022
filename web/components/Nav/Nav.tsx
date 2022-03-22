@@ -97,10 +97,7 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
               urlPath="/sponsorship-information"
               label="Sponsorship"
             />
-            <BasicMenuItem
-              urlPath="/registration-info"
-              label="Registration"
-            />
+            <BasicMenuItem urlPath="/registration-info" label="Registration" />
             <BasicMenuItem urlPath="/about" label="About" />
           </ul>
           <div className={styles.ticketButton}>
