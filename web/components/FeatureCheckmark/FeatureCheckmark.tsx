@@ -4,12 +4,14 @@ import crossIcon from '../../images/cross.svg';
 interface FeatureCheckmarkProps {
   included?: boolean;
   className?: string;
+  hideAltText?: boolean;
 }
 
 /* eslint-disable @next/next/no-img-element */
 export const FeatureCheckmark = ({
   included,
   className,
+  hideAltText,
 }: FeatureCheckmarkProps) =>
   included ? (
     <img
@@ -17,7 +19,7 @@ export const FeatureCheckmark = ({
       className={className}
       width={checkmarkIcon.width}
       height={checkmarkIcon.height}
-      alt="Included"
+      alt={hideAltText ? '' : 'Included'}
     />
   ) : (
     <img
@@ -25,7 +27,7 @@ export const FeatureCheckmark = ({
       className={className}
       width={crossIcon.width}
       height={crossIcon.height}
-      alt="Not included"
+      alt={hideAltText ? '' : 'Not included'}
     />
   );
 /* eslint-enable @next/next/no-img-element */

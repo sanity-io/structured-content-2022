@@ -13,7 +13,7 @@ export const FeatureSection = ({ children, features }: FeatureSection) => (
     <ul className={styles.features}>
       {features?.map((feature) => (
         <li key={feature} className={styles.feature}>
-          <FeatureCheckmark included={true} />
+          <FeatureCheckmark included={true} hideAltText={true} />
           <span className={styles.featureDescription}>{feature}</span>
         </li>
       ))}
