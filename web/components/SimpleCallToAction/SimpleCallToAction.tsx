@@ -1,6 +1,6 @@
 import { SimpleCallToAction as SimpleCallToActionProps } from '../../types/SimpleCallToAction';
 import ButtonLink from '../ButtonLink';
-import urlJoin from 'proper-url-join';
+import { getEntityPath } from '../../util/entityPaths';
 
 export const SimpleCallToAction = ({ text, link }: SimpleCallToActionProps) => {
   const openInNewTab = Boolean(link?.blank);
@@ -8,7 +8,7 @@ export const SimpleCallToAction = ({ text, link }: SimpleCallToActionProps) => {
     return (
       <ButtonLink
         text={text}
-        url={urlJoin(link.internal.slug.current)}
+        url={getEntityPath(link.internal)}
         openInNewTab={openInNewTab}
       />
     );
