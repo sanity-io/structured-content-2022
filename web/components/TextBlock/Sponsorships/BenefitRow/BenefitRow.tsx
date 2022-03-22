@@ -10,13 +10,16 @@ interface BenefitRowProps {
 
 export const BenefitRow = ({ name, sponsorships }: BenefitRowProps) => (
   <tr key={name}>
-    <td>{name}</td>
+    <td className={styles.rowHeader}>{name}</td>
     {sponsorships.map(({ _id, benefits }) => {
       const sponsorBenefit = benefits?.find((b) => b.benefit.name === name);
       return (
         <td
           key={_id}
-          className={clsx(Boolean(sponsorBenefit) && styles.active)}
+          className={clsx(
+            styles.cell,
+            Boolean(sponsorBenefit) && styles.active
+          )}
         >
           {sponsorBenefit?.number ?? (
             <FeatureCheckmark included={Boolean(sponsorBenefit)} />

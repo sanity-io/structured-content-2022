@@ -44,12 +44,12 @@ export const Sponsorships = ({
 
     return (
       <GridWrapper>
-        <table className={styles.container}>
+        <table className={styles.table}>
           <thead>
             <tr>
               <th />
               {sponsorships.map((s) => (
-                <th key={s._id}>
+                <th key={s._id} className={styles.columnHeader}>
                   <SponsorshipInfo sponsorship={s} />
                 </th>
               ))}
