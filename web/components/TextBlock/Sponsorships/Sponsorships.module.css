@@ -38,6 +38,7 @@
 }
 
 .sponsorshipName {
+  display: block;
   margin: 0 0 24px;
   font: var(--font-body-large-bold);
 }

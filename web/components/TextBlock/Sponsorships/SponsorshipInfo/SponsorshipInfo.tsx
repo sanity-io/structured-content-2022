@@ -7,11 +7,9 @@ interface SponsorshipInfoProps {
 }
 
 export const SponsorshipInfo = ({
-  sponsorship: { _id, type, available, price },
+  sponsorship: { _id, available, price },
 }: SponsorshipInfoProps) => (
   <>
-    <h2 className={styles.sponsorshipName}>{type}</h2>
-
     {available > 0 && (
       <div className={styles.spotsAvailable}>
         {available} available sponsorship

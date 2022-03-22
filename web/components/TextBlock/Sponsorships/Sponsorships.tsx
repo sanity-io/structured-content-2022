@@ -50,6 +50,7 @@ export const Sponsorships = ({
               <th />
               {sponsorships.map((s) => (
                 <th key={s._id} scope="col" className={styles.columnHeader}>
+                  <strong className={styles.sponsorshipName}>{s.type}</strong>
                   <SponsorshipInfo sponsorship={s} />
                 </th>
               ))}
@@ -72,6 +73,7 @@ export const Sponsorships = ({
             );
             return (
               <FeatureSection features={features} key={s._id}>
+                <h3 className={styles.sponsorshipName}>{s.type}</h3>
                 <SponsorshipInfo sponsorship={s} />
               </FeatureSection>
             );
