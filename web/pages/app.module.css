@@ -22,8 +22,7 @@
     transition: transform 0.5s cubic-bezier(0.25, 0.92, 0.37, 1);
   }
 
-  .header.onScrolledFrontPage {
-    position: fixed;
+  .header.onFrontPage.scrolledDown {
     transform: translateY(0%);
   }
 }
