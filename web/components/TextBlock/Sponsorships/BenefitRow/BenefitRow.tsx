@@ -23,11 +23,15 @@ export const BenefitRow = ({ name, sponsorships }: BenefitRowProps) => (
             Boolean(sponsorBenefit) && styles.active
           )}
         >
-          {sponsorBenefit?.number ?? (
+          {sponsorBenefit?.number ? (
+            <span className={styles.number}>{sponsorBenefit.number}</span>
+          ) : (
             <FeatureCheckmark included={Boolean(sponsorBenefit)} />
           )}
           {sponsorBenefit?.description && (
-            <div>{sponsorBenefit.description}</div>
+            <span className={styles.description}>
+              {sponsorBenefit.description}
+            </span>
           )}
         </td>
       );
