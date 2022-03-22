@@ -1,10 +1,7 @@
 .header {
   background-color: var(--color-brand-yellow);
   border-radius: 8px 8px 0 0;
-  font: inherit;
   padding: 24px;
-  text-align: left;
-  vertical-align: top;
 }
 
 .features {
@@ -22,5 +19,4 @@
 
 .featureDescription {
   padding-left: 12px;
-  vertical-align: top;
 }
