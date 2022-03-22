@@ -1,18 +1,16 @@
-import { useRef, useMemo, CSSProperties } from 'react';
 import clsx from 'clsx';
+import { useRef } from 'react';
+import useIntersection from '../../hooks/useIntersection';
+import { useRandomAnimation } from '../../hooks/useRandomAnimation';
 import { Venue } from '../../types/Venue';
 import styles from './VenueNames.module.css';
-
-import useIntersection from '../../hooks/useIntersection';
-import { getRandomAnimation } from '../../lib/animation';
 
 interface VenueNamesProps {
   venues?: Venue[];
 }
 
 const Venue = ({ name }: Venue) => {
-  const animation = useMemo(getRandomAnimation, []) as CSSProperties;
-
+  const animation = useRandomAnimation();
   return (
     <li className={styles.venue} style={animation}>
       {name}

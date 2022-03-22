@@ -1,12 +1,12 @@
-import { useRef, useMemo, CSSProperties } from 'react';
+import { useRef } from 'react';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import { PortableTextComponentProps } from '@portabletext/react';
 import newsletterShapes from '../../images/newsletter-shapes.svg';
+import useIntersection from '../../hooks/useIntersection';
+import { useRandomAnimation } from '../../hooks/useRandomAnimation';
 import GridWrapper from '../GridWrapper';
 import styles from './ConferenceUpdatesForm.module.css';
-import useIntersection from '../../hooks/useIntersection';
-import { getRandomAnimation } from '../../lib/animation';
 
 type ConferenceUpdatesFormProps = {
   type: 'contact' | 'registration' | 'newsletter';
@@ -23,10 +23,10 @@ export const ConferenceUpdatesForm = ({
   const wrapperRef = useRef<HTMLDivElement>();
   const isIntersecting = useIntersection(wrapperRef);
 
-  const animation1 = useMemo(getRandomAnimation, []) as CSSProperties;
-  const animation2 = useMemo(getRandomAnimation, []) as CSSProperties;
-  const animation3 = useMemo(getRandomAnimation, []) as CSSProperties;
-  const animation4 = useMemo(getRandomAnimation, []) as CSSProperties;
+  const imageAnimation = useRandomAnimation();
+  const headingAnimation = useRandomAnimation();
+  const formAnimation = useRandomAnimation();
+  const labelAnimation = useRandomAnimation();
 
   if (type !== 'newsletter') {
     console.error(`Unrecognized ConferenceUpdatesForm type: '${type}'`);
@@ -48,19 +48,19 @@ export const ConferenceUpdatesForm = ({
           width={newsletterShapes.width}
           height={newsletterShapes.height}
           className={styles.image}
-          style={animation1}
+          style={imageAnimation}
           alt=""
         />
 
         <div className={styles.mainContents}>
-          <h2 className={styles.heading} style={animation2}>
+          <h2 className={styles.heading} style={headingAnimation}>
             Get conference updates
           </h2>
           <form
             action={target}
             method="POST"
             className={styles.form}
-            style={animation3}
+            style={formAnimation}
             onSubmit={() => {
               if (redirect) {
                 router.push(redirect);
@@ -88,7 +88,7 @@ export const ConferenceUpdatesForm = ({
               </button>
             </div>
           </form>
-          <p className={styles.emailParagraph} style={animation4}>
+          <p className={styles.emailParagraph} style={labelAnimation}>
             We&#39;ll only send you updates about the conference
           </p>
         </div>

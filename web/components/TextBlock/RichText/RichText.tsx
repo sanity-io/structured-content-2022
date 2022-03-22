@@ -1,11 +1,11 @@
-import { useRef, useMemo, CSSProperties } from 'react';
+import { useRef } from 'react';
 import clsx from 'clsx';
 import TextBlock from '../TextBlock';
 import GridWrapper from '../../GridWrapper';
 import { RichTextSection } from '../../../types/RichTextSection';
 import styles from './RichText.module.css';
 import useIntersection from '../../../hooks/useIntersection';
-import { getRandomAnimation } from '../../../lib/animation';
+import { useRandomAnimation } from '../../../hooks/useRandomAnimation';
 
 interface RichTextProps {
   value: RichTextSection;
@@ -19,9 +19,8 @@ interface RichTextProps {
 export const RichText = ({ value, background }: RichTextProps) => {
   const wrapperRef = useRef<HTMLDivElement>();
   const isIntersecting = useIntersection(wrapperRef);
-
-  const animation1 = useMemo(getRandomAnimation, []) as CSSProperties;
-  const animation2 = useMemo(getRandomAnimation, []) as CSSProperties;
+  const headingAnimation = useRandomAnimation();
+  const textAnimation = useRandomAnimation();
 
   return (
     <GridWrapper>
@@ -35,7 +34,7 @@ export const RichText = ({ value, background }: RichTextProps) => {
       >
         <div className={styles.content}>
           {value.heading && (
-            <hgroup style={animation1}>
+            <hgroup style={headingAnimation}>
               {value.heading && (
                 <h2 id={`heading-h2-${value._key}`} className={styles.heading}>
                   {value.heading}
@@ -46,7 +45,7 @@ export const RichText = ({ value, background }: RichTextProps) => {
               )}
             </hgroup>
           )}
-          <div style={animation2} className={styles.text}>
+          <div style={textAnimation} className={styles.text}>
             <TextBlock value={value.content} />
           </div>
         </div>

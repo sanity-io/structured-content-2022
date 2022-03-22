@@ -1,6 +1,8 @@
-import { useRef, useMemo, CSSProperties } from 'react';
 import clsx from 'clsx';
+import { useRef } from 'react';
 import { PortableTextComponentProps } from '@portabletext/react';
+import useIntersection from '../../../hooks/useIntersection';
+import { useRandomAnimation } from '../../../hooks/useRandomAnimation';
 import { imageUrlFor } from '../../../lib/sanity';
 import { Figure } from '../../../types/Figure';
 import { Section } from '../../../types/Section';
@@ -8,8 +10,6 @@ import GridWrapper from '../../GridWrapper';
 import Heading from '../../Heading';
 import TextBlock from '../TextBlock';
 import styles from './TextAndImage.module.css';
-import useIntersection from '../../../hooks/useIntersection';
-import { getRandomAnimation } from '../../../lib/animation';
 
 type TextAndImageProps = {
   _key: string;
@@ -26,8 +26,8 @@ export const TextAndImage = ({
   const wrapperRef = useRef<HTMLDivElement>();
   const isIntersecting = useIntersection(wrapperRef);
 
-  const animation1 = useMemo(getRandomAnimation, []) as CSSProperties;
-  const animation2 = useMemo(getRandomAnimation, []) as CSSProperties;
+  const imageContainerAnimation = useRandomAnimation();
+  const textContainerAnimation = useRandomAnimation();
 
   return (
     <section
@@ -39,7 +39,10 @@ export const TextAndImage = ({
     >
       <GridWrapper>
         <div className={styles.contents}>
-          <div className={styles.imageContainer} style={animation1}>
+          <div
+            className={styles.imageContainer}
+            style={imageContainerAnimation}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={imageUrlFor(image).ignoreImageParams().url()}
@@ -47,7 +50,7 @@ export const TextAndImage = ({
               className={styles.image}
             />
           </div>
-          <div className={styles.text} style={animation2}>
+          <div className={styles.text} style={textContainerAnimation}>
             {title && (
               <hgroup>
                 <Heading type="h2" id={`heading-h2-${_key}`}>

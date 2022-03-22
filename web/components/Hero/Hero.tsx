@@ -1,19 +1,18 @@
-import { useRef, useMemo, CSSProperties } from 'react';
+import { useRef } from 'react';
 import clsx from 'clsx';
 import { Hero as HeroProps } from '../../types/Hero';
+import useIntersection from '../../hooks/useIntersection';
+import { useRandomAnimation } from '../../hooks/useRandomAnimation';
 import GridWrapper from '../GridWrapper';
 import SimpleCallToAction from '../SimpleCallToAction';
 import styles from './Hero.module.css';
-import useIntersection from '../../hooks/useIntersection';
-import { getRandomAnimation } from '../../lib/animation';
 
 export const Hero = ({ heading, summary, callToAction }: HeroProps) => {
   const wrapperRef = useRef<HTMLDivElement>();
   const isIntersecting = useIntersection(wrapperRef, '-80px 0px');
-
-  const animation1 = useMemo(getRandomAnimation, []) as CSSProperties;
-  const animation2 = useMemo(getRandomAnimation, []) as CSSProperties;
-  const animation3 = useMemo(getRandomAnimation, []) as CSSProperties;
+  const headingAnimation = useRandomAnimation();
+  const summaryAnimation = useRandomAnimation();
+  const ctaAnimation = useRandomAnimation();
 
   return (
     <div
@@ -25,16 +24,16 @@ export const Hero = ({ heading, summary, callToAction }: HeroProps) => {
     >
       <GridWrapper>
         <div className={styles.headingContainer}>
-          <h1 className={styles.heading} style={animation1}>
+          <h1 className={styles.heading} style={headingAnimation}>
             {heading}
           </h1>
           {summary && (
-            <p className={styles.summary} style={animation2}>
+            <p className={styles.summary} style={summaryAnimation}>
               {summary}
             </p>
           )}
           {callToAction && (
-            <div className={styles.cta} style={animation3}>
+            <div className={styles.cta} style={ctaAnimation}>
               <SimpleCallToAction {...callToAction} />
             </div>
           )}
