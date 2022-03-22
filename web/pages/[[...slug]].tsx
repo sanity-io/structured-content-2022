@@ -17,7 +17,7 @@ import { Figure } from '../types/Figure';
 import { Slug } from '../types/Slug';
 import { Section } from '../types/Section';
 import { Hero as HeroProps } from '../types/Hero';
-import { mainEventId } from '../util/entityPaths';
+import { mainEventId } from '../util/constants';
 import {
   ARTICLE_SECTION,
   FIGURE,
@@ -93,7 +93,7 @@ const QUERY = groq`
     "home": *[_id == "${mainEventId}"][0] {
       name,
       description,
-      "ticketsUrl": microcopy[key == "mainCta"][0].action,
+      "ticketsUrl": registrationUrl,
     },
     "footer": *[_id == "secondary-nav"][0] {
       "links": tree[].value.reference-> {
