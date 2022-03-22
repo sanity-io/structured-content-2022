@@ -58,7 +58,7 @@ const expiryString = (timestamp: Date): string => {
 
 const priceList = (ticket: Ticket) => (
   <ul className={styles.priceList}>
-    {ticket.groups.map((group) => {
+    {ticket.groups?.map((group) => {
       const currentTicket = availabilityData(group).find(
         (item) => !item.isExpired
       );

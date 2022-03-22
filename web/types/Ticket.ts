@@ -14,7 +14,7 @@ export type Ticket = {
   _id: string;
   _type: 'ticket';
   description?: Section[];
-  groups: TicketGroup[];
+  groups?: TicketGroup[];
   included: string[];
   type: string;
 };
