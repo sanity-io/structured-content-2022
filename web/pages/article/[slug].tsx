@@ -24,7 +24,7 @@ const QUERY = groq`
       content[] { ${BLOCK_CONTENT} },
     },
     "home": *[_id == "${mainEventId}"][0] {
-      "ticketsUrl": microcopy[key == "mainCta"][0].action,
+      "ticketsUrl": registrationUrl,
     },
     "footer": *[_id == "secondary-nav"][0] {
       "links": tree[].value.reference-> {
