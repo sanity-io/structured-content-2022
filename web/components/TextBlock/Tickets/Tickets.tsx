@@ -5,8 +5,6 @@ import sub from 'date-fns/sub';
 import { format } from 'date-fns-tz';
 import { PortableText, PortableTextComponentProps } from '@portabletext/react';
 import { Fragment } from 'react';
-import checkmarkIcon from '../../../images/checkmark.svg';
-import crossIcon from '../../../images/cross.svg';
 import { Ticket } from '../../../types/Ticket';
 import GridWrapper from '../../GridWrapper';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
