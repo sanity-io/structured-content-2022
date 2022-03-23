@@ -1,5 +1,5 @@
 :root {
-  --color-brand-black: #000000;
+  --color-brand-black: #121923;
   --color-brand-orange: #fbd024;
   --color-brand-white: #ffffff;
   --color-brand-yellow: #fdefb6;
@@ -30,7 +30,9 @@
   --font-display-xs: 700 28px/35px 'National 2 Narrow', sans-serif;
   --font-display-xxs: 700 24px/30px 'National 2 Narrow', sans-serif;
   --font-ui-sm-medium: 500 16px/22px 'Inter', sans-serif;
+  --font-ui-sm-semi: 600 16px/22px 'Inter', sans-serif;
   --font-ui-xl-medium: 500 30px/38px 'Inter', sans-serif;
+  --font-ui-xs: 400 14px/18px 'Inter', sans-serif;
   --font-ui-xxl-medium: 500 40px/56px 'Inter', sans-serif;
   --grid-gutter: 40px;
   --grid-half-gutter: 20px;
@@ -43,6 +45,7 @@
   --letter-spacing-body-xl: -0.019em;
   --letter-spacing-ui-sm: -0.011em;
   --letter-spacing-ui-xl: -0.021em;
+  --letter-spacing-ui-xs: -0.006em;
   --letter-spacing-ui-xxl: -0.022em;
   --max-body-text-width: 37.5rem;
   --spacing-small: 40px;

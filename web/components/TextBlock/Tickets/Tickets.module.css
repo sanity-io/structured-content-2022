@@ -23,18 +23,39 @@
 }
 
 .name {
-  margin: 0 0 4px;
-  font: var(--font-body-large-bold);
+  display: block;
+  margin: 0 0 8px;
+  font: var(--font-body-large-semi);
   letter-spacing: var(--letter-spacing-body-large);
 }
 
+.description {
+  font: var(--font-body-small);
+  letter-spacing: var(--letter-spacing-body-small);
+  color: var(--color-material-gray-600);
+}
+
 .priceList {
+  list-style: none;
+  padding: 0;
   margin: 24px 0 0 0;
 }
 
-.priceLabel,
-.description {
-  color: var(--color-material-gray-600);
+.group {
+  border: 1px solid var(--color-brand-black);
+  border-radius: 4px;
+  padding: 16px;
+  margin-top: 8px;
+}
+
+.groupName {
+  font: var(--font-ui-sm-semi);
+  letter-spacing: var(--letter-spacing-ui-sm);
+  margin: 0 0 24px;
+}
+
+.priceGroup {
+  margin: 0;
 }
 
 .visuallyHidden {
@@ -45,27 +66,32 @@
   overflow: hidden;
 }
 
+.price,
+.priceLabel {
+  color: var(--color-material-gray-600);
+  font: var(--font-ui-xs);
+  letter-spacing: var(--letter-spacing-ui-xs);
+}
+
+.currentLabel {
+  color: var(--color-brand-black);
+}
+
 .price {
   margin: 0 0 8px;
-  color: var(--color-brand-black);
 }
 
 .price:last-child {
   margin: 0;
 }
 
-.price.expired {
-  text-decoration: line-through;
-  color: var(--color-material-gray-600);
+.currentPrice {
+  font: var(--font-body-xl-medium);
+  color: var(--color-brand-black);
 }
 
-.ticketFeatures {
-  list-style-type: none;
-  padding: 24px;
-  border: 1px solid var(--color-brand-yellow);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  margin-bottom: 8px;
+.expired {
+  text-decoration: line-through;
 }
 
 .feature,
@@ -94,6 +120,17 @@
   .sections {
     margin: 64px 0;
   }
+
+  .priceList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .group {
+    margin-top: 0;
+    flex-basis: calc(50% - 4px);
+  }
 }
 
 @media (--large-up) {
@@ -103,5 +140,13 @@
 
   .sections {
     display: none;
+  }
+
+  .priceList {
+    display: block;
+  }
+
+  .group {
+    margin-top: 8px;
   }
 }
