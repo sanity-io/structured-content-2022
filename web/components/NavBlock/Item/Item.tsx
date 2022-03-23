@@ -8,7 +8,7 @@ interface ItemProps {
 }
 
 export const Item = ({ name, href }: ItemProps) => {
-  const animation = useRandomAnimation();
+  const animation = useRandomAnimation(true);
   return (
     <li className={styles.item} style={animation}>
       <Link href={href}>

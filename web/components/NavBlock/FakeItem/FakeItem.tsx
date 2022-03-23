@@ -25,7 +25,7 @@ export const FakeItem = ({
   tablet,
   desktop,
 }: FakeItemProps) => {
-  const animation = useRandomAnimation();
+  const animation = useRandomAnimation(true);
   const [shapeClass, setShapeClass] = useState<string>();
 
   useEffect(() => {
