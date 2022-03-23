@@ -5,7 +5,6 @@
   margin: 2px;
   display: inline-flex;
   align-items: center;
-  min-height: 50px;
   vertical-align: top;
   font: var(--font-ui-xs);
   letter-spacing: var(--letter-spacing-ui-xs);
