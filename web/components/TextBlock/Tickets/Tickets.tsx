@@ -5,13 +5,13 @@ import sub from 'date-fns/sub';
 import { format } from 'date-fns-tz';
 import { PortableText, PortableTextComponentProps } from '@portabletext/react';
 import { Fragment } from 'react';
-import checkmarkIcon from '../../../images/checkmark.svg';
-import crossIcon from '../../../images/cross.svg';
-import { Ticket } from '../../../types/Ticket';
+import { Ticket, TicketGroup } from '../../../types/Ticket';
 import GridWrapper from '../../GridWrapper';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import styles from './Tickets.module.css';
 import { getCollectionForSelectionType } from '../../../util/entity';
+import FeatureCheckmark from '../../FeatureCheckmark';
+import FeatureSection from '../../FeatureSection';
 
 interface TicketsProps {
   type: EntitySectionSelection;
@@ -26,6 +26,78 @@ type AvailabilityInfo = {
   expires?: Date;
   label?: string;
 };
+
+const availabilityData = (group: TicketGroup): AvailabilityInfo[] => {
+  const currentDate = new Date();
+  return group.priceAndAvailability?.map((item, index, array) => {
+    const nextPriceStart = array?.[index + 1]?.from;
+    const expiryTime = nextPriceStart ? parseISO(nextPriceStart) : null;
+    return {
+      _key: item._key,
+      price: item.price,
+      expires: expiryTime,
+      // Check if current time is at or after the expiry time
+      isExpired: expiryTime && compareAsc(currentDate, expiryTime) >= 0,
+      label: item.label,
+    };
+  });
+};
+
+const expiryString = (timestamp: Date): string => {
+  /* TODO: investigate if this is safe to do or if it needs to be done in a
+   * way that is aware of the PST timezone, in case of daylight saving corner
+   * cases
+   */
+  const oneDayBeforeExpiry = sub(timestamp, { days: 1 });
+  const formattedDay = format(oneDayBeforeExpiry, 'MMMM d', {
+    timeZone: 'PST8PDT',
+    locale: enUS,
+  });
+  return ` (thru ${formattedDay})`;
+};
+
+const priceList = (ticket: Ticket) => (
+  <ul className={styles.priceList}>
+    {ticket.groups?.map((group) => {
+      const currentTicket = availabilityData(group).find(
+        (item) => !item.isExpired
+      );
+      return (
+        <li key={group.name} className={styles.group}>
+          {group.name && <div className={styles.groupName}>{group.name}</div>}
+          <dl className={styles.priceGroup}>
+            {availabilityData(group)?.map(
+              ({ _key, label, price, isExpired, expires }) => (
+                <Fragment key={_key}>
+                  <dt
+                    className={clsx(
+                      styles.priceLabel,
+                      isExpired && styles.expired,
+                      !label && !expires && styles.visuallyHidden,
+                      currentTicket?._key === _key && styles.currentLabel
+                    )}
+                  >
+                    {label || 'Price'}
+                    {expires && expiryString(expires)}
+                  </dt>
+                  <dd
+                    className={clsx(
+                      styles.price,
+                      isExpired && styles.expired,
+                      currentTicket?._key === _key && styles.currentPrice
+                    )}
+                  >
+                    {price ? `$${price}` : 'Free'}
+                  </dd>
+                </Fragment>
+              )
+            )}
+          </dl>
+        </li>
+      );
+    })}
+  </ul>
+);
 
 export const Tickets = ({
   value: { type, tickets, allTickets },
@@ -49,35 +121,6 @@ export const Tickets = ({
     new Set(allTickets.map((ticket) => ticket.included).flat())
   );
 
-  const availabilityData = (ticket: Ticket): AvailabilityInfo[] => {
-    const currentDate = new Date();
-    return ticket.priceAndAvailability?.map((item, index, array) => {
-      const nextPriceStart = array?.[index + 1]?.from;
-      const expiryTime = nextPriceStart ? parseISO(nextPriceStart) : null;
-      return {
-        _key: item._key,
-        price: item.price,
-        expires: expiryTime,
-        // Check if current time is at or after the expiry time
-        isExpired: expiryTime && compareAsc(currentDate, expiryTime) >= 0,
-        label: item.label,
-      };
-    });
-  };
-
-  const expiryString = (timestamp: Date): string => {
-    /* TODO: investigate if this is safe to do or if it needs to be done in a
-     * way that is aware of the PST timezone, in case of daylight saving corner
-     * cases
-     */
-    const oneDayBeforeExpiry = sub(timestamp, { days: 1 });
-    const formattedDay = format(oneDayBeforeExpiry, 'MMMM d', {
-      timeZone: 'PST8PDT',
-      locale: enUS,
-    });
-    return ` (thru ${formattedDay})`;
-  };
-
   return (
     <GridWrapper>
       <table className={styles.table}>
@@ -85,49 +128,17 @@ export const Tickets = ({
           <tr>
             <th />
             {getCollectionForSelectionType(type, allTickets, tickets).map(
-              (ticket) => {
-                return (
-                  <th
-                    key={ticket._id}
-                    scope="col"
-                    className={styles.ticketInfo}
-                  >
-                    <div className={styles.name}>{ticket.type}</div>
-                    {ticket.description && (
-                      <div className={styles.description}>
-                        <PortableText value={ticket.description} />
-                      </div>
-                    )}
-                    <dl className={styles.priceList}>
-                      {availabilityData(ticket)?.map(
-                        ({ _key, label, price, isExpired, expires }) => (
-                          <Fragment key={_key}>
-                            <dt className={styles.priceLabel}>
-                              {label || (
-                                <span className={styles.visuallyHidden}>
-                                  Price
-                                </span>
-                              )}
-                              {expires && expiryString(expires)}
-                            </dt>
-                            {isExpired ? (
-                              <dd
-                                className={clsx(styles.price, styles.expired)}
-                              >
-                                {price ? `$${price}` : 'Free'}
-                              </dd>
-                            ) : (
-                              <dd className={styles.price}>
-                                <strong>{price ? `$${price}` : 'Free'}</strong>
-                              </dd>
-                            )}
-                          </Fragment>
-                        )
-                      )}
-                    </dl>
-                  </th>
-                );
-              }
+              (ticket) => (
+                <th key={ticket._id} scope="col" className={styles.ticketInfo}>
+                  <strong className={styles.name}>{ticket.type}</strong>
+                  {ticket.description && (
+                    <div className={styles.description}>
+                      <PortableText value={ticket.description} />
+                    </div>
+                  )}
+                  {priceList(ticket)}
+                </th>
+              )
             )}
           </tr>
         </thead>
@@ -149,25 +160,7 @@ export const Tickets = ({
                         featureIncluded && styles.featureIncluded
                       )}
                     >
-                      {/* eslint-disable @next/next/no-img-element */}
-                      {featureIncluded ? (
-                        <img
-                          src={checkmarkIcon.src}
-                          className={styles.icon}
-                          width={checkmarkIcon.width}
-                          height={checkmarkIcon.height}
-                          alt="Included"
-                        />
-                      ) : (
-                        <img
-                          src={crossIcon.src}
-                          className={styles.icon}
-                          width={crossIcon.width}
-                          height={crossIcon.height}
-                          alt="Not included"
-                        />
-                      )}
-                      {/* eslint-enable @next/next/no-img-element */}
+                      <FeatureCheckmark included={featureIncluded} />
                     </td>
                   );
                 }
@@ -179,62 +172,19 @@ export const Tickets = ({
 
       <div className={styles.sections}>
         {getCollectionForSelectionType(type, allTickets, tickets).map(
-          (ticket) => {
-            return (
-              <section key={ticket._id}>
-                <div className={clsx(styles.ticketInfo, styles.inSections)}>
-                  <h3 className={styles.name}>{ticket.type}</h3>
-                  {ticket.description && (
-                    <div className={styles.description}>
-                      <PortableText value={ticket.description} />
-                    </div>
-                  )}
-                  <dl className={styles.priceList}>
-                    {availabilityData(ticket)?.map(
-                      ({ _key, label, price, isExpired, expires }) => (
-                        <Fragment key={_key}>
-                          <dt className={styles.priceLabel}>
-                            {label || (
-                              <span className={styles.visuallyHidden}>
-                                Price
-                              </span>
-                            )}
-                            {expires && expiryString(expires)}
-                          </dt>
-                          {isExpired ? (
-                            <dd className={clsx(styles.price, styles.expired)}>
-                              {price ? `$${price}` : 'Free'}
-                            </dd>
-                          ) : (
-                            <dd className={styles.price}>
-                              <strong>{price ? `$${price}` : 'Free'}</strong>
-                            </dd>
-                          )}
-                        </Fragment>
-                      )
-                    )}
-                  </dl>
-                </div>
-                <ul className={styles.ticketFeatures}>
-                  {ticket.included.map((included) => (
-                    <li key={included} className={styles.includedFeature}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={checkmarkIcon.src}
-                        className={styles.icon}
-                        width={checkmarkIcon.width}
-                        height={checkmarkIcon.height}
-                        alt=""
-                      />
-                      <span className={styles.includedFeatureDescription}>
-                        {included}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            );
-          }
+          (ticket) => (
+            <FeatureSection features={ticket.included} key={ticket._id}>
+              <>
+                <h3 className={styles.name}>{ticket.type}</h3>
+                {ticket.description && (
+                  <div className={styles.description}>
+                    <PortableText value={ticket.description} />
+                  </div>
+                )}
+                {priceList(ticket)}
+              </>
+            </FeatureSection>
+          )
         )}
       </div>
     </GridWrapper>

@@ -1,5 +1,5 @@
 :root {
-  --color-brand-black: #000000;
+  --color-brand-black: #121923;
   --color-brand-orange: #fbd024;
   --color-brand-white: #ffffff;
   --color-brand-yellow: #fdefb6;
@@ -17,6 +17,7 @@
   --font-body-large: 400 20px/30px 'Inter', sans-serif;
   --font-body-large-bold: 700 20px/30px 'Inter', sans-serif;
   --font-body-large-medium: 500 20px/30px 'Inter', sans-serif;
+  --font-body-large-semi: 600 20px/30px 'Inter', sans-serif;
   --font-body-small: 400 16px/22px 'Inter', sans-serif;
   --font-body-small-bold: 700 16px/22px 'Inter', sans-serif;
   --font-body-small-medium: 500 16px/22px 'Inter', sans-serif;
@@ -29,6 +30,7 @@
   --font-display-xs: 700 28px/35px 'National 2 Narrow', sans-serif;
   --font-display-xxs: 700 24px/30px 'National 2 Narrow', sans-serif;
   --font-ui-sm-medium: 500 16px/22px 'Inter', sans-serif;
+  --font-ui-sm-semi: 600 16px/22px 'Inter', sans-serif;
   --font-ui-xl-medium: 500 30px/38px 'Inter', sans-serif;
   --font-ui-xs: 400 14px/18px 'Inter', sans-serif;
   --font-ui-xs-medium: 500 14px/18px 'Inter', sans-serif;

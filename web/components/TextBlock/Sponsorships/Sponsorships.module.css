@@ -1,0 +1,89 @@
+.table {
+  border-spacing: 8px;
+  display: none;
+  width: 100%;
+  font: var(--font-body-small-medium);
+  letter-spacing: var(--letter-spacing-body-small);
+  margin: 128px 0;
+}
+
+.listContainer {
+  font: var(--font-body-small-medium);
+  letter-spacing: var(--letter-spacing-body-small);
+  margin: 80px 0;
+}
+
+.columnHeader,
+.rowHeader,
+.cell {
+  padding: 24px;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.columnHeader,
+.rowHeader {
+  text-align: left;
+}
+
+.columnHeader {
+  background: var(--color-brand-yellow);
+}
+
+.rowHeader,
+.cell {
+  border: 1px solid var(--color-ui-gray-100);
+  height: 114px;
+}
+
+.rowHeader {
+  vertical-align: top;
+}
+
+.cell {
+  text-align: center;
+}
+
+.cell.active {
+  background-color: var(--color-brand-yellow-light);
+}
+
+.sponsorshipName {
+  display: block;
+  margin: 0 0 24px;
+  font: var(--font-body-large-semi);
+  letter-spacing: var(--letter-spacing-body-large);
+}
+
+.spotsAvailable {
+  border: 1px solid var(--color-brand-black);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.price {
+  margin-top: 48px;
+  font: var(--font-ui-xl-medium);
+  letter-spacing: var(--letter-spacing-ui-xl);
+}
+
+@media (--large-up) {
+  .table {
+    display: table;
+  }
+
+  .listContainer {
+    display: none;
+  }
+
+  .price,
+  .number {
+    font: var(--font-body-xl-medium);
+    letter-spacing: var(--letter-spacing-body-xl);
+  }
+
+  .description {
+    display: block;
+    margin-top: 10px;
+  }
+}

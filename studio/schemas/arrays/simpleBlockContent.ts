@@ -5,6 +5,19 @@ export default {
   of: [
     {
       type: "block",
+      marks: {
+        decorators: [
+          { title: "Strong", value: "strong" },
+          { title: "Emphasis", value: "em" },
+          { title: "Code", value: "code" },
+        ],
+        annotations: [
+          {
+            name: "link",
+            type: "link",
+          },
+        ],
+      },
     },
     {
       type: "simpleCallToAction",

@@ -9,9 +9,9 @@ import MetaTags from '../../components/MetaTags';
 import Nav from '../../components/Nav';
 import TextBlock from '../../components/TextBlock';
 import client from '../../lib/sanity.server';
-import { formatDate } from '../../util/date';
-import { mainEventId } from '../../util/entityPaths';
 import { BLOCK_CONTENT } from '../../util/queries';
+import { formatDate } from '../../util/date';
+import { mainEventId } from '../../util/constants';
 import { Article } from '../../types/Article';
 import { Slug } from '../../types/Slug';
 import styles from '../app.module.css';
@@ -34,7 +34,7 @@ const QUERY = groq`
       },
     },
     "home": *[_id == "${mainEventId}"][0] {
-      "ticketsUrl": microcopy[key == "mainCta"][0].action,
+      "ticketsUrl": registrationUrl,
     },
     "footer": *[_id == "secondary-nav"][0] {
       "links": tree[].value.reference-> {

@@ -1,18 +1,22 @@
+const LINK = 'internal->{_type, slug}, external, blank';
+
 const FIGURE = '_type, alt, asset';
-const SIMPLE_CALL_TO_ACTION = 'text, url, reference->{slug}';
+const SIMPLE_CALL_TO_ACTION = `text, link{ ${LINK} }`;
 
 const BLOCK_CONTENT = `
   ...,
   markDefs[] {
     ...,
-    reference-> {
-      _type,
-      slug,
-    },
+    _type == "link" => { ${LINK} },
   },
+  _type == "simpleCallToAction" => { ${SIMPLE_CALL_TO_ACTION} },
 `;
 const SIMPLE_BLOCK_CONTENT = `
   ...,
+  markDefs[] {
+    ...,
+    _type == "link" => { ${LINK} },
+  },
   _type == "simpleCallToAction" => { ${SIMPLE_CALL_TO_ACTION} },
 `;
 
@@ -38,8 +42,36 @@ const TICKET = `
   _id,
   _type,
   description[]{ ${SIMPLE_BLOCK_CONTENT} },
+  groups[]{
+    name,
+    priceAndAvailability[] { _key, from, label, price },    
+  },
   included,
-  priceAndAvailability,
+  type,
+`;
+
+const SPONSORSHIP = `
+  _createdAt,
+  _id,
+  _rev,
+  _type,
+  _updatedAt,
+  available,
+  benefits[] {
+    _key,
+    _type,
+    benefit-> {
+      _createdAt,
+      _id,
+      _rev,
+      _type,
+      _updatedAt,
+      name,
+    },
+    description,
+    number,
+  },
+  price,
   type,
 `;
 
@@ -53,4 +85,5 @@ export {
   SIMPLE_CALL_TO_ACTION,
   TEXT_AND_IMAGE_SECTION,
   TICKET,
+  SPONSORSHIP,
 };

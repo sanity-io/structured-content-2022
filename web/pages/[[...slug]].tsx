@@ -17,13 +17,14 @@ import { Figure } from '../types/Figure';
 import { Slug } from '../types/Slug';
 import { Section } from '../types/Section';
 import { Hero as HeroProps } from '../types/Hero';
-import { mainEventId } from '../util/entityPaths';
+import { mainEventId } from '../util/constants';
 import {
   ARTICLE_SECTION,
   FIGURE,
   HERO,
   PROGRAM,
   QUESTION_AND_ANSWER_COLLECTION_SECTION,
+  SPONSORSHIP,
   TEXT_AND_IMAGE_SECTION,
   TICKET,
 } from '../util/queries';
@@ -59,8 +60,7 @@ const SHARED_SECTIONS = `
   },
   _type == "sponsorshipsSection" => {
     ...,
-    sponsors[]->,
-    "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
+    "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]-> { ${SPONSORSHIP} },
   },
   _type == "ticketsSection" => {
     type,
@@ -93,7 +93,7 @@ const QUERY = groq`
     "home": *[_id == "${mainEventId}"][0] {
       name,
       description,
-      "ticketsUrl": microcopy[key == "mainCta"][0].action,
+      "ticketsUrl": registrationUrl,
     },
     "footer": *[_id == "secondary-nav"][0] {
       "links": tree[].value.reference-> {
@@ -153,9 +153,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
     enabled: preview,
   });
 
-  const [scrollTop, setScrollTop] = useState(
-    typeof document !== 'undefined' ? document.documentElement.scrollTop : 0
-  );
+  const [scrolledFarEnough, setScrolledFarEnough] = useState(false);
 
   /* This is a hack. What we really want is to enable the menu once we've
    * scrolled past the top logo on the front page. Probably a better way would
@@ -165,21 +163,22 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
   const scrollPositionTriggeringFrontPageMenu = 420;
 
   useEffect(() => {
-    const onScroll = (e) => {
-      setScrollTop(e.target.documentElement.scrollTop);
-    };
+    const onScroll = (e) =>
+      setScrolledFarEnough(
+        e.target.documentElement.scrollTop >
+          scrollPositionTriggeringFrontPageMenu
+      );
     window.addEventListener('scroll', onScroll);
 
     return () => window.removeEventListener('scroll', onScroll);
-  }, [scrollTop]);
+  }, []);
 
   const isFrontPage = slug === '/';
   const currentPath = slug.charAt(0) === '/' ? slug : `/${slug}`;
-  const scrolledFarEnough = scrollTop > scrollPositionTriggeringFrontPageMenu;
   const headerClasses = clsx(
     styles.header,
     isFrontPage && styles.onFrontPage,
-    isFrontPage && scrolledFarEnough && styles.onScrolledFrontPage
+    isFrontPage && scrolledFarEnough && styles.scrolledDown
   );
 
   return (
