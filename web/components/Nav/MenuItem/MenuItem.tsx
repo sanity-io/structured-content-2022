@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import clsx from 'clsx';
+import type { HTMLProps } from 'react';
 import styles from '../Nav.module.css';
-import { HTMLProps } from 'react';
 
 interface MenuItemProps extends HTMLProps<HTMLAnchorElement> {
   currentPath: string;

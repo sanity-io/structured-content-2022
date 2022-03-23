@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { useRef } from 'react';
 import useIntersection from '../../hooks/useIntersection';
-import Item from './Item';
 import FakeItem from './FakeItem';
+import Item from './Item';
 import styles from './NavBlock.module.css';
 
 interface NavBlockProps {
@@ -18,14 +18,14 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
       ref={wrapperRef}
     >
       <ul className={styles.list}>
-        <Item name="Program" href="/program" />
+        <Item href="/program">Program</Item>
 
         <FakeItem mobile tablet desktop />
         <FakeItem mobile tablet desktop />
         <FakeItem divider mobile />
         <FakeItem mobile />
 
-        <Item name="Sponsorship" href="/sponsorship-information" />
+        <Item href="/sponsorship-information">Sponsorship</Item>
 
         <FakeItem tablet desktop />
         <FakeItem divider mobile tablet desktop />
@@ -34,26 +34,19 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
         <FakeItem tablet desktop />
         <FakeItem mobile tablet desktop />
 
-        <Item name="Registration" href="/registration-info" />
+        <Item href="/registration-info">Registration</Item>
 
         <FakeItem divider mobile tablet desktop />
 
-        <Item name="About" href="/about" />
+        <Item href="/about">About</Item>
 
         <FakeItem mobile tablet desktop />
         <FakeItem mobile desktop />
         <FakeItem divider mobile />
 
-        <li className={styles.item}>
-          <a
-            className={styles.link}
-            href={ticketsUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Tickets
-          </a>
-        </li>
+        <Item href={ticketsUrl} target="_blank" rel="noreferrer">
+          Tickets
+        </Item>
 
         <FakeItem tablet desktop />
         <FakeItem mobile desktop />
