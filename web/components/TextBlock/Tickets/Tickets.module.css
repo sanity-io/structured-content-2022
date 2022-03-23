@@ -54,6 +54,10 @@
   margin: 0 0 24px;
 }
 
+.priceGroup {
+  margin: 0;
+}
+
 .visuallyHidden {
   position: absolute;
   width: 1px;
