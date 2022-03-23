@@ -183,16 +183,6 @@ export const Tickets = ({
                 )}
                 {priceList(ticket)}
               </>
-              <ul className={styles.ticketFeatures}>
-                {ticket.included.map((included) => (
-                  <li key={included} className={styles.includedFeature}>
-                    <FeatureCheckmark included={true} />
-                    <span className={styles.includedFeatureDescription}>
-                      {included}
-                    </span>
-                  </li>
-                ))}
-              </ul>
             </FeatureSection>
           )
         )}
