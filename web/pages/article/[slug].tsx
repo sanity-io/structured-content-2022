@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
+import clsx from 'clsx';
 import urlJoin from 'proper-url-join';
 import Card from '../../components/Card';
 import Hero from '../../components/Hero';
@@ -82,6 +83,10 @@ const ArticleRoute = ({
   slug,
 }: ArticleRouteProps) => {
   const { people, sessions, venues } = relatedTo || {};
+  const hasAsides =
+    (Array.isArray(sessions) && sessions.length) ||
+    (Array.isArray(people) && people.length) ||
+    (Array.isArray(venues) && venues.length);
   return (
     <>
       <MetaTags
@@ -127,64 +132,71 @@ const ArticleRoute = ({
          */}
         <GridWrapper>
           <div className={articleStyles.container}>
-            <div className={articleStyles.mainContent}>
+            <div
+              className={clsx(
+                articleStyles.mainContent,
+                hasAsides && articleStyles.asidesPresent
+              )}
+            >
               <TextBlock value={content} />
             </div>
-            <div className={articleStyles.asides}>
-              {Array.isArray(sessions) && sessions.length && (
-                <aside className={articleStyles.relatedItems}>
-                  <h2 className={articleStyles.relatedItemsHeading}>
-                    Related sessions
-                  </h2>
-                  <ul className={articleStyles.relatedItemsList}>
-                    {sessions.map((title, index) => (
-                      <li
-                        key={`${title}_${index}`}
-                        className={articleStyles.relatedItem}
-                      >
-                        <Card>{title}</Card>
-                      </li>
-                    ))}
-                  </ul>
-                </aside>
-              )}
+            {hasAsides && (
+              <div className={articleStyles.asides}>
+                {Array.isArray(sessions) && sessions.length && (
+                  <aside className={articleStyles.relatedItems}>
+                    <h2 className={articleStyles.relatedItemsHeading}>
+                      Related sessions
+                    </h2>
+                    <ul className={articleStyles.relatedItemsList}>
+                      {sessions.map((title, index) => (
+                        <li
+                          key={`${title}_${index}`}
+                          className={articleStyles.relatedItem}
+                        >
+                          <Card>{title}</Card>
+                        </li>
+                      ))}
+                    </ul>
+                  </aside>
+                )}
 
-              {Array.isArray(people) && people.length && (
-                <aside className={articleStyles.relatedItems}>
-                  <h2 className={articleStyles.relatedItemsHeading}>
-                    Related people
-                  </h2>
-                  <ul className={articleStyles.relatedItemsList}>
-                    {people.map(({ name, photo }, index) => (
-                      <li
-                        key={`${name}_${index}`}
-                        className={articleStyles.relatedItem}
-                      >
-                        <Card figure={photo}>{name}</Card>
-                      </li>
-                    ))}
-                  </ul>
-                </aside>
-              )}
+                {Array.isArray(people) && people.length && (
+                  <aside className={articleStyles.relatedItems}>
+                    <h2 className={articleStyles.relatedItemsHeading}>
+                      Related people
+                    </h2>
+                    <ul className={articleStyles.relatedItemsList}>
+                      {people.map(({ name, photo }, index) => (
+                        <li
+                          key={`${name}_${index}`}
+                          className={articleStyles.relatedItem}
+                        >
+                          <Card figure={photo}>{name}</Card>
+                        </li>
+                      ))}
+                    </ul>
+                  </aside>
+                )}
 
-              {Array.isArray(venues) && venues.length && (
-                <aside className={articleStyles.relatedItems}>
-                  <h2 className={articleStyles.relatedItemsHeading}>
-                    Related venues
-                  </h2>
-                  <ul className={articleStyles.relatedItemsList}>
-                    {venues.map((name, index) => (
-                      <li
-                        key={`${name}_${index}`}
-                        className={articleStyles.relatedItem}
-                      >
-                        <Card>{name}</Card>
-                      </li>
-                    ))}
-                  </ul>
-                </aside>
-              )}
-            </div>
+                {Array.isArray(venues) && venues.length && (
+                  <aside className={articleStyles.relatedItems}>
+                    <h2 className={articleStyles.relatedItemsHeading}>
+                      Related venues
+                    </h2>
+                    <ul className={articleStyles.relatedItemsList}>
+                      {venues.map((name, index) => (
+                        <li
+                          key={`${name}_${index}`}
+                          className={articleStyles.relatedItem}
+                        >
+                          <Card>{name}</Card>
+                        </li>
+                      ))}
+                    </ul>
+                  </aside>
+                )}
+              </div>
+            )}
           </div>
         </GridWrapper>
       </main>
