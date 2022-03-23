@@ -5,13 +5,13 @@ import sub from 'date-fns/sub';
 import { format } from 'date-fns-tz';
 import { PortableText, PortableTextComponentProps } from '@portabletext/react';
 import { Fragment } from 'react';
-import checkmarkIcon from '../../../images/checkmark.svg';
-import crossIcon from '../../../images/cross.svg';
 import { Ticket, TicketGroup } from '../../../types/Ticket';
 import GridWrapper from '../../GridWrapper';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import styles from './Tickets.module.css';
 import { getCollectionForSelectionType } from '../../../util/entity';
+import FeatureCheckmark from '../../FeatureCheckmark';
+import FeatureSection from '../../FeatureSection';
 
 interface TicketsProps {
   type: EntitySectionSelection;
@@ -160,25 +160,7 @@ export const Tickets = ({
                         featureIncluded && styles.featureIncluded
                       )}
                     >
-                      {/* eslint-disable @next/next/no-img-element */}
-                      {featureIncluded ? (
-                        <img
-                          src={checkmarkIcon.src}
-                          className={styles.icon}
-                          width={checkmarkIcon.width}
-                          height={checkmarkIcon.height}
-                          alt="Included"
-                        />
-                      ) : (
-                        <img
-                          src={crossIcon.src}
-                          className={styles.icon}
-                          width={crossIcon.width}
-                          height={crossIcon.height}
-                          alt="Not included"
-                        />
-                      )}
-                      {/* eslint-enable @next/next/no-img-element */}
+                      <FeatureCheckmark included={featureIncluded} />
                     </td>
                   );
                 }
@@ -191,8 +173,8 @@ export const Tickets = ({
       <div className={styles.sections}>
         {getCollectionForSelectionType(type, allTickets, tickets).map(
           (ticket) => (
-            <section key={ticket._id}>
-              <div className={clsx(styles.ticketInfo, styles.inSections)}>
+            <FeatureSection features={ticket.included} key={ticket._id}>
+              <>
                 <h3 className={styles.name}>{ticket.type}</h3>
                 {ticket.description && (
                   <div className={styles.description}>
@@ -200,25 +182,18 @@ export const Tickets = ({
                   </div>
                 )}
                 {priceList(ticket)}
-              </div>
+              </>
               <ul className={styles.ticketFeatures}>
                 {ticket.included.map((included) => (
                   <li key={included} className={styles.includedFeature}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={checkmarkIcon.src}
-                      className={styles.icon}
-                      width={checkmarkIcon.width}
-                      height={checkmarkIcon.height}
-                      alt=""
-                    />
+                    <FeatureCheckmark included={true} />
                     <span className={styles.includedFeatureDescription}>
                       {included}
                     </span>
                   </li>
                 ))}
               </ul>
-            </section>
+            </FeatureSection>
           )
         )}
       </div>

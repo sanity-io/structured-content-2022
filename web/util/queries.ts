@@ -50,6 +50,31 @@ const TICKET = `
   type,
 `;
 
+const SPONSORSHIP = `
+  _createdAt,
+  _id,
+  _rev,
+  _type,
+  _updatedAt,
+  available,
+  benefits[] {
+    _key,
+    _type,
+    benefit-> {
+      _createdAt,
+      _id,
+      _rev,
+      _type,
+      _updatedAt,
+      name,
+    },
+    description,
+    number,
+  },
+  price,
+  type,
+`;
+
 export {
   ARTICLE_SECTION,
   BLOCK_CONTENT,
@@ -60,4 +85,5 @@ export {
   SIMPLE_CALL_TO_ACTION,
   TEXT_AND_IMAGE_SECTION,
   TICKET,
+  SPONSORSHIP,
 };
