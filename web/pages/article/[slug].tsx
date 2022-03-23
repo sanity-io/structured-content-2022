@@ -136,9 +136,16 @@ const ArticleRoute = ({
                   <h2 className={articleStyles.relatedItemsHeading}>
                     Related sessions
                   </h2>
-                  {sessions.map((title, index) => (
-                    <Card key={`${title}_${index}`}>{title}</Card>
-                  ))}
+                  <ul className={articleStyles.relatedItemsList}>
+                    {sessions.map((title, index) => (
+                      <li
+                        key={`${title}_${index}`}
+                        className={articleStyles.relatedItem}
+                      >
+                        <Card>{title}</Card>
+                      </li>
+                    ))}
+                  </ul>
                 </aside>
               )}
 
@@ -147,11 +154,16 @@ const ArticleRoute = ({
                   <h2 className={articleStyles.relatedItemsHeading}>
                     Related people
                   </h2>
-                  {people.map(({ name, photo }, index) => (
-                    <Card key={`${name}_${index}`} figure={photo}>
-                      {name}
-                    </Card>
-                  ))}
+                  <ul className={articleStyles.relatedItemsList}>
+                    {people.map(({ name, photo }, index) => (
+                      <li
+                        key={`${name}_${index}`}
+                        className={articleStyles.relatedItem}
+                      >
+                        <Card figure={photo}>{name}</Card>
+                      </li>
+                    ))}
+                  </ul>
                 </aside>
               )}
 
@@ -160,9 +172,16 @@ const ArticleRoute = ({
                   <h2 className={articleStyles.relatedItemsHeading}>
                     Related venues
                   </h2>
-                  {venues.map((name, index) => (
-                    <Card key={`${name}_${index}`}>{name}</Card>
-                  ))}
+                  <ul className={articleStyles.relatedItemsList}>
+                    {venues.map((name, index) => (
+                      <li
+                        key={`${name}_${index}`}
+                        className={articleStyles.relatedItem}
+                      >
+                        <Card>{name}</Card>
+                      </li>
+                    ))}
+                  </ul>
                 </aside>
               )}
             </div>

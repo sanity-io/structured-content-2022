@@ -41,6 +41,15 @@
   margin: 0 0 10px;
 }
 
+.relatedItemsList {
+  padding: 0;
+  margin: 0;
+}
+
+.relatedItem {
+  display: inline-block;
+}
+
 @media (--medium-up) {
   .extraHeroContent {
     margin-top: 64px;
