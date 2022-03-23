@@ -7,13 +7,21 @@ export type Sponsorship = {
   _type: 'sponsorship';
   _updatedAt: string;
   available: number;
-  offering: string[];
-  passes: {
-    inPerson: number;
-    online: number;
-    workshop: number;
-  };
+  benefits?: {
+    benefit: Benefit;
+    number?: number;
+    description?: string;
+  }[];
   price: number;
   sponsors?: Omit<Sponsor, '_id'>[];
   type: SponsorLevel;
+};
+
+type Benefit = {
+  _createdAt: string;
+  _id: string;
+  _rev: string;
+  _type: 'benefit';
+  _updatedAt: string;
+  name: string;
 };

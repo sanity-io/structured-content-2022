@@ -24,6 +24,7 @@ import {
   HERO,
   PROGRAM,
   QUESTION_AND_ANSWER_COLLECTION_SECTION,
+  SPONSORSHIP,
   TEXT_AND_IMAGE_SECTION,
   TICKET,
 } from '../util/queries';
@@ -59,8 +60,7 @@ const SHARED_SECTIONS = `
   },
   _type == "sponsorshipsSection" => {
     ...,
-    sponsors[]->,
-    "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
+    "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]-> { ${SPONSORSHIP} },
   },
   _type == "ticketsSection" => {
     type,

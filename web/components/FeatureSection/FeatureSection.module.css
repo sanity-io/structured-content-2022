@@ -1,0 +1,27 @@
+.header {
+  background-color: var(--color-brand-yellow);
+  border-radius: 8px 8px 0 0;
+  padding: 24px;
+}
+
+.features {
+  list-style-type: none;
+  padding: 24px;
+  border: 1px solid var(--color-brand-yellow);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.feature {
+  margin-left: 36px;
+  text-indent: -36px;
+}
+
+.feature:not(:last-child) {
+  padding-bottom: 16px;
+}
+
+.featureDescription {
+  padding-left: 12px;
+}
