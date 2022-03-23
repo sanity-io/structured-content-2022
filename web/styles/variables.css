@@ -47,7 +47,6 @@
   --spacing-small: 40px;
   --spacing-medium: 64px;
   --spacing-large: 128px;
-  /* Animations */
   --item-enter-animation: item-enter var(--duration)
-    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    cubic-bezier(0.1, 0.92, 0.37, 1) both;
 }

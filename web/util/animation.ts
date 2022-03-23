@@ -5,8 +5,8 @@ const randomize = (min: number, max: number) =>
 
 export const getRandomAnimation = (addRotation?: boolean) =>
   ({
-    '--distance': `${randomize(0, 150)}px`,
-    '--duration': `${randomize(300, 500)}ms`,
-    '--delay': `${randomize(100, 650)}ms`,
+    '--distance': '32px',
+    '--duration': '1200ms',
+    '--delay': '100ms',
     '--rotation': `${addRotation ? randomize(-16, 16) : 0}deg`,
   } as CSSProperties);
