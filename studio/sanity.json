@@ -20,7 +20,8 @@
     "@sanity/hierarchical-document-list",
     "@sanity/production-preview",
     "@sanity/vision",
-    "social-preview"
+    "social-preview",
+    "structured-content-logo"
   ],
   "parts": [
     {

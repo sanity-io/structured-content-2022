@@ -22,11 +22,6 @@
   vertical-align: top;
 }
 
-.ticketInfo.inSections {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
 .name {
   margin: 0 0 4px;
   font: var(--font-body-large-bold);
@@ -71,18 +66,6 @@
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   margin-bottom: 8px;
-}
-
-.includedFeature:not(:last-child) {
-  padding-bottom: 16px;
-}
-
-.icon {
-  vertical-align: top;
-}
-
-.includedFeatureDescription {
-  padding-left: 12px;
 }
 
 .feature,
