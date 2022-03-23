@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useRef } from 'react';
 import useIntersection from '../../hooks/useIntersection';
-import { useRandomAnimation } from '../../hooks/useRandomAnimation';
+import { useAnimationProperties } from '../../hooks/useAnimationProperties';
 import { Venue } from '../../types/Venue';
 import styles from './VenueNames.module.css';
 
@@ -10,7 +10,7 @@ interface VenueNamesProps {
 }
 
 const Venue = ({ name }: Venue) => {
-  const animation = useRandomAnimation();
+  const animation = useAnimationProperties();
   return (
     <li className={styles.venue} style={animation}>
       {name}

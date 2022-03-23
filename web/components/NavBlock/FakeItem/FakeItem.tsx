@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
-import { useRandomAnimation } from '../../../hooks/useRandomAnimation';
+import { useAnimationProperties } from '../../../hooks/useAnimationProperties';
 import styles from '../NavBlock.module.css';
 
 interface FakeItemProps {
@@ -25,7 +25,7 @@ export const FakeItem = ({
   tablet,
   desktop,
 }: FakeItemProps) => {
-  const animation = useRandomAnimation(true);
+  const animation = useAnimationProperties(true);
   const [shapeClass, setShapeClass] = useState<string>();
 
   useEffect(() => {

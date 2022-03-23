@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { useRef } from 'react';
 import { PortableTextComponentProps } from '@portabletext/react';
 import useIntersection from '../../../hooks/useIntersection';
-import { useRandomAnimation } from '../../../hooks/useRandomAnimation';
+import { useAnimationProperties } from '../../../hooks/useAnimationProperties';
 import { imageUrlFor } from '../../../lib/sanity';
 import { Figure } from '../../../types/Figure';
 import { Section } from '../../../types/Section';
@@ -26,8 +26,8 @@ export const TextAndImage = ({
   const wrapperRef = useRef<HTMLDivElement>();
   const isIntersecting = useIntersection(wrapperRef);
 
-  const imageContainerAnimation = useRandomAnimation();
-  const textContainerAnimation = useRandomAnimation();
+  const imageContainerAnimation = useAnimationProperties();
+  const textContainerAnimation = useAnimationProperties();
 
   return (
     <section

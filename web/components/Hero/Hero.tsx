@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import clsx from 'clsx';
 import { Hero as HeroProps } from '../../types/Hero';
 import useIntersection from '../../hooks/useIntersection';
-import { useRandomAnimation } from '../../hooks/useRandomAnimation';
+import { useAnimationProperties } from '../../hooks/useAnimationProperties';
 import GridWrapper from '../GridWrapper';
 import SimpleCallToAction from '../SimpleCallToAction';
 import styles from './Hero.module.css';
@@ -10,9 +10,9 @@ import styles from './Hero.module.css';
 export const Hero = ({ heading, summary, callToAction }: HeroProps) => {
   const wrapperRef = useRef<HTMLDivElement>();
   const isIntersecting = useIntersection(wrapperRef, '-80px 0px');
-  const headingAnimation = useRandomAnimation();
-  const summaryAnimation = useRandomAnimation();
-  const ctaAnimation = useRandomAnimation();
+  const headingAnimation = useAnimationProperties();
+  const summaryAnimation = useAnimationProperties();
+  const ctaAnimation = useAnimationProperties();
 
   return (
     <div

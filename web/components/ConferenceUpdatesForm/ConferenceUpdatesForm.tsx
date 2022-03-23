@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { PortableTextComponentProps } from '@portabletext/react';
 import newsletterShapes from '../../images/newsletter-shapes.svg';
 import useIntersection from '../../hooks/useIntersection';
-import { useRandomAnimation } from '../../hooks/useRandomAnimation';
+import { useAnimationProperties } from '../../hooks/useAnimationProperties';
 import GridWrapper from '../GridWrapper';
 import styles from './ConferenceUpdatesForm.module.css';
 
@@ -23,10 +23,10 @@ export const ConferenceUpdatesForm = ({
   const wrapperRef = useRef<HTMLDivElement>();
   const isIntersecting = useIntersection(wrapperRef);
 
-  const imageAnimation = useRandomAnimation();
-  const headingAnimation = useRandomAnimation();
-  const formAnimation = useRandomAnimation();
-  const labelAnimation = useRandomAnimation();
+  const imageAnimation = useAnimationProperties();
+  const headingAnimation = useAnimationProperties();
+  const formAnimation = useAnimationProperties();
+  const labelAnimation = useAnimationProperties();
 
   if (type !== 'newsletter') {
     console.error(`Unrecognized ConferenceUpdatesForm type: '${type}'`);

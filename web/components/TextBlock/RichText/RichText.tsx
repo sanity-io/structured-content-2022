@@ -5,7 +5,7 @@ import GridWrapper from '../../GridWrapper';
 import { RichTextSection } from '../../../types/RichTextSection';
 import styles from './RichText.module.css';
 import useIntersection from '../../../hooks/useIntersection';
-import { useRandomAnimation } from '../../../hooks/useRandomAnimation';
+import { useAnimationProperties } from '../../../hooks/useAnimationProperties';
 
 interface RichTextProps {
   value: RichTextSection;
@@ -19,8 +19,8 @@ interface RichTextProps {
 export const RichText = ({ value, background }: RichTextProps) => {
   const wrapperRef = useRef<HTMLDivElement>();
   const isIntersecting = useIntersection(wrapperRef);
-  const headingAnimation = useRandomAnimation();
-  const textAnimation = useRandomAnimation();
+  const headingAnimation = useAnimationProperties();
+  const textAnimation = useAnimationProperties();
 
   return (
     <GridWrapper>
