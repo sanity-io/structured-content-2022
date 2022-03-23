@@ -4,15 +4,15 @@
   padding: 0;
 }
 
+.venue {
+  display: inline-block;
+  font: var(--font-display-base);
+}
+
 .venues.isIntersecting .venue {
   transform-origin: bottom;
   animation: var(--item-enter-animation);
   animation-delay: var(--delay);
-}
-
-.venue {
-  display: inline-block;
-  font: var(--font-display-base);
 }
 
 .venue:nth-child(n + 2)::before {
