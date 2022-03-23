@@ -1,4 +1,8 @@
+import clsx from 'clsx';
+import { useRef } from 'react';
 import { PortableTextComponentProps } from '@portabletext/react';
+import useIntersection from '../../../hooks/useIntersection';
+import { useAnimationProperties } from '../../../hooks/useAnimationProperties';
 import { imageUrlFor } from '../../../lib/sanity';
 import { Figure } from '../../../types/Figure';
 import { Section } from '../../../types/Section';
@@ -18,31 +22,48 @@ type TextAndImageProps = {
 
 export const TextAndImage = ({
   value: { image, tagline, text, title, _key },
-}: PortableTextComponentProps<TextAndImageProps>) => (
-  <section className={styles.container}>
-    <GridWrapper>
-      <div className={styles.contents}>
-        <div className={styles.imageContainer}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imageUrlFor(image).ignoreImageParams().url()}
-            alt={image.alt || ''}
-            className={styles.image}
-          />
-        </div>
-        <div className={styles.text}>
-          {title && (
-            <hgroup>
-              <Heading type="h2" id={`heading-h2-${_key}`}>
-                {title}
-              </Heading>
-              {tagline && <h3 className={styles.tagline}>{tagline}</h3>}
-            </hgroup>
-          )}
+}: PortableTextComponentProps<TextAndImageProps>) => {
+  const wrapperRef = useRef<HTMLDivElement>();
+  const isIntersecting = useIntersection(wrapperRef);
 
-          <TextBlock value={text} />
+  const imageContainerAnimation = useAnimationProperties();
+  const textContainerAnimation = useAnimationProperties();
+
+  return (
+    <section
+      className={clsx(
+        styles.container,
+        isIntersecting && styles.isIntersecting
+      )}
+      ref={wrapperRef}
+    >
+      <GridWrapper>
+        <div className={styles.contents}>
+          <div
+            className={styles.imageContainer}
+            style={imageContainerAnimation}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imageUrlFor(image).ignoreImageParams().url()}
+              alt={image.alt || ''}
+              className={styles.image}
+            />
+          </div>
+          <div className={styles.text} style={textContainerAnimation}>
+            {title && (
+              <hgroup>
+                <Heading type="h2" id={`heading-h2-${_key}`}>
+                  {title}
+                </Heading>
+                {tagline && <h3 className={styles.tagline}>{tagline}</h3>}
+              </hgroup>
+            )}
+
+            <TextBlock value={text} />
+          </div>
         </div>
-      </div>
-    </GridWrapper>
-  </section>
-);
+      </GridWrapper>
+    </section>
+  );
+};

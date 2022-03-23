@@ -2,6 +2,15 @@
   margin: 80px 0;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .nav.isIntersecting .item,
+  .nav.isIntersecting .fakeItem {
+    transform-origin: bottom;
+    animation: var(--item-enter-animation);
+    animation-delay: var(--delay);
+  }
+}
+
 .list {
   display: flex;
   flex-wrap: wrap;
@@ -122,5 +131,12 @@
   .fakeItem.desktop,
   .divider.desktop {
     display: block;
+  }
+}
+
+@keyframes item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--distance)) rotate(var(--rotation));
   }
 }

@@ -9,6 +9,19 @@
   font: var(--font-display-base);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .venues.isIntersecting .venue {
+    transform-origin: bottom;
+    animation: var(--item-enter-animation);
+    animation-delay: var(--delay);
+  }
+}
+
+.venue:nth-child(n + 2)::before {
+  content: '•';
+  margin: 0 6px;
+}
+
 .link {
   color: var(--color-brand-black);
   text-decoration: none;
@@ -16,11 +29,6 @@
 
 .link:hover {
   text-decoration: underline;
-}
-
-.venue:nth-child(n + 2)::before {
-  content: '•';
-  margin: 0 6px;
 }
 
 @media (--medium-up) {
@@ -44,5 +52,12 @@
 
   .venue {
     font: var(--font-display-xl);
+  }
+}
+
+@keyframes item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--distance)) rotate(var(--rotation));
   }
 }

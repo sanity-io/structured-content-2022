@@ -6,6 +6,17 @@
   border-radius: 12px;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .container.isIntersecting .image,
+  .container.isIntersecting .heading,
+  .container.isIntersecting .form,
+  .container.isIntersecting .emailParagraph {
+    transform-origin: bottom;
+    animation: var(--item-enter-animation);
+    animation-delay: var(--delay);
+  }
+}
+
 .image {
   display: none;
 }
@@ -105,5 +116,12 @@
   .formContents {
     max-width: 100%;
     margin: 0;
+  }
+}
+
+@keyframes item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--distance)) rotate(var(--rotation));
   }
 }

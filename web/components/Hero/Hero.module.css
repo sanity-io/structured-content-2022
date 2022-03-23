@@ -4,6 +4,16 @@
   padding: 40px 0 80px;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .container.isIntersecting .heading,
+  .container.isIntersecting .summary,
+  .container.isIntersecting .cta {
+    transform-origin: bottom;
+    animation: var(--item-enter-animation);
+    animation-delay: var(--delay);
+  }
+}
+
 .summary {
   font: var(--font-body-small-medium);
   letter-spacing: var(--letter-spacing-body-small);
@@ -50,5 +60,12 @@
   .summary {
     grid-column: 4 / span 6;
     max-width: none;
+  }
+}
+
+@keyframes item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--distance)) rotate(var(--rotation));
   }
 }
