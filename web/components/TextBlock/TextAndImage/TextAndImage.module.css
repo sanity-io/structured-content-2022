@@ -3,11 +3,13 @@
   padding: 64px 0;
 }
 
-.container.isIntersecting .imageContainer,
-.container.isIntersecting .text {
-  transform-origin: bottom;
-  animation: var(--item-enter-animation);
-  animation-delay: var(--delay);
+@media (prefers-reduced-motion: no-preference) {
+  .container.isIntersecting .imageContainer,
+  .container.isIntersecting .text {
+    transform-origin: bottom;
+    animation: var(--item-enter-animation);
+    animation-delay: var(--delay);
+  }
 }
 
 .imageContainer {

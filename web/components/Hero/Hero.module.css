@@ -4,12 +4,14 @@
   padding: 40px 0 80px;
 }
 
-.container.isIntersecting .heading,
-.container.isIntersecting .summary,
-.container.isIntersecting .cta {
-  transform-origin: bottom;
-  animation: var(--item-enter-animation);
-  animation-delay: var(--delay);
+@media (prefers-reduced-motion: no-preference) {
+  .container.isIntersecting .heading,
+  .container.isIntersecting .summary,
+  .container.isIntersecting .cta {
+    transform-origin: bottom;
+    animation: var(--item-enter-animation);
+    animation-delay: var(--delay);
+  }
 }
 
 .summary {

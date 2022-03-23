@@ -6,13 +6,15 @@
   border-radius: 12px;
 }
 
-.container.isIntersecting .image,
-.container.isIntersecting .heading,
-.container.isIntersecting .form,
-.container.isIntersecting .emailParagraph {
-  transform-origin: bottom;
-  animation: var(--item-enter-animation);
-  animation-delay: var(--delay);
+@media (prefers-reduced-motion: no-preference) {
+  .container.isIntersecting .image,
+  .container.isIntersecting .heading,
+  .container.isIntersecting .form,
+  .container.isIntersecting .emailParagraph {
+    transform-origin: bottom;
+    animation: var(--item-enter-animation);
+    animation-delay: var(--delay);
+  }
 }
 
 .image {

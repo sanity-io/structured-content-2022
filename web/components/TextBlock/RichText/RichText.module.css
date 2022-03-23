@@ -8,12 +8,14 @@
   border-radius: 12px;
 }
 
-.container.isIntersecting .text,
-.container.isIntersecting .heading,
-.container.isIntersecting .subHeading {
-  transform-origin: bottom;
-  animation: var(--item-enter-animation);
-  animation-delay: var(--delay);
+@media (prefers-reduced-motion: no-preference) {
+  .container.isIntersecting .text,
+  .container.isIntersecting .heading,
+  .container.isIntersecting .subHeading {
+    transform-origin: bottom;
+    animation: var(--item-enter-animation);
+    animation-delay: var(--delay);
+  }
 }
 
 .subHeading {
