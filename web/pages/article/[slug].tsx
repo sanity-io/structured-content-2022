@@ -21,11 +21,11 @@ import articleStyles from './article.module.css';
 const QUERY = groq`
   {
     "article": *[_type == "article" && slug.current == $slug][0] {
-      _createdAt,
       _id,
-      _updatedAt,
       heading,
       summary,
+      publishedAt,
+      updatedAt,
       content[] { ${BLOCK_CONTENT} },
       authors[]->{name, photo},
       relatedTo {
@@ -68,10 +68,10 @@ interface ArticleRouteProps {
 const ArticleRoute = ({
   data: {
     article: {
-      _createdAt,
-      _updatedAt,
       heading,
       summary,
+      publishedAt,
+      updatedAt,
       content,
       authors,
       relatedTo,
@@ -115,12 +115,14 @@ const ArticleRoute = ({
               </ul>
             )}
             <div className={articleStyles.timestamps}>
-              <p className={articleStyles.publishedAt}>
-                Published on: {formatDate(_createdAt, 'UTC')}
-              </p>
-              {_updatedAt && (
+              {publishedAt && (
+                <p className={articleStyles.publishedAt}>
+                  Published on: {formatDate(publishedAt, 'UTC')}
+                </p>
+              )}
+              {updatedAt && (
                 <p className={articleStyles.updatedAt}>
-                  Updated on: {formatDate(_updatedAt, 'UTC')}
+                  Updated on: {formatDate(updatedAt, 'UTC')}
                 </p>
               )}
             </div>

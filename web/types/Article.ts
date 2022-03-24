@@ -3,15 +3,14 @@ import { Section } from './Section';
 import { Figure } from './Figure';
 
 export type Article = {
-  _createdAt: string;
   _id: string;
   _rev: string;
   _type: 'article';
-  _updatedAt: string;
   authors?: { name: string; photo: Figure }[];
   content: Section[];
   heading: string;
   publishedAt: string;
+  updatedAt: string;
   slug: Slug;
   summary: string;
   relatedTo?: {
