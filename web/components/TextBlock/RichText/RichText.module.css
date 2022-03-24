@@ -8,6 +8,16 @@
   border-radius: 12px;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .container.isIntersecting .text,
+  .container.isIntersecting .heading,
+  .container.isIntersecting .subHeading {
+    transform-origin: bottom;
+    animation: var(--item-enter-animation);
+    animation-delay: var(--delay);
+  }
+}
+
 .subHeading {
   font: var(--font-body-base-medium);
 }
@@ -38,5 +48,12 @@
 
   .container.background {
     padding: 128px 0;
+  }
+}
+
+@keyframes item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--distance)) rotate(var(--rotation));
   }
 }

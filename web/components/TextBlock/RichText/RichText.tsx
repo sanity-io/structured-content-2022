@@ -1,8 +1,11 @@
+import { useRef } from 'react';
 import clsx from 'clsx';
 import TextBlock from '../TextBlock';
 import GridWrapper from '../../GridWrapper';
 import { RichTextSection } from '../../../types/RichTextSection';
 import styles from './RichText.module.css';
+import useIntersection from '../../../hooks/useIntersection';
+import { useAnimationProperties } from '../../../hooks/useAnimationProperties';
 
 interface RichTextProps {
   value: RichTextSection;
@@ -13,22 +16,40 @@ interface RichTextProps {
   background?: boolean;
 }
 
-export const RichText = ({ value, background }: RichTextProps) => (
-  <GridWrapper>
-    <div className={clsx(styles.container, background && styles.background)}>
-      <div className={styles.content}>
-        {value.heading && (
-          <hgroup>
-            {value.heading && (
-              <h2 id={`heading-h2-${value._key}`}>{value.heading}</h2>
-            )}
-            {value.subheading && (
-              <h3 className={styles.subHeading}>{value.subheading}</h3>
-            )}
-          </hgroup>
+export const RichText = ({ value, background }: RichTextProps) => {
+  const wrapperRef = useRef<HTMLDivElement>();
+  const isIntersecting = useIntersection(wrapperRef);
+  const headingAnimation = useAnimationProperties();
+  const textAnimation = useAnimationProperties();
+
+  return (
+    <GridWrapper>
+      <div
+        className={clsx(
+          styles.container,
+          background && styles.background,
+          isIntersecting && styles.isIntersecting
         )}
-        <TextBlock value={value.content} />
+        ref={wrapperRef}
+      >
+        <div className={styles.content}>
+          {value.heading && (
+            <hgroup style={headingAnimation}>
+              {value.heading && (
+                <h2 id={`heading-h2-${value._key}`} className={styles.heading}>
+                  {value.heading}
+                </h2>
+              )}
+              {value.subheading && (
+                <h3 className={styles.subHeading}>{value.subheading}</h3>
+              )}
+            </hgroup>
+          )}
+          <div style={textAnimation} className={styles.text}>
+            <TextBlock value={value.content} />
+          </div>
+        </div>
       </div>
-    </div>
-  </GridWrapper>
-);
+    </GridWrapper>
+  );
+};

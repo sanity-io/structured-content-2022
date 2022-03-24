@@ -1,107 +1,56 @@
-import Link from 'next/link';
 import clsx from 'clsx';
+import { useRef } from 'react';
+import useIntersection from '../../hooks/useIntersection';
+import FakeItem from './FakeItem';
+import Item from './Item';
 import styles from './NavBlock.module.css';
-import { useEffect, useState } from 'react';
-
-const RANDOM_SHAPE_PERCENT_CHANCE = 0.33;
-type Shape = 'Plus' | 'C' | 'Ovals' | 'O' | 'HalfOval';
-
-interface FakeItemProps {
-  divider?: boolean;
-  mobile?: boolean;
-  tablet?: boolean;
-  desktop?: boolean;
-}
-
-const getRandomShape = (): Shape => {
-  const shapes: Shape[] = ['Plus', 'C', 'Ovals', 'O', 'HalfOval'];
-  return shapes[Math.floor(Math.random() * shapes.length)];
-};
-
-const FakeItem = ({ divider, mobile, tablet, desktop }: FakeItemProps) => {
-  const [shapeClass, setShapeClass] = useState<string>(null);
-  useEffect(() => {
-    if (Math.random() <= RANDOM_SHAPE_PERCENT_CHANCE) {
-      setShapeClass(styles[`shape${getRandomShape()}`]);
-    }
-  }, []);
-
-  return (
-    <li
-      className={clsx(
-        divider ? styles.divider : styles.fakeItem,
-        mobile && styles.mobile,
-        tablet && styles.tablet,
-        desktop && styles.desktop,
-        shapeClass
-      )}
-      aria-hidden="true"
-    />
-  );
-};
 
 interface NavBlockProps {
   ticketsUrl: string;
 }
 
-export const NavBlock = ({ ticketsUrl }: NavBlockProps) => (
-  <nav className={styles.nav}>
-    <ul className={styles.list}>
-      <li className={styles.item}>
-        <Link href="/program">
-          <a className={styles.link}>Program</a>
-        </Link>
-      </li>
+export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
+  const wrapperRef = useRef<HTMLElement>();
+  const isIntersecting = useIntersection(wrapperRef);
+  return (
+    <nav
+      className={clsx(styles.nav, isIntersecting && styles.isIntersecting)}
+      ref={wrapperRef}
+    >
+      <ul className={styles.list}>
+        <Item href="/program">Program</Item>
 
-      <FakeItem mobile tablet desktop />
-      <FakeItem mobile tablet desktop />
-      <FakeItem divider mobile />
-      <FakeItem mobile />
+        <FakeItem mobile tablet desktop />
+        <FakeItem mobile tablet desktop />
+        <FakeItem divider mobile />
+        <FakeItem mobile />
 
-      <li className={styles.item}>
-        <Link href="/sponsorship-information">
-          <a className={styles.link}>Sponsorship</a>
-        </Link>
-      </li>
+        <Item href="/sponsorship-information">Sponsorship</Item>
 
-      <FakeItem tablet desktop />
-      <FakeItem divider mobile tablet desktop />
-      <FakeItem tablet desktop />
-      <FakeItem tablet desktop />
-      <FakeItem tablet desktop />
-      <FakeItem mobile tablet desktop />
+        <FakeItem tablet desktop />
+        <FakeItem divider mobile tablet desktop />
+        <FakeItem tablet desktop />
+        <FakeItem tablet desktop />
+        <FakeItem tablet desktop />
+        <FakeItem mobile tablet desktop />
 
-      <li className={styles.item}>
-        <Link href="/registration-info">
-          <a className={styles.link}>Registration</a>
-        </Link>
-      </li>
+        <Item href="/registration-info">Registration</Item>
 
-      <FakeItem divider mobile tablet desktop />
+        <FakeItem divider mobile tablet desktop />
 
-      <li className={styles.item}>
-        <Link href="/about">
-          <a className={styles.link}>About</a>
-        </Link>
-      </li>
+        <Item href="/about">About</Item>
 
-      <FakeItem mobile tablet desktop />
-      <FakeItem mobile desktop />
-      <FakeItem divider mobile />
+        <FakeItem mobile tablet desktop />
+        <FakeItem mobile desktop />
+        <FakeItem divider mobile />
 
-      <li className={styles.item}>
-        <a
-          className={styles.link}
-          href={ticketsUrl}
-          target="_blank"
-          rel="noreferrer"
-        >
+        <Item href={ticketsUrl} target="_blank" rel="noreferrer">
           Tickets
-        </a>
-      </li>
+        </Item>
 
-      <FakeItem tablet desktop />
-      <FakeItem mobile desktop />
-    </ul>
-  </nav>
-);
+        <FakeItem tablet desktop />
+        <FakeItem mobile desktop />
+      </ul>
+    </nav>
+  );
+};
