@@ -33,6 +33,8 @@
   --font-ui-sm-semi: 600 16px/22px 'Inter', sans-serif;
   --font-ui-xl-medium: 500 30px/38px 'Inter', sans-serif;
   --font-ui-xs: 400 14px/18px 'Inter', sans-serif;
+  --font-ui-xs-medium: 500 14px/18px 'Inter', sans-serif;
+  --font-ui-xs-semi: 600 14px/18px 'Inter', sans-serif;
   --font-ui-xxl-medium: 500 40px/56px 'Inter', sans-serif;
   --grid-gutter: 40px;
   --grid-half-gutter: 20px;

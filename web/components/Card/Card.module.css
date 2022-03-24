@@ -1,0 +1,18 @@
+.card {
+  border-radius: 4px;
+  padding: 10px 14px;
+  border: 1px solid var(--color-brand-black);
+  margin: 2px;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: top;
+  font: var(--font-ui-xs);
+  letter-spacing: var(--letter-spacing-ui-xs);
+}
+
+.figure {
+  margin: 0 14px 0 0;
+  height: 28px;
+  width: 28px;
+  border-radius: 2px;
+}

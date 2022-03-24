@@ -1,5 +1,6 @@
-import { useRef } from 'react';
 import clsx from 'clsx';
+import type { ReactNode } from 'react';
+import { useRef } from 'react';
 import { Hero as HeroProps } from '../../types/Hero';
 import useIntersection from '../../hooks/useIntersection';
 import { useAnimationProperties } from '../../hooks/useAnimationProperties';
@@ -7,7 +8,12 @@ import GridWrapper from '../GridWrapper';
 import SimpleCallToAction from '../SimpleCallToAction';
 import styles from './Hero.module.css';
 
-export const Hero = ({ heading, summary, callToAction }: HeroProps) => {
+export const Hero = ({
+  heading,
+  summary,
+  callToAction,
+  children,
+}: HeroProps & { children?: ReactNode }) => {
   const wrapperRef = useRef<HTMLDivElement>();
   const isIntersecting = useIntersection(wrapperRef, '-80px 0px');
   const headingAnimation = useAnimationProperties();
@@ -38,6 +44,7 @@ export const Hero = ({ heading, summary, callToAction }: HeroProps) => {
             </div>
           )}
         </div>
+        {children}
       </GridWrapper>
     </div>
   );
