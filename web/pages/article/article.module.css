@@ -60,7 +60,7 @@
     display: inline;
   }
 
-  .updatedAt::before {
+  .publishedAt + .updatedAt::before {
     content: ' | ';
   }
 
