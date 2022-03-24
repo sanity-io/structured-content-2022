@@ -12,11 +12,7 @@ export const Card = ({ children, figure }: CardProps) => (
   <div className={styles.card}>
     {figure /* eslint-disable-next-line @next/next/no-img-element */ ? (
       <img
-        src={imageUrlFor(figure)
-          .size(112, 112)
-          .fit('min')
-          .ignoreImageParams()
-          .url()}
+        src={imageUrlFor(figure).size(112, 112).fit('min').url()}
         alt={figure.alt || ''}
         width={28}
         height={28}
