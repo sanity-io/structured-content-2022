@@ -18,7 +18,6 @@ import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import { SPEAKER } from '../../util/queries';
 import { formatDateWithDay, formatTimeRange } from '../../util/date';
-import articleStyles from '../article/article.module.css';
 import speakerStyles from './speakers.module.css';
 
 const QUERY = groq`
@@ -81,10 +80,10 @@ const SpeakersRoute = ({
     <header className={styles.header}>
       <Nav currentPath={`/speakers/${slug}`} ticketsUrl={ticketsUrl} />
     </header>
-    <main>
+    <main className={speakerStyles.container}>
       <GridWrapper>
-        <div className={articleStyles.container}>
-          <aside>
+        <article className={speakerStyles.subContainer}>
+          <aside className={speakerStyles.aside}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={imageUrlFor(photo).size(336, 480).saturation(-100).url()}
@@ -95,7 +94,7 @@ const SpeakersRoute = ({
             />
           </aside>
 
-          <div className={articleStyles.mainContent}>
+          <div className={speakerStyles.mainContent}>
             <>
               <h1>{name}</h1>
               <div>{pronouns}</div>
@@ -154,19 +153,19 @@ const SpeakersRoute = ({
             </div>
             <TextBlock value={bio} />
           </div>
-        </div>
-        <ConferenceUpdatesForm
-          value={{
-            type: 'newsletter',
-            id: 'newsletter-form',
-            buttonText: 'Subscribe',
-          }}
-          index={0}
-          isInline={false}
-          renderNode={null}
-        />
+        </article>
       </GridWrapper>
     </main>
+    <ConferenceUpdatesForm
+      value={{
+        type: 'newsletter',
+        id: 'newsletter-form',
+        buttonText: 'Subscribe',
+      }}
+      index={0}
+      isInline={false}
+      renderNode={null}
+    />
     <Footer links={footer.links} />
   </>
 );

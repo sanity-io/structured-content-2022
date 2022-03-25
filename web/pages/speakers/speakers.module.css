@@ -1,3 +1,7 @@
+.container {
+  background-color: var(--color-brand-yellow-light);
+}
+
 .socialContainer {
   margin-top: 24px;
 }
@@ -25,7 +29,25 @@
   height: 480px;
   border-bottom-right-radius: 16px;
   border-top-right-radius: 16px;
-  position: absolute;
-  z-index: -1;
-  left: 0;
+}
+
+@media (--large-up) {
+  .subContainer {
+    margin: 0 0 128px;
+    padding-top: 128px;
+
+    display: grid;
+    column-gap: var(--grid-gutter);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .mainContent {
+    max-width: var(--max-body-text-width);
+    margin: 0 auto;
+    grid-column: 4 / span 5;
+  }
+
+  .aside {
+    grid-column: 1 / span 3;
+  }
 }
