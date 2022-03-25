@@ -58,6 +58,12 @@ interface SpeakersRouteProps {
   slug: string;
 }
 
+const socialLinkProps = (url: string) => ({
+  href: url,
+  target: '_blank',
+  rel: 'noopener noreferrer',
+});
+
 const SpeakersRoute = ({
   data: {
     speaker: { bio, photo, name, pronouns, title, company, social, sessions },
@@ -97,44 +103,36 @@ const SpeakersRoute = ({
               {social && (
                 <div className={speakerStyles.socialContainer}>
                   {social.twitter && (
-                    <a
-                      href={`https://twitter.com/${social.twitter}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Card
+                      linkProps={socialLinkProps(
+                        urlJoin('https://twitter.com', social.twitter)
+                      )}
                     >
-                      <Card>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={twitterLogo.src}
-                          alt="Twitter"
-                          width={18}
-                          height={18}
-                          className={speakerStyles.socialImage}
-                        />
-                        {social.twitter}
-                      </Card>
-                    </a>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={twitterLogo.src}
+                        alt="Twitter"
+                        width={18}
+                        height={18}
+                        className={speakerStyles.socialImage}
+                      />
+                      {social.twitter}
+                    </Card>
                   )}
                   {social.linkedin && (
-                    <a
-                      href={social.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Card>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={linkedinLogo.src}
-                          alt="LinkedIn"
-                          width={18}
-                          height={18}
-                          className={speakerStyles.socialImage}
-                        />
-                        {urlJoin(social.linkedin, { trailingSlash: false })
-                          .split('/')
-                          .pop()}
-                      </Card>
-                    </a>
+                    <Card linkProps={socialLinkProps(social.linkedin)}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={linkedinLogo.src}
+                        alt="LinkedIn"
+                        width={18}
+                        height={18}
+                        className={speakerStyles.socialImage}
+                      />
+                      {urlJoin(social.linkedin, { trailingSlash: false })
+                        .split('/')
+                        .pop()}
+                    </Card>
                   )}
                 </div>
               )}
