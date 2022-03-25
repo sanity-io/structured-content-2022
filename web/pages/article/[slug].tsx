@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import clsx from 'clsx';
 import urlJoin from 'proper-url-join';
@@ -96,11 +96,7 @@ const ArticleRoute = ({
         rewrittenArticleSlugs={rewrittenArticleSlugs}
       />
       <header className={styles.header}>
-        <Nav
-          onFrontPage={false}
-          currentPath={`/article/${slug}`}
-          ticketsUrl={ticketsUrl}
-        />
+        <Nav currentPath={`/article/${slug}`} ticketsUrl={ticketsUrl} />
       </header>
       <main>
         <Hero heading={heading} summary={summary}>

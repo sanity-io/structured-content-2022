@@ -2,7 +2,6 @@ const LINK = 'internal->{_type, slug}, external, blank';
 
 const FIGURE = '_type, alt, asset';
 const SIMPLE_CALL_TO_ACTION = `text, link{ ${LINK} }`;
-
 const BLOCK_CONTENT = `
   ...,
   markDefs[] {
@@ -19,7 +18,6 @@ const SIMPLE_BLOCK_CONTENT = `
   },
   _type == "simpleCallToAction" => { ${SIMPLE_CALL_TO_ACTION} },
 `;
-
 const ARTICLE_SECTION = `heading, subheading, content[]{ ${SIMPLE_BLOCK_CONTENT} }`;
 const HERO = `heading, summary, callToAction{ ${SIMPLE_CALL_TO_ACTION} }`;
 const PROGRAM = `
@@ -48,6 +46,28 @@ const TICKET = `
   },
   included,
   type,
+`;
+const SPEAKER = `
+  bio,
+  company,
+  name,
+  photo,
+  pronouns,
+  slug,
+  social { twitter, linkedin },
+  title,
+  _createdAt,
+  _id,
+  _rev,
+  _type,
+  _updatedAt,
+  "sessions": *[_type == "session" && references(^._id)] {
+    _id,
+    title,
+    startTime,
+    duration,
+    "timezone": location->.timezone,
+  },
 `;
 
 const SPONSORSHIP = `
@@ -86,4 +106,5 @@ export {
   TEXT_AND_IMAGE_SECTION,
   TICKET,
   SPONSORSHIP,
+  SPEAKER,
 };

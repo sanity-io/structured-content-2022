@@ -1,8 +1,19 @@
 import { formatInTimeZone } from 'date-fns-tz';
+import { addMinutes } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 
 export const formatTime = (date: string, timezone: string) =>
   formatInTimeZone(new Date(date), timezone, 'HH:mm', { locale: enUS });
+
+export const formatTimeRange = (
+  date: string,
+  duration: number,
+  timezone: string
+) =>
+  `${formatTime(date, timezone)}–${formatTime(
+    addMinutes(new Date(date), duration).toISOString(),
+    timezone
+  )}`;
 
 export const formatDate = (date: string, timezone: string) =>
   formatInTimeZone(new Date(date), timezone, 'MMMM d, yyyy', { locale: enUS });

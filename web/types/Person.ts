@@ -3,14 +3,20 @@ import { Section } from './Section';
 import { Figure } from './Figure';
 
 export type Person = {
-  _id: string;
-  name: string;
-  title: string;
-  _type: 'person';
   bio?: Section[];
+  company?: string;
+  name: string;
   photo: Figure;
-  social: {
-    twitter: string;
-  };
+  pronouns?: string;
   slug: Slug;
+  social?: {
+    twitter?: string;
+    linkedin?: string;
+  };
+  title: string;
+  _createdAt: string;
+  _id: string;
+  _rev: string;
+  _type: 'person';
+  _updatedAt: string;
 };

@@ -1,0 +1,31 @@
+.socialContainer {
+  margin-top: 24px;
+}
+
+.socialImage {
+  margin: 0 12px;
+}
+
+.sessionContainer {
+  margin: 48px 0;
+}
+
+.session {
+  display: block;
+  margin: 8px 0;
+}
+
+.sessionTitle {
+  font: var(--font-display-xxs);
+  margin: 0;
+}
+
+.speakerImage {
+  width: 336px;
+  height: 480px;
+  border-bottom-right-radius: 16px;
+  border-top-right-radius: 16px;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+}
