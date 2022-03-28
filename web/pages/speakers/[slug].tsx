@@ -16,11 +16,12 @@ import Card from '../../components/Card';
 import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import { SPEAKER } from '../../util/queries';
-import { formatDateWithDay, formatTimeRange } from '../../util/date';
+import { formatDateWithDay, formatTimeDuration, formatTimeRange } from '../../util/date';
 import styles from '../app.module.css';
 import speakerStyles from './speakers.module.css';
 import { useRandomShape } from '../../hooks/useRandomShape';
 import clsx from 'clsx';
+import { addMinutes, intervalToDuration, format } from "date-fns";
 
 const QUERY = groq`
   {
@@ -159,15 +160,19 @@ const SpeakersRoute = ({
               {Array.isArray(sessions) &&
                 sessions.map(
                   ({ _id, title, startTime, duration, timezone }) => (
-                    <Card key={_id} className={speakerStyles.session}>
-                      <h2 className={speakerStyles.sessionTitle}>{title}</h2>
-                      <div>{formatDateWithDay(startTime, timezone)}</div>
-                      <div>
-                        {formatTimeRange(startTime, duration, timezone)}{' '}
-                        {timezone}
-                      </div>
-                    </Card>
-                  )
+                      <Card key={_id} className={speakerStyles.session}>
+                        <h2 className={speakerStyles.sessionTitle}>{title}</h2>
+                        <div>
+                          <time dateTime={startTime}>{formatDateWithDay(startTime, timezone)}</time>
+                        </div>
+                        <div>
+                          <time dateTime={formatTimeDuration(startTime, duration)}>
+                            {formatTimeRange(startTime, duration, timezone)}{' '}
+                            {timezone}
+                          </time>
+                        </div>
+                      </Card>
+                    )
                 )}
             </div>
             <TextBlock value={bio} />

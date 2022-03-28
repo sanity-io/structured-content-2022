@@ -1,5 +1,5 @@
 import { formatInTimeZone } from 'date-fns-tz';
-import { addMinutes } from 'date-fns';
+import { addMinutes, intervalToDuration } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 
 export const formatTime = (date: string, timezone: string) =>
@@ -20,6 +20,15 @@ export const formatDate = (date: string, timezone: string) =>
 
 export const formatDateWithDay = (date: string, timezone: string) =>
   formatInTimeZone(new Date(date), timezone, 'eeee – MMMM d', { locale: enUS });
+
+export const formatTimeDuration = (start: string, duration: number) => {
+  // This only handles durations of up to 24 hours
+  const { hours, minutes } = intervalToDuration({
+    start: new Date(start),
+    end: addMinutes(new Date(start), duration),
+  });
+  return `PT${hours ? hours + 'H' : ''}${minutes ? minutes + 'M' : ''}`;
+};
 
 const monthNames = [
   'January',
