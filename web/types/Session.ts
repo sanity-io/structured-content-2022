@@ -1,11 +1,15 @@
-import { Person } from './Person';
 import { Section } from './Section';
-import { Slug } from './Slug';
-import { Sponsor } from './Sponsor';
+import { Person } from './Person';
 
 export type Session = {
   _id: string;
   _type: 'session';
   title?: string;
   duration?: number;
+  shortDescription?: Section;
+  speakers?: {
+    role: 'speaker' | 'moderator';
+    person: Person;
+  }[];
+  type?: 'workshop' | 'conference' | 'meetup' | 'webinar';
 };

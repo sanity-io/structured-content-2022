@@ -1,0 +1,41 @@
+.top {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background-color: var(--color-brand-yellow-light);
+}
+
+.topContainer {
+  display: flex;
+}
+
+.sessionInfo {
+  max-width: 50vw;
+}
+
+.sessionTitle {
+  font: var(--font-display-xl);
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.speaker {
+  display: flex;
+  align-items: center;
+}
+
+.roleAndTitle {
+  text-transform: capitalize;
+  font: var(--font-ui-xs-medium);
+}
+
+.speakerImage {
+  border-radius: 24px;
+  margin-right: 24px;
+}
+
+.shortDescription {
+  max-width: 543px;
+  margin: 80px;
+  padding: 0;
+  font: var(--font-body-base);
+}

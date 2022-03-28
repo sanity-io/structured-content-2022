@@ -8,6 +8,8 @@ export type Person = {
   title: string;
   _type: 'person';
   bio?: Section[];
+  company?: string;
+  pronouns?: string;
   photo: Figure;
   social: {
     twitter: string;
