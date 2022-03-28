@@ -83,15 +83,15 @@ const SpeakersRoute = ({
     </header>
     <main className={speakerStyles.container}>
       <GridWrapper>
-        <article className={speakerStyles.subContainer}>
+        <article className={speakerStyles.article}>
           <aside className={speakerStyles.aside}>
-            <div className={speakerStyles.shapeColumn}>
+            <div className={speakerStyles.asideColumn}>
               <Shape />
               <Shape />
-              <Shape />
+              <Shape className={speakerStyles.shapeColumnClip} />
             </div>
-            <div className={speakerStyles.speakerImageColumn}>
-              <Shape margin="marginBottom" />
+            <div className={speakerStyles.asideColumn}>
+              <Shape />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={imageUrlFor(photo).size(336, 480).saturation(-100).url()}
@@ -100,7 +100,7 @@ const SpeakersRoute = ({
                 width={336}
                 height={480}
               />
-              <Shape margin="marginTop" />
+              <Shape className={speakerStyles.speakerImageColumnClip} />
             </div>
           </aside>
 
