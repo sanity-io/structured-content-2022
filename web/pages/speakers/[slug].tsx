@@ -1,5 +1,6 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import urlJoin from 'proper-url-join';
+import { parseISO } from 'date-fns';
 import { groq } from 'next-sanity';
 import type { Person } from '../../types/Person';
 import type { Slug } from '../../types/Slug';
@@ -149,7 +150,11 @@ const SpeakersRoute = ({
                           dateTime={formatTimeDuration(startTime, duration)}
                         >
                           {formatTimeRange(startTime, duration, timezone)}{' '}
-                          {getNonLocationTimezone(startTime, timezone, true)}
+                          {getNonLocationTimezone(
+                            parseISO(startTime),
+                            timezone,
+                            true
+                          )}
                         </time>
                       </div>
                     </article>

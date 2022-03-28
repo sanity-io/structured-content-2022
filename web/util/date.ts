@@ -80,7 +80,7 @@ export const formatDateRangeInUtc = (
 export const getNonLocationTimezone = (
   timestamp: Date,
   locationTimezone: string,
-  abbreviated: boolean
+  abbreviated?: boolean
 ): string =>
   formatInTimeZone(timestamp, locationTimezone, abbreviated ? 'z' : 'zzzz', {
     locale: enUS,
