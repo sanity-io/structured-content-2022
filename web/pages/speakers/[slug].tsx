@@ -101,7 +101,7 @@ const SpeakersRoute = ({
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={imageUrlFor(photo).size(336, 480).saturation(-100).url()}
-                  alt={name}
+                  alt={photo?.alt || ''}
                   className={speakerStyles.speakerImage}
                   width={336}
                   height={480}

@@ -51,7 +51,7 @@ const SPEAKER = `
   bio,
   company,
   name,
-  photo,
+  photo { ${FIGURE} },
   pronouns,
   slug,
   social { twitter, linkedin },
