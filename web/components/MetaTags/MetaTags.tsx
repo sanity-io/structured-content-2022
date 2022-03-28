@@ -3,6 +3,7 @@ import urlJoin from 'proper-url-join';
 import opengraphImage from '../../images/opengraph-image.png';
 import { imageUrlFor } from '../../lib/sanity';
 import { Figure } from '../../types/Figure';
+import { productionUrl } from '../../util/constants';
 
 interface MetaTagsProps {
   title: string;
@@ -33,7 +34,7 @@ export const MetaTags = ({
     <NextSeo
       title={title}
       description={description}
-      canonical={urlJoin('https://structuredcontent.live', canonicalPath)}
+      canonical={urlJoin(productionUrl, canonicalPath)}
       noindex={noIndex}
       openGraph={{
         images: [
@@ -46,7 +47,7 @@ export const MetaTags = ({
                 alt: image.alt,
               }
             : {
-                url: opengraphImage.src,
+                url: urlJoin(productionUrl, opengraphImage.src),
                 width: opengraphImage.width,
                 height: opengraphImage.height,
               },
