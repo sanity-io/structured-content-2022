@@ -1,26 +1,32 @@
+.shapesContainer {
+  overflow: hidden;
+}
+
+.shapesColumn {
+  display: none;
+}
+
+.speakerImageColumn {
+  display: grid;
+  grid-template-columns: repeat(3, 192px);
+  gap: 12px;
+  justify-content: center;
+}
+
 .speakerImage {
   width: 192px;
   height: 255px;
   border-radius: 16px;
 }
 
-/*
-  .shapesColumn {
-    display: none;
-  }
-
-  .speakerImageColumn {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    overflow: hidden;
-  }
-*/
-
 @media (--medium-up) {
   .speakerImage {
     width: 280px;
     height: 372px;
+  }
+
+  .speakerImageColumn {
+    grid-template-columns: repeat(3, 280px);
   }
 }
 
@@ -31,7 +37,6 @@
     gap: 21px;
     justify-content: end;
     height: 804px;
-    overflow: hidden;
   }
 
   .shapesColumn,
