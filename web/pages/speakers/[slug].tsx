@@ -85,12 +85,12 @@ const SpeakersRoute = ({
       <GridWrapper>
         <article className={speakerStyles.article}>
           <aside className={speakerStyles.aside}>
-            <div className={speakerStyles.asideColumn}>
+            <div className={speakerStyles.shapesColumn}>
               <Shape />
               <Shape />
               <Shape className={speakerStyles.shapeColumnClip} />
             </div>
-            <div className={speakerStyles.asideColumn}>
+            <div className={speakerStyles.speakerImageColumn}>
               <Shape />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
