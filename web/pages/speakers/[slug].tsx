@@ -65,6 +65,14 @@ const socialLinkProps = (url: string) => ({
   rel: 'noopener noreferrer',
 });
 
+const Shape = ({
+  marginClass = speakerStyles.shapeMargin,
+}: {
+  marginClass?: string;
+}) => (
+  <div className={clsx(speakerStyles.shape, marginClass, useRandomShape())} />
+);
+
 const SpeakersRoute = ({
   data: {
     speaker: { bio, photo, name, pronouns, title, company, social, sessions },
@@ -87,17 +95,12 @@ const SpeakersRoute = ({
         <article className={speakerStyles.subContainer}>
           <aside className={speakerStyles.aside}>
             <div className={speakerStyles.shapeColumn}>
-              <div className={clsx(speakerStyles.shape, useRandomShape())} />
-              <div className={clsx(speakerStyles.shape, useRandomShape())} />
-              <div className={clsx(speakerStyles.shape, useRandomShape())} />
+              <Shape />
+              <Shape />
+              <Shape />
             </div>
             <div className={speakerStyles.speakerImageColumn}>
-              <div
-                className={clsx(
-                  speakerStyles.shapeMarginBottom,
-                  useRandomShape()
-                )}
-              />
+              <Shape marginClass={speakerStyles.shapeMarginBottom} />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={imageUrlFor(photo).size(336, 480).saturation(-100).url()}
@@ -106,9 +109,7 @@ const SpeakersRoute = ({
                 width={336}
                 height={480}
               />
-              <div
-                className={clsx(speakerStyles.shapeMarginTop, useRandomShape())}
-              />
+              <Shape marginClass={speakerStyles.shapeMarginTop} />
             </div>
           </aside>
 

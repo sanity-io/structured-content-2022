@@ -31,6 +31,11 @@
 }
 
 .shape {
+  width: 336px;
+  height: 336px;
+}
+
+.shapeMargin {
   margin: 21px;
 }
 
@@ -40,13 +45,6 @@
 
 .shapeMarginBottom {
   margin-bottom: 21px;
-}
-
-.shape,
-.shapeMarginTop,
-.shapeMarginBottom {
-  width: 336px;
-  height: 336px;
 }
 
 @media (--large-up) {
