@@ -135,7 +135,7 @@ const SpeakersRoute = ({
               {Array.isArray(sessions) &&
                 sessions.map(
                   ({ _id, title, startTime, duration, timezone }) => (
-                    <Card key={_id} className={speakerStyles.session}>
+                    <div key={_id} className={speakerStyles.session}>
                       <h2 className={speakerStyles.sessionTitle}>{title}</h2>
                       <div>
                         <time dateTime={startTime}>
@@ -150,7 +150,7 @@ const SpeakersRoute = ({
                           {getNonLocationTimezone(startTime, timezone, true)}
                         </time>
                       </div>
-                    </Card>
+                    </div>
                   )
                 )}
             </div>
