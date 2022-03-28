@@ -1,0 +1,55 @@
+.shape {
+  width: 192px;
+  height: 255px;
+}
+
+.margin {
+  margin: 12px;
+}
+
+.marginTop {
+  margin-top: 12px;
+}
+
+.marginBottom {
+  margin-bottom: 12px;
+}
+
+@media (--medium-up) {
+  .shape {
+    width: 280px;
+    height: 372px;
+  }
+
+  .margin {
+    margin: 17.5px;
+  }
+
+  .marginTop {
+    margin-top: 17.5px;
+  }
+
+  .marginBottom {
+    margin-bottom: 17.5px;
+  }
+}
+
+@media (--large-up) {
+  .shape {
+    width: 336px;
+    height: 336px;
+  }
+
+  .margin {
+    margin: 21px;
+  }
+
+  .marginTop {
+    margin-top: 21px;
+  }
+
+  .marginBottom {
+    margin-bottom: 21px;
+  }
+}
+

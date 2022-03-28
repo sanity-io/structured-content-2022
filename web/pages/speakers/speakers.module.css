@@ -30,23 +30,6 @@
   border-radius: 16px;
 }
 
-.shape {
-  width: 336px;
-  height: 336px;
-}
-
-.shapeMargin {
-  margin: 21px;
-}
-
-.shapeMarginTop {
-  margin-top: 21px;
-}
-
-.shapeMarginBottom {
-  margin-bottom: 21px;
-}
-
 @media (--large-up) {
   .subContainer {
     margin: 0 0 128px;

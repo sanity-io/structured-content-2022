@@ -13,15 +13,13 @@ import TextBlock from '../../components/TextBlock';
 import { imageUrlFor } from '../../lib/sanity';
 import ConferenceUpdatesForm from '../../components/ConferenceUpdatesForm';
 import Card from '../../components/Card';
+import Shape from "../../components/Shape";
 import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import { SPEAKER } from '../../util/queries';
 import { formatDateWithDay, formatTimeDuration, formatTimeRange } from '../../util/date';
 import styles from '../app.module.css';
 import speakerStyles from './speakers.module.css';
-import { useRandomShape } from '../../hooks/useRandomShape';
-import clsx from 'clsx';
-import { addMinutes, intervalToDuration, format } from "date-fns";
 
 const QUERY = groq`
   {
@@ -66,14 +64,6 @@ const socialLinkProps = (url: string) => ({
   rel: 'noopener noreferrer',
 });
 
-const Shape = ({
-  marginClass = speakerStyles.shapeMargin,
-}: {
-  marginClass?: string;
-}) => (
-  <div className={clsx(speakerStyles.shape, marginClass, useRandomShape())} />
-);
-
 const SpeakersRoute = ({
   data: {
     speaker: { bio, photo, name, pronouns, title, company, social, sessions },
@@ -101,7 +91,7 @@ const SpeakersRoute = ({
               <Shape />
             </div>
             <div className={speakerStyles.speakerImageColumn}>
-              <Shape marginClass={speakerStyles.shapeMarginBottom} />
+              <Shape margin="marginBottom" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={imageUrlFor(photo).size(336, 480).saturation(-100).url()}
@@ -110,7 +100,7 @@ const SpeakersRoute = ({
                 width={336}
                 height={480}
               />
-              <Shape marginClass={speakerStyles.shapeMarginTop} />
+              <Shape margin="marginTop" />
             </div>
           </aside>
 
