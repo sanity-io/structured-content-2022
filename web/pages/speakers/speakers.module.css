@@ -51,6 +51,10 @@
 }
 
 @media (--large-up) {
+  .container {
+    position: relative;
+  }
+
   .article {
     margin: 0 0 128px;
     padding-top: 128px;
@@ -67,32 +71,39 @@
   }
 
   .aside {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 21px;
+    position: absolute;
+    width: calc(5 / 12 * 100%);
+    top: 0;
+    left: 0;
+  }
 
-    position: relative;
-    top: -330px;
-    left: -150px;
+  .shapesContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 336px);
+    gap: 21px;
+    justify-content: end;
+    height: 804px;
+    overflow: hidden;
   }
 
   .shapesColumn,
   .speakerImageColumn {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    width: 336px;
     gap: 21px;
-    height: 803px;
+  }
+
+  .shapesColumn {
+    margin-top: -205px;
+  }
+
+  .speakerImageColumn {
+    margin-top: -168px;
   }
 
   .speakerImage {
     width: 336px;
     height: 480px;
-  }
-
-  .shapeColumnClip {
-    clip-path: inset(0 0 40px 0);
-  }
-
-  .speakerImageColumnClip {
-    clip-path: inset(0 0 185px 0);
   }
 }

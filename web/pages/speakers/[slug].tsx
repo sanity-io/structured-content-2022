@@ -13,7 +13,7 @@ import TextBlock from '../../components/TextBlock';
 import { imageUrlFor } from '../../lib/sanity';
 import ConferenceUpdatesForm from '../../components/ConferenceUpdatesForm';
 import Card from '../../components/Card';
-import Shape from "../../components/Shape";
+import Shape from '../../components/Shape';
 import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import { SPEAKER } from '../../util/queries';
@@ -90,22 +90,24 @@ const SpeakersRoute = ({
       <GridWrapper>
         <article className={speakerStyles.article}>
           <aside className={speakerStyles.aside}>
-            <div className={speakerStyles.shapesColumn}>
-              <Shape />
-              <Shape />
-              <Shape className={speakerStyles.shapeColumnClip} />
-            </div>
-            <div className={speakerStyles.speakerImageColumn}>
-              <Shape />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={imageUrlFor(photo).size(336, 480).saturation(-100).url()}
-                alt={name}
-                className={speakerStyles.speakerImage}
-                width={336}
-                height={480}
-              />
-              <Shape className={speakerStyles.speakerImageColumnClip} />
+            <div className={speakerStyles.shapesContainer}>
+              <div className={speakerStyles.shapesColumn}>
+                <Shape />
+                <Shape />
+                <Shape />
+              </div>
+              <div className={speakerStyles.speakerImageColumn}>
+                <Shape />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={imageUrlFor(photo).size(336, 480).saturation(-100).url()}
+                  alt={name}
+                  className={speakerStyles.speakerImage}
+                  width={336}
+                  height={480}
+                />
+                <Shape />
+              </div>
             </div>
           </aside>
 
