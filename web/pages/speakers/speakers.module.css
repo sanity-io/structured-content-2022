@@ -27,8 +27,26 @@
 .speakerImage {
   width: 336px;
   height: 480px;
-  border-bottom-right-radius: 16px;
-  border-top-right-radius: 16px;
+  border-radius: 16px;
+}
+
+.shape {
+  margin: 21px;
+}
+
+.shapeMarginTop {
+  margin-top: 21px;
+}
+
+.shapeMarginBottom {
+  margin-bottom: 21px;
+}
+
+.shape,
+.shapeMarginTop,
+.shapeMarginBottom {
+  width: 336px;
+  height: 336px;
 }
 
 @media (--large-up) {
@@ -44,10 +62,23 @@
   .mainContent {
     max-width: var(--max-body-text-width);
     margin: 0 auto;
-    grid-column: 4 / span 5;
+    grid-column: 7 / span 5;
   }
 
   .aside {
-    grid-column: 1 / span 3;
+    display: grid;
+    position: relative;
+    top: -320px;
+    left: -172px;
+  }
+
+  .shapeColumn {
+    grid-column: 1 / span 1;
+    clip-path: inset(0 0 255px 0);
+  }
+
+  .speakerImageColumn {
+    grid-column: 2 / span 1;
+    clip-path: inset(0 0 255px 0);
   }
 }
