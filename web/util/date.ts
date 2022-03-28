@@ -72,12 +72,16 @@ export const formatDateRangeInUtc = (
 };
 
 /* Converts an IANA time zone name, which typically refers to a specific city,
- * into a long-form "non-location" format.
+ * into a "non-location" format. Gives the long-form format by default.
  * Example: given the locationTimezone "Europe/Paris", this will yield "Central
  * European Time" or "Central European Summer Time" depending on the timestamp.
+ * If "abbreviated" is true it'll yield "CET" or "CEST".
  */
 export const getNonLocationTimezone = (
   timestamp: Date,
-  locationTimezone: string
+  locationTimezone: string,
+  abbreviated: boolean
 ): string =>
-  formatInTimeZone(timestamp, locationTimezone, 'zzzz', { locale: enUS });
+  formatInTimeZone(timestamp, locationTimezone, abbreviated ? 'z' : 'zzzz', {
+    locale: enUS,
+  });
