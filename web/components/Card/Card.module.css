@@ -19,6 +19,7 @@
 
 .link {
   text-decoration: none;
+  display: inline-block; /* nicer focus outline */
 }
 
 .link:hover .card {

@@ -87,11 +87,13 @@ const SpeakersRoute = ({
     </header>
     <main className={speakerStyles.container}>
       <GridWrapper>
-        <article className={speakerStyles.article}>
+        <div className={speakerStyles.article}>
           <div className={speakerStyles.mainContent}>
-            <h1>{name}</h1>
-            <div>{pronouns}</div>
-            <div>{[title, company].filter(Boolean).join(', ')}</div>
+            <div className={speakerStyles.summary}>
+              <h1 className={speakerStyles.name}>{name}</h1>
+              <div>{pronouns}</div>
+              <div>{[title, company].filter(Boolean).join(', ')}</div>
+            </div>
             {social && (
               <div className={speakerStyles.socialContainer}>
                 {social.twitter && (
@@ -135,7 +137,7 @@ const SpeakersRoute = ({
               {Array.isArray(sessions) &&
                 sessions.map(
                   ({ _id, title, startTime, duration, timezone }) => (
-                    <div key={_id} className={speakerStyles.session}>
+                    <article key={_id} className={speakerStyles.session}>
                       <h2 className={speakerStyles.sessionTitle}>{title}</h2>
                       <div>
                         <time dateTime={startTime}>
@@ -150,13 +152,15 @@ const SpeakersRoute = ({
                           {getNonLocationTimezone(startTime, timezone, true)}
                         </time>
                       </div>
-                    </div>
+                    </article>
                   )
                 )}
             </div>
-            <TextBlock value={bio} />
+            <div className={speakerStyles.bio}>
+              <TextBlock value={bio} />
+            </div>
           </div>
-        </article>
+        </div>
       </GridWrapper>
     </main>
     <ConferenceUpdatesForm
