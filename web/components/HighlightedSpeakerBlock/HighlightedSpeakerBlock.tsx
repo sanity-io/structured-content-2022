@@ -10,19 +10,19 @@ interface HighlightedSpeakerBlockProps {
 export const HighlightedSpeakerBlock = ({
   photo,
 }: HighlightedSpeakerBlockProps) => (
-  <div className={styles.shapesContainer}>
-    <div className={styles.shapesColumn}>
+  <div className={styles.container}>
+    <div className={styles.column}>
       <Shape />
       <Shape />
       <Shape />
     </div>
-    <div className={styles.speakerImageColumn}>
+    <div className={styles.imageColumn}>
       <Shape />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={imageUrlFor(photo).size(336, 480).saturation(-100).url()}
         alt={photo?.alt || ''}
-        className={styles.speakerImage}
+        className={styles.image}
         width={336}
         height={480}
       />

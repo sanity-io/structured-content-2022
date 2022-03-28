@@ -1,37 +1,37 @@
-.shapesContainer {
+.container {
   overflow: hidden;
 }
 
-.shapesColumn {
+.column {
   display: none;
 }
 
-.speakerImageColumn {
+.imageColumn {
   display: grid;
   grid-template-columns: repeat(3, 192px);
   gap: 12px;
   justify-content: center;
 }
 
-.speakerImage {
+.image {
   width: 192px;
   height: 255px;
   border-radius: 16px;
 }
 
 @media (--medium-up) {
-  .speakerImage {
+  .image {
     width: 280px;
     height: 372px;
   }
 
-  .speakerImageColumn {
+  .imageColumn {
     grid-template-columns: repeat(3, 280px);
   }
 }
 
 @media (--large-up) {
-  .shapesContainer {
+  .container {
     display: grid;
     grid-template-columns: repeat(2, 336px);
     gap: 21px;
@@ -39,23 +39,23 @@
     height: 804px;
   }
 
-  .shapesColumn,
-  .speakerImageColumn {
+  .column,
+  .imageColumn {
     display: flex;
     flex-direction: column;
     width: 336px;
     gap: 21px;
   }
 
-  .shapesColumn {
+  .column {
     margin-top: -205px;
   }
 
-  .speakerImageColumn {
+  .imageColumn {
     margin-top: -168px;
   }
 
-  .speakerImage {
+  .image {
     width: 336px;
     height: 480px;
   }
