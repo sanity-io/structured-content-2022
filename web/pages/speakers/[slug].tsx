@@ -88,52 +88,49 @@ const SpeakersRoute = ({
     <main className={speakerStyles.container}>
       <GridWrapper>
         <article className={speakerStyles.article}>
-          <aside className={speakerStyles.aside}>
-            <HighlightedSpeakerBlock photo={photo} />
-          </aside>
-
           <div className={speakerStyles.mainContent}>
-            <>
-              <h1>{name}</h1>
-              <div>{pronouns}</div>
-              <div>{[title, company].filter(Boolean).join(', ')}</div>
-              {social && (
-                <div className={speakerStyles.socialContainer}>
-                  {social.twitter && (
-                    <Card
-                      linkProps={socialLinkProps(
-                        urlJoin('https://twitter.com', social.twitter)
-                      )}
-                    >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={twitterLogo.src}
-                        alt="Twitter"
-                        width={18}
-                        height={18}
-                        className={speakerStyles.socialImage}
-                      />
-                      {social.twitter}
-                    </Card>
-                  )}
-                  {social.linkedin && (
-                    <Card linkProps={socialLinkProps(social.linkedin)}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={linkedinLogo.src}
-                        alt="LinkedIn"
-                        width={18}
-                        height={18}
-                        className={speakerStyles.socialImage}
-                      />
-                      {urlJoin(social.linkedin, { trailingSlash: false })
-                        .split('/')
-                        .pop()}
-                    </Card>
-                  )}
-                </div>
-              )}
-            </>
+            <h1>{name}</h1>
+            <div>{pronouns}</div>
+            <div>{[title, company].filter(Boolean).join(', ')}</div>
+            {social && (
+              <div className={speakerStyles.socialContainer}>
+                {social.twitter && (
+                  <Card
+                    linkProps={socialLinkProps(
+                      urlJoin('https://twitter.com', social.twitter)
+                    )}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={twitterLogo.src}
+                      alt="Twitter"
+                      width={18}
+                      height={18}
+                      className={speakerStyles.socialImage}
+                    />
+                    {social.twitter}
+                  </Card>
+                )}
+                {social.linkedin && (
+                  <Card linkProps={socialLinkProps(social.linkedin)}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={linkedinLogo.src}
+                      alt="LinkedIn"
+                      width={18}
+                      height={18}
+                      className={speakerStyles.socialImage}
+                    />
+                    {urlJoin(social.linkedin, { trailingSlash: false })
+                      .split('/')
+                      .pop()}
+                  </Card>
+                )}
+              </div>
+            )}
+            <div className={speakerStyles.speakerImage}>
+              <HighlightedSpeakerBlock photo={photo} />
+            </div>
             <div className={speakerStyles.sessionContainer}>
               {Array.isArray(sessions) &&
                 sessions.map(
