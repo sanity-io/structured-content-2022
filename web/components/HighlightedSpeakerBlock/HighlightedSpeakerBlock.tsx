@@ -11,7 +11,7 @@ export const HighlightedSpeakerBlock = ({
   photo,
 }: HighlightedSpeakerBlockProps) => (
   <div className={styles.container}>
-    <div className={styles.column}>
+    <div className={styles.column} aria-hidden="true">
       <Shape />
       <Shape />
       <Shape />
