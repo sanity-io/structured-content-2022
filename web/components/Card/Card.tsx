@@ -38,7 +38,7 @@ export const Card = ({ children, figure, linkProps }: CardProps) => {
   const { className: linkCls, href, ...otherLinkProps } = linkProps;
   return (
     <Link href={href}>
-      <a className={clsx(styles.link, linkCls)} {...otherLinkProps}>
+      <a className={styles.link} {...otherLinkProps}>
         {Card}
       </a>
     </Link>
