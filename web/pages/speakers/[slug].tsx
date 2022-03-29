@@ -90,56 +90,61 @@ const SpeakersRoute = ({
               <div>{[title, company].filter(Boolean).join(', ')}</div>
             </div>
             {social && (
-              <div className={speakerStyles.socialContainer}>
+              <ul className={speakerStyles.socialContainer}>
                 {social.twitter && (
-                  <Card
-                    linkProps={socialLinkProps(
-                      urlJoin('https://twitter.com', social.twitter)
-                    )}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={twitterLogo.src}
-                      alt="Twitter"
-                      width={18}
-                      height={18}
-                      className={speakerStyles.socialImage}
-                    />
-                    {social.twitter}
-                  </Card>
+                  <li className={speakerStyles.socialItem}>
+                    <Card
+                      linkProps={socialLinkProps(
+                        urlJoin('https://twitter.com', social.twitter)
+                      )}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={twitterLogo.src}
+                        alt="Twitter"
+                        width={18}
+                        height={18}
+                        className={speakerStyles.socialImage}
+                      />
+                      {social.twitter}
+                    </Card>
+                  </li>
                 )}
                 {social.linkedin && (
-                  <Card linkProps={socialLinkProps(social.linkedin)}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={linkedinLogo.src}
-                      alt="LinkedIn"
-                      width={18}
-                      height={18}
-                      className={speakerStyles.socialImage}
-                    />
-                    {urlJoin(social.linkedin, { trailingSlash: false })
-                      .split('/')
-                      .pop()}
-                  </Card>
+                  <li className={speakerStyles.socialItem}>
+                    <Card linkProps={socialLinkProps(social.linkedin)}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={linkedinLogo.src}
+                        alt="LinkedIn"
+                        width={18}
+                        height={18}
+                        className={speakerStyles.socialImage}
+                      />
+                      {urlJoin(social.linkedin, { trailingSlash: false })
+                        .split('/')
+                        .pop()}
+                    </Card>
+                  </li>
                 )}
-              </div>
+              </ul>
             )}
             <div className={speakerStyles.speakerImage}>
               <HighlightedSpeakerBlock photo={photo} />
             </div>
-            <div className={speakerStyles.sessionContainer}>
+            <ul className={speakerStyles.sessionContainer}>
               {Array.isArray(sessions) &&
                 sessions.map(
                   ({ _id, title, startTime, duration, timezone }) =>
                     title && (
-                      <SessionCard
-                        key={_id}
-                        {...{ title, startTime, duration, timezone }}
-                      />
+                      <li key={_id}>
+                        <SessionCard
+                          {...{ title, startTime, duration, timezone }}
+                        />
+                      </li>
                     )
                 )}
-            </div>
+            </ul>
             <div className={speakerStyles.bio}>
               <TextBlock value={bio} />
             </div>

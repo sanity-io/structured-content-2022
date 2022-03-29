@@ -18,23 +18,28 @@
 
 .socialContainer {
   text-align: center;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.speakerImage {
-  margin: 80px calc(-1 * var(--grid-half-gutter));
-}
-
-.socialContainer {
-  margin-top: 24px;
+.socialItem {
+  display: inline-block;
 }
 
 .socialImage {
   margin-right: 12px;
 }
 
+.speakerImage {
+  margin: 80px calc(-1 * var(--grid-half-gutter));
+}
+
 .sessionContainer {
   max-width: var(--max-body-text-width);
   margin: 48px auto;
+  padding: 0;
+  list-style: none;
 }
 
 .bio {
