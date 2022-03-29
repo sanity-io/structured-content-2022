@@ -1,7 +1,3 @@
-.container {
-  overflow: hidden;
-}
-
 .column {
   display: none;
 }
@@ -36,7 +32,6 @@
     grid-template-columns: repeat(2, 336px);
     gap: 21px;
     justify-content: end;
-    height: 804px;
   }
 
   .column,
