@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import urlJoin from 'proper-url-join';
+import { Fragment } from 'react';
 import Footer from '../../components/Footer';
 import GridWrapper from '../../components/GridWrapper';
 import MetaTags from '../../components/MetaTags';
@@ -87,9 +88,9 @@ const SessionRoute = ({
             <div>
               {speakers?.map(
                 ({ role, person: { _id, name, title, company, photo } }) => (
-                  <>
+                  <Fragment key={_id}>
                     <hr />
-                    <div key={_id} className={programStyles.speaker}>
+                    <div className={programStyles.speaker}>
                       <div>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -111,7 +112,7 @@ const SessionRoute = ({
                         </div>
                       </div>
                     </div>
-                  </>
+                  </Fragment>
                 )
               )}
               <hr />
