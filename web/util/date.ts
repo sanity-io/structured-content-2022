@@ -7,8 +7,14 @@ export const formatTime = (date: string, timezone: string) =>
 export const formatDate = (date: string, timezone: string) =>
   formatInTimeZone(new Date(date), timezone, 'MMMM d, yyyy', { locale: enUS });
 
-export const formatDateWithDay = (date: string, timezone: string) =>
-  formatInTimeZone(new Date(date), timezone, 'eeee – MMMM d', { locale: enUS });
+export const formatDateWithDay = (
+  date: string,
+  timezone: string,
+  joinCharacter = ' – '
+) =>
+  formatInTimeZone(new Date(date), timezone, `eeee${joinCharacter}MMMM d`, {
+    locale: enUS,
+  });
 
 const monthNames = [
   'January',
@@ -51,6 +57,25 @@ export const formatDateRangeInUtc = (
   };
 };
 
+const meridiem = (date: string) =>
+  new Date(date).getHours() >= 12 ? 'PM' : 'AM';
+
+export const formatTimeRange = (
+  timestamp1: string,
+  timestamp2: string,
+  timezone: string
+) => ({
+  start: formatInTimeZone(
+    new Date(timestamp1),
+    timezone,
+    `H:mm${meridiem(timestamp1) !== meridiem(timestamp2) ? ' aa' : ''}`,
+    { locale: enUS }
+  ),
+  end: formatInTimeZone(new Date(timestamp2), timezone, 'H:mm aa', {
+    locale: enUS,
+  }),
+});
+
 /* Converts an IANA time zone name, which typically refers to a specific city,
  * into a long-form "non-location" format.
  * Example: given the locationTimezone "Europe/Paris", this will yield "Central
@@ -58,6 +83,7 @@ export const formatDateRangeInUtc = (
  */
 export const getNonLocationTimezone = (
   timestamp: Date,
-  locationTimezone: string
+  locationTimezone: string,
+  format = 'zzzz'
 ): string =>
-  formatInTimeZone(timestamp, locationTimezone, 'zzzz', { locale: enUS });
+  formatInTimeZone(timestamp, locationTimezone, format, { locale: enUS });

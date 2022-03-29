@@ -15,6 +15,9 @@ import { Slug } from '../../types/Slug';
 import { Session } from '../../types/Session';
 import styles from '../app.module.css';
 import programStyles from './program.module.css';
+import { addMinutes } from 'date-fns';
+import { formatDateWithDay, formatTimeRange } from '../../util/date';
+import SessionDateTime from '../../components/SessionDateTime';
 
 const QUERY = groq`
   {
@@ -39,6 +42,19 @@ const QUERY = groq`
         _id,
       }
     },
+    "timeInfo": *[_id == "${mainEventId}"][0].venues[0]-> {
+      "mainVenueTimezone": timezone,
+      "currentSessionInProgram": *[_type == "program" && references(^._id)][0].sessions[] { 
+        session-> 
+      }[session.slug.current == $slug][0].session { duration },
+      "mainVenueSessions": *[_type == "program" && references(^._id)][0] {
+        startDateTime,
+        "durations": *[_id == ^._id].sessions[] {
+          "duration": coalesce(duration, session->.duration),
+          "slug": coalesce(session->.slug.current, "padding"),
+        },
+      }
+    },  
   }`;
 
 interface SessionRouteProps {
@@ -54,6 +70,19 @@ interface SessionRouteProps {
         _id: string;
       }[];
     };
+    timeInfo: {
+      mainVenueTimezone: string;
+      currentSessionInProgram?: {
+        duration: number;
+      };
+      mainVenueSessions: {
+        startDateTime: string;
+        durations: {
+          duration: number;
+          slug: string | 'padding';
+        }[];
+      };
+    };
   };
   slug: string;
 }
@@ -63,6 +92,7 @@ const SessionRoute = ({
     session: { title, shortDescription, speakers, type },
     home: { ticketsUrl },
     footer,
+    timeInfo: { mainVenueTimezone, currentSessionInProgram, mainVenueSessions },
   },
   slug,
 }: SessionRouteProps) => {
@@ -82,8 +112,12 @@ const SessionRoute = ({
             <div className={programStyles.sessionInfo}>
               {type === 'workshop' && <Tag>{type}</Tag>}
               <h1 className={programStyles.sessionTitle}>{title}</h1>
-              <div>Wednesday, TODO</div>
-              <div>TODO:00-TODO:00 AM PDT</div>
+              <SessionDateTime
+                {...mainVenueSessions}
+                {...currentSessionInProgram}
+                slug={slug}
+                mainVenueTimezone={mainVenueTimezone}
+              />
             </div>
             <div>
               {speakers?.map(
