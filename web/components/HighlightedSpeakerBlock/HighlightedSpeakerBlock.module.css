@@ -8,27 +8,25 @@
 
 .imageColumn {
   display: grid;
-  grid-template-columns: repeat(3, 192px);
+  grid-template-columns: repeat(3, 178px);
   gap: 12px;
   justify-content: center;
 }
 
 .image {
-  width: 192px;
+  width: 178px;
   height: 255px;
   border-radius: 16px;
-  object-fit: cover;
-  object-position: center top;
 }
 
 @media (--medium-up) {
   .image {
-    width: 280px;
+    width: 260px;
     height: 372px;
   }
 
   .imageColumn {
-    grid-template-columns: repeat(3, 280px);
+    grid-template-columns: repeat(3, 260px);
   }
 }
 

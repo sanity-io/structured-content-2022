@@ -1,11 +1,11 @@
 .shape {
-  width: 192px;
+  width: 178px;
   height: 255px;
 }
 
 @media (--medium-up) {
   .shape {
-    width: 280px;
+    width: 260px;
     height: 372px;
   }
 }
