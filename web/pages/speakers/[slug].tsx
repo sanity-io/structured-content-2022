@@ -1,6 +1,5 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import urlJoin from 'proper-url-join';
-import { parseISO } from 'date-fns';
 import { groq } from 'next-sanity';
 import type { Person } from '../../types/Person';
 import type { Slug } from '../../types/Slug';
@@ -14,15 +13,10 @@ import TextBlock from '../../components/TextBlock';
 import ConferenceUpdatesForm from '../../components/ConferenceUpdatesForm';
 import Card from '../../components/Card';
 import HighlightedSpeakerBlock from '../../components/HighlightedSpeakerBlock';
+import SessionCard from '../../components/SessionCard';
 import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import { SPEAKER } from '../../util/queries';
-import {
-  formatDateWithDay,
-  formatTimeDuration,
-  formatTimeRange,
-  getNonLocationTimezone,
-} from '../../util/date';
 import styles from '../app.module.css';
 import speakerStyles from './speakers.module.css';
 
@@ -137,28 +131,13 @@ const SpeakersRoute = ({
             <div className={speakerStyles.sessionContainer}>
               {Array.isArray(sessions) &&
                 sessions.map(
-                  ({ _id, title, startTime, duration, timezone }) => (
-                    <article key={_id} className={speakerStyles.session}>
-                      <h2 className={speakerStyles.sessionTitle}>{title}</h2>
-                      <div>
-                        <time dateTime={startTime}>
-                          {formatDateWithDay(startTime, timezone)}
-                        </time>
-                      </div>
-                      <div>
-                        <time
-                          dateTime={formatTimeDuration(startTime, duration)}
-                        >
-                          {formatTimeRange(startTime, duration, timezone)}{' '}
-                          {getNonLocationTimezone(
-                            parseISO(startTime),
-                            timezone,
-                            true
-                          )}
-                        </time>
-                      </div>
-                    </article>
-                  )
+                  ({ _id, title, startTime, duration, timezone }) =>
+                    title && (
+                      <SessionCard
+                        key={_id}
+                        {...{ title, startTime, duration, timezone }}
+                      />
+                    )
                 )}
             </div>
             <div className={speakerStyles.bio}>
