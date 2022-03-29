@@ -13,6 +13,8 @@
   width: 192px;
   height: 255px;
   border-radius: 16px;
+  object-fit: cover;
+  object-position: center top;
 }
 
 @media (--medium-up) {
