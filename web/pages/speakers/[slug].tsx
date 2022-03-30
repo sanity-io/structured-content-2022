@@ -21,11 +21,10 @@ import styles from '../app.module.css';
 import speakerStyles from './speakers.module.css';
 import { sessionStart } from '../../util/session';
 import { Session } from '../../types/Session';
-import { parseISO } from 'date-fns';
 
 const QUERY = groq`
   {
-    "speaker": *[_type == "person" && slug.current == $slug][0] { ${SPEAKER} },
+    "speaker": *[_type == "person" && slug.current == $slug && count(*[references(^._id)]) > 0][0] { ${SPEAKER} },
     "ticketsUrl": *[_id == "${mainEventId}"][0].registrationUrl,
     "footer": *[_id == "secondary-nav"][0] {
       "links": tree[].value.reference-> {
