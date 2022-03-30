@@ -30,6 +30,8 @@
   border-bottom: 2px solid var(--color-brand-black);
   display: flex;
   align-items: center;
+  font: var(--font-ui-xs-medium);
+  letter-spacing: var(--letter-spacing-ui-xs);
 }
 
 .speaker:first-child {
@@ -41,10 +43,8 @@
   margin-right: 24px;
 }
 
-.roleAndTitle {
+.role {
   text-transform: capitalize;
-  font: var(--font-ui-xs-medium);
-  letter-spacing: var(--letter-spacing-ui-xs);
 }
 
 .speakerName {

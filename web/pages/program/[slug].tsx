@@ -145,13 +145,11 @@ const SessionRoute = ({
                           />
                         )}
                         <div>
-                          <div className={programStyles.roleAndTitle}>
-                            {role}
-                          </div>
+                          <div className={programStyles.role}>{role}</div>
                           <strong className={programStyles.speakerName}>
                             {name}
                           </strong>
-                          <div className={programStyles.roleAndTitle}>
+                          <div>
                             {[title, company].filter(Boolean).join(', ')}
                           </div>
                         </div>
