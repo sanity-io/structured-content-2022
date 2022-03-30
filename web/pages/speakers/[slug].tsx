@@ -35,19 +35,17 @@ const QUERY = groq`
     },
   }`;
 
-type SimpleSession = {
-  _type: string;
-  duration: number;
-  session?: Pick<Session, '_id' | 'duration'>;
-};
-
 type SpeakerSession = {
   _id: string;
   title: string;
   duration: number;
   programContainingSession: {
     programStart: string;
-    sessions: SimpleSession[];
+    sessions: {
+      _type: string;
+      duration: number;
+      session?: Pick<Session, '_id' | 'duration'>;
+    }[];
     venueTimezone: string;
   };
 };
@@ -75,12 +73,6 @@ const socialLinkProps = (url: string) => ({
   rel: 'noopener noreferrer',
 });
 
-const toSimpleSessions = (sessions: SimpleSession[]) =>
-  sessions.map(({ duration, session }) => ({
-    duration: duration || session.duration,
-    _id: session?._id,
-  }));
-
 const toSessionCardProps = (sessions: SpeakerSession[]) =>
   sessions
     .filter(({ programContainingSession }) => Boolean(programContainingSession))
@@ -89,15 +81,17 @@ const toSessionCardProps = (sessions: SpeakerSession[]) =>
         _id,
         programContainingSession: { programStart, sessions, venueTimezone },
         ...otherProps
-      }) => ({
-        ...otherProps,
-        timezone: venueTimezone,
-        sessionStart: sessionStart(
-          programStart,
-          _id,
-          toSimpleSessions(sessions)
-        ),
-      })
+      }) => {
+        const simpleSessions = sessions.map(({ duration, session }) => ({
+          duration: duration || session.duration,
+          _id: session?._id,
+        }));
+        return {
+          ...otherProps,
+          timezone: venueTimezone,
+          sessionStart: sessionStart(programStart, _id, simpleSessions),
+        };
+      }
     );
 
 const SpeakersRoute = ({
