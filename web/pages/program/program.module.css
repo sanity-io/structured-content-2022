@@ -1,31 +1,37 @@
 .top {
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding: 40px 0 48px;
   background-color: var(--color-brand-yellow-light);
 }
 
-.topContainer {
-  display: flex;
+.sessionInfo {
+  text-align: center;
+  font: var(--font-body-small-medium);
+  letter-spacing: var(--letter-spacing-body-small);
 }
 
-.sessionInfo {
-  max-width: 50vw;
+.tag {
+  margin-bottom: 24px;
 }
 
 .sessionTitle {
-  font: var(--font-display-xl);
-  margin-top: 32px;
-  margin-bottom: 32px;
+  margin: 0 auto 24px;
+  max-width: var(--max-body-text-width);
+}
+
+.speakers {
+  margin: 80px auto 0;
+  max-width: var(--max-body-text-width);
 }
 
 .speaker {
+  padding: 16px 0 24px;
+  border-bottom: 2px solid var(--color-brand-black);
   display: flex;
   align-items: center;
 }
 
-.roleAndTitle {
-  text-transform: capitalize;
-  font: var(--font-ui-xs-medium);
+.speaker:first-child {
+  border-top: 2px solid var(--color-brand-black);
 }
 
 .speakerImage {
@@ -33,8 +39,69 @@
   margin-right: 24px;
 }
 
+.roleAndTitle {
+  text-transform: capitalize;
+  font: var(--font-ui-xs-medium);
+  letter-spacing: var(--letter-spacing-ui-xs);
+}
+
+.speakerName {
+  font: var(--font-display-xxs);
+}
+
 .shortDescription {
-  max-width: 543px;
-  margin: 80px 0;
-  font: var(--font-body-base);
+  max-width: var(--max-body-text-width);
+  margin: 48px auto 80px;
+}
+
+@media (--medium-up) {
+  .top {
+    padding: 108px 0 64px;
+  }
+
+  .sessionInfo {
+    font: var(--font-body-base-medium);
+    letter-spacing: var(--letter-spacing-body-base);
+  }
+
+  .tag,
+  .sessionTitle {
+    margin-bottom: 32px;
+  }
+
+  .speakers {
+    margin-top: 96px;
+  }
+}
+
+@media (--large-up) {
+  .top {
+    padding: 88px 0 80px;
+  }
+
+  .topContainer {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--grid-gutter);
+    align-items: center;
+  }
+
+  .sessionInfo {
+    text-align: left;
+    grid-column: 2 / span 6;
+  }
+
+  .sessionTitle {
+    font: var(--font-display-xl);
+    margin: 0 0 32px;
+  }
+
+  .speakers {
+    margin: 0;
+    grid-column: 8 / span 4;
+  }
+
+  .shortDescription {
+    margin: 80px auto 128px calc((100% + var(--grid-gutter)) / 12);
+  }
 }

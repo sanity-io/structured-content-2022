@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import urlJoin from 'proper-url-join';
-import { Fragment } from 'react';
 import Footer from '../../components/Footer';
 import GridWrapper from '../../components/GridWrapper';
 import MetaTags from '../../components/MetaTags';
@@ -111,7 +110,11 @@ const SessionRoute = ({
           <GridWrapper>
             <div className={programStyles.topContainer}>
               <div className={programStyles.sessionInfo}>
-                {type === 'workshop' && <Tag>{type}</Tag>}
+                {type === 'workshop' && (
+                  <div className={programStyles.tag}>
+                    <Tag>{type}</Tag>
+                  </div>
+                )}
                 <h1 className={programStyles.sessionTitle}>{title}</h1>
                 <SessionDateTime
                   {...mainVenueSessions}
@@ -120,39 +123,35 @@ const SessionRoute = ({
                   mainVenueTimezone={mainVenueTimezone}
                 />
               </div>
-              <div>
+              <div className={programStyles.speakers}>
                 {speakers?.map(
                   ({ role, person: { _id, name, title, company, photo } }) => (
-                    <Fragment key={_id}>
-                      <hr />
-                      <div className={programStyles.speaker}>
-                        <div>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={imageUrlFor(photo)
-                              .size(64, 80)
-                              .saturation(-100)
-                              .url()}
-                            width={64}
-                            height={80}
-                            alt={name}
-                            className={programStyles.speakerImage}
-                          />
-                        </div>
-                        <div>
-                          <div className={programStyles.roleAndTitle}>
-                            {role}
-                          </div>
-                          <strong>{name}</strong>
-                          <div className={programStyles.roleAndTitle}>
-                            {[title, company].filter(Boolean).join(', ')}
-                          </div>
+                    <div key={_id} className={programStyles.speaker}>
+                      <div>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={imageUrlFor(photo)
+                            .size(64, 80)
+                            .saturation(-100)
+                            .url()}
+                          width={64}
+                          height={80}
+                          alt={name}
+                          className={programStyles.speakerImage}
+                        />
+                      </div>
+                      <div>
+                        <div className={programStyles.roleAndTitle}>{role}</div>
+                        <strong className={programStyles.speakerName}>
+                          {name}
+                        </strong>
+                        <div className={programStyles.roleAndTitle}>
+                          {[title, company].filter(Boolean).join(', ')}
                         </div>
                       </div>
-                    </Fragment>
+                    </div>
                   )
                 )}
-                <hr />
               </div>
             </div>
           </GridWrapper>
