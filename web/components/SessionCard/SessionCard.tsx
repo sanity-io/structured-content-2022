@@ -23,7 +23,7 @@ export const SessionCard = ({
     <strong className={styles.title}>{title}</strong>
     {startTime && (
       <div>
-        <time dateTime={startTime.toString()}>
+        <time dateTime={startTime.toISOString()}>
           {formatDateWithDay(startTime, timezone || 'UTC')}
         </time>
       </div>
