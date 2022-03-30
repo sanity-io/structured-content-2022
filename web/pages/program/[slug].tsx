@@ -108,56 +108,60 @@ const SessionRoute = ({
       </header>
       <main>
         <div className={programStyles.top}>
-          <GridWrapper className={programStyles.topContainer}>
-            <div className={programStyles.sessionInfo}>
-              {type === 'workshop' && <Tag>{type}</Tag>}
-              <h1 className={programStyles.sessionTitle}>{title}</h1>
-              <SessionDateTime
-                {...mainVenueSessions}
-                {...currentSessionInProgram}
-                slug={slug}
-                mainVenueTimezone={mainVenueTimezone}
-              />
-            </div>
-            <div>
-              {speakers?.map(
-                ({ role, person: { _id, name, title, company, photo } }) => (
-                  <Fragment key={_id}>
-                    <hr />
-                    <div className={programStyles.speaker}>
-                      <div>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={imageUrlFor(photo)
-                            .size(64, 80)
-                            .saturation(-100)
-                            .url()}
-                          width={64}
-                          height={80}
-                          alt={name}
-                          className={programStyles.speakerImage}
-                        />
-                      </div>
-                      <div>
-                        <div className={programStyles.roleAndTitle}>{role}</div>
-                        <strong>{name}</strong>
-                        <div className={programStyles.roleAndTitle}>
-                          {[title, company].filter(Boolean).join(', ')}
+          <GridWrapper>
+            <div className={programStyles.topContainer}>
+              <div className={programStyles.sessionInfo}>
+                {type === 'workshop' && <Tag>{type}</Tag>}
+                <h1 className={programStyles.sessionTitle}>{title}</h1>
+                <SessionDateTime
+                  {...mainVenueSessions}
+                  {...currentSessionInProgram}
+                  slug={slug}
+                  mainVenueTimezone={mainVenueTimezone}
+                />
+              </div>
+              <div>
+                {speakers?.map(
+                  ({ role, person: { _id, name, title, company, photo } }) => (
+                    <Fragment key={_id}>
+                      <hr />
+                      <div className={programStyles.speaker}>
+                        <div>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={imageUrlFor(photo)
+                              .size(64, 80)
+                              .saturation(-100)
+                              .url()}
+                            width={64}
+                            height={80}
+                            alt={name}
+                            className={programStyles.speakerImage}
+                          />
+                        </div>
+                        <div>
+                          <div className={programStyles.roleAndTitle}>
+                            {role}
+                          </div>
+                          <strong>{name}</strong>
+                          <div className={programStyles.roleAndTitle}>
+                            {[title, company].filter(Boolean).join(', ')}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Fragment>
-                )
-              )}
-              <hr />
+                    </Fragment>
+                  )
+                )}
+                <hr />
+              </div>
             </div>
           </GridWrapper>
         </div>
-        <div>
-          <GridWrapper className={programStyles.shortDescription}>
+        <GridWrapper>
+          <div className={programStyles.shortDescription}>
             <TextBlock value={shortDescription} />
-          </GridWrapper>
-        </div>
+          </div>
+        </GridWrapper>
       </main>
       <Footer links={footer.links} />
     </>
