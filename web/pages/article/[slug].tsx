@@ -113,12 +113,12 @@ const ArticleRoute = ({
             <div className={articleStyles.timestamps}>
               {publishedAt && (
                 <p className={articleStyles.publishedAt}>
-                  Published on: {formatDate(publishedAt, 'UTC')}
+                  Published on: {formatDate(new Date(publishedAt), 'UTC')}
                 </p>
               )}
               {updatedAt && (
                 <p className={articleStyles.updatedAt}>
-                  Updated on: {formatDate(updatedAt, 'UTC')}
+                  Updated on: {formatDate(new Date(updatedAt), 'UTC')}
                 </p>
               )}
             </div>

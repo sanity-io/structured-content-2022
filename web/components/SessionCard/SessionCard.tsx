@@ -1,4 +1,3 @@
-import { parseISO } from 'date-fns';
 import {
   formatDateWithDay,
   formatTimeDuration,
@@ -9,7 +8,7 @@ import styles from './SessionCard.module.css';
 
 interface SessionCardProps {
   title: string;
-  startTime?: string;
+  startTime?: Date;
   duration?: number;
   timezone?: string;
 }
@@ -24,7 +23,7 @@ export const SessionCard = ({
     <strong className={styles.title}>{title}</strong>
     {startTime && (
       <div>
-        <time dateTime={startTime}>
+        <time dateTime={startTime.toString()}>
           {formatDateWithDay(startTime, timezone || 'UTC')}
         </time>
       </div>
@@ -33,7 +32,7 @@ export const SessionCard = ({
       <div>
         <time dateTime={formatTimeDuration(startTime, duration)}>
           {formatTimeRange(startTime, duration, timezone || 'UTC')}{' '}
-          {getNonLocationTimezone(parseISO(startTime), timezone, true)}
+          {getNonLocationTimezone(startTime, timezone, true)}
         </time>
       </div>
     )}

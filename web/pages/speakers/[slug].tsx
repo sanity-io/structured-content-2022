@@ -170,7 +170,7 @@ const SpeakersRoute = ({
                         startDateTime,
                         _id,
                         simpleSessions
-                      ).toISOString();
+                      );
                       return (
                         <li key={_id}>
                           <SessionCard
