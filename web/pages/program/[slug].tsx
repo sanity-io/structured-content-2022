@@ -112,7 +112,7 @@ const SessionRoute = ({
               <div className={programStyles.sessionInfo}>
                 {type === 'workshop' && (
                   <div className={programStyles.tag}>
-                    <Tag>{type}</Tag>
+                    <Tag>Workshop</Tag>
                   </div>
                 )}
                 <h1 className={programStyles.sessionTitle}>{title}</h1>
