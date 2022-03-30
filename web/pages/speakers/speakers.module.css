@@ -70,7 +70,7 @@
   .article {
     margin: 0 0 128px;
     padding: 128px 0;
-    min-height: 804px; /* accomodate the abs.pos. .speakerImage */
+    min-height: 1100px; /* accomodate the abs.pos. .speakerImage */
 
     display: grid;
     column-gap: var(--grid-gutter);
