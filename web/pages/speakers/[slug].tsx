@@ -21,7 +21,7 @@ import styles from '../app.module.css';
 import speakerStyles from './speakers.module.css';
 import { sessionStart } from '../../util/session';
 import { Session } from '../../types/Session';
-import { parseISO } from "date-fns";
+import { parseISO } from 'date-fns';
 
 const QUERY = groq`
   {
