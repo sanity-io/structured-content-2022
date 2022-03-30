@@ -1,5 +1,4 @@
 import type { HTMLProps, ReactNode } from 'react';
-import clsx from 'clsx';
 import Link from 'next/link';
 import { imageUrlFor } from '../../lib/sanity';
 import type { Figure } from '../../types/Figure';
@@ -35,7 +34,7 @@ export const Card = ({ children, figure, linkProps }: CardProps) => {
     return Card;
   }
 
-  const { className: linkCls, href, ...otherLinkProps } = linkProps;
+  const { className, href, ...otherLinkProps } = linkProps;
   return (
     <Link href={href}>
       <a className={styles.link} {...otherLinkProps}>
