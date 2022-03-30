@@ -4,7 +4,7 @@ import Shape from '../../components/Shape';
 import styles from './HighlightedSpeakerBlock.module.css';
 
 interface HighlightedSpeakerBlockProps {
-  photo: Figure;
+  photo?: Figure;
 }
 
 export const HighlightedSpeakerBlock = ({
@@ -18,14 +18,18 @@ export const HighlightedSpeakerBlock = ({
     </div>
     <div className={styles.imageColumn}>
       <Shape />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={imageUrlFor(photo).size(336, 480).saturation(-100).url()}
-        alt={photo?.alt || ''}
-        className={styles.image}
-        width={336}
-        height={480}
-      />
+      {photo ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={imageUrlFor(photo).size(336, 480).saturation(-100).url()}
+          alt={photo.alt || ''}
+          className={styles.image}
+          width={336}
+          height={480}
+        />
+      ) : (
+        <Shape />
+      )}
       <Shape />
     </div>
   </div>
