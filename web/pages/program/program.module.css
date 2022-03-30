@@ -21,6 +21,8 @@
 .speakers {
   margin: 80px auto 0;
   max-width: var(--max-body-text-width);
+  padding: 0;
+  list-style: none;
 }
 
 .speaker {

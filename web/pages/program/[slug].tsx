@@ -123,11 +123,14 @@ const SessionRoute = ({
                   mainVenueTimezone={mainVenueTimezone}
                 />
               </div>
-              <div className={programStyles.speakers}>
-                {speakers?.map(
-                  ({ role, person: { _id, name, title, company, photo } }) => (
-                    <div key={_id} className={programStyles.speaker}>
-                      <div>
+              {speakers && (
+                <ul className={programStyles.speakers}>
+                  {speakers.map(
+                    ({
+                      role,
+                      person: { _id, name, title, company, photo },
+                    }) => (
+                      <li key={_id} className={programStyles.speaker}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={imageUrlFor(photo)
@@ -139,20 +142,22 @@ const SessionRoute = ({
                           alt={name}
                           className={programStyles.speakerImage}
                         />
-                      </div>
-                      <div>
-                        <div className={programStyles.roleAndTitle}>{role}</div>
-                        <strong className={programStyles.speakerName}>
-                          {name}
-                        </strong>
-                        <div className={programStyles.roleAndTitle}>
-                          {[title, company].filter(Boolean).join(', ')}
+                        <div>
+                          <div className={programStyles.roleAndTitle}>
+                            {role}
+                          </div>
+                          <strong className={programStyles.speakerName}>
+                            {name}
+                          </strong>
+                          <div className={programStyles.roleAndTitle}>
+                            {[title, company].filter(Boolean).join(', ')}
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  )
-                )}
-              </div>
+                      </li>
+                    )
+                  )}
+                </ul>
+              )}
             </div>
           </GridWrapper>
         </div>
