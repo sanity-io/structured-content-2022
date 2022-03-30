@@ -61,13 +61,23 @@ const SPEAKER = `
   _rev,
   _type,
   _updatedAt,
-  "sessions": *[_type == "session" && references(^._id)] {
+  "sessions": *[_type == "session" && references(^._id) && !(_id in path("drafts.**"))] {
     _id,
     title,
-    startTime,
     duration,
-    "timezone": location->.timezone,
-  },
+    "programContainingSession": *[_type == "program" && references(^._id)][0] {
+      startDateTime,
+      sessions[] {
+        _type,
+        duration,
+        session-> {
+          _id,
+          duration,
+        }
+      },
+      "venueTimezone": venues[0]->.timezone,
+    },
+  },       
 `;
 
 const SPONSORSHIP = `

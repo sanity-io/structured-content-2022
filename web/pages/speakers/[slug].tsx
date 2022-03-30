@@ -19,6 +19,8 @@ import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import { SPEAKER } from '../../util/queries';
 import styles from '../app.module.css';
 import speakerStyles from './speakers.module.css';
+import { Session } from '../../types/Session';
+import { sessionStartTime } from '../../util/session';
 
 const QUERY = groq`
   {
@@ -37,11 +39,21 @@ interface SpeakersRouteProps {
   data: {
     speaker: Person & {
       sessions?: {
-        title: string;
-        startTime: string;
-        duration: number;
-        timezone: string;
         _id: string;
+        title: string;
+        duration: number;
+        programContainingSession: {
+          startDateTime: string;
+          sessions: {
+            _type: string;
+            duration: number;
+            session?: {
+              _id: string;
+              duration: number;
+            };
+          }[];
+          venueTimezone: string;
+        };
       }[];
     };
     ticketsUrl: string;
@@ -52,7 +64,6 @@ interface SpeakersRouteProps {
         _id: string;
       }[];
     };
-    rewrittenArticleSlugs?: string[];
   };
   slug: string;
 }
@@ -134,16 +145,41 @@ const SpeakersRoute = ({
             </div>
             <ul className={speakerStyles.sessionContainer}>
               {Array.isArray(sessions) &&
-                sessions.map(
-                  ({ _id, title, startTime, duration, timezone }) =>
-                    title && (
-                      <li key={_id}>
-                        <SessionCard
-                          {...{ title, startTime, duration, timezone }}
-                        />
-                      </li>
-                    )
-                )}
+                sessions
+                  .filter(({ programContainingSession }) =>
+                    Boolean(programContainingSession)
+                  )
+                  .map(
+                    ({
+                      _id,
+                      title,
+                      programContainingSession: {
+                        startDateTime,
+                        sessions,
+                        venueTimezone: timezone,
+                      },
+                      duration,
+                    }) => {
+                      const simpleSessions = sessions.map(
+                        ({ duration, session }) => ({
+                          duration: duration || session.duration,
+                          id: session?._id,
+                        })
+                      );
+                      const startTime = sessionStartTime(
+                        startDateTime,
+                        _id,
+                        simpleSessions
+                      ).toISOString();
+                      return (
+                        <li key={_id}>
+                          <SessionCard
+                            {...{ title, duration, timezone, startTime }}
+                          />
+                        </li>
+                      );
+                    }
+                  )}
             </ul>
             <div className={speakerStyles.bio}>
               <TextBlock value={bio} />
