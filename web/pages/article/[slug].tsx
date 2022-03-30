@@ -17,6 +17,7 @@ import { Article } from '../../types/Article';
 import { Slug } from '../../types/Slug';
 import styles from '../app.module.css';
 import articleStyles from './article.module.css';
+import { parseISO } from 'date-fns';
 
 const QUERY = groq`
   {
@@ -113,12 +114,12 @@ const ArticleRoute = ({
             <div className={articleStyles.timestamps}>
               {publishedAt && (
                 <p className={articleStyles.publishedAt}>
-                  Published on: {formatDate(new Date(publishedAt), 'UTC')}
+                  Published on: {formatDate(parseISO(publishedAt), 'UTC')}
                 </p>
               )}
               {updatedAt && (
                 <p className={articleStyles.updatedAt}>
-                  Updated on: {formatDate(new Date(updatedAt), 'UTC')}
+                  Updated on: {formatDate(parseISO(updatedAt), 'UTC')}
                 </p>
               )}
             </div>

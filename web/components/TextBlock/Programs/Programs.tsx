@@ -49,7 +49,7 @@ export const Programs = ({
                   <div key={program._id}>
                     <h3 className={clsx(styles.dayHeader, styles.first)}>
                       {formatDateWithDay(
-                        new Date(program.startDateTime),
+                        parseISO(program.startDateTime),
                         timezone
                       )}
                     </h3>

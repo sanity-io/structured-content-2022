@@ -1,4 +1,4 @@
-import { addMinutes } from 'date-fns';
+import { addMinutes, parseISO } from 'date-fns';
 import { Session } from '../types/Session';
 
 const minutesFromProgramStart = (
@@ -19,7 +19,7 @@ export const sessionStart = (
     return null;
   }
 
-  const start = new Date(programStart);
+  const start = parseISO(programStart);
   const sessionIndex = sessions.findIndex(({ _id }) => _id === sessionId);
   const sessionStartOffset =
     sessionIndex > -1 ? minutesFromProgramStart(sessions, sessionIndex) : 0;
