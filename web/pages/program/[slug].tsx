@@ -131,17 +131,19 @@ const SessionRoute = ({
                       person: { _id, name, title, company, photo },
                     }) => (
                       <li key={_id} className={programStyles.speaker}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={imageUrlFor(photo)
-                            .size(64, 80)
-                            .saturation(-100)
-                            .url()}
-                          width={64}
-                          height={80}
-                          alt={name}
-                          className={programStyles.speakerImage}
-                        />
+                        {photo && (
+                          /* eslint-disable-next-line @next/next/no-img-element */
+                          <img
+                            src={imageUrlFor(photo)
+                              .size(64, 80)
+                              .saturation(-100)
+                              .url()}
+                            width={64}
+                            height={80}
+                            alt={name}
+                            className={programStyles.speakerImage}
+                          />
+                        )}
                         <div>
                           <div className={programStyles.roleAndTitle}>
                             {role}
