@@ -19,8 +19,8 @@ import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import { SPEAKER } from '../../util/queries';
 import styles from '../app.module.css';
 import speakerStyles from './speakers.module.css';
+import { sessionStart } from '../../util/session';
 import { Session } from '../../types/Session';
-import { sessionStartTime } from '../../util/session';
 
 const QUERY = groq`
   {
@@ -35,26 +35,27 @@ const QUERY = groq`
     },
   }`;
 
+type SimpleSession = {
+  _type: string;
+  duration: number;
+  session?: Pick<Session, '_id' | 'duration'>;
+};
+
+type SpeakerSession = {
+  _id: string;
+  title: string;
+  duration: number;
+  programContainingSession: {
+    programStart: string;
+    sessions: SimpleSession[];
+    venueTimezone: string;
+  };
+};
+
 interface SpeakersRouteProps {
   data: {
     speaker: Person & {
-      sessions?: {
-        _id: string;
-        title: string;
-        duration: number;
-        programContainingSession: {
-          startDateTime: string;
-          sessions: {
-            _type: string;
-            duration: number;
-            session?: {
-              _id: string;
-              duration: number;
-            };
-          }[];
-          venueTimezone: string;
-        };
-      }[];
+      sessions?: SpeakerSession[];
     };
     ticketsUrl: string;
     footer: {
@@ -73,6 +74,31 @@ const socialLinkProps = (url: string) => ({
   target: '_blank',
   rel: 'noopener noreferrer',
 });
+
+const toSimpleSessions = (sessions: SimpleSession[]) =>
+  sessions.map(({ duration, session }) => ({
+    duration: duration || session.duration,
+    _id: session?._id,
+  }));
+
+const toSessionCardProps = (sessions: SpeakerSession[]) =>
+  sessions
+    .filter(({ programContainingSession }) => Boolean(programContainingSession))
+    .map(
+      ({
+        _id,
+        programContainingSession: { programStart, sessions, venueTimezone },
+        ...otherProps
+      }) => ({
+        ...otherProps,
+        timezone: venueTimezone,
+        sessionStart: sessionStart(
+          programStart,
+          _id,
+          toSimpleSessions(sessions)
+        ),
+      })
+    );
 
 const SpeakersRoute = ({
   data: {
@@ -145,41 +171,11 @@ const SpeakersRoute = ({
             </div>
             <ul className={speakerStyles.sessionContainer}>
               {Array.isArray(sessions) &&
-                sessions
-                  .filter(({ programContainingSession }) =>
-                    Boolean(programContainingSession)
-                  )
-                  .map(
-                    ({
-                      _id,
-                      title,
-                      programContainingSession: {
-                        startDateTime,
-                        sessions,
-                        venueTimezone: timezone,
-                      },
-                      duration,
-                    }) => {
-                      const simpleSessions = sessions.map(
-                        ({ duration, session }) => ({
-                          duration: duration || session.duration,
-                          id: session?._id,
-                        })
-                      );
-                      const startTime = sessionStartTime(
-                        startDateTime,
-                        _id,
-                        simpleSessions
-                      );
-                      return (
-                        <li key={_id}>
-                          <SessionCard
-                            {...{ title, duration, timezone, startTime }}
-                          />
-                        </li>
-                      );
-                    }
-                  )}
+                toSessionCardProps(sessions).map((props, index) => (
+                  <li key={index}>
+                    <SessionCard {...props} />
+                  </li>
+                ))}
             </ul>
             <div className={speakerStyles.bio}>
               <TextBlock value={bio} />

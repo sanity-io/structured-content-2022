@@ -1,12 +1,8 @@
 import { addMinutes } from 'date-fns';
-
-type SimpleSession = {
-  duration: number;
-  id: string;
-};
+import { Session } from '../types/Session';
 
 const minutesFromProgramStart = (
-  sessions: SimpleSession[],
+  sessions: Pick<Session, 'duration'>[],
   currentSessionIndex: number
 ) =>
   sessions.reduce(
@@ -14,17 +10,17 @@ const minutesFromProgramStart = (
     0
   );
 
-export const sessionStartTime = (
+export const sessionStart = (
   programStart: string | null,
   sessionId: string,
-  sessions: SimpleSession[]
+  sessions: Pick<Session, '_id' | 'duration'>[]
 ) => {
   if (!programStart) {
     return null;
   }
 
   const start = new Date(programStart);
-  const sessionIndex = sessions.findIndex(({ id }) => id === sessionId);
+  const sessionIndex = sessions.findIndex(({ _id }) => _id === sessionId);
   const sessionStartOffset =
     sessionIndex > -1 ? minutesFromProgramStart(sessions, sessionIndex) : 0;
   return addMinutes(start, sessionStartOffset);

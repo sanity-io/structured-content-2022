@@ -8,31 +8,31 @@ import styles from './SessionCard.module.css';
 
 interface SessionCardProps {
   title: string;
-  startTime?: Date;
+  sessionStart?: Date;
   duration?: number;
   timezone?: string;
 }
 
 export const SessionCard = ({
   title,
-  startTime,
+  sessionStart,
   duration,
   timezone,
 }: SessionCardProps) => (
   <div className={styles.card}>
     <strong className={styles.title}>{title}</strong>
-    {startTime && (
+    {sessionStart && (
       <div>
-        <time dateTime={startTime.toISOString()}>
-          {formatDateWithDay(startTime, timezone || 'UTC')}
+        <time dateTime={sessionStart.toISOString()}>
+          {formatDateWithDay(sessionStart, timezone || 'UTC')}
         </time>
       </div>
     )}
-    {startTime && duration && (
+    {sessionStart && duration && (
       <div>
-        <time dateTime={formatTimeDuration(startTime, duration)}>
-          {formatTimeRange(startTime, duration, timezone || 'UTC')}{' '}
-          {getNonLocationTimezone(startTime, timezone, true)}
+        <time dateTime={formatTimeDuration(sessionStart, duration)}>
+          {formatTimeRange(sessionStart, duration, timezone || 'UTC')}{' '}
+          {getNonLocationTimezone(sessionStart, timezone, true)}
         </time>
       </div>
     )}

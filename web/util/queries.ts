@@ -66,7 +66,7 @@ const SPEAKER = `
     title,
     duration,
     "programContainingSession": *[_type == "program" && references(^._id)][0] {
-      startDateTime,
+      "programStart": startDateTime,
       sessions[] {
         _type,
         duration,
