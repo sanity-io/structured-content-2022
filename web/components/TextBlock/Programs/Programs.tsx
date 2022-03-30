@@ -1,9 +1,10 @@
+import clsx from 'clsx';
 import { addMinutes, parseISO } from 'date-fns';
 import { Fragment } from 'react';
 import { PortableTextComponentProps } from '@portabletext/react';
-import clsx from 'clsx';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { Program } from '../../../types/Program';
+import { getCollectionForSelectionType } from '../../../util/entity';
 import {
   formatDateWithDay,
   formatTime,
@@ -12,7 +13,6 @@ import {
 import Accordion from '../../Accordion';
 import GridWrapper from '../../GridWrapper';
 import styles from './Programs.module.css';
-import { getCollectionForSelectionType } from '../../../util/entity';
 
 type ProgramsProps = {
   type: EntitySectionSelection;
