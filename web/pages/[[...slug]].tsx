@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import urlJoin from 'proper-url-join';
 import { useEffect, useState } from 'react';
@@ -13,15 +13,17 @@ import Nav from '../components/Nav';
 import MetaTags from '../components/MetaTags';
 import { usePreviewSubscription } from '../lib/sanity';
 import client from '../lib/sanity.server';
-import { Figure } from '../types/Figure';
-import { Slug } from '../types/Slug';
-import { Section } from '../types/Section';
-import { Hero as HeroProps } from '../types/Hero';
+import type { Figure } from '../types/Figure';
+import type { Hero as HeroProps } from '../types/Hero';
+import type { PrimaryNavItem } from "../types/PrimaryNavItem";
+import type { Section } from '../types/Section';
+import type { Slug } from '../types/Slug';
 import { mainEventId } from '../util/constants';
 import {
   ARTICLE_SECTION,
   FIGURE,
   HERO,
+  PRIMARY_NAV,
   PROGRAM,
   QUESTION_AND_ANSWER_COLLECTION_SECTION,
   SPONSORSHIP,
@@ -95,6 +97,7 @@ const QUERY = groq`
       description,
       "ticketsUrl": registrationUrl,
     },
+    "navItems": ${PRIMARY_NAV},
     "footer": *[_id == "secondary-nav"][0] {
       "links": tree[].value.reference-> {
         "name": seo.title,
@@ -125,6 +128,7 @@ interface RouteProps {
       description: string;
       ticketsUrl: string;
     };
+    navItems: PrimaryNavItem[];
     footer: {
       links: {
         name: string;
@@ -146,6 +150,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
       },
       home: { name: homeName, description, ticketsUrl },
       footer,
+      navItems,
     },
   } = usePreviewSubscription(QUERY, {
     params: { slug },
@@ -191,6 +196,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
           onFrontPage={isFrontPage}
           currentPath={currentPath}
           ticketsUrl={ticketsUrl}
+          items={navItems}
         />
       </header>
       <main>

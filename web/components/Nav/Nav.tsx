@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import logo from '../../images/logo.svg';
+import type { PrimaryNavItem } from "../../types/PrimaryNavItem";
 import ButtonLink from '../ButtonLink';
 import GridWrapper from '../GridWrapper';
 import MenuItem from './MenuItem';
@@ -11,6 +12,7 @@ interface NavProps {
   onFrontPage: boolean;
   currentPath: string;
   ticketsUrl: string;
+  items: PrimaryNavItem[];
 }
 
 export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
