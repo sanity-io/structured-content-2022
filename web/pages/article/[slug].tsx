@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import clsx from 'clsx';
 import urlJoin from 'proper-url-join';
@@ -17,6 +17,7 @@ import { Article } from '../../types/Article';
 import { Slug } from '../../types/Slug';
 import styles from '../app.module.css';
 import articleStyles from './article.module.css';
+import { parseISO } from 'date-fns';
 
 const QUERY = groq`
   {
@@ -96,11 +97,7 @@ const ArticleRoute = ({
         rewrittenArticleSlugs={rewrittenArticleSlugs}
       />
       <header className={styles.header}>
-        <Nav
-          onFrontPage={false}
-          currentPath={`/article/${slug}`}
-          ticketsUrl={ticketsUrl}
-        />
+        <Nav currentPath={`/article/${slug}`} ticketsUrl={ticketsUrl} />
       </header>
       <main>
         <Hero heading={heading} summary={summary}>
@@ -117,12 +114,12 @@ const ArticleRoute = ({
             <div className={articleStyles.timestamps}>
               {publishedAt && (
                 <p className={articleStyles.publishedAt}>
-                  Published on: {formatDate(publishedAt, 'UTC')}
+                  Published on: {formatDate(parseISO(publishedAt), 'UTC')}
                 </p>
               )}
               {updatedAt && (
                 <p className={articleStyles.updatedAt}>
-                  Updated on: {formatDate(updatedAt, 'UTC')}
+                  Updated on: {formatDate(parseISO(updatedAt), 'UTC')}
                 </p>
               )}
             </div>

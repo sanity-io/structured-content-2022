@@ -1,60 +1,33 @@
 import { formatInTimeZone } from 'date-fns-tz';
+import { addMinutes, intervalToDuration } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 
-export const formatTime = (date: string, timezone: string) =>
-  formatInTimeZone(new Date(date), timezone, 'HH:mm', { locale: enUS });
+export const formatTime = (date: Date, timezone: string) =>
+  formatInTimeZone(date, timezone, 'HH:mm', { locale: enUS });
 
-export const formatDate = (date: string, timezone: string) =>
-  formatInTimeZone(new Date(date), timezone, 'MMMM d, yyyy', { locale: enUS });
-
-export const formatDateWithDay = (
-  date: string,
-  timezone: string,
-  joinCharacter = ' – '
+export const formatTimeRange = (
+  date: Date,
+  duration: number,
+  timezone: string
 ) =>
-  formatInTimeZone(new Date(date), timezone, `eeee${joinCharacter}MMMM d`, {
-    locale: enUS,
+  `${formatTime(date, timezone)}–${formatTime(
+    addMinutes(date, duration),
+    timezone
+  )}`;
+
+export const formatDate = (date: Date, timezone: string) =>
+  formatInTimeZone(date, timezone, 'MMMM d, yyyy', { locale: enUS });
+
+export const formatDateWithDay = (date: Date, timezone: string) =>
+  formatInTimeZone(date, timezone, 'eeee – MMMM d', { locale: enUS });
+
+export const formatTimeDuration = (start: Date, duration: number) => {
+  // This only handles durations of up to 24 hours
+  const { hours, minutes } = intervalToDuration({
+    start,
+    end: addMinutes(start, duration),
   });
-
-const monthNames = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-
-const utcDate = (date: string) => {
-  const d = new Date(date);
-  return {
-    day: d.getUTCDate(),
-    month: d.getUTCMonth(),
-    year: d.getUTCFullYear(),
-  };
-};
-
-export const formatDateRangeInUtc = (
-  timestamp1: string,
-  timestamp2: string
-) => {
-  const d1 = utcDate(timestamp1);
-  const d2 = utcDate(timestamp2);
-
-  const y1 = Math.abs(d2.year - d1.year) > 0 ? `, ${d1.year}` : '';
-  const m2 =
-    Math.abs(d2.month - d1.month) > 0 ? ` ${monthNames[d2.month]} ` : '';
-
-  return {
-    start: `${monthNames[d1.month]} ${d1.day}${y1}`,
-    end: `${m2}${d2.day}, ${d2.year}`,
-  };
+  return `PT${hours ? hours + 'H' : ''}${minutes ? minutes + 'M' : ''}`;
 };
 
 const meridiem = (date: string) =>
@@ -77,13 +50,16 @@ export const formatTimeRange = (
 });
 
 /* Converts an IANA time zone name, which typically refers to a specific city,
- * into a long-form "non-location" format.
+ * into a "non-location" format. Gives the long-form format by default.
  * Example: given the locationTimezone "Europe/Paris", this will yield "Central
  * European Time" or "Central European Summer Time" depending on the timestamp.
+ * If "abbreviated" is true it'll yield "CET" or "CEST".
  */
 export const getNonLocationTimezone = (
   timestamp: Date,
   locationTimezone: string,
-  format = 'zzzz'
+  abbreviated?: boolean
 ): string =>
-  formatInTimeZone(timestamp, locationTimezone, format, { locale: enUS });
+  formatInTimeZone(timestamp, locationTimezone, abbreviated ? 'z' : 'zzzz', {
+    locale: enUS,
+  });

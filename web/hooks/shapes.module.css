@@ -1,0 +1,20 @@
+.shapePlus {
+  background: url('../images/navblock_plus.svg') top left / 100% 100% no-repeat;
+}
+
+.shapeC {
+  background: url('../images/navblock_c.svg') top left / 100% 100% no-repeat;
+}
+
+.shapeOvals {
+  background: url('../images/navblock_ovals.svg') top left / 100% 100% no-repeat;
+}
+
+.shapeO {
+  background: url('../images/navblock_o.svg') top left / 100% 100% no-repeat;
+}
+
+.shapeHalfOval {
+  background: url('../images/navblock_halfoval.svg') top left / 100% 100%
+    no-repeat;
+}
