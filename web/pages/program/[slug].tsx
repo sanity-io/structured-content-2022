@@ -14,9 +14,12 @@ import { Slug } from '../../types/Slug';
 import { Session } from '../../types/Session';
 import styles from '../app.module.css';
 import programStyles from './program.module.css';
-import { addMinutes } from 'date-fns';
-import { formatDateWithDay, formatTimeRange } from '../../util/date';
-import SessionDateTime from '../../components/SessionDateTime';
+import {
+  formatDateWithDay,
+  formatTimeRange,
+  getNonLocationTimezone,
+} from '../../util/date';
+import { sessionStart } from '../../util/session';
 
 const QUERY = groq`
   {
@@ -45,12 +48,12 @@ const QUERY = groq`
       "mainVenueTimezone": timezone,
       "currentSessionInProgram": *[_type == "program" && references(^._id)][0].sessions[] { 
         session-> 
-      }[session.slug.current == $slug][0].session { duration },
+      }[session.slug.current == $slug][0].session { _id, duration },
       "mainVenueSessions": *[_type == "program" && references(^._id)][0] {
         startDateTime,
-        "durations": *[_id == ^._id].sessions[] {
+        "sessions": *[_id == ^._id].sessions[] {
           "duration": coalesce(duration, session->.duration),
-          "slug": coalesce(session->.slug.current, "padding"),
+          "_id": session->._id,
         },
       }
     },  
@@ -71,15 +74,10 @@ interface SessionRouteProps {
     };
     timeInfo: {
       mainVenueTimezone: string;
-      currentSessionInProgram?: {
-        duration: number;
-      };
+      currentSessionInProgram?: Pick<Session, '_id' | 'duration'>;
       mainVenueSessions: {
         startDateTime: string;
-        durations: {
-          duration: number;
-          slug: string | 'padding';
-        }[];
+        sessions: Pick<Session, '_id' | 'duration'>[];
       };
     };
   };
@@ -91,10 +89,19 @@ const SessionRoute = ({
     session: { title, shortDescription, speakers, type },
     home: { ticketsUrl },
     footer,
-    timeInfo: { mainVenueTimezone, currentSessionInProgram, mainVenueSessions },
+    timeInfo: {
+      mainVenueTimezone,
+      currentSessionInProgram,
+      mainVenueSessions: { startDateTime, sessions },
+    },
   },
   slug,
 }: SessionRouteProps) => {
+  const start = sessionStart(
+    startDateTime,
+    currentSessionInProgram?._id,
+    sessions
+  );
   return (
     <>
       <MetaTags title={title} description="" currentPath={`/session/${slug}`} />
@@ -116,13 +123,24 @@ const SessionRoute = ({
                   </div>
                 )}
                 <h1 className={programStyles.sessionTitle}>{title}</h1>
-                <SessionDateTime
-                  {...mainVenueSessions}
-                  {...currentSessionInProgram}
-                  slug={slug}
-                  mainVenueTimezone={mainVenueTimezone}
-                />
+
+                {startDateTime && currentSessionInProgram && (
+                  <>
+                    <div>
+                      {formatDateWithDay(start, mainVenueTimezone, ', ')}
+                    </div>
+                    <div>
+                      {formatTimeRange(
+                        start,
+                        currentSessionInProgram.duration,
+                        mainVenueTimezone
+                      )}{' '}
+                      {getNonLocationTimezone(start, mainVenueTimezone, true)}
+                    </div>
+                  </>
+                )}
               </div>
+
               {speakers && (
                 <ul className={programStyles.speakers}>
                   {speakers.map(

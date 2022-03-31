@@ -2,24 +2,20 @@ import { formatInTimeZone } from 'date-fns-tz';
 import { addMinutes, intervalToDuration } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 
-export const formatTime = (date: Date, timezone: string) =>
-  formatInTimeZone(date, timezone, 'HH:mm', { locale: enUS });
-
-export const formatTimeRange = (
-  date: Date,
-  duration: number,
-  timezone: string
-) =>
-  `${formatTime(date, timezone)}–${formatTime(
-    addMinutes(date, duration),
-    timezone
-  )}`;
+export const formatTime = (date: Date, timezone: string, meridiem?: boolean) =>
+  formatInTimeZone(date, timezone, `HH:mm${meridiem ? ' aa' : ''}`, {
+    locale: enUS,
+  });
 
 export const formatDate = (date: Date, timezone: string) =>
   formatInTimeZone(date, timezone, 'MMMM d, yyyy', { locale: enUS });
 
-export const formatDateWithDay = (date: Date, timezone: string) =>
-  formatInTimeZone(date, timezone, 'eeee – MMMM d', { locale: enUS });
+export const formatDateWithDay = (
+  date: Date,
+  timezone: string,
+  separator = ' – '
+) =>
+  formatInTimeZone(date, timezone, `eeee${separator}MMMM d`, { locale: enUS });
 
 export const formatTimeDuration = (start: Date, duration: number) => {
   // This only handles durations of up to 24 hours
@@ -30,24 +26,21 @@ export const formatTimeDuration = (start: Date, duration: number) => {
   return `PT${hours ? hours + 'H' : ''}${minutes ? minutes + 'M' : ''}`;
 };
 
-const meridiem = (date: string) =>
-  new Date(date).getHours() >= 12 ? 'PM' : 'AM';
+const differingMeridiem = (d1: Date, d2: Date) =>
+  d1.getHours() >= 12 !== d2.getHours() >= 12;
 
 export const formatTimeRange = (
-  timestamp1: string,
-  timestamp2: string,
+  start: Date,
+  duration: number,
   timezone: string
-) => ({
-  start: formatInTimeZone(
-    new Date(timestamp1),
+) => {
+  const end = addMinutes(start, duration);
+  return `${formatTime(
+    start,
     timezone,
-    `H:mm${meridiem(timestamp1) !== meridiem(timestamp2) ? ' aa' : ''}`,
-    { locale: enUS }
-  ),
-  end: formatInTimeZone(new Date(timestamp2), timezone, 'H:mm aa', {
-    locale: enUS,
-  }),
-});
+    differingMeridiem(start, end)
+  )}–${formatTime(end, timezone)}`;
+};
 
 /* Converts an IANA time zone name, which typically refers to a specific city,
  * into a "non-location" format. Gives the long-form format by default.
