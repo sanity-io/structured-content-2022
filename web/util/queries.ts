@@ -78,10 +78,8 @@ const SPONSORSHIP = `
 const PRIMARY_NAV = `
   *[_type == "navigation" && slug.current == "primary-nav"][0].items[] {
     label,
-    target {
-      "href": coalesce(internal->.slug.current, external),
-      "blank": blank == true,
-    }
+    "href": coalesce(target.internal->.slug.current, target.external),
+    "blank": target.blank == true,
   }
 `;
 

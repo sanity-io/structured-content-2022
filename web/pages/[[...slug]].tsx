@@ -15,7 +15,7 @@ import { usePreviewSubscription } from '../lib/sanity';
 import client from '../lib/sanity.server';
 import type { Figure } from '../types/Figure';
 import type { Hero as HeroProps } from '../types/Hero';
-import type { PrimaryNavItem } from "../types/PrimaryNavItem";
+import type { PrimaryNavItem } from '../types/PrimaryNavItem';
 import type { Section } from '../types/Section';
 import type { Slug } from '../types/Slug';
 import { mainEventId } from '../util/constants';

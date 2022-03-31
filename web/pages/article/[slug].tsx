@@ -14,7 +14,7 @@ import { formatDate } from '../../util/date';
 import { mainEventId } from '../../util/constants';
 import { BLOCK_CONTENT, PRIMARY_NAV } from '../../util/queries';
 import type { Article } from '../../types/Article';
-import type { PrimaryNavItem } from "../../types/PrimaryNavItem";
+import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
 import type { Slug } from '../../types/Slug';
 import styles from '../app.module.css';
 import articleStyles from './article.module.css';
