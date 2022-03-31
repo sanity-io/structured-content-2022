@@ -10,16 +10,16 @@ import TextBlock from '../../components/TextBlock';
 import { imageUrlFor } from '../../lib/sanity';
 import client from '../../lib/sanity.server';
 import { mainEventId } from '../../util/constants';
-import { Slug } from '../../types/Slug';
-import { Session } from '../../types/Session';
-import styles from '../app.module.css';
-import programStyles from './program.module.css';
+import type { Slug } from '../../types/Slug';
+import type { Session } from '../../types/Session';
 import {
   formatDateWithDay,
   formatTimeRange,
   getNonLocationTimezone,
 } from '../../util/date';
 import { sessionStart } from '../../util/session';
+import styles from '../app.module.css';
+import programStyles from './program.module.css';
 
 const QUERY = groq`
   {
