@@ -65,7 +65,7 @@ const SPEAKER = `
     _id,
     title,
     duration,
-    "programContainingSession": *[_type == "program" && references(^._id)][0] {
+    "programContainingSession": *[_type == "program" && references(^._id)] | order(_createdAt)[0] {
       "programStart": startDateTime,
       sessions[] {
         _type,
