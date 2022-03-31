@@ -8,7 +8,7 @@ import MenuItem from './MenuItem';
 import styles from './Nav.module.css';
 
 interface NavProps {
-  onFrontPage: boolean;
+  onFrontPage?: boolean;
   currentPath: string;
   ticketsUrl: string;
 }

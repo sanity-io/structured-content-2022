@@ -1,9 +1,10 @@
+import clsx from 'clsx';
 import { addMinutes, parseISO } from 'date-fns';
 import { Fragment } from 'react';
 import { PortableTextComponentProps } from '@portabletext/react';
-import clsx from 'clsx';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { Program } from '../../../types/Program';
+import { getCollectionForSelectionType } from '../../../util/entity';
 import {
   formatDateWithDay,
   formatTime,
@@ -12,7 +13,6 @@ import {
 import Accordion from '../../Accordion';
 import GridWrapper from '../../GridWrapper';
 import styles from './Programs.module.css';
-import { getCollectionForSelectionType } from '../../../util/entity';
 
 type ProgramsProps = {
   type: EntitySectionSelection;
@@ -48,7 +48,10 @@ export const Programs = ({
                 content: (
                   <div key={program._id}>
                     <h3 className={clsx(styles.dayHeader, styles.first)}>
-                      {formatDateWithDay(program.startDateTime, timezone)}
+                      {formatDateWithDay(
+                        parseISO(program.startDateTime),
+                        timezone
+                      )}
                     </h3>
                     {program.sessions.map((session, index) => {
                       const Session = (
@@ -56,10 +59,7 @@ export const Programs = ({
                           {session._type === 'padding' ? (
                             <h3 className={styles.dayHeader}>
                               {formatDateWithDay(
-                                addMinutes(
-                                  currentTime,
-                                  session.duration
-                                ).toISOString(),
+                                addMinutes(currentTime, session.duration),
                                 timezone
                               )}
                             </h3>
@@ -67,16 +67,12 @@ export const Programs = ({
                             <>
                               <div className={styles.sessionItem}>
                                 <h4 className={styles.sessionDuration}>
-                                  {formatTime(
-                                    currentTime.toISOString(),
-                                    timezone
-                                  )}{' '}
-                                  -{' '}
+                                  {formatTime(currentTime, timezone)} -{' '}
                                   {formatTime(
                                     addMinutes(
                                       currentTime,
                                       session.session.duration
-                                    ).toISOString(),
+                                    ),
                                     timezone
                                   )}
                                 </h4>
