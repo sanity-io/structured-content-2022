@@ -75,6 +75,16 @@ const SPONSORSHIP = `
   type,
 `;
 
+const PRIMARY_NAV = `
+  *[_type == "navigation" && slug.current == "primary-nav"][0].items[] {
+    label,
+    target {
+      "href": coalesce(internal->.slug.current, external),
+      "blank": blank == true,
+    }
+  }
+`;
+
 export {
   ARTICLE_SECTION,
   BLOCK_CONTENT,
@@ -86,4 +96,5 @@ export {
   TEXT_AND_IMAGE_SECTION,
   TICKET,
   SPONSORSHIP,
+  PRIMARY_NAV,
 };
