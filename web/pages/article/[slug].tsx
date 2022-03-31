@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { parseISO } from 'date-fns';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import urlJoin from 'proper-url-join';
@@ -101,7 +102,6 @@ const ArticleRoute = ({
       />
       <header className={styles.header}>
         <Nav
-          onFrontPage={false}
           currentPath={`/article/${slug}`}
           ticketsUrl={ticketsUrl}
           items={navItems}
@@ -122,12 +122,12 @@ const ArticleRoute = ({
             <div className={articleStyles.timestamps}>
               {publishedAt && (
                 <p className={articleStyles.publishedAt}>
-                  Published on: {formatDate(publishedAt, 'UTC')}
+                  Published on: {formatDate(parseISO(publishedAt), 'UTC')}
                 </p>
               )}
               {updatedAt && (
                 <p className={articleStyles.updatedAt}>
-                  Updated on: {formatDate(updatedAt, 'UTC')}
+                  Updated on: {formatDate(parseISO(updatedAt), 'UTC')}
                 </p>
               )}
             </div>

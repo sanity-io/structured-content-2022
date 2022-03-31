@@ -1,0 +1,18 @@
+.shape {
+  width: 178px;
+  height: 255px;
+}
+
+@media (--medium-up) {
+  .shape {
+    width: 260px;
+    height: 372px;
+  }
+}
+
+@media (--large-up) {
+  .shape {
+    width: 336px;
+    height: 336px;
+  }
+}

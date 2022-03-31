@@ -16,3 +16,12 @@
   width: 28px;
   border-radius: 2px;
 }
+
+.link {
+  text-decoration: none;
+  display: inline-block; /* nicer focus outline */
+}
+
+.link:hover .card {
+  background-color: var(--color-brand-yellow);
+}
