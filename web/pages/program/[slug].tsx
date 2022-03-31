@@ -20,6 +20,7 @@ import {
 import { sessionStart } from '../../util/session';
 import styles from '../app.module.css';
 import programStyles from './program.module.css';
+import Link from 'next/link';
 
 const QUERY = groq`
   {
@@ -30,7 +31,7 @@ const QUERY = groq`
       longDescription,
       speakers[] {
         role,
-        person->,
+        person-> { _id, name, title, company, photo, slug },
       },
       type,
     },
@@ -146,27 +147,35 @@ const SessionRoute = ({
                   {speakers.map(
                     ({
                       role,
-                      person: { _id, name, title, company, photo },
+                      person: { _id, name, title, company, photo, slug },
                     }) => (
                       <li key={_id} className={programStyles.speaker}>
                         {photo && (
-                          /* eslint-disable-next-line @next/next/no-img-element */
-                          <img
-                            src={imageUrlFor(photo)
-                              .size(64, 80)
-                              .saturation(-100)
-                              .url()}
-                            width={64}
-                            height={80}
-                            alt={name}
-                            className={programStyles.speakerImage}
-                          />
+                          <Link href={urlJoin('/speakers', slug.current)}>
+                            <a>
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                src={imageUrlFor(photo)
+                                  .size(64, 80)
+                                  .saturation(-100)
+                                  .url()}
+                                width={64}
+                                height={80}
+                                alt={name}
+                                className={programStyles.speakerImage}
+                              />
+                            </a>
+                          </Link>
                         )}
                         <div>
                           <div className={programStyles.role}>{role}</div>
-                          <strong className={programStyles.speakerName}>
-                            {name}
-                          </strong>
+                          <Link href={urlJoin('/speakers', slug.current)}>
+                            <a>
+                              <strong className={programStyles.speakerName}>
+                                {name}
+                              </strong>
+                            </a>
+                          </Link>
                           <div>
                             {[title, company].filter(Boolean).join(', ')}
                           </div>
