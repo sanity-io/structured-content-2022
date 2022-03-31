@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import urlJoin from 'proper-url-join';
 import Footer from '../../components/Footer';
@@ -27,7 +27,7 @@ const QUERY = groq`
       _id,
       title,
       duration,
-      shortDescription,
+      longDescription,
       speakers[] {
         role,
         person->,
@@ -86,7 +86,7 @@ interface SessionRouteProps {
 
 const SessionRoute = ({
   data: {
-    session: { title, shortDescription, speakers, type },
+    session: { title, longDescription, speakers, type },
     home: { ticketsUrl },
     footer,
     timeInfo: {
@@ -180,8 +180,8 @@ const SessionRoute = ({
           </GridWrapper>
         </div>
         <GridWrapper>
-          <div className={programStyles.shortDescription}>
-            <TextBlock value={shortDescription} />
+          <div className={programStyles.longDescription}>
+            <TextBlock value={longDescription} />
           </div>
         </GridWrapper>
       </main>

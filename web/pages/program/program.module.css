@@ -51,7 +51,7 @@
   font: var(--font-display-xxs);
 }
 
-.shortDescription {
+.longDescription {
   max-width: var(--max-body-text-width);
   margin: 48px auto 80px;
 }
@@ -103,7 +103,7 @@
     grid-column: 8 / span 4;
   }
 
-  .shortDescription {
+  .longDescription {
     margin: 80px auto 128px calc((100% + var(--grid-gutter)) / 12);
   }
 }

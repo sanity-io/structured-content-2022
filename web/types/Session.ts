@@ -7,6 +7,7 @@ export type Session = {
   title?: string;
   duration?: number;
   shortDescription?: Section;
+  longDescription?: Section;
   speakers?: {
     role: 'speaker' | 'moderator';
     person: Person;
