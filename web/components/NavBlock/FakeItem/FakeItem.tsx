@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useAnimationProperties } from '../../../hooks/useAnimationProperties';
-import styles from '../NavBlock.module.css';
 import { useRandomShape } from '../../../hooks/useRandomShape';
+import styles from '../NavBlock.module.css';
 
 interface FakeItemProps {
   divider?: boolean;
@@ -19,15 +19,15 @@ export const FakeItem = ({
   desktop,
 }: FakeItemProps) => {
   const randomShapeClass = useRandomShape(RANDOM_SHAPE_PERCENT_CHANCE);
-  const animationProperties = useAnimationProperties(true);
   return (
     <li
-      style={animationProperties}
+      style={useAnimationProperties(true)}
       className={clsx(
         divider ? styles.divider : styles.fakeItem,
         mobile && styles.mobile,
         tablet && styles.tablet,
         desktop && styles.desktop,
+        !randomShapeClass && styles.noShape,
         randomShapeClass
       )}
       aria-hidden="true"
