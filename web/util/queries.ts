@@ -1,5 +1,4 @@
 const LINK = 'internal->{_type, slug}, external, blank';
-
 const FIGURE = '_type, alt, asset';
 const SIMPLE_CALL_TO_ACTION = `text, link{ ${LINK} }`;
 const BLOCK_CONTENT = `
@@ -108,8 +107,7 @@ const SPONSORSHIP = `
 const PRIMARY_NAV = `
   *[_type == "navigation" && slug.current == "primary-nav"][0].items[] {
     label,
-    "href": coalesce(target.internal->.slug.current, target.external),
-    "blank": target.blank == true,
+    target { ${LINK} },
   }
 `;
 

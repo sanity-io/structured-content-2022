@@ -1,5 +1,6 @@
+import type { Link } from './Link';
+
 export type PrimaryNavItem = {
   label: string;
-  href: string;
-  blank: boolean;
+  target: Link;
 };

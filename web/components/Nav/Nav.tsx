@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import logo from '../../images/logo.svg';
 import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
+import { getEntityPath } from '../../util/entityPaths';
 import ButtonLink from '../ButtonLink';
 import GridWrapper from '../GridWrapper';
 import MenuItem from './MenuItem';
@@ -77,16 +78,19 @@ export const Nav = ({
               Tickets
             </MenuItem>
 
-            {items.map(({ label, href, blank }, index) => (
-              <MenuItem
-                key={index}
-                {...{ closeMenu, currentPath, href }}
-                {...(blank && { target: '_blank', rel: 'noreferrer' })}
-                style={{ animationDelay: `${(index + 1) * 50}ms` }}
-              >
-                {label}
-              </MenuItem>
-            ))}
+            {items.map(
+              ({ label, target: { external, internal, blank } }, index) => (
+                <MenuItem
+                  key={index}
+                  {...{ closeMenu, currentPath }}
+                  href={external || getEntityPath(internal)}
+                  {...(blank && { target: '_blank', rel: 'noreferrer' })}
+                  style={{ animationDelay: `${(index + 1) * 50}ms` }}
+                >
+                  {label}
+                </MenuItem>
+              )
+            )}
           </ul>
           <div className={styles.ticketButton}>
             <ButtonLink url={ticketsUrl} text="Tickets" openInNewTab={true} />
