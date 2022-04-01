@@ -149,37 +149,36 @@ const SessionRoute = ({
                       role,
                       person: { _id, name, title, company, photo, slug },
                     }) => (
-                      <li key={_id} className={programStyles.speaker}>
-                        {photo && (
-                          <Link href={urlJoin('/speakers', slug.current)}>
-                            <a>
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img
-                                src={imageUrlFor(photo)
-                                  .size(64, 80)
-                                  .saturation(-100)
-                                  .url()}
-                                width={64}
-                                height={80}
-                                alt={name}
-                                className={programStyles.speakerImage}
-                              />
-                            </a>
-                          </Link>
-                        )}
-                        <div>
-                          <div className={programStyles.role}>{role}</div>
-                          <Link href={urlJoin('/speakers', slug.current)}>
-                            <a>
-                              <strong className={programStyles.speakerName}>
-                                {name}
-                              </strong>
-                            </a>
-                          </Link>
-                          <div>
-                            {[title, company].filter(Boolean).join(', ')}
-                          </div>
-                        </div>
+                      <li key={_id}>
+                        <Link href={urlJoin('/speakers', slug.current)}>
+                          <a className={programStyles.speaker}>
+                            <div className={programStyles.speakerDetails}>
+                              {photo && (
+                                /* eslint-disable-next-line @next/next/no-img-element */
+                                <img
+                                  src={imageUrlFor(photo)
+                                    .size(64, 80)
+                                    .saturation(-100)
+                                    .url()}
+                                  width={64}
+                                  height={80}
+                                  alt={name}
+                                  className={programStyles.speakerImage}
+                                />
+                              )}
+                              <div>
+                                <div className={programStyles.role}>{role}</div>
+                                <strong className={programStyles.speakerName}>
+                                  {name}
+                                </strong>
+                                <div>
+                                  {[title, company].filter(Boolean).join(', ')}
+                                </div>
+                              </div>
+                            </div>
+                            <div className={programStyles.speakerArrow} />
+                          </a>
+                        </Link>
                       </li>
                     )
                   )}
