@@ -4,6 +4,11 @@ export default {
   title: "Tickets section",
   fields: [
     {
+      name: "heading",
+      type: "string",
+      title: "Ticket table heading",
+    },
+    {
       name: "type",
       type: "string",
       title: "Section type",
