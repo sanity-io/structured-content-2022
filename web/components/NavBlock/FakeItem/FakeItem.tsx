@@ -17,16 +17,20 @@ export const FakeItem = ({
   mobile,
   tablet,
   desktop,
-}: FakeItemProps) => (
-  <li
-    style={useAnimationProperties(true)}
-    className={clsx(
-      divider ? styles.divider : styles.fakeItem,
-      mobile && styles.mobile,
-      tablet && styles.tablet,
-      desktop && styles.desktop,
-      useRandomShape(RANDOM_SHAPE_PERCENT_CHANCE)
-    )}
-    aria-hidden="true"
-  />
-);
+}: FakeItemProps) => {
+  const randomShapeClass = useRandomShape(RANDOM_SHAPE_PERCENT_CHANCE);
+  const animationProperties = useAnimationProperties(true);
+  return (
+    <li
+      style={animationProperties}
+      className={clsx(
+        divider ? styles.divider : styles.fakeItem,
+        mobile && styles.mobile,
+        tablet && styles.tablet,
+        desktop && styles.desktop,
+        randomShapeClass
+      )}
+      aria-hidden="true"
+    />
+  );
+};
