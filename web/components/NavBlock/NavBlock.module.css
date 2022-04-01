@@ -50,9 +50,12 @@
 
 .fakeItem {
   flex: auto;
-  background: var(--color-brand-orange);
   border-radius: 8px;
   display: none;
+}
+
+.fakeItem.noShape {
+  background-color: var(--color-brand-orange);
 }
 
 .fakeItem.mobile {
