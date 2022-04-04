@@ -50,7 +50,7 @@
 
 .sponsorshipName {
   display: block;
-  margin: 0 0 24px;
+  margin: 0 0 48px;
   font: var(--font-body-large-semi);
   letter-spacing: var(--letter-spacing-body-large);
 }
@@ -62,7 +62,6 @@
 }
 
 .price {
-  margin-top: 48px;
   font: var(--font-ui-xl-medium);
   letter-spacing: var(--letter-spacing-ui-xl);
 }

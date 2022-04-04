@@ -4,8 +4,8 @@ import { getCollectionForSelectionType } from '../../../util/entity';
 import FeatureSection from '../../FeatureSection';
 import GridWrapper from '../../GridWrapper';
 import BenefitRow from './BenefitRow';
-import SponsorshipInfo from './SponsorshipInfo';
 import styles from './Sponsorships.module.css';
+import { formatPrice } from "../../../util/number";
 
 interface SponsorshipsProps {
   value: {
@@ -51,7 +51,7 @@ export const Sponsorships = ({
               {sponsorships.map((s) => (
                 <th key={s._id} scope="col" className={styles.columnHeader}>
                   <strong className={styles.sponsorshipName}>{s.type}</strong>
-                  <SponsorshipInfo sponsorship={s} />
+                  <div className={styles.price}>{formatPrice(s.price)}</div>
                 </th>
               ))}
             </tr>
@@ -74,7 +74,7 @@ export const Sponsorships = ({
             return (
               <FeatureSection features={features} key={s._id}>
                 <h3 className={styles.sponsorshipName}>{s.type}</h3>
-                <SponsorshipInfo sponsorship={s} />
+                <div className={styles.price}>{formatPrice(s.price)}</div>
               </FeatureSection>
             );
           })}

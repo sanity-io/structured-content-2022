@@ -86,7 +86,6 @@ const SPONSORSHIP = `
   _rev,
   _type,
   _updatedAt,
-  available,
   benefits[] {
     _key,
     _type,
