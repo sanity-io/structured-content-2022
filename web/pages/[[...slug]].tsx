@@ -24,6 +24,7 @@ import {
   HERO,
   PROGRAM,
   QUESTION_AND_ANSWER_COLLECTION_SECTION,
+  SIMPLE_CALL_TO_ACTION,
   SPONSORSHIP,
   TEXT_AND_IMAGE_SECTION,
   TICKET,
@@ -40,6 +41,8 @@ const SHARED_SECTIONS = `
   },
   _type == "speakersSection" => {
     ...,
+    heading,
+    callToAction { ${SIMPLE_CALL_TO_ACTION} }, 
     speakers[]->,
     "allSpeakers": *[_type == "person"],
   },
