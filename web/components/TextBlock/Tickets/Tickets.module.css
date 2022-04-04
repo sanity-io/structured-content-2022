@@ -9,7 +9,6 @@
   border-spacing: 8px;
   font: var(--font-body-small-medium);
   letter-spacing: var(--letter-spacing-body-small);
-  margin-bottom: 96px;
 }
 
 .sections {
@@ -121,6 +120,11 @@
   background-color: var(--color-brand-yellow-light);
 }
 
+.callToAction {
+  max-width: var(--max-body-text-width);
+  margin: 0 auto 32px;
+}
+
 @media (--medium-up) {
   .heading {
     margin-bottom: 48px;
@@ -139,6 +143,10 @@
   .group {
     margin-top: 0;
     flex-basis: calc(50% - 4px);
+  }
+
+  .callToAction {
+    margin-top: 48px;
   }
 }
 
@@ -161,5 +169,9 @@
 
   .group {
     margin-top: 8px;
+  }
+
+  .callToAction {
+    margin-top: 64px;
   }
 }

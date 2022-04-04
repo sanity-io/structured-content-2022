@@ -5,17 +5,20 @@ import sub from 'date-fns/sub';
 import { format } from 'date-fns-tz';
 import { PortableText, PortableTextComponentProps } from '@portabletext/react';
 import { Fragment } from 'react';
-import { Ticket, TicketGroup } from '../../../types/Ticket';
-import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
+import type { SimpleCallToAction } from '../../../types/SimpleCallToAction';
+import type { Ticket, TicketGroup } from '../../../types/Ticket';
+import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { getCollectionForSelectionType } from '../../../util/entity';
 import GridWrapper from '../../GridWrapper';
 import FeatureCheckmark from '../../FeatureCheckmark';
 import FeatureSection from '../../FeatureSection';
 import styles from './Tickets.module.css';
+import ButtonLink from '../../ButtonLink';
 
 interface TicketsProps {
   type: EntitySectionSelection;
   heading: string;
+  callToAction?: SimpleCallToAction;
   allTickets: Ticket[];
   tickets?: Ticket[];
 }
@@ -101,7 +104,7 @@ const priceList = (ticket: Ticket) => (
 );
 
 export const Tickets = ({
-  value: { type, heading, tickets, allTickets },
+  value: { type, heading, callToAction, tickets, allTickets },
 }: PortableTextComponentProps<TicketsProps>) => {
   if (!Array.isArray(allTickets) || allTickets.length === 0) {
     console.error(`Tickets missing or invalid tickets array: '${allTickets}'`);
@@ -189,6 +192,18 @@ export const Tickets = ({
           )
         )}
       </div>
+
+      {callToAction && (
+        <div className={styles.callToAction}>
+          <ButtonLink
+            url={
+              callToAction.link?.external ||
+              callToAction.link?.internal?.slug?.current
+            }
+            text={callToAction.text}
+          />
+        </div>
+      )}
     </GridWrapper>
   );
 };

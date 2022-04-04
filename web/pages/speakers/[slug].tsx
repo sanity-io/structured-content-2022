@@ -4,7 +4,7 @@ import { groq } from 'next-sanity';
 import type { Person } from '../../types/Person';
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
-import type { Section } from "../../types/Section";
+import type { Section } from '../../types/Section';
 import MetaTags from '../../components/MetaTags';
 import Nav from '../../components/Nav';
 import GridWrapper from '../../components/GridWrapper';
