@@ -6,15 +6,16 @@ import { format } from 'date-fns-tz';
 import { PortableText, PortableTextComponentProps } from '@portabletext/react';
 import { Fragment } from 'react';
 import { Ticket, TicketGroup } from '../../../types/Ticket';
-import GridWrapper from '../../GridWrapper';
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
-import styles from './Tickets.module.css';
 import { getCollectionForSelectionType } from '../../../util/entity';
+import GridWrapper from '../../GridWrapper';
 import FeatureCheckmark from '../../FeatureCheckmark';
 import FeatureSection from '../../FeatureSection';
+import styles from './Tickets.module.css';
 
 interface TicketsProps {
   type: EntitySectionSelection;
+  heading: string;
   allTickets: Ticket[];
   tickets?: Ticket[];
 }
@@ -100,7 +101,7 @@ const priceList = (ticket: Ticket) => (
 );
 
 export const Tickets = ({
-  value: { type, tickets, allTickets },
+  value: { type, heading, tickets, allTickets },
 }: PortableTextComponentProps<TicketsProps>) => {
   if (!Array.isArray(allTickets) || allTickets.length === 0) {
     console.error(`Tickets missing or invalid tickets array: '${allTickets}'`);
@@ -123,6 +124,7 @@ export const Tickets = ({
 
   return (
     <GridWrapper>
+      {heading && <h2 className={styles.heading}>{heading}</h2>}
       <table className={styles.table}>
         <thead>
           <tr>

@@ -1,10 +1,15 @@
+.heading {
+  max-width: var(--max-body-text-width);
+  margin: 0 auto 32px;
+}
+
 .table {
   display: none;
   width: 100%;
   border-spacing: 8px;
   font: var(--font-body-small-medium);
   letter-spacing: var(--letter-spacing-body-small);
-  margin: 96px 0;
+  margin-bottom: 96px;
 }
 
 .sections {
@@ -117,6 +122,10 @@
 }
 
 @media (--medium-up) {
+  .heading {
+    margin-bottom: 48px;
+  }
+
   .sections {
     margin: 64px 0;
   }
@@ -134,6 +143,10 @@
 }
 
 @media (--large-up) {
+  .heading {
+    margin-bottom: 64px;
+  }
+
   .table {
     display: table;
   }

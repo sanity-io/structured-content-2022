@@ -64,6 +64,7 @@ const SHARED_SECTIONS = `
   },
   _type == "ticketsSection" => {
     type,
+    heading,
     tickets[]->{ ${TICKET} },
     "allTickets": *[_id == "${mainEventId}"][0].tickets[]->{ ${TICKET} }
   },
