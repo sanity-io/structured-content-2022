@@ -22,12 +22,35 @@
 
 .speakerItem {
   border-bottom: 2px solid var(--color-brand-black);
-  display: flex;
-  align-items: center;
 }
 
 .speakerItem:first-child {
   border-top: 2px solid var(--color-brand-black);
+}
+
+.speakerLink {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin: 0 -16px;
+  padding: 0 16px;
+  border-radius: 16px;
+}
+
+.speakerLink:hover {
+  background: var(--color-brand-orange);
+}
+
+.speakerLink:active {
+  background: var(--color-brand-yellow);
+}
+
+.speakerLink::after {
+  content: '->';
+  white-space: nowrap;
+  letter-spacing: normal; /* Chromium disables ligatures otherwise */
+  flex: auto;
+  text-align: right;
 }
 
 .speakerPhoto {
@@ -74,6 +97,16 @@
 
   .heading {
     font: var(--font-display-lg);
+  }
+
+  .speakerLink {
+    margin: 0 -32px;
+    padding: 0 32px;
+  }
+
+  .speakerLink::after {
+    font-size: 40px;
+    line-height: 1;
   }
 
   .speakerPhoto {
