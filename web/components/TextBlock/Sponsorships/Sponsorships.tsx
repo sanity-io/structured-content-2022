@@ -1,11 +1,11 @@
 import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { Sponsorship } from '../../../types/Sponsorship';
 import { getCollectionForSelectionType } from '../../../util/entity';
+import { formatPrice } from '../../../util/number';
 import FeatureSection from '../../FeatureSection';
 import GridWrapper from '../../GridWrapper';
 import BenefitRow from './BenefitRow';
 import styles from './Sponsorships.module.css';
-import { formatPrice } from "../../../util/number";
 
 interface SponsorshipsProps {
   value: {

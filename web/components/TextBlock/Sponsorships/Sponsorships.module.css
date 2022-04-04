@@ -55,12 +55,6 @@
   letter-spacing: var(--letter-spacing-body-large);
 }
 
-.spotsAvailable {
-  border: 1px solid var(--color-brand-black);
-  border-radius: 4px;
-  padding: 16px;
-}
-
 .price {
   font: var(--font-ui-xl-medium);
   letter-spacing: var(--letter-spacing-ui-xl);
