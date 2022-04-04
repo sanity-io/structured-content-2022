@@ -1,3 +1,8 @@
+.heading {
+  max-width: var(--max-body-text-width);
+  margin: 0 auto 32px;
+}
+
 .dayHeader {
   font: var(--font-body-small-bold);
   letter-spacing: var(--letter-spacing-body-small);
@@ -26,6 +31,10 @@
 }
 
 @media (--medium-up) {
+  .heading {
+    margin-bottom: 48px;
+  }
+
   .dayHeader {
     margin: 48px 0;
   }
@@ -38,5 +47,11 @@
 
   .sessionDuration {
     margin-bottom: 0;
+  }
+}
+
+@media (--large-up) {
+  .heading {
+    margin-bottom: 64px;
   }
 }

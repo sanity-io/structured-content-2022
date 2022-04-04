@@ -70,6 +70,7 @@ const SHARED_SECTIONS = `
   _type == "formSection" => { ... },
   _type == "programsSection" => {
     type,
+    heading,
     programs[]-> { ${PROGRAM} },
     "allPrograms": *[_type == "program"] { ${PROGRAM} }
   },

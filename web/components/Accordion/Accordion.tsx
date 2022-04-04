@@ -4,6 +4,7 @@ import styles from './Accordion.module.css';
 
 interface AccordionProps {
   baseId: string;
+  heading?: ReactNode;
   items: {
     title: string;
     content: ReactNode | ReactNode[];
@@ -21,7 +22,7 @@ const AccordionSection = ({ title, content, baseId }) => {
 
   return (
     <>
-      <h2 className={styles.heading} id={`heading-h2-${baseId}`}>
+      <h2 className={styles.sectionHeading} id={`heading-h2-${baseId}`}>
         <button
           onClick={onClick}
           className={clsx(styles.accordion, open && styles.active)}
@@ -38,8 +39,9 @@ const AccordionSection = ({ title, content, baseId }) => {
   );
 };
 
-export const Accordion = ({ baseId, items }: AccordionProps) => (
+export const Accordion = ({ baseId, items, heading }: AccordionProps) => (
   <div className={styles.container}>
+    {heading}
     {items.map(({ title, content }, index) => (
       <AccordionSection
         key={index}

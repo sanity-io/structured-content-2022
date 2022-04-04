@@ -19,7 +19,7 @@
   border: none;
 }
 
-.heading {
+.sectionHeading {
   font: var(--font-display-xxs);
   margin: 0;
 }
@@ -53,11 +53,11 @@
     max-width: var(--max-body-text-width);
   }
 
-  .heading {
+  .sectionHeading {
     font: var(--font-display-xs);
   }
 
-  .heading,
+  .sectionHeading,
   .panel {
     margin-left: -52px;
     margin-right: -52px;
@@ -82,7 +82,7 @@
     margin: 128px auto;
   }
 
-  .heading,
+  .sectionHeading,
   .panel {
     margin-left: -64px;
     margin-right: -64px;
