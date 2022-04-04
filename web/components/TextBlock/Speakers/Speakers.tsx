@@ -1,4 +1,5 @@
 import type { PortableTextComponentProps } from '@portabletext/react';
+import { imageUrlFor } from '../../../lib/sanity';
 import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import type { Person } from '../../../types/Person';
 import type { SimpleCallToAction } from '../../../types/SimpleCallToAction';
@@ -32,6 +33,18 @@ export const Speakers = ({
     {getCollectionForSelectionType(type, allSpeakers, speakers).map(
       (speaker) => (
         <div key={speaker._id}>
+          {speaker.photo && (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={imageUrlFor(speaker.photo)
+                .size(193, 243)
+                .saturation(-100)
+                .url()}
+              alt={speaker.photo.alt || ''}
+              width={193}
+              height={243}
+            />
+          )}
           <div>{speaker.name}</div>
           <div>
             {[speaker.title, speaker.company].filter(Boolean).join(', ')}
