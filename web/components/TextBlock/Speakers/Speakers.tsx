@@ -33,7 +33,9 @@ export const Speakers = ({
       (speaker) => (
         <div key={speaker._id}>
           <div>{speaker.name}</div>
-          <div>{speaker.title}</div>
+          <div>
+            {[speaker.title, speaker.company].filter(Boolean).join(', ')}
+          </div>
         </div>
       )
     )}
