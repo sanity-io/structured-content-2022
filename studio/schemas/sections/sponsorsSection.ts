@@ -4,6 +4,16 @@ export default {
   title: "Sponsors section",
   fields: [
     {
+      name: "heading",
+      type: "string",
+      title: "Ticket table heading",
+    },
+    {
+      name: "callToAction",
+      type: "simpleCallToAction",
+      title: "Call to action",
+    },
+    {
       name: "type",
       type: "string",
       title: "Section type",
