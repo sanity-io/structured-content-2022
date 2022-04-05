@@ -26,8 +26,10 @@ export const formatTimeDuration = (start: Date, duration: number) => {
   return `PT${hours ? hours + 'H' : ''}${minutes ? minutes + 'M' : ''}`;
 };
 
-const differingMeridiem = (d1: Date, d2: Date) =>
-  d1.getHours() >= 12 !== d2.getHours() >= 12;
+const differingMeridiem = (d1: Date, d2: Date) => {
+  const fmt = (d) => formatInTimeZone(d, 'UTC', 'aa', { locale: enUS });
+  return fmt(d1) !== fmt(d2);
+};
 
 export const formatTimeRange = (
   start: Date,
