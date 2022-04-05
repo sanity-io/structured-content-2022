@@ -1,6 +1,7 @@
 import { PortableTextComponentProps } from '@portabletext/react';
-import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
-import { Venue } from '../../../types/Venue';
+import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
+import type { Section } from '../../../types/Section';
+import type { Venue } from '../../../types/Venue';
 import GridWrapper from '../../GridWrapper';
 import VenueNames from '../../VenueNames';
 import { getCollectionForSelectionType } from '../../../util/entity';
@@ -9,6 +10,7 @@ import { SimpleCallToAction } from '../../../types/SimpleCallToAction';
 type VenuesSectionProps = {
   type: EntitySectionSelection;
   heading?: string;
+  lead?: Section[];
   callToAction?: SimpleCallToAction;
   allVenues: Venue[];
   venues?: Venue[];

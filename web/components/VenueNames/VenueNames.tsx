@@ -2,10 +2,12 @@ import clsx from 'clsx';
 import { useRef } from 'react';
 import useIntersection from '../../hooks/useIntersection';
 import { useAnimationProperties } from '../../hooks/useAnimationProperties';
-import type { Venue } from '../../types/Venue';
+import type { Section } from '../../types/Section';
 import type { SimpleCallToAction as TSimpleCallToAction } from '../../types/SimpleCallToAction';
+import type { Venue } from '../../types/Venue';
 import styles from './VenueNames.module.css';
 import SimpleCallToAction from '../SimpleCallToAction';
+import TextBlock from '../TextBlock';
 
 interface VenueItemProps {
   name: string;
@@ -26,12 +28,14 @@ const VenueItem = ({ name, main, heading }: VenueItemProps) => {
 interface VenueNamesProps {
   venues?: Venue[];
   heading?: string;
+  lead?: Section[];
   callToAction?: TSimpleCallToAction;
 }
 
 export const VenueNames = ({
   venues,
   heading,
+  lead,
   callToAction,
 }: VenueNamesProps) => {
   const wrapperRef = useRef<HTMLUListElement>();
@@ -55,6 +59,7 @@ export const VenueNames = ({
           />
         ))}
       </ul>
+      <TextBlock value={lead} />
       <SimpleCallToAction {...callToAction} />
     </div>
   );

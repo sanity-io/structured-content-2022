@@ -9,6 +9,11 @@ export default {
       title: "Ticket table heading",
     },
     {
+      name: "lead",
+      type: "simpleBlockContent",
+      title: "Lead",
+    },
+    {
       name: "callToAction",
       type: "simpleCallToAction",
       title: "Call to action",
