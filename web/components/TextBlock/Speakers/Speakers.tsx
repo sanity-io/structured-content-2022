@@ -2,7 +2,7 @@ import type { PortableTextComponentProps } from '@portabletext/react';
 import Link from 'next/link';
 import { imageUrlFor } from '../../../lib/sanity';
 import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
-import type { Person } from '../../../types/Person';
+import type { FrontpagePerson } from '../../../types/Person';
 import type { SimpleCallToAction as TSimpleCallToAction } from '../../../types/SimpleCallToAction';
 import { getCollectionForSelectionType } from '../../../util/entity';
 import { getEntityPath } from '../../../util/entityPaths';
@@ -14,8 +14,8 @@ type SpeakersProps = {
   type: EntitySectionSelection;
   heading?: string;
   callToAction?: TSimpleCallToAction;
-  allSpeakers?: Person[];
-  speakers?: Person[];
+  allSpeakers?: FrontpagePerson[];
+  speakers?: FrontpagePerson[];
 };
 
 export const Speakers = ({
