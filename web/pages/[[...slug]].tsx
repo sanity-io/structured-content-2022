@@ -26,6 +26,8 @@ import {
   PRIMARY_NAV,
   PROGRAM,
   QUESTION_AND_ANSWER_COLLECTION_SECTION,
+  SIMPLE_CALL_TO_ACTION,
+  SPEAKER_FRONTPAGE,
   SPONSORSHIP,
   TEXT_AND_IMAGE_SECTION,
   TICKET,
@@ -42,8 +44,10 @@ const SHARED_SECTIONS = `
   },
   _type == "speakersSection" => {
     ...,
-    speakers[]->,
-    "allSpeakers": *[_type == "person"],
+    heading,
+    callToAction { ${SIMPLE_CALL_TO_ACTION} }, 
+    speakers[]-> { ${SPEAKER_FRONTPAGE} },
+    "allSpeakers": *[_type == "person"] { ${SPEAKER_FRONTPAGE} },
   },
   _type == "sessionsSection" => {
     ...,

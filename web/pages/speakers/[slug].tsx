@@ -1,27 +1,27 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import urlJoin from 'proper-url-join';
 import { groq } from 'next-sanity';
-import MetaTags from '../../components/MetaTags';
-import Nav from '../../components/Nav';
-import GridWrapper from '../../components/GridWrapper';
-import Footer from '../../components/Footer';
-import TextBlock from '../../components/TextBlock';
-import ConferenceUpdatesForm from '../../components/ConferenceUpdatesForm';
-import Card from '../../components/Card';
-import HighlightedSpeakerBlock from '../../components/HighlightedSpeakerBlock';
-import SessionCard from '../../components/SessionCard';
-import twitterLogo from '../../images/twitter_logo_black.svg';
-import linkedinLogo from '../../images/linkedin_logo_black.svg';
-import client from '../../lib/sanity.server';
 import type { Person } from '../../types/Person';
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
-import { mainEventId } from '../../util/constants';
+import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
+import type { Section } from '../../types/Section';
+import Card from '../../components/Card';
+import Footer from '../../components/Footer';
+import GridWrapper from '../../components/GridWrapper';
+import HighlightedSpeakerBlock from '../../components/HighlightedSpeakerBlock';
+import MetaTags from '../../components/MetaTags';
+import Nav from '../../components/Nav';
+import SessionCard from '../../components/SessionCard';
+import TextBlock from '../../components/TextBlock';
+import client from '../../lib/sanity.server';
+import { mainEventId, newsletterSharedSectionId } from '../../util/constants';
+import twitterLogo from '../../images/twitter_logo_black.svg';
+import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import { sessionStart } from '../../util/session';
 import { PRIMARY_NAV, SPEAKER } from '../../util/queries';
 import styles from '../app.module.css';
 import speakerStyles from './speakers.module.css';
-import { PrimaryNavItem } from '../../types/PrimaryNavItem';
 
 const QUERY = groq`
   {
@@ -35,6 +35,7 @@ const QUERY = groq`
         _id,
       }
     },
+    "newsletterSection": *[_id == "${newsletterSharedSectionId}"][0],
   }`;
 
 type SpeakerSession = {
@@ -66,6 +67,7 @@ interface SpeakersRouteProps {
         _id: string;
       }[];
     };
+    newsletterSection: Section;
   };
   slug: string;
 }
@@ -104,6 +106,7 @@ const SpeakersRoute = ({
     ticketsUrl,
     navItems,
     footer,
+    newsletterSection,
   },
   slug,
 }: SpeakersRouteProps) => (
@@ -187,16 +190,7 @@ const SpeakersRoute = ({
         </div>
       </GridWrapper>
     </main>
-    <ConferenceUpdatesForm
-      value={{
-        type: 'newsletter',
-        id: 'newsletter-form',
-        buttonText: 'Subscribe',
-      }}
-      index={0}
-      isInline={false}
-      renderNode={null}
-    />
+    <TextBlock value={newsletterSection} />
     <Footer links={footer.links} />
   </>
 );

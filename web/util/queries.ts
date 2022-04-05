@@ -79,6 +79,16 @@ const SPEAKER = `
   },       
 `;
 
+const SPEAKER_FRONTPAGE = `
+  _id,
+  _type, 
+  slug,
+  photo { ${FIGURE} },
+  name,
+  title,
+  company,
+`;
+
 const SPONSORSHIP = `
   _createdAt,
   _id,
@@ -123,5 +133,6 @@ export {
   TICKET,
   SPONSORSHIP,
   SPEAKER,
+  SPEAKER_FRONTPAGE,
   PRIMARY_NAV,
 };
