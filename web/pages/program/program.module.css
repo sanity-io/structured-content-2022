@@ -27,7 +27,9 @@
 
 .speaker {
   padding: 16px 0 24px;
+  border-top: 2px solid var(--color-brand-black);
   border-bottom: 2px solid var(--color-brand-black);
+  margin-top: -2px;
   display: flex;
   align-items: center;
   font: var(--font-ui-xs-medium);
@@ -35,14 +37,10 @@
   text-decoration: none;
 }
 
-.speaker:first-child {
-  border-top: 2px solid var(--color-brand-black);
-}
-
 .speaker:hover {
   background-color: var(--color-brand-orange);
   border-radius: 16px;
-  border: none;
+  border-color: transparent;
   padding-left: 24px;
   padding-right: 24px;
   position: relative;
