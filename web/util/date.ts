@@ -39,7 +39,7 @@ export const formatTimeRange = (
     start,
     timezone,
     differingMeridiem(start, end)
-  )}–${formatTime(end, timezone)}`;
+  )}–${formatTime(end, timezone, true)}`;
 };
 
 /* Converts an IANA time zone name, which typically refers to a specific city,
