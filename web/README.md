@@ -27,8 +27,6 @@ following variables are supported:
 
 - SANITY_STUDIO_API_DATASET: The name of the dataset to use for the Sanity API. If not specified, `staging` will be used
   locally and for Live Previews, and `production` in production.
-- SANITY_STUDIO_REVALIDATE_SECRET: Secret used by /revalidate endpoint (called by Studio) to revalidate pages. Set in the
-  [Vercel project's environment variables][env-vars].
 
 ## Learn More
 
