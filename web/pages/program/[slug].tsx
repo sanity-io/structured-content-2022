@@ -152,31 +152,28 @@ const SessionRoute = ({
                       <li key={_id}>
                         <Link href={urlJoin('/speakers', slug.current)}>
                           <a className={programStyles.speaker}>
-                            <div className={programStyles.speakerDetails}>
-                              {photo && (
-                                /* eslint-disable-next-line @next/next/no-img-element */
-                                <img
-                                  src={imageUrlFor(photo)
-                                    .size(64, 80)
-                                    .saturation(-100)
-                                    .url()}
-                                  width={64}
-                                  height={80}
-                                  alt={name}
-                                  className={programStyles.speakerImage}
-                                />
-                              )}
+                            {photo && (
+                              /* eslint-disable-next-line @next/next/no-img-element */
+                              <img
+                                src={imageUrlFor(photo)
+                                  .size(64, 80)
+                                  .saturation(-100)
+                                  .url()}
+                                width={64}
+                                height={80}
+                                alt={name}
+                                className={programStyles.speakerImage}
+                              />
+                            )}
+                            <div>
+                              <div className={programStyles.role}>{role}</div>
+                              <strong className={programStyles.speakerName}>
+                                {name}
+                              </strong>
                               <div>
-                                <div className={programStyles.role}>{role}</div>
-                                <strong className={programStyles.speakerName}>
-                                  {name}
-                                </strong>
-                                <div>
-                                  {[title, company].filter(Boolean).join(', ')}
-                                </div>
+                                {[title, company].filter(Boolean).join(', ')}
                               </div>
                             </div>
-                            <div className={programStyles.speakerArrow} />
                           </a>
                         </Link>
                       </li>

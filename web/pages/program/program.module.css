@@ -30,7 +30,6 @@
   border-bottom: 2px solid var(--color-brand-black);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   font: var(--font-ui-xs-medium);
   letter-spacing: var(--letter-spacing-ui-xs);
   text-decoration: none;
@@ -49,20 +48,17 @@
   position: relative;
 }
 
-.speakerDetails {
-  display: flex;
-  align-items: center;
+.speaker::after {
+  white-space: nowrap;
+  letter-spacing: normal; /* Chromium disables ligature otherwise */
+  content: ' ->';
+  flex: auto;
+  text-align: right;
 }
 
 .speakerImage {
   border-radius: 24px;
   margin-right: 24px;
-}
-
-.speakerArrow::after {
-  white-space: nowrap;
-  letter-spacing: normal; /* Chromium disables ligature otherwise */
-  content: ' ->';
 }
 
 .role {
