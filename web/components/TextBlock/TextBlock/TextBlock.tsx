@@ -17,6 +17,7 @@ import Tickets from '../Tickets';
 import Figure from '../Figure';
 import Sponsorships from '../Sponsorships';
 import Programs from '../Programs';
+import Speakers from '../Speakers';
 
 const components: Partial<PortableTextComponents> = {
   types: {
@@ -32,6 +33,7 @@ const components: Partial<PortableTextComponents> = {
     venuesSection: VenuesSection,
     sponsorsSection: SponsorsSection,
     sponsorshipsSection: Sponsorships,
+    speakersSection: Speakers,
     ticketsSection: Tickets,
     figure: Figure,
     programsSection: Programs,

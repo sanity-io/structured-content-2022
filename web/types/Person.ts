@@ -20,3 +20,13 @@ export type Person = {
   _type: 'person';
   _updatedAt: string;
 };
+
+export type FrontpagePerson = {
+  _id: string;
+  _type: 'person';
+  slug: Slug;
+  photo: Figure;
+  name: string;
+  title: string;
+  company: string;
+};

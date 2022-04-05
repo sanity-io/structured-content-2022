@@ -1,25 +1,67 @@
-import { Person } from '../../../types/Person';
-import { PortableTextComponentProps } from '@portabletext/react/dist/react-portable-text.esm';
-import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
+import type { PortableTextComponentProps } from '@portabletext/react';
+import Link from 'next/link';
+import { imageUrlFor } from '../../../lib/sanity';
+import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
+import type { FrontpagePerson } from '../../../types/Person';
+import type { SimpleCallToAction as TSimpleCallToAction } from '../../../types/SimpleCallToAction';
 import { getCollectionForSelectionType } from '../../../util/entity';
+import { getEntityPath } from '../../../util/entityPaths';
+import GridWrapper from '../../GridWrapper';
+import SimpleCallToAction from '../../SimpleCallToAction';
+import styles from './Speakers.module.css';
 
 type SpeakersProps = {
   type: EntitySectionSelection;
-  allSpeakers?: Person[];
-  speakers?: Person[];
+  heading?: string;
+  callToAction?: TSimpleCallToAction;
+  allSpeakers?: FrontpagePerson[];
+  speakers?: FrontpagePerson[];
 };
 
 export const Speakers = ({
-  value: { type, allSpeakers, speakers },
+  value: { type, heading, callToAction, allSpeakers, speakers },
 }: PortableTextComponentProps<SpeakersProps>) => (
-  <>
-    {getCollectionForSelectionType(type, allSpeakers, speakers).map(
-      (speaker) => (
-        <div key={speaker._id}>
-          <div>{speaker.name}</div>
-          <div>{speaker.title}</div>
-        </div>
-      )
-    )}
-  </>
+  <section className={styles.container}>
+    <GridWrapper>
+      <div className={styles.introContent}>
+        {heading && <h2 className={styles.heading}>{heading}</h2>}
+        <SimpleCallToAction {...callToAction} />
+      </div>
+      <ul className={styles.speakerList}>
+        {getCollectionForSelectionType(type, allSpeakers, speakers).map(
+          (speaker) => (
+            <li key={speaker._id} className={styles.speakerItem}>
+              <Link href={getEntityPath(speaker)}>
+                <a className={styles.speakerLink}>
+                  {speaker.photo && (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={imageUrlFor(speaker.photo)
+                        .size(193, 243)
+                        .saturation(-100)
+                        .url()}
+                      alt={speaker.photo.alt || ''}
+                      width={193}
+                      height={243}
+                      className={styles.speakerPhoto}
+                    />
+                  )}
+                  <div className={styles.speakerDetails}>
+                    <strong className={styles.speakerName}>
+                      {speaker.name}
+                    </strong>
+                    <div>
+                      {[speaker.title, speaker.company]
+                        .filter(Boolean)
+                        .join(', ')}
+                    </div>
+                  </div>
+                </a>
+              </Link>
+            </li>
+          )
+        )}
+      </ul>
+    </GridWrapper>
+  </section>
 );
