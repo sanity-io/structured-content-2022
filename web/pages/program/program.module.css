@@ -50,6 +50,7 @@
 
 .speaker::after {
   white-space: nowrap;
+  font: var(--font-body-xl);
   letter-spacing: normal; /* Chromium disables ligature otherwise */
   content: ' ->';
   flex: auto;
