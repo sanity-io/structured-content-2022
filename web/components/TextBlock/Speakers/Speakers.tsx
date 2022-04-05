@@ -3,17 +3,17 @@ import Link from 'next/link';
 import { imageUrlFor } from '../../../lib/sanity';
 import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import type { Person } from '../../../types/Person';
-import type { SimpleCallToAction } from '../../../types/SimpleCallToAction';
+import type { SimpleCallToAction as TSimpleCallToAction } from '../../../types/SimpleCallToAction';
 import { getCollectionForSelectionType } from '../../../util/entity';
 import { getEntityPath } from '../../../util/entityPaths';
-import ButtonLink from '../../ButtonLink';
 import GridWrapper from '../../GridWrapper';
+import SimpleCallToAction from '../../SimpleCallToAction';
 import styles from './Speakers.module.css';
 
 type SpeakersProps = {
   type: EntitySectionSelection;
   heading?: string;
-  callToAction?: SimpleCallToAction;
+  callToAction?: TSimpleCallToAction;
   allSpeakers?: Person[];
   speakers?: Person[];
 };
@@ -25,15 +25,7 @@ export const Speakers = ({
     <GridWrapper>
       <div className={styles.introContent}>
         {heading && <h2 className={styles.heading}>{heading}</h2>}
-        {callToAction && (
-          <ButtonLink
-            url={
-              callToAction.link?.external ||
-              callToAction.link?.internal?.slug?.current
-            }
-            text={callToAction.text}
-          />
-        )}
+        <SimpleCallToAction {...callToAction} />
       </div>
       <ul className={styles.speakerList}>
         {getCollectionForSelectionType(type, allSpeakers, speakers).map(
