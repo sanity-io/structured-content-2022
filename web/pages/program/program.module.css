@@ -48,6 +48,10 @@
   background-color: var(--color-brand-orange);
 }
 
+.speakerLink:active {
+  background-color: var(--color-brand-yellow);
+}
+
 .speakerLink::after {
   white-space: nowrap;
   font: var(--font-body-xl);
