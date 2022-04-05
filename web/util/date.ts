@@ -26,8 +26,8 @@ export const formatTimeDuration = (start: Date, duration: number) => {
   return `PT${hours ? hours + 'H' : ''}${minutes ? minutes + 'M' : ''}`;
 };
 
-const differingMeridiem = (d1: Date, d2: Date) => {
-  const fmt = (d) => formatInTimeZone(d, 'UTC', 'aa', { locale: enUS });
+const differingMeridiem = (d1: Date, d2: Date, timeZone = 'UTC') => {
+  const fmt = (d) => formatInTimeZone(d, timeZone, 'aa', { locale: enUS });
   return fmt(d1) !== fmt(d2);
 };
 
@@ -37,7 +37,7 @@ export const formatTimeRange = (
   timezone: string
 ) => {
   const end = addMinutes(start, duration);
-  const isDifferingMeridiem = differingMeridiem(start, end);
+  const isDifferingMeridiem = differingMeridiem(start, end, timezone);
   return [
     formatTime(start, timezone, isDifferingMeridiem),
     isDifferingMeridiem ? ' – ' : '–',
