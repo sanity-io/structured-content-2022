@@ -35,11 +35,12 @@ export const formatTimeRange = (
   timezone: string
 ) => {
   const end = addMinutes(start, duration);
-  return `${formatTime(
-    start,
-    timezone,
-    differingMeridiem(start, end)
-  )}–${formatTime(end, timezone, true)}`;
+  const isDifferingMeridiem = differingMeridiem(start, end);
+  return [
+    formatTime(start, timezone, isDifferingMeridiem),
+    isDifferingMeridiem ? ' – ' : '–',
+    formatTime(end, timezone, true),
+  ].join('');
 };
 
 /* Converts an IANA time zone name, which typically refers to a specific city,
