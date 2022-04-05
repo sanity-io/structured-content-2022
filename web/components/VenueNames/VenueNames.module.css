@@ -9,6 +9,18 @@
   font: var(--font-display-base);
 }
 
+.venue.main {
+  font: var(--font-display-2xl);
+  display: block;
+  margin-bottom: 64px;
+}
+
+.mainVenueLabel {
+  font: var(--font-body-small-medium);
+  display: block;
+  margin-bottom: 16px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .venues.isIntersecting .venue {
     transform-origin: bottom;
@@ -17,7 +29,7 @@
   }
 }
 
-.venue:nth-child(n + 2)::before {
+.venue:nth-child(n + 3)::before {
   content: '•';
   margin: 0 6px;
 }

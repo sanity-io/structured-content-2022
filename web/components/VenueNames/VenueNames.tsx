@@ -2,34 +2,60 @@ import clsx from 'clsx';
 import { useRef } from 'react';
 import useIntersection from '../../hooks/useIntersection';
 import { useAnimationProperties } from '../../hooks/useAnimationProperties';
-import { Venue } from '../../types/Venue';
+import type { Venue } from '../../types/Venue';
+import type { SimpleCallToAction as TSimpleCallToAction } from '../../types/SimpleCallToAction';
 import styles from './VenueNames.module.css';
+import SimpleCallToAction from '../SimpleCallToAction';
 
-interface VenueNamesProps {
-  venues?: Venue[];
+interface VenueItemProps {
+  name: string;
+  main?: boolean;
+  heading?: string;
 }
 
-const Venue = ({ name }: Venue) => {
+const VenueItem = ({ name, main, heading }: VenueItemProps) => {
   const animation = useAnimationProperties();
   return (
-    <li className={styles.venue} style={animation}>
+    <li className={clsx(styles.venue, main && styles.main)} style={animation}>
+      {main && <span className={styles.mainVenueLabel}>{heading}</span>}
       {name}
     </li>
   );
 };
 
-export const VenueNames = ({ venues }: VenueNamesProps) => {
+interface VenueNamesProps {
+  venues?: Venue[];
+  heading?: string;
+  callToAction?: TSimpleCallToAction;
+}
+
+export const VenueNames = ({
+  venues,
+  heading,
+  callToAction,
+}: VenueNamesProps) => {
   const wrapperRef = useRef<HTMLUListElement>();
   const isIntersecting = useIntersection(wrapperRef);
+  if (!Array.isArray(venues) || !venues.length) {
+    return null;
+  }
 
   return (
-    <ul
-      className={clsx(styles.venues, isIntersecting && styles.isIntersecting)}
-      ref={wrapperRef}
-    >
-      {venues?.map((venue) => (
-        <Venue {...venue} key={venue.name} />
-      ))}
-    </ul>
+    <div className={styles.venues}>
+      <ul
+        className={clsx(isIntersecting && styles.isIntersecting)}
+        ref={wrapperRef}
+      >
+        {venues?.map((venue, index) => (
+          <VenueItem
+            {...venue}
+            key={venue.name}
+            main={index === 0}
+            heading={heading}
+          />
+        ))}
+      </ul>
+      <SimpleCallToAction {...callToAction} />
+    </div>
   );
 };

@@ -54,6 +54,9 @@ const SHARED_SECTIONS = `
   },
   _type == "venuesSection" => {
     ...,
+    type,
+    heading,
+    callToAction { ${SIMPLE_CALL_TO_ACTION} }, 
     venues[]->{name},
     "allVenues": *[_id == "${mainEventId}"][0].venues[]->{name},
   },
