@@ -2,24 +2,20 @@ import { formatInTimeZone } from 'date-fns-tz';
 import { addMinutes, intervalToDuration } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 
-export const formatTime = (date: Date, timezone: string) =>
-  formatInTimeZone(date, timezone, 'HH:mm', { locale: enUS });
-
-export const formatTimeRange = (
-  date: Date,
-  duration: number,
-  timezone: string
-) =>
-  `${formatTime(date, timezone)}–${formatTime(
-    addMinutes(date, duration),
-    timezone
-  )}`;
+export const formatTime = (date: Date, timezone: string, meridiem?: boolean) =>
+  formatInTimeZone(date, timezone, meridiem ? 'h:mm aa' : 'HH:mm', {
+    locale: enUS,
+  });
 
 export const formatDate = (date: Date, timezone: string) =>
   formatInTimeZone(date, timezone, 'MMMM d, yyyy', { locale: enUS });
 
-export const formatDateWithDay = (date: Date, timezone: string) =>
-  formatInTimeZone(date, timezone, 'eeee – MMMM d', { locale: enUS });
+export const formatDateWithDay = (
+  date: Date,
+  timezone: string,
+  separator = ' – '
+) =>
+  formatInTimeZone(date, timezone, `eeee${separator}MMMM d`, { locale: enUS });
 
 export const formatTimeDuration = (start: Date, duration: number) => {
   // This only handles durations of up to 24 hours
@@ -28,6 +24,25 @@ export const formatTimeDuration = (start: Date, duration: number) => {
     end: addMinutes(start, duration),
   });
   return `PT${hours ? hours + 'H' : ''}${minutes ? minutes + 'M' : ''}`;
+};
+
+const differingMeridiem = (d1: Date, d2: Date, timeZone = 'UTC') => {
+  const fmt = (d) => formatInTimeZone(d, timeZone, 'aa', { locale: enUS });
+  return fmt(d1) !== fmt(d2);
+};
+
+export const formatTimeRange = (
+  start: Date,
+  duration: number,
+  timezone: string
+) => {
+  const end = addMinutes(start, duration);
+  const isDifferingMeridiem = differingMeridiem(start, end, timezone);
+  return [
+    formatTime(start, timezone, isDifferingMeridiem),
+    isDifferingMeridiem ? ' – ' : '–',
+    formatTime(end, timezone, true),
+  ].join('');
 };
 
 /* Converts an IANA time zone name, which typically refers to a specific city,
