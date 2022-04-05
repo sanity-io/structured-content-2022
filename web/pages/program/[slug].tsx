@@ -149,9 +149,9 @@ const SessionRoute = ({
                       role,
                       person: { _id, name, title, company, photo, slug },
                     }) => (
-                      <li key={_id}>
+                      <li key={_id} className={programStyles.speakerItem}>
                         <Link href={urlJoin('/speakers', slug.current)}>
-                          <a className={programStyles.speaker}>
+                          <a className={programStyles.speakerLink}>
                             {photo && (
                               /* eslint-disable-next-line @next/next/no-img-element */
                               <img
