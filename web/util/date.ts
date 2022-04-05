@@ -3,7 +3,7 @@ import { addMinutes, intervalToDuration } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 
 export const formatTime = (date: Date, timezone: string, meridiem?: boolean) =>
-  formatInTimeZone(date, timezone, `HH:mm${meridiem ? ' aa' : ''}`, {
+  formatInTimeZone(date, timezone, meridiem ? 'h:mm aa' : 'HH:mm', {
     locale: enUS,
   });
 
