@@ -40,8 +40,7 @@
   }
 
   .heading {
-    margin: 0 auto 48px;
-    max-width: var(--max-body-text-width);
+    margin-bottom: 48px;
   }
 
   .dayHeader {
