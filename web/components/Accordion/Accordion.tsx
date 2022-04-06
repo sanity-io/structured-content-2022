@@ -20,8 +20,8 @@ const AccordionSection = ({ title, content, baseId }) => {
   const panelId = `${baseId}-panel`;
 
   return (
-    <>
-      <h2 className={styles.heading} id={`heading-h2-${baseId}`}>
+    <section>
+      <h3 className={styles.sectionHeading} id={`heading-h2-${baseId}`}>
         <button
           onClick={onClick}
           className={clsx(styles.accordion, open && styles.active)}
@@ -30,16 +30,16 @@ const AccordionSection = ({ title, content, baseId }) => {
         >
           {title}
         </button>
-      </h2>
+      </h3>
       <div className={clsx(styles.panel, open && styles.open)} id={panelId}>
         {content}
       </div>
-    </>
+    </section>
   );
 };
 
 export const Accordion = ({ baseId, items }: AccordionProps) => (
-  <div className={styles.container}>
+  <>
     {items.map(({ title, content }, index) => (
       <AccordionSection
         key={index}
@@ -48,5 +48,5 @@ export const Accordion = ({ baseId, items }: AccordionProps) => (
         baseId={`${baseId}-${index}`}
       />
     ))}
-  </div>
+  </>
 );

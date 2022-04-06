@@ -5,16 +5,20 @@ import sub from 'date-fns/sub';
 import { format } from 'date-fns-tz';
 import { PortableText, PortableTextComponentProps } from '@portabletext/react';
 import { Fragment } from 'react';
-import { Ticket, TicketGroup } from '../../../types/Ticket';
-import GridWrapper from '../../GridWrapper';
-import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
-import styles from './Tickets.module.css';
+import type { SimpleCallToAction as TSimpleCallToAction } from '../../../types/SimpleCallToAction';
+import type { Ticket, TicketGroup } from '../../../types/Ticket';
+import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { getCollectionForSelectionType } from '../../../util/entity';
+import GridWrapper from '../../GridWrapper';
 import FeatureCheckmark from '../../FeatureCheckmark';
 import FeatureSection from '../../FeatureSection';
+import SimpleCallToAction from '../../SimpleCallToAction';
+import styles from './Tickets.module.css';
 
 interface TicketsProps {
   type: EntitySectionSelection;
+  heading: string;
+  callToAction?: TSimpleCallToAction;
   allTickets: Ticket[];
   tickets?: Ticket[];
 }
@@ -100,7 +104,7 @@ const priceList = (ticket: Ticket) => (
 );
 
 export const Tickets = ({
-  value: { type, tickets, allTickets },
+  value: { type, heading, callToAction, tickets, allTickets },
 }: PortableTextComponentProps<TicketsProps>) => {
   if (!Array.isArray(allTickets) || allTickets.length === 0) {
     console.error(`Tickets missing or invalid tickets array: '${allTickets}'`);
@@ -123,70 +127,83 @@ export const Tickets = ({
 
   return (
     <GridWrapper>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th />
-            {getCollectionForSelectionType(type, allTickets, tickets).map(
-              (ticket) => (
-                <th key={ticket._id} scope="col" className={styles.ticketInfo}>
-                  <strong className={styles.name}>{ticket.type}</strong>
+      <section className={styles.container}>
+        {heading && <h2 className={styles.heading}>{heading}</h2>}
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th />
+              {getCollectionForSelectionType(type, allTickets, tickets).map(
+                (ticket) => (
+                  <th
+                    key={ticket._id}
+                    scope="col"
+                    className={styles.ticketInfo}
+                  >
+                    <strong className={styles.name}>{ticket.type}</strong>
+                    {ticket.description && (
+                      <div className={styles.description}>
+                        <PortableText value={ticket.description} />
+                      </div>
+                    )}
+                    {priceList(ticket)}
+                  </th>
+                )
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {includedTypes.map((includedType) => (
+              <tr key={includedType}>
+                <th className={styles.feature} scope="row">
+                  {includedType}
+                </th>
+                {getCollectionForSelectionType(type, allTickets, tickets).map(
+                  (ticket) => {
+                    const featureIncluded =
+                      ticket.included.includes(includedType);
+                    return (
+                      <td
+                        key={ticket._id}
+                        className={clsx(
+                          styles.featurePresence,
+                          featureIncluded && styles.featureIncluded
+                        )}
+                      >
+                        <FeatureCheckmark included={featureIncluded} />
+                      </td>
+                    );
+                  }
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div className={styles.sections}>
+          {getCollectionForSelectionType(type, allTickets, tickets).map(
+            (ticket) => (
+              <FeatureSection features={ticket.included} key={ticket._id}>
+                <>
+                  <h3 className={styles.name}>{ticket.type}</h3>
                   {ticket.description && (
                     <div className={styles.description}>
                       <PortableText value={ticket.description} />
                     </div>
                   )}
                   {priceList(ticket)}
-                </th>
-              )
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {includedTypes.map((includedType) => (
-            <tr key={includedType}>
-              <th className={styles.feature} scope="row">
-                {includedType}
-              </th>
-              {getCollectionForSelectionType(type, allTickets, tickets).map(
-                (ticket) => {
-                  const featureIncluded =
-                    ticket.included.includes(includedType);
-                  return (
-                    <td
-                      key={ticket._id}
-                      className={clsx(
-                        styles.featurePresence,
-                        featureIncluded && styles.featureIncluded
-                      )}
-                    >
-                      <FeatureCheckmark included={featureIncluded} />
-                    </td>
-                  );
-                }
-              )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                </>
+              </FeatureSection>
+            )
+          )}
+        </div>
 
-      <div className={styles.sections}>
-        {getCollectionForSelectionType(type, allTickets, tickets).map(
-          (ticket) => (
-            <FeatureSection features={ticket.included} key={ticket._id}>
-              <>
-                <h3 className={styles.name}>{ticket.type}</h3>
-                {ticket.description && (
-                  <div className={styles.description}>
-                    <PortableText value={ticket.description} />
-                  </div>
-                )}
-                {priceList(ticket)}
-              </>
-            </FeatureSection>
-          )
+        {callToAction && (
+          <div className={styles.callToAction}>
+            <SimpleCallToAction {...callToAction} />
+          </div>
         )}
-      </div>
+      </section>
     </GridWrapper>
   );
 };

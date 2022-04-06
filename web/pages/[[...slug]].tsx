@@ -70,12 +70,15 @@ const SHARED_SECTIONS = `
   },
   _type == "ticketsSection" => {
     type,
+    heading,
+    callToAction { ${SIMPLE_CALL_TO_ACTION} },
     tickets[]->{ ${TICKET} },
     "allTickets": *[_id == "${mainEventId}"][0].tickets[]->{ ${TICKET} }
   },
   _type == "formSection" => { ... },
   _type == "programsSection" => {
     type,
+    heading,
     programs[]-> { ${PROGRAM} },
     "allPrograms": *[_type == "program"] { ${PROGRAM} }
   },

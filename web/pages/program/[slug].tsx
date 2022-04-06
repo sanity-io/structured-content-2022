@@ -10,7 +10,7 @@ import TextBlock from '../../components/TextBlock';
 import { imageUrlFor } from '../../lib/sanity';
 import client from '../../lib/sanity.server';
 import { mainEventId } from '../../util/constants';
-import { PRIMARY_NAV } from "../../util/queries";
+import { PRIMARY_NAV } from '../../util/queries';
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
 import {
@@ -22,7 +22,7 @@ import { sessionStart } from '../../util/session';
 import styles from '../app.module.css';
 import programStyles from './program.module.css';
 import Link from 'next/link';
-import { PrimaryNavItem } from "../../types/PrimaryNavItem";
+import { PrimaryNavItem } from '../../types/PrimaryNavItem';
 
 const QUERY = groq`
   {
