@@ -10,6 +10,7 @@ import TextBlock from '../../components/TextBlock';
 import { imageUrlFor } from '../../lib/sanity';
 import client from '../../lib/sanity.server';
 import { mainEventId } from '../../util/constants';
+import { PRIMARY_NAV } from "../../util/queries";
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
 import {
@@ -21,6 +22,7 @@ import { sessionStart } from '../../util/session';
 import styles from '../app.module.css';
 import programStyles from './program.module.css';
 import Link from 'next/link';
+import { PrimaryNavItem } from "../../types/PrimaryNavItem";
 
 const QUERY = groq`
   {
@@ -38,6 +40,7 @@ const QUERY = groq`
     "home": *[_id == "${mainEventId}"][0] {
       "ticketsUrl": registrationUrl,
     },
+    "navItems": ${PRIMARY_NAV},
     "footer": *[_id == "secondary-nav"][0] {
       "links": tree[].value.reference-> {
         "name": seo.title,
@@ -66,6 +69,7 @@ interface SessionRouteProps {
     home: {
       ticketsUrl: string;
     };
+    navItems: PrimaryNavItem[];
     footer: {
       links: {
         name: string;
@@ -89,6 +93,7 @@ const SessionRoute = ({
   data: {
     session: { title, longDescription, speakers, type },
     home: { ticketsUrl },
+    navItems,
     footer,
     timeInfo: {
       mainVenueTimezone,
@@ -108,9 +113,9 @@ const SessionRoute = ({
       <MetaTags title={title} description="" currentPath={`/session/${slug}`} />
       <header className={styles.header}>
         <Nav
-          onFrontPage={false}
           currentPath={`/session/${slug}`}
           ticketsUrl={ticketsUrl}
+          items={navItems}
         />
       </header>
       <main>
