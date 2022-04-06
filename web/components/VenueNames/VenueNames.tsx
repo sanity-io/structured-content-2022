@@ -19,7 +19,9 @@ const VenueItem = ({ name, main, heading }: VenueItemProps) => {
   const animation = useAnimationProperties();
   return (
     <li className={clsx(styles.venue, main && styles.main)} style={animation}>
-      {main && <span className={styles.mainVenueLabel}>{heading}</span>}
+      {main && heading && (
+        <span className={styles.mainVenueLabel}>{heading}</span>
+      )}
       {name}
     </li>
   );
@@ -59,7 +61,11 @@ export const VenueNames = ({
           />
         ))}
       </ul>
-      <TextBlock value={lead} />
+      {lead && (
+        <div className={styles.lead}>
+          <TextBlock value={lead} />
+        </div>
+      )}
       <SimpleCallToAction {...callToAction} />
     </div>
   );
