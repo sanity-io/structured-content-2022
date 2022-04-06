@@ -123,8 +123,7 @@
 }
 
 .callToAction {
-  max-width: var(--max-body-text-width);
-  margin: 0 auto 32px;
+  margin-top: 32px;
 }
 
 @media (--medium-up) {
@@ -149,7 +148,8 @@
   }
 
   .callToAction {
-    margin-top: 48px;
+    margin: 48px auto 0;
+    max-width: var(--max-body-text-width);
   }
 }
 
