@@ -50,7 +50,7 @@ const QUERY = groq`
     "rewrittenArticleSlugs": *[_type == "article"].slug.current,
   }`;
 
-interface ArticleRouteProps {
+interface ArticlesRouteProps {
   data: {
     article: Article;
     home: {
@@ -69,7 +69,7 @@ interface ArticleRouteProps {
   slug: string;
 }
 
-const ArticleRoute = ({
+const ArticlesRoute = ({
   data: {
     article: {
       heading,
@@ -86,7 +86,7 @@ const ArticleRoute = ({
     rewrittenArticleSlugs,
   },
   slug,
-}: ArticleRouteProps) => {
+}: ArticlesRouteProps) => {
   const { people, sessions, venues } = relatedTo || {};
   const hasAsides =
     (Array.isArray(sessions) && sessions.length) ||
@@ -102,7 +102,7 @@ const ArticleRoute = ({
       />
       <header className={styles.header}>
         <Nav
-          currentPath={`/article/${slug}`}
+          currentPath={`/articles/${slug}`}
           ticketsUrl={ticketsUrl}
           items={navItems}
         />
@@ -240,4 +240,4 @@ export const getStaticProps: GetStaticProps = async ({
   return { props: { data, slug } };
 };
 
-export default ArticleRoute;
+export default ArticlesRoute;

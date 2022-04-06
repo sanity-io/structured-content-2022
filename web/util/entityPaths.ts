@@ -13,7 +13,7 @@ export const getEntityPath = (entity?: { _type: string; slug?: Slug }) => {
     case 'route':
       return urlJoin(entity.slug.current, { leadingSlash: true });
     case 'article':
-      return urlJoin('article', entity.slug.current, { leadingSlash: true });
+      return urlJoin('articles', entity.slug.current, { leadingSlash: true });
     case 'person':
       return urlJoin('speakers', entity.slug.current, { leadingSlash: true });
     default:
