@@ -45,9 +45,9 @@ export const VenueNames = ({
   }
 
   return (
-    <div className={styles.venues}>
+    <div className={styles.container}>
       <ul
-        className={clsx(isIntersecting && styles.isIntersecting)}
+        className={clsx(styles.venues, isIntersecting && styles.isIntersecting)}
         ref={wrapperRef}
       >
         {venues?.map((venue, index) => (
