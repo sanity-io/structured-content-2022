@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import sanityLogo from '../../images/sanity_logo_black.svg';
+import sanityLogo from '../../images/sanity_logo_white.svg';
 import instagramLogo from '../../images/instagram_logo_black.svg';
 import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import GridWrapper from '../GridWrapper';
 import styles from './Footer.module.css';
 import { Slug } from '../../types/Slug';
+import urlJoin from "proper-url-join";
 
 interface FooterProps {
   links: {
@@ -26,12 +27,13 @@ export const Footer = ({ links }: FooterProps) => (
           target="_blank"
           rel="noreferrer"
         >
-          <Image src={sanityLogo} alt="Sanity" width={139} height={28} />
+          <Image src={sanityLogo} alt="Sanity" width={162} height={46} />
         </a>
       </div>
 
       <p>Structured Content 2022 is a conference by Sanity</p>
 
+      Inquiries:
       <address>
         <a className={styles.mailLink} href="mailto:confinfo@sanity.io">
           confinfo@sanity.io
@@ -80,7 +82,7 @@ export const Footer = ({ links }: FooterProps) => (
           ?.filter(({ slug }) => slug.current)
           .map(({ name, slug, _id }) => (
             <li key={_id} className={styles.linksItem}>
-              <Link href={`/${slug.current}`}>
+              <Link href={urlJoin(slug.current)}>
                 <a className={styles.linksItemLink}>{name}</a>
               </Link>
             </li>
