@@ -30,6 +30,8 @@ export default {
       name: "venues",
       type: "array",
       title: "Venues",
+      description:
+        "Venues have to be listed in an event document to show up here",
       hidden: ({ parent }) => parent?.type !== "highlighted",
       of: [
         {
