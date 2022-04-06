@@ -5,20 +5,20 @@ import sub from 'date-fns/sub';
 import { format } from 'date-fns-tz';
 import { PortableText, PortableTextComponentProps } from '@portabletext/react';
 import { Fragment } from 'react';
-import type { SimpleCallToAction } from '../../../types/SimpleCallToAction';
+import type { SimpleCallToAction as TSimpleCallToAction } from '../../../types/SimpleCallToAction';
 import type { Ticket, TicketGroup } from '../../../types/Ticket';
 import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import { getCollectionForSelectionType } from '../../../util/entity';
 import GridWrapper from '../../GridWrapper';
 import FeatureCheckmark from '../../FeatureCheckmark';
 import FeatureSection from '../../FeatureSection';
+import SimpleCallToAction from '../../SimpleCallToAction';
 import styles from './Tickets.module.css';
-import ButtonLink from '../../ButtonLink';
 
 interface TicketsProps {
   type: EntitySectionSelection;
   heading: string;
-  callToAction?: SimpleCallToAction;
+  callToAction?: TSimpleCallToAction;
   allTickets: Ticket[];
   tickets?: Ticket[];
 }
@@ -200,13 +200,7 @@ export const Tickets = ({
 
         {callToAction && (
           <div className={styles.callToAction}>
-            <ButtonLink
-              url={
-                callToAction.link?.external ||
-                callToAction.link?.internal?.slug?.current
-              }
-              text={callToAction.text}
-            />
+            <SimpleCallToAction {...callToAction} />
           </div>
         )}
       </section>
