@@ -127,83 +127,89 @@ export const Tickets = ({
 
   return (
     <GridWrapper>
-      {heading && <h2 className={styles.heading}>{heading}</h2>}
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th />
-            {getCollectionForSelectionType(type, allTickets, tickets).map(
-              (ticket) => (
-                <th key={ticket._id} scope="col" className={styles.ticketInfo}>
-                  <strong className={styles.name}>{ticket.type}</strong>
+      <section className={styles.container}>
+        {heading && <h2 className={styles.heading}>{heading}</h2>}
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th />
+              {getCollectionForSelectionType(type, allTickets, tickets).map(
+                (ticket) => (
+                  <th
+                    key={ticket._id}
+                    scope="col"
+                    className={styles.ticketInfo}
+                  >
+                    <strong className={styles.name}>{ticket.type}</strong>
+                    {ticket.description && (
+                      <div className={styles.description}>
+                        <PortableText value={ticket.description} />
+                      </div>
+                    )}
+                    {priceList(ticket)}
+                  </th>
+                )
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {includedTypes.map((includedType) => (
+              <tr key={includedType}>
+                <th className={styles.feature} scope="row">
+                  {includedType}
+                </th>
+                {getCollectionForSelectionType(type, allTickets, tickets).map(
+                  (ticket) => {
+                    const featureIncluded =
+                      ticket.included.includes(includedType);
+                    return (
+                      <td
+                        key={ticket._id}
+                        className={clsx(
+                          styles.featurePresence,
+                          featureIncluded && styles.featureIncluded
+                        )}
+                      >
+                        <FeatureCheckmark included={featureIncluded} />
+                      </td>
+                    );
+                  }
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div className={styles.sections}>
+          {getCollectionForSelectionType(type, allTickets, tickets).map(
+            (ticket) => (
+              <FeatureSection features={ticket.included} key={ticket._id}>
+                <>
+                  <h3 className={styles.name}>{ticket.type}</h3>
                   {ticket.description && (
                     <div className={styles.description}>
                       <PortableText value={ticket.description} />
                     </div>
                   )}
                   {priceList(ticket)}
-                </th>
-              )
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {includedTypes.map((includedType) => (
-            <tr key={includedType}>
-              <th className={styles.feature} scope="row">
-                {includedType}
-              </th>
-              {getCollectionForSelectionType(type, allTickets, tickets).map(
-                (ticket) => {
-                  const featureIncluded =
-                    ticket.included.includes(includedType);
-                  return (
-                    <td
-                      key={ticket._id}
-                      className={clsx(
-                        styles.featurePresence,
-                        featureIncluded && styles.featureIncluded
-                      )}
-                    >
-                      <FeatureCheckmark included={featureIncluded} />
-                    </td>
-                  );
-                }
-              )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <div className={styles.sections}>
-        {getCollectionForSelectionType(type, allTickets, tickets).map(
-          (ticket) => (
-            <FeatureSection features={ticket.included} key={ticket._id}>
-              <>
-                <h3 className={styles.name}>{ticket.type}</h3>
-                {ticket.description && (
-                  <div className={styles.description}>
-                    <PortableText value={ticket.description} />
-                  </div>
-                )}
-                {priceList(ticket)}
-              </>
-            </FeatureSection>
-          )
-        )}
-      </div>
-
-      {callToAction && (
-        <div className={styles.callToAction}>
-          <ButtonLink
-            url={
-              callToAction.link?.external ||
-              callToAction.link?.internal?.slug?.current
-            }
-            text={callToAction.text}
-          />
+                </>
+              </FeatureSection>
+            )
+          )}
         </div>
-      )}
+
+        {callToAction && (
+          <div className={styles.callToAction}>
+            <ButtonLink
+              url={
+                callToAction.link?.external ||
+                callToAction.link?.internal?.slug?.current
+              }
+              text={callToAction.text}
+            />
+          </div>
+        )}
+      </section>
     </GridWrapper>
   );
 };
