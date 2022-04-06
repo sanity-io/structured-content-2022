@@ -56,7 +56,7 @@ interface ArticlesRouteProps {
     home: {
       ticketsUrl: string;
     };
-    navItems: PrimaryNavItem[];
+    navItems?: PrimaryNavItem[];
     footer: {
       links: {
         name: string;

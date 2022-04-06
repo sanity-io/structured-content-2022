@@ -13,14 +13,14 @@ interface NavProps {
   onFrontPage?: boolean;
   currentPath: string;
   ticketsUrl: string;
-  items: PrimaryNavItem[];
+  items?: PrimaryNavItem[];
 }
 
 export const Nav = ({
   onFrontPage,
   currentPath,
   ticketsUrl,
-  items,
+  items = [],
 }: NavProps) => {
   const [menuOpened, setMenuOpened] = useState(false);
   const contentsId = 'nav-menu-contents';
