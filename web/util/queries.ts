@@ -1,5 +1,4 @@
 const LINK = 'internal->{_type, slug}, external, blank';
-
 const FIGURE = '_type, alt, asset';
 const SIMPLE_CALL_TO_ACTION = `text, link{ ${LINK} }`;
 const BLOCK_CONTENT = `
@@ -80,6 +79,16 @@ const SPEAKER = `
   },       
 `;
 
+const SPEAKER_FRONTPAGE = `
+  _id,
+  _type, 
+  slug,
+  photo { ${FIGURE} },
+  name,
+  title,
+  company,
+`;
+
 const SPONSORSHIP = `
   _createdAt,
   _id,
@@ -105,6 +114,13 @@ const SPONSORSHIP = `
   type,
 `;
 
+const PRIMARY_NAV = `
+  *[_type == "navigation" && slug.current == "primary-nav"][0].items[] {
+    label,
+    target { ${LINK} },
+  }
+`;
+
 export {
   ARTICLE_SECTION,
   BLOCK_CONTENT,
@@ -117,4 +133,6 @@ export {
   TICKET,
   SPONSORSHIP,
   SPEAKER,
+  SPEAKER_FRONTPAGE,
+  PRIMARY_NAV,
 };

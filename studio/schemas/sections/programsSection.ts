@@ -9,6 +9,11 @@ export default {
       title: "Section heading",
     },
     {
+      name: "callToAction",
+      type: "simpleCallToAction",
+      title: "Call to action",
+    },
+    {
       name: "type",
       type: "string",
       title: "Section type",

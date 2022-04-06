@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import logo from '../../images/logo.svg';
+import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
+import { getEntityPath } from '../../util/entityPaths';
 import ButtonLink from '../ButtonLink';
 import GridWrapper from '../GridWrapper';
 import MenuItem from './MenuItem';
@@ -11,9 +13,15 @@ interface NavProps {
   onFrontPage?: boolean;
   currentPath: string;
   ticketsUrl: string;
+  items?: PrimaryNavItem[];
 }
 
-export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
+export const Nav = ({
+  onFrontPage,
+  currentPath,
+  ticketsUrl,
+  items = [],
+}: NavProps) => {
   const [menuOpened, setMenuOpened] = useState(false);
   const contentsId = 'nav-menu-contents';
 
@@ -69,34 +77,20 @@ export const Nav = ({ onFrontPage, currentPath, ticketsUrl }: NavProps) => {
             >
               Tickets
             </MenuItem>
-            <MenuItem
-              {...{ currentPath, closeMenu }}
-              href="/program"
-              style={{ animationDelay: '50ms' }}
-            >
-              Program
-            </MenuItem>
-            <MenuItem
-              {...{ currentPath, closeMenu }}
-              href="/sponsorship-information"
-              style={{ animationDelay: '100ms' }}
-            >
-              Sponsorship
-            </MenuItem>
-            <MenuItem
-              {...{ currentPath, closeMenu }}
-              href="/registration-info"
-              style={{ animationDelay: '150ms' }}
-            >
-              Registration
-            </MenuItem>
-            <MenuItem
-              {...{ currentPath, closeMenu }}
-              href="/about"
-              style={{ animationDelay: '200ms' }}
-            >
-              About
-            </MenuItem>
+
+            {items.map(
+              ({ label, target: { external, internal, blank } }, index) => (
+                <MenuItem
+                  key={index}
+                  {...{ closeMenu, currentPath }}
+                  href={external || getEntityPath(internal)}
+                  {...(blank && { target: '_blank', rel: 'noreferrer' })}
+                  style={{ animationDelay: `${(index + 1) * 50}ms` }}
+                >
+                  {label}
+                </MenuItem>
+              )
+            )}
           </ul>
           <div className={styles.ticketButton}>
             <ButtonLink url={ticketsUrl} text="Tickets" openInNewTab={true} />
