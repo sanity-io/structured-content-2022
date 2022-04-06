@@ -1,5 +1,5 @@
 .container {
-  background: var(--color-ui-gray-900);
+  background: var(--color-brand-black);
   color: var(--color-brand-white);
   text-align: center;
   padding: var(--spacing-medium) 0 var(--spacing-large);
@@ -44,7 +44,8 @@
 }
 
 .separator {
-  border-top: 1px solid var(--color-ui-gray-900);
+  border-top: 1px solid;
+  border-color: var(--color-ui-gray-900); /* Chrome doesn't set border color here if using shorthand property */
   width: 100%;
   margin: 0;
   padding: 0;
