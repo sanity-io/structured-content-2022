@@ -20,7 +20,7 @@ const VenueItem = ({ name, main, heading }: VenueItemProps) => {
   return (
     <li className={clsx(styles.venue, main && styles.main)} style={animation}>
       {main && heading && (
-        <span className={styles.mainVenueLabel}>{heading}</span>
+        <span className={styles.mainVenueLabel}>{heading} </span>
       )}
       {name}
     </li>
