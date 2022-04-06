@@ -1,6 +1,7 @@
+import clsx from 'clsx';
+import { parseISO } from 'date-fns';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
-import clsx from 'clsx';
 import urlJoin from 'proper-url-join';
 import Card from '../../components/Card';
 import Hero from '../../components/Hero';
@@ -10,14 +11,14 @@ import MetaTags from '../../components/MetaTags';
 import Nav from '../../components/Nav';
 import TextBlock from '../../components/TextBlock';
 import client from '../../lib/sanity.server';
-import { BLOCK_CONTENT } from '../../util/queries';
 import { formatDate } from '../../util/date';
 import { mainEventId } from '../../util/constants';
-import { Article } from '../../types/Article';
-import { Slug } from '../../types/Slug';
+import { BLOCK_CONTENT, PRIMARY_NAV } from '../../util/queries';
+import type { Article } from '../../types/Article';
+import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
+import type { Slug } from '../../types/Slug';
 import styles from '../app.module.css';
 import articleStyles from './article.module.css';
-import { parseISO } from 'date-fns';
 
 const QUERY = groq`
   {
@@ -38,6 +39,7 @@ const QUERY = groq`
     "home": *[_id == "${mainEventId}"][0] {
       "ticketsUrl": registrationUrl,
     },
+    "navItems": ${PRIMARY_NAV},
     "footer": *[_id == "secondary-nav"][0] {
       "links": tree[].value.reference-> {
         "name": seo.title,
@@ -54,6 +56,7 @@ interface ArticleRouteProps {
     home: {
       ticketsUrl: string;
     };
+    navItems: PrimaryNavItem[];
     footer: {
       links: {
         name: string;
@@ -78,6 +81,7 @@ const ArticleRoute = ({
       relatedTo,
     },
     home: { ticketsUrl },
+    navItems,
     footer,
     rewrittenArticleSlugs,
   },
@@ -97,7 +101,11 @@ const ArticleRoute = ({
         rewrittenArticleSlugs={rewrittenArticleSlugs}
       />
       <header className={styles.header}>
-        <Nav currentPath={`/article/${slug}`} ticketsUrl={ticketsUrl} />
+        <Nav
+          currentPath={`/article/${slug}`}
+          ticketsUrl={ticketsUrl}
+          items={navItems}
+        />
       </header>
       <main>
         <Hero heading={heading} summary={summary}>

@@ -1,5 +1,4 @@
 const LINK = 'internal->{_type, slug}, external, blank';
-
 const FIGURE = '_type, alt, asset';
 const SIMPLE_CALL_TO_ACTION = `text, link{ ${LINK} }`;
 const BLOCK_CONTENT = `
@@ -115,6 +114,13 @@ const SPONSORSHIP = `
   type,
 `;
 
+const PRIMARY_NAV = `
+  *[_type == "navigation" && slug.current == "primary-nav"][0].items[] {
+    label,
+    target { ${LINK} },
+  }
+`;
+
 export {
   ARTICLE_SECTION,
   BLOCK_CONTENT,
@@ -128,4 +134,5 @@ export {
   SPONSORSHIP,
   SPEAKER,
   SPEAKER_FRONTPAGE,
+  PRIMARY_NAV,
 };
