@@ -59,7 +59,7 @@ interface SpeakersRouteProps {
       sessions?: SpeakerSession[];
     };
     ticketsUrl: string;
-    navItems: PrimaryNavItem[];
+    navItems?: PrimaryNavItem[];
     footer: {
       links: {
         name: string;
