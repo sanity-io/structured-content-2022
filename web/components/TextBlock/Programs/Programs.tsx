@@ -28,11 +28,15 @@ export const Programs = ({
   if (type === 'all' || type === 'highlighted') {
     return (
       <GridWrapper>
-        <Accordion
-          baseId={`accordion-${index}`}
-          heading={heading && <h2 className={styles.heading}>{heading}</h2>}
-          items={getCollectionForSelectionType(type, allPrograms, programs).map(
-            (program) => {
+        <section className={styles.container}>
+          {heading && <h2 className={styles.heading}>{heading}</h2>}
+          <Accordion
+            baseId={`accordion-${index}`}
+            items={getCollectionForSelectionType(
+              type,
+              allPrograms,
+              programs
+            ).map((program) => {
               const firstVenue = program?.venues[0];
               const programName = firstVenue?.name || program.internalName;
               const timezone = firstVenue?.timezone || 'UTC';
@@ -94,9 +98,9 @@ export const Programs = ({
                   </div>
                 ),
               };
-            }
-          )}
-        />
+            })}
+          />
+        </section>
       </GridWrapper>
     );
   }

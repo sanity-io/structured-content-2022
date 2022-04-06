@@ -4,7 +4,6 @@ import styles from './Accordion.module.css';
 
 interface AccordionProps {
   baseId: string;
-  heading?: ReactNode;
   items: {
     title: string;
     content: ReactNode | ReactNode[];
@@ -39,9 +38,8 @@ const AccordionSection = ({ title, content, baseId }) => {
   );
 };
 
-export const Accordion = ({ baseId, items, heading }: AccordionProps) => (
-  <div className={styles.container}>
-    {heading}
+export const Accordion = ({ baseId, items }: AccordionProps) => (
+  <>
     {items.map(({ title, content }, index) => (
       <AccordionSection
         key={index}
@@ -50,5 +48,5 @@ export const Accordion = ({ baseId, items, heading }: AccordionProps) => (
         baseId={`${baseId}-${index}`}
       />
     ))}
-  </div>
+  </>
 );
