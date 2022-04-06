@@ -1,6 +1,5 @@
 .heading {
-  max-width: var(--max-body-text-width);
-  margin: 0 auto 32px;
+  margin: 0 0 32px;
 }
 
 .table {
@@ -127,7 +126,8 @@
 
 @media (--medium-up) {
   .heading {
-    margin-bottom: 48px;
+    margin: 0 auto 48px;
+    max-width: var(--max-body-text-width);
   }
 
   .sections {
