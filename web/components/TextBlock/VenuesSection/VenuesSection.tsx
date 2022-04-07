@@ -1,16 +1,16 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 import { PortableTextComponentProps } from '@portabletext/react';
-import { useRef } from "react";
-import { useAnimationProperties } from "../../../hooks/useAnimationProperties";
-import useIntersection from "../../../hooks/useIntersection";
+import { useRef } from 'react';
+import { useAnimationProperties } from '../../../hooks/useAnimationProperties';
+import useIntersection from '../../../hooks/useIntersection';
 import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import type { Section } from '../../../types/Section';
 import { SimpleCallToAction as TSimpleCallToAction } from '../../../types/SimpleCallToAction';
 import type { Venue } from '../../../types/Venue';
 import { getCollectionForSelectionType } from '../../../util/entity';
 import GridWrapper from '../../GridWrapper';
-import SimpleCallToAction from "../../SimpleCallToAction";
-import TextBlock from "../index";
+import SimpleCallToAction from '../../SimpleCallToAction';
+import TextBlock from '../index';
 import styles from './VenuesSection.module.css';
 
 type VenuesSectionProps = {
@@ -40,7 +40,6 @@ const VenueItem = ({ name, main, heading }: VenueItemProps) => {
   );
 };
 
-
 export const VenuesSection = ({
   value: { type, allVenues, venues, heading, lead, callToAction },
 }: PortableTextComponentProps<VenuesSectionProps>) => {
@@ -62,7 +61,10 @@ export const VenuesSection = ({
     <GridWrapper>
       <div className={styles.container}>
         <ul
-          className={clsx(styles.venues, isIntersecting && styles.isIntersecting)}
+          className={clsx(
+            styles.venues,
+            isIntersecting && styles.isIntersecting
+          )}
           ref={wrapperRef}
         >
           {venues?.map((venue, index) => (
