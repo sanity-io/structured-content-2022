@@ -1,10 +1,12 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
+import clsx from 'clsx';
 import urlJoin from 'proper-url-join';
 import Footer from '../../components/Footer';
 import GridWrapper from '../../components/GridWrapper';
 import MetaTags from '../../components/MetaTags';
 import Nav from '../../components/Nav';
+import SessionSpeakers from '../../components/SessionSpeakers';
 import Tag from '../../components/Tag';
 import TextBlock from '../../components/TextBlock';
 import { imageUrlFor } from '../../lib/sanity';
@@ -144,6 +146,8 @@ const SessionRoute = ({
     currentSessionInProgram?._id,
     sessions
   );
+  const hasHighlightedSpeakers =
+    speakers?.length === 1 || speakers?.length === 2;
   return (
     <>
       <MetaTags title={title} description="" currentPath={`/session/${slug}`} />
@@ -155,7 +159,12 @@ const SessionRoute = ({
         />
       </header>
       <main>
-        <div className={programStyles.top}>
+        <div
+          className={clsx(
+            programStyles.top,
+            hasHighlightedSpeakers && programStyles.hasHighlightedSpeakers
+          )}
+        >
           <GridWrapper>
             <div className={programStyles.topContainer}>
               <div className={programStyles.sessionInfo}>
@@ -183,9 +192,17 @@ const SessionRoute = ({
                 )}
               </div>
 
-              {speakers && (
-                <SpeakerList speakers={speakers} />
-              )}
+              {speakers &&
+                (hasHighlightedSpeakers ? (
+                  <div className={programStyles.highlightedSpeakers}>
+                    <SessionSpeakers
+                      photo={speakers[0]?.person?.photo}
+                      photo2={speakers[1]?.person?.photo}
+                    />
+                  </div>
+                ) : (
+                  <SpeakerList speakers={speakers} />
+                ))}
             </div>
           </GridWrapper>
         </div>
