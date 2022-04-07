@@ -4,28 +4,30 @@ import { groq } from 'next-sanity';
 import type { Person } from '../../types/Person';
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
+import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
 import type { Section } from '../../types/Section';
+import Card from '../../components/Card';
+import Footer from '../../components/Footer';
+import GridWrapper from '../../components/GridWrapper';
+import HighlightedSpeakerBlock from '../../components/HighlightedSpeakerBlock';
 import MetaTags from '../../components/MetaTags';
 import Nav from '../../components/Nav';
-import GridWrapper from '../../components/GridWrapper';
-import Footer from '../../components/Footer';
+import SessionCard from '../../components/SessionCard';
+import TextBlock from '../../components/TextBlock';
 import client from '../../lib/sanity.server';
 import { mainEventId, newsletterSharedSectionId } from '../../util/constants';
-import TextBlock from '../../components/TextBlock';
-import Card from '../../components/Card';
-import HighlightedSpeakerBlock from '../../components/HighlightedSpeakerBlock';
-import SessionCard from '../../components/SessionCard';
 import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
-import { SPEAKER } from '../../util/queries';
+import { sessionStart } from '../../util/session';
+import { PRIMARY_NAV, SPEAKER } from '../../util/queries';
 import styles from '../app.module.css';
 import speakerStyles from './speakers.module.css';
-import { sessionStart } from '../../util/session';
 
 const QUERY = groq`
   {
     "speaker": *[_type == "person" && slug.current == $slug && count(*[references(^._id)]) > 0][0] { ${SPEAKER} },
     "ticketsUrl": *[_id == "${mainEventId}"][0].registrationUrl,
+    "navItems": ${PRIMARY_NAV},
     "footer": *[_id == "secondary-nav"][0] {
       "links": tree[].value.reference-> {
         "name": seo.title,
@@ -57,6 +59,7 @@ interface SpeakersRouteProps {
       sessions?: SpeakerSession[];
     };
     ticketsUrl: string;
+    navItems?: PrimaryNavItem[];
     footer: {
       links: {
         name: string;
@@ -101,6 +104,7 @@ const SpeakersRoute = ({
   data: {
     speaker: { bio, photo, name, pronouns, title, company, social, sessions },
     ticketsUrl,
+    navItems,
     footer,
     newsletterSection,
   },
@@ -113,7 +117,11 @@ const SpeakersRoute = ({
       currentPath={`speakers/${slug}`}
     />
     <header className={styles.header}>
-      <Nav currentPath={`/speakers/${slug}`} ticketsUrl={ticketsUrl} />
+      <Nav
+        currentPath={`/speakers/${slug}`}
+        ticketsUrl={ticketsUrl}
+        items={navItems}
+      />
     </header>
     <main className={speakerStyles.container}>
       <GridWrapper>

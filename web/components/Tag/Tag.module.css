@@ -1,0 +1,8 @@
+.tag {
+  display: inline-block;
+  background-color: var(--color-brand-orange);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font: var(--font-ui-xs-medium);
+  letter-spacing: var(--letter-spacing-ui-xs);
+}

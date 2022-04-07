@@ -1,16 +1,22 @@
+.container {
+  margin: 80px 0;
+}
+
+.heading {
+  margin: 0 0 32px;
+}
+
 .table {
   display: none;
   width: 100%;
   border-spacing: 8px;
   font: var(--font-body-small-medium);
   letter-spacing: var(--letter-spacing-body-small);
-  margin: 96px 0;
 }
 
 .sections {
   font: var(--font-body-small-medium);
   letter-spacing: var(--letter-spacing-body-small);
-  margin: 48px 0;
 }
 
 .ticketInfo {
@@ -116,9 +122,18 @@
   background-color: var(--color-brand-yellow-light);
 }
 
+.callToAction {
+  margin-top: 32px;
+}
+
 @media (--medium-up) {
-  .sections {
-    margin: 64px 0;
+  .container {
+    margin: 96px 0;
+  }
+
+  .heading {
+    margin: 0 auto 48px;
+    max-width: var(--max-body-text-width);
   }
 
   .priceList {
@@ -131,9 +146,22 @@
     margin-top: 0;
     flex-basis: calc(50% - 4px);
   }
+
+  .callToAction {
+    margin: 48px auto 0;
+    max-width: var(--max-body-text-width);
+  }
 }
 
 @media (--large-up) {
+  .container {
+    margin: 128px 0;
+  }
+
+  .heading {
+    margin-bottom: 64px;
+  }
+
   .table {
     display: table;
   }
@@ -148,5 +176,9 @@
 
   .group {
     margin-top: 8px;
+  }
+
+  .callToAction {
+    margin-top: 64px;
   }
 }

@@ -4,6 +4,16 @@ export default {
   title: "Speakers section",
   fields: [
     {
+      name: "heading",
+      type: "string",
+      title: "Ticket table heading",
+    },
+    {
+      name: "callToAction",
+      type: "simpleCallToAction",
+      title: "Call to action",
+    },
+    {
       name: "type",
       type: "string",
       title: "Section type",
@@ -28,8 +38,7 @@ export default {
           options: {
             // Just include people that's part of a session, and that hasn't been selected already
             filter: ({ parent }) => ({
-              filter:
-                '_id in *[_type == "session"].speakers[].person._ref && !(_id in $current)',
+              filter: "!(_id in $current)",
               params: {
                 current: parent?.map(({ _ref }) => _ref),
               },

@@ -4,6 +4,21 @@ export default {
   title: "Venues section",
   fields: [
     {
+      name: "heading",
+      type: "string",
+      title: "Ticket table heading",
+    },
+    {
+      name: "lead",
+      type: "simpleBlockContent",
+      title: "Lead",
+    },
+    {
+      name: "callToAction",
+      type: "simpleCallToAction",
+      title: "Call to action",
+    },
+    {
       name: "type",
       type: "string",
       title: "Section type",
@@ -20,6 +35,8 @@ export default {
       name: "venues",
       type: "array",
       title: "Venues",
+      description:
+        "Venues have to be listed in an event document to show up here",
       hidden: ({ parent }) => parent?.type !== "highlighted",
       of: [
         {
