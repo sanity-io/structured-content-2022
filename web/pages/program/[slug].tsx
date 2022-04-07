@@ -11,6 +11,7 @@ import { imageUrlFor } from '../../lib/sanity';
 import client from '../../lib/sanity.server';
 import { mainEventId } from '../../util/constants';
 import { PRIMARY_NAV } from '../../util/queries';
+import type { Person } from '../../types/Person';
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
 import {
@@ -89,6 +90,41 @@ interface SessionRouteProps {
   slug: string;
 }
 
+type SpeakerListInput = {
+  role: string;
+  person: Person;
+}[];
+
+const SpeakerList = ({ speakers }: { speakers: SpeakerListInput }) => (
+  <ul className={programStyles.speakers}>
+    {speakers.map(
+      ({ role, person: { _id, name, title, company, photo, slug } }) => (
+        <li key={_id} className={programStyles.speakerItem}>
+          <Link href={urlJoin('/speakers', slug.current)}>
+            <a className={programStyles.speakerLink}>
+              {photo && (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={imageUrlFor(photo).size(64, 80).saturation(-100).url()}
+                  width={64}
+                  height={80}
+                  alt={name}
+                  className={programStyles.speakerImage}
+                />
+              )}
+              <div>
+                <div className={programStyles.role}>{role}</div>
+                <strong className={programStyles.speakerName}>{name}</strong>
+                <div>{[title, company].filter(Boolean).join(', ')}</div>
+              </div>
+            </a>
+          </Link>
+        </li>
+      )
+    )}
+  </ul>
+);
+
 const SessionRoute = ({
   data: {
     session: { title, longDescription, speakers, type },
@@ -148,43 +184,7 @@ const SessionRoute = ({
               </div>
 
               {speakers && (
-                <ul className={programStyles.speakers}>
-                  {speakers.map(
-                    ({
-                      role,
-                      person: { _id, name, title, company, photo, slug },
-                    }) => (
-                      <li key={_id} className={programStyles.speakerItem}>
-                        <Link href={urlJoin('/speakers', slug.current)}>
-                          <a className={programStyles.speakerLink}>
-                            {photo && (
-                              /* eslint-disable-next-line @next/next/no-img-element */
-                              <img
-                                src={imageUrlFor(photo)
-                                  .size(64, 80)
-                                  .saturation(-100)
-                                  .url()}
-                                width={64}
-                                height={80}
-                                alt={name}
-                                className={programStyles.speakerImage}
-                              />
-                            )}
-                            <div>
-                              <div className={programStyles.role}>{role}</div>
-                              <strong className={programStyles.speakerName}>
-                                {name}
-                              </strong>
-                              <div>
-                                {[title, company].filter(Boolean).join(', ')}
-                              </div>
-                            </div>
-                          </a>
-                        </Link>
-                      </li>
-                    )
-                  )}
-                </ul>
+                <SpeakerList speakers={speakers} />
               )}
             </div>
           </GridWrapper>
