@@ -1,40 +1,59 @@
 import clsx from 'clsx';
-import type { Figure } from '../../types/Figure';
+import type { Person } from '../../types/Person';
 import { imageUrlFor } from '../../lib/sanity';
 import { useRandomShape } from '../../hooks/useRandomShape';
 import styles from './SessionSpeakers.module.css';
 
 interface SessionSpeakersProps {
-  photo?: Figure;
-  photo2?: Figure;
+  speaker1?: Person;
+  speaker2?: Person;
 }
 
 const Shape = () => (
   <div className={clsx(styles.shape, useRandomShape())} aria-hidden="true" />
 );
 
-const Speaker = ({ photo, variant }) => (
-  /* eslint-disable-next-line @next/next/no-img-element */
-  <img
-    src={imageUrlFor(photo).size(256, 390).saturation(-100).url()}
-    alt={photo.alt || ''}
-    className={clsx(styles.image, styles[variant])}
-    width={256}
-    height={390}
-  />
+const Speaker = ({
+  speaker,
+  variant,
+}: {
+  speaker: Person;
+  variant?: string;
+}) => (
+  <figure className={clsx(styles.speaker, variant && styles[variant])}>
+    {speaker.photo && (
+      /* eslint-disable-next-line @next/next/no-img-element */
+      <img
+        src={imageUrlFor(speaker.photo).size(256, 390).saturation(-100).url()}
+        alt={speaker.photo.alt || ''}
+        className={styles.image}
+        width={256}
+        height={390}
+      />
+    )}
+    <figcaption className={styles.caption}>
+      {speaker.name && (
+        <strong className={styles.speakerName}>{speaker.name}</strong>
+      )}
+      {[speaker.title, speaker.company].filter(Boolean).join(', ')}
+    </figcaption>
+  </figure>
 );
 
-export const SessionSpeakers = ({ photo, photo2 }: SessionSpeakersProps) => (
-  <div className={clsx(styles.container, photo2 && styles.hasTwoSpeakers)}>
+export const SessionSpeakers = ({
+  speaker1,
+  speaker2,
+}: SessionSpeakersProps) => (
+  <div className={clsx(styles.container, speaker2 && styles.hasTwoSpeakers)}>
     <div className={styles.column1}>
       <Shape />
-      {photo ? <Speaker photo={photo} /> : <Shape />}
-      {photo2 && <Speaker photo={photo2} variant="nonDesktop" />}
+      {speaker1 ? <Speaker speaker={speaker1} /> : <Shape />}
+      {speaker2 && <Speaker speaker={speaker2} variant="nonDesktop" />}
       <Shape />
     </div>
-    <div className={styles.column2} aria-hidden={photo2 ? null : 'true'}>
+    <div className={styles.column2} aria-hidden={speaker2 ? null : 'true'}>
       <Shape />
-      {photo2 && <Speaker photo={photo2} variant="desktopOnly" />}
+      {speaker2 && <Speaker speaker={speaker2} variant="desktopOnly" />}
       <Shape />
       <Shape />
     </div>
