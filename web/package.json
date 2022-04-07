@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "cd .. && husky install web/.husky"
   },
   "dependencies": {
     "@portabletext/react": "^1.0.2",
@@ -24,16 +25,22 @@
     "react-gtm-module": "^2.0.11"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/node": "^14.18.12",
     "@types/proper-url-join": "^2.1.1",
     "@types/react": "^17.0.38",
     "autoprefixer": "^10.4.2",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.8",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.7",
     "postcss": "^8.4.5",
     "postcss-custom-media": "^8.0.0",
     "postcss-custom-properties": "^12.1.4",
-    "prettier": "^2.5.1",
+    "prettier": "^2.6.1",
     "typescript": "^4.5.5"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,css,md}": "prettier --write"
   }
 }
