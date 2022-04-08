@@ -18,7 +18,7 @@ const Speaker = ({
   variant,
 }: {
   speaker: Person;
-  variant?: string;
+  variant?: 'desktopOnly' | 'nonDesktop';
 }) => (
   <figure className={clsx(styles.speaker, variant && styles[variant])}>
     {speaker.photo && (
