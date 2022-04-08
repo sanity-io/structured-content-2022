@@ -79,7 +79,7 @@ const SPEAKER = `
   },       
 `;
 
-const SPEAKER_FRONTPAGE = `
+const SPEAKERS_SECTION_SPEAKER = `
   _id,
   _type, 
   slug,
@@ -133,6 +133,6 @@ export {
   TICKET,
   SPONSORSHIP,
   SPEAKER,
-  SPEAKER_FRONTPAGE,
+  SPEAKERS_SECTION_SPEAKER,
   PRIMARY_NAV,
 };
