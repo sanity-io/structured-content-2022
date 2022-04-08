@@ -4,6 +4,7 @@
 
 .introContent {
   margin-bottom: 48px;
+  text-align: center;
 }
 
 .heading {
@@ -18,12 +19,14 @@
 }
 
 .speakerItem {
-  margin-bottom: 16px;
+  margin: 0 auto 16px;
+  width: 350px;
+  max-width: 100%;
 }
 
 .speakerLink {
   text-decoration: none;
-  display: inline-block;
+  display: block;
   margin: 0 -16px;
   padding: 16px;
   border-radius: 16px;
@@ -64,6 +67,7 @@
   }
 
   .introContent {
+    text-align: left;
     margin: 0 auto 64px;
     max-width: var(--max-body-text-width);
   }
@@ -77,6 +81,10 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: var(--grid-medium-gutter);
+  }
+
+  .speakerItem {
+    width: auto;
   }
 
   .speakerLink {
