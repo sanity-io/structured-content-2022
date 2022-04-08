@@ -46,8 +46,8 @@ const SHARED_SECTIONS = `
     ...,
     heading,
     callToAction { ${SIMPLE_CALL_TO_ACTION} }, 
-    speakers[]-> { ${SPEAKERS_SECTION_SPEAKER} },
-    "allSpeakers": *[_type == "person"] { ${SPEAKERS_SECTION_SPEAKER} },
+    speakers[]-> { ${SPEAKERS_SECTION_SPEAKER} } | order(name),
+    "allSpeakers": *[_type == "person"] { ${SPEAKERS_SECTION_SPEAKER} } | order(name),
   },
   _type == "sessionsSection" => {
     ...,
