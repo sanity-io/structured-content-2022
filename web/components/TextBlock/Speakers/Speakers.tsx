@@ -23,10 +23,12 @@ export const Speakers = ({
 }: PortableTextComponentProps<SpeakersProps>) => (
   <section className={styles.container}>
     <GridWrapper>
-      <div className={styles.introContent}>
-        {heading && <h2 className={styles.heading}>{heading}</h2>}
-        <SimpleCallToAction {...callToAction} />
-      </div>
+      {(heading || callToAction) && (
+        <div className={styles.introContent}>
+          {heading && <h2 className={styles.heading}>{heading}</h2>}
+          <SimpleCallToAction {...callToAction} />
+        </div>
+      )}
       <ul className={styles.speakerList}>
         {getCollectionForSelectionType(type, allSpeakers, speakers).map(
           (speaker) => (
