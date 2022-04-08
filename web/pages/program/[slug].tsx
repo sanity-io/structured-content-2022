@@ -198,7 +198,7 @@ const SessionRoute = ({
                 (hasHighlightedSpeakers ? (
                   <div className={programStyles.highlightedSpeakers}>
                     <SessionSpeakers
-                      speaker1={speakers[0]?.person}
+                      speaker1={speakers[0].person}
                       speaker2={speakers[1]?.person}
                     />
                   </div>
