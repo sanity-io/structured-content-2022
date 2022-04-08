@@ -18,6 +18,10 @@
   max-width: var(--max-body-text-width);
 }
 
+.highlightedSpeakers {
+  margin: 80px calc(-1 * var(--grid-half-gutter)) 0;
+}
+
 .speakers {
   margin: 80px auto 0;
   max-width: var(--max-body-text-width);
@@ -94,6 +98,14 @@
     margin-bottom: 32px;
   }
 
+  .sessionTitle {
+    font: var(--font-display-xl);
+  }
+
+  .highlightedSpeakers {
+    margin: 96px calc(-1 * var(--grid-medium-gutter)) 0;
+  }
+
   .speakers {
     margin-top: 96px;
   }
@@ -106,9 +118,14 @@
   }
 }
 
-@media (--large-up) {
+@media (--session-large-up) {
   .top {
     padding: 88px 0 80px;
+  }
+
+  .top.hasHighlightedSpeakers {
+    position: relative;
+    min-height: 630px;
   }
 
   .topContainer {
@@ -118,14 +135,26 @@
     align-items: center;
   }
 
+  .top.hasHighlightedSpeakers .topContainer {
+    margin-top: 40px;
+  }
+
   .sessionInfo {
     text-align: left;
     grid-column: 2 / span 6;
   }
 
   .sessionTitle {
-    font: var(--font-display-xl);
     margin: 0 0 32px;
+  }
+
+  .highlightedSpeakers {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 16px;
+    height: 630px;
+    overflow: hidden;
   }
 
   .speakers {

@@ -1,16 +1,19 @@
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
+import clsx from 'clsx';
 import urlJoin from 'proper-url-join';
 import Footer from '../../components/Footer';
 import GridWrapper from '../../components/GridWrapper';
 import MetaTags from '../../components/MetaTags';
 import Nav from '../../components/Nav';
+import SessionSpeakers from '../../components/SessionSpeakers';
 import Tag from '../../components/Tag';
 import TextBlock from '../../components/TextBlock';
 import { imageUrlFor } from '../../lib/sanity';
 import client from '../../lib/sanity.server';
 import { mainEventId } from '../../util/constants';
 import { PRIMARY_NAV } from '../../util/queries';
+import type { Person } from '../../types/Person';
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
 import {
@@ -89,6 +92,43 @@ interface SessionRouteProps {
   slug: string;
 }
 
+interface SpeakerListProps {
+  speakers: {
+    role: string;
+    person: Person;
+  }[];
+}
+
+const SpeakerList = ({ speakers }: SpeakerListProps) => (
+  <ul className={programStyles.speakers}>
+    {speakers.map(
+      ({ role, person: { _id, name, title, company, photo, slug } }) => (
+        <li key={_id} className={programStyles.speakerItem}>
+          <Link href={urlJoin('/speakers', slug.current)}>
+            <a className={programStyles.speakerLink}>
+              {photo && (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={imageUrlFor(photo).size(64, 80).saturation(-100).url()}
+                  width={64}
+                  height={80}
+                  alt={name}
+                  className={programStyles.speakerImage}
+                />
+              )}
+              <div>
+                <div className={programStyles.role}>{role}</div>
+                <strong className={programStyles.speakerName}>{name}</strong>
+                <div>{[title, company].filter(Boolean).join(', ')}</div>
+              </div>
+            </a>
+          </Link>
+        </li>
+      )
+    )}
+  </ul>
+);
+
 const SessionRoute = ({
   data: {
     session: { title, longDescription, speakers, type },
@@ -108,6 +148,8 @@ const SessionRoute = ({
     currentSessionInProgram?._id,
     sessions
   );
+  const hasHighlightedSpeakers =
+    speakers?.length === 1 || speakers?.length === 2;
   return (
     <>
       <MetaTags title={title} description="" currentPath={`/session/${slug}`} />
@@ -119,7 +161,12 @@ const SessionRoute = ({
         />
       </header>
       <main>
-        <div className={programStyles.top}>
+        <div
+          className={clsx(
+            programStyles.top,
+            hasHighlightedSpeakers && programStyles.hasHighlightedSpeakers
+          )}
+        >
           <GridWrapper>
             <div className={programStyles.topContainer}>
               <div className={programStyles.sessionInfo}>
@@ -147,45 +194,17 @@ const SessionRoute = ({
                 )}
               </div>
 
-              {speakers && (
-                <ul className={programStyles.speakers}>
-                  {speakers.map(
-                    ({
-                      role,
-                      person: { _id, name, title, company, photo, slug },
-                    }) => (
-                      <li key={_id} className={programStyles.speakerItem}>
-                        <Link href={urlJoin('/speakers', slug.current)}>
-                          <a className={programStyles.speakerLink}>
-                            {photo && (
-                              /* eslint-disable-next-line @next/next/no-img-element */
-                              <img
-                                src={imageUrlFor(photo)
-                                  .size(64, 80)
-                                  .saturation(-100)
-                                  .url()}
-                                width={64}
-                                height={80}
-                                alt={name}
-                                className={programStyles.speakerImage}
-                              />
-                            )}
-                            <div>
-                              <div className={programStyles.role}>{role}</div>
-                              <strong className={programStyles.speakerName}>
-                                {name}
-                              </strong>
-                              <div>
-                                {[title, company].filter(Boolean).join(', ')}
-                              </div>
-                            </div>
-                          </a>
-                        </Link>
-                      </li>
-                    )
-                  )}
-                </ul>
-              )}
+              {speakers &&
+                (hasHighlightedSpeakers ? (
+                  <div className={programStyles.highlightedSpeakers}>
+                    <SessionSpeakers
+                      speaker1={speakers[0].person}
+                      speaker2={speakers[1]?.person}
+                    />
+                  </div>
+                ) : (
+                  <SpeakerList speakers={speakers} />
+                ))}
             </div>
           </GridWrapper>
         </div>
