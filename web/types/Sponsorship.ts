@@ -6,7 +6,6 @@ export type Sponsorship = {
   _rev: string;
   _type: 'sponsorship';
   _updatedAt: string;
-  available: number;
   benefits?: {
     benefit: Benefit;
     number?: number;
