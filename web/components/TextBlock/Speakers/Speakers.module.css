@@ -1,10 +1,8 @@
 .container {
-  padding: 80px 0;
-  background: var(--color-brand-yellow-light);
+  margin: 64px 0;
 }
 
 .introContent {
-  text-align: center;
   margin-bottom: 48px;
 }
 
@@ -14,26 +12,20 @@
 }
 
 .speakerList {
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   list-style: none;
-  max-width: 1062px;
 }
 
 .speakerItem {
-  border-bottom: 2px solid var(--color-brand-black);
-}
-
-.speakerItem:first-child {
-  border-top: 2px solid var(--color-brand-black);
+  margin-bottom: 16px;
 }
 
 .speakerLink {
   text-decoration: none;
-  display: flex;
-  align-items: center;
+  display: inline-block;
   margin: 0 -16px;
-  padding: 0 16px;
+  padding: 16px;
   border-radius: 16px;
 }
 
@@ -45,81 +37,75 @@
   background: var(--color-brand-yellow);
 }
 
-.speakerLink::after {
-  content: '->';
-  white-space: nowrap;
-  letter-spacing: normal; /* Chromium disables ligatures otherwise */
-  flex: auto;
-  text-align: right;
-}
-
 .speakerPhoto {
-  margin: 16px 24px 16px 0;
+  margin-bottom: 20px;
   border-radius: 16px;
-  width: 64px;
+  width: 100%;
   height: auto;
+  max-width: 350px;
+  vertical-align: top;
 }
 
 .speakerDetails {
-  margin: 24px 0;
-  font: var(--font-body-base-medium);
+  font: var(--font-ui-sm-medium);
+  letter-spacing: var(--letter-spacing-ui-sm);
 }
 
 .speakerName {
-  font: var(--font-display-xxs);
+  font: 700 28px/1.1 'National 2 Narrow', sans-serif;
   letter-spacing: normal;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 @media (--medium-up) {
   .container {
-    padding: 96px 0;
+    margin: 64px 0 96px;
   }
 
   .introContent {
-    margin-bottom: 64px;
+    margin: 0 auto 64px;
+    max-width: var(--max-body-text-width);
   }
 
   .heading {
+    font: var(--font-display-base);
     margin-bottom: 32px;
   }
 
-  .speakerName {
-    font: var(--font-display-xs);
+  .speakerList {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--grid-medium-gutter);
+  }
+
+  .speakerLink {
+    display: block;
+    margin: 0;
+    padding: 24px;
+    border-radius: 32px;
+  }
+
+  .speakerPhoto {
+    max-width: none;
   }
 }
 
 @media (--large-up) {
   .container {
-    padding: 128px 0;
+    margin: 96px 0 128px;
   }
 
   .heading {
     font: var(--font-display-lg);
   }
 
-  .speakerLink {
-    margin: 0 -32px;
-    padding: 0 32px;
-  }
-
-  .speakerLink::after {
-    font-size: 40px;
-    line-height: 1;
-  }
-
-  .speakerPhoto {
-    margin: 31px 48px 32px 0;
-    width: 193px;
-  }
-
-  .speakerDetails {
-    margin: 80px 0;
-    font: var(--font-body-large-medium);
+  .speakerList {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--grid-gutter);
   }
 
   .speakerName {
-    font: var(--font-display-base);
+    font: var(--font-display-sm);
   }
 }
