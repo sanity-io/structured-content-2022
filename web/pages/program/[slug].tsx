@@ -92,12 +92,14 @@ interface SessionRouteProps {
   slug: string;
 }
 
-type SpeakerListInput = {
-  role: string;
-  person: Person;
-}[];
+interface SpeakerListProps {
+  speakers: {
+    role: string;
+    person: Person;
+  }[];
+}
 
-const SpeakerList = ({ speakers }: { speakers: SpeakerListInput }) => (
+const SpeakerList = ({ speakers }: SpeakerListProps) => (
   <ul className={programStyles.speakers}>
     {speakers.map(
       ({ role, person: { _id, name, title, company, photo, slug } }) => (
