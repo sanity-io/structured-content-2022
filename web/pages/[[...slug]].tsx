@@ -28,6 +28,7 @@ import {
   QUESTION_AND_ANSWER_COLLECTION_SECTION,
   SIMPLE_CALL_TO_ACTION,
   SPEAKER_FRONTPAGE,
+  SPONSOR,
   SPONSORSHIP,
   TEXT_AND_IMAGE_SECTION,
   TICKET,
@@ -64,8 +65,8 @@ const SHARED_SECTIONS = `
   },
   _type == "sponsorsSection" => {
     ...,
-    sponsors[]->,
-    "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]->,
+    sponsors[]->{ ${SPONSOR} },
+    "allSponsorships": *[_id == "${mainEventId}"][0].sponsorships[]-> { ${SPONSORSHIP} },
   },
   _type == "sponsorshipsSection" => {
     ...,

@@ -89,6 +89,16 @@ const SPEAKER_FRONTPAGE = `
   company,
 `;
 
+const SPONSOR = `
+  _id,
+  _type,
+  _key,
+  callToActionURL,
+  image,
+  title,
+  url,
+`;
+
 const SPONSORSHIP = `
   _createdAt,
   _id,
@@ -111,6 +121,7 @@ const SPONSORSHIP = `
   },
   price,
   type,
+  sponsors[]->{ ${SPONSOR} },
 `;
 
 const PRIMARY_NAV = `
@@ -131,6 +142,7 @@ export {
   TEXT_AND_IMAGE_SECTION,
   TICKET,
   SPONSORSHIP,
+  SPONSOR,
   SPEAKER,
   SPEAKER_FRONTPAGE,
   PRIMARY_NAV,
