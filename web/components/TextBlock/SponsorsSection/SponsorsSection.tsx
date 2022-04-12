@@ -53,7 +53,6 @@ export const SponsorsSection = ({
   }
 
   if (type === 'all') {
-    console.log(allSponsorships);
     return (
       <GridWrapper>
         <div className={styles.root}>
