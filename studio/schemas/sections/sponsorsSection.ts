@@ -48,4 +48,9 @@ export default {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: "type",
+    },
+  },
 };

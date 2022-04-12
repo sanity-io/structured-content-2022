@@ -37,15 +37,17 @@ export const SponsorsSection = ({
 
     return (
       <GridWrapper>
-        <section className={styles.sponsorLevel}>
-          <ul className={styles.sponsors}>
-            {sponsors.map((sponsor) => (
-              <li key={sponsor._id} className={styles.sponsor}>
-                <Sponsor sponsor={sponsor} />
-              </li>
-            ))}
-          </ul>
-        </section>
+        <div className={styles.root}>
+          <section className={styles.sponsorLevel}>
+            <ul className={styles.sponsors}>
+              {sponsors.map((sponsor) => (
+                <li key={sponsor._id} className={styles.sponsor}>
+                  <Sponsor sponsor={sponsor} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
       </GridWrapper>
     );
   }
@@ -53,20 +55,22 @@ export const SponsorsSection = ({
   if (type === 'all') {
     return (
       <GridWrapper>
-        {allSponsorships
-          .filter((sponsorship) => sponsorship.sponsors?.length > 0)
-          .map(({ _id, type, sponsors }) => (
-            <section key={_id} className={styles.sponsorLevel}>
-              <Heading type="h3">{type}</Heading>
-              <ul className={styles.sponsors}>
-                {sponsors.map((sponsor) => (
-                  <li key={sponsor._key} className={styles.sponsor}>
-                    <Sponsor sponsor={sponsor as TSponsor} type={type} />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+        <div className={styles.root}>
+          {allSponsorships
+            .filter((sponsorship) => sponsorship.sponsors?.length > 0)
+            .map(({ _id, type, sponsors }) => (
+              <section key={_id} className={styles.sponsorLevel}>
+                <Heading type="h3">{type}</Heading>
+                <ul className={styles.sponsors}>
+                  {sponsors.map((sponsor) => (
+                    <li key={sponsor._key} className={styles.sponsor}>
+                      <Sponsor sponsor={sponsor as TSponsor} type={type} />
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+        </div>
       </GridWrapper>
     );
   }
