@@ -9,12 +9,13 @@ import styles from './SponsorsSection.module.css';
 
 type SponsorsSectionProps = {
   type: EntitySectionSelection;
+  heading: string;
   allSponsorships: Sponsorship[];
   sponsors?: TSponsor[];
 };
 
 export const SponsorsSection = ({
-  value: { type, allSponsorships, sponsors },
+  value: { type, heading, allSponsorships, sponsors },
 }: PortableTextComponentProps<SponsorsSectionProps>) => {
   if (!Array.isArray(allSponsorships) || allSponsorships.length === 0) {
     console.error(
@@ -37,7 +38,7 @@ export const SponsorsSection = ({
 
     return (
       <GridWrapper>
-        <div className={styles.root}>
+        <div className={styles.container}>
           <section className={styles.sponsorLevel}>
             <ul className={styles.sponsors}>
               {sponsors.map((sponsor) => (
@@ -55,7 +56,8 @@ export const SponsorsSection = ({
   if (type === 'all') {
     return (
       <GridWrapper>
-        <div className={styles.root}>
+        <div className={styles.container}>
+          {heading && <h2 className={styles.heading}>{heading}</h2>}
           {allSponsorships
             .filter((sponsorship) => sponsorship.sponsors?.length > 0)
             .map(({ _id, type, sponsors }) => (
