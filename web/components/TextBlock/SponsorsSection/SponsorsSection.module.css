@@ -1,3 +1,7 @@
+.root {
+  margin-bottom: 128px;
+}
+
 .sponsorLevel {
   text-align: center;
   background: var(--color-ui-gray-100);
