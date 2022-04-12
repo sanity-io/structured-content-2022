@@ -58,7 +58,6 @@ export default {
       of: [{ type: "reference", to: [{ type: "sponsor" }] }],
       validation: (Rule) => [
         Rule.unique(),
-        Rule.min(1),
         Rule.max(Rule.valueOfField("available")),
       ],
     },
