@@ -1,5 +1,7 @@
 import clsx from 'clsx';
+import Link from 'next/link';
 import type { Person } from '../../types/Person';
+import { getEntityPath } from '../../util/entityPaths';
 import { imageUrlFor } from '../../lib/sanity';
 import { useRandomShape } from '../../hooks/useRandomShape';
 import styles from './SessionSpeakers.module.css';
@@ -20,24 +22,31 @@ const Speaker = ({
   speaker: Person;
   variant?: 'desktopOnly' | 'nonDesktop';
 }) => (
-  <figure className={clsx(styles.speaker, variant && styles[variant])}>
-    {speaker.photo && (
-      /* eslint-disable-next-line @next/next/no-img-element */
-      <img
-        src={imageUrlFor(speaker.photo).size(256, 390).saturation(-100).url()}
-        alt={speaker.photo.alt || ''}
-        className={styles.image}
-        width={256}
-        height={390}
-      />
-    )}
-    <figcaption className={styles.caption}>
-      {speaker.name && (
-        <strong className={styles.speakerName}>{speaker.name}</strong>
-      )}
-      {[speaker.title, speaker.company].filter(Boolean).join(', ')}
-    </figcaption>
-  </figure>
+  <Link href={getEntityPath(speaker)}>
+    <a>
+      <figure className={clsx(styles.speaker, variant && styles[variant])}>
+        {speaker.photo && (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={imageUrlFor(speaker.photo)
+              .size(256, 390)
+              .saturation(-100)
+              .url()}
+            alt={speaker.photo.alt || ''}
+            className={styles.image}
+            width={256}
+            height={390}
+          />
+        )}
+        <figcaption className={styles.caption}>
+          {speaker.name && (
+            <strong className={styles.speakerName}>{speaker.name}</strong>
+          )}
+          {[speaker.title, speaker.company].filter(Boolean).join(', ')}
+        </figcaption>
+      </figure>
+    </a>
+  </Link>
 );
 
 export const SessionSpeakers = ({
