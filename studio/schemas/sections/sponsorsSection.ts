@@ -48,4 +48,10 @@ export default {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: "heading",
+      subtitle: "type",
+    },
+  },
 };

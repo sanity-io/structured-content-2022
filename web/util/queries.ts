@@ -89,13 +89,22 @@ const SPEAKERS_SECTION_SPEAKER = `
   company,
 `;
 
+const SPONSOR = `
+  _id,
+  _type,
+  _key,
+  callToActionURL,
+  image,
+  title,
+  url,
+`;
+
 const SPONSORSHIP = `
   _createdAt,
   _id,
   _rev,
   _type,
   _updatedAt,
-  available,
   benefits[] {
     _key,
     _type,
@@ -112,6 +121,7 @@ const SPONSORSHIP = `
   },
   price,
   type,
+  sponsors[]->{ ${SPONSOR} },
 `;
 
 const PRIMARY_NAV = `
@@ -132,6 +142,7 @@ export {
   TEXT_AND_IMAGE_SECTION,
   TICKET,
   SPONSORSHIP,
+  SPONSOR,
   SPEAKER,
   SPEAKERS_SECTION_SPEAKER,
   PRIMARY_NAV,
