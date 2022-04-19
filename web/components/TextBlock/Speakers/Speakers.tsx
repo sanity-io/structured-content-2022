@@ -23,10 +23,12 @@ export const Speakers = ({
 }: PortableTextComponentProps<SpeakersProps>) => (
   <section className={styles.container}>
     <GridWrapper>
-      <div className={styles.introContent}>
-        {heading && <h2 className={styles.heading}>{heading}</h2>}
-        <SimpleCallToAction {...callToAction} />
-      </div>
+      {(heading || callToAction) && (
+        <div className={styles.introContent}>
+          {heading && <h2 className={styles.heading}>{heading}</h2>}
+          <SimpleCallToAction {...callToAction} />
+        </div>
+      )}
       <ul className={styles.speakerList}>
         {getCollectionForSelectionType(type, allSpeakers, speakers).map(
           (speaker) => (
@@ -37,12 +39,12 @@ export const Speakers = ({
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img
                       src={imageUrlFor(speaker.photo)
-                        .size(193, 243)
+                        .size(410, 410)
                         .saturation(-100)
                         .url()}
                       alt={speaker.photo.alt || ''}
-                      width={193}
-                      height={243}
+                      width={410}
+                      height={410}
                       className={styles.speakerPhoto}
                     />
                   )}
