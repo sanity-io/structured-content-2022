@@ -13,7 +13,7 @@ import { imageUrlFor } from '../../lib/sanity';
 import client from '../../lib/sanity.server';
 import { mainEventId } from '../../util/constants';
 import { getEntityPath } from '../../util/entityPaths';
-import { PRIMARY_NAV, SPEAKERS_SECTION_SPEAKER } from '../../util/queries';
+import { PRIMARY_NAV, SPEAKER } from '../../util/queries';
 import type { Person } from '../../types/Person';
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
@@ -37,7 +37,7 @@ const QUERY = groq`
       longDescription,
       speakers[] {
         role,
-        person-> { ${SPEAKERS_SECTION_SPEAKER} },
+        person-> { ${SPEAKER} },
       },
       type,
     },

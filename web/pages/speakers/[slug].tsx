@@ -19,13 +19,13 @@ import { mainEventId, newsletterSharedSectionId } from '../../util/constants';
 import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import { sessionStart } from '../../util/session';
-import { PRIMARY_NAV, SPEAKER } from '../../util/queries';
+import { PRIMARY_NAV, SPEAKER_WITH_SESSIONS } from '../../util/queries';
 import styles from '../app.module.css';
 import speakerStyles from './speakers.module.css';
 
 const QUERY = groq`
   {
-    "speaker": *[_type == "person" && slug.current == $slug && count(*[references(^._id)]) > 0][0] { ${SPEAKER} },
+    "speaker": *[_type == "person" && slug.current == $slug && count(*[references(^._id)]) > 0][0] { ${SPEAKER_WITH_SESSIONS} },
     "ticketsUrl": *[_id == "${mainEventId}"][0].registrationUrl,
     "navItems": ${PRIMARY_NAV},
     "footer": *[_id == "secondary-nav"][0] {
