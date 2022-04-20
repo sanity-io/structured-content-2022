@@ -23,7 +23,7 @@ export default {
       name: "slug",
       type: "slug",
       title: "Slug",
-      description: "/article/:slug",
+      description: "/articles/:slug",
       options: {
         source: "heading",
       },

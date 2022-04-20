@@ -35,7 +35,7 @@ module.exports = {
 
     const rewrites = articleSlugs.filter(Boolean).map((slug) => ({
       source: `/${slug}`,
-      destination: `/article/${slug}`,
+      destination: `/articles/${slug}`,
     }));
 
     console.log(`Rewriting ${rewrites.length} article slugs:`);
