@@ -46,7 +46,7 @@ const TICKET = `
   included,
   type,
 `;
-const SPEAKER = `
+const SPEAKER_WITH_SESSIONS = `
   bio,
   company,
   name,
@@ -79,7 +79,7 @@ const SPEAKER = `
   },       
 `;
 
-const SPEAKERS_SECTION_SPEAKER = `
+const SPEAKER = `
   _id,
   _type, 
   slug,
@@ -143,7 +143,7 @@ export {
   TICKET,
   SPONSORSHIP,
   SPONSOR,
+  SPEAKER_WITH_SESSIONS,
   SPEAKER,
-  SPEAKERS_SECTION_SPEAKER,
   PRIMARY_NAV,
 };

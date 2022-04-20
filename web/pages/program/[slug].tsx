@@ -12,7 +12,8 @@ import TextBlock from '../../components/TextBlock';
 import { imageUrlFor } from '../../lib/sanity';
 import client from '../../lib/sanity.server';
 import { mainEventId } from '../../util/constants';
-import { PRIMARY_NAV } from '../../util/queries';
+import { getEntityPath } from '../../util/entityPaths';
+import { PRIMARY_NAV, SPEAKER } from '../../util/queries';
 import type { Person } from '../../types/Person';
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
@@ -36,7 +37,7 @@ const QUERY = groq`
       longDescription,
       speakers[] {
         role,
-        person-> { _id, name, title, company, photo, slug },
+        person-> { ${SPEAKER} },
       },
       type,
     },
@@ -101,10 +102,14 @@ interface SpeakerListProps {
 
 const SpeakerList = ({ speakers }: SpeakerListProps) => (
   <ul className={programStyles.speakers}>
-    {speakers.map(
-      ({ role, person: { _id, name, title, company, photo, slug } }) => (
+    {speakers.map((speaker) => {
+      const {
+        role,
+        person: { _id, name, title, company, photo },
+      } = speaker;
+      return (
         <li key={_id} className={programStyles.speakerItem}>
-          <Link href={urlJoin('/speakers', slug.current)}>
+          <Link href={getEntityPath(speaker.person)}>
             <a className={programStyles.speakerLink}>
               {photo && (
                 /* eslint-disable-next-line @next/next/no-img-element */
@@ -124,8 +129,8 @@ const SpeakerList = ({ speakers }: SpeakerListProps) => (
             </a>
           </Link>
         </li>
-      )
-    )}
+      );
+    })}
   </ul>
 );
 
