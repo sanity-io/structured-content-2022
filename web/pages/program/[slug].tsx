@@ -148,11 +148,32 @@ const SessionRoute = ({
     currentSessionInProgram?._id,
     sessions
   );
+  const hasAssociatedProgram = startDateTime && currentSessionInProgram;
   const hasHighlightedSpeakers =
     speakers?.length === 1 || speakers?.length === 2;
+  const formattedStartDate = formatDateWithDay(start, mainVenueTimezone, ', ');
+  const formattedTimezone = getNonLocationTimezone(
+    start,
+    mainVenueTimezone,
+    true
+  );
+  const formattedDuration =
+    hasAssociatedProgram &&
+    formatTimeRange(
+      start,
+      currentSessionInProgram?.duration,
+      mainVenueTimezone
+    );
+  const description = hasAssociatedProgram
+    ? `${formattedStartDate} ${formattedDuration} ${formattedTimezone}`
+    : '';
   return (
     <>
-      <MetaTags title={title} description="" currentPath={`/session/${slug}`} />
+      <MetaTags
+        title={title}
+        description={description}
+        currentPath={`/session/${slug}`}
+      />
       <header className={styles.header}>
         <Nav
           currentPath={`/session/${slug}`}
@@ -177,18 +198,11 @@ const SessionRoute = ({
                 )}
                 <h1 className={programStyles.sessionTitle}>{title}</h1>
 
-                {startDateTime && currentSessionInProgram && (
+                {hasAssociatedProgram && (
                   <>
+                    <div>{formattedStartDate}</div>
                     <div>
-                      {formatDateWithDay(start, mainVenueTimezone, ', ')}
-                    </div>
-                    <div>
-                      {formatTimeRange(
-                        start,
-                        currentSessionInProgram.duration,
-                        mainVenueTimezone
-                      )}{' '}
-                      {getNonLocationTimezone(start, mainVenueTimezone, true)}
+                      {formattedDuration} {formattedTimezone}
                     </div>
                   </>
                 )}
