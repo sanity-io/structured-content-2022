@@ -173,9 +173,10 @@ const SessionRoute = ({
                   ({ time, label, timezone, date }) => (
                     <p key={time}>
                       <strong>{label}</strong>
-                      {/* should these be <time> tags? */}
-                      <span style={{ display: 'block' }}>{date}</span>
-                      <span style={{ display: 'block' }}>
+                      <span className={programStyles.sessionVenueDateTime}>
+                        {date}
+                      </span>
+                      <span className={programStyles.sessionVenueDateTime}>
                         {time} {timezone}
                       </span>
                     </p>

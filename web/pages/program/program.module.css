@@ -18,6 +18,10 @@
   max-width: var(--max-body-text-width);
 }
 
+.sessionVenueDateTime {
+  display: block;
+}
+
 .highlightedSpeakers {
   margin: 80px calc(-1 * var(--grid-half-gutter)) 0;
 }
