@@ -30,12 +30,15 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
         <FakeItem tablet desktop />
         <FakeItem divider mobile tablet desktop />
         <FakeItem tablet desktop />
-        <FakeItem tablet desktop />
+
+        <Item href="/speakers">Speakers</Item>
+
         <FakeItem tablet desktop />
         <FakeItem mobile tablet desktop />
 
         <Item href="/registration-info">Registration</Item>
 
+        <FakeItem mobile />
         <FakeItem divider mobile tablet desktop />
 
         <Item href="/about">About</Item>
