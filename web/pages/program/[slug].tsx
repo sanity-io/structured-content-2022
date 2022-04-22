@@ -135,7 +135,11 @@ const SessionRoute = ({
   const matchingSessionsInPrograms = sessionTimingDetailsForMatchingPrograms(
     programs,
     _id
-  );
+  ).map(({ label, ...rest }) => ({
+    // Ad-hoc override for the SF venue, for this specific view only
+    label: label === 'San Francisco' ? 'San Francisco & Virtual' : label,
+    ...rest,
+  }));
   return (
     <>
       <MetaTags title={title} description="" currentPath={`/session/${slug}`} />
