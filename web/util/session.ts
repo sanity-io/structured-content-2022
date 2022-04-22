@@ -46,15 +46,11 @@ export const sessionTimingDetailsForMatchingPrograms = (
   programs
     .map((program) => ({
       program,
-      sessionIndex: program.sessions.findIndex(
-        // TODO: would this be cleaner if we found the session instead of the index? (but commit first before refactoring)
-        (session) => session.session?._id === sessionId
-      ),
+      session: program.sessions.find((s) => s.session?._id === sessionId),
     }))
-    .filter((match) => match.sessionIndex !== -1)
-    .map(({ program: { sessions, startDateTime, venues }, sessionIndex }) => {
+    .filter((entry) => Boolean(entry.session))
+    .map(({ program: { sessions, startDateTime, venues }, session }) => {
       const [{ name, timezone }] = venues;
-      const session = sessions[sessionIndex];
       const start = sessionStart(
         startDateTime,
         session.session._id,
