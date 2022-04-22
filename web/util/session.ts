@@ -3,6 +3,7 @@ import type { Session } from '../types/Session';
 import type { Program, ProgramSession } from '../types/Program';
 import {
   formatDateWithDay,
+  formatTimeDuration,
   formatTimeRange,
   getNonLocationTimezone,
 } from './date';
@@ -40,6 +41,7 @@ const getDuration = ({ session, duration, durationOverride }: ProgramSession) =>
  * - the Program's associated Venue name (using the first entry in the Program's Venues array)
  * - the Session's date (based on the Session's start time)
  * - the Session's time range (accounting for any duration overrides)
+ * - the Session's duration
  * - the Session's timezone
  */
 export const sessionTimingDetailsForMatchingPrograms = (
@@ -63,10 +65,14 @@ export const sessionTimingDetailsForMatchingPrograms = (
       );
 
       const [{ name, timezone }] = venues;
+      const startDate = parseISO(startDateTime);
+      const duration = getDuration(session);
       return {
         label: name,
-        date: formatDateWithDay(parseISO(startDateTime), timezone, ', '),
-        time: formatTimeRange(start, getDuration(session), timezone),
+        rawDate: startDateTime,
+        date: formatDateWithDay(startDate, timezone, ', '),
+        time: formatTimeRange(start, duration, timezone),
+        duration: formatTimeDuration(startDate, duration),
         timezone: getNonLocationTimezone(start, timezone, true),
       };
     });

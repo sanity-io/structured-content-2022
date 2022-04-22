@@ -23,6 +23,8 @@ import type { Session } from '../../types/Session';
 import { sessionTimingDetailsForMatchingPrograms } from '../../util/session';
 import styles from '../app.module.css';
 import programStyles from './program.module.css';
+import { formatTimeDuration } from '../../util/date';
+import { parseISO } from 'date-fns';
 
 const QUERY = groq`
   {
@@ -170,15 +172,21 @@ const SessionRoute = ({
                 <h1 className={programStyles.sessionTitle}>{title}</h1>
 
                 {matchingSessionsInPrograms.map(
-                  ({ time, label, timezone, date }) => (
-                    <p key={time}>
+                  ({ label, time, timezone, rawDate, date, duration }) => (
+                    <p key={label}>
                       <strong>{label}</strong>
-                      <span className={programStyles.sessionVenueDateTime}>
+                      <time
+                        dateTime={rawDate}
+                        className={programStyles.sessionVenueDateTime}
+                      >
                         {date}
-                      </span>
-                      <span className={programStyles.sessionVenueDateTime}>
+                      </time>
+                      <time
+                        dateTime={duration}
+                        className={programStyles.sessionVenueDateTime}
+                      >
                         {time} {timezone}
-                      </span>
+                      </time>
                     </p>
                   )
                 )}
