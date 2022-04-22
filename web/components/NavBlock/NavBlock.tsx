@@ -35,10 +35,11 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
 
         <FakeItem tablet desktop />
         <FakeItem mobile tablet desktop />
+        <FakeItem divider mobile />
+        <FakeItem mobile />
 
         <Item href="/registration-info">Registration</Item>
 
-        <FakeItem mobile />
         <FakeItem divider mobile tablet desktop />
 
         <Item href="/about">About</Item>
