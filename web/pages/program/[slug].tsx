@@ -2,6 +2,7 @@ import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import clsx from 'clsx';
 import urlJoin from 'proper-url-join';
+import Link from 'next/link';
 import Footer from '../../components/Footer';
 import GridWrapper from '../../components/GridWrapper';
 import MetaTags from '../../components/MetaTags';
@@ -15,23 +16,13 @@ import { mainEventId } from '../../util/constants';
 import { getEntityPath } from '../../util/entityPaths';
 import { PRIMARY_NAV, PROGRAM, SPEAKER } from '../../util/queries';
 import type { Person } from '../../types/Person';
+import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
+import type { Program } from '../../types/Program';
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
-import {
-  formatDateWithDay,
-  formatTimeRange,
-  getNonLocationTimezone,
-} from '../../util/date';
-import {
-  sessionTimingDetailsForMatchingPrograms,
-  sessionStart,
-} from '../../util/session';
+import { sessionTimingDetailsForMatchingPrograms } from '../../util/session';
 import styles from '../app.module.css';
 import programStyles from './program.module.css';
-import Link from 'next/link';
-import { PrimaryNavItem } from '../../types/PrimaryNavItem';
-import { Venue } from '../../types/Venue';
-import { Program } from '../../types/Program';
 
 const QUERY = groq`
   {
@@ -57,19 +48,6 @@ const QUERY = groq`
         _id,
       }
     },
-    "timeInfo": *[_id == "${mainEventId}"][0].venues[0]-> {
-      "mainVenueTimezone": timezone,
-      "currentSessionInProgram": *[_type == "program" && references(^._id)][0].sessions[] { 
-        session-> 
-      }[session.slug.current == $slug][0].session { _id, duration },
-      "mainVenueSessions": *[_type == "program" && references(^._id)][0] {
-        startDateTime,
-        "sessions": *[_id == ^._id].sessions[] {
-          "duration": coalesce(duration, session->.duration),
-          "_id": session->._id,
-        },
-      }
-    },  
     "programs": *[_type == "program"] { ${PROGRAM} },
   }`;
 
@@ -147,20 +125,10 @@ const SessionRoute = ({
     home: { ticketsUrl },
     navItems,
     footer,
-    timeInfo: {
-      mainVenueTimezone,
-      currentSessionInProgram,
-      mainVenueSessions: { startDateTime, sessions },
-    },
     programs,
   },
   slug,
 }: SessionRouteProps) => {
-  const start = sessionStart(
-    startDateTime,
-    currentSessionInProgram?._id,
-    sessions
-  );
   const hasHighlightedSpeakers =
     speakers?.length === 1 || speakers?.length === 2;
 
@@ -194,22 +162,6 @@ const SessionRoute = ({
                   </div>
                 )}
                 <h1 className={programStyles.sessionTitle}>{title}</h1>
-
-                {startDateTime && currentSessionInProgram && (
-                  <>
-                    <div>
-                      {formatDateWithDay(start, mainVenueTimezone, ', ')}
-                    </div>
-                    <div>
-                      {formatTimeRange(
-                        start,
-                        currentSessionInProgram.duration,
-                        mainVenueTimezone
-                      )}{' '}
-                      {getNonLocationTimezone(start, mainVenueTimezone, true)}
-                    </div>
-                  </>
-                )}
 
                 {matchingSessionsInPrograms.map(
                   ({ time, label, timezone, date }) => (
