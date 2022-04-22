@@ -67,7 +67,6 @@
   }
 
   .introContent {
-    text-align: left;
     margin: 0 auto 64px;
     max-width: var(--max-body-text-width);
   }
