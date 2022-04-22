@@ -6,6 +6,7 @@ export type Program = {
   internalName: string;
   sessions: {
     duration?: number;
+    durationOverride?: number;
     _key: string;
     _type: 'padding' | 'slot';
     session?: Session;

@@ -13,7 +13,7 @@ import { imageUrlFor } from '../../lib/sanity';
 import client from '../../lib/sanity.server';
 import { mainEventId } from '../../util/constants';
 import { getEntityPath } from '../../util/entityPaths';
-import { PRIMARY_NAV, SPEAKER } from '../../util/queries';
+import { PRIMARY_NAV, PROGRAM, SPEAKER } from '../../util/queries';
 import type { Person } from '../../types/Person';
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
@@ -22,11 +22,16 @@ import {
   formatTimeRange,
   getNonLocationTimezone,
 } from '../../util/date';
-import { sessionStart } from '../../util/session';
+import {
+  sessionTimingDetailsForMatchingPrograms,
+  sessionStart,
+} from '../../util/session';
 import styles from '../app.module.css';
 import programStyles from './program.module.css';
 import Link from 'next/link';
 import { PrimaryNavItem } from '../../types/PrimaryNavItem';
+import { Venue } from '../../types/Venue';
+import { Program } from '../../types/Program';
 
 const QUERY = groq`
   {
@@ -65,6 +70,7 @@ const QUERY = groq`
         },
       }
     },  
+    "programs": *[_type == "program"] { ${PROGRAM} },
   }`;
 
 interface SessionRouteProps {
@@ -89,6 +95,7 @@ interface SessionRouteProps {
         sessions: Pick<Session, '_id' | 'duration'>[];
       };
     };
+    programs: Program[];
   };
   slug: string;
 }
@@ -136,7 +143,7 @@ const SpeakerList = ({ speakers }: SpeakerListProps) => (
 
 const SessionRoute = ({
   data: {
-    session: { title, longDescription, speakers, type },
+    session: { title, longDescription, speakers, type, _id },
     home: { ticketsUrl },
     navItems,
     footer,
@@ -145,6 +152,7 @@ const SessionRoute = ({
       currentSessionInProgram,
       mainVenueSessions: { startDateTime, sessions },
     },
+    programs,
   },
   slug,
 }: SessionRouteProps) => {
@@ -155,6 +163,11 @@ const SessionRoute = ({
   );
   const hasHighlightedSpeakers =
     speakers?.length === 1 || speakers?.length === 2;
+
+  const matchingSessionsInPrograms = sessionTimingDetailsForMatchingPrograms(
+    programs,
+    _id
+  );
   return (
     <>
       <MetaTags title={title} description="" currentPath={`/session/${slug}`} />
@@ -196,6 +209,19 @@ const SessionRoute = ({
                       {getNonLocationTimezone(start, mainVenueTimezone, true)}
                     </div>
                   </>
+                )}
+
+                {matchingSessionsInPrograms.map(
+                  ({ time, label, timezone, date }) => (
+                    <p key={time}>
+                      <strong>{label}</strong>
+                      {/* should these be <time> tags? */}
+                      <span style={{ display: 'block' }}>{date}</span>
+                      <span style={{ display: 'block' }}>
+                        {time} {timezone}
+                      </span>
+                    </p>
+                  )
                 )}
               </div>
 

@@ -1,5 +1,11 @@
 import { addMinutes, parseISO } from 'date-fns';
-import { Session } from '../types/Session';
+import type { Session } from '../types/Session';
+import type { Program } from '../types/Program';
+import {
+  formatDateWithDay,
+  formatTimeRange,
+  getNonLocationTimezone,
+} from './date';
 
 const minutesFromProgramStart = (
   sessions: Pick<Session, 'duration'>[],
@@ -25,3 +31,48 @@ export const sessionStart = (
     sessionIndex > -1 ? minutesFromProgramStart(sessions, sessionIndex) : 0;
   return addMinutes(start, sessionStartOffset);
 };
+
+/* Given all Programs, finds the Programs that contain the Session (matching on _id).
+ * For each match, returns:
+ * - the Program's associated Venue name (using the first entry in the Program's Venues array)
+ * - the Session's date (based on the Session's start time)
+ * - the Session's time range (accounting for any duration overrides)
+ * - the Session's timezone
+ */
+export const sessionTimingDetailsForMatchingPrograms = (
+  programs: Program[],
+  sessionId: string
+) =>
+  programs
+    .map((program) => ({
+      program,
+      sessionIndex: program.sessions.findIndex(
+        // TODO: would this be cleaner if we found the session instead of the index? (but commit first before refactoring)
+        (session) => session.session?._id === sessionId
+      ),
+    }))
+    .filter((match) => match.sessionIndex !== -1)
+    .map(({ program: { sessions, startDateTime, venues }, sessionIndex }) => {
+      const [{ name, timezone }] = venues;
+      const session = sessions[sessionIndex];
+      const start = sessionStart(
+        startDateTime,
+        session.session._id,
+        sessions.map(({ session, duration, durationOverride }) => ({
+          ...session,
+          duration: durationOverride ?? duration ?? session?.duration ?? 0,
+        }))
+      );
+      return {
+        label: name,
+        date: formatDateWithDay(parseISO(startDateTime), timezone, ', '),
+        time: formatTimeRange(
+          start,
+          session.durationOverride ??
+            session.duration ??
+            session.session.duration,
+          timezone
+        ),
+        timezone: getNonLocationTimezone(start, timezone, true),
+      };
+    });
