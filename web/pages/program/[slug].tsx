@@ -48,7 +48,9 @@ const QUERY = groq`
         _id,
       }
     },
-    "programs": *[_type == "program"] { ${PROGRAM} },
+    "programs": *[_id == "${mainEventId}"].venues[]-> {
+      "program": *[_type == "program" && references(^._id)] { ${PROGRAM} }
+    }["program"][],
   }`;
 
 interface SessionRouteProps {
