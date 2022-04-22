@@ -23,8 +23,6 @@ import type { Session } from '../../types/Session';
 import { sessionTimingDetailsForMatchingPrograms } from '../../util/session';
 import styles from '../app.module.css';
 import programStyles from './program.module.css';
-import { formatTimeDuration } from '../../util/date';
-import { parseISO } from 'date-fns';
 
 const QUERY = groq`
   {
