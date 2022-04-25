@@ -14,6 +14,7 @@ import { getCollectionForSelectionType } from '../../../util/entity';
 import { getEntityPath } from '../../../util/entityPaths';
 import { getDuration, sessionStart } from '../../../util/session';
 import { imageUrlFor } from '../../../lib/sanity';
+import GridWrapper from '../../GridWrapper';
 import VenueNav from '../../VenueNav';
 import styles from './Programs.module.css';
 
@@ -66,7 +67,9 @@ export const Programs = ({
         </div>
 
         <section className={styles.container}>
-          {heading && <h2 className={styles.heading}>{heading}</h2>}
+          <GridWrapper>
+            {heading && <h2 className={styles.heading}>{heading}</h2>}
+          </GridWrapper>
 
           {Object.keys(sessionsPerDay).map((day) => (
             <Fragment key={day}>
