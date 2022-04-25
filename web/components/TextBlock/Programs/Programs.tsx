@@ -122,6 +122,7 @@ export const Programs = ({
                           .map(({ person }) => (
                             <Link key={person._id} href={getEntityPath(person)}>
                               <a className={styles.speaker}>
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                   className={styles.speakerImage}
                                   src={imageUrlFor(person.photo)
