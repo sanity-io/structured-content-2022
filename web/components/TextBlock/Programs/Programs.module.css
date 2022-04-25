@@ -5,71 +5,87 @@
 }
 
 .container {
-  margin: 80px 0;
+  margin-top: 68px;
 }
 
 .heading {
   margin: 0 0 32px;
 }
 
+.dayContainer {
+  background: var(--color-brand-orange);
+  padding: 24px 20px;
+}
+
 .dayHeader {
-  font: var(--font-body-small-bold);
+  font: var(--font-display-xxs);
   letter-spacing: var(--letter-spacing-body-small);
-  margin: 32px 0;
+  margin: 0;
 }
 
-.dayHeader.first {
-  margin-top: 0;
+.dayLocation {
+  font: var(--font-body-base-medium);
 }
 
-.sessionItem {
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--color-material-gray-300);
-  margin-bottom: 24px;
-  font: var(--font-ui-sm-medium);
-  letter-spacing: var(--letter-spacing-ui-sm);
+.sessions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.sessionItem:last-child {
-  margin-bottom: 0;
+.session {
+  padding: 32px 20px;
+  border-top: 1px solid black;
 }
 
-.sessionDuration {
-  font: inherit;
-  margin: 0 0 16px;
+.session:last-of-type {
+  border-bottom: 1px solid black;
+}
+
+.sessionTitleLink {
+  text-decoration: none;
+}
+
+.sessionTitleLink:hover {
+  text-decoration: underline;
+}
+
+.sessionTitle {
+  font: var(--font-display-xxs);
+  letter-spacing: var(--letter-spacing-body-small);
+  margin-top: 24px;
+  margin-bottom: 20px;
+}
+
+.speaker {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.speaker:not(:first-of-type) {
+  margin-top: 8px;
+}
+
+.speaker:hover {
+  text-decoration: underline;
+}
+
+.speakerImage {
+  border-radius: 4px;
+  margin-right: 12px;
+}
+
+.speakerName {
+  font: var(--font-ui-xs-semi);
+}
+
+.speakerTitle {
+  font: var(--font-ui-xs);
 }
 
 @media (--medium-up) {
-  .container {
-    margin: 96px auto;
-    max-width: var(--max-body-text-width);
-  }
-
-  .heading {
-    margin-bottom: 48px;
-  }
-
-  .dayHeader {
-    margin: 48px 0;
-  }
-
-  .sessionItem {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 32px;
-  }
-
-  .sessionDuration {
-    margin-bottom: 0;
-  }
 }
 
 @media (--large-up) {
-  .container {
-    margin: 128px auto;
-  }
-
-  .heading {
-    margin-bottom: 64px;
-  }
 }

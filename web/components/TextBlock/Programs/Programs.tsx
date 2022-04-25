@@ -1,17 +1,19 @@
-import clsx from 'clsx';
-import { addMinutes, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
+import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import type { PortableTextComponentProps } from '@portabletext/react';
 import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import type { Program } from '../../../types/Program';
-import { getCollectionForSelectionType } from '../../../util/entity';
+import { partition } from '../../../util/array';
 import {
   formatDateWithDay,
-  formatTime,
+  formatTimeRange,
   getNonLocationTimezone,
 } from '../../../util/date';
-import Accordion from '../../Accordion';
-import GridWrapper from '../../GridWrapper';
+import { getCollectionForSelectionType } from '../../../util/entity';
+import { getEntityPath } from '../../../util/entityPaths';
+import { getDuration, sessionStart } from '../../../util/session';
+import { imageUrlFor } from '../../../lib/sanity';
 import VenueNav from '../../VenueNav';
 import styles from './Programs.module.css';
 
@@ -22,94 +24,132 @@ type ProgramsProps = {
   programs?: Program[];
 };
 
+// Add an _id field to 'padding'-type sessions and normalize duration
+// in order to calculate start/end offsets for all sessions
+const mapSessionDurationAndIds = (program: Program) =>
+  program.sessions.map((session) => ({
+    ...session,
+    duration: getDuration(session),
+    _id: session?.session?._id ?? session._key,
+  }));
+
 export const Programs = ({
   value: { type, heading, allPrograms, programs },
-  index,
 }: PortableTextComponentProps<ProgramsProps>) => {
   const collection = getCollectionForSelectionType(type, allPrograms, programs);
   const venues = collection?.map((program) => program.venues).flat();
-  const [activeVenue, setActiveVenue] = useState(venues[0]);
+  const [activeProgram, setActiveProgram] = useState<Program>(collection?.[0]);
+
+  const onVenueClick = (clickedVenue) => {
+    const venue = collection?.find(({ venues }) =>
+      venues?.find((v) => v._id === clickedVenue._id)
+    );
+    setActiveProgram(venue);
+  };
 
   if (type === 'all' || type === 'highlighted') {
+    const sessionsPerDay = partition(activeProgram.sessions, (session) => {
+      const sessions = mapSessionDurationAndIds(activeProgram);
+      const id = session.session?._id ?? session._key;
+      const date = sessionStart(activeProgram.startDateTime, id, sessions);
+      return formatDateWithDay(date, activeProgram.venues[0].timezone, ', ');
+    });
+
     return (
-      <GridWrapper>
+      <>
         <div className={styles.venueNavContainer}>
           <VenueNav
             venues={venues}
-            activeVenue={activeVenue}
-            onVenueClick={setActiveVenue}
+            activeVenue={activeProgram?.venues[0]}
+            onVenueClick={onVenueClick}
           />
         </div>
+
         <section className={styles.container}>
           {heading && <h2 className={styles.heading}>{heading}</h2>}
-          <Accordion
-            baseId={`accordion-${index}`}
-            items={collection.map((program) => {
-              const firstVenue = program?.venues[0];
-              const programName = firstVenue?.name || program.internalName;
-              const timezone = firstVenue?.timezone || 'UTC';
-              let currentTime = parseISO(program.startDateTime);
-              const formattedTimezone = getNonLocationTimezone(
-                currentTime,
-                timezone
-              );
-              /* This should perhaps be outputting a list instead, i.e. a <dl>
-               * or <ul>, rather than a lot of <h4>s. Not done due to dev time
-               * constraints.
-               */
-              return {
-                title: `${programName} - ${formattedTimezone}`,
-                content: (
-                  <div key={program._id}>
-                    <h3 className={clsx(styles.dayHeader, styles.first)}>
-                      {formatDateWithDay(
-                        parseISO(program.startDateTime),
-                        timezone
-                      )}
-                    </h3>
-                    {program.sessions.map((session, index) => {
-                      const Session = (
-                        <Fragment key={index}>
-                          {session._type === 'padding' ? (
-                            <h3 className={styles.dayHeader}>
-                              {formatDateWithDay(
-                                addMinutes(currentTime, session.duration),
-                                timezone
-                              )}
-                            </h3>
-                          ) : (
-                            <>
-                              <div className={styles.sessionItem}>
-                                <h4 className={styles.sessionDuration}>
-                                  {formatTime(currentTime, timezone)} -{' '}
-                                  {formatTime(
-                                    addMinutes(
-                                      currentTime,
-                                      session.session.duration
-                                    ),
-                                    timezone
-                                  )}
-                                </h4>
-                                <div>{session.session.title}</div>
-                              </div>
-                            </>
-                          )}
-                        </Fragment>
-                      );
 
-                      currentTime = addMinutes(
-                        currentTime,
-                        session.session?.duration || session.duration
-                      );
-                      return Session;
-                    })}
-                  </div>
-                ),
-              };
-            })}
-          />
+          {Object.keys(sessionsPerDay).map((day) => (
+            <Fragment key={day}>
+              <div className={styles.dayContainer}>
+                <h3 className={styles.dayHeader}>{day}</h3>
+                <div className={styles.dayLocation}>
+                  {activeProgram?.venues[0].name} (
+                  {getNonLocationTimezone(
+                    parseISO(activeProgram?.startDateTime),
+                    activeProgram?.venues[0]?.timezone,
+                    true
+                  )}
+                  )
+                </div>
+              </div>
+
+              <ul className={styles.sessions}>
+                {sessionsPerDay[day]
+                  .filter((session) => session.session)
+                  .map((session) => {
+                    const start = sessionStart(
+                      activeProgram.startDateTime,
+                      session.session._id,
+                      mapSessionDurationAndIds(activeProgram)
+                    );
+                    return (
+                      <li key={session._key} className={styles.session}>
+                        <div className={styles.sessionTime}>
+                          {formatTimeRange(
+                            start,
+                            getDuration(session),
+                            activeProgram.venues[0]?.timezone
+                          )}{' '}
+                          {getNonLocationTimezone(
+                            start,
+                            activeProgram.venues[0]?.timezone,
+                            true
+                          )}
+                        </div>
+                        <Link href={getEntityPath(session.session)}>
+                          <a className={styles.sessionTitleLink}>
+                            <h4 className={styles.sessionTitle}>
+                              {session.session.title}
+                            </h4>
+                          </a>
+                        </Link>
+
+                        {session.session.speakers
+                          ?.filter((speaker) => speaker.person)
+                          .map(({ person }) => (
+                            <Link key={person._id} href={getEntityPath(person)}>
+                              <a className={styles.speaker}>
+                                <img
+                                  className={styles.speakerImage}
+                                  src={imageUrlFor(person.photo)
+                                    .size(40, 40)
+                                    .url()}
+                                  width={40}
+                                  height={40}
+                                  alt={person.name}
+                                />
+
+                                <div>
+                                  <div className={styles.speakerName}>
+                                    {person.name}
+                                  </div>
+                                  <div className={styles.speakerTitle}>
+                                    {[person.title, person.company]
+                                      .filter(Boolean)
+                                      .join(', ')}
+                                  </div>
+                                </div>
+                              </a>
+                            </Link>
+                          ))}
+                      </li>
+                    );
+                  })}
+              </ul>
+            </Fragment>
+          ))}
         </section>
-      </GridWrapper>
+      </>
     );
   }
 

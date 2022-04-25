@@ -1,5 +1,6 @@
 import { addMinutes, parseISO } from 'date-fns';
-import { Session } from '../types/Session';
+import type { ProgramSession } from '../types/Program';
+import type { Session } from '../types/Session';
 
 const minutesFromProgramStart = (
   sessions: Pick<Session, 'duration'>[],
@@ -25,3 +26,9 @@ export const sessionStart = (
     sessionIndex > -1 ? minutesFromProgramStart(sessions, sessionIndex) : 0;
   return addMinutes(start, sessionStartOffset);
 };
+
+export const getDuration = ({
+  session,
+  duration,
+  durationOverride,
+}: ProgramSession) => durationOverride ?? duration ?? session?.duration ?? 0;

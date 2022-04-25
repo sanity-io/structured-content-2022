@@ -22,7 +22,13 @@ export const VenueNav = ({
   <nav className={styles.container}>
     <ul className={styles.venues}>
       {venues.map((venue) => (
-        <li key={venue.name} className={styles.venuesItem}>
+        <li
+          key={venue.name}
+          className={clsx(
+            styles.venuesItem,
+            activeVenue?._id === venue._id && styles.active
+          )}
+        >
           <button
             className={clsx(
               styles.venue,

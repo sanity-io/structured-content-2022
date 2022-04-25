@@ -16,6 +16,8 @@ export const getEntityPath = (entity?: { _type: string; slug?: Slug }) => {
       return urlJoin('articles', entity.slug.current, { leadingSlash: true });
     case 'person':
       return urlJoin('speakers', entity.slug.current, { leadingSlash: true });
+    case 'session':
+      return urlJoin('program', entity.slug.current, { leadingSlash: true });
     default:
       console.error(
         `getEntityPath: unsupported entity type: '${entity._type}'`
