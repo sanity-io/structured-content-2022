@@ -12,14 +12,14 @@
   margin: 0 0 32px;
 }
 
-.dayContainer {
+.dayHeader {
   background: var(--color-brand-orange);
   padding: 24px 20px;
 }
 
-.dayHeader {
+.dayHeading {
   font: var(--font-display-xxs);
-  letter-spacing: var(--letter-spacing-body-small);
+  letter-spacing: normal;
   margin: 0;
 }
 

@@ -73,8 +73,8 @@ export const Programs = ({
 
           {Object.keys(sessionsPerDay).map((day) => (
             <section key={day}>
-              <div className={styles.dayContainer}>
-                <h3 className={styles.dayHeader}>{day}</h3>
+              <div className={styles.dayHeader}>
+                <h3 className={styles.dayHeading}>{day}</h3>
                 <div className={styles.dayLocation}>
                   {activeProgram?.venues[0].name} (
                   {getNonLocationTimezone(
