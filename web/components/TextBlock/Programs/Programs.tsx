@@ -1,6 +1,6 @@
 import { parseISO } from 'date-fns';
 import Link from 'next/link';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import type { PortableTextComponentProps } from '@portabletext/react';
 import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import type { Program } from '../../../types/Program';
@@ -72,7 +72,7 @@ export const Programs = ({
           </GridWrapper>
 
           {Object.keys(sessionsPerDay).map((day) => (
-            <Fragment key={day}>
+            <section key={day}>
               <div className={styles.dayContainer}>
                 <h3 className={styles.dayHeader}>{day}</h3>
                 <div className={styles.dayLocation}>
@@ -150,7 +150,7 @@ export const Programs = ({
                     );
                   })}
               </ul>
-            </Fragment>
+            </section>
           ))}
         </section>
       </>
