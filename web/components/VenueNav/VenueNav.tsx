@@ -6,6 +6,7 @@ interface VenueNavProps {
   venues: Venue[];
   activeVenue?: Venue;
   onVenueClick: (venue: Venue) => void;
+  ariaControlsId: string;
 }
 
 const venueLabel = (venueName: string) =>
@@ -18,6 +19,7 @@ export const VenueNav = ({
   venues,
   activeVenue,
   onVenueClick,
+  ariaControlsId,
 }: VenueNavProps) => (
   <nav className={styles.container}>
     <ul className={styles.venues}>
@@ -35,6 +37,8 @@ export const VenueNav = ({
               activeVenue?._id === venue._id && styles.active
             )}
             onClick={() => onVenueClick(venue)}
+            type="button"
+            aria-controls={ariaControlsId}
           >
             <span className={styles.venueName}>{venue.name}</span>
             <span className={styles.venueSubtitle}>

@@ -56,6 +56,14 @@ export const Programs = ({
       return formatDateWithDay(date, activeProgram.venues[0].timezone, ', ');
     });
 
+    /* TODO: This is a hack due to the programs redesign being rushed. If the
+     * buttons are kept, rather than replaced with links in the near future,
+     * the ID should be made globally (for the page) unique using a proper
+     * system for it. Perhaps the VenueNav should be made to work as a tab bar
+     * too.
+     */
+    const sessionsId = 'program-sessions-container';
+
     return (
       <>
         <div className={styles.venueNavContainer}>
@@ -63,10 +71,11 @@ export const Programs = ({
             venues={venues}
             activeVenue={activeProgram?.venues[0]}
             onVenueClick={onVenueClick}
+            ariaControlsId={sessionsId}
           />
         </div>
 
-        <section className={styles.container}>
+        <section className={styles.container} id={sessionsId}>
           <GridWrapper>
             {heading && <h2 className={styles.heading}>{heading}</h2>}
           </GridWrapper>
