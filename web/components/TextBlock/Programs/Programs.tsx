@@ -106,55 +106,67 @@ export const Programs = ({
                     );
                     return (
                       <li key={session._key} className={styles.session}>
-                        <div className={styles.sessionTime}>
-                          {formatTimeRange(
-                            start,
-                            getDuration(session),
-                            activeProgram.venues[0]?.timezone
-                          )}{' '}
-                          {getNonLocationTimezone(
-                            start,
-                            activeProgram.venues[0]?.timezone,
-                            true
+                        <section>
+                          <div className={styles.sessionTime}>
+                            {formatTimeRange(
+                              start,
+                              getDuration(session),
+                              activeProgram.venues[0]?.timezone
+                            )}{' '}
+                            {getNonLocationTimezone(
+                              start,
+                              activeProgram.venues[0]?.timezone,
+                              true
+                            )}
+                          </div>
+                          <Link href={getEntityPath(session.session)}>
+                            <a className={styles.sessionTitleLink}>
+                              <h4 className={styles.sessionTitle}>
+                                {session.session.title}
+                              </h4>
+                            </a>
+                          </Link>
+
+                          {session.session.speakers && (
+                            <ul className={styles.speakers}>
+                              {session.session.speakers
+                                ?.filter((speaker) => speaker.person)
+                                .map(({ person }) => (
+                                  <li key={person._id}>
+                                    <Link href={getEntityPath(person)}>
+                                      <a className={styles.speaker}>
+                                        {person.photo && (
+                                          /* eslint-disable-next-line @next/next/no-img-element */
+                                          <img
+                                            className={styles.speakerImage}
+                                            src={imageUrlFor(person.photo)
+                                              .size(40, 40)
+                                              .url()}
+                                            width={40}
+                                            height={40}
+                                            alt={person.photo.alt || ''}
+                                          />
+                                        )}
+
+                                        <div>
+                                          <strong
+                                            className={styles.speakerName}
+                                          >
+                                            {person.name}
+                                          </strong>
+                                          <div className={styles.speakerTitle}>
+                                            {[person.title, person.company]
+                                              .filter(Boolean)
+                                              .join(', ')}
+                                          </div>
+                                        </div>
+                                      </a>
+                                    </Link>
+                                  </li>
+                                ))}
+                            </ul>
                           )}
-                        </div>
-                        <Link href={getEntityPath(session.session)}>
-                          <a className={styles.sessionTitleLink}>
-                            <h4 className={styles.sessionTitle}>
-                              {session.session.title}
-                            </h4>
-                          </a>
-                        </Link>
-
-                        {session.session.speakers
-                          ?.filter((speaker) => speaker.person)
-                          .map(({ person }) => (
-                            <Link key={person._id} href={getEntityPath(person)}>
-                              <a className={styles.speaker}>
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                  className={styles.speakerImage}
-                                  src={imageUrlFor(person.photo)
-                                    .size(40, 40)
-                                    .url()}
-                                  width={40}
-                                  height={40}
-                                  alt={person.name}
-                                />
-
-                                <div>
-                                  <div className={styles.speakerName}>
-                                    {person.name}
-                                  </div>
-                                  <div className={styles.speakerTitle}>
-                                    {[person.title, person.company]
-                                      .filter(Boolean)
-                                      .join(', ')}
-                                  </div>
-                                </div>
-                              </a>
-                            </Link>
-                          ))}
+                        </section>
                       </li>
                     );
                   })}

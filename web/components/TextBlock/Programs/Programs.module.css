@@ -15,11 +15,11 @@
 .dayHeader {
   background: var(--color-brand-orange);
   padding: 24px 20px;
+  border-bottom: 1px solid var(--color-brand-black);
 }
 
 .dayHeading {
   font: var(--font-display-xxs);
-  letter-spacing: normal;
   margin: 0;
 }
 
@@ -35,11 +35,12 @@
 
 .session {
   padding: 32px 20px;
-  border-top: 1px solid black;
+  border-bottom: 1px solid var(--color-brand-black);
 }
 
-.session:last-of-type {
-  border-bottom: 1px solid black;
+.sessionTime {
+  font: var(--font-ui-sm-medium);
+  letter-spacing: var(--letter-spacing-ui-sm);
 }
 
 .sessionTitleLink {
@@ -52,18 +53,20 @@
 
 .sessionTitle {
   font: var(--font-display-xxs);
-  letter-spacing: var(--letter-spacing-body-small);
-  margin-top: 24px;
-  margin-bottom: 20px;
+  letter-spacing: normal;
+  margin: 24px 0 0;
+}
+
+.speakers {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
 }
 
 .speaker {
   display: flex;
   align-items: center;
   text-decoration: none;
-}
-
-.speaker:not(:first-of-type) {
   margin-top: 8px;
 }
 
@@ -78,10 +81,12 @@
 
 .speakerName {
   font: var(--font-ui-xs-semi);
+  letter-spacing: var(--letter-spacing-ui-xs);
 }
 
 .speakerTitle {
   font: var(--font-ui-xs);
+  letter-spacing: var(--letter-spacing-ui-xs);
 }
 
 @media (--medium-up) {
