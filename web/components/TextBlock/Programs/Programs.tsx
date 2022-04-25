@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { addMinutes, parseISO } from 'date-fns';
-import { Fragment } from 'react';
-import { PortableTextComponentProps } from '@portabletext/react';
-import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
-import { Program } from '../../../types/Program';
+import { Fragment, useState } from 'react';
+import type { PortableTextComponentProps } from '@portabletext/react';
+import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
+import type { Program } from '../../../types/Program';
 import { getCollectionForSelectionType } from '../../../util/entity';
 import {
   formatDateWithDay,
@@ -12,6 +12,7 @@ import {
 } from '../../../util/date';
 import Accordion from '../../Accordion';
 import GridWrapper from '../../GridWrapper';
+import VenueNav from '../../VenueNav';
 import styles from './Programs.module.css';
 
 type ProgramsProps = {
@@ -25,18 +26,25 @@ export const Programs = ({
   value: { type, heading, allPrograms, programs },
   index,
 }: PortableTextComponentProps<ProgramsProps>) => {
+  const collection = getCollectionForSelectionType(type, allPrograms, programs);
+  const venues = collection?.map((program) => program.venues).flat();
+  const [activeVenue, setActiveVenue] = useState(venues[0]);
+
   if (type === 'all' || type === 'highlighted') {
     return (
       <GridWrapper>
+        <div className={styles.venueNavContainer}>
+          <VenueNav
+            venues={venues}
+            activeVenue={activeVenue}
+            onVenueClick={setActiveVenue}
+          />
+        </div>
         <section className={styles.container}>
           {heading && <h2 className={styles.heading}>{heading}</h2>}
           <Accordion
             baseId={`accordion-${index}`}
-            items={getCollectionForSelectionType(
-              type,
-              allPrograms,
-              programs
-            ).map((program) => {
+            items={collection.map((program) => {
               const firstVenue = program?.venues[0];
               const programName = firstVenue?.name || program.internalName;
               const timezone = firstVenue?.timezone || 'UTC';

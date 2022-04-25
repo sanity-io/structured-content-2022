@@ -1,0 +1,55 @@
+.container {
+  border: 1px solid black;
+  border-radius: 6px;
+  background: white;
+}
+
+.venues {
+  list-style: none;
+  display: inline;
+  padding: 0;
+}
+
+.venuesItem {
+  float: left;
+  text-align: center;
+}
+
+.venuesItem:not(:last-child):after {
+  content: '';
+  border-left: 1px solid black;
+  position: relative;
+  top: 12px;
+}
+
+.venue {
+  padding: 14px 32px;
+  background: none;
+  border: none;
+  border-radius: 6px;
+}
+
+.venue:hover {
+  background: var(--color-brand-yellow);
+  box-shadow: 0 0 0 1px black;
+}
+
+.venue:active {
+  background: var(--color-brand-yellow-light);
+}
+
+.venue:focus,
+.venue.active {
+  background: var(--color-brand-orange);
+  box-shadow: 0 0 0 1px black;
+}
+
+.venueName {
+  font: var(--font-body-base-medium);
+  display: block;
+}
+
+.venueSubtitle {
+  font: var(--font-ui-xs-medium);
+  display: block;
+}

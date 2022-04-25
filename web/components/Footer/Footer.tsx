@@ -7,7 +7,7 @@ import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import GridWrapper from '../GridWrapper';
 import styles from './Footer.module.css';
 import { Slug } from '../../types/Slug';
-import urlJoin from "proper-url-join";
+import urlJoin from 'proper-url-join';
 
 interface FooterProps {
   links: {
@@ -30,16 +30,13 @@ export const Footer = ({ links }: FooterProps) => (
           <Image src={sanityLogo} alt="Sanity" width={162} height={46} />
         </a>
       </div>
-
       <p>Structured Content 2022 is a conference by Sanity</p>
-
       Inquiries:
       <address>
         <a className={styles.mailLink} href="mailto:confinfo@sanity.io">
           confinfo@sanity.io
         </a>
       </address>
-
       <ul className={styles.social}>
         <li className={styles.socialItem}>
           <a

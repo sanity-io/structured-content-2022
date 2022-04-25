@@ -27,7 +27,7 @@ const PROGRAM = `
     ...,
     session->{ duration, title },
   },
-  venues[]->{ name, timezone },
+  venues[]->{ _id, name, timezone },
 `;
 const QUESTION_AND_ANSWER_COLLECTION_SECTION = `
   title, questions[]{ _key, question, answer[]{ ${SIMPLE_BLOCK_CONTENT} } }
