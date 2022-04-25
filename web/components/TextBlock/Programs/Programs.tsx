@@ -105,8 +105,8 @@ export const Programs = ({
                       mapSessionDurationAndIds(activeProgram)
                     );
                     return (
-                      <li key={session._key} className={styles.session}>
-                        <section>
+                      <li key={session._key}>
+                        <section className={styles.session}>
                           <div className={styles.sessionTime}>
                             {formatTimeRange(
                               start,
@@ -119,53 +119,55 @@ export const Programs = ({
                               true
                             )}
                           </div>
-                          <Link href={getEntityPath(session.session)}>
-                            <a className={styles.sessionTitleLink}>
-                              <h4 className={styles.sessionTitle}>
-                                {session.session.title}
-                              </h4>
-                            </a>
-                          </Link>
+                          <div className={styles.sessionMain}>
+                            <Link href={getEntityPath(session.session)}>
+                              <a className={styles.sessionTitleLink}>
+                                <h4 className={styles.sessionTitle}>
+                                  {session.session.title}
+                                </h4>
+                              </a>
+                            </Link>
 
-                          {session.session.speakers && (
-                            <ul className={styles.speakers}>
-                              {session.session.speakers
-                                ?.filter((speaker) => speaker.person)
-                                .map(({ person }) => (
-                                  <li key={person._id}>
-                                    <Link href={getEntityPath(person)}>
-                                      <a className={styles.speaker}>
-                                        {person.photo && (
-                                          /* eslint-disable-next-line @next/next/no-img-element */
-                                          <img
-                                            className={styles.speakerImage}
-                                            src={imageUrlFor(person.photo)
-                                              .size(40, 40)
-                                              .url()}
-                                            width={40}
-                                            height={40}
-                                            alt={person.photo.alt || ''}
-                                          />
-                                        )}
+                            {session.session.speakers && (
+                              <ul className={styles.speakers}>
+                                {session.session.speakers
+                                  ?.filter((speaker) => speaker.person)
+                                  .map(({ person }) => (
+                                    <li key={person._id}>
+                                      <Link href={getEntityPath(person)}>
+                                        <a className={styles.speaker}>
+                                          {person.photo && (
+                                            /* eslint-disable-next-line @next/next/no-img-element */
+                                            <img
+                                              className={styles.speakerImage}
+                                              src={imageUrlFor(person.photo)
+                                                .size(40, 40)
+                                                .url()}
+                                              width={40}
+                                              height={40}
+                                              alt={person.photo.alt || ''}
+                                            />
+                                          )}
 
-                                        <div>
-                                          <strong
-                                            className={styles.speakerName}
-                                          >
-                                            {person.name}
-                                          </strong>
-                                          <div className={styles.speakerTitle}>
-                                            {[person.title, person.company]
-                                              .filter(Boolean)
-                                              .join(', ')}
+                                          <div>
+                                            <strong
+                                              className={styles.speakerName}
+                                            >
+                                              {person.name}
+                                            </strong>
+                                            <div>
+                                              {[person.title, person.company]
+                                                .filter(Boolean)
+                                                .join(', ')}
+                                            </div>
                                           </div>
-                                        </div>
-                                      </a>
-                                    </Link>
-                                  </li>
-                                ))}
-                            </ul>
-                          )}
+                                        </a>
+                                      </Link>
+                                    </li>
+                                  ))}
+                              </ul>
+                            )}
+                          </div>
                         </section>
                       </li>
                     );

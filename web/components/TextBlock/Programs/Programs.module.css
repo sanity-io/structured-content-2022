@@ -68,6 +68,8 @@
   align-items: center;
   text-decoration: none;
   margin-top: 8px;
+  font: var(--font-ui-xs);
+  letter-spacing: var(--letter-spacing-ui-xs);
 }
 
 .speaker:hover {
@@ -81,16 +83,56 @@
 
 .speakerName {
   font: var(--font-ui-xs-semi);
-  letter-spacing: var(--letter-spacing-ui-xs);
-}
-
-.speakerTitle {
-  font: var(--font-ui-xs);
-  letter-spacing: var(--letter-spacing-ui-xs);
 }
 
 @media (--medium-up) {
+  .dayHeader {
+    padding: 32px;
+  }
+
+  .session {
+    padding: 40px 32px;
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    column-gap: var(--grid-medium-gutter);
+  }
+
+  .sessionTime {
+    grid-column: 1 / span 3;
+  }
+
+  .sessionMain {
+    grid-column: 4 / span 5;
+  }
+
+  .sessionTitle {
+    font: var(--font-display-sm);
+    margin-top: 0;
+  }
+
+  .speakers {
+    margin-top: 24px;
+  }
 }
 
 @media (--large-up) {
+  .dayHeader {
+    padding: 32px 40px;
+  }
+
+  .session {
+    padding: 48px 40px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--grid-gutter);
+  }
+
+  .sessionTime {
+    grid-column: 1 / span 4;
+    font: var(--font-body-base-medium);
+    letter-spacing: var(--letter-spacing-body-base);
+  }
+
+  .sessionMain {
+    grid-column: 5 / span 8;
+  }
 }
