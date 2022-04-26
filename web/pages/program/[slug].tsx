@@ -51,6 +51,7 @@ const QUERY = groq`
     "programs": *[_id == "${mainEventId}"].venues[]-> {
       "program": *[_type == "program" && references(^._id)] { ${PROGRAM} }
     }["program"][],
+    "mainVenueName": (*[_id == "${mainEventId}"].venues[0]->.name)[0],
   }`;
 
 interface SessionRouteProps {
@@ -76,6 +77,7 @@ interface SessionRouteProps {
       };
     };
     programs: Program[];
+    mainVenueName: string;
   };
   slug: string;
 }
@@ -128,6 +130,7 @@ const SessionRoute = ({
     navItems,
     footer,
     programs,
+    mainVenueName,
   },
   slug,
 }: SessionRouteProps) => {
@@ -139,7 +142,7 @@ const SessionRoute = ({
     _id
   ).map(({ label, ...rest }) => ({
     // Ad-hoc override for the SF venue, for this specific view only
-    label: label === 'San Francisco' ? 'San Francisco & Virtual' : label,
+    label: label === mainVenueName ? 'San Francisco & Virtual' : label,
     ...rest,
   }));
   return (
