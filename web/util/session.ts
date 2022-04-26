@@ -36,13 +36,14 @@ export const sessionStart = (
 const getDuration = ({ session, duration, durationOverride }: ProgramSession) =>
   durationOverride ?? duration ?? session?.duration ?? 0;
 
-/* Given all Programs, finds the Programs that contain the Session (matching on _id).
+/* Given all Programs, finds the Programs that contain the Session (matching on sessionId === _id).
  * For each match, returns:
- * - the Program's associated Venue name (using the first entry in the Program's Venues array)
- * - the Session's date (based on the Session's start time)
- * - the Session's time range (accounting for any duration overrides)
- * - the Session's duration
- * - the Session's timezone
+ * - label: Program's associated Venue name (using the first entry in the Program's Venues array)
+ * - rawDate: the Session's date (based on the Session's start time)
+ * - date: rawDate, but formatted
+ * - time: the Session's time range, formatted (accounting for any duration overrides)
+ * - duration: the Session's duration, formatted
+ * - timezone: the Session's timezone, formatted
  */
 export const sessionTimingDetailsForMatchingPrograms = (
   programs: Program[],
