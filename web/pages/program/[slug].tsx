@@ -2,6 +2,7 @@ import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import clsx from 'clsx';
 import urlJoin from 'proper-url-join';
+import { toPlainText } from '@portabletext/react';
 import Footer from '../../components/Footer';
 import GridWrapper from '../../components/GridWrapper';
 import MetaTags from '../../components/MetaTags';
@@ -34,6 +35,7 @@ const QUERY = groq`
       _id,
       title,
       duration,
+      shortDescription,
       longDescription,
       speakers[] {
         role,
@@ -54,7 +56,7 @@ const QUERY = groq`
     },
     "timeInfo": *[_id == "${mainEventId}"][0].venues[0]-> {
       "mainVenueTimezone": timezone,
-      "currentSessionInProgram": *[_type == "program" && references(^._id)][0].sessions[] { 
+      "sessionInProgram": *[_type == "program" && references(^._id)][0].sessions[] { 
         session-> 
       }[session.slug.current == $slug][0].session { _id, duration },
       "mainVenueSessions": *[_type == "program" && references(^._id)][0] {
@@ -83,7 +85,7 @@ interface SessionRouteProps {
     };
     timeInfo: {
       mainVenueTimezone: string;
-      currentSessionInProgram?: Pick<Session, '_id' | 'duration'>;
+      sessionInProgram?: Pick<Session, '_id' | 'duration'>;
       mainVenueSessions: {
         startDateTime: string;
         sessions: Pick<Session, '_id' | 'duration'>[];
@@ -136,28 +138,27 @@ const SpeakerList = ({ speakers }: SpeakerListProps) => (
 
 const SessionRoute = ({
   data: {
-    session: { title, longDescription, speakers, type },
+    session: { title, shortDescription, longDescription, speakers, type },
     home: { ticketsUrl },
     navItems,
     footer,
     timeInfo: {
-      mainVenueTimezone,
-      currentSessionInProgram,
+      mainVenueTimezone: timezone,
+      sessionInProgram: session,
       mainVenueSessions: { startDateTime, sessions },
     },
   },
   slug,
 }: SessionRouteProps) => {
-  const start = sessionStart(
-    startDateTime,
-    currentSessionInProgram?._id,
-    sessions
-  );
-  const hasHighlightedSpeakers =
-    speakers?.length === 1 || speakers?.length === 2;
+  const hasHighlightedSpeakers = [1, 2].includes(speakers?.length);
+  const start = sessionStart(startDateTime, session?._id, sessions);
   return (
     <>
-      <MetaTags title={title} description="" currentPath={`/session/${slug}`} />
+      <MetaTags
+        title={title}
+        description={shortDescription ? toPlainText(shortDescription) : ''}
+        currentPath={`/session/${slug}`}
+      />
       <header className={styles.header}>
         <Nav
           currentPath={`/session/${slug}`}
@@ -182,18 +183,12 @@ const SessionRoute = ({
                 )}
                 <h1 className={programStyles.sessionTitle}>{title}</h1>
 
-                {startDateTime && currentSessionInProgram && (
+                {start && (
                   <>
+                    <div>{formatDateWithDay(start, timezone, ', ')}</div>
                     <div>
-                      {formatDateWithDay(start, mainVenueTimezone, ', ')}
-                    </div>
-                    <div>
-                      {formatTimeRange(
-                        start,
-                        currentSessionInProgram.duration,
-                        mainVenueTimezone
-                      )}{' '}
-                      {getNonLocationTimezone(start, mainVenueTimezone, true)}
+                      {formatTimeRange(start, session?.duration, timezone)}{' '}
+                      {getNonLocationTimezone(start, timezone, true)}
                     </div>
                   </>
                 )}
