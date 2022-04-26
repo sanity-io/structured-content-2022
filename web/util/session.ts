@@ -7,6 +7,7 @@ import {
   formatTimeRange,
   getNonLocationTimezone,
 } from './date';
+import { format, formatInTimeZone } from 'date-fns-tz';
 
 const minutesFromProgramStart = (
   sessions: Pick<Session, 'duration'>[],
@@ -39,11 +40,11 @@ const getDuration = ({ session, duration, durationOverride }: ProgramSession) =>
 /* Given all Programs, finds the Programs that contain the Session (matching on sessionId === _id).
  * For each match, returns:
  * - label: Program's associated Venue name (using the first entry in the Program's Venues array)
- * - rawDate: the Session's date (based on the Session's start time)
- * - date: rawDate, but formatted
- * - time: the Session's time range, formatted (accounting for any duration overrides)
- * - duration: the Session's duration, formatted
- * - timezone: the Session's timezone, formatted
+ * - rawDate: the Session's start date and time, global date and time string
+ * - date: the Session's date, human-readable string
+ * - time: the Session's time range accounting for any duration overrides, human-readable string
+ * - duration: the Session's duration, human-readable string
+ * - timezone: the Session's timezone, human-readable string
  */
 export const sessionTimingDetailsForMatchingPrograms = (
   programs: Program[],
@@ -66,14 +67,13 @@ export const sessionTimingDetailsForMatchingPrograms = (
       );
 
       const [{ name, timezone }] = venues;
-      const startDate = parseISO(startDateTime);
       const duration = getDuration(session);
       return {
         label: name,
-        rawDate: startDateTime,
-        date: formatDateWithDay(startDate, timezone, ', '),
+        rawDate: start.toISOString(),
+        date: formatDateWithDay(start, timezone, ', '),
         time: formatTimeRange(start, duration, timezone),
-        duration: formatTimeDuration(startDate, duration),
+        duration: formatTimeDuration(start, duration),
         timezone: getNonLocationTimezone(start, timezone, true),
       };
     });
