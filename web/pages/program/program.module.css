@@ -3,7 +3,7 @@
   background-color: var(--color-brand-yellow-light);
 }
 
-.sessionInfo {
+.info {
   text-align: center;
   font: var(--font-body-small-medium);
   letter-spacing: var(--letter-spacing-body-small);
@@ -13,7 +13,7 @@
   margin-bottom: 24px;
 }
 
-.sessionTitle {
+.title {
   margin: 0 auto 24px;
   max-width: var(--max-body-text-width);
 }
@@ -23,12 +23,13 @@
   list-style: none;
 }
 
-.venueTime:not(:last-of-type) {
-  margin-bottom: 16px;
+.venueTime {
+  display: flex;
+  flex-direction: column;
 }
 
-.sessionVenueDateTime {
-  display: block;
+.venueTime:not(:last-of-type) {
+  margin-bottom: 16px;
 }
 
 .highlightedSpeakers {
@@ -101,17 +102,17 @@
     padding: 108px 0 64px;
   }
 
-  .sessionInfo {
+  .info {
     font: var(--font-body-base-medium);
     letter-spacing: var(--letter-spacing-body-base);
   }
 
   .tag,
-  .sessionTitle {
+  .title {
     margin-bottom: 32px;
   }
 
-  .sessionTitle {
+  .title {
     font: var(--font-display-xl);
   }
 
@@ -152,12 +153,12 @@
     margin-top: 40px;
   }
 
-  .sessionInfo {
+  .info {
     text-align: left;
     grid-column: 2 / span 6;
   }
 
-  .sessionTitle {
+  .title {
     margin: 0 0 32px;
   }
 

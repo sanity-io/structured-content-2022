@@ -164,29 +164,21 @@ const SessionRoute = ({
         >
           <GridWrapper>
             <div className={programStyles.topContainer}>
-              <div className={programStyles.sessionInfo}>
+              <div className={programStyles.info}>
                 {type === 'workshop' && (
                   <div className={programStyles.tag}>
                     <Tag>Workshop</Tag>
                   </div>
                 )}
-                <h1 className={programStyles.sessionTitle}>{title}</h1>
+                <h1 className={programStyles.title}>{title}</h1>
 
                 <ul className={programStyles.venueTimes}>
                   {matchingSessionsInPrograms.map(
                     ({ label, time, timezone, rawDate, date, duration }) => (
                       <li className={programStyles.venueTime} key={label}>
                         <strong>{label}</strong>
-                        <time
-                          dateTime={rawDate}
-                          className={programStyles.sessionVenueDateTime}
-                        >
-                          {date}
-                        </time>
-                        <time
-                          dateTime={duration}
-                          className={programStyles.sessionVenueDateTime}
-                        >
+                        <time dateTime={rawDate}>{date}</time>
+                        <time dateTime={duration}>
                           {time} {timezone}
                         </time>
                       </li>
