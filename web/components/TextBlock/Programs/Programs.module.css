@@ -27,12 +27,6 @@
   font: var(--font-body-base-medium);
 }
 
-.sessions {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
 .sessionLink {
   display: block;
   text-decoration: none;

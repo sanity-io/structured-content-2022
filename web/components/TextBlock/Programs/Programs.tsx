@@ -156,34 +156,32 @@ export const Programs = ({
                 </GridWrapper>
               </div>
 
-              <ul className={styles.sessions}>
-                {sessionsPerDay[day]
-                  .filter((session) => session.session)
-                  .map((session) => {
-                    const start = sessionStart(
-                      activeProgram.startDateTime,
-                      session.session._id,
-                      mapSessionDurationAndIds(activeProgram)
-                    );
-                    return (
-                      <li key={session._key}>
-                        {shouldLinkToSession(session.session) ? (
-                          <Link href={getEntityPath(session.session)}>
-                            <a className={styles.sessionLink}>
-                              <SessionSection
-                                {...{ session, activeProgram, start }}
-                              />
-                            </a>
-                          </Link>
-                        ) : (
-                          <SessionSection
-                            {...{ session, activeProgram, start }}
-                          />
-                        )}
-                      </li>
-                    );
-                  })}
-              </ul>
+              {sessionsPerDay[day]
+                .filter((session) => session.session)
+                .map((session) => {
+                  const start = sessionStart(
+                    activeProgram.startDateTime,
+                    session.session._id,
+                    mapSessionDurationAndIds(activeProgram)
+                  );
+                  return shouldLinkToSession(session.session) ? (
+                    <Link
+                      href={getEntityPath(session.session)}
+                      key={session._key}
+                    >
+                      <a className={styles.sessionLink}>
+                        <SessionSection
+                          {...{ session, activeProgram, start }}
+                        />
+                      </a>
+                    </Link>
+                  ) : (
+                    <SessionSection
+                      {...{ session, activeProgram, start }}
+                      key={session._key}
+                    />
+                  );
+                })}
             </section>
           ))}
         </section>
