@@ -14,7 +14,7 @@
 
 .dayHeader {
   background: var(--color-brand-orange);
-  padding: 24px 20px;
+  padding: 24px 0;
   border-bottom: 1px solid var(--color-brand-black);
 }
 
@@ -44,7 +44,7 @@
 }
 
 .session {
-  padding: 32px 20px;
+  padding: 32px 0;
   border-bottom: 1px solid var(--color-brand-black);
 }
 
@@ -84,11 +84,14 @@
 
 @media (--medium-up) {
   .dayHeader {
-    padding: 32px;
+    padding: 32px 0;
   }
 
   .session {
-    padding: 40px 32px;
+    padding: 40px 0;
+  }
+
+  .sessionContents {
     display: grid;
     grid-template-columns: repeat(8, minmax(0, 1fr));
     column-gap: var(--grid-medium-gutter);
@@ -113,12 +116,11 @@
 }
 
 @media (--large-up) {
-  .dayHeader {
-    padding: 32px 40px;
+  .session {
+    padding: 48px 0;
   }
 
-  .session {
-    padding: 48px 40px;
+  .sessionContents {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: var(--grid-gutter);
   }
