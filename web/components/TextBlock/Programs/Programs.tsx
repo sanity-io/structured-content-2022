@@ -106,36 +106,35 @@ export const Programs = ({
                     );
                     return (
                       <li key={session._key}>
-                        <section className={styles.session}>
-                          <div className={styles.sessionTime}>
-                            {formatTimeRange(
-                              start,
-                              getDuration(session),
-                              activeProgram.venues[0]?.timezone
-                            )}{' '}
-                            {getNonLocationTimezone(
-                              start,
-                              activeProgram.venues[0]?.timezone,
-                              true
-                            )}
-                          </div>
-                          <div className={styles.sessionMain}>
-                            <Link href={getEntityPath(session.session)}>
-                              <a className={styles.sessionTitleLink}>
+                        <Link href={getEntityPath(session.session)}>
+                          <a className={styles.sessionLink}>
+                            <section className={styles.session}>
+                              <div className={styles.sessionTime}>
+                                {formatTimeRange(
+                                  start,
+                                  getDuration(session),
+                                  activeProgram.venues[0]?.timezone
+                                )}{' '}
+                                {getNonLocationTimezone(
+                                  start,
+                                  activeProgram.venues[0]?.timezone,
+                                  true
+                                )}
+                              </div>
+                              <div className={styles.sessionMain}>
                                 <h4 className={styles.sessionTitle}>
                                   {session.session.title}
                                 </h4>
-                              </a>
-                            </Link>
 
-                            {session.session.speakers && (
-                              <ul className={styles.speakers}>
-                                {session.session.speakers
-                                  ?.filter((speaker) => speaker.person)
-                                  .map(({ person }) => (
-                                    <li key={person._id}>
-                                      <Link href={getEntityPath(person)}>
-                                        <a className={styles.speaker}>
+                                {session.session.speakers && (
+                                  <ul className={styles.speakers}>
+                                    {session.session.speakers
+                                      ?.filter((speaker) => speaker.person)
+                                      .map(({ person }) => (
+                                        <li
+                                          key={person._id}
+                                          className={styles.speaker}
+                                        >
                                           {person.photo && (
                                             /* eslint-disable-next-line @next/next/no-img-element */
                                             <img
@@ -161,14 +160,14 @@ export const Programs = ({
                                                 .join(', ')}
                                             </div>
                                           </div>
-                                        </a>
-                                      </Link>
-                                    </li>
-                                  ))}
-                              </ul>
-                            )}
-                          </div>
-                        </section>
+                                        </li>
+                                      ))}
+                                  </ul>
+                                )}
+                              </div>
+                            </section>
+                          </a>
+                        </Link>
                       </li>
                     );
                   })}
