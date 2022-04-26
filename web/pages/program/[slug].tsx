@@ -53,7 +53,7 @@ const QUERY = groq`
     },
     "timeInfo": *[_id == "${mainEventId}"][0].venues[0]-> {
       "mainVenueTimezone": timezone,
-      "currentSessionInProgram": *[_type == "program" && references(^._id)][0].sessions[] { 
+      "sessionInProgram": *[_type == "program" && references(^._id)][0].sessions[] { 
         session-> 
       }[session.slug.current == $slug][0].session { _id, duration },
       "mainVenueSessions": *[_type == "program" && references(^._id)][0] {
@@ -82,7 +82,7 @@ interface SessionRouteProps {
     };
     timeInfo: {
       mainVenueTimezone: string;
-      currentSessionInProgram?: Pick<Session, '_id' | 'duration'>;
+      sessionInProgram?: Pick<Session, '_id' | 'duration'>;
       mainVenueSessions: {
         startDateTime: string;
         sessions: Pick<Session, '_id' | 'duration'>[];
@@ -136,31 +136,21 @@ const SessionRoute = ({
     navItems,
     footer,
     timeInfo: {
-      mainVenueTimezone,
-      currentSessionInProgram,
+      mainVenueTimezone: timezone,
+      sessionInProgram: session,
       mainVenueSessions: { startDateTime, sessions },
     },
   },
   slug,
 }: SessionRouteProps) => {
-  const start = sessionStart(
-    startDateTime,
-    currentSessionInProgram?._id,
-    sessions
-  );
-  const hasAssociatedProgram = startDateTime && currentSessionInProgram;
-  const hasHighlightedSpeakers =
-    speakers?.length === 1 || speakers?.length === 2;
-  const formattedStartDate = formatDateWithDay(start, mainVenueTimezone, ', ');
-  const formattedTimezone = getNonLocationTimezone(
-    start,
-    mainVenueTimezone,
-    true
-  );
+  const hasHighlightedSpeakers = [1, 2].includes(speakers?.length);
+  const start = sessionStart(startDateTime, session?._id, sessions);
+  const formattedStartDate = start && formatDateWithDay(start, timezone, ', ');
   const formattedDuration =
-    hasAssociatedProgram &&
-    formatTimeRange(start, currentSessionInProgram.duration, mainVenueTimezone);
-  const description = hasAssociatedProgram
+    start && formatTimeRange(start, session?.duration, timezone);
+  const formattedTimezone =
+    start && getNonLocationTimezone(start, timezone, true);
+  const description = start
     ? `${formattedStartDate} ${formattedDuration} ${formattedTimezone}`
     : '';
   return (
@@ -194,7 +184,7 @@ const SessionRoute = ({
                 )}
                 <h1 className={programStyles.sessionTitle}>{title}</h1>
 
-                {hasAssociatedProgram && (
+                {start && (
                   <>
                     <div>{formattedStartDate}</div>
                     <div>
