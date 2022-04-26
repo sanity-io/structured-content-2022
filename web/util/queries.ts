@@ -25,7 +25,7 @@ const PROGRAM = `
   startDateTime,
   sessions[] {
     ...,
-    session->{ duration, title },
+    session->{ _id, duration, title },
   },
   venues[]->{ name, timezone },
 `;

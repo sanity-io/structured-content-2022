@@ -8,6 +8,7 @@ import { getCollectionForSelectionType } from '../../../util/entity';
 import {
   formatDateWithDay,
   formatTime,
+  formatTimeRange,
   getNonLocationTimezone,
 } from '../../../util/date';
 import Accordion from '../../Accordion';
@@ -73,12 +74,9 @@ export const Programs = ({
                             <>
                               <div className={styles.sessionItem}>
                                 <h4 className={styles.sessionDuration}>
-                                  {formatTime(currentTime, timezone)} -{' '}
-                                  {formatTime(
-                                    addMinutes(
-                                      currentTime,
-                                      session.session.duration
-                                    ),
+                                  {formatTimeRange(
+                                    currentTime,
+                                    session.session.duration,
                                     timezone
                                   )}
                                 </h4>
