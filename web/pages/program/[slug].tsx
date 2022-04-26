@@ -2,6 +2,8 @@ import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import clsx from 'clsx';
 import urlJoin from 'proper-url-join';
+import { toPlainText } from '@portabletext/react';
+import Link from 'next/link';
 import Footer from '../../components/Footer';
 import GridWrapper from '../../components/GridWrapper';
 import MetaTags from '../../components/MetaTags';
@@ -13,20 +15,15 @@ import { imageUrlFor } from '../../lib/sanity';
 import client from '../../lib/sanity.server';
 import { mainEventId } from '../../util/constants';
 import { getEntityPath } from '../../util/entityPaths';
-import { PRIMARY_NAV, SPEAKER } from '../../util/queries';
+import { PRIMARY_NAV, PROGRAM, SPEAKER } from '../../util/queries';
 import type { Person } from '../../types/Person';
+import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
+import type { Program } from '../../types/Program';
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
-import {
-  formatDateWithDay,
-  formatTimeRange,
-  getNonLocationTimezone,
-} from '../../util/date';
-import { sessionStart } from '../../util/session';
+import { sessionTimingDetailsForMatchingPrograms } from '../../util/session';
 import styles from '../app.module.css';
 import programStyles from './program.module.css';
-import Link from 'next/link';
-import { PrimaryNavItem } from '../../types/PrimaryNavItem';
 
 const QUERY = groq`
   {
@@ -34,6 +31,7 @@ const QUERY = groq`
       _id,
       title,
       duration,
+      shortDescription,
       longDescription,
       speakers[] {
         role,
@@ -52,19 +50,10 @@ const QUERY = groq`
         _id,
       }
     },
-    "timeInfo": *[_id == "${mainEventId}"][0].venues[0]-> {
-      "mainVenueTimezone": timezone,
-      "currentSessionInProgram": *[_type == "program" && references(^._id)][0].sessions[] { 
-        session-> 
-      }[session.slug.current == $slug][0].session { _id, duration },
-      "mainVenueSessions": *[_type == "program" && references(^._id)][0] {
-        startDateTime,
-        "sessions": *[_id == ^._id].sessions[] {
-          "duration": coalesce(duration, session->.duration),
-          "_id": session->._id,
-        },
-      }
-    },  
+    "programs": *[_id == "${mainEventId}"].venues[]-> {
+      "program": *[_type == "program" && references(^._id)] { ${PROGRAM} }
+    }["program"][],
+    "mainVenueName": (*[_id == "${mainEventId}"].venues[0]->.name)[0],
   }`;
 
 interface SessionRouteProps {
@@ -81,14 +70,8 @@ interface SessionRouteProps {
         _id: string;
       }[];
     };
-    timeInfo: {
-      mainVenueTimezone: string;
-      currentSessionInProgram?: Pick<Session, '_id' | 'duration'>;
-      mainVenueSessions: {
-        startDateTime: string;
-        sessions: Pick<Session, '_id' | 'duration'>[];
-      };
-    };
+    programs: Program[];
+    mainVenueName: string;
   };
   slug: string;
 }
@@ -136,28 +119,31 @@ const SpeakerList = ({ speakers }: SpeakerListProps) => (
 
 const SessionRoute = ({
   data: {
-    session: { title, longDescription, speakers, type },
+    session: { title, shortDescription, longDescription, speakers, type, _id },
     home: { ticketsUrl },
     navItems,
     footer,
-    timeInfo: {
-      mainVenueTimezone,
-      currentSessionInProgram,
-      mainVenueSessions: { startDateTime, sessions },
-    },
+    programs,
+    mainVenueName,
   },
   slug,
 }: SessionRouteProps) => {
-  const start = sessionStart(
-    startDateTime,
-    currentSessionInProgram?._id,
-    sessions
-  );
-  const hasHighlightedSpeakers =
-    speakers?.length === 1 || speakers?.length === 2;
+  const hasHighlightedSpeakers = [1, 2].includes(speakers?.length);
+  const matchingSessionsInPrograms = sessionTimingDetailsForMatchingPrograms(
+    programs,
+    _id
+  ).map(({ label, ...rest }) => ({
+    // Ad-hoc override for the SF venue, for this specific view only
+    label: label === mainVenueName ? `${label} & Virtual` : label,
+    ...rest,
+  }));
   return (
     <>
-      <MetaTags title={title} description="" currentPath={`/session/${slug}`} />
+      <MetaTags
+        title={title}
+        description={shortDescription ? toPlainText(shortDescription) : ''}
+        currentPath={`/session/${slug}`}
+      />
       <header className={styles.header}>
         <Nav
           currentPath={`/session/${slug}`}
@@ -174,29 +160,27 @@ const SessionRoute = ({
         >
           <GridWrapper>
             <div className={programStyles.topContainer}>
-              <div className={programStyles.sessionInfo}>
+              <div className={programStyles.info}>
                 {type === 'workshop' && (
                   <div className={programStyles.tag}>
                     <Tag>Workshop</Tag>
                   </div>
                 )}
-                <h1 className={programStyles.sessionTitle}>{title}</h1>
+                <h1 className={programStyles.title}>{title}</h1>
 
-                {startDateTime && currentSessionInProgram && (
-                  <>
-                    <div>
-                      {formatDateWithDay(start, mainVenueTimezone, ', ')}
-                    </div>
-                    <div>
-                      {formatTimeRange(
-                        start,
-                        currentSessionInProgram.duration,
-                        mainVenueTimezone
-                      )}{' '}
-                      {getNonLocationTimezone(start, mainVenueTimezone, true)}
-                    </div>
-                  </>
-                )}
+                <ul className={programStyles.venueTimes}>
+                  {matchingSessionsInPrograms.map(
+                    ({ label, time, timezone, rawDate, date, duration }) => (
+                      <li className={programStyles.venueTime} key={label}>
+                        <strong>{label}</strong>
+                        <time dateTime={rawDate}>{date}</time>
+                        <time dateTime={duration}>
+                          {time} {timezone}
+                        </time>
+                      </li>
+                    )
+                  )}
+                </ul>
               </div>
 
               {speakers &&

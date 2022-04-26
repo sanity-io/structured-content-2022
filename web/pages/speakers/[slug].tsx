@@ -114,7 +114,8 @@ const SpeakersRoute = ({
     <MetaTags
       title={`${name} – Structured Content 2022`}
       description={`Speaker page for ${name}`}
-      currentPath={`speakers/${slug}`}
+      currentPath={`/speakers/${slug}`}
+      image={photo}
     />
     <header className={styles.header}>
       <Nav
