@@ -23,7 +23,7 @@ export const sessionStart = (
   sessionId: string,
   sessions: Pick<Session, '_id' | 'duration'>[]
 ) => {
-  if (!programStart) {
+  if (!programStart || !sessionId) {
     return null;
   }
 

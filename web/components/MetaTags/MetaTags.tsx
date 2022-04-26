@@ -40,10 +40,7 @@ export const MetaTags = ({
         images: [
           image
             ? {
-                url: imageUrlFor(image)
-                  .ignoreImageParams()
-                  .size(1260, 630)
-                  .url(),
+                url: imageUrlFor(image).size(1260, 630).url(),
                 alt: image.alt,
               }
             : {

@@ -2,6 +2,7 @@ import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import clsx from 'clsx';
 import urlJoin from 'proper-url-join';
+import { toPlainText } from '@portabletext/react';
 import Link from 'next/link';
 import Footer from '../../components/Footer';
 import GridWrapper from '../../components/GridWrapper';
@@ -30,6 +31,7 @@ const QUERY = groq`
       _id,
       title,
       duration,
+      shortDescription,
       longDescription,
       speakers[] {
         role,
@@ -67,14 +69,6 @@ interface SessionRouteProps {
         slug: Slug;
         _id: string;
       }[];
-    };
-    timeInfo: {
-      mainVenueTimezone: string;
-      currentSessionInProgram?: Pick<Session, '_id' | 'duration'>;
-      mainVenueSessions: {
-        startDateTime: string;
-        sessions: Pick<Session, '_id' | 'duration'>[];
-      };
     };
     programs: Program[];
     mainVenueName: string;
@@ -125,7 +119,7 @@ const SpeakerList = ({ speakers }: SpeakerListProps) => (
 
 const SessionRoute = ({
   data: {
-    session: { title, longDescription, speakers, type, _id },
+    session: { title, shortDescription, longDescription, speakers, type, _id },
     home: { ticketsUrl },
     navItems,
     footer,
@@ -134,9 +128,7 @@ const SessionRoute = ({
   },
   slug,
 }: SessionRouteProps) => {
-  const hasHighlightedSpeakers =
-    speakers?.length === 1 || speakers?.length === 2;
-
+  const hasHighlightedSpeakers = [1, 2].includes(speakers?.length);
   const matchingSessionsInPrograms = sessionTimingDetailsForMatchingPrograms(
     programs,
     _id
@@ -147,7 +139,11 @@ const SessionRoute = ({
   }));
   return (
     <>
-      <MetaTags title={title} description="" currentPath={`/session/${slug}`} />
+      <MetaTags
+        title={title}
+        description={shortDescription ? toPlainText(shortDescription) : ''}
+        currentPath={`/session/${slug}`}
+      />
       <header className={styles.header}>
         <Nav
           currentPath={`/session/${slug}`}
