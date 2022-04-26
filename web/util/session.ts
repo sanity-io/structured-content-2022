@@ -7,7 +7,6 @@ import {
   formatTimeRange,
   getNonLocationTimezone,
 } from './date';
-import { format, formatInTimeZone } from 'date-fns-tz';
 
 const minutesFromProgramStart = (
   sessions: Pick<Session, 'duration'>[],
