@@ -2,10 +2,19 @@ import { formatInTimeZone } from 'date-fns-tz';
 import { addMinutes, intervalToDuration } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 
-export const formatTime = (date: Date, timezone: string, meridiem?: boolean) =>
-  formatInTimeZone(date, timezone, meridiem ? 'h:mm aa' : 'HH:mm', {
-    locale: enUS,
-  });
+export const formatTime = (
+  date: Date,
+  timezone: string,
+  hideMeridiemIndicator?: boolean
+) =>
+  formatInTimeZone(
+    date,
+    timezone,
+    `h:mm${hideMeridiemIndicator ? '' : ' aa'}`,
+    {
+      locale: enUS,
+    }
+  );
 
 export const formatDate = (date: Date, timezone: string) =>
   formatInTimeZone(date, timezone, 'MMMM d, yyyy', { locale: enUS });
@@ -39,9 +48,9 @@ export const formatTimeRange = (
   const end = addMinutes(start, duration);
   const isDifferingMeridiem = differingMeridiem(start, end, timezone);
   return [
-    formatTime(start, timezone, isDifferingMeridiem),
+    formatTime(start, timezone, !isDifferingMeridiem),
     isDifferingMeridiem ? ' – ' : '–',
-    formatTime(end, timezone, true),
+    formatTime(end, timezone),
   ].join('');
 };
 
