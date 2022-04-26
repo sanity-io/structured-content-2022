@@ -142,7 +142,7 @@ const SessionRoute = ({
     _id
   ).map(({ label, ...rest }) => ({
     // Ad-hoc override for the SF venue, for this specific view only
-    label: label === mainVenueName ? 'San Francisco & Virtual' : label,
+    label: label === mainVenueName ? `${label} & Virtual` : label,
     ...rest,
   }));
   return (
