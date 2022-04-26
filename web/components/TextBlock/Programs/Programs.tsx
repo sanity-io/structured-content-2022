@@ -66,7 +66,10 @@ const SessionSection = ({ session, activeProgram, start }) => (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img
                         className={styles.speakerImage}
-                        src={imageUrlFor(person.photo).size(40, 40).url()}
+                        src={imageUrlFor(person.photo)
+                          .size(40, 40)
+                          .saturation(-100)
+                          .url()}
                         width={40}
                         height={40}
                         alt={person.photo.alt || ''}
