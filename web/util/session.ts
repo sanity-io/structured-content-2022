@@ -33,8 +33,11 @@ export const sessionStart = (
   return addMinutes(start, sessionStartOffset);
 };
 
-export const getDuration = ({ session, duration, durationOverride }: ProgramSession) =>
-  durationOverride ?? duration ?? session?.duration ?? 0;
+export const getDuration = ({
+  session,
+  duration,
+  durationOverride,
+}: ProgramSession) => durationOverride ?? duration ?? session?.duration ?? 0;
 
 /* Given all Programs, finds the Programs that contain the Session (matching on sessionId === _id).
  * For each match, returns:
