@@ -115,6 +115,13 @@
 
   .speakers {
     margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+  }
+
+  .speaker {
+    margin-top: 0;
   }
 }
 
