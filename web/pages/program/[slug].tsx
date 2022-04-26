@@ -2,6 +2,7 @@ import type { GetStaticPaths, GetStaticProps } from 'next';
 import { groq } from 'next-sanity';
 import clsx from 'clsx';
 import urlJoin from 'proper-url-join';
+import { toPlainText } from '@portabletext/react';
 import Footer from '../../components/Footer';
 import GridWrapper from '../../components/GridWrapper';
 import MetaTags from '../../components/MetaTags';
@@ -33,6 +34,7 @@ const QUERY = groq`
       _id,
       title,
       duration,
+      shortDescription,
       longDescription,
       speakers[] {
         role,
@@ -131,7 +133,7 @@ const SpeakerList = ({ speakers }: SpeakerListProps) => (
 
 const SessionRoute = ({
   data: {
-    session: { title, longDescription, speakers, type },
+    session: { title, shortDescription, longDescription, speakers, type },
     home: { ticketsUrl },
     navItems,
     footer,
@@ -145,19 +147,11 @@ const SessionRoute = ({
 }: SessionRouteProps) => {
   const hasHighlightedSpeakers = [1, 2].includes(speakers?.length);
   const start = sessionStart(startDateTime, session?._id, sessions);
-  const formattedStartDate = start && formatDateWithDay(start, timezone, ', ');
-  const formattedDuration =
-    start && formatTimeRange(start, session?.duration, timezone);
-  const formattedTimezone =
-    start && getNonLocationTimezone(start, timezone, true);
-  const description = start
-    ? `${formattedStartDate} ${formattedDuration} ${formattedTimezone}`
-    : '';
   return (
     <>
       <MetaTags
         title={title}
-        description={description}
+        description={shortDescription ? toPlainText(shortDescription) : ''}
         currentPath={`/session/${slug}`}
       />
       <header className={styles.header}>
@@ -186,9 +180,10 @@ const SessionRoute = ({
 
                 {start && (
                   <>
-                    <div>{formattedStartDate}</div>
+                    <div>{formatDateWithDay(start, timezone, ', ')}</div>
                     <div>
-                      {formattedDuration} {formattedTimezone}
+                      {formatTimeRange(start, session?.duration, timezone)}{' '}
+                      {getNonLocationTimezone(start, timezone, true)}
                     </div>
                   </>
                 )}
