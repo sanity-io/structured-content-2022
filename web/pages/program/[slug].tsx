@@ -159,11 +159,7 @@ const SessionRoute = ({
   );
   const formattedDuration =
     hasAssociatedProgram &&
-    formatTimeRange(
-      start,
-      currentSessionInProgram?.duration,
-      mainVenueTimezone
-    );
+    formatTimeRange(start, currentSessionInProgram.duration, mainVenueTimezone);
   const description = hasAssociatedProgram
     ? `${formattedStartDate} ${formattedDuration} ${formattedTimezone}`
     : '';
