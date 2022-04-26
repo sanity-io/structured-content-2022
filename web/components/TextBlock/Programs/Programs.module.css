@@ -1,11 +1,9 @@
 .venueNavContainer {
-  display: flex;
-  justify-content: center;
-  transform: translateY(-50%);
+  margin: 32px 0;
 }
 
 .container {
-  margin-top: 68px;
+  margin: 64px 0 80px;
 }
 
 .heading {
@@ -77,6 +75,17 @@
 }
 
 @media (--medium-up) {
+  .venueNavContainer {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    transform: translateY(-50%);
+  }
+
+  .container {
+    margin: 60px 0 96px;
+  }
+
   .dayHeader {
     padding: 32px 0;
   }
@@ -110,6 +119,10 @@
 }
 
 @media (--large-up) {
+  .container {
+    margin: 96px 0 128px;
+  }
+
   .session {
     padding: 48px 0;
   }
