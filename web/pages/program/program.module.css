@@ -18,6 +18,15 @@
   max-width: var(--max-body-text-width);
 }
 
+.venueTimes {
+  padding: 0;
+  list-style: none;
+}
+
+.venueTime:not(:last-of-type) {
+  margin-bottom: 16px;
+}
+
 .sessionVenueDateTime {
   display: block;
 }

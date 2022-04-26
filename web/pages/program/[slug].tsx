@@ -172,25 +172,27 @@ const SessionRoute = ({
                 )}
                 <h1 className={programStyles.sessionTitle}>{title}</h1>
 
-                {matchingSessionsInPrograms.map(
-                  ({ label, time, timezone, rawDate, date, duration }) => (
-                    <p key={label}>
-                      <strong>{label}</strong>
-                      <time
-                        dateTime={rawDate}
-                        className={programStyles.sessionVenueDateTime}
-                      >
-                        {date}
-                      </time>
-                      <time
-                        dateTime={duration}
-                        className={programStyles.sessionVenueDateTime}
-                      >
-                        {time} {timezone}
-                      </time>
-                    </p>
-                  )
-                )}
+                <ul className={programStyles.venueTimes}>
+                  {matchingSessionsInPrograms.map(
+                    ({ label, time, timezone, rawDate, date, duration }) => (
+                      <li className={programStyles.venueTime} key={label}>
+                        <strong>{label}</strong>
+                        <time
+                          dateTime={rawDate}
+                          className={programStyles.sessionVenueDateTime}
+                        >
+                          {date}
+                        </time>
+                        <time
+                          dateTime={duration}
+                          className={programStyles.sessionVenueDateTime}
+                        >
+                          {time} {timezone}
+                        </time>
+                      </li>
+                    )
+                  )}
+                </ul>
               </div>
 
               {speakers &&
