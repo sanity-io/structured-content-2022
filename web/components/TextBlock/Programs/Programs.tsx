@@ -124,7 +124,7 @@ export const Programs = ({
     return (
       <>
         <div className={styles.venueNavContainer}>
-          <VenueNav venues={venues} activeVenue={activeProgram?.venues[0]} />
+          <VenueNav venues={venues} activeVenue={activeProgram.venues[0]} />
         </div>
 
         <section className={styles.container}>
