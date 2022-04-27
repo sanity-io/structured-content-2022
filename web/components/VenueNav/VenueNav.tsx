@@ -8,7 +8,6 @@ import styles from './VenueNav.module.css';
 interface VenueNavProps {
   venues: Venue[];
   activeVenue?: Venue;
-  ariaControlsId: string;
 }
 
 const venueLabel = (venueName: string) =>
@@ -40,7 +39,6 @@ export const VenueNav = ({
                   styles.venue,
                   activeVenue?._id === _id && styles.active
                 )}
-                aria-controls={ariaControlsId}
               >
                 <span className={styles.venueName}>{name}</span>
                 <span className={styles.venueSubtitle}>{venueLabel(name)}</span>
