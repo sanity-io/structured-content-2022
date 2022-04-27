@@ -46,8 +46,10 @@ export default {
       const totalMinutes = (): number => {
         return sessionsDurations.length > 0
           ? sessionsDurations.reduce((total, { session, durationOverride }) => {
-              const duration = durationOverride || session?.duration;
-              return total + duration;
+              const duration = durationOverride || session?.duration || 0;
+              const minutes: number = total + duration;
+
+              return minutes;
             }, 0)
           : 0;
       };
