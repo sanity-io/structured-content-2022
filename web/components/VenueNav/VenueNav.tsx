@@ -16,11 +16,7 @@ const venueLabel = (venueName: string) =>
     Virtual: 'Online',
   }[venueName] || 'Satellite');
 
-export const VenueNav = ({
-  venues,
-  activeVenue,
-  ariaControlsId,
-}: VenueNavProps) => {
+export const VenueNav = ({ venues, activeVenue }: VenueNavProps) => {
   const router = useRouter();
   return (
     <nav className={styles.container}>
