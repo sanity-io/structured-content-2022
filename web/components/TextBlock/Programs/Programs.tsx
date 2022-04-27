@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import type { PortableTextComponentProps } from '@portabletext/react';
 import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import type { Program } from '../../../types/Program';
+import type { Venue } from '../../../types/Venue';
 import { partition } from '../../../util/array';
 import {
   formatDateWithDay,
@@ -23,6 +24,7 @@ type ProgramsProps = {
   heading?: string;
   allPrograms: Program[];
   programs?: Program[];
+  mainVenue?: Venue;
 };
 
 // Add an _id field to 'padding'-type sessions and normalize duration
@@ -104,7 +106,7 @@ const findByVenueSlug = (programs: Program[], venueSlug?: string) =>
   programs.find(({ venues }) => venues[0]?.slug.current === venueSlug);
 
 export const Programs = ({
-  value: { type, heading, allPrograms, programs },
+  value: { type, heading, allPrograms, programs, mainVenue },
 }: PortableTextComponentProps<ProgramsProps>) => {
   const collection = getCollectionForSelectionType(type, allPrograms, programs);
   const venues = collection?.map((program) => program.venues).flat();
@@ -127,7 +129,11 @@ export const Programs = ({
     return (
       <>
         <div className={styles.venueNavContainer}>
-          <VenueNav venues={venues} activeVenue={activeProgram.venues[0]} />
+          <VenueNav
+            venues={venues}
+            activeVenue={activeProgram.venues[0]}
+            mainVenue={mainVenue}
+          />
         </div>
 
         <section className={styles.container}>

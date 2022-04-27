@@ -8,15 +8,16 @@ import styles from './VenueNav.module.css';
 interface VenueNavProps {
   venues: Venue[];
   activeVenue?: Venue;
+  mainVenue?: Venue;
 }
 
-const venueLabel = (venueName: string) =>
-  ({
-    'San Francisco': 'Main venue',
-    Virtual: 'Online',
-  }[venueName] || 'Satellite');
+export const VenueNav = ({ venues, activeVenue, mainVenue }: VenueNavProps) => {
+  const venueLabel = (venueName: string) =>
+    ({
+      [mainVenue?.name]: 'Main venue',
+      Virtual: 'Online',
+    }[venueName] || 'Satellite');
 
-export const VenueNav = ({ venues, activeVenue }: VenueNavProps) => {
   const router = useRouter();
   return (
     <nav className={styles.container}>

@@ -46,6 +46,14 @@ const SESSION = `
   title,
   type,
 `;
+const VENUE = `
+  _id,
+  _type,
+  name,
+  geolocation,
+  slug,
+  timezone,
+`;
 const PROGRAM = `
   _id,
   internalName,
@@ -54,7 +62,7 @@ const PROGRAM = `
     ...,
     session->{ ${SESSION} },
   },
-  venues[]->{ _id, name, slug, timezone },
+  venues[]->{ ${VENUE} },
 `;
 const QUESTION_AND_ANSWER_COLLECTION_SECTION = `
   title, questions[]{ _key, question, answer[]{ ${SIMPLE_BLOCK_CONTENT} } }
@@ -164,4 +172,5 @@ export {
   SPEAKER_WITH_SESSIONS,
   SPEAKER,
   PRIMARY_NAV,
+  VENUE,
 };

@@ -32,6 +32,7 @@ import {
   SPONSORSHIP,
   TEXT_AND_IMAGE_SECTION,
   TICKET,
+  VENUE,
 } from '../util/queries';
 import styles from './app.module.css';
 
@@ -84,7 +85,8 @@ const SHARED_SECTIONS = `
     type,
     heading,
     programs[]-> { ${PROGRAM} },
-    "allPrograms": *[_type == "program"] { ${PROGRAM} }
+    "allPrograms": *[_type == "program"] { ${PROGRAM} },
+    "mainVenue": *[_id == "${mainEventId}"][0].venues[0]-> { ${VENUE} },
   },
 `;
 
