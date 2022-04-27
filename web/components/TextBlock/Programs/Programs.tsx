@@ -37,30 +37,32 @@ const mapSessionDurationAndIds = (program: Program) =>
 const shouldLinkToSession = (session) =>
   !['break', 'social'].includes(session.type);
 
-const SessionSection = ({ session, activeProgram, start }) => (
-  <section className={styles.session}>
-    <GridWrapper>
-      <div className={styles.sessionContents}>
-        <div className={styles.sessionTime}>
-          {formatTimeRange(
-            start,
-            getDuration(session),
-            activeProgram.venues[0]?.timezone
-          )}{' '}
-          {getNonLocationTimezone(
-            start,
-            activeProgram.venues[0]?.timezone,
-            true
-          )}
-        </div>
-        <div className={styles.sessionMain}>
-          <h4 className={styles.sessionTitle}>{session.session.title}</h4>
+const SessionSection = ({ session, activeProgram, start }) => {
+  const speakers = session.session.speakers?.filter(
+    (speaker) => speaker.person
+  );
+  return (
+    <section className={styles.session}>
+      <GridWrapper>
+        <div className={styles.sessionContents}>
+          <div className={styles.sessionTime}>
+            {formatTimeRange(
+              start,
+              getDuration(session),
+              activeProgram.venues[0]?.timezone
+            )}{' '}
+            {getNonLocationTimezone(
+              start,
+              activeProgram.venues[0]?.timezone,
+              true
+            )}
+          </div>
+          <div className={styles.sessionMain}>
+            <h4 className={styles.sessionTitle}>{session.session.title}</h4>
 
-          {session.session.speakers && (
-            <ul className={styles.speakers}>
-              {session.session.speakers
-                ?.filter((speaker) => speaker.person)
-                .map(({ person }) => (
+            {speakers && (
+              <ul className={styles.speakers}>
+                {speakers.map(({ person }) => (
                   <li key={person._id} className={styles.speaker}>
                     {person.photo && (
                       /* eslint-disable-next-line @next/next/no-img-element */
@@ -88,13 +90,14 @@ const SessionSection = ({ session, activeProgram, start }) => (
                     </div>
                   </li>
                 ))}
-            </ul>
-          )}
+              </ul>
+            )}
+          </div>
         </div>
-      </div>
-    </GridWrapper>
-  </section>
-);
+      </GridWrapper>
+    </section>
+  );
+};
 
 const findByVenueSlug = (programs: Program[], venueSlug?: string) =>
   venueSlug &&
@@ -128,9 +131,11 @@ export const Programs = ({
         </div>
 
         <section className={styles.container}>
-          <GridWrapper>
-            {heading && <h2 className={styles.heading}>{heading}</h2>}
-          </GridWrapper>
+          {heading && (
+            <GridWrapper>
+              <h2 className={styles.heading}>{heading}</h2>
+            </GridWrapper>
+          )}
 
           {Object.keys(sessionsPerDay).map((day) => (
             <section key={day}>
