@@ -67,7 +67,7 @@ const SessionSection = ({ session, activeProgram, start }) => (
                       <img
                         className={styles.speakerImage}
                         src={imageUrlFor(person.photo)
-                          .size(40, 40)
+                          .size(160, 160)
                           .saturation(-100)
                           .url()}
                         width={40}
