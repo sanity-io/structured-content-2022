@@ -96,8 +96,9 @@ const SessionSection = ({ session, activeProgram, start }) => (
   </section>
 );
 
-const findByVenueName = (programs: Program[], venueName?: string) =>
-  venueName && programs.find(({ venues }) => venues[0].name === venueName);
+const findByVenueSlug = (programs: Program[], venueSlug?: string) =>
+  venueSlug &&
+  programs.find(({ venues }) => venues[0]?.slug.current === venueSlug);
 
 export const Programs = ({
   value: { type, heading, allPrograms, programs },
@@ -106,9 +107,9 @@ export const Programs = ({
   const venues = collection?.map((program) => program.venues).flat();
   const router = useRouter();
   const venue = router.query.venue as string;
-  const activeProgram = findByVenueName(collection, venue) || programs?.[0];
+  const activeProgram = findByVenueSlug(collection, venue) || programs?.[0];
   if (!activeProgram) {
-    console.error(`No activeProgram found for ${venue}`);
+    console.error(`No activeProgram found for Venue slug '${venue}'`);
     return null;
   }
 

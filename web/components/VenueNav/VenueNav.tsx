@@ -26,7 +26,7 @@ export const VenueNav = ({
   return (
     <nav className={styles.container}>
       <ul className={styles.venues}>
-        {venues.map(({ name, _id }) => (
+        {venues.map(({ name, _id, slug }) => (
           <li
             key={name}
             className={clsx(
@@ -34,7 +34,9 @@ export const VenueNav = ({
               activeVenue?._id === _id && styles.active
             )}
           >
-            <Link href={urlJoin(router.asPath, { query: { venue: name } })}>
+            <Link
+              href={urlJoin(router.asPath, { query: { venue: slug.current } })}
+            >
               <a
                 className={clsx(
                   styles.venue,
