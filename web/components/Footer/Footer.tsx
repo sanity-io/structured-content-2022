@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import sanityLogo from '../../images/sanity_logo_white.svg';
-import instagramLogo from '../../images/instagram_logo_black.svg';
-import twitterLogo from '../../images/twitter_logo_black.svg';
-import linkedinLogo from '../../images/linkedin_logo_black.svg';
+import instagramLogo from '../../images/instagram_logo_white.svg';
+import twitterLogo from '../../images/twitter_logo_white.svg';
+import linkedinLogo from '../../images/linkedin_logo_white.svg';
 import GridWrapper from '../GridWrapper';
 import styles from './Footer.module.css';
 import { Slug } from '../../types/Slug';
