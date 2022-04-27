@@ -1,0 +1,13 @@
+.container {
+  width: 1200px;
+  height: 628px;
+  background: url(../../images/og_image_background.svg);
+  padding: 32px 40px;
+}
+
+.title {
+  font: 700 80px/80px 'National 2 Narrow', sans-serif;
+  letter-spacing: -0.5px;
+  color: black;
+  width: 752px;
+}
