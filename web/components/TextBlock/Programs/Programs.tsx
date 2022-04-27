@@ -118,7 +118,7 @@ export const Programs = ({
       const sessions = mapSessionDurationAndIds(activeProgram);
       const id = session.session?._id ?? session._key;
       const date = sessionStart(activeProgram.startDateTime, id, sessions);
-      return formatDateWithDay(date, activeProgram.venues[0].timezone, ', ');
+      return formatDateWithDay(date, activeProgram.venues?.[0]?.timezone, ', ');
     });
 
     return (
@@ -138,10 +138,10 @@ export const Programs = ({
                 <GridWrapper>
                   <h3 className={styles.dayHeading}>{day}</h3>
                   <div className={styles.dayLocation}>
-                    {activeProgram?.venues[0].name} (
+                    {activeProgram.venues?.[0]?.name} (
                     {getNonLocationTimezone(
-                      parseISO(activeProgram?.startDateTime),
-                      activeProgram?.venues[0]?.timezone,
+                      parseISO(activeProgram.startDateTime),
+                      activeProgram.venues?.[0]?.timezone,
                       true
                     )}
                     )
