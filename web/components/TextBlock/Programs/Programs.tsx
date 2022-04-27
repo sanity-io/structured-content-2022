@@ -106,8 +106,9 @@ export const Programs = ({
   const venues = collection?.map((program) => program.venues).flat();
   const router = useRouter();
   const venue = router.query.venue as string;
-  const activeProgram = findByVenueName(collection, venue) || programs[0];
+  const activeProgram = findByVenueName(collection, venue) || programs?.[0];
   if (!activeProgram) {
+    console.error(`No activeProgram found for ${venue}`);
     return null;
   }
 
