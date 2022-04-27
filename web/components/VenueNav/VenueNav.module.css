@@ -19,10 +19,11 @@
 
 .venue {
   padding: 16px 24px;
-  background: none;
   border: 1px solid black;
   border-radius: 6px;
-  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  text-align: center;
 }
 
 .venue:focus-visible,

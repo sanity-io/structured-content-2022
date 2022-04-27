@@ -1,6 +1,6 @@
 import { parseISO } from 'date-fns';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
 import type { PortableTextComponentProps } from '@portabletext/react';
 import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import type { Program } from '../../../types/Program';
@@ -96,19 +96,20 @@ const SessionSection = ({ session, activeProgram, start }) => (
   </section>
 );
 
+const findByVenueName = (programs: Program[], venueName?: string) =>
+  venueName && programs.find(({ venues }) => venues[0].name === venueName);
+
 export const Programs = ({
   value: { type, heading, allPrograms, programs },
 }: PortableTextComponentProps<ProgramsProps>) => {
   const collection = getCollectionForSelectionType(type, allPrograms, programs);
   const venues = collection?.map((program) => program.venues).flat();
-  const [activeProgram, setActiveProgram] = useState<Program>(collection?.[0]);
-
-  const onVenueClick = (clickedVenue) => {
-    const venue = collection?.find(({ venues }) =>
-      venues?.find((v) => v._id === clickedVenue._id)
-    );
-    setActiveProgram(venue);
-  };
+  const router = useRouter();
+  const venue = router.query.venue as string;
+  const activeProgram = findByVenueName(collection, venue) || programs[0];
+  if (!activeProgram) {
+    return null;
+  }
 
   if (type === 'all' || type === 'highlighted') {
     const sessionsPerDay = partition(activeProgram.sessions, (session) => {
@@ -132,7 +133,6 @@ export const Programs = ({
           <VenueNav
             venues={venues}
             activeVenue={activeProgram?.venues[0]}
-            onVenueClick={onVenueClick}
             ariaControlsId={sessionsId}
           />
         </div>
