@@ -15,6 +15,13 @@
   display: inline-block; /* nicer focus outline */
 }
 
+.logoLink:focus-visible,
+.mailLink:focus-visible,
+.socialLink:focus-visible,
+.linksItemLink:focus-visible {
+  outline-color: var(--color-brand-white);
+}
+
 .mailLink {
   text-decoration: none;
   color: var(--color-ui-gray-600);
