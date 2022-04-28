@@ -1,5 +1,6 @@
-import { Section } from './Section';
-import { Person } from './Person';
+import type { Person } from './Person';
+import type { Section } from './Section';
+import type { Slug } from './Slug';
 
 export type Session = {
   _id: string;
@@ -8,6 +9,7 @@ export type Session = {
   duration?: number;
   shortDescription?: Section;
   longDescription?: Section;
+  slug?: Slug;
   speakers?: {
     role: 'speaker' | 'moderator';
     person: Person;

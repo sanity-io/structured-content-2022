@@ -7,6 +7,18 @@
   letter-spacing: var(--letter-spacing-ui-xs);
 }
 
+.link {
+  text-decoration: none;
+}
+
+.link:hover .card {
+  background: var(--color-brand-yellow);
+}
+
+.link:active .card {
+  background: var(--color-brand-yellow-light);
+}
+
 .title {
   display: block;
   font: var(--font-display-xxs);
