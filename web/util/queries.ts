@@ -96,18 +96,15 @@ const SPEAKER_WITH_SESSIONS = `
   _type,
   _updatedAt,
   "sessions": *[_type == "session" && references(^._id) && !(_id in path("drafts.**"))] {
-    _id,
-    title,
-    duration,
+    "session": { ${SESSION} },
     "programContainingSession": *[_type == "program" && references(^._id)] | order(_createdAt)[0] {
       "programStart": startDateTime,
       sessions[] {
+        _key,
         _type,
         duration,
-        session-> {
-          _id,
-          duration,
-        }
+        durationOverride,
+        session->{ ${SESSION} },
       },
       "venueTimezone": venues[0]->.timezone,
     },
