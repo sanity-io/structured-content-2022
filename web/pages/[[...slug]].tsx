@@ -32,6 +32,7 @@ import {
   SPONSORSHIP,
   TEXT_AND_IMAGE_SECTION,
   TICKET,
+  VENUE,
 } from '../util/queries';
 import styles from './app.module.css';
 
@@ -84,7 +85,8 @@ const SHARED_SECTIONS = `
     type,
     heading,
     programs[]-> { ${PROGRAM} },
-    "allPrograms": *[_type == "program"] { ${PROGRAM} }
+    "allPrograms": *[_type == "program"] { ${PROGRAM} },
+    "mainVenue": *[_id == "${mainEventId}"][0].venues[0]-> { ${VENUE} },
   },
 `;
 
@@ -227,9 +229,17 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const allSlugsQuery = groq`*[defined(slug.current) && _type == 'route'][].slug.current`;
-  const pages = await client.fetch(allSlugsQuery);
-  const paths = pages.map((slug) => ({
+  const allSlugsQuery = groq`
+    {
+      "slugs": *[defined(slug.current) && _type == 'route'][].slug.current,
+      "programVenues": *[_type == 'program'].venues[]->.slug.current,
+    }
+  `;
+  const { slugs, programVenues } = await client.fetch(allSlugsQuery);
+  const programSlugs = Array.from<string>(new Set(programVenues)).map((slug) =>
+    urlJoin('program', { query: { venue: slug } })
+  );
+  const paths = [...slugs, ...programSlugs].map((slug) => ({
     params: {
       slug: [urlJoin(slug, { leadingSlash: false })].filter(Boolean),
     },

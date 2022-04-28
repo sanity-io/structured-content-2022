@@ -1,6 +1,6 @@
 import { addMinutes, parseISO } from 'date-fns';
-import type { Session } from '../types/Session';
 import type { Program, ProgramSession } from '../types/Program';
+import type { Session } from '../types/Session';
 import {
   formatDateWithDay,
   formatTimeDuration,
@@ -33,8 +33,11 @@ export const sessionStart = (
   return addMinutes(start, sessionStartOffset);
 };
 
-const getDuration = ({ session, duration, durationOverride }: ProgramSession) =>
-  durationOverride ?? duration ?? session?.duration ?? 0;
+export const getDuration = ({
+  session,
+  duration,
+  durationOverride,
+}: ProgramSession) => durationOverride ?? duration ?? session?.duration ?? 0;
 
 /* Given all Programs, finds the Programs that contain the Session (matching on sessionId === _id).
  * For each match, returns:
