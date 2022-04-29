@@ -25,3 +25,10 @@ export const getEntityPath = (entity?: { _type: string; slug?: Slug }) => {
       return '';
   }
 };
+
+export const getOgImagePath = (imageText?: string) =>
+  imageText
+    ? urlJoin('api', 'og-image', encodeURIComponent(imageText), {
+        leadingSlash: true,
+      })
+    : '';

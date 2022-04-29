@@ -13,6 +13,7 @@ import TextBlock from '../../components/TextBlock';
 import client from '../../lib/sanity.server';
 import { formatDate } from '../../util/date';
 import { mainEventId } from '../../util/constants';
+import { getOgImagePath } from "../../util/entityPaths";
 import { BLOCK_CONTENT, PRIMARY_NAV } from '../../util/queries';
 import type { Article } from '../../types/Article';
 import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
@@ -99,6 +100,7 @@ const ArticlesRoute = ({
         description={summary}
         currentPath={slug}
         rewrittenArticleSlugs={rewrittenArticleSlugs}
+        fallbackImage={{ url: getOgImagePath(heading), alt: heading }}
       />
       <header className={styles.header}>
         <Nav

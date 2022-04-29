@@ -19,6 +19,7 @@ import type { PrimaryNavItem } from '../types/PrimaryNavItem';
 import type { Section } from '../types/Section';
 import type { Slug } from '../types/Slug';
 import { mainEventId } from '../util/constants';
+import { getOgImagePath } from '../util/entityPaths';
 import {
   ARTICLE_SECTION,
   FIGURE,
@@ -203,6 +204,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
     <>
       <MetaTags
         {...{ title, description: seoDescription, image, currentPath, noIndex }}
+        fallbackImage={{ url: getOgImagePath(title), alt: title }}
       />
       <header className={headerClasses}>
         <Nav
