@@ -2,8 +2,9 @@ import Jimp from 'jimp-compact';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { resolve } from 'path';
 import wrap from 'word-wrap';
-// Make Vercel include this file (referenced by national-2-narrow-bold.fnt) in lambda
-import '../../../public/static/fonts/national-2-narrow-bold-min.png';
+
+// Make Vercel include this file (referenced by .fnt below) in lambda
+resolve('public', 'static', 'fonts', 'national-2-narrow-bold-min.png');
 
 const FONT_SIZE = 80;
 const PADDING_X = 32;
