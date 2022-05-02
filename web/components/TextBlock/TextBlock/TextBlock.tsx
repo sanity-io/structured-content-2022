@@ -5,7 +5,6 @@ import { getEntityPath } from '../../../util/entityPaths';
 import SharedSections from '../SharedSections';
 import Person from '../Person';
 import RichText from '../RichText';
-import Venue from '../Venue';
 import QuestionAndAnswerCollection from '../QuestionAndAnswerCollection';
 import TextAndImage from '../TextAndImage';
 import SimpleCallToAction from '../SimpleCallToAction';
@@ -22,7 +21,6 @@ const components: Partial<PortableTextComponents> = {
   types: {
     richText: RichText,
     person: Person,
-    venue: Venue,
     questionAndAnswerCollectionSection: QuestionAndAnswerCollection,
     textAndImageSection: TextAndImage,
     sharedSections: SharedSections,
