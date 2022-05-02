@@ -181,7 +181,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
   const scrollPositionTriggeringFrontPageMenu = 420;
 
   useEffect(() => {
-    const onScroll = (e) =>
+    const onScroll = (e: { target: any }) =>
       setScrolledFarEnough(
         e.target.documentElement.scrollTop >
           scrollPositionTriggeringFrontPageMenu
@@ -248,12 +248,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: 'blocking' };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug: slugParam },
-  preview = false,
-}) => {
+export const getStaticProps: GetStaticProps = async ({ params, preview = false }) => {
+  const slugParam = params?.slug?.[0] ?? '';
   const slug = Array.isArray(slugParam)
-    ? urlJoin.apply(null, [...slugParam, { leadingSlash: false }])
+    ? slugParam.reduce((acc, cv) => urlJoin(acc, cv, { leadingSlash: false }))
     : slugParam || '/';
   const data = await client.fetch(QUERY, { slug });
   if (!data?.route?.page) {
