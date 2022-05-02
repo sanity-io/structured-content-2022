@@ -3,11 +3,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { PortableTextComponentProps } from '@portabletext/react';
 import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
-import type { Program } from '../../../types/Program';
-import type { Session } from "../../../types/Session";
+import type { Program, ProgramSession } from '../../../types/Program';
+import type { Session } from '../../../types/Session';
 import type { Venue } from '../../../types/Venue';
 import { partition } from '../../../util/array';
 import {
+  defaultTimezone,
   formatDateWithDay,
   formatTimeRange,
   getNonLocationTimezone,
@@ -40,59 +41,67 @@ const mapSessionDurationAndIds = (program: Program) =>
 const shouldLinkToSession = (session?: Session) =>
   session?.type && !['break', 'social'].includes(session.type);
 
-const SessionSection = ({ session, activeProgram, start }) => {
+interface SessionSectionProps {
+  session: ProgramSession & { session: Session };
+  activeProgram: Program;
+  start: Date;
+}
+
+const SessionSection = ({
+  session,
+  activeProgram,
+  start,
+}: SessionSectionProps) => {
   const speakers = session.session.speakers?.filter(
     (speaker) => speaker.person
   );
+  const timezone = activeProgram.venues[0]?.timezone || defaultTimezone;
   return (
     <section className={styles.session}>
       <GridWrapper>
         <div className={styles.sessionContents}>
           <div className={styles.sessionTime}>
-            {formatTimeRange(
-              start,
-              getDuration(session),
-              activeProgram.venues[0]?.timezone
-            )}{' '}
-            {getNonLocationTimezone(
-              start,
-              activeProgram.venues[0]?.timezone,
-              true
-            )}
+            {formatTimeRange(start, getDuration(session), timezone)}{' '}
+            {getNonLocationTimezone(start, timezone, true)}
           </div>
           <div className={styles.sessionMain}>
             <h4 className={styles.sessionTitle}>{session.session.title}</h4>
 
             {speakers && (
               <ul className={styles.speakers}>
-                {speakers.map(({ person }) => (
-                  <li key={person._id} className={styles.speaker}>
-                    {person.photo && (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img
-                        className={styles.speakerImage}
-                        src={imageUrlFor(person.photo)
-                          .size(160, 160)
-                          .saturation(-100)
-                          .url()}
-                        width={40}
-                        height={40}
-                        alt={person.photo.alt || ''}
-                      />
-                    )}
+                {speakers.map(({ person }) => {
+                  const personPhotoSrc =
+                    person?.photo &&
+                    imageUrlFor(person.photo)
+                      .size(160, 160)
+                      .saturation(-100)
+                      .url();
+                  return (
+                    <li key={person._id} className={styles.speaker}>
+                      {personPhotoSrc && (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          className={styles.speakerImage}
+                          src={personPhotoSrc}
+                          width={40}
+                          height={40}
+                          alt={person.photo.alt || ''}
+                        />
+                      )}
 
-                    <div>
-                      <strong className={styles.speakerName}>
-                        {person.name}
-                      </strong>
                       <div>
-                        {[person.title, person.company]
-                          .filter(Boolean)
-                          .join(', ')}
+                        <strong className={styles.speakerName}>
+                          {person.name}
+                        </strong>
+                        <div>
+                          {[person.title, person.company]
+                            .filter(Boolean)
+                            .join(', ')}
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                ))}
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </div>
