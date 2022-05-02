@@ -38,7 +38,8 @@ export const formatTimeDuration = (start: Date, duration: number) => {
 };
 
 const differingMeridiem = (d1: Date, d2: Date, timeZone = defaultTimezone) => {
-  const fmt = (d: Date) => formatInTimeZone(d, timeZone, 'aa', { locale: enUS });
+  const fmt = (d: Date) =>
+    formatInTimeZone(d, timeZone, 'aa', { locale: enUS });
   return fmt(d1) !== fmt(d2);
 };
 

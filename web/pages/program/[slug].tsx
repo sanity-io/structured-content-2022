@@ -90,7 +90,8 @@ const SpeakerList = ({ speakers }: SpeakerListProps) => (
         role,
         person: { _id, name, title, company, photo },
       } = speaker;
-      const personPhotoSrc = photo && imageUrlFor(photo).size(64, 80).saturation(-100).url();
+      const personPhotoSrc =
+        photo && imageUrlFor(photo).size(64, 80).saturation(-100).url();
       return (
         <li key={_id} className={programStyles.speakerItem}>
           <Link href={getEntityPath(speaker.person)}>
@@ -129,7 +130,8 @@ const SessionRoute = ({
   },
   slug,
 }: SessionRouteProps) => {
-  const hasHighlightedSpeakers = speakers?.length && [1, 2].includes(speakers.length);
+  const hasHighlightedSpeakers =
+    speakers?.length && [1, 2].includes(speakers.length);
   const matchingSessionsInPrograms = sessionTimingDetailsForMatchingPrograms(
     programs,
     _id
@@ -218,7 +220,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
         slug: urlJoin(slug, { leadingSlash: false }),
       },
     }))
-    .filter(({ params: { slug } }: { params: { slug: string }}) => Boolean(slug));
+    .filter(({ params: { slug } }: { params: { slug: string } }) =>
+      Boolean(slug)
+    );
 
   return { paths, fallback: 'blocking' };
 };

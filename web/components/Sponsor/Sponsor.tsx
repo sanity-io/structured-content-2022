@@ -38,22 +38,23 @@ export const Sponsor = ({
   sponsor: { image, title, callToActionURL },
   type,
 }: SponsorProps) => {
-  const dimension = type && imgDimensions[type] || imgDimensions.Community;
-  const src = image && imageUrlFor(image)
-    .auto('format')
-    .bg('fff')
-    .size(dimension.width, dimension.height)
-    .fit('max')
-    .ignoreImageParams()
-    .url();
+  const dimension = (type && imgDimensions[type]) || imgDimensions.Community;
+  const src =
+    image &&
+    imageUrlFor(image)
+      .auto('format')
+      .bg('fff')
+      .size(dimension.width, dimension.height)
+      .fit('max')
+      .ignoreImageParams()
+      .url();
 
   return src ? (
     <a href={callToActionURL}>
       <div className={clsx(styles.sponsor, dimension.className)}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={title} className={styles.image}/>
+        <img src={src} alt={title} className={styles.image} />
       </div>
     </a>
   ) : null;
-
 };
