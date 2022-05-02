@@ -172,11 +172,11 @@ export const Programs = ({
               </div>
 
               {sessionsPerDay[day]
-                .filter((session) => session.session)
+                .filter((session) => Boolean(session.session))
                 .map((session) => {
                   const start = sessionStart(
                     activeProgram.startDateTime,
-                    session.session._id,
+                    session.session!._id,
                     mapSessionDurationAndIds(activeProgram)
                   );
                   return shouldLinkToSession(session.session) ? (
