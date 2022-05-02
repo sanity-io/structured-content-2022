@@ -10,20 +10,25 @@ interface AccordionProps {
   }[];
 }
 
-const AccordionSection = ({ title, content, baseId }) => {
+interface AccordionSectionProps {
+  title: string;
+  content: ReactNode | ReactNode[];
+  baseId: string;
+}
+
+const AccordionSection = ({
+  title,
+  content,
+  baseId,
+}: AccordionSectionProps) => {
   const [open, setOpen] = useState(false);
-
-  const onClick = (e) => {
-    setOpen(!open);
-  };
-
   const panelId = `${baseId}-panel`;
 
   return (
     <section>
       <h3 className={styles.sectionHeading} id={`heading-h2-${baseId}`}>
         <button
-          onClick={onClick}
+          onClick={() => setOpen((open) => !open)}
           className={clsx(styles.accordion, open && styles.active)}
           aria-controls={panelId}
           aria-expanded={open}
