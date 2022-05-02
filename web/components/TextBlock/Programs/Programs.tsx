@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import type { PortableTextComponentProps } from '@portabletext/react';
 import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import type { Program } from '../../../types/Program';
+import type { Session } from "../../../types/Session";
 import type { Venue } from '../../../types/Venue';
 import { partition } from '../../../util/array';
 import {
@@ -36,8 +37,8 @@ const mapSessionDurationAndIds = (program: Program) =>
     _id: session?.session?._id ?? session._key,
   }));
 
-const shouldLinkToSession = (session) =>
-  !['break', 'social'].includes(session.type);
+const shouldLinkToSession = (session?: Session) =>
+  session?.type && !['break', 'social'].includes(session.type);
 
 const SessionSection = ({ session, activeProgram, start }) => {
   const speakers = session.session.speakers?.filter(
