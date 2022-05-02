@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 import { PortableTextBlock } from '@portabletext/types';
 import { RichTextSection } from '../../../types/RichTextSection';
