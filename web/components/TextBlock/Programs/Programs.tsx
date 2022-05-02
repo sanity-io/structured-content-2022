@@ -133,7 +133,8 @@ export const Programs = ({
       const sessions = mapSessionDurationAndIds(activeProgram);
       const id = session.session?._id ?? session._key;
       const date = sessionStart(activeProgram.startDateTime, id, sessions);
-      return formatDateWithDay(date, activeProgram.venues?.[0]?.timezone, ', ');
+      const timezone = activeProgram.venues?.[0]?.timezone || defaultTimezone;
+      return date && formatDateWithDay(date, timezone, ', ') || '';
     });
 
     return (
@@ -162,7 +163,7 @@ export const Programs = ({
                     {activeProgram.venues?.[0]?.name} (
                     {getNonLocationTimezone(
                       parseISO(activeProgram.startDateTime),
-                      activeProgram.venues?.[0]?.timezone,
+                      activeProgram.venues?.[0]?.timezone || defaultTimezone,
                       true
                     )}
                     )
