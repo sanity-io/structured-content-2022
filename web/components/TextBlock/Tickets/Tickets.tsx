@@ -41,7 +41,9 @@ const availabilityData = (group: TicketGroup): AvailabilityInfo[] => {
       price: item.price,
       expires: expiryTime || undefined,
       // Check if current time is at or after the expiry time
-      isExpired: Boolean(expiryTime && compareAsc(currentDate, expiryTime) >= 0),
+      isExpired: Boolean(
+        expiryTime && compareAsc(currentDate, expiryTime) >= 0
+      ),
       label: item.label,
     };
   });

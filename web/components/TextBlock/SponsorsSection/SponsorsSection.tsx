@@ -59,7 +59,10 @@ export const SponsorsSection = ({
         <div className={styles.container}>
           {heading && <h2 className={styles.heading}>{heading}</h2>}
           {allSponsorships
-            .filter((sponsorship) => sponsorship.sponsors?.length && sponsorship.sponsors.length > 0)
+            .filter(
+              (sponsorship) =>
+                sponsorship.sponsors?.length && sponsorship.sponsors.length > 0
+            )
             .map(({ _id, type, sponsors }) => (
               <section key={_id} className={styles.sponsorLevel}>
                 <Heading type="h3">{type}</Heading>
