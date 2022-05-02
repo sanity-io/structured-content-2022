@@ -43,7 +43,7 @@ const VenueItem = ({ name, main, heading }: VenueItemProps) => {
 export const VenuesSection = ({
   value: { type, allVenues, venues, heading, lead, callToAction },
 }: PortableTextComponentProps<VenuesSectionProps>) => {
-  const wrapperRef = useRef<HTMLUListElement>();
+  const wrapperRef = useRef<HTMLUListElement>(null);
   const isIntersecting = useIntersection(wrapperRef);
   if (!Array.isArray(allVenues) || allVenues.length === 0) {
     console.error(

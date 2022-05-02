@@ -17,7 +17,7 @@ interface RichTextProps {
 }
 
 export const RichText = ({ value, background }: RichTextProps) => {
-  const wrapperRef = useRef<HTMLDivElement>();
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersection(wrapperRef);
   const headingAnimation = useAnimationProperties();
   const textAnimation = useAnimationProperties();

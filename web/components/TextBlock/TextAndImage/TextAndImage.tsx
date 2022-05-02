@@ -23,7 +23,7 @@ type TextAndImageProps = {
 export const TextAndImage = ({
   value: { image, tagline, text, title, _key },
 }: PortableTextComponentProps<TextAndImageProps>) => {
-  const wrapperRef = useRef<HTMLDivElement>();
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersection(wrapperRef);
 
   const imageContainerAnimation = useAnimationProperties();
