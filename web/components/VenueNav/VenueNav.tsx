@@ -14,7 +14,7 @@ interface VenueNavProps {
 export const VenueNav = ({ venues, activeVenue, mainVenue }: VenueNavProps) => {
   const venueLabel = (venueName: string) =>
     ({
-      [mainVenue?.name]: 'Main venue',
+      [mainVenue?.name || '']: 'Main venue',
       Virtual: 'Online',
     }[venueName] || 'Satellite');
 
@@ -31,7 +31,9 @@ export const VenueNav = ({ venues, activeVenue, mainVenue }: VenueNavProps) => {
             )}
           >
             <Link
-              href={urlJoin(router.asPath, { query: { venue: slug.current } })}
+              href={urlJoin(router.asPath, {
+                query: { venue: slug.current || '' },
+              })}
             >
               <a
                 className={clsx(
