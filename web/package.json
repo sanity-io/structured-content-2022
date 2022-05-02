@@ -28,6 +28,7 @@
     "@types/node": "^14.18.12",
     "@types/proper-url-join": "^2.1.1",
     "@types/react": "^17.0.38",
+    "@types/react-gtm-module": "^2.0.1",
     "autoprefixer": "^10.4.2",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.8",
