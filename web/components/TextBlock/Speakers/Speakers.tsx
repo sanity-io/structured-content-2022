@@ -14,7 +14,7 @@ type SpeakersProps = {
   type: EntitySectionSelection;
   heading?: string;
   callToAction?: TSimpleCallToAction;
-  allSpeakers?: FrontpagePerson[];
+  allSpeakers: FrontpagePerson[];
   speakers?: FrontpagePerson[];
 };
 
@@ -31,37 +31,39 @@ export const Speakers = ({
       )}
       <ul className={styles.speakerList}>
         {getCollectionForSelectionType(type, allSpeakers, speakers).map(
-          (speaker) => (
-            <li key={speaker._id} className={styles.speakerItem}>
-              <Link href={getEntityPath(speaker)}>
-                <a className={styles.speakerLink}>
-                  {speaker.photo && (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img
-                      src={imageUrlFor(speaker.photo)
-                        .size(410, 410)
-                        .saturation(-100)
-                        .url()}
-                      alt={speaker.photo.alt || ''}
-                      width={410}
-                      height={410}
-                      className={styles.speakerPhoto}
-                    />
-                  )}
-                  <div className={styles.speakerDetails}>
-                    <strong className={styles.speakerName}>
-                      {speaker.name}
-                    </strong>
-                    <div>
-                      {[speaker.title, speaker.company]
-                        .filter(Boolean)
-                        .join(', ')}
+          (speaker) => {
+            const speakerPhotoSrc =
+              speaker.photo &&
+              imageUrlFor(speaker.photo).size(410, 410).saturation(-100).url();
+            return (
+              <li key={speaker._id} className={styles.speakerItem}>
+                <Link href={getEntityPath(speaker)}>
+                  <a className={styles.speakerLink}>
+                    {speakerPhotoSrc && (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={speakerPhotoSrc}
+                        alt={speaker.photo.alt || ''}
+                        width={410}
+                        height={410}
+                        className={styles.speakerPhoto}
+                      />
+                    )}
+                    <div className={styles.speakerDetails}>
+                      <strong className={styles.speakerName}>
+                        {speaker.name}
+                      </strong>
+                      <div>
+                        {[speaker.title, speaker.company]
+                          .filter(Boolean)
+                          .join(', ')}
+                      </div>
                     </div>
-                  </div>
-                </a>
-              </Link>
-            </li>
-          )
+                  </a>
+                </Link>
+              </li>
+            );
+          }
         )}
       </ul>
     </GridWrapper>
