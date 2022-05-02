@@ -14,14 +14,17 @@ export const MenuItem = ({
   currentPath,
   closeMenu,
   ...rest
-}: MenuItemProps) => (
-  <li className={className}>
-    <Link href={href}>
-      <a
-        {...rest}
-        className={clsx(styles.link, href === currentPath && styles.current)}
-        onClick={closeMenu}
-      />
-    </Link>
-  </li>
-);
+}: MenuItemProps) => {
+  const Anchor = (
+    <a
+      {...rest}
+      className={clsx(styles.link, href === currentPath && styles.current)}
+      onClick={closeMenu}
+    />
+  );
+  return (
+    <li className={className}>
+      {href ? <Link href={href}>{Anchor}</Link> : Anchor}
+    </li>
+  );
+};
