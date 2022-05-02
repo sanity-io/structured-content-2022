@@ -90,14 +90,15 @@ const SpeakerList = ({ speakers }: SpeakerListProps) => (
         role,
         person: { _id, name, title, company, photo },
       } = speaker;
+      const personPhotoSrc = photo && imageUrlFor(photo).size(64, 80).saturation(-100).url();
       return (
         <li key={_id} className={programStyles.speakerItem}>
           <Link href={getEntityPath(speaker.person)}>
             <a className={programStyles.speakerLink}>
-              {photo && (
+              {personPhotoSrc && (
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img
-                  src={imageUrlFor(photo).size(64, 80).saturation(-100).url()}
+                  src={personPhotoSrc}
                   width={64}
                   height={80}
                   alt={name}
@@ -128,7 +129,7 @@ const SessionRoute = ({
   },
   slug,
 }: SessionRouteProps) => {
-  const hasHighlightedSpeakers = [1, 2].includes(speakers?.length);
+  const hasHighlightedSpeakers = speakers?.length && [1, 2].includes(speakers.length);
   const matchingSessionsInPrograms = sessionTimingDetailsForMatchingPrograms(
     programs,
     _id
@@ -140,7 +141,7 @@ const SessionRoute = ({
   return (
     <>
       <MetaTags
-        title={title}
+        title={title || ''}
         description={shortDescription ? toPlainText(shortDescription) : ''}
         currentPath={`/session/${slug}`}
       />
@@ -212,21 +213,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allSlugsQuery = groq`*[defined(slug.current) && _type == 'session'][].slug.current`;
   const pages = await client.fetch(allSlugsQuery);
   const paths = pages
-    .map((slug) => ({
+    .map((slug: string) => ({
       params: {
         slug: urlJoin(slug, { leadingSlash: false }),
       },
     }))
-    .filter(({ params: { slug } }) => Boolean(slug));
+    .filter(({ params: { slug } }: { params: { slug: string }}) => Boolean(slug));
 
   return { paths, fallback: 'blocking' };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug: slugParam },
-}) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slugParam = params?.slug;
   const slug = Array.isArray(slugParam)
-    ? urlJoin.apply(null, [...slugParam, { leadingSlash: false }])
+    ? slugParam.reduce((cv, acc) => urlJoin(acc, cv, { leadingSlash: false }))
     : slugParam;
   const data = await client.fetch(QUERY, { slug });
   if (!data?.session?._id) {
