@@ -11,7 +11,7 @@ interface SponsorshipsProps {
   value: {
     type: EntitySectionSelection;
     heading: string;
-    allSponsorships?: Sponsorship[];
+    allSponsorships: Sponsorship[];
     sponsorships?: Sponsorship[];
   };
 }
@@ -66,7 +66,7 @@ export const Sponsorships = ({
             </thead>
             <tbody>
               {allBenefitNamesSortOrderPreserved(allSponsorships).map((b) => (
-                <BenefitRow key={b} name={b} sponsorships={sponsorships} />
+                <BenefitRow key={b} name={b || ''} sponsorships={sponsorships} />
               ))}
             </tbody>
           </table>
