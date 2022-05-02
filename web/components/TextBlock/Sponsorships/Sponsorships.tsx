@@ -20,7 +20,8 @@ const allBenefitNamesSortOrderPreserved = (allSponsorships: Sponsorship[]) => {
   const benefitNames = allSponsorships
     .map((s, index) => s.benefits?.map((b) => ({ ...b.benefit, index })))
     .flat()
-    .sort((a, b) => a.index - b.index)
+    .filter(Boolean)
+    .sort((a, b) => a!.index - b!.index)
     .map((b) => b?.name);
   return Array.from(new Set(benefitNames));
 };
