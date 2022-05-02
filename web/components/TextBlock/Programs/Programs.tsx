@@ -115,6 +115,14 @@ const findByVenueSlug = (programs: Program[], venueSlug?: string) =>
   venueSlug &&
   programs.find(({ venues }) => venues[0]?.slug.current === venueSlug);
 
+/* Type predicate for ProgramSession that we know to have an associated Session.
+ * Used to filter out e.g. 'padding' sessions.
+ */
+const hasSession = (
+  session: ProgramSession
+): session is ProgramSession & { session: Session } =>
+  Boolean(session?.session);
+
 export const Programs = ({
   value: { type, heading, allPrograms, programs, mainVenue },
 }: PortableTextComponentProps<ProgramsProps>) => {
@@ -134,7 +142,7 @@ export const Programs = ({
       const id = session.session?._id ?? session._key;
       const date = sessionStart(activeProgram.startDateTime, id, sessions);
       const timezone = activeProgram.venues?.[0]?.timezone || defaultTimezone;
-      return date && formatDateWithDay(date, timezone, ', ') || '';
+      return (date && formatDateWithDay(date, timezone, ', ')) || '';
     });
 
     return (
@@ -171,32 +179,30 @@ export const Programs = ({
                 </GridWrapper>
               </div>
 
-              {sessionsPerDay[day]
-                .filter((session) => Boolean(session.session))
-                .map((session) => {
-                  const start = sessionStart(
-                    activeProgram.startDateTime,
-                    session.session!._id,
-                    mapSessionDurationAndIds(activeProgram)
-                  );
-                  return shouldLinkToSession(session.session) ? (
-                    <Link
-                      href={getEntityPath(session.session)}
-                      key={session._key}
-                    >
-                      <a className={styles.sessionLink}>
-                        <SessionSection
-                          {...{ session, activeProgram, start }}
-                        />
-                      </a>
-                    </Link>
-                  ) : (
-                    <SessionSection
-                      {...{ session, activeProgram, start }}
-                      key={session._key}
-                    />
-                  );
-                })}
+              {sessionsPerDay[day].filter(hasSession).map((session) => {
+                const start = sessionStart(
+                  activeProgram.startDateTime,
+                  session.session!._id,
+                  mapSessionDurationAndIds(activeProgram)
+                );
+                if (!start) {
+                  return null;
+                }
+
+                const Section = (
+                  <SessionSection {...{ session, activeProgram, start }} />
+                );
+                return shouldLinkToSession(session.session) ? (
+                  <Link
+                    href={getEntityPath(session.session)}
+                    key={session._key}
+                  >
+                    <a className={styles.sessionLink}>{Section}</a>
+                  </Link>
+                ) : (
+                  Section
+                );
+              })}
             </section>
           ))}
         </section>
