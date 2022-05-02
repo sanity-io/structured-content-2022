@@ -20,7 +20,7 @@ export const ConferenceUpdatesForm = ({
   value: { type, id, buttonText, target, redirect },
 }: PortableTextComponentProps<ConferenceUpdatesFormProps>) => {
   const router = useRouter();
-  const wrapperRef = useRef<HTMLDivElement>();
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersection(wrapperRef);
 
   const imageAnimation = useAnimationProperties();
