@@ -29,6 +29,7 @@ export const TextAndImage = ({
   const imageContainerAnimation = useAnimationProperties();
   const textContainerAnimation = useAnimationProperties();
 
+  const imageSrc = imageUrlFor(image).ignoreImageParams().url();
   return (
     <section
       className={clsx(
@@ -39,17 +40,19 @@ export const TextAndImage = ({
     >
       <GridWrapper>
         <div className={styles.contents}>
-          <div
-            className={styles.imageContainer}
-            style={imageContainerAnimation}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={imageUrlFor(image).ignoreImageParams().url()}
-              alt={image.alt || ''}
-              className={styles.image}
-            />
-          </div>
+          {imageSrc && (
+            <div
+              className={styles.imageContainer}
+              style={imageContainerAnimation}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={imageSrc}
+                alt={image.alt || ''}
+                className={styles.image}
+              />
+            </div>
+          )}
           <div className={styles.text} style={textContainerAnimation}>
             {title && (
               <hgroup>
