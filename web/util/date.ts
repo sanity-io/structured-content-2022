@@ -2,6 +2,8 @@ import { formatInTimeZone } from 'date-fns-tz';
 import { addMinutes, intervalToDuration } from 'date-fns';
 import enUS from 'date-fns/locale/en-US';
 
+export const defaultTimezone = 'UTC';
+
 export const formatTime = (
   date: Date,
   timezone: string,
@@ -35,8 +37,8 @@ export const formatTimeDuration = (start: Date, duration: number) => {
   return `PT${hours ? hours + 'H' : ''}${minutes ? minutes + 'M' : ''}`;
 };
 
-const differingMeridiem = (d1: Date, d2: Date, timeZone = 'UTC') => {
-  const fmt = (d) => formatInTimeZone(d, timeZone, 'aa', { locale: enUS });
+const differingMeridiem = (d1: Date, d2: Date, timeZone = defaultTimezone) => {
+  const fmt = (d: Date) => formatInTimeZone(d, timeZone, 'aa', { locale: enUS });
   return fmt(d1) !== fmt(d2);
 };
 
