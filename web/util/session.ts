@@ -8,7 +8,6 @@ import {
   formatTimeRange,
   getNonLocationTimezone,
 } from './date';
-import { element } from 'prop-types';
 
 const minutesFromProgramStart = (
   sessions: Pick<Session, 'duration'>[],
