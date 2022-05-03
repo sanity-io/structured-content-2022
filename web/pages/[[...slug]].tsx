@@ -248,7 +248,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: 'blocking' };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, preview = false }) => {
+export const getStaticProps: GetStaticProps = async ({
+  params,
+  preview = false,
+}) => {
   const slugParam = params?.slug?.[0] ?? '';
   const slug = Array.isArray(slugParam)
     ? slugParam.reduce((acc, cv) => urlJoin(acc, cv, { leadingSlash: false }))

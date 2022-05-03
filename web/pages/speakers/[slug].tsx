@@ -200,19 +200,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allSlugsQuery = groq`*[defined(slug.current) && _type == 'person'][].slug.current`;
   const pages = await client.fetch(allSlugsQuery);
   const paths = pages
-    .map((slug) => ({
+    .map((slug: string) => ({
       params: { slug: urlJoin(slug, { leadingSlash: false }) },
     }))
-    .filter(({ params: { slug } }) => Boolean(slug));
+    .filter(({ params: { slug } }: { params: { slug: string } }) =>
+      Boolean(slug)
+    );
 
   return { paths, fallback: 'blocking' };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug: slugParam },
-}) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slugParam = params?.slug;
   const slug = Array.isArray(slugParam)
-    ? urlJoin.apply(null, [...slugParam, { leadingSlash: false }])
+    ? slugParam.reduce((acc, cv) => urlJoin(acc, cv, { leadingSlash: false }))
     : slugParam;
   const data = await client.fetch(QUERY, { slug });
   if (!data?.speaker?._id) {

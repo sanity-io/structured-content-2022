@@ -216,9 +216,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const pages = await client.fetch(allSlugsQuery);
   const paths = pages
     .map((slug: string) => ({
-      params: {
-        slug: urlJoin(slug, { leadingSlash: false }),
-      },
+      params: { slug: urlJoin(slug, { leadingSlash: false }) },
     }))
     .filter(({ params: { slug } }: { params: { slug: string } }) =>
       Boolean(slug)
@@ -230,7 +228,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slugParam = params?.slug;
   const slug = Array.isArray(slugParam)
-    ? slugParam.reduce((cv, acc) => urlJoin(acc, cv, { leadingSlash: false }))
+    ? slugParam.reduce((acc, cv) => urlJoin(acc, cv, { leadingSlash: false }))
     : slugParam;
   const data = await client.fetch(QUERY, { slug });
   if (!data?.session?._id) {
