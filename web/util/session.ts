@@ -8,13 +8,15 @@ import {
   formatTimeRange,
   getNonLocationTimezone,
 } from './date';
+import { element } from 'prop-types';
 
 const minutesFromProgramStart = (
   sessions: Pick<Session, 'duration'>[],
   currentSessionIndex: number
 ) =>
   sessions.reduce(
-    (acc, { duration }, i) => (i < currentSessionIndex ? acc + (duration || 0) : acc),
+    (acc, { duration }, i) =>
+      i < currentSessionIndex ? acc + (duration || 0) : acc,
     0
   );
 
@@ -39,6 +41,15 @@ export const getDuration = ({
   duration,
   durationOverride,
 }: ProgramSession) => durationOverride ?? duration ?? session?.duration ?? 0;
+
+type SessionTimingDetails = {
+  label: string;
+  rawDate: string;
+  date: string;
+  time: string;
+  duration: string;
+  timezone: string;
+};
 
 /* Given all Programs, finds the Programs that contain the Session (matching on sessionId === _id).
  * For each match, returns:
@@ -79,7 +90,8 @@ export const sessionTimingDetailsForMatchingPrograms = (
         duration: formatTimeDuration(start, duration),
         timezone: getNonLocationTimezone(start, timezone, true),
       };
-    }).filter(Boolean)
+    })
+    .filter(Boolean) as SessionTimingDetails[];
 
 /* Add an _id field to 'padding'-type sessions and normalize duration
  * in order to calculate start/end offsets for all sessions
