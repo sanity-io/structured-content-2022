@@ -74,7 +74,7 @@ export const sessionTimingDetailsForMatchingPrograms = (
       const start = sessionStart(
         program.startDateTime,
         session?.session?._id || '',
-        mapSessionDurationAndIds(program),
+        mapSessionDurationAndIds(program)
       );
       if (!start) {
         return null;
