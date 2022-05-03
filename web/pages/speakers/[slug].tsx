@@ -88,17 +88,21 @@ const toSessionCardProps = (sessions: SpeakerSession[]) =>
         ...otherProps
       }) => {
         const simpleSessions = sessions.map(({ duration, session }) => ({
-          duration: duration || session.duration,
-          _id: session?._id,
+          duration: duration || session?.duration,
+          _id: session?._id || '',
         }));
         return {
           ...otherProps,
           timezone: venueTimezone,
-          sessionStart: sessionStart(programStart, _id, simpleSessions),
+          sessionStart:
+            sessionStart(programStart, _id, simpleSessions) || undefined,
         };
       }
     )
-    .sort((a, b) => a.sessionStart.getTime() - b.sessionStart.getTime());
+    .sort(
+      (a, b) =>
+        (a.sessionStart?.getTime() || -1) - (b.sessionStart?.getTime() || -1)
+    );
 
 const SpeakersRoute = ({
   data: {

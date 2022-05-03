@@ -79,3 +79,13 @@ export const sessionTimingDetailsForMatchingPrograms = (
         timezone: getNonLocationTimezone(start, timezone, true),
       };
     });
+
+/* Add an _id field to 'padding'-type sessions and normalize duration
+ * in order to calculate start/end offsets for all sessions
+ */
+export const mapSessionDurationAndIds = (program: Program) =>
+  program.sessions.map((session) => ({
+    ...session,
+    duration: getDuration(session),
+    _id: session?.session?._id ?? session._key,
+  }));

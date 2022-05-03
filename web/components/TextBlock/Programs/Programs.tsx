@@ -15,7 +15,11 @@ import {
 } from '../../../util/date';
 import { getCollectionForSelectionType } from '../../../util/entity';
 import { getEntityPath } from '../../../util/entityPaths';
-import { getDuration, sessionStart } from '../../../util/session';
+import {
+  getDuration,
+  mapSessionDurationAndIds,
+  sessionStart,
+} from '../../../util/session';
 import { imageUrlFor } from '../../../lib/sanity';
 import GridWrapper from '../../GridWrapper';
 import VenueNav from '../../VenueNav';
@@ -28,15 +32,6 @@ type ProgramsProps = {
   programs?: Program[];
   mainVenue?: Venue;
 };
-
-// Add an _id field to 'padding'-type sessions and normalize duration
-// in order to calculate start/end offsets for all sessions
-const mapSessionDurationAndIds = (program: Program) =>
-  program.sessions.map((session) => ({
-    ...session,
-    duration: getDuration(session),
-    _id: session?.session?._id ?? session._key,
-  }));
 
 const shouldLinkToSession = (session?: Session) =>
   session?.type && !['break', 'social'].includes(session.type);
