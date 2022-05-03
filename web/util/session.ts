@@ -2,6 +2,7 @@ import { addMinutes, parseISO } from 'date-fns';
 import type { Program, ProgramSession } from '../types/Program';
 import type { Session } from '../types/Session';
 import {
+  defaultTimezone,
   formatDateWithDay,
   formatTimeDuration,
   formatTimeRange,
@@ -13,7 +14,7 @@ const minutesFromProgramStart = (
   currentSessionIndex: number
 ) =>
   sessions.reduce(
-    (acc, { duration }, i) => (i < currentSessionIndex ? acc + duration : acc),
+    (acc, { duration }, i) => (i < currentSessionIndex ? acc + (duration || 0) : acc),
     0
   );
 
@@ -58,18 +59,18 @@ export const sessionTimingDetailsForMatchingPrograms = (
       session: program.sessions.find((s) => s.session?._id === sessionId),
     }))
     .filter((entry) => Boolean(entry.session))
-    .map(({ program: { sessions, startDateTime, venues }, session }) => {
+    .map(({ program, session }) => {
       const start = sessionStart(
-        startDateTime,
-        session.session._id,
-        sessions.map((programSession) => ({
-          ...programSession.session,
-          duration: getDuration(programSession),
-        }))
+        program.startDateTime,
+        session?.session?._id || '',
+        mapSessionDurationAndIds(program),
       );
+      if (!start) {
+        return null;
+      }
 
-      const [{ name, timezone }] = venues;
-      const duration = getDuration(session);
+      const [{ name, timezone = defaultTimezone }] = program.venues;
+      const duration = session ? getDuration(session) : 0;
       return {
         label: name,
         rawDate: start.toISOString(),
@@ -78,7 +79,7 @@ export const sessionTimingDetailsForMatchingPrograms = (
         duration: formatTimeDuration(start, duration),
         timezone: getNonLocationTimezone(start, timezone, true),
       };
-    });
+    }).filter(Boolean)
 
 /* Add an _id field to 'padding'-type sessions and normalize duration
  * in order to calculate start/end offsets for all sessions
