@@ -1,15 +1,13 @@
 import Jimp from 'jimp-compact';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { resolve } from 'path';
-import wrap from 'word-wrap';
 
 // Make Vercel include this file (referenced by .fnt below) in lambda
 resolve('fonts', 'national-2-narrow-bold.png');
 
-const FONT_SIZE = 80;
 const PADDING_X = 32;
 const PADDING_Y = 40;
-const WORD_WRAP_LIMIT = 26;
+const MAX_WIDTH = 752;
 
 export default async function ogImage(
   req: NextApiRequest,
@@ -20,15 +18,11 @@ export default async function ogImage(
     const imagePath = resolve('images', 'og_image_background.png');
     const image = await Jimp.read(imagePath);
 
-    const font = await Jimp.loadFont(
-      resolve('fonts', 'national-2-narrow-bold.fnt')
-    );
-    wrap(req.query.slug as string, { width: WORD_WRAP_LIMIT })
-      .split('\n')
-      .forEach((line, i) =>
-        image.print(font, PADDING_X, PADDING_Y + i * FONT_SIZE, line)
-      );
+    const fontPath = resolve('fonts', 'national-2-narrow-bold.fnt');
+    const font = await Jimp.loadFont(fontPath);
 
+    const slug = req.query.slug as string;
+    image.print(font, PADDING_X, PADDING_Y, slug, MAX_WIDTH);
     const buffer = await image.getBufferAsync(Jimp.MIME_PNG);
     res.writeHead(200, {
       'Content-Type': 'image/png',
