@@ -1,3 +1,7 @@
+.link {
+  text-decoration: none;
+}
+
 .card {
   border-radius: 8px;
   padding: 24px;
@@ -5,10 +9,6 @@
   margin: 8px 0;
   font: var(--font-ui-xs-medium);
   letter-spacing: var(--letter-spacing-ui-xs);
-}
-
-.link {
-  text-decoration: none;
 }
 
 .link:hover .card {
