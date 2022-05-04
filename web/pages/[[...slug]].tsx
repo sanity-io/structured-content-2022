@@ -162,7 +162,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
         page: { hero, sections },
         seo: { title, description: seoDescription, image, noIndex },
       },
-      home: { name: homeName, description, ticketsUrl },
+      home: { name: mainEventName, description, ticketsUrl },
       footer,
       navItems,
     },
@@ -204,7 +204,10 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
     <>
       <MetaTags
         {...{ title, description: seoDescription, image, currentPath, noIndex }}
-        fallbackImage={{ url: getOgImagePath(title), alt: title }}
+        fallbackImage={{
+          url: getOgImagePath(title),
+          alt: [mainEventName, title].filter(Boolean).join(' – '),
+        }}
       />
       <header className={headerClasses}>
         <Nav
@@ -217,7 +220,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
       <main>
         {slug === '/' ? (
           <GridWrapper>
-            <ConferenceHeader name={homeName} description={description} />
+            <ConferenceHeader name={mainEventName} description={description} />
             <NavBlock ticketsUrl={ticketsUrl} />
           </GridWrapper>
         ) : (
