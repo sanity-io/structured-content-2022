@@ -14,6 +14,7 @@ import HighlightedSpeakerBlock from '../../components/HighlightedSpeakerBlock';
 import MetaTags from '../../components/MetaTags';
 import Nav from '../../components/Nav';
 import SessionCard from '../../components/SessionCard';
+import type { SessionCardProps } from '../../components/SessionCard';
 import TextBlock from '../../components/TextBlock';
 import client from '../../lib/sanity.server';
 import { mainEventId, newsletterSharedSectionId } from '../../util/constants';
@@ -40,7 +41,7 @@ const QUERY = groq`
   }`;
 
 type SpeakerSession = {
-  session: Session;
+  session: Pick<Session, '_id' | '_type' | 'title' | 'duration' | 'slug'>;
   programContainingSession: {
     programStart: string;
     sessions: ProgramSession[];
@@ -73,7 +74,7 @@ const socialLinkProps = (url: string) => ({
   rel: 'noopener noreferrer',
 });
 
-const toSessionCardProps = (sessions: SpeakerSession[]) =>
+const toSessionCardProps = (sessions: SpeakerSession[]): SessionCardProps[] =>
   sessions
     .filter(({ programContainingSession }) => Boolean(programContainingSession))
     .filter(({ session }) => Boolean(session))
@@ -86,10 +87,10 @@ const toSessionCardProps = (sessions: SpeakerSession[]) =>
         timezone: venueTimezone,
         sessionStart: sessionStart(
           programStart,
-          session?._id,
+          session._id,
           sessions.map((session) => ({
             duration: getDuration(session),
-            _id: session?.session?._id,
+            _id: session.session?._id,
           }))
         ),
       })

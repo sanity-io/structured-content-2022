@@ -9,7 +9,7 @@ import {
 import { getEntityPath } from '../../util/entityPaths';
 import styles from './SessionCard.module.css';
 
-interface SessionCardProps
+export interface SessionCardProps
   extends Pick<Session, '_type' | 'title' | 'duration' | 'slug'> {
   sessionStart?: Date;
   timezone?: string;
