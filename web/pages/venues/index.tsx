@@ -58,7 +58,7 @@ const VenuesRoute = ({
   <>
     <MetaTags
       title={`Venues – ${eventName}`}
-      description={`Venues for page for ${eventName}`}
+      description={`Venues page for ${eventName}`}
       currentPath="/venues"
     />
     <header>
