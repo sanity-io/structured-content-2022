@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import wrap from 'word-wrap';
 
 // Make Vercel include this file (referenced by .fnt below) in lambda
-resolve('public', 'static', 'fonts', 'national-2-narrow-bold.png');
+resolve('fonts', 'national-2-narrow-bold.png');
 
 const FONT_SIZE = 80;
 const PADDING_X = 32;
@@ -21,7 +21,7 @@ export default async function ogImage(
     const image = await Jimp.read(imagePath);
 
     const font = await Jimp.loadFont(
-      resolve('public', 'static', 'fonts', 'national-2-narrow-bold.fnt')
+      resolve('fonts', 'national-2-narrow-bold.fnt')
     );
     wrap(req.query.slug as string, { width: WORD_WRAP_LIMIT })
       .split('\n')
