@@ -146,7 +146,7 @@ const SessionRoute = ({
         title={title || ''}
         description={shortDescription ? toPlainText(shortDescription) : ''}
         currentPath={`/session/${slug}`}
-        fallbackImage={{ url: getOgImagePath(title), alt: title }}
+        fallbackImage={{ url: getOgImagePath(title), alt: title || '' }}
       />
       <header className={styles.header}>
         <Nav
