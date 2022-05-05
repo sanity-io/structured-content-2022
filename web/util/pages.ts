@@ -8,6 +8,6 @@ export const getSlug = (params?: ParsedUrlQuery) => {
   }
 
   return Array.isArray(slug)
-    ? slug.reduce((acc, curr) => urlJoin(acc, curr, { trailingSlash: false }))
+    ? slug.reduce((acc, curr) => urlJoin(acc, curr, { leadingSlash: false }))
     : slug;
 };
