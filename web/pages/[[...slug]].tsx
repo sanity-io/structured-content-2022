@@ -20,6 +20,7 @@ import type { Section } from '../types/Section';
 import type { Slug } from '../types/Slug';
 import { mainEventId } from '../util/constants';
 import { getOgImagePath } from '../util/entityPaths';
+import { getSlug } from '../util/pages';
 import {
   ARTICLE_SECTION,
   FIGURE,
@@ -257,10 +258,7 @@ export const getStaticProps: GetStaticProps = async ({
   params,
   preview = false,
 }) => {
-  const slugParam = params?.slug?.[0] ?? '';
-  const slug = Array.isArray(slugParam)
-    ? slugParam.reduce((acc, cv) => urlJoin(acc, cv, { leadingSlash: false }))
-    : slugParam || '/';
+  const slug = getSlug(params) || '/';
   const data = await client.fetch(QUERY, { slug });
   if (!data?.route?.page) {
     return { notFound: true };

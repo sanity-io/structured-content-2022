@@ -47,7 +47,9 @@ export const VenueNav = ({ venues, activeVenue, mainVenue }: VenueNavProps) => {
                 )}
               >
                 <span className={styles.venueName}>{name}</span>
-                <span className={styles.venueSubtitle}>{venueLabel(name, mainVenue?.name)}</span>
+                <span className={styles.venueSubtitle}>
+                  {venueLabel(name, mainVenue?.name)}
+                </span>
               </a>
             </Link>
           </li>

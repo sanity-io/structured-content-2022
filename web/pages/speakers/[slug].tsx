@@ -19,6 +19,7 @@ import { mainEventId, newsletterSharedSectionId } from '../../util/constants';
 import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import { getOgImagePath } from '../../util/entityPaths';
+import { getSlug } from '../../util/pages';
 import { sessionStart } from '../../util/session';
 import { PRIMARY_NAV, SPEAKER_WITH_SESSIONS } from '../../util/queries';
 import styles from '../app.module.css';
@@ -217,10 +218,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const slugParam = params?.slug;
-  const slug = Array.isArray(slugParam)
-    ? slugParam.reduce((acc, cv) => urlJoin(acc, cv, { leadingSlash: false }))
-    : slugParam;
+  const slug = getSlug(params);
   const data = await client.fetch(QUERY, { slug });
   if (!data?.speaker?._id) {
     return { notFound: true };

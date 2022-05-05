@@ -14,6 +14,7 @@ import client from '../../lib/sanity.server';
 import { formatDate } from '../../util/date';
 import { mainEventId } from '../../util/constants';
 import { getOgImagePath } from '../../util/entityPaths';
+import { getSlug } from '../../util/pages';
 import { BLOCK_CONTENT, PRIMARY_NAV } from '../../util/queries';
 import type { Article } from '../../types/Article';
 import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
@@ -229,10 +230,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const slugParam = params?.slug;
-  const slug = Array.isArray(slugParam)
-    ? slugParam.reduce((acc, cv) => urlJoin(acc, cv, { leadingSlash: false }))
-    : slugParam;
+  const slug = getSlug(params);
   const data = await client.fetch(QUERY, { slug });
   if (!data?.article?._id) {
     return { notFound: true };
