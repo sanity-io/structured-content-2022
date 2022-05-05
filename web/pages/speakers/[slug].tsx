@@ -18,6 +18,7 @@ import client from '../../lib/sanity.server';
 import { mainEventId, newsletterSharedSectionId } from '../../util/constants';
 import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
+import { getOgImagePath } from '../../util/entityPaths';
 import { sessionStart } from '../../util/session';
 import { PRIMARY_NAV, SPEAKER_WITH_SESSIONS } from '../../util/queries';
 import styles from '../app.module.css';
@@ -120,6 +121,7 @@ const SpeakersRoute = ({
       description={`Speaker page for ${name}`}
       currentPath={`/speakers/${slug}`}
       image={photo}
+      fallbackImage={{ url: getOgImagePath(name), alt: name }}
     />
     <header className={styles.header}>
       <Nav

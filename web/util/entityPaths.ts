@@ -1,4 +1,5 @@
 import urlJoin from 'proper-url-join';
+import { productionUrl } from './constants';
 import { Slug } from '../types/Slug';
 
 export const getEntityPath = (entity?: { _type: string; slug?: Slug }) => {
@@ -25,3 +26,10 @@ export const getEntityPath = (entity?: { _type: string; slug?: Slug }) => {
       return '';
   }
 };
+
+export const getOgImagePath = (imageText?: string) =>
+  imageText
+    ? urlJoin(productionUrl, 'api', 'og-image', encodeURIComponent(imageText), {
+        leadingSlash: true,
+      })
+    : '';
