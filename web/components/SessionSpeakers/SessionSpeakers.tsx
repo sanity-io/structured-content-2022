@@ -62,7 +62,7 @@ export const SessionSpeakers = ({
       {speaker2 && <Speaker speaker={speaker2} variant="nonDesktop" />}
       <Shape />
     </div>
-    <div className={styles.column2} aria-hidden={Boolean(speaker2)}>
+    <div className={styles.column2} aria-hidden={!Boolean(speaker2)}>
       <Shape />
       {speaker2 && <Speaker speaker={speaker2} variant="desktopOnly" />}
       <Shape />
