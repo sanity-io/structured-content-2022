@@ -11,13 +11,18 @@ interface VenueNavProps {
   mainVenue?: Venue;
 }
 
-export const VenueNav = ({ venues, activeVenue, mainVenue }: VenueNavProps) => {
-  const venueLabel = (venueName: string) =>
-    ({
-      [mainVenue?.name || '']: 'Main venue',
-      Virtual: 'Online',
-    }[venueName] || 'Satellite');
+const venueLabel = (venueName: string, mainVenueName?: string) => {
+  switch (venueName) {
+    case mainVenueName:
+      return 'Main Venue';
+    case 'Virtual':
+      return 'Online';
+    default:
+      return 'Satellite';
+  }
+};
 
+export const VenueNav = ({ venues, activeVenue, mainVenue }: VenueNavProps) => {
   const router = useRouter();
   return (
     <nav className={styles.container}>
@@ -42,7 +47,7 @@ export const VenueNav = ({ venues, activeVenue, mainVenue }: VenueNavProps) => {
                 )}
               >
                 <span className={styles.venueName}>{name}</span>
-                <span className={styles.venueSubtitle}>{venueLabel(name)}</span>
+                <span className={styles.venueSubtitle}>{venueLabel(name, mainVenue?.name)}</span>
               </a>
             </Link>
           </li>
