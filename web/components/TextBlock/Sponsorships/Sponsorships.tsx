@@ -1,5 +1,5 @@
-import { EntitySectionSelection } from '../../../types/EntitySectionSelection';
-import { Sponsorship } from '../../../types/Sponsorship';
+import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
+import type { Sponsorship } from '../../../types/Sponsorship';
 import { getCollectionForSelectionType } from '../../../util/entity';
 import { formatPrice } from '../../../util/number';
 import FeatureSection from '../../FeatureSection';
@@ -20,10 +20,10 @@ const allBenefitNamesSortOrderPreserved = (allSponsorships: Sponsorship[]) => {
   const benefitNames = allSponsorships
     .map((s, index) => s.benefits?.map((b) => ({ ...b.benefit, index })))
     .flat()
-    .filter(Boolean)
+    .filter((b) => Boolean(b?.name))
     .sort((a, b) => a!.index - b!.index)
-    .map((b) => b?.name);
-  return Array.from(new Set(benefitNames));
+    .map((b) => b!.name);
+  return Array.from(new Set(benefitNames)) as string[];
 };
 
 export const Sponsorships = ({
@@ -66,13 +66,15 @@ export const Sponsorships = ({
               </tr>
             </thead>
             <tbody>
-              {allBenefitNamesSortOrderPreserved(allSponsorships).map((b) => (
-                <BenefitRow
-                  key={b}
-                  name={b || ''}
-                  sponsorships={sponsorships}
-                />
-              ))}
+              {allBenefitNamesSortOrderPreserved(allSponsorships).map(
+                (benefit) => (
+                  <BenefitRow
+                    key={benefit}
+                    name={benefit}
+                    sponsorships={sponsorships}
+                  />
+                )
+              )}
             </tbody>
           </table>
 
