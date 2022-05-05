@@ -11,7 +11,7 @@ export const Figure = ({ value }: PortableTextComponentProps<TFigure>) => {
     <GridWrapper>
       <figure className={styles.container}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={imageSrc} alt={value.alt} className={styles.image} />
+        <img src={imageSrc} alt={value.alt || ''} className={styles.image} />
       </figure>
     </GridWrapper>
   ) : null;
