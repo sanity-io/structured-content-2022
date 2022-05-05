@@ -175,7 +175,7 @@ export const Programs = ({
               {sessionsPerDay[day].filter(hasSession).map((session) => {
                 const start = sessionStart(
                   activeProgram.startDateTime,
-                  session.session!._id,
+                  session.session._id,
                   mapSessionDurationAndIds(activeProgram)
                 );
                 if (!start) {
