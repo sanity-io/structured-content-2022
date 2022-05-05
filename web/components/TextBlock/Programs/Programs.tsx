@@ -182,18 +182,20 @@ export const Programs = ({
                   return null;
                 }
 
-                const Section = (
-                  <SessionSection {...{ session, activeProgram, start }} />
-                );
                 return shouldLinkToSession(session.session) ? (
                   <Link
                     href={getEntityPath(session.session)}
                     key={session._key}
                   >
-                    <a className={styles.sessionLink}>{Section}</a>
+                    <a className={styles.sessionLink}>
+                      <SessionSection {...{ session, activeProgram, start }} />
+                    </a>
                   </Link>
                 ) : (
-                  Section
+                  <SessionSection
+                    key={session._key}
+                    {...{ session, activeProgram, start }}
+                  />
                 );
               })}
             </section>
