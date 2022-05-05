@@ -65,12 +65,10 @@ const SessionSection = ({
             {speakers && (
               <ul className={styles.speakers}>
                 {speakers.map(({ person }) => {
-                  const personPhotoSrc =
-                    person?.photo &&
-                    imageUrlFor(person.photo)
-                      .size(160, 160)
-                      .saturation(-100)
-                      .url();
+                  const personPhotoSrc = imageUrlFor(person.photo)
+                    .size(160, 160)
+                    .saturation(-100)
+                    .url();
                   return (
                     <li key={person._id} className={styles.speaker}>
                       {personPhotoSrc && (
