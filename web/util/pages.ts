@@ -1,4 +1,4 @@
-import { ParsedUrlQuery } from 'querystring';
+import type { ParsedUrlQuery } from 'querystring';
 import urlJoin from 'proper-url-join';
 
 export const getSlug = (params?: ParsedUrlQuery) => {
