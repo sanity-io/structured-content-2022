@@ -16,9 +16,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     const hasConsent = getCookieConsentValue();
     if (
       hasConsent !== 'false' &&
-      process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' &&
+      process.env.NEXT_PUBLIC_GTM_ID
     ) {
-      TagManager.initialize({ gtmId: process.env.NEXT_PUBLIC_GTM_ID || '' });
+      TagManager.initialize({ gtmId: process.env.NEXT_PUBLIC_GTM_ID });
     }
   }, []);
 
