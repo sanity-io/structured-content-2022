@@ -13,7 +13,7 @@ import type { Slug } from '../../types/Slug';
 import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
 import type { Venue } from '../../types/Venue';
 import { mainEventId, newsletterSharedSectionId } from '../../util/constants';
-import { getEntityPath } from '../../util/entityPaths';
+import { getEntityPath, getOgImagePath } from '../../util/entityPaths';
 import { getSlug } from '../../util/pages';
 import { PRIMARY_NAV } from '../../util/queries';
 
@@ -49,12 +49,12 @@ type VenueRouteProps = {
 };
 
 const accessibilityFieldTitles = {
-  wheelchair: "Wheelchair Accessible",
-  parking: "Accessible parking",
-  prioritySeating: "Priority Seating",
-  captioning: "Closed Captioning",
-  neutralRestroom: "Gender neutral restrooms",
-}
+  wheelchair: 'Wheelchair Accessible',
+  parking: 'Accessible parking',
+  prioritySeating: 'Priority Seating',
+  captioning: 'Closed Captioning',
+  neutralRestroom: 'Gender neutral restrooms',
+};
 
 const VenueRoute = ({
   data: {
@@ -66,56 +66,62 @@ const VenueRoute = ({
     venue,
   },
   slug,
-}: VenueRouteProps) => (
-  <>
-    <MetaTags
-      title={`${venue.name} venue – ${eventName}`}
-      description={`${venue.name} venues for page for ${eventName}`}
-      currentPath={urlJoin('venues', slug)}
-    />
-    <header>
-      <Nav
+}: VenueRouteProps) => {
+  const title = `${venue.name} venue`;
+  return (
+    <>
+      <MetaTags
+        title={`${title} – ${eventName}`}
+        description={`${venue.name} venues for page for ${eventName}`}
         currentPath={urlJoin('venues', slug)}
-        ticketsUrl={ticketsUrl}
-        items={navItems}
+        fallbackImage={{ url: getOgImagePath(title), alt: title }}
       />
-    </header>
-    <main>
-      <GridWrapper>
-        {venue.directions && (
-          <>
-            <h2>Directions</h2>
-            <TextBlock value={venue.directions} />
-          </>
-        )}
+      <header>
+        <Nav
+          currentPath={urlJoin('venues', slug)}
+          ticketsUrl={ticketsUrl}
+          items={navItems}
+        />
+      </header>
+      <main>
+        <GridWrapper>
+          {venue.directions && (
+            <>
+              <h2>Directions</h2>
+              <TextBlock value={venue.directions} />
+            </>
+          )}
 
-        {venue.accomodations && (
-          <>
-            <h2>Accommodations</h2>
-            <TextBlock value={venue.accomodations} />
-          </>
-        )}
-        {venue.acccesibility && (
-          <>
-            <h2>Accessibility</h2>
-            <ul>
-              {Object.keys(venue.acccesibility)
-                .filter(key => venue.acccesibility[key] === true)
-                .map((key) => <li key={key}>{accessibilityFieldTitles[key]}</li>)}
-            </ul>
-          </>
-        )}
+          {venue.accomodations && (
+            <>
+              <h2>Accommodations</h2>
+              <TextBlock value={venue.accomodations} />
+            </>
+          )}
+          {venue.acccesibility && (
+            <>
+              <h2>Accessibility</h2>
+              <ul>
+                {Object.keys(venue.acccesibility)
+                  .filter((key) => venue.acccesibility[key] === true)
+                  .map((key) => (
+                    <li key={key}>{accessibilityFieldTitles[key]}</li>
+                  ))}
+              </ul>
+            </>
+          )}
 
-        <div>
-          <h2>{venue.name}</h2>
-          <ButtonLink text="More information" url={getEntityPath(venue)} />
-        </div>
-      </GridWrapper>
-    </main>
-    <TextBlock value={newsletterSection} />
-    <Footer links={footerLinks} />
-  </>
-);
+          <div>
+            <h2>{venue.name}</h2>
+            <ButtonLink text="More information" url={getEntityPath(venue)} />
+          </div>
+        </GridWrapper>
+      </main>
+      <TextBlock value={newsletterSection} />
+      <Footer links={footerLinks} />
+    </>
+  );
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const allSlugsQuery = groq`*[defined(slug.current) && _type == 'venue'][].slug.current`;

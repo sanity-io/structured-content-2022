@@ -7,13 +7,15 @@ export type Venue = {
   _rev: string;
   _type: 'venue';
   _updatedAt: string;
-  acccesibility?: { // sic - typo in the schema
+  // sic - typo in the schema
+  acccesibility?: {
     captioning?: boolean;
     neutralRestroom?: boolean;
     parking?: boolean;
     prioritySeating?: boolean;
     wheelchair?: boolean;
   };
+  // sic - typo in the schema
   accomodations?: Section[];
   address?: {
     city?: string;
