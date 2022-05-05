@@ -45,6 +45,11 @@ export default {
       },
       fields: [
         {
+          name: "name",
+          type: "string",
+          title: "Name",
+        },
+        {
           name: "street",
           type: "string",
           title: "Street",
@@ -137,6 +142,8 @@ export default {
         {
           name: "description",
           type: "simpleBlockContent",
+          description:
+            "For additional accessibilty information and directions.",
         },
       ],
     },

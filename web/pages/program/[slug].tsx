@@ -14,7 +14,7 @@ import TextBlock from '../../components/TextBlock';
 import { imageUrlFor } from '../../lib/sanity';
 import client from '../../lib/sanity.server';
 import { mainEventId } from '../../util/constants';
-import { getEntityPath } from '../../util/entityPaths';
+import { getEntityPath, getOgImagePath } from '../../util/entityPaths';
 import { PRIMARY_NAV, PROGRAM, SPEAKER } from '../../util/queries';
 import type { Person } from '../../types/Person';
 import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
@@ -143,6 +143,7 @@ const SessionRoute = ({
         title={title}
         description={shortDescription ? toPlainText(shortDescription) : ''}
         currentPath={`/session/${slug}`}
+        fallbackImage={{ url: getOgImagePath(title), alt: title }}
       />
       <header className={styles.header}>
         <Nav
