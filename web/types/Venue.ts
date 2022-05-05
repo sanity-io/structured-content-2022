@@ -20,11 +20,11 @@ export type Venue = {
   address?: {
     city?: string;
     country?: string;
+    name?: string;
+    other?: string;
     postalCode?: string;
     state?: string;
     street?: string;
-    other?: string;
-    zip?: string;
   };
   directions?: Section[];
   geolocation?: {
@@ -35,4 +35,5 @@ export type Venue = {
   name: string;
   slug: Slug;
   timezone?: string;
+  url?: string;
 };
