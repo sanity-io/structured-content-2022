@@ -31,6 +31,7 @@ export const MetaTags = ({
   const canonicalPath = isRewrittenPath
     ? urlJoin('article', currentPath)
     : currentPath;
+  const imageUrl = image && imageUrlFor(image).size(1260, 630).url();
   return (
     <NextSeo
       title={title}
@@ -40,9 +41,7 @@ export const MetaTags = ({
       openGraph={{
         images: [
           {
-            url: image
-              ? imageUrlFor(image).size(1260, 630).url()
-              : fallbackImage.url,
+            url: imageUrl || fallbackImage.url,
             alt: (image || fallbackImage).alt,
           },
         ],

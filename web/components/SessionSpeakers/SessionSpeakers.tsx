@@ -21,33 +21,35 @@ const Speaker = ({
 }: {
   speaker: Person;
   variant?: 'desktopOnly' | 'nonDesktop';
-}) => (
-  <Link href={getEntityPath(speaker)}>
-    <a>
-      <figure className={clsx(styles.speaker, variant && styles[variant])}>
-        {speaker.photo && (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            src={imageUrlFor(speaker.photo)
-              .size(256, 390)
-              .saturation(-100)
-              .url()}
-            alt={speaker.photo.alt || ''}
-            className={styles.image}
-            width={256}
-            height={390}
-          />
-        )}
-        <figcaption className={styles.caption}>
-          {speaker.name && (
-            <strong className={styles.speakerName}>{speaker.name}</strong>
+}) => {
+  const speakerPhotoSrc =
+    speaker.photo &&
+    imageUrlFor(speaker.photo).size(256, 390).saturation(-100).url();
+  return (
+    <Link href={getEntityPath(speaker)}>
+      <a>
+        <figure className={clsx(styles.speaker, variant && styles[variant])}>
+          {speakerPhotoSrc && (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={speakerPhotoSrc}
+              alt={speaker.photo.alt || ''}
+              className={styles.image}
+              width={256}
+              height={390}
+            />
           )}
-          {[speaker.title, speaker.company].filter(Boolean).join(', ')}
-        </figcaption>
-      </figure>
-    </a>
-  </Link>
-);
+          <figcaption className={styles.caption}>
+            {speaker.name && (
+              <strong className={styles.speakerName}>{speaker.name}</strong>
+            )}
+            {[speaker.title, speaker.company].filter(Boolean).join(', ')}
+          </figcaption>
+        </figure>
+      </a>
+    </Link>
+  );
+};
 
 export const SessionSpeakers = ({
   speaker1,
@@ -60,7 +62,7 @@ export const SessionSpeakers = ({
       {speaker2 && <Speaker speaker={speaker2} variant="nonDesktop" />}
       <Shape />
     </div>
-    <div className={styles.column2} aria-hidden={speaker2 ? null : 'true'}>
+    <div className={styles.column2} aria-hidden={speaker2 ? undefined : true}>
       <Shape />
       {speaker2 && <Speaker speaker={speaker2} variant="desktopOnly" />}
       <Shape />

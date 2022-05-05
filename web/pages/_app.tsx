@@ -1,3 +1,4 @@
+import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';
 import { getCookieConsentValue } from 'react-cookie-consent';
@@ -10,12 +11,13 @@ import favicon16x16 from '../images/favicon-16x16.png';
 import '../styles/globals.css';
 import styles from './app.module.css';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const hasConsent = getCookieConsentValue();
     if (
       hasConsent !== 'false' &&
-      process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' &&
+      process.env.NEXT_PUBLIC_GTM_ID
     ) {
       TagManager.initialize({ gtmId: process.env.NEXT_PUBLIC_GTM_ID });
     }

@@ -11,15 +11,14 @@ interface CardProps {
 }
 
 export const Card = ({ children, figure, linkProps }: CardProps) => {
+  const src =
+    figure &&
+    imageUrlFor(figure).size(112, 112).fit('min').saturation(-100).url();
   const Card = (
     <div className={styles.card}>
-      {figure /* eslint-disable-next-line @next/next/no-img-element */ ? (
+      {src /* eslint-disable-next-line @next/next/no-img-element */ ? (
         <img
-          src={imageUrlFor(figure)
-            .size(112, 112)
-            .fit('min')
-            .saturation(-100)
-            .url()}
+          src={src}
           alt={figure.alt || ''}
           width={28}
           height={28}
@@ -35,11 +34,13 @@ export const Card = ({ children, figure, linkProps }: CardProps) => {
   }
 
   const { className, href, ...otherLinkProps } = linkProps;
-  return (
+  return href ? (
     <Link href={href}>
       <a className={styles.link} {...otherLinkProps}>
         {Card}
       </a>
     </Link>
+  ) : (
+    Card
   );
 };

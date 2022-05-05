@@ -3,9 +3,21 @@ import GridWrapper from '../../GridWrapper';
 import TextBlock from '../TextBlock';
 import styles from './QuestionAndAnswerCollection.module.css';
 
+interface QuestionAndAnswerCollectionProps {
+  value: {
+    _key: string;
+    title?: string;
+    questions: {
+      _key: string;
+      question: string;
+      answer: any;
+    }[];
+  };
+}
+
 export const QuestionAndAnswerCollection = ({
   value: { questions, title, _key },
-}) => (
+}: QuestionAndAnswerCollectionProps) => (
   <GridWrapper>
     <div className={styles.container}>
       {title && (

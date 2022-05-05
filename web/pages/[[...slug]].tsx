@@ -20,6 +20,7 @@ import type { Section } from '../types/Section';
 import type { Slug } from '../types/Slug';
 import { mainEventId } from '../util/constants';
 import { getOgImagePath } from '../util/entityPaths';
+import { getSlug } from '../util/pages';
 import {
   ARTICLE_SECTION,
   FIGURE,
@@ -182,7 +183,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
   const scrollPositionTriggeringFrontPageMenu = 420;
 
   useEffect(() => {
-    const onScroll = (e) =>
+    const onScroll = (e: { target: any }) =>
       setScrolledFarEnough(
         e.target.documentElement.scrollTop >
           scrollPositionTriggeringFrontPageMenu
@@ -254,12 +255,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({
-  params: { slug: slugParam },
+  params,
   preview = false,
 }) => {
-  const slug = Array.isArray(slugParam)
-    ? urlJoin.apply(null, [...slugParam, { leadingSlash: false }])
-    : slugParam || '/';
+  const slug = getSlug(params) || '/';
   const data = await client.fetch(QUERY, { slug });
   if (!data?.route?.page) {
     return { notFound: true };

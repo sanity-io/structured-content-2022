@@ -14,7 +14,7 @@ export const Hero = ({
   callToAction,
   children,
 }: HeroProps & { children?: ReactNode }) => {
-  const wrapperRef = useRef<HTMLDivElement>();
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersection(wrapperRef, '-80px 0px');
   const headingAnimation = useAnimationProperties();
   const summaryAnimation = useAnimationProperties();

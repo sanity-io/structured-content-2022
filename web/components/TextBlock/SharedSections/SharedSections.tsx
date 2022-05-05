@@ -1,3 +1,4 @@
+import { PortableTextComponentProps } from '@portabletext/react';
 import ConferenceUpdatesForm from '../../ConferenceUpdatesForm';
 import Figure from '../Figure';
 import RichText from '../RichText';
@@ -10,7 +11,13 @@ import Sessions from '../../Sessions';
 import Sponsorships from '../Sponsorships';
 import Tickets from '../Tickets';
 
-export const SharedSections = ({ value: { sections, ...rest } }) => (
+interface SharedSectionsProps {
+  sections: any[];
+}
+
+export const SharedSections = ({
+  value: { sections, ...rest },
+}: PortableTextComponentProps<SharedSectionsProps>) => (
   <>
     {sections.map((section) => {
       // Matches /studio/schemas/sections/index.ts

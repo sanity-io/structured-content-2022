@@ -14,6 +14,7 @@ import client from '../../lib/sanity.server';
 import { formatDate } from '../../util/date';
 import { mainEventId } from '../../util/constants';
 import { getOgImagePath } from '../../util/entityPaths';
+import { getSlug } from '../../util/pages';
 import { BLOCK_CONTENT, PRIMARY_NAV } from '../../util/queries';
 import type { Article } from '../../types/Article';
 import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
@@ -218,22 +219,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allSlugsQuery = groq`*[defined(slug.current) && _type == 'article'][].slug.current`;
   const pages = await client.fetch(allSlugsQuery);
   const paths = pages
-    .map((slug) => ({
-      params: {
-        slug: urlJoin(slug, { leadingSlash: false }),
-      },
+    .map((slug: string) => ({
+      params: { slug: urlJoin(slug, { leadingSlash: false }) },
     }))
-    .filter(({ params: { slug } }) => Boolean(slug));
+    .filter(({ params: { slug } }: { params: { slug: string } }) =>
+      Boolean(slug)
+    );
 
   return { paths, fallback: 'blocking' };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug: slugParam },
-}) => {
-  const slug = Array.isArray(slugParam)
-    ? urlJoin.apply(null, [...slugParam, { leadingSlash: false }])
-    : slugParam;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slug = getSlug(params);
   const data = await client.fetch(QUERY, { slug });
   if (!data?.article?._id) {
     return { notFound: true };
