@@ -20,6 +20,8 @@ import client from '../../lib/sanity.server';
 import { mainEventId, newsletterSharedSectionId } from '../../util/constants';
 import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
+import { getOgImagePath } from '../../util/entityPaths';
+import { getSlug } from '../../util/pages';
 import { getDuration, sessionStart } from '../../util/session';
 import { PRIMARY_NAV, SPEAKER_WITH_SESSIONS } from '../../util/queries';
 import styles from '../app.module.css';
@@ -82,20 +84,24 @@ const toSessionCardProps = (sessions: SpeakerSession[]): SessionCardProps[] =>
       ({
         session,
         programContainingSession: { programStart, sessions, venueTimezone },
-      }) => ({
-        ...session,
-        timezone: venueTimezone,
-        sessionStart: sessionStart(
-          programStart,
-          session._id,
-          sessions.map((session) => ({
-            duration: getDuration(session),
-            _id: session.session?._id,
-          }))
-        ),
-      })
+        ...otherProps
+      }) => {
+        const simpleSessions = sessions.map(({ duration, session }) => ({
+          duration: duration || session?.duration,
+          _id: session?._id || '',
+        }));
+        return {
+          ...otherProps,
+          timezone: venueTimezone,
+          sessionStart:
+            sessionStart(programStart, _id, simpleSessions) || undefined,
+        };
+      }
     )
-    .sort((a, b) => a.sessionStart.getTime() - b.sessionStart.getTime());
+    .sort(
+      (a, b) =>
+        (a.sessionStart?.getTime() || -1) - (b.sessionStart?.getTime() || -1)
+    );
 
 const SpeakersRoute = ({
   data: {
@@ -113,6 +119,7 @@ const SpeakersRoute = ({
       description={`Speaker page for ${name}`}
       currentPath={`/speakers/${slug}`}
       image={photo}
+      fallbackImage={{ url: getOgImagePath(name), alt: name }}
     />
     <header className={styles.header}>
       <Nav
@@ -197,20 +204,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allSlugsQuery = groq`*[defined(slug.current) && _type == 'person'][].slug.current`;
   const pages = await client.fetch(allSlugsQuery);
   const paths = pages
-    .map((slug) => ({
+    .map((slug: string) => ({
       params: { slug: urlJoin(slug, { leadingSlash: false }) },
     }))
-    .filter(({ params: { slug } }) => Boolean(slug));
+    .filter(({ params: { slug } }: { params: { slug: string } }) =>
+      Boolean(slug)
+    );
 
   return { paths, fallback: 'blocking' };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug: slugParam },
-}) => {
-  const slug = Array.isArray(slugParam)
-    ? urlJoin.apply(null, [...slugParam, { leadingSlash: false }])
-    : slugParam;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slug = getSlug(params);
   const data = await client.fetch(QUERY, { slug });
   if (!data?.speaker?._id) {
     return { notFound: true };

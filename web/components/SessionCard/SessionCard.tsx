@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Session } from '../../types/Session';
 import {
+  defaultTimezone,
   formatDateWithDay,
   formatTimeDuration,
   formatTimeRange,
@@ -20,7 +21,7 @@ export const SessionCard = ({
   title,
   sessionStart,
   duration,
-  timezone,
+  timezone = defaultTimezone,
   slug,
 }: SessionCardProps) => {
   const Content = (
@@ -29,14 +30,14 @@ export const SessionCard = ({
       {sessionStart && (
         <div>
           <time dateTime={sessionStart.toISOString()}>
-            {formatDateWithDay(sessionStart, timezone || 'UTC')}
+            {formatDateWithDay(sessionStart, timezone)}
           </time>
         </div>
       )}
       {sessionStart && duration && (
         <div>
           <time dateTime={formatTimeDuration(sessionStart, duration)}>
-            {formatTimeRange(sessionStart, duration, timezone || 'UTC')}{' '}
+            {formatTimeRange(sessionStart, duration, timezone)}{' '}
             {getNonLocationTimezone(sessionStart, timezone, true)}
           </time>
         </div>

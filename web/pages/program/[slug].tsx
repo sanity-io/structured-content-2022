@@ -14,7 +14,8 @@ import TextBlock from '../../components/TextBlock';
 import { imageUrlFor } from '../../lib/sanity';
 import client from '../../lib/sanity.server';
 import { mainEventId } from '../../util/constants';
-import { getEntityPath } from '../../util/entityPaths';
+import { getEntityPath, getOgImagePath } from '../../util/entityPaths';
+import { getSlug } from '../../util/pages';
 import { PRIMARY_NAV, PROGRAM, SPEAKER } from '../../util/queries';
 import type { Person } from '../../types/Person';
 import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
@@ -90,14 +91,16 @@ const SpeakerList = ({ speakers }: SpeakerListProps) => (
         role,
         person: { _id, name, title, company, photo },
       } = speaker;
+      const personPhotoSrc =
+        photo && imageUrlFor(photo).size(64, 80).saturation(-100).url();
       return (
         <li key={_id} className={programStyles.speakerItem}>
           <Link href={getEntityPath(speaker.person)}>
             <a className={programStyles.speakerLink}>
-              {photo && (
+              {personPhotoSrc && (
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img
-                  src={imageUrlFor(photo).size(64, 80).saturation(-100).url()}
+                  src={personPhotoSrc}
                   width={64}
                   height={80}
                   alt={name}
@@ -128,7 +131,8 @@ const SessionRoute = ({
   },
   slug,
 }: SessionRouteProps) => {
-  const hasHighlightedSpeakers = [1, 2].includes(speakers?.length);
+  const hasHighlightedSpeakers =
+    speakers?.length && [1, 2].includes(speakers.length);
   const matchingSessionsInPrograms = sessionTimingDetailsForMatchingPrograms(
     programs,
     _id
@@ -140,9 +144,10 @@ const SessionRoute = ({
   return (
     <>
       <MetaTags
-        title={title}
+        title={title || ''}
         description={shortDescription ? toPlainText(shortDescription) : ''}
         currentPath={`/session/${slug}`}
+        fallbackImage={{ url: getOgImagePath(title), alt: title || '' }}
       />
       <header className={styles.header}>
         <Nav
@@ -212,22 +217,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allSlugsQuery = groq`*[defined(slug.current) && _type == 'session'][].slug.current`;
   const pages = await client.fetch(allSlugsQuery);
   const paths = pages
-    .map((slug) => ({
-      params: {
-        slug: urlJoin(slug, { leadingSlash: false }),
-      },
+    .map((slug: string) => ({
+      params: { slug: urlJoin(slug, { leadingSlash: false }) },
     }))
-    .filter(({ params: { slug } }) => Boolean(slug));
+    .filter(({ params: { slug } }: { params: { slug: string } }) =>
+      Boolean(slug)
+    );
 
   return { paths, fallback: 'blocking' };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug: slugParam },
-}) => {
-  const slug = Array.isArray(slugParam)
-    ? urlJoin.apply(null, [...slugParam, { leadingSlash: false }])
-    : slugParam;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slug = getSlug(params);
   const data = await client.fetch(QUERY, { slug });
   if (!data?.session?._id) {
     return { notFound: true };

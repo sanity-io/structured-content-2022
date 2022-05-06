@@ -10,7 +10,7 @@ interface NavBlockProps {
 }
 
 export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
-  const wrapperRef = useRef<HTMLElement>();
+  const wrapperRef = useRef<HTMLElement>(null);
   const isIntersecting = useIntersection(wrapperRef);
   return (
     <nav

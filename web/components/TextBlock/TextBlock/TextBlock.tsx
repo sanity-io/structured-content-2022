@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { PortableText, PortableTextComponents } from '@portabletext/react';
 import { PortableTextBlock } from '@portabletext/types';
 import { RichTextSection } from '../../../types/RichTextSection';
@@ -6,7 +5,6 @@ import { getEntityPath } from '../../../util/entityPaths';
 import SharedSections from '../SharedSections';
 import Person from '../Person';
 import RichText from '../RichText';
-import Venue from '../Venue';
 import QuestionAndAnswerCollection from '../QuestionAndAnswerCollection';
 import TextAndImage from '../TextAndImage';
 import SimpleCallToAction from '../SimpleCallToAction';
@@ -23,7 +21,6 @@ const components: Partial<PortableTextComponents> = {
   types: {
     richText: RichText,
     person: Person,
-    venue: Venue,
     questionAndAnswerCollectionSection: QuestionAndAnswerCollection,
     textAndImageSection: TextAndImage,
     sharedSections: SharedSections,

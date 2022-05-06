@@ -3,7 +3,11 @@ import type { HTMLProps } from 'react';
 import { useAnimationProperties } from '../../../hooks/useAnimationProperties';
 import styles from '../NavBlock.module.css';
 
-export const Item = ({ href, ...rest }: HTMLProps<HTMLAnchorElement>) => {
+interface ItemProps extends HTMLProps<HTMLAnchorElement> {
+  href: string;
+}
+
+export const Item = ({ href, ...rest }: ItemProps) => {
   const animation = useAnimationProperties(true);
   return (
     <li className={styles.item} style={animation}>

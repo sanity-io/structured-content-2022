@@ -14,5 +14,5 @@ export type Session = {
     role: 'speaker' | 'moderator';
     person: Person;
   }[];
-  type?: 'workshop' | 'conference' | 'meetup' | 'webinar';
+  type?: 'talk' | 'panel' | 'break' | 'social' | 'workshop';
 };
