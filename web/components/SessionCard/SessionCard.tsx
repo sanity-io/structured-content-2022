@@ -12,7 +12,7 @@ import styles from './SessionCard.module.css';
 
 export interface SessionCardProps
   extends Pick<Session, '_type' | 'title' | 'duration' | 'slug'> {
-  sessionStart?: Date;
+  sessionStart: Date | null;
   timezone?: string;
 }
 

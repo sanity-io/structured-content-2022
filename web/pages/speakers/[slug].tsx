@@ -22,7 +22,7 @@ import twitterLogo from '../../images/twitter_logo_black.svg';
 import linkedinLogo from '../../images/linkedin_logo_black.svg';
 import { getOgImagePath } from '../../util/entityPaths';
 import { getSlug } from '../../util/pages';
-import { getDuration, sessionStart } from '../../util/session';
+import { sessionStart } from '../../util/session';
 import { PRIMARY_NAV, SPEAKER_WITH_SESSIONS } from '../../util/queries';
 import styles from '../app.module.css';
 import speakerStyles from './speakers.module.css';
@@ -46,7 +46,10 @@ type SpeakerSession = {
   session: Pick<Session, '_id' | '_type' | 'title' | 'duration' | 'slug'>;
   programContainingSession: {
     programStart: string;
-    sessions: ProgramSession[];
+    sessions: {
+      _id: string;
+      duration: number;
+    }[];
     venueTimezone: string;
   };
 };
@@ -54,7 +57,7 @@ type SpeakerSession = {
 interface SpeakersRouteProps {
   data: {
     speaker: Person & {
-      sessions?: SpeakerSession[];
+      sessions: SpeakerSession[];
     };
     ticketsUrl: string;
     navItems?: PrimaryNavItem[];
@@ -79,24 +82,15 @@ const socialLinkProps = (url: string) => ({
 const toSessionCardProps = (sessions: SpeakerSession[]): SessionCardProps[] =>
   sessions
     .filter(({ programContainingSession }) => Boolean(programContainingSession))
-    .filter(({ session }) => Boolean(session))
     .map(
       ({
         session,
         programContainingSession: { programStart, sessions, venueTimezone },
-        ...otherProps
-      }) => {
-        const simpleSessions = sessions.map(({ duration, session }) => ({
-          duration: duration || session?.duration,
-          _id: session?._id || '',
-        }));
-        return {
-          ...otherProps,
-          timezone: venueTimezone,
-          sessionStart:
-            sessionStart(programStart, _id, simpleSessions) || undefined,
-        };
-      }
+      }) => ({
+        ...session,
+        timezone: venueTimezone,
+        sessionStart: sessionStart(programStart, session._id, sessions),
+      })
     )
     .sort(
       (a, b) =>

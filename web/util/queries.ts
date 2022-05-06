@@ -100,11 +100,8 @@ const SPEAKER_WITH_SESSIONS = `
     "programContainingSession": *[_type == "program" && references(^._id)] | order(_createdAt)[0] {
       "programStart": startDateTime,
       sessions[] {
-        _key,
-        _type,
-        duration,
-        durationOverride,
-        session->{ _id },
+        "_id": coalesce(session->._id, _key),
+        "duration": coalesce(durationOverride, duration, session->.duration, 0),
       },
       "venueTimezone": venues[0]->.timezone,
     },
