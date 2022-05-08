@@ -122,31 +122,44 @@ export const Programs = ({
   const collection = getCollectionForSelectionType(type, allPrograms, programs);
   const venues = collection?.map((program) => program.venues).flat();
   const router = useRouter();
-  const venue = router.query.venue as string;
-  const activeProgram = findByVenueSlug(collection, venue) || programs?.[0];
+  const venueName = router.query.venue as string;
+  const activeProgram = findByVenueSlug(collection, venueName) || programs?.[0];
   if (!activeProgram) {
-    console.error(`No activeProgram found for Venue slug '${venue}'`);
+    console.error(`No activeProgram found for Venue slug '${venueName}'`);
     return null;
   }
 
   if (type === 'all' || type === 'highlighted') {
+    const activeVenue = activeProgram.venues?.[0];
+    const { address } = activeVenue || {};
     const sessionsPerDay = partition(activeProgram.sessions, (session) => {
       const sessions = mapSessionDurationAndIds(activeProgram);
       const id = session.session?._id ?? session._key;
       const date = sessionStart(activeProgram.startDateTime, id, sessions);
-      const timezone = activeProgram.venues?.[0]?.timezone || defaultTimezone;
+      const timezone = activeVenue?.timezone || defaultTimezone;
       return (date && formatDateWithDay(date, timezone, ', ')) || '';
     });
 
     return (
       <>
         <div className={styles.venueNavContainer}>
-          <VenueNav
-            venues={venues}
-            activeVenue={activeProgram.venues[0]}
-            mainVenue={mainVenue}
-          />
+          <VenueNav {...{ activeVenue, venues, mainVenue }} />
         </div>
+
+        {typeof address === 'object' && (
+          <address className={styles.venueAddress}>
+            <div>{address.name}</div>
+            <div>{address.street}</div>
+            <div>
+              {[
+                address.city,
+                [address.state, address.postalCode].filter(Boolean).join(' '),
+              ]
+                .filter(Boolean)
+                .join(', ')}
+            </div>
+          </address>
+        )}
 
         <section className={styles.container}>
           {heading && (
