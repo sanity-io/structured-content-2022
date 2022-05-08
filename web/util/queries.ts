@@ -49,10 +49,15 @@ const SESSION = `
 const VENUE = `
   _id,
   _type,
+  acccesibility,
+  accomodations,
+  address { city, country, name, other, postalCode, state, street },
+  directions,
+  geolocation { _type, lat, lng },
   name,
-  geolocation,
   slug,
   timezone,
+  url,
 `;
 const PROGRAM = `
   _id,
