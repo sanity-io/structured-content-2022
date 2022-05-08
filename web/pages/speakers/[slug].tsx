@@ -5,6 +5,7 @@ import type { Person } from '../../types/Person';
 import type { Slug } from '../../types/Slug';
 import type { Session } from '../../types/Session';
 import type { PrimaryNavItem } from '../../types/PrimaryNavItem';
+import type { ProgramSession } from '../../types/Program';
 import type { Section } from '../../types/Section';
 import Card from '../../components/Card';
 import Footer from '../../components/Footer';
@@ -13,6 +14,7 @@ import HighlightedSpeakerBlock from '../../components/HighlightedSpeakerBlock';
 import MetaTags from '../../components/MetaTags';
 import Nav from '../../components/Nav';
 import SessionCard from '../../components/SessionCard';
+import type { SessionCardProps } from '../../components/SessionCard';
 import TextBlock from '../../components/TextBlock';
 import client from '../../lib/sanity.server';
 import { mainEventId, newsletterSharedSectionId } from '../../util/constants';
@@ -41,15 +43,12 @@ const QUERY = groq`
   }`;
 
 type SpeakerSession = {
-  _id: string;
-  title: string;
-  duration: number;
+  session: Pick<Session, '_id' | '_type' | 'title' | 'duration' | 'slug'>;
   programContainingSession: {
     programStart: string;
     sessions: {
-      _type: string;
+      _id: string;
       duration: number;
-      session?: Pick<Session, '_id' | 'duration'>;
     }[];
     venueTimezone: string;
   };
@@ -58,7 +57,7 @@ type SpeakerSession = {
 interface SpeakersRouteProps {
   data: {
     speaker: Person & {
-      sessions?: SpeakerSession[];
+      sessions: SpeakerSession[];
     };
     ticketsUrl: string;
     navItems?: PrimaryNavItem[];
@@ -80,26 +79,18 @@ const socialLinkProps = (url: string) => ({
   rel: 'noopener noreferrer',
 });
 
-const toSessionCardProps = (sessions: SpeakerSession[]) =>
+const toSessionCardProps = (sessions: SpeakerSession[]): SessionCardProps[] =>
   sessions
     .filter(({ programContainingSession }) => Boolean(programContainingSession))
     .map(
       ({
-        _id,
+        session,
         programContainingSession: { programStart, sessions, venueTimezone },
-        ...otherProps
-      }) => {
-        const simpleSessions = sessions.map(({ duration, session }) => ({
-          duration: duration || session?.duration,
-          _id: session?._id || '',
-        }));
-        return {
-          ...otherProps,
-          timezone: venueTimezone,
-          sessionStart:
-            sessionStart(programStart, _id, simpleSessions) || undefined,
-        };
-      }
+      }) => ({
+        ...session,
+        timezone: venueTimezone,
+        sessionStart: sessionStart(programStart, session._id, sessions),
+      })
     )
     .sort(
       (a, b) =>
@@ -185,9 +176,9 @@ const SpeakersRoute = ({
             </div>
             <ul className={speakerStyles.sessionContainer}>
               {Array.isArray(sessions) &&
-                toSessionCardProps(sessions).map((props, index) => (
+                toSessionCardProps(sessions).map((session, index) => (
                   <li key={index}>
-                    <SessionCard {...props} />
+                    <SessionCard {...session} />
                   </li>
                 ))}
             </ul>
