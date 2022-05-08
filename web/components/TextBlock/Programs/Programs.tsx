@@ -148,12 +148,12 @@ export const Programs = ({
 
         {typeof address === 'object' && (
           <address className={styles.venueAddress}>
-            <div>{address.name}</div>
-            <div>{address.street}</div>
+            <div>{address?.name}</div>
+            <div>{address?.street}</div>
             <div>
               {[
-                address.city,
-                [address.state, address.postalCode].filter(Boolean).join(' '),
+                address?.city,
+                [address?.state, address?.postalCode].filter(Boolean).join(' '),
               ]
                 .filter(Boolean)
                 .join(', ')}
