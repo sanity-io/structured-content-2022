@@ -2,11 +2,11 @@ import type { Section } from './Section';
 import type { Slug } from './Slug';
 
 export type Venue = {
-  _createdAt: string;
+  _createdAt?: string;
   _id: string;
-  _rev: string;
+  _rev?: string;
   _type: 'venue';
-  _updatedAt: string;
+  _updatedAt?: string;
   // sic - typo in the schema
   acccesibility?: {
     captioning?: boolean;
