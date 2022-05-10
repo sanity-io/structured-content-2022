@@ -146,7 +146,7 @@ export const Programs = ({
           <VenueNav {...{ activeVenue, venues, mainVenue }} />
         </div>
 
-        {typeof address === 'object' && (
+        {address && (
           <address className={styles.venueAddress}>
             <div>{address?.name}</div>
             <div>{address?.street}</div>
