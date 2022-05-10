@@ -1,6 +1,7 @@
 import { parseISO } from 'date-fns';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { Fragment } from 'react';
 import type { PortableTextComponentProps } from '@portabletext/react';
 import type { EntitySectionSelection } from '../../../types/EntitySectionSelection';
 import type { Program, ProgramSession } from '../../../types/Program';
@@ -140,24 +141,32 @@ export const Programs = ({
       return (date && formatDateWithDay(date, timezone, ', ')) || '';
     });
 
+    const formattedAddress =
+      address &&
+      [
+        address.name,
+        address.street,
+        [
+          address.city,
+          [address.state, address.postalCode].filter(Boolean).join(' '),
+        ]
+          .filter(Boolean)
+          .join(', '),
+      ].filter(Boolean);
     return (
       <>
         <div className={styles.venueNavContainer}>
           <VenueNav {...{ activeVenue, venues, mainVenue }} />
         </div>
 
-        {address && (
+        {formattedAddress && (
           <p className={styles.venueAddress}>
-            <div>{address?.name}</div>
-            <div>{address?.street}</div>
-            <div>
-              {[
-                address?.city,
-                [address?.state, address?.postalCode].filter(Boolean).join(' '),
-              ]
-                .filter(Boolean)
-                .join(', ')}
-            </div>
+            {formattedAddress.map((line, index) => (
+              <Fragment key={index}>
+                {line}
+                {index !== formattedAddress.length - 1 && <br />}
+              </Fragment>
+            ))}
           </p>
         )}
 
