@@ -147,7 +147,7 @@ export const Programs = ({
         </div>
 
         {address && (
-          <address className={styles.venueAddress}>
+          <p className={styles.venueAddress}>
             <div>{address?.name}</div>
             <div>{address?.street}</div>
             <div>
@@ -158,7 +158,7 @@ export const Programs = ({
                 .filter(Boolean)
                 .join(', ')}
             </div>
-          </address>
+          </p>
         )}
 
         <section className={styles.container}>
