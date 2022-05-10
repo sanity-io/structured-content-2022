@@ -160,14 +160,16 @@ export const Programs = ({
         </div>
 
         {formattedAddress && (
-          <p className={styles.venueAddress}>
-            {formattedAddress.map((line, index) => (
-              <Fragment key={index}>
-                {line}
-                {index !== formattedAddress.length - 1 && <br />}
-              </Fragment>
-            ))}
-          </p>
+          <GridWrapper>
+            <p className={styles.venueAddress}>
+              {formattedAddress.map((line, index) => (
+                <Fragment key={index}>
+                  {line}
+                  {index !== formattedAddress.length - 1 && <br />}
+                </Fragment>
+              ))}
+            </p>
+          </GridWrapper>
         )}
 
         <section className={styles.container}>
