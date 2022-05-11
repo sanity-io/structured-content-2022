@@ -1,9 +1,13 @@
 .venueNavContainer {
-  margin: 32px 0;
+  margin: 32px 0 48px;
+}
+
+.venueAddress {
+  margin: 0;
 }
 
 .container {
-  margin: 64px 0 80px;
+  margin: 48px 0 80px;
 }
 
 .heading {
@@ -76,14 +80,18 @@
 
 @media (--medium-up) {
   .venueNavContainer {
-    margin: 0;
+    margin: 0 0 calc(64px - (77px / 2)); /* 77px is the height of VenueNav */
     display: flex;
     justify-content: center;
     transform: translateY(-50%);
   }
 
+  .venueAddress {
+    text-align: center;
+  }
+
   .container {
-    margin: 60px 0 96px;
+    margin: 64px 0 96px;
   }
 
   .dayHeader {
