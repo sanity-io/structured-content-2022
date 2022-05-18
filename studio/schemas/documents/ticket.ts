@@ -39,6 +39,11 @@ export default {
       type: "string",
     },
     {
+      name: "soldOut",
+      type: "boolean",
+      title: "Sold out?",
+    },
+    {
       name: "groups",
       title: "Ticket groups",
       type: "array",
