@@ -81,6 +81,7 @@ const TICKET = `
   description[]{ ${SIMPLE_BLOCK_CONTENT} },
   groups[]{
     name,
+    soldOut,
     priceAndAvailability[] { _key, from, label, price },    
   },
   included,

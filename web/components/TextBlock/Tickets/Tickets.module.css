@@ -91,6 +91,7 @@
   margin: 0;
 }
 
+.soldOut,
 .currentPrice {
   font: var(--font-body-xl-medium);
   color: var(--color-brand-black);

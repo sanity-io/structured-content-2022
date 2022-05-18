@@ -71,34 +71,38 @@ const priceList = (ticket: Ticket) => (
       return (
         <li key={group.name} className={styles.group}>
           {group.name && <div className={styles.groupName}>{group.name}</div>}
-          <dl className={styles.priceGroup}>
-            {availabilityData(group)?.map(
-              ({ _key, label, price, isExpired, expires }) => (
-                <Fragment key={_key}>
-                  <dt
-                    className={clsx(
-                      styles.priceLabel,
-                      isExpired && styles.expired,
-                      !label && !expires && styles.visuallyHidden,
-                      currentTicket?._key === _key && styles.currentLabel
-                    )}
-                  >
-                    {label || 'Price'}
-                    {expires && expiryString(expires)}
-                  </dt>
-                  <dd
-                    className={clsx(
-                      styles.price,
-                      isExpired && styles.expired,
-                      currentTicket?._key === _key && styles.currentPrice
-                    )}
-                  >
-                    {price ? `$${price}` : 'Free'}
-                  </dd>
-                </Fragment>
-              )
-            )}
-          </dl>
+          {group.soldOut ? (
+            <div className={styles.soldOut}>Sold out</div>
+          ) : (
+            <dl className={styles.priceGroup}>
+              {availabilityData(group)?.map(
+                ({ _key, label, price, isExpired, expires }) => (
+                  <Fragment key={_key}>
+                    <dt
+                      className={clsx(
+                        styles.priceLabel,
+                        isExpired && styles.expired,
+                        !label && !expires && styles.visuallyHidden,
+                        currentTicket?._key === _key && styles.currentLabel
+                      )}
+                    >
+                      {label || 'Price'}
+                      {expires && expiryString(expires)}
+                    </dt>
+                    <dd
+                      className={clsx(
+                        styles.price,
+                        isExpired && styles.expired,
+                        currentTicket?._key === _key && styles.currentPrice
+                      )}
+                    >
+                      {price ? `$${price}` : 'Free'}
+                    </dd>
+                  </Fragment>
+                )
+              )}
+            </dl>
+          )}
         </li>
       );
     })}
