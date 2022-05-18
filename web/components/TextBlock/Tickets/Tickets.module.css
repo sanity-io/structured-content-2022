@@ -94,6 +94,7 @@
 .soldOut,
 .currentPrice {
   font: var(--font-body-xl-medium);
+  letter-spacing: var(--letter-spacing-body-xl);
   color: var(--color-brand-black);
 }
 
