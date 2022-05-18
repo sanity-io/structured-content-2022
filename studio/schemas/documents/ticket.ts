@@ -39,11 +39,6 @@ export default {
       type: "string",
     },
     {
-      name: "soldOut",
-      type: "boolean",
-      title: "Sold out?",
-    },
-    {
       name: "groups",
       title: "Ticket groups",
       type: "array",
@@ -57,6 +52,13 @@ export default {
               name: "name",
               title: "Ticket group name",
               type: "string",
+            },
+            {
+              name: "soldOut",
+              type: "boolean",
+              title: "Sold out?",
+              description:
+                "If true, this will override the availability of tickets, since they are sold out.",
             },
             {
               name: "priceAndAvailability",

@@ -2,6 +2,7 @@ import { Section } from './Section';
 
 export type TicketGroup = {
   name: string;
+  soldOut?: boolean;
   priceAndAvailability: {
     _key: string;
     from: string;
