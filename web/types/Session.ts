@@ -15,4 +15,6 @@ export type Session = {
     person: Person;
   }[];
   type?: 'talk' | 'panel' | 'break' | 'social' | 'workshop';
+  videoURL?: string;
+  slideURL?: string;
 };

@@ -25,6 +25,7 @@ import type { Session } from '../../types/Session';
 import { sessionTimingDetailsForMatchingPrograms } from '../../util/session';
 import styles from '../app.module.css';
 import programStyles from './program.module.css';
+import YouTubeBlock from '../../components/YouTubeBlock';
 
 const QUERY = groq`
   {
@@ -34,6 +35,7 @@ const QUERY = groq`
       duration,
       shortDescription,
       longDescription,
+      videoURL,
       speakers[] {
         role,
         person-> { ${SPEAKER} },
@@ -120,7 +122,16 @@ const SpeakerList = ({ speakers }: SpeakerListProps) => (
 
 const SessionRoute = ({
   data: {
-    session: { title, shortDescription, longDescription, speakers, type, _id },
+    session: {
+      title,
+      shortDescription,
+      longDescription,
+      speakers,
+      type,
+      _id,
+      videoURL,
+      slideURL,
+    },
     home: { ticketsUrl },
     navItems,
     footer,
@@ -192,6 +203,9 @@ const SessionRoute = ({
           </GridWrapper>
         </div>
         <GridWrapper>
+          <div className={programStyles.video}>
+            {videoURL && <YouTubeBlock url={videoURL} />}
+          </div>
           <div className={programStyles.longDescription}>
             <TextBlock value={longDescription} />
           </div>
