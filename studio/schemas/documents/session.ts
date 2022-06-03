@@ -79,6 +79,18 @@ export default {
       type: "blockContent",
     },
     {
+      name: "videoURL",
+      type: "url",
+      title: "URL to recording",
+      description: "URL to YouTube, Vimeo etc",
+    },
+    {
+      name: "slideURL",
+      type: "url",
+      title: "URL to slide-deck",
+      description: "URL to SlideShare, Google Slides etc",
+    },
+    {
       name: "speakers",
       title: "Speakers",
       type: "array",
