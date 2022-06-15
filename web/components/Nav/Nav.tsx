@@ -12,7 +12,7 @@ import styles from './Nav.module.css';
 interface NavProps {
   onFrontPage?: boolean;
   currentPath: string;
-  ticketsUrl: string;
+  ticketsUrl?: string;
   items?: PrimaryNavItem[];
 }
 
@@ -48,7 +48,11 @@ export const Nav = ({
         </div>
         <div
           id={contentsId}
-          className={clsx(styles.menuContents, !menuOpened && styles.closed)}
+          className={clsx(
+            styles.menuContents,
+            !menuOpened && styles.closed,
+            !ticketsUrl && styles.noTickets
+          )}
         >
           <Link href="/">
             <a
@@ -68,15 +72,17 @@ export const Nav = ({
             </a>
           </Link>
           <ul className={clsx(styles.items, !menuOpened && styles.menuClosed)}>
-            <MenuItem
-              {...{ currentPath, closeMenu }}
-              href={ticketsUrl}
-              target="_blank"
-              rel="noreferrer"
-              className={styles.ticketItem}
-            >
-              Tickets
-            </MenuItem>
+            {ticketsUrl && (
+              <MenuItem
+                {...{ currentPath, closeMenu }}
+                href={ticketsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.ticketItem}
+              >
+                Tickets
+              </MenuItem>
+            )}
 
             {items.map(
               ({ label, target: { external, internal, blank } }, index) => (
@@ -92,9 +98,11 @@ export const Nav = ({
               )
             )}
           </ul>
-          <div className={styles.ticketButton}>
-            <ButtonLink url={ticketsUrl} text="Tickets" openInNewTab={true} />
-          </div>
+          {ticketsUrl && (
+            <div className={styles.ticketButton}>
+              <ButtonLink url={ticketsUrl} text="Tickets" openInNewTab={true} />
+            </div>
+          )}
         </div>
       </GridWrapper>
     </nav>

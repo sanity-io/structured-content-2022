@@ -12,6 +12,14 @@
   padding: 20px 0;
 }
 
+/* Keep .items centered even in the absence of a tickets button, without
+ * needing an empty div or changing the fact that .items left-align if they
+ * wrap to multiple lines
+ */
+.menuContents.noTickets::after {
+  content: '';
+}
+
 .logo {
   width: auto;
   height: 48px;

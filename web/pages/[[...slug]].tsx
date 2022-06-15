@@ -200,6 +200,11 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
     isFrontPage && styles.onFrontPage,
     isFrontPage && scrolledFarEnough && styles.scrolledDown
   );
+  /* This could be defined in the Sanity schema in the future, if this codebase
+   * is reused for other conferences. (Don't want to link to tickets page after
+   * the conference has happened.)
+   */
+  const showTicketsLink = false;
 
   return (
     <>
@@ -214,7 +219,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
         <Nav
           onFrontPage={isFrontPage}
           currentPath={currentPath}
-          ticketsUrl={ticketsUrl}
+          ticketsUrl={showTicketsLink ? ticketsUrl : undefined}
           items={navItems}
         />
       </header>
@@ -222,7 +227,7 @@ const Route = ({ data: initialData, slug, preview }: RouteProps) => {
         {slug === '/' ? (
           <GridWrapper>
             <ConferenceHeader name={mainEventName} description={description} />
-            <NavBlock ticketsUrl={ticketsUrl} />
+            <NavBlock ticketsUrl={showTicketsLink ? ticketsUrl : undefined} />
           </GridWrapper>
         ) : (
           <Hero {...hero} />

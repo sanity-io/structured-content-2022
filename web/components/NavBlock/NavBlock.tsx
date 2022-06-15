@@ -6,7 +6,7 @@ import Item from './Item';
 import styles from './NavBlock.module.css';
 
 interface NavBlockProps {
-  ticketsUrl: string;
+  ticketsUrl?: string;
 }
 
 export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
@@ -25,7 +25,7 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
         <FakeItem divider mobile />
         <FakeItem mobile />
 
-        <Item href="/sponsorship-information">Sponsorship</Item>
+        <FakeItem mobile tablet desktop />
 
         <FakeItem tablet desktop />
         <FakeItem divider mobile tablet desktop />
@@ -38,7 +38,7 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
         <FakeItem divider mobile />
         <FakeItem mobile />
 
-        <Item href="/registration-info">Registration</Item>
+        <FakeItem mobile tablet desktop />
 
         <FakeItem divider mobile tablet desktop />
 
@@ -48,9 +48,13 @@ export const NavBlock = ({ ticketsUrl }: NavBlockProps) => {
         <FakeItem mobile desktop />
         <FakeItem divider mobile />
 
-        <Item href={ticketsUrl} target="_blank" rel="noreferrer">
-          Tickets
-        </Item>
+        {ticketsUrl ? (
+          <Item href={ticketsUrl} target="_blank" rel="noreferrer">
+            Tickets
+          </Item>
+        ) : (
+          <FakeItem mobile tablet desktop />
+        )}
 
         <FakeItem tablet desktop />
         <FakeItem mobile desktop />
